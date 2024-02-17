@@ -1,0 +1,18 @@
+.navbar{
+    width: 100%;
+    background: rgb(186, 153, 217);
+    display: flex;
+    margin: 0%;
+}
+
+.title{
+    padding: 0rem 2rem;
+    font-size: 25px;
+}
+/* 
+@media screen and (max-width:850px) {
+    .title{
+        padding: 0rem 2rem;
+    }
+} */
+

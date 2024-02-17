@@ -1,0 +1,161 @@
+.page{
+    width: 100%;
+    margin: 0%;
+    justify-content:center;
+    align-items: center;
+    display: flex;
+    
+ 
+}
+
+.chart-now-kw{
+    flex: 1;
+    width: 80%;
+    display: flex;
+    /* position: absolute; */
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0%;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.chart-now-cost{
+    flex: 1;
+    width: 80%;
+    display: flex;
+    /* position: absolute; */
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0%;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+@media screen and (max-width:2000px){
+    .page{
+        width: 100%;
+        margin-top: 0.5rem;
+        justify-content:center;
+        align-items: center;
+        display: flex;
+        margin-bottom: 1.19rem;
+    }
+
+    .chart-now-kw{
+        height: 500px;
+        padding: 1rem;
+    }
+
+    .chart-now-cost{
+        height: 500px;
+        padding: 1rem;
+    }
+}
+
+@media screen and (max-width:1150px){
+    .page{
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        margin-top: -2px;
+        margin-bottom: 20px;
+    }
+    .chart-now-kw{
+        /* width:30%;
+       
+        align-items: center;
+        justify-content: center;
+        padding: 2px;
+        margin: 2px; */
+    }
+    .chart-now-cost{
+        /* width: 30%;
+        
+        align-items: center;
+        justify-content: center;
+        padding: 2px;
+        margin: 2px; */
+    }
+}
+
+@media screen and (max-width:850px){
+    .page{
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        margin-top: 5px;
+        margin-bottom: 29px;
+    }
+    .chart-now-kw{
+        width:30%; 
+        align-items: center;
+        justify-content: center;
+        padding: 50px;
+       
+    }
+    .chart-now-cost{
+        width: 30%;
+       
+        align-items: center;
+        justify-content: center;
+        padding: 50px;
+    }
+
+}
+
+@media screen and (max-width:650px){
+    .page{
+        width: 80%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0%;
+        margin-left: 50px;
+        height: 72.7vh;
+    }
+
+    .chart-now-cost{
+        width: 100%;
+        margin-top: -90px;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .chart-now-kw{
+        margin-top: -60px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width:450px){
+    .page{
+        width: 80%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0%;
+        margin-left: 50px;
+        height: 76.6vh;
+    }
+
+    .chart-now-cost{
+        width: 100%;
+        margin-top: -90px;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .chart-now-kw{
+        margin-top: -60px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+    
+}
+
