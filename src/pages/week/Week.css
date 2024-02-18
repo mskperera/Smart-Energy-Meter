@@ -16,8 +16,8 @@
         justify-content: center;
         height: 50vh;
         margin: 1rem;
-        margin-top: 100px;
-        margin-bottom: 3.2rem;
+        margin-top: 90px;
+        margin-bottom: 3.8rem;
         padding-left: 65px;
     }
 }
@@ -30,18 +30,19 @@
         height: 50vh;
         margin: 1rem;
         margin-top: 151px;
-        padding-left: 10px;
+        padding-left: -10px;
     }
 }
 
 @media screen and (max-width:650px){
     .page-2{
-        width: 90%;
+        width: 100%;
         align-items: center;
         justify-content: center;
         height: 50vh;
         margin: 1rem;
         margin-top: 151px;
+        margin-left: -30px;
     }
 }
 

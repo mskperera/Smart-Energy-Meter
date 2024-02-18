@@ -11,24 +11,24 @@
 
 @media screen and (max-width:1150px){
     .page-1{
-        width: 90%;
+        width: 100%;
         align-items: center;
         justify-content: center;
         margin-top:80px;
         height: 50vh;
         margin-bottom: 71px;
-        margin-left: -50px;
+        margin-left: -100px;
     }
 }
 
 @media screen and (max-width:850px){
     .page-1{
-        width: 850px;
+        width: 900px;
         align-items: center;
         justify-content: center;
-        margin: 0rem;
-        margin-left: -180px;
-        margin-top:150px;
+        margin: 1.9rem;
+        margin-left: -155px;
+        margin-top:120px;
         height: 52.3vh;
     }
 }

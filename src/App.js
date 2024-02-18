@@ -6,6 +6,7 @@ import Week from '../src/pages/week/Week';
 import Month from './pages/month/Month';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import APIData from './pages/APIData';
+import Login from './pages/login/Login';
 // import TodayCost from '../src/pages/today/TodayCost';
 // import WeekCost from '../src/pages/week/WeekCost';
 // import MonthCost from './pages/month/MonthCost';
@@ -16,6 +17,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home/>}/>
+        <Route path='/login' element={<Login/>}/>
         <Route path='/today' element={<Today/>}/>
         <Route path='/week' element={<Week/>}/>
         <Route path='/month' element={<Month/>}/>
