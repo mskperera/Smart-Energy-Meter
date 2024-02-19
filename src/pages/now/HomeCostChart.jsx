@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Doughnut } from 'react-chartjs-2';
-
+import {getEngergyUsageNow} from '../../action/device';
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
 
 const HomeCostChart = () => {
-  const [obj,setobj]=useState({
+  const [obj,setObj]=useState({
     maxValue:10000,
     minValue:0,
     currentValue:4500,
@@ -19,6 +19,27 @@ const HomeCostChart = () => {
   },[
     obj
   ])
+
+  useEffect(()=>{
+    loadChartData();
+  },[obj]);
+
+  const loadChartData=async()=>{
+    const payload={
+      deviceId:"D-0003",
+   mesurementUnitId:1
+    }
+   const result=await getEngergyUsageNow(payload);
+   console.log('resultwww',result.data)
+  //  {"kwh":308.02,"deviceTimeStamp":1708324999,"kwhPerSec":0,"deviceTimeStampDate_UTC":"2024-02-19T06:43:19.000Z","kwh_MeasurementValue_max":100,"kwh_MeasurementValue_min":0,"Voltage":233.4}
+ 
+   const {UsageBill}=result.data;
+  
+  
+   setObj({...obj,currentValue:UsageBill});
+  }
+
+
   const data = {
     // labels: ['Label 1', 'Label 2', 'Label 3'],
     labels: ['Rs.'],
