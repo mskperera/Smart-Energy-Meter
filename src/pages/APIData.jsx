@@ -57,9 +57,19 @@ const loadChartData=async()=>{
    setEngergyUsagekwhPersecsByDateRangeMin(result.data.recordsets);
   }
 
+  const [count,setCount]=useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount(prevCount => prevCount + 1);
+      loadChartData();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
 
   useEffect(()=>{
-    loadChartData();
+    
     loadEngergyUsageKwhByDateRange();
     loadEnergyMeterDataKwhPersecsByDateRangeHour();
     loadEnergyMeterDataKwhPersecsByDateRangeMin();
