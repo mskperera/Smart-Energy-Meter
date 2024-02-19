@@ -23,11 +23,11 @@
 
 @media screen and (max-width:850px){
     .page-1{
-        width: 900px;
+        width: 800px;
         align-items: center;
         justify-content: center;
         margin: 1.9rem;
-        margin-left: -155px;
+        margin-left: -160px;
         margin-top:120px;
         height: 52.3vh;
     }
