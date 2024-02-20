@@ -17,7 +17,7 @@ export const login = async formData => {
   }
 };
 
-export const refreshAccessToken = async () => {
+export const refreshAccessToken = async (data) => {
   try{
     console.log('refreshAccessToken');
   const refreshToken=localStorage.getItem('refreshToken');
