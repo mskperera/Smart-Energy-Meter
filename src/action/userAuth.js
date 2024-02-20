@@ -1,11 +1,13 @@
 import axios from "axios";
+import customAxios from "../utils/axios";
 const API = process.env.NEXT_PUBLIC_API_KEY;
 
 
 
 export const login = async formData => {
+
   try{
-  const res = await axios.post(`${API}/auth/login`, formData);
+  const res = await customAxios.post(`/auth/login`, formData);
   localStorage.setItem('token', res.data.token);
   localStorage.setItem('refreshToken', res.data.refreshToken);
   localStorage.setItem('userData', JSON.stringify(res.data.user));
@@ -21,8 +23,8 @@ export const refreshAccessToken = async () => {
   const refreshToken=localStorage.getItem('refreshToken');
 
 
-  return await axios
-      .post(`${API}/auth/refresh-access-token`, data, {
+  return await customAxios
+      .post(`/auth/refresh-access-token`, data, {
         headers: {
           'Content-Type': 'application/json',
           "authrefresh":`Bearer ${refreshToken}`

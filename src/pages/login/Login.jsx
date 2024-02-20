@@ -1,15 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Login.css'
+import {login} from '../../action/userAuth'
+import { useNavigate } from 'react-router-dom/dist/umd/react-router-dom.development';
+
+
 
 function Login() {
+ 
+    const navigate=useNavigate();
+    const [formData, setFormData]=useState({
+
+            "userName":"admin",
+            "password":"1234",
+            "gmtOffset":"+5:30",
+            "publicIP":"212.121"  
+    });
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+    
+        try {
+          const response = await login(formData);
+          if (response.status === 200) {
+            navigate('/home');
+            console.log('Login successful! Navigate to home page.');
+          } else {
+   
+            console.log('Login failed. Handle error.');
+          }
+        } catch (error) {
+          console.error('Error during login:', error);
+        }
+      };
+
   return (
     <div className='wrapper d-flex align-items-center justify-content-center w-100'>
         <div className='login'>
             <h2 className='d-flex align-items-center justify-content-center mb-3'>Login</h2>
-            <form className='needs-validation'>
+            <form className='needs-validation' onSubmit={handleLogin}>
                 <div className='form-group was-validated mb-2'>
                     <label htmlFor='email' className='form-label'>Email</label>
-                    <input type='email' className='form-control' required placeholder='test@gmail.com'></input>
+                    <input type='text' className='form-control' required placeholder='test@gmail.com'></input>
                     {/* <div className='invalid-feedback'>Please enter your Email</div> */}
                 </div>
                 <div className='form-group was-validated mb-2'>

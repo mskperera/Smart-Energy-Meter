@@ -14,14 +14,14 @@ const TodayKw = () => {
   const loadEngergyUsageKwhByDateRange=async()=>{
     const payload={
         deviceId:"D-0003",
-        mesurementUnitId:2,
+       //mesurementUnitId:1,//1-kwh,7-usage bill
         frequencyId:1,
-        startDate:"2024-01-21",
-        endDate:"2024-12-21"
+        startDate:"2024-02-19",
+        endDate:"2024-02-20"
     }
    const result=await getEngergyUsageKwhByDateRange(payload);
    console.log('engergyUsagekwhByDateRange',result.data)
-  // setEngergyUsagekwhByDateRange(result.data.recordsets);
+   setEngergyUsagekwhByDateRange(result.data.recordsets);
   
      
        console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
@@ -36,7 +36,7 @@ const TodayKw = () => {
        for(let i=0;i<charData.length;i++){
         hours.push(charData[i].hour);
         dataKwArr.push(charData[i].maxKwh)
-        ruppyArr.push(charData[i].usageBill)
+       // ruppyArr.push(charData[i].usageBill)
        }
       
        console.log('lll',hours)
