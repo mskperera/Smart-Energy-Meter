@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom/dist/umd/react-router-dom.developm
 function Login() {
  
     const navigate=useNavigate();
+
     const [formData, setFormData]=useState({
 
             "userName":"admin",
@@ -22,7 +23,7 @@ function Login() {
         try {
           const response = await login(formData);
           if (response.status === 200) {
-            navigate('/home');
+             navigate('/home');
             console.log('Login successful! Navigate to home page.');
           } else {
    
@@ -39,13 +40,15 @@ function Login() {
             <h2 className='d-flex align-items-center justify-content-center mb-3'>Login</h2>
             <form className='needs-validation' onSubmit={handleLogin}>
                 <div className='form-group was-validated mb-2'>
-                    <label htmlFor='email' className='form-label'>Email</label>
-                    <input type='text' className='form-control' required placeholder='test@gmail.com'></input>
+                    <label htmlFor='username' className='form-label'>Username</label>
+                    <input type='text' className='form-control' required placeholder='test@gmail.com' value={formData.userName} // Bind input value to state
+              onChange={(e) => setFormData({ ...formData, userName: e.target.value })}></input>
                     {/* <div className='invalid-feedback'>Please enter your Email</div> */}
                 </div>
                 <div className='form-group was-validated mb-2'>
                     <label htmlFor='password' className='form-label'>Password</label>
-                    <input type='password' className='form-control' required placeholder='********'></input>
+                    <input type='password' className='form-control' required placeholder='********' value={formData.password} // Bind input value to state
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}></input>
                     {/* <div className='invalid-feedback'>Please enter your Password</div> */}
                 </div>
                 <div className='form-group mb-2'>
