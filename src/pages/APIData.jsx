@@ -4,7 +4,10 @@ import { getEnergyMeterDataKwhPersecsByDateRange, getEngergyUsageKwhByDateRange,
 function APIData() {
 
     const [engergyUsageNow,setEngergyUsageNow]=useState(null);
-    const [engergyUsagekwhByDateRange,setEngergyUsagekwhByDateRange]=useState(null);
+    const [engergyUsagekwhByDateRangeHours,setEngergyUsagekwhByDateRangeHours]=useState(null);
+    const [engergyUsagekwhByDateRangeMins,setEngergyUsagekwhByDateRangeMins]=useState(null);
+    const [engergyUsagekwhByDateRangeWeeks,setEngergyUsagekwhByDateRangeWeeks]=useState(null);
+
     const [engergyUsagekwhPersecsByDateRangeHour,setEngergyUsagekwhPersecsByDateRangeHour]=useState(null);
     const [engergyUsagekwhPersecsByDateRangeMin,setEngergyUsagekwhPersecsByDateRangeMin]=useState(null);
 
@@ -18,17 +21,16 @@ const loadChartData=async()=>{
    setEngergyUsageNow(result.data);
   }
 
-  const loadEngergyUsageKwhByDateRange=async()=>{
+  const loadEngergyUsageKwhByDateRange=async(deviceId,frequencyId,startDate,endDate)=>{
     const payload={
-        deviceId:"D-0003",
-        mesurementUnitId:2,
-        frequencyId:1,
-        startDate:"2024-01-21",
-        endDate:"2024-12-21"
+        deviceId,
+        mesurementUnitId:0,
+        frequencyId,
+        startDate,
+        endDate
     }
    const result=await getEngergyUsageKwhByDateRange(payload);
-   console.log('engergyUsagekwhByDateRange',result.data)
-   setEngergyUsagekwhByDateRange(result.data.recordsets);
+   return result;
   }
   
   const loadEnergyMeterDataKwhPersecsByDateRangeHour=async()=>{
@@ -68,11 +70,29 @@ const loadChartData=async()=>{
   }, []);
 
 
-  useEffect(()=>{
-    
-    loadEngergyUsageKwhByDateRange();
-    loadEnergyMeterDataKwhPersecsByDateRangeHour();
-    loadEnergyMeterDataKwhPersecsByDateRangeMin();
+const loadData=async()=>{
+
+  const resultHours=await loadEngergyUsageKwhByDateRange("D-0003",1,"2024-02-20","2024-02-20");
+  console.log('EngergyUsagekwhByDateRangeHours',resultHours.data)
+  setEngergyUsagekwhByDateRangeHours(resultHours.data.recordsets);
+
+  const resultmins=await loadEngergyUsageKwhByDateRange("D-0003",2,"2024-02-20","2024-02-20");
+  console.log('engergyUsagekwhByDateRangeMins',resultmins.data)
+  setEngergyUsagekwhByDateRangeMins(resultmins.data.recordsets);
+
+
+  const resultweeks=await loadEngergyUsageKwhByDateRange("D-0003",3,"2024-02-01","2024-02-20");
+  console.log('engergyUsagekwhByDateRangeWeeks',resultweeks.data)
+  setEngergyUsagekwhByDateRangeWeeks(resultweeks.data.recordsets);
+
+
+   loadEnergyMeterDataKwhPersecsByDateRangeHour();
+   loadEnergyMeterDataKwhPersecsByDateRangeMin();
+}
+
+  useEffect( ()=>{
+    loadData();
+
   },[]);
 
   return (
@@ -81,8 +101,16 @@ const loadChartData=async()=>{
     {JSON.stringify(engergyUsageNow)}
     <hr/>
     <br/>
-    <h4>Engergy Usage By Date Range</h4>
-    {JSON.stringify(engergyUsagekwhByDateRange)}
+    <h4>Engergy Usage By Date Range - Hours</h4>
+    {JSON.stringify(engergyUsagekwhByDateRangeHours)}
+    <hr/>
+    <br/>
+    <h4>Engergy Usage By Date Range - Mins</h4>
+    {JSON.stringify(engergyUsagekwhByDateRangeMins)}
+    <hr/>
+    <br/>
+    <h4>Engergy Usage By Date Range - Weeks</h4>
+    {JSON.stringify(engergyUsagekwhByDateRangeWeeks)}
     <hr/>
     <br/>
 
