@@ -3,7 +3,7 @@
         width: 80%;
         align-items: center;
         justify-content: center;
-        padding-left: 220px;
+        padding-left: 270px;
         height: 71vh;
         margin: 0%;
     }
@@ -27,7 +27,7 @@
         align-items: center;
         justify-content: center;
         margin: 1.9rem;
-        margin-left: -160px;
+        margin-left: -180px;
         margin-top:120px;
         height: 52.3vh;
     }
@@ -35,12 +35,12 @@
 
 @media screen and (max-width:650px){
     .page-1{
-        width: 600px;
+        width: 650px;
         align-items: center;
         justify-content: center;
         margin: 0rem;
         margin-top: 167px;
-        margin-left: -190px;
+        margin-left: -235px;
         height: 50vh;
     }
 }
@@ -52,7 +52,7 @@
         justify-content: center;
         margin: 0rem;
         margin-top: 226px;
-        margin-left: -210px;
+        margin-left: -240px;
         height: 50vh;
     }
 }

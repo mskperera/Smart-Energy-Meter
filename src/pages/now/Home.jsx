@@ -8,16 +8,19 @@ import HomeCostChart from './HomeCostChart'
 
 
 const Home = () => {
+
+
+
   return (
     <div>
         <Navbar/>
         <Menu/>
         <div className='page'>
           <div className='chart-now-kw'>
-            <HomeChart/>
+            <HomeChart data=''/>
           </div>
           <div className='chart-now-cost'>
-            <HomeCostChart/>
+            <HomeCostChart data=''/>
           </div>
         </div>
         <BottomNav/>

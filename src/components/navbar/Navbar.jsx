@@ -8,7 +8,7 @@ const Navbar = () => {
       {/* <div className='icon'>
         <BiTachometer color='white' size={80}/> 
       </div> */}
-      <p className='title'>Energy Meter</p>
+      <p className='title'>Smart Energy Meter</p>
     </div>
   )
 }
