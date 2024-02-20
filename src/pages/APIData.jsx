@@ -86,8 +86,8 @@ const loadData=async()=>{
   setEngergyUsagekwhByDateRangeWeeks(resultweeks.data.recordsets);
 
 
-   loadEnergyMeterDataKwhPersecsByDateRangeHour();
-   loadEnergyMeterDataKwhPersecsByDateRangeMin();
+  //  loadEnergyMeterDataKwhPersecsByDateRangeHour();
+  //  loadEnergyMeterDataKwhPersecsByDateRangeMin();
 }
 
   useEffect( ()=>{
@@ -114,7 +114,7 @@ const loadData=async()=>{
     <hr/>
     <br/>
 
-    <h4>Engergy Usage kwh/s By DateRange - Hours</h4>
+    {/* <h4>Engergy Usage kwh/s By DateRange - Hours</h4>
     {JSON.stringify(engergyUsagekwhPersecsByDateRangeHour)}
     <hr/>
     <br/>
@@ -122,7 +122,7 @@ const loadData=async()=>{
     <h4>Engergy Usage kwh/s By DateRange - Mins</h4>
     {JSON.stringify(engergyUsagekwhPersecsByDateRangeMin)}
     <hr/>
-    <br/>
+    <br/> */}
 
     </>
   
