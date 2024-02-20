@@ -81,7 +81,7 @@ const loadChartData=async()=>{
     {JSON.stringify(engergyUsageNow)}
     <hr/>
     <br/>
-    <h4>Engergy Usage kwh By Date Range</h4>
+    <h4>Engergy Usage By Date Range</h4>
     {JSON.stringify(engergyUsagekwhByDateRange)}
     <hr/>
     <br/>
