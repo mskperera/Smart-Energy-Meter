@@ -7,6 +7,7 @@ function APIData() {
     const [engergyUsagekwhByDateRangeHours,setEngergyUsagekwhByDateRangeHours]=useState(null);
     const [engergyUsagekwhByDateRangeMins,setEngergyUsagekwhByDateRangeMins]=useState(null);
     const [engergyUsagekwhByDateRangeWeeks,setEngergyUsagekwhByDateRangeWeeks]=useState(null);
+    const [engergyUsagekwhByDateRangeCustom,setEngergyUsagekwhByDateRangeCustom]=useState(null);
 
     const [engergyUsagekwhPersecsByDateRangeHour,setEngergyUsagekwhPersecsByDateRangeHour]=useState(null);
     const [engergyUsagekwhPersecsByDateRangeMin,setEngergyUsagekwhPersecsByDateRangeMin]=useState(null);
@@ -81,9 +82,13 @@ const loadData=async()=>{
   setEngergyUsagekwhByDateRangeMins(resultmins.data.recordsets);
 
 
-  const resultweeks=await loadEngergyUsageKwhByDateRange("D-0003",3,"2024-02-01","2024-02-20");
+  const resultweeks=await loadEngergyUsageKwhByDateRange("D-0003",3,"2024-02-20","2024-02-20");
   console.log('engergyUsagekwhByDateRangeWeeks',resultweeks.data)
   setEngergyUsagekwhByDateRangeWeeks(resultweeks.data.recordsets);
+
+  const resultCustom=await loadEngergyUsageKwhByDateRange("D-0003",4,"2024-02-01","2024-02-20");
+  console.log('engergyUsagekwhByDateRange Custom',resultCustom.data)
+  setEngergyUsagekwhByDateRangeCustom(resultCustom.data.recordsets);
 
 
   //  loadEnergyMeterDataKwhPersecsByDateRangeHour();
@@ -114,6 +119,10 @@ const loadData=async()=>{
     <hr/>
     <br/>
 
+    <h4>Engergy Usage By Date Range - Custom</h4>
+    {JSON.stringify(engergyUsagekwhByDateRangeCustom)}
+    <hr/>
+    <br/>
     {/* <h4>Engergy Usage kwh/s By DateRange - Hours</h4>
     {JSON.stringify(engergyUsagekwhPersecsByDateRangeHour)}
     <hr/>
