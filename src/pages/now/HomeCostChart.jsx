@@ -27,11 +27,8 @@ const HomeCostChart = () => {
   const loadChartData=async()=>{
     const payload={
       deviceId:"4",
-<<<<<<< Updated upstream
-   mesurementUnitId:1
-=======
-      mesurementUnitId:1
->>>>>>> Stashed changes
+      mesurementUnitId:1,
+      // mesurementUnitId:1,
     }
    const result=await getEngergyUsageNow(payload);
    console.log('resultwww',result.data)

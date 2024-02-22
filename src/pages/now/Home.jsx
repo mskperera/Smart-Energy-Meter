@@ -8,17 +8,15 @@ import HomeCostChart from './HomeCostChart'
 import Voltage from './Voltage'
 import Current from './Current'
 import Power from './Power'
-<<<<<<< Updated upstream
-=======
 import Hertz from './Hertz'
 // import { Link } from 'react-router-dom'
->>>>>>> Stashed changes
+
 
 
 const Home = () => {
 
   return (
-    <div>
+    <>
         <Navbar/>
         <Menu/>
         {/* <div className='nav-bar'>
@@ -39,14 +37,7 @@ const Home = () => {
             <HomeCostChart data=''/>
           </div>
         </div>
-<<<<<<< Updated upstream
 
-        <div className='bottom'>
-            <div><Voltage/></div>
-            <div><Current/></div>
-            <div><Power/></div>
-            <div></div>
-=======
         <div className='page-bottom'>
           <div className='bottom-1'><Voltage/></div>
           <div className='bottom-1'><Current/></div>
@@ -54,10 +45,9 @@ const Home = () => {
           <div className='bottom-3'>
                 <Hertz/>
           </div>
->>>>>>> Stashed changes
         </div>
         <BottomNav/>
-    </div>
+      </>
   )
 }
 

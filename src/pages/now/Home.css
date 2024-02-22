@@ -30,14 +30,11 @@
     padding: 2rem;
 }
 
-<<<<<<< Updated upstream
 .bottom{
     width: 100%;
     display: flex;
     
 }
-
-=======
 .page-bottom{
     display: flex;
     width: 100%;
@@ -82,7 +79,7 @@
     display: flex;
 } */
 
->>>>>>> Stashed changes
+
 @media screen and (max-width:2000px){
     .page{
         width: 100%;
