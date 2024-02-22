@@ -4,7 +4,7 @@ import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legen
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
-const MonthKw = () => {
+const CustomCost = () => {
 
     useEffect(()=>{
         loadEngergyUsageKwhByDateRange();
@@ -29,42 +29,42 @@ const MonthKw = () => {
          
         
            const months=[];
-           const monthKwArr=[];
+           const monthCostArr=[];
         //    const ruppyArr=[];
     
            for(let i=0;i<charData.length;i++){
             months.push(charData[i].day);
-            monthKwArr.push(charData[i].kwhPerDay)
+            monthCostArr.push(charData[i].usageBillPerDay)
            // ruppyArr.push(charData[i].usageBill)
            }
           
            const datasets0=[
             {
-              label:'kW',
-              data:monthKwArr,
-              backgroundColor:'#36A2EB',
+              label:'Rs',
+              data:monthCostArr,
+              backgroundColor:'aqua',
               borderWidath:1,
             }
           ]
             setData({...data,labels:months,datasets:datasets0})
           }
-          
+
     const [data,setData]=useState({
         labels:[],
     
         datasets:[
-            {
-            label:'kW',
-            data:[],
-            backgroundColor:'#36A2EB',
-            borderWidath:1,
-        },
-        // {
-        //     label:'Rs',
-        //     data:[60,89,98,10,90,70,20,54,75,88,40,10],
-        //     backgroundColor:'aqua',
+        //     {
+        //     label:'kW',
+        //     data:[18,50,10,25,35,36,89,98,50,90,75,62],
+        //     backgroundColor:'#36A2EB',
         //     borderWidath:1,
         // },
+        {
+            label:'Rs',
+            data:[],
+            backgroundColor:'aqua',
+            borderWidath:1,
+        },
     ]     
     });
     const options={
@@ -72,4 +72,4 @@ const MonthKw = () => {
     }
  return <Bar data={data} options={options}/>
 }
-export default MonthKw
+export default CustomCost

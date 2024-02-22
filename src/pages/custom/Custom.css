@@ -1,13 +1,13 @@
-.page-3{
+.page-5{
     width: 100%;
     align-items: center;
     justify-content: center;
     /* padding-left: 270px; */
-    height: 68.3vh;
+    height: 64.35vh;
     margin: 0%;
 }
 
-.chart-month-kw{
+.chart-pick-kw{
     flex: 1;
     width: 80%;
     display: flex;
@@ -19,7 +19,7 @@
     padding: 2rem;
 }
 
-.chart-month-cost{
+.chart-pick-cost{
     flex: 1;
     width: 80%;
     display: flex;
@@ -30,8 +30,17 @@
     flex-direction: column;
     padding: 2rem;
 }
+
+.date{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+}
+
+
 @media screen and (max-width:2000px) {
-    .page-3{
+    .page-5{
         width: 100%;
         margin-top: 0.5rem;
         justify-content:center;
@@ -42,19 +51,19 @@
         /* margin-left: -150px; */
     }
 
-    .chart-month-kw{
+    .chart-pick-kw{
         width: 100%;
         padding: 1rem;
     }
 
-    .chart-month-cost{
+    .chart-pick-cost{
         width: 100%;
         padding: 1rem;
     }
 }
 
 @media screen and (max-width:1150px) {
-    .page-3{
+    .page-5{
         width: 100%;
         align-items: center;
         justify-content: center;
@@ -67,7 +76,7 @@
 }
 
 @media screen and (max-width:850px) {
-    .page-3{
+    .page-5{
         width: 100%;
         align-items: center;
         justify-content: center;
@@ -79,7 +88,7 @@
 }
 
 @media screen and (max-width:650px) {
-    .page-3{
+    .page-5{
         width: 100%;
         flex-direction: column;
         align-items: center;
@@ -89,7 +98,7 @@
         margin-top: -10px;
         margin-left: -10px;
     }
-    .chart-month-kw{
+    .chart-pick-kw{
         flex: 1;
         width: 100%;
         display: flex;
@@ -100,7 +109,7 @@
         padding: 0rem;
 }
 
-    .chart-month-cost{
+    .chart-pick-cost{
         flex: 1;
         width: 100%;
         display: flex;
@@ -113,18 +122,18 @@
 }
 
 @media screen and (max-width:450px) {
-    .page-3{
+    .page-5{
         width: 100%;
         align-items: center;
         justify-content: center;
-        height: 86vh;
+        height: 77.6vh;
         margin: 1rem;
         margin-top: -80px;
         margin-left: -15px;
         margin-bottom: 7.8px;
     }
 
-    .chart-month-kw{
+    .chart-pick-kw{
         flex: 1;
         width: 400px;
         display: flex;
@@ -134,7 +143,7 @@
         padding: 2rem;
     }
     
-    .chart-month-cost{
+    .chart-pick-cost{
         flex: 1;
         width:400px;
         display: flex;

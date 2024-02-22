@@ -4,8 +4,8 @@ import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legen
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
-const MonthKw = () => {
-
+const YearKw = () => {
+    
     useEffect(()=>{
         loadEngergyUsageKwhByDateRange();
     });
@@ -14,7 +14,7 @@ const MonthKw = () => {
         const payload={
             deviceId:"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
-            frequencyId:3,
+            frequencyId:4,
             startDate:'2024-02-01',
             endDate:'2024-02-29',
         }
@@ -33,8 +33,8 @@ const MonthKw = () => {
         //    const ruppyArr=[];
     
            for(let i=0;i<charData.length;i++){
-            months.push(charData[i].day);
-            monthKwArr.push(charData[i].kwhPerDay)
+            months.push(charData[i].monthName);
+            monthKwArr.push(charData[i].kwhPerMonth)
            // ruppyArr.push(charData[i].usageBill)
            }
           
@@ -72,4 +72,5 @@ const MonthKw = () => {
     }
  return <Bar data={data} options={options}/>
 }
-export default MonthKw
+
+export default YearKw

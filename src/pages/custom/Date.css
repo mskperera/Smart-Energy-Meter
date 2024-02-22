@@ -1,0 +1,21 @@
+.picker{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.picker div{
+    padding: 0px;
+    margin-top: 0px;
+}
+
+@media screen and (max-width:450px){
+    .picker{
+        flex-direction: column;
+    }
+
+    .picker div{
+        padding: 1px;
+    }
+}

@@ -1,11 +1,56 @@
-@media screen and (max-width:2000px) {
+.page-1{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
+    height: 68.3vh;
+    margin: 0%;
+}
+
+.chart-today-kw{
+    flex: 1;
+    width: 80%;
+    display: flex;
+    /* position: absolute; */
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0%;
+    flex-direction: column;
+    padding: 5rem;
+}
+
+.chart-today-cost{
+    flex: 1;
+    width: 80%;
+    display: flex;
+    /* position: absolute; */
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0%;
+    flex-direction: column;
+    padding: 5rem;
+}
+
+@media screen and (max-width:2000px){
     .page-1{
-        width: 80%;
+        width: 100%;
+        margin-top: 0.5rem;
+        justify-content:center;
         align-items: center;
-        justify-content: center;
-        padding-left: 270px;
-        height: 71vh;
-        margin: 0%;
+        display: flex;
+        margin-bottom: 1.19rem;
+        padding: 1rem;
+        /* margin-left: -150px; */
+    }
+
+    .chart-today-kw{
+        width: 500px;
+        padding: 1rem;
+    }
+
+    .chart-today-cost{
+        width: 500px;
+        padding: 1rem;
     }
 }
 
@@ -14,45 +59,113 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        margin-top:80px;
         height: 50vh;
-        margin-bottom: 71px;
-        margin-left: -100px;
+        margin: 0rem;
+        margin-top: 90px;
+        margin-bottom: 3.8rem;
+        padding: 50px;
     }
+
+    .chart-today-kw{
+        flex: 1;
+        width: 100%;
+        display: flex;
+        /* position: absolute; */
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
+}
+
+    .chart-today-cost{
+        flex: 1;
+        width: 100%;
+        display: flex;
+        /* position: absolute; */
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
+}
 }
 
 @media screen and (max-width:850px){
     .page-1{
-        width: 800px;
+        width: 100%;
         align-items: center;
         justify-content: center;
-        margin: 1.9rem;
-        margin-left: -180px;
-        margin-top:120px;
-        height: 52.3vh;
+        height: 71.4vh;
+        margin: 0rem;
+        margin-top: 10px;
     }
 }
 
 @media screen and (max-width:650px){
     .page-1{
-        width: 650px;
+        width: 100%;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin: 0rem;
-        margin-top: 167px;
-        margin-left: -235px;
-        height: 50vh;
+        height: 69.2vh;
+        margin: 1rem;
+        margin-top: 10px;
+        margin-left: 0px;
     }
+    .chart-today-kw{
+        flex: 1;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0%;
+        padding: 0rem;
+}
+
+    .chart-today-cost{
+        flex: 1;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0%;
+        padding: 0rem;
+}
 }
 
 @media screen and (max-width:450px){
     .page-1{
-        width: 580px;
+        width: 100%;
         align-items: center;
         justify-content: center;
-        margin: 0rem;
-        margin-top: 226px;
-        margin-left: -240px;
-        height: 50vh;
+        height: 80vh;
+        margin: 1rem;
+        margin-top: -50px;
+        margin-left: -5px;
+        margin-bottom: 20px;
     }
+
+    .chart-today-kw{
+        flex: 1;
+        width: 380px;
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+        margin: 0%;
+
+        padding: 1rem;
+}
+
+    .chart-today-cost{
+        flex: 1;
+        width: 380px;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
+}
 }

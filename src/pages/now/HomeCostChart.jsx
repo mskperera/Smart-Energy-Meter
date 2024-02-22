@@ -27,7 +27,11 @@ const HomeCostChart = () => {
   const loadChartData=async()=>{
     const payload={
       deviceId:"4",
+<<<<<<< Updated upstream
    mesurementUnitId:1
+=======
+      mesurementUnitId:1
+>>>>>>> Stashed changes
     }
    const result=await getEngergyUsageNow(payload);
    console.log('resultwww',result.data)
@@ -52,8 +56,9 @@ const HomeCostChart = () => {
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
         rotation:225,
-        cutout:'70%',
-        borderWidth: 1, 
+        cutout:'90%',
+        borderWidth: 1,
+        borderRadius: 50, 
       },
     ],
   };
@@ -71,7 +76,7 @@ const HomeCostChart = () => {
       ctx.font ='bold 100rem';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
-      ctx.fillText(`Rs:${data.datasets[0].data[0]}`,xCenter,yCenter +20)
+      ctx.fillText(data.datasets[0].data[0]+": Rs",xCenter,yCenter +20)
     }
   }
 

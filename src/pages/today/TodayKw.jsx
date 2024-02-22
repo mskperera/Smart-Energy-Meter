@@ -9,15 +9,21 @@ const TodayKw = () => {
     
   useEffect(()=>{
     loadEngergyUsageKwhByDateRange();
-  },[]);
+  },);
+
+  // const getCurrentDateWithoutTime = () => {
+  //   const currentDate = new Date();
+  //   currentDate.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
+  //   return currentDate;
+  // };
 
   const loadEngergyUsageKwhByDateRange=async()=>{
     const payload={
-        deviceId:"D-0003",
-       //mesurementUnitId:1,//1-kwh,7-usage bill
+        deviceId:"4",
+        mesurementUnitId:1,//1-kwh,7-usage bill
         frequencyId:1,
-        startDate:"2024-02-19",
-        endDate:"2024-02-20"
+        startDate:"2024-02-20",
+        endDate:"2024-02-20",
     }
    const result=await getEngergyUsageKwhByDateRange(payload);
    console.log('engergyUsagekwhByDateRange',result.data)
@@ -31,11 +37,11 @@ const TodayKw = () => {
     
        const hours=[];
        const dataKwArr=[];
-       const ruppyArr=[];
+    //    const ruppyArr=[];
 
        for(let i=0;i<charData.length;i++){
         hours.push(charData[i].hour);
-        dataKwArr.push(charData[i].maxKwh)
+        dataKwArr.push(charData[i].kwhPerHour)
        // ruppyArr.push(charData[i].usageBill)
        }
       
@@ -43,17 +49,18 @@ const TodayKw = () => {
       
       const datasets0=[
         {
-        label:'kW',
+        label:'kWh',
         data:dataKwArr,
         backgroundColor:'#36A2EB',
         borderWidath:1,
-    },
-    {
-        label:'Rs',
-        data:ruppyArr,
-        backgroundColor:'aqua',
-        borderWidath:1,
-    }];
+    }
+    // {
+    //     label:'Rs',
+    //     data:[],
+    //     backgroundColor:'aqua',
+    //     borderWidath:1,
+    // }
+];
 
    // const dataSetKw=datasets[0];
     //dataSetKw.data=
@@ -70,16 +77,16 @@ const TodayKw = () => {
         datasets:[
             {
             label:'kW',
-            data:[18,50,10,25,35,36,89,98,50,90,75,62,54,75,88,45,33,56,44,72,41,31,20,66],
+            data:[],
             backgroundColor:'#36A2EB',
             borderWidath:1,
         },
-        {
-            label:'Rs',
-            data:[80,50,15,25,35,60,89,98,10,90,70,20,54,75,88,40,77,22,51,33,66,32,47,40],
-            backgroundColor:'aqua',
-            borderWidath:1,
-        },
+        // {
+        //     label:'Rs',
+        //     data:[80,50,15,25,35,60,89,98,10,90,70,20,54,75,88,40,77,22,51,33,66,32,47,40],
+        //     backgroundColor:'aqua',
+        //     borderWidath:1,
+        // },
     ]     
     });
     const options={

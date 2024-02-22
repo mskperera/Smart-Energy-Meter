@@ -8,10 +8,17 @@ ChartJS.register(ArcElement, Tooltip);
 const HomeChart = () => {
 
   const [objKw,setObjKw] = useState({
+<<<<<<< Updated upstream
     maxKwValue:1000,
     minKwValue:0,
     currentKwValue:0,
     mesurementUnitKw:"kW",
+=======
+    maxKwValue:450,
+    minKwValue:0,
+    currentKwValue:0,
+    mesurementUnitKw:"kWh",
+>>>>>>> Stashed changes
     kwhPerSeconds:0,
   });
 
@@ -30,7 +37,11 @@ const HomeChart = () => {
   const loadChartData=async()=>{
     const payload={
       deviceId:"4",
+<<<<<<< Updated upstream
    mesurementUnitId:1
+=======
+      mesurementUnitId:8
+>>>>>>> Stashed changes
     }
    const result=await getEngergyUsageNow(payload);
    console.log('resultwww',result.data)
@@ -43,7 +54,11 @@ const HomeChart = () => {
   }
 
   const data = {
+<<<<<<< Updated upstream
     labels: ['kW'],
+=======
+    labels: ['kWh'],
+>>>>>>> Stashed changes
     datasets: [
       {
         data: [objKw.currentKwValue,remaningkwvalue],
@@ -51,8 +66,10 @@ const HomeChart = () => {
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
         rotation:225,
-        cutout:'70%',
-        borderWidth: 1, 
+        cutout:'90%',
+        borderWidth: 1,
+        borderRadius: 50,
+        
       },
     ],
   };
@@ -70,7 +87,7 @@ const HomeChart = () => {
       ctx.font ='bold 100';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
-      ctx.fillText(`kW:${data.datasets[0].data[0]}`,xCenter,yCenter +20)
+      ctx.fillText(data.datasets[0].data[0]+': kWh',xCenter,yCenter +20)
     }
   }
 
@@ -79,7 +96,7 @@ const HomeChart = () => {
     // customize chart options
   };
 
-  return <Doughnut data={data} options={options} plugins={[gaugeText]} />;
+  return <Doughnut data={data} options={options} plugins={[gaugeText]}/>;
 };
 
 export default HomeChart;

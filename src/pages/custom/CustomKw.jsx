@@ -4,7 +4,7 @@ import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legen
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
-const MonthKw = () => {
+const CustomKw = () => {
 
     useEffect(()=>{
         loadEngergyUsageKwhByDateRange();
@@ -72,4 +72,4 @@ const MonthKw = () => {
     }
  return <Bar data={data} options={options}/>
 }
-export default MonthKw
+export default CustomKw

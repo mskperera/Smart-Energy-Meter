@@ -4,25 +4,23 @@
     justify-content:center;
     align-items: center;
     display: flex;
-    
- 
 }
 
 .chart-now-kw{
     flex: 1;
-    width: 80%;
+    width: 40%;
     display: flex;
     /* position: absolute; */
     justify-content: flex-end;
     align-items: center;
     margin: 0%;
     flex-direction: column;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .chart-now-cost{
     flex: 1;
-    width: 80%;
+    width: 40%;
     display: flex;
     /* position: absolute; */
     justify-content: flex-end;
@@ -32,31 +30,86 @@
     padding: 2rem;
 }
 
+<<<<<<< Updated upstream
 .bottom{
     width: 100%;
     display: flex;
     
 }
 
+=======
+.page-bottom{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 0%;
+}
+
+/* .page-bottom-1{
+    flex: 1;
+}
+.page-bottom-2{
+    flex: 1;
+} */
+
+.page-bottom div{
+    width: 250px;
+    padding: 1rem;
+    /* margin-top: -50px; */
+}
+
+
+.bottom-3{
+    width: 50px;
+    margin: 0%;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+   
+}
+
+/* .bottom-3 .box1{
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+.bottom-3 .box2{
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+} */
+
+>>>>>>> Stashed changes
 @media screen and (max-width:2000px){
     .page{
         width: 100%;
-        margin-top: 0.5rem;
+        margin-top: -1rem;
         justify-content:center;
         align-items: center;
         display: flex;
-        margin-bottom: 1.19rem;
+        margin-bottom: -3rem;
     }
 
     .chart-now-kw{
-        height: 500px;
-        padding: 1rem;
+        height: 400px;
+        padding: 2rem;
     }
 
     .chart-now-cost{
-        height: 500px;
-        padding: 1rem;
+        height: 400px;
+        padding: 2rem;
     }
+
+    .bottom-3{
+        width: 20px;
+        margin: 0%;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+}
 }
 
 @media screen and (max-width:1150px){
@@ -67,22 +120,22 @@
         margin-top: -2px;
         margin-bottom: 20px;
     }
-    .chart-now-kw{
+    /* .chart-now-kw{ */
         /* width:30%;
        
         align-items: center;
         justify-content: center;
         padding: 2px;
         margin: 2px; */
-    }
-    .chart-now-cost{
+    /* } */
+    /* .chart-now-cost{ */
         /* width: 30%;
         
         align-items: center;
         justify-content: center;
         padding: 2px;
         margin: 2px; */
-    }
+    /* } */
 }
 
 @media screen and (max-width:850px){
@@ -91,7 +144,7 @@
         align-items: center;
         justify-content: center;
         margin-top: 5px;
-        margin-bottom: 29px;
+        margin-bottom: 28.5px;
     }
     .chart-now-kw{
         width:30%; 
@@ -144,24 +197,46 @@
         align-items: center;
         justify-content: space-between;
         margin: 0%;
-        margin-left: 50px;
-        height: 76.6vh;
+        margin-left: 40px;
+        height: 65.2vh;
     }
 
     .chart-now-cost{
         width: 100%;
-        margin-top: -90px;
+        margin-top:-100px;
         align-items: center;
         justify-content: center;
         margin-bottom: 10px;
     }
 
     .chart-now-kw{
-        margin-top: -60px;
+        margin-top: -90px;
         width: 100%;
         align-items: center;
         justify-content: center;
+        margin-bottom: -90px;
+    }
+
+    .page-bottom{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: 0%;
+        margin-top: -90px;
     }
     
+    .page-bottom div{
+        width: 80px;
+        padding: 5px;
+        margin-bottom: 30px;
+    }
+
+    /* .bottom-3 div{
+        flex: 1;
+        justify-content: space-between;
+        align-items: center;
+        display: flex;
+    } */
 }
 

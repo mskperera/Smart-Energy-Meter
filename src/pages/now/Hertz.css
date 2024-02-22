@@ -1,0 +1,24 @@
+.hz{
+    border: 2px solid;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.hz p{
+    font-size: 20px;
+    font-weight: 600;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: -10px;
+    display: flex;
+}
+
+@media screen and (max-width:450px){
+    .hz p{
+        font-size: 15px;
+        font-weight: 600; 
+    }
+}
