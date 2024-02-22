@@ -59,10 +59,10 @@ export const getEnergyMeterDataKwhPersecsByDateRange= async (payload) => {
 }
 
 
-export const saveDeviceSetting= async (payload) => {
+export const saveDeviceSettings= async (payload) => {
   try {
     return await customAxios
-      .post(`/device/energymeter/saveDeviceSetting`,payload, {
+      .post(`/device/energymeter/saveDeviceSettings`,payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -98,8 +98,6 @@ export const get_DeviceSettingsByDeviceId= async (deviceId) => {
     return err;
   }
 }
-
-
 
 
 
