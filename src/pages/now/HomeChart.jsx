@@ -8,9 +8,9 @@ ChartJS.register(ArcElement, Tooltip);
 const HomeChart = () => {
 
   const [objKw,setObjKw] = useState({
-    maxKwValue:5000,
+    maxKwValue:1000,
     minKwValue:0,
-    currentKwValue:1050,
+    currentKwValue:0,
     mesurementUnitKw:"kW",
     kwhPerSeconds:0,
   });
@@ -29,7 +29,7 @@ const HomeChart = () => {
 
   const loadChartData=async()=>{
     const payload={
-      deviceId:"D-0003",
+      deviceId:"4",
    mesurementUnitId:1
     }
    const result=await getEngergyUsageNow(payload);
@@ -43,7 +43,7 @@ const HomeChart = () => {
   }
 
   const data = {
-    labels: ['Used kW'],
+    labels: ['kW'],
     datasets: [
       {
         data: [objKw.currentKwValue,remaningkwvalue],

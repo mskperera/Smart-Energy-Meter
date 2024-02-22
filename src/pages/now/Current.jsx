@@ -1,59 +1,59 @@
 import React, { useEffect, useState } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import {getEngergyUsageNow} from '../../action/device';
+
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
 
-const HomeCostChart = () => {
-  const [obj,setObj]=useState({
-    maxValue:40000,
-    minValue:0,
-    currentValue:0,
-    mesurementUnit:"Rs"
-    });
- 
-  const [remaningvalue,setRemainingValue]=useState(null)
+const Current = () => {
+
+  const [objC,setObjC] = useState({
+    maxCValue:15,
+    // minKwValue:0,
+    currentCValue:0,
+    mesurementUnitKw:"A",
+    // kwhPerSeconds:0,
+  });
+
+  // const [engergyUsageNow ,setEngergyUsageNow ] = useState(null);
+
+  const [remaningkwvalue,setRemainingKwValue]= useState(null);
 
   useEffect(()=>{
-    setRemainingValue(obj.maxValue-obj.currentValue)
-  },[
-    obj
-  ])
+    setRemainingKwValue(objC.maxCValue-objC.currentCValue);
+  },[objC]);
 
   useEffect(()=>{
     loadChartData();
-  },[obj]);
+  },[objC]);
 
   const loadChartData=async()=>{
     const payload={
       deviceId:"4",
-   mesurementUnitId:1
+      mesurementUnitId:3
     }
    const result=await getEngergyUsageNow(payload);
    console.log('resultwww',result.data)
   //  {"kwh":308.02,"deviceTimeStamp":1708324999,"kwhPerSec":0,"deviceTimeStampDate_UTC":"2024-02-19T06:43:19.000Z","kwh_MeasurementValue_max":100,"kwh_MeasurementValue_min":0,"Voltage":233.4}
  
-   const {usageBill}=result.data;
+   const {current}=result.data;
   
   
-   setObj({...obj,currentValue:usageBill});
+   setObjC({...objC,currentCValue:current});
   }
 
-
   const data = {
-    // labels: ['Label 1', 'Label 2', 'Label 3'],
-    labels: ['Rs.'],
+    // labels: ['A'],
     datasets: [
       {
-        data: [obj.currentValue,remaningvalue],
-        // backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        // hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        backgroundColor: ['#36A2EB','#F5F5DC'],
+        data: [objC.currentCValue,remaningkwvalue],
+        backgroundColor: [ '#36A2EB','#F5F5DC'],
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
         rotation:225,
-        cutout:'70%',
-        borderWidth: 1, 
+        cutout:'90%',
+        borderWidth: 1,
+        borderRadius: 50,
       },
     ],
   };
@@ -68,18 +68,19 @@ const HomeCostChart = () => {
 
       ctx.save();
       ctx.fillStyle='black';
-      ctx.font ='bold 100rem';
+      ctx.font ='bold 10';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
-      ctx.fillText(`Rs:${data.datasets[0].data[0]}`,xCenter,yCenter +20)
+      ctx.fillText(data.datasets[0].data[0]+": A",xCenter,yCenter)
     }
   }
+
 
   const options = {
     // customize chart options
   };
 
-  return <Doughnut data={data} options={options} plugins={[gaugeText]} />;
+  return <Doughnut data={data} options={options} plugins={[gaugeText]}/>;
 };
 
-export default HomeCostChart;
+export default Current;

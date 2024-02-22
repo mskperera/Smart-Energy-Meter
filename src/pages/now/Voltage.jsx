@@ -1,62 +1,62 @@
 import React, { useEffect, useState } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import {getEngergyUsageNow} from '../../action/device';
+
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
 
-const HomeCostChart = () => {
-  const [obj,setObj]=useState({
-    maxValue:40000,
-    minValue:0,
-    currentValue:0,
-    mesurementUnit:"Rs"
-    });
- 
-  const [remaningvalue,setRemainingValue]=useState(null)
+const Voltage = () => {
+
+  const [objV,setObjV] = useState({
+    maxVValue:250,
+    // minKwValue:0,
+    currentVValue:0,
+    mesurementUnitKw:"V",
+    // kwhPerSeconds:0,
+  });
+
+  // const [engergyUsageNow ,setEngergyUsageNow ] = useState(null);
+
+  const [remaningkwvalue,setRemainingKwValue]= useState(null);
 
   useEffect(()=>{
-    setRemainingValue(obj.maxValue-obj.currentValue)
-  },[
-    obj
-  ])
+    setRemainingKwValue(objV.maxVValue-objV.currentVValue);
+  },[objV]);
 
   useEffect(()=>{
     loadChartData();
-  },[obj]);
+  },[objV]);
 
   const loadChartData=async()=>{
     const payload={
       deviceId:"4",
-   mesurementUnitId:1
+      mesurementUnitId:3
     }
    const result=await getEngergyUsageNow(payload);
    console.log('resultwww',result.data)
   //  {"kwh":308.02,"deviceTimeStamp":1708324999,"kwhPerSec":0,"deviceTimeStampDate_UTC":"2024-02-19T06:43:19.000Z","kwh_MeasurementValue_max":100,"kwh_MeasurementValue_min":0,"Voltage":233.4}
  
-   const {usageBill}=result.data;
+   const {voltage}=result.data;
   
   
-   setObj({...obj,currentValue:usageBill});
+   setObjV({...objV,currentVValue:voltage});
   }
 
-
   const data = {
-    // labels: ['Label 1', 'Label 2', 'Label 3'],
-    labels: ['Rs.'],
+    // labels: ['V'],
     datasets: [
       {
-        data: [obj.currentValue,remaningvalue],
-        // backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        // hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        backgroundColor: ['#36A2EB','#F5F5DC'],
+        data: [objV.currentVValue,remaningkwvalue],
+        backgroundColor: [ '#36A2EB','#F5F5DC'],
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
         rotation:225,
-        cutout:'70%',
-        borderWidth: 1, 
-      },
+        cutout:'90%',
+        borderWidth: 1,
+        borderRadius: 50,      },
     ],
   };
+
 
   const gaugeText={
     id:'gaugeText',
@@ -68,18 +68,19 @@ const HomeCostChart = () => {
 
       ctx.save();
       ctx.fillStyle='black';
-      ctx.font ='bold 100rem';
+      ctx.font ='bold 10';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
-      ctx.fillText(`Rs:${data.datasets[0].data[0]}`,xCenter,yCenter +20)
+      ctx.fillText(data.datasets[0].data[0]+": V",xCenter,yCenter)
     }
   }
+
 
   const options = {
     // customize chart options
   };
 
-  return <Doughnut data={data} options={options} plugins={[gaugeText]} />;
+  return <Doughnut data={data} options={options} plugins={[gaugeText]}/>;
 };
 
-export default HomeCostChart;
+export default Voltage;
