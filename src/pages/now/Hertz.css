@@ -16,6 +16,18 @@
     display: flex;
 }
 
+@media screen and (max-width:850px){
+    .hz{
+        margin-top: 20px;
+    }
+
+    .hz p{
+        font-size: 15px;
+        font-weight: 600; 
+        padding: 0%;
+    }
+}
+
 @media screen and (max-width:450px){
     .hz p{
         font-size: 15px;

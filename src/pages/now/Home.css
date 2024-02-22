@@ -152,10 +152,30 @@
     }
     .chart-now-cost{
         width: 30%;
-       
         align-items: center;
         justify-content: center;
         padding: 50px;
+    }
+
+    .page-bottom{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: 0%;
+        margin-top: -90px;
+    }
+    
+    .page-bottom div{
+        width: 150px;
+        padding: 5px;
+        margin-bottom: 30px;
+    }
+
+    .bottom-3{
+        width: 0px;
+        
+    
     }
 
 }
