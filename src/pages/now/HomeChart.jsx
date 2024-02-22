@@ -30,13 +30,13 @@ const HomeChart = () => {
 
   useEffect(()=>{
     loadChartData();
-  },[objKw]);
+  },);
 
   const loadChartData=async()=>{
     const payload={
       deviceId:"4",
-   mesurementUnitId:1,
-      mesurementUnitId:8
+      mesurementUnitId:1,
+      // mesurementUnitId:8
     }
    const result=await getEngergyUsageNow(payload);
    console.log('resultwww',result.data)

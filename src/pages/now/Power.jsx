@@ -25,7 +25,7 @@ const Power = () => {
 
   useEffect(()=>{
     loadChartData();
-  },[objP]);
+  },);
 
   const loadChartData=async()=>{
     const payload={

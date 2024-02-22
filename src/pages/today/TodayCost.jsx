@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
-import { getEnergyMeterDataKwhPersecsByDateRange, getEngergyUsageKwhByDateRange } from '../../action/device';
+import { getEngergyUsageKwhByDateRange } from '../../action/device';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 

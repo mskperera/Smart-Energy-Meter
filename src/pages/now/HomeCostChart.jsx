@@ -22,7 +22,7 @@ const HomeCostChart = () => {
 
   useEffect(()=>{
     loadChartData();
-  },[obj]);
+  },);
 
   const loadChartData=async()=>{
     const payload={

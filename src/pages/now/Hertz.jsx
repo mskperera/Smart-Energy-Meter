@@ -22,7 +22,7 @@ const Hertz = () => {
     
       useEffect(()=>{
         loadChartData();
-      },[objHertz]);
+      },);
     
       const loadChartData=async()=>{
         const payload={

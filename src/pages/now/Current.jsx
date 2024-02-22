@@ -25,7 +25,7 @@ const Current = () => {
 
   useEffect(()=>{
     loadChartData();
-  },[objC]);
+  },);
 
   const loadChartData=async()=>{
     const payload={

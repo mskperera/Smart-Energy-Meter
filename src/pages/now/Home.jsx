@@ -44,6 +44,8 @@ const Home = () => {
           <div className='bottom-2'><Power/></div>
           <div className='bottom-3'>
                 <Hertz/>
+                <br/>
+                <Hertz/>
           </div>
         </div>
         <BottomNav/>

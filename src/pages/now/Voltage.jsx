@@ -25,7 +25,7 @@ const Voltage = () => {
 
   useEffect(()=>{
     loadChartData();
-  },[objV]);
+  },);
 
   const loadChartData=async()=>{
     const payload={
