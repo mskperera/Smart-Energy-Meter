@@ -1,10 +1,10 @@
 import customAxios from "../utils/axios";
 
 
-export const  getEngergyUsageNow= async (payload) => {
+export const  getDrpConsumerCategories= async () => {
   try {
     return await customAxios
-      .post(`/device/energymeter/getEngergyUsageNow`,payload, {
+      .get(`/drpdowns/getDrpConsumerCategories`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -20,10 +20,10 @@ export const  getEngergyUsageNow= async (payload) => {
   }
 }
 
-export const getEngergyUsageKwhByDateRange= async (payload) => {
+export const getDrpConsumerSubCategoriesById= async (id) => {
   try {
     return await customAxios
-      .post(`/device/energymeter/getEngergyUsageKwhByDateRange`,payload, {
+      .get(`/drpdowns/getDrpConsumerSubCategoriesById/${id}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -39,30 +39,10 @@ export const getEngergyUsageKwhByDateRange= async (payload) => {
   }
 }
 
-export const getEnergyMeterDataKwhPersecsByDateRange= async (payload) => {
+export const getDrpSupplier= async () => {
   try {
     return await customAxios
-      .post(`/device/energymeter/getEnergyMeterDataKwhPersecsByDateRange`,payload, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return err.response;
-      });
-  } catch (err) {
-    return err;
-  }
-}
-
-
-export const saveDeviceSetting= async (payload) => {
-  try {
-    return await customAxios
-      .post(`/device/energymeter/saveDeviceSetting`,payload, {
+      .get(`/drpdowns/getDrpSupplier`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -79,11 +59,10 @@ export const saveDeviceSetting= async (payload) => {
 }
 
 
-
-export const get_DeviceSettingsByDeviceId= async (deviceId) => {
+export const getDrpSupplyType= async () => {
   try {
     return await customAxios
-      .get(`/device/energymeter/get_DeviceSettingsByDeviceId/${deviceId}`, {
+      .get(`/drpdowns/getDrpSupplyType`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -98,9 +77,3 @@ export const get_DeviceSettingsByDeviceId= async (deviceId) => {
     return err;
   }
 }
-
-
-
-
-
-
