@@ -53,6 +53,7 @@ const addUpdateDeviceSettings=async()=>{
     supplierId: 1,
     supplyTypeId: 1,
     consumerCategoryid: 1,
+    consumerSubCategoryId:2
   };
 
   const res = await saveDeviceSettings(payload);
