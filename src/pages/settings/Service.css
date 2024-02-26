@@ -10,3 +10,15 @@
     background-color: rgb(186, 153, 217);
     color: black;
 }
+
+@media screen and (max-width:850px){
+    .wrapper3{
+        height: 73.8vh;
+    }
+}
+
+@media screen and (max-width:450px){
+    .wrapper3{
+        height: 77.2vh;
+    }
+}

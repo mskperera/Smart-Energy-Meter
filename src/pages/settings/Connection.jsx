@@ -17,7 +17,7 @@ function Connection() {
     </div>
     <div className='wrapper3 d-flex align-items-center justify-content-center w-100'>
         <div className='service'>
-            <h2 className='d-flex align-items-center justify-content-center mb-3'>Device Settings</h2>
+            <h2 className='d-flex align-items-center justify-content-center mb-3'>Connection</h2>
             <form className='needs-validation'>
                 <div className='form-group mb-2'>
                     <label htmlFor='devicename' className='form-label'>Device Name</label>

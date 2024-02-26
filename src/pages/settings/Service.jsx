@@ -1,10 +1,116 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BottomNav from '../../components/bottommenu/BottomNav'
 import Navbar from '../../components/navbar/Navbar'
 import { Link } from 'react-router-dom'
 import './Service.css'
+import { getDrpConsumerCategories, getDrpConsumerSubCategoriesById, getDrpSupplier, getDrpSupplyType } from '../../action/dropdown'
+import { get_DeviceSettingsByDeviceId, saveDeviceSettings } from '../../action/device'
 
 function Service() {
+
+    const [dropoptionsConsumerCatogery, setDropoptionsConsumerCatogery] = useState(['Option 1', 'Option 2', 'Option 3']);
+    const [consumerCategoryselectedValue, setConsumerCategoryselectedValue] = useState('');
+
+    const [dropoptionsConsumerSubCatogery, setDropoptionsConsumerSubCatogery] = useState(['Option 1', 'Option 2', 'Option 3']);
+    const [consumerSubCategoryselectedValue, setConsumerSubCategoryselectedValue] = useState('');
+
+    const [dropoptionsSupplier, setDropoptionsSupplier] = useState(['Option 1', 'Option 2', 'Option 3']);
+    const [supplierSelectedValue, setSupplierselectedValue] = useState('');
+
+    const [dropoptionsSupplyType, setDropoptionsSupplyType] = useState(['Option 1', 'Option 2', 'Option 3']);
+    const [supplyTypeSelectedValue, setSupplyTypeselectedValue] = useState('');
+
+    const [load,setLoad]=useState(false);
+    
+    useEffect(() => {
+
+        // loadDeviceSettingstData();
+        loadDrpConsumerCategories();
+        loadDrpConsumerSubCategoriesById();
+        loadDrpSupplier();
+        loadDrpSupplyType();
+        // loadDeviceDetailsByDeviceId();
+    }, []);
+
+    useEffect(()=>{
+        loadDeviceSettingstData()
+    },[
+        load
+    ])
+
+  
+
+    const [deviceSettings,setDeviceSettings] = useState('');
+
+    const loadDeviceSettingstData=async()=>{
+ 
+        const result=await get_DeviceSettingsByDeviceId(4);
+        setDeviceSettings(result.data);
+       }
+
+    const loadDrpConsumerCategories=async()=>{
+        const result=await getDrpConsumerCategories();
+        setDropoptionsConsumerCatogery(result.data);
+       }
+
+    const loadDrpConsumerSubCategoriesById=async()=>{
+        const result=await getDrpConsumerSubCategoriesById(3);
+        setDropoptionsConsumerSubCatogery(result.data);
+       }
+
+    const loadDrpSupplier=async()=>{
+        const result=await getDrpSupplier();
+        setDropoptionsSupplier(result.data);
+       }
+
+    const loadDrpSupplyType=async()=>{
+        const result=await getDrpSupplyType();
+        setDropoptionsSupplyType(result.data);
+       }
+
+   
+       const [message,setMessage]=useState('');
+       const [errormessage,setErrorMessage]=useState('');
+
+
+const addUpdateDeviceSettings=async()=>{
+
+    try{
+    
+    setErrorMessage('');
+    setMessage('');
+
+
+    const payload = {
+      deviceId:4 ,
+      supplierId: supplierSelectedValue,
+      supplyTypeId: supplyTypeSelectedValue,
+      consumerCategoryid: consumerCategoryselectedValue,
+      consumerSubCategoryId:consumerSubCategoryselectedValue
+    };
+  
+    const res = await saveDeviceSettings(payload);
+    console.log(res);
+    const { responseStatus, outputMessage } = res.data.output;
+    if (responseStatus === "failed") {
+      setErrorMessage(outputMessage)
+      return;
+    }
+  
+    setMessage(outputMessage)
+    setLoad(!load)
+  }
+
+  catch(err){
+    //const jsonString = JSON.parse(err);
+    //setErrorMessage(jsonString);
+    console.log(err);
+  }
+  
+}
+
+  
+
   return (
     <>
     <Navbar/>
@@ -17,70 +123,60 @@ function Service() {
     </div>
     <div className='wrapper3 d-flex align-items-center justify-content-center w-100'>
         <div className='service'>
-            <h5 className='d-flex align-items-center justify-content-center mb-3'>Device Settings</h5>
-            <form className='needs-validation'>
-                <div className='form-group was-validated mb-2'>
-                    <label htmlFor='deviceid' className='form-label'>Device ID</label>
-                        <select name="selecteID" className='form-control'>
-                            <option value=""></option>
-                            <option value="a">A</option>
-                            <option value="b">B</option>
-                        </select>
-                    {/* <input type='text' className='form-control' required placeholder='test@gmail.com'></input> */}
-                    {/* <div className='invalid-feedback'>Please enter your Email</div> */}
+            <h4 className='d-flex align-items-center justify-content-center mb-3'>Device Settings</h4>
+            <form form className='needs-validation' onSubmit={(e) => {e.preventDefault(); addUpdateDeviceSettings();}}>
+                <div className='form-group mb-2'>
+                    <label htmlFor='consumerCategoryId' className='form-label'>Consumer Category</label>
+                        <select onChange={(e)=>{
+                            console.log(e.target.value)
+                            setConsumerCategoryselectedValue(e.target.value)
+                        }} name="consumerCategoryId" className='form-control'>
+                           {dropoptionsConsumerCatogery.map(d=>(
+                            <option key={d.consumerCategoryId} value={d.consumerCategoryId}>{d.consumerCategoryName}</option>
+                           ))}            
+                        </select>   
                 </div>
-
-                <div className='form-group was-validated mb-2'>
-                    <label htmlFor='consumer' className='form-label'>Consumer Category</label>
-                        <select name="consumerCategoryId" className='form-control'>
-                            <option value=""></option>
-                            <option value="domestic">Domestic</option>
-                            <option value="religious">Religious & Charitable Institutions</option>
-                            <option value="other">Other Consumer Categories</option>
-                            <option value="evcharging">EV Charging of CEB Charging Stations</option>
-                            <option value="agriculture">Agriculture</option>
+{JSON.stringify(consumerCategoryselectedValue)}
+                <div className='form-group mb-2'>
+                    <label htmlFor='ConsumerSubCategoryId' className='form-label'>Consumer SubCategory</label>
+                        <select onChange={(e)=>{
+                            setConsumerSubCategoryselectedValue(e.target.value)
+                        }} name="ConsumerSubCategoryId" className='form-control'>
+                            {dropoptionsConsumerSubCatogery.map(s=>(
+                            <option key={s.ConsumerSubCategoryId} value={s.ConsumerSubCategoryId}>{s.ConsumerSubCategoryName}</option>
+                           ))}
                         </select>
-                    {/* <input type='password' className='form-control' required placeholder='********'></input> */}
-                    {/* <div className='invalid-feedback'>Please enter your Password</div> */}
                 </div>
+{JSON.stringify(consumerSubCategoryselectedValue)}
 
-                <div className='form-group was-validated mb-2'>
-                    <label htmlFor='consumer' className='form-label'>Consumer SubCategory</label>
-                        <select name="consumerCategoryId" className='form-control'>
-                            <option value=""></option>
-                            <option value="rate1">Industrial Rate1</option>
-                            <option value="rate2">Industrial Rate2</option>
-                            <option value="rate3">Industrial Rate3</option>
-                            <option value="hotelrate1">Hotel Rate1</option>
-                            <option value="hotelrate2">Hotel Rate2</option>
+                <div className='form-group mb-2'>
+                    <label htmlFor='supplierId' className='form-label'>Supplier</label>
+                        <select onChange={(e)=>{
+                            setSupplierselectedValue(e.target.value)
+                        }} name="supplierId" className='form-control '>
+                            {dropoptionsSupplier.map(r=>(
+                            <option key={r.supplierId} value={r.supplierId}>{r.supplierName}</option>
+                           ))}
                         </select>
-                    {/* <input type='password' className='form-control' required placeholder='********'></input> */}
-                    {/* <div className='invalid-feedback'>Please enter your Password</div> */}
                 </div>
+{JSON.stringify(supplierSelectedValue)}
 
-                <div className='form-group was-validated mb-2'>
-                    <label htmlFor='supplierid' className='form-label'>Supplier</label>
-                        <select name="supplierId" className='form-control'>
-                            <option value=""></option>
-                            <option value="ceb">CEB</option>
-                            <option value="leco">LECO</option>
-                        </select>
-                    {/* <input type='password' className='form-control' required placeholder='********'></input> */}
-                    {/* <div className='invalid-feedback'>Please enter your Password</div> */}
-                </div>
-
-                <div className='form-group was-validated mb-2'>
+                <div className='form-group mb-2'>
                     <label htmlFor='supplytype' className='form-label'>Supply Type</label>
-                        <select name="supplierId" className='form-control'>
-                            <option value=""></option>
-                            <option value="single">Single Phase</option>
-                            <option value="three">Three phase</option>
+                    <select onChange={(e)=>{
+                            setSupplyTypeselectedValue(e.target.value)
+                        }} name="supplyTypeId" className='form-control'>
+                            {dropoptionsSupplyType.map(t=>(
+                            <option key={t.supplyTypeId} value={t.supplyTypeId}>{t.supplyTypeName}</option>
+                           ))}
                         </select>
-                    {/* <input type='password' className='form-control' required placeholder='********'></input> */}
-                    {/* <div className='invalid-feedback'>Please enter your Password</div> */}
                 </div>
+{JSON.stringify(supplyTypeSelectedValue)}
                 
                 <button type='submit' className='btn btn-primary w-100 mt-2'>Save</button>
+
+                {message && <p>{message}</p>}
+                {errormessage && <p>{errormessage}</p>}
             </form>
         </div>
     </div>
