@@ -102,3 +102,23 @@ export const get_DeviceSettingsByDeviceId= async (deviceId) => {
 
 
 
+
+export const getDeviceDetailsByDeviceId= async (deviceId) => {
+  try {
+    return await customAxios
+      .get(`/device/energymeter/getDeviceDetailsByDeviceId/${deviceId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
