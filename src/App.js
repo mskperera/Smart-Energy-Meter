@@ -12,7 +12,10 @@ import Login from './pages/login/Login';
 import Year from './pages/year/Year';
 import Custom from './pages/custom/Custom';
 import APIData from './pages/apiData/charts';
-import Device from './pages/device/Device';
+// import Device from './pages/device/Device';
+import DeviceInfo from './pages/device/DeviceInfo';
+import Service from './pages/settings/Service';
+import Connection from './pages/settings/Connection';
 // import TodayCost from '../src/pages/today/TodayCost';
 // import WeekCost from '../src/pages/week/WeekCost';
 // import MonthCost from './pages/month/MonthCost';
@@ -30,7 +33,10 @@ function App() {
         <Route path='/apiData/charts' element={<Charts/>}/>
         <Route path='/year' element={<Year/>}/>
         <Route path='/custom' element={<Custom/>}/>
-        <Route path='/device' element={<Device/>}/>
+        {/* <Route path='/device' element={<Device/>}/> */}
+        <Route path='/deviceinfo' element={<DeviceInfo/>}/>
+        <Route path='/service' element={<Service/>}/>
+        <Route path='/connection' element={<Connection/>}/>
         <Route path='/apiData/deviceSettings' element={<DeviceSettings/>}/>
         <Route path='/apiData' element={<APIData/>}/>
         {/* <Route path='/cost' element={<Cost/>}/> */}

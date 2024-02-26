@@ -1,0 +1,12 @@
+.wrapper2{
+    height: 82.51vh;
+}
+
+.deviceinfo{
+    width: 330px;
+    padding: 30px;
+    height: min-content;
+    border-radius: 5px;
+    background-color: rgb(186, 153, 217);
+    color: black;
+}

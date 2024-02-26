@@ -51,7 +51,7 @@
         justify-content: center;
         align-items: center;
         list-style: none;
-        margin-right: 25px;
+        margin-left: -5px;
     }
 
     .nav-bar-links li{
