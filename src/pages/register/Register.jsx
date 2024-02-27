@@ -19,31 +19,19 @@ function Register() {
                     {/* <div className='invalid-feedback'>Please enter your Password</div> */}
                 </div>
                 <div className='form-group was-validated mb-1'>
-                    <label htmlFor='address' className='form-label'>Address</label>
-                    <textarea type='text' className='form-control' required ></textarea>
-                </div>
-                <div className='form-group was-validated mb-1'>
                     <label htmlFor='email' className='form-label'>Email</label>
                     <input type='email' className='form-control' required ></input>
                 </div>
-                <div className='form-group was-validated mb-1'>
-                    <label htmlFor='billingaddress' className='form-label'>Billing Address</label>
-                    <textarea type='text' className='form-control' required ></textarea>
-                    {/* <div className='invalid-feedback'>Please enter your Password</div> */}
+
+                <div class="mb-1">
+                     <label for="formFile" class="form-label">Profile Picture</label>
+                     <input class="form-control" type="file" id="formFile"/>
                 </div>
                 <div className='form-group was-validated mb-1'>
-                    <label htmlFor='userrole' className='form-label'>User Role</label>
+                    <label htmlFor='displayname' className='form-label'>Display Name</label>
                     <input type='text' className='form-control' required ></input>
                 </div>
-                <div className='form-group was-validated mb-1'>
-                    <label htmlFor='mobile' className='form-label'>Mobile</label>
-                    <input type='number' className='form-control' required ></input>
-                </div>
-                <div className='form-group was-validated mb-1'>
-                    <label htmlFor='tel' className='form-label'>Tel</label>
-                    <input type='number' className='form-control' required ></input>
-                </div>
-                <button type='submit' className='btn btn-primary w-100 mt-2'>Save</button>
+                <button type='submit' className='btn btn-primary w-100 mt-3'>Save</button>
             </form>
         </div>
     </div>

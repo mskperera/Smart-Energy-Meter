@@ -17,6 +17,7 @@ import APIData from './pages/apiData/charts';
 import DeviceInfo from './pages/device/DeviceInfo';
 import Service from './pages/settings/Service';
 import Register from './pages/register/Register';
+import Profile from './pages/profile/Profile';
 // import Connection from './pages/settings/Connection';
 
 
@@ -28,6 +29,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
+        <Route path='/profile' element={<Profile/>}/>
         <Route path='/home' element={<Home/>}/>
         <Route path='/today' element={<Today/>}/>
         <Route path='/week' element={<Week/>}/>
