@@ -77,3 +77,23 @@ export const getDrpSupplyType= async () => {
     return err;
   }
 }
+
+
+export const getDrpUserRole= async () => {
+  try {
+    return await customAxios
+      .get(`/drpdowns/getDrpUserRole`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
