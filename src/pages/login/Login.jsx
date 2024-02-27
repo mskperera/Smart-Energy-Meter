@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Login.css'
 import {login} from '../../action/userAuth'
-import { useNavigate } from 'react-router-dom/dist/umd/react-router-dom.development';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -16,6 +16,7 @@ function Login() {
             "gmtOffset":"+5:30",
             "publicIP":"212.121"  
     });
+    
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -56,6 +57,7 @@ function Login() {
                     <label htmlFor='check' className='form-check-label'>Remember Me</label>
                 </div>
                 <button type='submit' className='btn btn-primary w-100 mt-2'>Login</button>
+                <Link to={'/register'}><p>Register Here</p></Link>
             </form>
         </div>
     </div>

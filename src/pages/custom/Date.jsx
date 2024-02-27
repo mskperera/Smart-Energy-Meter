@@ -27,6 +27,7 @@ const DateRangePicker = () => {
                 placeholderText="Start Date"
             />
         </div>
+        
          <div>
             <DatePicker
                 selected={endDate}

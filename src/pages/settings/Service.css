@@ -1,5 +1,9 @@
 .wrapper3{
-    height: 71.95vh;
+    height: 66.1vh;
+}
+
+.wrapper4{
+    height: 66.1vh;
 }
 
 .service{
@@ -9,7 +13,50 @@
     border-radius: 5px;
     background-color: rgb(186, 153, 217);
     color: black;
+    margin-top: -50px;
 }
+
+
+.connection{
+    width: 330px;
+    padding: 15px;
+    height: min-content;
+    border-radius: 5px;
+    background-color: rgb(186, 153, 217);
+    color: black;
+    margin-top: -100px;
+}
+
+.content{
+    display: none;
+}
+
+.show-content{
+    display:block;
+}
+
+
+.tab{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.tab-links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+.tab-links li{
+    margin: 1rem 3rem;
+    cursor: pointer;
+}
+
 
 @media screen and (max-width:850px){
     .wrapper3{
@@ -19,6 +66,9 @@
 
 @media screen and (max-width:450px){
     .wrapper3{
-        height: 77.2vh;
+        height: 64vh;
+    }
+    .connection{
+        margin-top: -440px;
     }
 }
