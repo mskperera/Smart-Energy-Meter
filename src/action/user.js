@@ -1,10 +1,10 @@
 import customAxios from "../utils/axios";
 
 
-export const  getDrpConsumerCategories= async () => {
+export const  deleteUser= async (userId) => {
   try {
     return await customAxios
-      .get(`/drpdowns/getDrpConsumerCategories`, {
+      .delete(`/deleteUser/${userId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -20,10 +20,10 @@ export const  getDrpConsumerCategories= async () => {
   }
 }
 
-export const getDrpConsumerSubCategoriesById= async (id) => {
+export const getUserbyUserId= async (userId) => {
   try {
     return await customAxios
-      .get(`/drpdowns/getDrpConsumerSubCategoriesById/${id}`, {
+      .get(`/getUserbyUserId/${userId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -39,30 +39,10 @@ export const getDrpConsumerSubCategoriesById= async (id) => {
   }
 }
 
-export const getDrpSupplier= async () => {
+export const getUsers= async () => {
   try {
     return await customAxios
-      .get(`/drpdowns/getDrpSupplier`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return err.response;
-      });
-  } catch (err) {
-    return err;
-  }
-}
-
-
-export const getDrpSupplyType= async () => {
-  try {
-    return await customAxios
-      .get(`/drpdowns/getDrpSupplyType`, {
+      .get(`/getUsers`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -79,10 +59,10 @@ export const getDrpSupplyType= async () => {
 }
 
 
-export const getDrpUserRole= async () => {
+export const addUser= async (payload) => {
   try {
     return await customAxios
-      .get(`/drpdowns/getDrpUserRole`, {
+      .post(`/addUser`,payload, {
         headers: {
           'Content-Type': 'application/json',
         },
