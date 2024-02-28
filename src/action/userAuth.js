@@ -8,7 +8,6 @@ export const login = async formData => {
 
   try{
   const res = await customAxios.post(`/auth/login`, formData);
-  console.log('auth',res)
   localStorage.setItem('token', res.data.token);
   localStorage.setItem('refreshToken', res.data.refreshToken);
   localStorage.setItem('userData', JSON.stringify(res.data.user));

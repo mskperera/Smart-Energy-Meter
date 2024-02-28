@@ -47,7 +47,7 @@ const addUpdateUser=async()=>{
   password: "1234",
   isActive: true,
   email: "test@gmail.com",
-  profilePic: "https://example.com/profiles/john_doe.jpg",
+  // profilePic: "https://example.com/profiles/john_doe.jpg",
   displayName: "MSK perera",
   iud: "I",//"U"-update,"I"-insert
   gmt_Offset: "+05:30"

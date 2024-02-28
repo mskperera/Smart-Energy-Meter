@@ -1,13 +1,21 @@
 .navbar{
     width: 100%;
-    background: rgb(186, 153, 217);
     display: flex;
-    margin: 0%;
+    justify-content: space-between;
+    align-items: center;
+    background:  rgb(186, 153, 217);
+    padding: 1rem 2rem;
 }
 
 .title{
-    padding: 0rem 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.title p{
     font-size: 25px;
+    margin-left: 20px;
 }
 
 .app__navbar-login{
