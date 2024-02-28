@@ -53,8 +53,6 @@ const DeviceSettings=()=> {
     setDeviceDetails(result.data);
    }
 
-
-   
    
 
 const addUpdateDeviceSettings=async()=>{

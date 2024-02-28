@@ -37,12 +37,12 @@ const Profile = () => {
         </div>
         <div className="card-footer">
           <button className="btn btn-primary mr-2" onClick={handleEditProfile}>
-            Edit Profile
+            Save
           </button>
-          &nbsp;
+          {/* &nbsp;
           <button className="btn btn-danger" onClick={handleDeleteProfile}>
             Delete Profile
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

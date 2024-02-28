@@ -1,10 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BottomNav from '../../components/bottommenu/BottomNav'
 import './DeviceInfo.css'
 import Navbar from '../../components/navbar/Navbar'
+import { getDeviceDetailsByDeviceId } from '../../action/device'
 // import { Link } from 'react-router-dom'
 
 const DeviceInfo = () => {
+
+
+  const [deviceDetails,setDeviceDetails]=useState(null);
+
+  useEffect(() => {
+
+    // loadDeviceSettingstData();
+    // loadDrpConsumerCategories();
+    // loadDrpConsumerSubCategoriesById();
+    // loadDrpSupplier();
+    // loadDrpSupplyType();
+    loadDeviceDetailsByDeviceId();
+}, []);
+
+  const loadDeviceDetailsByDeviceId=async()=>{
+    const result=await getDeviceDetailsByDeviceId(4);
+    setDeviceDetails(result.data);
+    console.log('ddddddd',result)
+   }
+
+
+
   return (
     <>
     <Navbar/>
@@ -20,19 +43,19 @@ const DeviceInfo = () => {
            <h2 className='d-flex align-items-center justify-content-center mb-3'>Device Info</h2>
            <div className='form-group mb-2'>
             <label htmlFor='product' className='form-label'>Product</label>
-            <input className='form-control' placeholder=' EC-34u88 –v1' readOnly/>
+            <input className='form-control' placeholder={deviceDetails.product} readOnly/>
            </div>
            <div className='form-group mb-2'>
             <label htmlFor='version' className='form-label'>Firmware Version</label>
-            <input className='form-control' placeholder=' v1.93.323' readOnly/>
+            <input className='form-control' placeholder={deviceDetails.firmwareVersion} readOnly/>
            </div>
            <div className='form-group mb-2'>
             <label htmlFor='hversion' className='form-label'>Hardware Version</label>
-            <input className='form-control' placeholder=' 0.1' readOnly/>
+            <input className='form-control' placeholder={deviceDetails.hardwareVersion} readOnly/>
            </div>
            <div className='form-group mb-2'>
             <label htmlFor='serial' className='form-label'>Serial number</label>
-            <input className='form-control' placeholder=' 0.1' readOnly/>
+            <input className='form-control' placeholder={deviceDetails.serialNo} readOnly/>
            </div>
            
         </div>
