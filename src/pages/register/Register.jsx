@@ -80,4 +80,8 @@ function Register() {
   );
 }
 
+<<<<<<< Updated upstream
 export default Register;
+=======
+export default Register;
+>>>>>>> Stashed changes

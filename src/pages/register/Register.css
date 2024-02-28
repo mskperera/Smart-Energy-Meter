@@ -3,10 +3,37 @@
     background-color: rgb(186, 153, 217);
 }
 .register{
+<<<<<<< Updated upstream
     width: 450px;
     padding: 30px ;
+=======
+    width: 500px;
+    padding: 20px ;
+>>>>>>> Stashed changes
     height: min-content;
     border-radius: 5px;
     background-color: white;
     color: black;
+}
+
+@media screen and (max-width:850px) {
+    .register{
+        width: 400px;
+        padding: 20px ;
+        height: min-content;
+        border-radius: 5px;
+        background-color: white;
+        color: black;
+    }
+}
+
+@media screen and (max-width:650px) {
+    .register{
+        width: 350px;
+        padding: 20px ;
+        height: min-content;
+        border-radius: 5px;
+        background-color: white;
+        color: black;
+    }
 }

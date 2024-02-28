@@ -20,7 +20,7 @@ const Navbar = () => {
       <div/>
          <a href='/profile'>Profile</a>
       <div/>
-        <a href='/' >Logout</a>
+         <a href='/' >Logout</a>
       </div>
     </div>
 
