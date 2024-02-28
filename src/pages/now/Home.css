@@ -51,7 +51,7 @@
 } */
 
 .page-bottom div{
-    width: 250px;
+    width: 198px;
     padding: 1rem;
     /* margin-top: -50px; */
 }
@@ -59,11 +59,11 @@
 
 .bottom-3{
     width: 50px;
-    margin: 0%;
-    justify-content: space-between;
+    margin-top: 50px;
+    /* justify-content: space-between;
     align-items: center;
-    flex-direction: column;
-   
+    flex-direction: column; */
+    
 }
 
 /* .bottom-3 .box1{
@@ -188,11 +188,11 @@
         justify-content: space-between;
         margin: 0%;
         margin-left: 50px;
-        height: 72.7vh;
+        height: 55.9vh;
     }
 
     .chart-now-cost{
-        width: 100%;
+        width: 80%;
         margin-top: -90px;
         align-items: center;
         justify-content: center;
@@ -201,9 +201,28 @@
 
     .chart-now-kw{
         margin-top: -60px;
-        width: 100%;
+        width: 80%;
         align-items: center;
         justify-content: center;
+    }
+
+    .page-bottom{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: 0%;
+        margin-top: -50px;
+    }
+    
+    .page-bottom div{
+        width: 80px;
+        padding: 5px;
+        margin-bottom: 30px;
+    }
+
+    .bottom-3{
+        margin-top: 30px;
     }
 }
 
@@ -215,7 +234,7 @@
         justify-content: space-between;
         margin: 0%;
         margin-left: 40px;
-        height: 65.2vh;
+        height: 66.2vh;
     }
 
     .chart-now-cost{
@@ -249,11 +268,8 @@
         margin-bottom: 30px;
     }
 
-    /* .bottom-3 div{
-        flex: 1;
-        justify-content: space-between;
-        align-items: center;
-        display: flex;
-    } */
+    .bottom-3{
+        margin-top: 30px;
+    }
 }
 

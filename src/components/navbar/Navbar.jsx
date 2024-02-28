@@ -1,6 +1,7 @@
 import React from 'react'
 //import { BiTachometer } from "react-icons/bi";
 import './Navbar.css'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   return (
@@ -8,8 +9,18 @@ const Navbar = () => {
       {/* <div className='icon'>
         <BiTachometer color='white' size={80}/> 
       </div> */}
-      <p className='title'>Smart Energy Meter</p>
+      <div>
+        <p className='title'>Smart Energy Meter</p>
+      </div>
+
+      <div className='app__navbar-login'>
+         <a href='/profile'>Profile</a>
+      <div/>
+        <a href='/' >Logout</a>
+      </div>
     </div>
+
+    
   )
 }
 

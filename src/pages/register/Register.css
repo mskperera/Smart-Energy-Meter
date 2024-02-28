@@ -1,10 +1,10 @@
-.wrapper1{
+.wrapper-register{
     height: 100vh;
     background-color: rgb(186, 153, 217);
 }
-.device{
-    width: 330px;
-    padding: 30px;
+.register{
+    width: 350px;
+    padding: 30px ;
     height: min-content;
     border-radius: 5px;
     background-color: white;

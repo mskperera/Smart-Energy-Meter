@@ -5,6 +5,7 @@ import Today from '../src/pages/today/Today';
 import Week from '../src/pages/week/Week';
 import Month from './pages/month/Month';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/js/dist/tab'
 import Charts from './pages/apiData/charts';
 import DeviceSettings from './pages/apiData/deviceSettings';
 
@@ -12,10 +13,14 @@ import Login from './pages/login/Login';
 import Year from './pages/year/Year';
 import Custom from './pages/custom/Custom';
 import APIData from './pages/apiData/charts';
-import Device from './pages/device/Device';
-// import TodayCost from '../src/pages/today/TodayCost';
-// import WeekCost from '../src/pages/week/WeekCost';
-// import MonthCost from './pages/month/MonthCost';
+
+import DeviceInfo from './pages/device/DeviceInfo';
+import Service from './pages/settings/Service';
+import Register from './pages/register/Register';
+import Profile from './pages/profile/Profile';
+// import Connection from './pages/settings/Connection';
+
+
 
 
 function App() {
@@ -23,6 +28,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
+        <Route path='/profile' element={<Profile/>}/>
+
         <Route path='/home' element={<Home/>}/>
         <Route path='/today' element={<Today/>}/>
         <Route path='/week' element={<Week/>}/>
@@ -30,7 +38,10 @@ function App() {
         <Route path='/apiData/charts' element={<Charts/>}/>
         <Route path='/year' element={<Year/>}/>
         <Route path='/custom' element={<Custom/>}/>
-        <Route path='/device' element={<Device/>}/>
+        {/* <Route path='/device' element={<Device/>}/> */}
+        <Route path='/deviceinfo' element={<DeviceInfo/>}/>
+        <Route path='/service' element={<Service/>}/>
+        {/* <Route path='/connection' element={<Connection/>}/> */}
         <Route path='/apiData/deviceSettings' element={<DeviceSettings/>}/>
         <Route path='/apiData' element={<APIData/>}/>
         {/* <Route path='/cost' element={<Cost/>}/> */}

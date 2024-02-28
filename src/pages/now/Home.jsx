@@ -39,12 +39,11 @@ const Home = () => {
         </div>
 
         <div className='page-bottom'>
-          <div className='bottom-1'><Voltage/></div>
-          <div className='bottom-1'><Current/></div>
-          <div className='bottom-2'><Power/></div>
+          <div><Voltage/></div>
+          <div><Current/></div>
+          <div><Power/></div>
           <div className='bottom-3'>
                 <Hertz/>
-                <br/>
                 <Hertz/>
           </div>
         </div>

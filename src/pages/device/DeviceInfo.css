@@ -1,0 +1,24 @@
+.wrapper2{
+    height: 82.51vh;
+}
+
+.deviceinfo{
+    width: 330px;
+    padding: 30px;
+    height: min-content;
+    border-radius: 5px;
+    background-color: rgb(186, 153, 217);
+    color: black;
+}
+
+@media screen and (max-width:650px) {
+    .wrapper2{
+        height: 82.3vh;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .wrapper2{
+        height: 84.7vh;
+    }
+}

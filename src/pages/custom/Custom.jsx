@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import BottomNav from '../../components/bottommenu/BottomNav'
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/navbar/Navbar'
@@ -9,6 +9,9 @@ import Date from './Date'
 
 
 function Custom() {
+
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
     
     return (
         <>
@@ -24,14 +27,17 @@ function Custom() {
                 </ul>
         </div>
         <div className='date'>
-          <Date/>
+          <Date onDateChange={(startDate, endDate) => {
+            setSelectedStartDate(startDate);
+            setSelectedEndDate(endDate);
+          }}/>
         </div>
         <div className='page-5'>
           <div className='chart-pick-kw'>
-            <CustomKw/>
+            <CustomKw startDate={selectedStartDate} endDate={selectedEndDate}/>
           </div>
           <div className='chart-pick-cost'>
-            <CustomCost/>
+            <CustomCost startDate={selectedStartDate} endDate={selectedEndDate}/>
           </div>
         </div>
             <BottomNav/>

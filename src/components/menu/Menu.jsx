@@ -11,7 +11,7 @@ const Menu = () => {
                 <Link to={"/week"}><li className='btn btn-sm btn-primary'>Week</li></Link>
                 <Link to={"/month"}><li className='btn btn-sm btn-primary'>Month</li></Link>
                 <Link to={"/year"}><li className='btn btn-sm btn-primary'>Year</li></Link>
-                <Link to={"/year"}><li className='btn btn-sm btn-primary'>Custom</li></Link>
+                <Link to={"/custom"}><li className='btn btn-sm btn-primary'>Custom</li></Link>
             </ul>
     </div>
   )
