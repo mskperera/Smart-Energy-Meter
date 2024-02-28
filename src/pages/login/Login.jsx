@@ -9,6 +9,8 @@ function Login() {
  
     const navigate=useNavigate();
 
+    const [errorMessage,setErrorMessage]=useState('');
+
     const [formData, setFormData]=useState({
 
             "userName":"admin",
@@ -23,15 +25,17 @@ function Login() {
     
         try {
           const response = await login(formData);
-          if (response.status === 200) {
+          console.log('response',response);
+          // if (response.status === 200) {
              navigate('/home');
-            console.log('Login successful! Navigate to home page.');
-          } else {
+          //   console.log('Login successful! Navigate to home page.');
+          // } else {
    
-            console.log('Login failed. Handle error.');
-          }
+          //   console.log('Login failed. Handle error.');
+          // }
         } catch (error) {
           console.error('Error during login:', error);
+          setErrorMessage(error.response.data.error)
         }
       };
 
@@ -57,7 +61,11 @@ function Login() {
                     <label htmlFor='check' className='form-check-label'>Remember Me</label>
                 </div>
                 <button type='submit' className='btn btn-primary w-100 mt-2'>Login</button>
+
+             {errorMessage &&   <p>{errorMessage}</p>}
+
                 <Link to={'/register'}><p>Register Here</p></Link>
+
             </form>
         </div>
     </div>
