@@ -51,7 +51,7 @@ const Voltage = () => {
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
         rotation:225,
-        cutout:'90%',
+        cutout:'80%',
         borderWidth: 1,
         borderRadius: 50,      },
     ],
@@ -68,10 +68,11 @@ const Voltage = () => {
 
       ctx.save();
       ctx.fillStyle='black';
-      ctx.font ='bold 10';
+      ctx.font ='20px Trebuchet MS';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
-      ctx.fillText(data.datasets[0].data[0]+": V",xCenter,yCenter)
+      ctx.fillText(data.datasets[0].data[0],xCenter,yCenter)
+      ctx.fillText("V",xCenter,yCenter +20)
     }
   }
 
@@ -79,6 +80,31 @@ const Voltage = () => {
   const options = {
     // customize chart options
   };
+
+  // const responsiveOptions = {
+  //   maintainAspectRatio: false,
+  //   plugins: {
+  //     legend: {
+  //       display: false,
+  //     },
+  //     gaugeText: gaugeText,
+
+  //     beforeDatasetsDraw(chart,args, pluginOption){
+  //       const {ctx,data} = chart;
+  
+  //       const xCenter = chart.getDatasetMeta(0).data[0].x;
+  //       const yCenter = chart.getDatasetMeta(0).data[0].y;
+  
+  //       ctx.save();
+  //       ctx.fillStyle='black';
+  //       ctx.font ='10px Trebuchet MS';
+  //       ctx.textAlign= 'center';
+  //       ctx.textBaseline = 'baseline';
+  //       ctx.fillText(data.datasets[0].data[0],xCenter,yCenter)
+  //       ctx.fillText("V",xCenter,yCenter +28)
+  //     }
+  //   },
+  // };
 
   return <Doughnut data={data} options={options} plugins={[gaugeText]}/>;
 };

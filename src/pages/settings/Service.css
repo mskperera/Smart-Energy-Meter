@@ -14,6 +14,7 @@
     background-color: rgb(186, 153, 217);
     color: black;
     margin-top: -50px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 
@@ -25,6 +26,7 @@
     background-color: rgb(186, 153, 217);
     color: black;
     margin-top: -100px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .content{
@@ -55,21 +57,25 @@
 .tab-links li{
     margin: 1rem 3rem;
     cursor: pointer;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 
 @media screen and (max-width:850px){
     .wrapper3{
-        height: 73.8vh;
+        height: 65.6vh;
+    }
+    .wrapper4{
+        height: 65.6vh;
     }
 }
 
 @media screen and (max-width:450px){
     .wrapper3{
-        height: 64vh;
+        height: 73.6vh;
     }
     .wrapper4{
-        height: 64vh;
+        height: 73.6vh;
     }
     .connection{
         margin-top: -110px;

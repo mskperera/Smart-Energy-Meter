@@ -51,7 +51,7 @@ const Power = () => {
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
         rotation:225,
-        cutout:'90%',
+        cutout:'80%',
         borderWidth: 1,
         borderRadius: 50,
       },
@@ -68,10 +68,11 @@ const Power = () => {
 
       ctx.save();
       ctx.fillStyle='black';
-      ctx.font ='bold 10';
+      ctx.font ='20px Trebuchet MS';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
-      ctx.fillText(data.datasets[0].data[0]+": W",xCenter,yCenter)
+      ctx.fillText(data.datasets[0].data[0],xCenter,yCenter)
+      ctx.fillText("W",xCenter,yCenter +20)
     }
   }
 

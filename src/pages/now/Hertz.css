@@ -1,10 +1,12 @@
 .hz{
-    border: 2px solid;
+    border: none;
+    background-color: rgb(42, 247, 42);
     height: fit-content;
     align-items: center;
     justify-content: center;
     display: flex;
     margin-top: 20px;
+    border-radius: 20px;
 }
 
 .hz p{
@@ -35,14 +37,17 @@
         font-weight: 600; 
         justify-content: center;
         align-items: center;
-        padding: 2px;
+        padding: 1px;
     }
 
     .hz{
-        border: 1px solid;
+        /* border: 1px solid; */
         height: fit-content;
         align-items: center;
         justify-content: center;
         display: flex;
+        margin-top: 22px;
+        height: 20px;
+        margin-left: -5px;
     }
 }

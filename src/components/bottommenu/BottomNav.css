@@ -15,6 +15,10 @@
     list-style: none;
 }
 
+.tool .tooltip{
+    visibility: hidden;
+}
+
 .bottom-bar-links li{
     margin: 1rem 5rem;
     cursor: pointer;
@@ -60,5 +64,9 @@
         align-items: center;
         justify-content: space-between;
         margin-left: 10px;
+    }
+
+    .bottom-bar{
+        height: 45px;
     }
 }

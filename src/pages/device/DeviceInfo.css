@@ -9,6 +9,7 @@
     border-radius: 5px;
     background-color: rgb(186, 153, 217);
     color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 @media screen and (max-width:650px) {
@@ -19,6 +20,6 @@
 
 @media screen and (max-width:450px) {
     .wrapper2{
-        height: 84.7vh;
+        height: 88.1vh;
     }
 }

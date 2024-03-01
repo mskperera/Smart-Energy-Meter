@@ -111,15 +111,10 @@ console.log("testingsave")
       supplyTypeId: supplyTypeSelectedValue,
       consumerCategoryid: consumerCategoryselectedValue,
       consumerSubCategoryId:consumerSubCategoryselectedValue,
-<<<<<<< Updated upstream
       connection:"192.12.1.2",
       deviceName: "Device name 1",
       portNo: 1221
 
-=======
-      connection:'connection',
-      deviceName:'',
->>>>>>> Stashed changes
     };
 
 

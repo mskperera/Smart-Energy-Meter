@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import {getEngergyUsageNow} from '../../action/device';
 
-import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
+import { Chart as ChartJS, ArcElement, Tooltip, Colors } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
 
 const HomeChart = () => {
@@ -57,34 +57,42 @@ const HomeChart = () => {
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
         rotation:225,
-        cutout:'90%',
-        borderWidth: 1,
+        cutout:'75%',
+        borderWidth: 0,
         borderRadius: 50,
-        
       },
     ],
   };
 
   const gaugeText={
     id:'gaugeText',
-    beforeDatasetsDraw(chart,args, pluginOption){
+    beforeDatasetsDraw(chart,args, plugins){
       const {ctx,data} = chart;
 
-      const xCenter = chart.getDatasetMeta(0).data[0].x;
-      const yCenter = chart.getDatasetMeta(0).data[0].y;
+      const centerX = chart.getDatasetMeta(0).data[0].x;
+      const centerY = chart.getDatasetMeta(0).data[0].y;
 
       ctx.save();
       ctx.fillStyle='black';
-      ctx.font ='bold 100';
+      ctx.font ='50px Trebuchet MS ';
+
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
-      ctx.fillText(data.datasets[0].data[0]+': kWh',xCenter,yCenter +20)
+      ctx.fillText(data.datasets[0].data[0],centerX,centerY)
+      ctx.fillText("kW",centerX,centerY +40)
     }
   }
 
 
   const options = {
     // customize chart options
+    plugins: {
+      legend: {
+        labels: {
+          color: 'Black', 
+        },
+      },
+    },
   };
 
   return <Doughnut data={data} options={options} plugins={[gaugeText]}/>;

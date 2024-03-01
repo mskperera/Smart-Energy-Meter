@@ -43,14 +43,14 @@ const addUpdateUser=async()=>{
   const payload = {
     userRegId:null,
     userRoleId:2,
-  userName: "tes1t",
-  password: "1234",
-  isActive: true,
-  email: "test@gmail.com",
-  // profilePic: "https://example.com/profiles/john_doe.jpg",
-  displayName: "MSK perera",
-  iud: "I",//"U"-update,"I"-insert
-  gmt_Offset: "+05:30"
+    userName: "tes1t",
+    password: "1234",
+    isActive: true,
+    email: "test@gmail.com",
+    // profilePic: "https://example.com/profiles/john_doe.jpg",
+    displayName: "MSK perera",
+    iud: "I",//"U"-update,"I"-insert
+    gmt_Offset: "+05:30"
   };
 
   const res = await addUser(payload);

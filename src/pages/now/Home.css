@@ -4,6 +4,7 @@
     justify-content:center;
     align-items: center;
     display: flex;
+    /* background-color: 	#191970; */
 }
 
 .chart-now-kw{
@@ -41,6 +42,7 @@
     justify-content: center;
     align-items: center;
     margin: 0%;
+    /* background-color: #483D8B; */
 }
 
 /* .page-bottom-1{
@@ -141,7 +143,7 @@
         align-items: center;
         justify-content: center;
         margin-top: 5px;
-        margin-bottom: 28.5px;
+        margin-bottom: 40px;
     }
     .chart-now-kw{
         width:30%; 
@@ -163,13 +165,13 @@
         justify-content: center;
         align-items: center;
         margin: 0%;
-        margin-top: -90px;
+        margin-top: -57px;
     }
     
     .page-bottom div{
         width: 150px;
-        padding: 5px;
-        margin-bottom: 30px;
+        padding: 10px;
+        margin-bottom: 3px;
     }
 
     .bottom-3{
@@ -188,7 +190,7 @@
         justify-content: space-between;
         margin: 0%;
         margin-left: 50px;
-        height: 55.9vh;
+        height: 53.5vh;
     }
 
     .chart-now-cost{
@@ -212,17 +214,21 @@
         justify-content: center;
         align-items: center;
         margin: 0%;
-        margin-top: -50px;
+        margin-top: 20px;
     }
     
     .page-bottom div{
-        width: 80px;
-        padding: 5px;
-        margin-bottom: 30px;
+        width: 90px;
+        padding: 8px;
+        margin-bottom: 10px;
     }
 
-    .bottom-3{
-        margin-top: 30px;
+    .page-bottom .vol{
+        width: 25%;
+    }
+
+    .page-bottom .bottom-3{
+        margin-top: 16px;
     }
 }
 
@@ -231,26 +237,29 @@
         width: 80%;
         flex-direction: column;
         align-items: center;
-        justify-content: space-between;
+        justify-content:center;
         margin: 0%;
         margin-left: 40px;
-        height: 66.2vh;
+        height: 60vh;
+        padding: 0%;
     }
 
     .chart-now-cost{
-        width: 100%;
-        margin-top:-100px;
+        width: 80%;
+        margin-top:0;
         align-items: center;
         justify-content: center;
-        margin-bottom: 10px;
+        margin-bottom: 0;
+        padding: 10px;
     }
 
     .chart-now-kw{
-        margin-top: -90px;
-        width: 100%;
+        margin-top: 0;
+        width: 80%;
         align-items: center;
         justify-content: center;
-        margin-bottom: -90px;
+        margin-bottom: 0;
+        padding: 10px;
     }
 
     .page-bottom{
@@ -258,18 +267,18 @@
         width: 100%;
         justify-content: center;
         align-items: center;
-        margin: 0%;
-        margin-top: -90px;
+        margin-bottom: 10px;
+        height: 17.1vh;
     }
     
     .page-bottom div{
         width: 80px;
         padding: 5px;
-        margin-bottom: 30px;
+        margin-bottom:0;
     }
 
-    .bottom-3{
-        margin-top: 30px;
-    }
+    /* .bottom-3{
+        margin-top: 0;
+    } */
 }
 

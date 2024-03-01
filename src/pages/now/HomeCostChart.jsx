@@ -6,7 +6,7 @@ ChartJS.register(ArcElement, Tooltip);
 
 const HomeCostChart = () => {
   const [obj,setObj]=useState({
-    maxValue:40000,
+    maxValue:45000,
     minValue:0,
     currentValue:0,
     mesurementUnit:"Rs"
@@ -53,7 +53,7 @@ const HomeCostChart = () => {
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
         rotation:225,
-        cutout:'90%',
+        cutout:'75%',
         borderWidth: 1,
         borderRadius: 50, 
       },
@@ -70,16 +70,25 @@ const HomeCostChart = () => {
 
       ctx.save();
       ctx.fillStyle='black';
-      ctx.font ='bold 100rem';
+      ctx.font ='50px Trebuchet MS ';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
-      ctx.fillText(data.datasets[0].data[0]+": Rs",xCenter,yCenter +20)
+      ctx.fillText(data.datasets[0].data[0],xCenter,yCenter)
+      ctx.fillText("Rs",xCenter,yCenter +40)
     }
   }
 
   const options = {
     // customize chart options
+    plugins: {
+      legend: {
+        labels: {
+          color: 'black', // specify the color for the chart labels
+        },
+      },
+    },
   };
+
 
   return <Doughnut data={data} options={options} plugins={[gaugeText]} />;
 };

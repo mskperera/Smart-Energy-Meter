@@ -68,7 +68,27 @@ const CustomCost = () => {
     ]     
     });
     const options={
-
+        scales: {
+            x: {
+              ticks: {
+                color: 'black', // color of x-axis labels
+              },
+            },
+            y: {
+              beginAtZero: true,
+              ticks: {
+                color: 'black', //color of y-axis labels
+              },
+            },
+          },
+          
+        plugins: {
+            legend: {
+              labels: {
+                color: 'black',//color for the chart labels
+              },
+            },
+          },
     }
  return <Bar data={data} options={options}/>
 }

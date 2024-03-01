@@ -8,7 +8,7 @@ import { getDeviceDetailsByDeviceId } from '../../action/device'
 const DeviceInfo = () => {
 
 
-  const [deviceDetails,setDeviceDetails]=useState(null);
+  const [deviceDetails,setDeviceDetails]=useState('');
 
   useEffect(() => {
 
@@ -23,7 +23,7 @@ const DeviceInfo = () => {
   const loadDeviceDetailsByDeviceId=async()=>{
     const result=await getDeviceDetailsByDeviceId(4);
     setDeviceDetails(result.data);
-    console.log('ddddddd',result)
+    console.log('Details',result)
    }
 
 
@@ -43,19 +43,19 @@ const DeviceInfo = () => {
            <h2 className='d-flex align-items-center justify-content-center mb-3'>Device Info</h2>
            <div className='form-group mb-2'>
             <label htmlFor='product' className='form-label'>Product</label>
-            <input className='form-control' placeholder={deviceDetails.product} readOnly/>
+            <input type='text' className='form-control' value={deviceDetails.product} readOnly />
            </div>
            <div className='form-group mb-2'>
             <label htmlFor='version' className='form-label'>Firmware Version</label>
-            <input className='form-control' placeholder={deviceDetails.firmwareVersion} readOnly/>
+            <input type='text' className='form-control' value={deviceDetails.firmwareVersion} readOnly/>
            </div>
            <div className='form-group mb-2'>
             <label htmlFor='hversion' className='form-label'>Hardware Version</label>
-            <input className='form-control' placeholder={deviceDetails.hardwareVersion} readOnly/>
+            <input type='text' className='form-control' value={deviceDetails.hardwareVersion} readOnly />
            </div>
            <div className='form-group mb-2'>
             <label htmlFor='serial' className='form-label'>Serial number</label>
-            <input className='form-control' placeholder={deviceDetails.serialNo} readOnly/>
+            <input type='text' className='form-control' value={deviceDetails.serialNo} readOnly/>
            </div>
            
         </div>

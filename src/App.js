@@ -19,6 +19,7 @@ import Service from './pages/settings/Service';
 import Register from './pages/register/Register';
 import Profile from './pages/profile/Profile';
 import Userlist from './pages/userlist/Userlist';
+import Management from './pages/management/Management';
 // import Connection from './pages/settings/Connection';
 
 
@@ -28,7 +29,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/login' element={<Login/>}/>
+        <Route path='/' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/userlist' element={<Userlist/>}/>
@@ -39,16 +40,12 @@ function App() {
         <Route path='/apiData/charts' element={<Charts/>}/>
         <Route path='/year' element={<Year/>}/>
         <Route path='/custom' element={<Custom/>}/>
-        {/* <Route path='/device' element={<Device/>}/> */}
         <Route path='/deviceinfo' element={<DeviceInfo/>}/>
         <Route path='/service' element={<Service/>}/>
         {/* <Route path='/connection' element={<Connection/>}/> */}
+        <Route path='/management' element={<Management/>}/>
         <Route path='/apiData/deviceSettings' element={<DeviceSettings/>}/>
         <Route path='/apiData' element={<APIData/>}/>
-        {/* <Route path='/cost' element={<Cost/>}/> */}
-        {/* <Route path='/todaycost' element={<TodayCost/>}/> */}
-        {/* <Route path='/weekcost' element={<WeekCost/>}/> */}
-        {/* <Route path='/monthcost' element={<MonthCost/>}/> */}
       </Routes>
     </BrowserRouter>
   );

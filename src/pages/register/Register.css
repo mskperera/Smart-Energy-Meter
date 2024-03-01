@@ -3,17 +3,14 @@
     background-color: rgb(186, 153, 217);
 }
 .register{
-<<<<<<< Updated upstream
+
     width: 450px;
     padding: 30px ;
-=======
-    width: 500px;
-    padding: 20px ;
->>>>>>> Stashed changes
     height: min-content;
     border-radius: 5px;
     background-color: white;
     color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 @media screen and (max-width:850px) {

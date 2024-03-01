@@ -3,12 +3,12 @@ import { useState } from 'react'
 import './Hertz.css'
 import { getEngergyUsageNow } from '../../action/device';
 
-const Hertz = () => {
-    const [objHertz,setObjHertz] = useState({
+const Powerfact = () => {
+    const [objPowerFact,setPowerFact] = useState({
         // maxCValue:15,
         // minKwValue:0,
-        currentHzValue:0,
-        mesurementUnitKw:"Hz",
+        currentPfValue:0,
+        mesurementUnitPf:" ",
         // kwhPerSeconds:0,
       });
     
@@ -17,8 +17,8 @@ const Hertz = () => {
       const [remaningkwvalue,setRemainingKwValue]= useState(null);
     
       useEffect(()=>{
-        setRemainingKwValue(objHertz.currentHzValue);
-      },[objHertz]);
+        setRemainingKwValue(objPowerFact.currentPfValue);
+      },[objPowerFact]);
     
       useEffect(()=>{
         loadChartData();
@@ -33,17 +33,17 @@ const Hertz = () => {
        console.log('resultwww',result.data)
       //  {"kwh":308.02,"deviceTimeStamp":1708324999,"kwhPerSec":0,"deviceTimeStampDate_UTC":"2024-02-19T06:43:19.000Z","kwh_MeasurementValue_max":100,"kwh_MeasurementValue_min":0,"Voltage":233.4}
      
-       const {hertz}=result.data;
+       const {pf}=result.data;
       
       
-       setObjHertz({...objHertz,currentHzValue:hertz});
+       setPowerFact({...objPowerFact,currentPfValue:pf});
       }
 
   return (
     <div className='hz'>
-        <p>{objHertz.currentHzValue} Hz</p>
+        <p>{objPowerFact.currentPfValue} pf</p>
     </div>
   )
 }
 
-export default Hertz
+export default Powerfact

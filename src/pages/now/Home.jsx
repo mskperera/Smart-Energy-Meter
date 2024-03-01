@@ -9,6 +9,7 @@ import Voltage from './Voltage'
 import Current from './Current'
 import Power from './Power'
 import Hertz from './Hertz'
+import Powerfact from './Powerfact'
 // import { Link } from 'react-router-dom'
 
 
@@ -39,12 +40,12 @@ const Home = () => {
         </div>
 
         <div className='page-bottom'>
-          <div><Voltage/></div>
-          <div><Current/></div>
-          <div><Power/></div>
+          <div className='vol'><Voltage/></div>
+          <div className='vol'><Current/></div>
+          <div className='vol'><Power/></div>
           <div className='bottom-3'>
                 <Hertz/>
-                <Hertz/>
+                <Powerfact/>
           </div>
         </div>
         <BottomNav/>

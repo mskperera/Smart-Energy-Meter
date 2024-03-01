@@ -1,3 +1,4 @@
+
 .nav-bar{
     width: 100%;
     display: flex;
@@ -15,6 +16,7 @@
 .nav-bar-links li{
     margin: 1rem 3rem;
     cursor: pointer;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
 @media screen and (max-width:850px){
@@ -58,8 +60,5 @@
         margin:0.5rem 0.3rem;
     }
 
-    /* .btn1{
-        width: 70px;
-        font-size: 10%;
-    } */
+    
 }
