@@ -52,7 +52,7 @@ const Voltage = () => {
         circumference:270,
         rotation:225,
         cutout:'80%',
-        borderWidth: 1,
+        borderWidth: 0,
         borderRadius: 50,      },
     ],
   };
@@ -67,7 +67,7 @@ const Voltage = () => {
       const yCenter = chart.getDatasetMeta(0).data[0].y;
 
       ctx.save();
-      ctx.fillStyle='black';
+      ctx.fillStyle='white';
       ctx.font ='20px Trebuchet MS';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';

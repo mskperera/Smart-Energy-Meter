@@ -37,8 +37,8 @@ const Home = () => {
           <div className='chart-now-cost'>
             <HomeCostChart data=''/>
           </div>
-        </div>
 
+        </div>
         <div className='page-bottom'>
           <div className='vol'><Voltage/></div>
           <div className='vol'><Current/></div>
@@ -48,7 +48,8 @@ const Home = () => {
                 <Powerfact/>
           </div>
         </div>
-        <BottomNav/>
+
+        <BottomNav className="bar1"/>
       </>
   )
 }

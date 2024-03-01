@@ -93,14 +93,20 @@ const TodayKw = () => {
 
       scales: {
         x: {
+          grid: {
+            color: 'Gray', //  color of x-axis grid lines
+          },
           ticks: {
-            color: 'black', // color of x-axis labels
+            color: 'white', // color of x-axis labels
           },
         },
         y: {
+          grid: {
+            color: 'Gray', //  color of x-axis grid lines
+          },
           beginAtZero: true,
           ticks: {
-            color: 'black', //color of y-axis labels
+            color: 'white', //color of y-axis labels
           },
         },
       },
@@ -108,7 +114,7 @@ const TodayKw = () => {
       plugins: {
         legend: {
           labels: {
-            color: 'black', 
+            color: 'white', 
           },
         },
       },

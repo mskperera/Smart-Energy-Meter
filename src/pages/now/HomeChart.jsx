@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import {getEngergyUsageNow} from '../../action/device';
+import './Homechart.css'
 
 import { Chart as ChartJS, ArcElement, Tooltip, Colors } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
@@ -49,11 +50,11 @@ const HomeChart = () => {
   }
 
   const data = {
-    labels: ['kWh'],
+    // labels: ['kWh'],
     datasets: [
       {
         data: [objKw.currentKwValue,remaningkwvalue],
-        backgroundColor: [ '#36A2EB','#F5F5DC'],
+        backgroundColor: [ 'yellow','#F5F5DC'],
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
         rotation:225,
@@ -73,7 +74,7 @@ const HomeChart = () => {
       const centerY = chart.getDatasetMeta(0).data[0].y;
 
       ctx.save();
-      ctx.fillStyle='black';
+      ctx.fillStyle='white';
       ctx.font ='50px Trebuchet MS ';
 
       ctx.textAlign= 'center';
@@ -95,7 +96,15 @@ const HomeChart = () => {
     },
   };
 
-  return <Doughnut data={data} options={options} plugins={[gaugeText]}/>;
+  
+
+
+  return (
+      <Doughnut data={data} options={options} plugins={[gaugeText]} className="chart" />
+    // <div className="chart-container bg-transparent" >
+    // </div>
+  );
+  
 };
 
 export default HomeChart;

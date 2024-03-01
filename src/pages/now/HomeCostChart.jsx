@@ -43,18 +43,18 @@ const HomeCostChart = () => {
 
   const data = {
     // labels: ['Label 1', 'Label 2', 'Label 3'],
-    labels: ['Rs.'],
+    // labels: ['Rs.'],
     datasets: [
       {
         data: [obj.currentValue,remaningvalue],
         // backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
         // hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        backgroundColor: ['#36A2EB','#F5F5DC'],
+        backgroundColor: ['yellow','#F5F5DC'],
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
         rotation:225,
         cutout:'75%',
-        borderWidth: 1,
+        borderWidth: 0,
         borderRadius: 50, 
       },
     ],
@@ -69,7 +69,7 @@ const HomeCostChart = () => {
       const yCenter = chart.getDatasetMeta(0).data[0].y;
 
       ctx.save();
-      ctx.fillStyle='black';
+      ctx.fillStyle='white';
       ctx.font ='50px Trebuchet MS ';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';

@@ -21,13 +21,13 @@ function Week() {
       <Navbar/>
       <nav className='nav-bar'>
             <ul className='nav-bar-links'>
-                <Link to={"/home"}><li className='btn btn-sm btn-info'>Now</li></Link> 
-                <Link to={"/today"}><li className='btn btn-sm btn-info'>Today</li></Link>  
+                <Link to={"/home"}><li className='btn btn-sm btn-info bg-transparent'>Now</li></Link> 
+                <Link to={"/today"}><li className='btn btn-sm btn-info bg-transparent'>Today</li></Link>  
                 <Link to={"/week"}><li className={`btn btn-sm btn-primary ${activeTab === 'Now' ? 'active' : ''}`}
                 onClick={() => handleTabClick('Now')}>Week</li></Link>
-                <Link to={"/month"}><li className='btn btn-sm btn-info'>Month</li></Link>
-                <Link to={"/year"}><li className='btn btn-sm btn-info'>Year</li></Link>
-                <Link to={"/custom"}><li className='btn btn-sm btn-info'>Custom</li></Link>
+                <Link to={"/month"}><li className='btn btn-sm btn-info bg-transparent'>Month</li></Link>
+                <Link to={"/year"}><li className='btn btn-sm btn-info bg-transparent'>Year</li></Link>
+                <Link to={"/custom"}><li className='btn btn-sm btn-info bg-transparent'>Custom</li></Link>
             </ul>
    
     </nav>

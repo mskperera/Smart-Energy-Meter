@@ -10,9 +10,9 @@ import { get_DeviceSettingsByDeviceId, saveDeviceSettings } from '../../action/d
 
 function Service () {
 
-    const [editedDeviceName, setEditedDeviceName] = useState("Device name 1");
-    const [editedConnection, setEditedConnection] = useState('192.12.1.2');
-    const [editedPortNo, setEditedPortNo] = useState(1221);
+    const [editedDeviceName, setEditedDeviceName] = useState();
+    const [editedConnection, setEditedConnection] = useState();
+    const [editedPortNo, setEditedPortNo] = useState();
 
 
     const [dropoptionsConsumerCatogery, setDropoptionsConsumerCatogery] = useState(['Option 1', 'Option 2', 'Option 3']);
@@ -29,11 +29,14 @@ function Service () {
 
     const [load,setLoad]=useState(false);
 
+    useEffect(()=>{
+        loadDrpConsumerSubCategoriesById();
+    },[consumerCategoryselectedValue])
     useEffect(() => {
 
-        loadDeviceSettingstData();
+      
         loadDrpConsumerCategories();
-        loadDrpConsumerSubCategoriesById();
+       
         loadDrpSupplier();
         loadDrpSupplyType();
         // loadDeviceDetailsByDeviceId();
@@ -58,6 +61,7 @@ function Service () {
        console.log("test",result);
        const deviceSetttings=result.data;
        setConsumerCategoryselectedValue(deviceSetttings.consumerCategoryId);
+
     }
 
     const loadDrpConsumerCategories=async()=>{
@@ -66,7 +70,7 @@ function Service () {
        }
 
     const loadDrpConsumerSubCategoriesById=async()=>{
-        const result=await getDrpConsumerSubCategoriesById(deviceId);
+        const result=await getDrpConsumerSubCategoriesById(consumerCategoryselectedValue);
         console.log("consumer",result);
         const subCategory = result.data;
         setDropoptionsConsumerSubCatogery(result.data);
@@ -172,7 +176,7 @@ console.log("testingsave")
                                         </select>   
                                 </div>
                 {/* {JSON.stringify(consumerCategoryselectedValue)} */}
-                                <div className='form-group mb-2'>
+                               {false && <div className='form-group mb-2'>
                                     <label htmlFor='ConsumerSubCategoryId' className='form-label'>Consumer SubCategory</label>
                                         <select onChange={(e)=>{
                                             setConsumerSubCategoryselectedValue(e.target.value)
@@ -181,7 +185,7 @@ console.log("testingsave")
                                             <option key={s.ConsumerSubCategoryId} value={s.ConsumerSubCategoryId}>{s.ConsumerSubCategoryName}</option>
                                         ))}
                                         </select>
-                                </div>
+                                </div>}
                 {/* {JSON.stringify(consumerSubCategoryselectedValue)} */}
 
                                 <div className='form-group mb-2'>

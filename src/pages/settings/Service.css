@@ -1,9 +1,11 @@
 .wrapper3{
-    height: 66.1vh;
+    height: 72.84vh;
+    background-color:#191970;
 }
 
 .wrapper4{
-    height: 66.1vh;
+    height: 72.84vh;
+    background-color:#191970;
 }
 
 .service{
@@ -13,7 +15,7 @@
     border-radius: 5px;
     background-color: rgb(186, 153, 217);
     color: black;
-    margin-top: -50px;
+    margin-top: 0px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -25,7 +27,7 @@
     border-radius: 5px;
     background-color: rgb(186, 153, 217);
     color: black;
-    margin-top: -100px;
+    margin-top: 0px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -43,8 +45,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
-    margin-bottom: 30px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .tab-links{

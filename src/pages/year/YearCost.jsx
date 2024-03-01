@@ -72,14 +72,20 @@ const YearCost = () => {
 
         scales: {
             x: {
+              grid: {
+                color: 'gray', // color of x-axis labels
+              },
               ticks: {
-                color: 'black', // color of x-axis labels
+                color: 'white', // color of x-axis labels
               },
             },
             y: {
+              grid: {
+                color: 'gray', // color of x-axis labels
+              },
               beginAtZero: true,
               ticks: {
-                color: 'black', //color of y-axis labels
+                color: 'white', //color of y-axis labels
               },
             },
           },
@@ -87,7 +93,7 @@ const YearCost = () => {
         plugins: {
             legend: {
               labels: {
-                color: 'black', // color for the chart labels
+                color: 'white', // color for the chart labels
               },
             },
           },

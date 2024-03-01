@@ -1,10 +1,12 @@
 .page{
     width: 100%;
-    margin: 0%;
+    /* margin-top: 50px; */
     justify-content:center;
     align-items: center;
     display: flex;
-    /* background-color: 	#191970; */
+    background-color:#191970;
+    /* position: absolute; */
+    height: 64.48vh;
 }
 
 .chart-now-kw{
@@ -17,6 +19,7 @@
     margin: 0%;
     flex-direction: column;
     padding: 1rem;
+    margin-top: 40px;
 }
 
 .chart-now-cost{
@@ -28,21 +31,25 @@
     align-items: center;
     margin: 0%;
     flex-direction: column;
-    padding: 2rem;
+    padding: 1rem;
 }
 
-.bottom{
+/* .bottom{
     width: 100%;
     display: flex;
     
-}
+    
+} */
 .page-bottom{
     display: flex;
     width: 100%;
     justify-content: center;
     align-items: center;
+    margin-top: 150px;
+    /* background-color:yellow; */
+    background-color:#191970;
+    /* position: absolute; */
     margin: 0%;
-    /* background-color: #483D8B; */
 }
 
 /* .page-bottom-1{

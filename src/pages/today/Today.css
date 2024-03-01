@@ -2,8 +2,8 @@
     width: 100%;
     align-items: center;
     justify-content: center;
-
-    height: 68.3vh;
+    background-color:#191970;
+    height: 82.52vh;
     margin: 0%;
 }
 
@@ -34,11 +34,11 @@
 @media screen and (max-width:2000px){
     .page-1{
         width: 100%;
-        margin-top: 0.5rem;
+        margin-top: 0rem;
         justify-content:center;
         align-items: center;
         display: flex;
-        margin-bottom: 1.19rem;
+        margin-bottom: 0rem;
         padding: 1rem;
         /* margin-left: -150px; */
     }

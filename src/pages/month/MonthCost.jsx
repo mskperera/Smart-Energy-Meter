@@ -71,14 +71,20 @@ const MonthCost = () => {
 
         scales: {
             x: {
+              grid: {
+                color: 'Gray', // color of x-axis labels
+              },
               ticks: {
-                color: 'black', // color of x-axis labels
+                color: 'white', // color of x-axis labels
               },
             },
             y: {
+              grid: {
+                color: 'Gray', // color of x-axis labels
+              },
               beginAtZero: true,
               ticks: {
-                color: 'black', //color of y-axis labels
+                color: 'white', //color of y-axis labels
               },
             },
           },
@@ -86,7 +92,7 @@ const MonthCost = () => {
         plugins: {
             legend: {
               labels: {
-                color: 'black', // color for the chart labels
+                color: 'white', // color for the chart labels
               },
             },
           },
