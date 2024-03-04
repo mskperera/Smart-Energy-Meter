@@ -39,6 +39,30 @@ const UserManagement=()=> {
    
    
 
+// const addUpdateUser=async()=>{
+//   const payload = {
+//     userRegId:null,
+//     userRoleId:2,
+//     userName: "tes1t",
+//     password: "1234",
+//     isActive: true,
+//     email: "test@gmail.com",
+//     // profilePic: "https://example.com/profiles/john_doe.jpg",
+//     displayName: "MSK perera",
+//     iud: "I",//"U"-update,"I"-insert
+//     gmt_Offset: "+05:30"
+//   };
+
+//   const res = await addUser(payload);
+//   console.log(res);
+//   const { responseStatus, outputMessage } = res.data.output;
+//   if (responseStatus === "failed") {
+//     console.log("exception:", outputMessage);
+//   }
+
+//   console.log("successful:", outputMessage);
+// }
+
 const addUpdateUser=async()=>{
   const payload = {
     userRegId:null,
@@ -47,7 +71,11 @@ const addUpdateUser=async()=>{
     password: "1234",
     isActive: true,
     email: "test@gmail.com",
-    // profilePic: "https://example.com/profiles/john_doe.jpg",
+    mobileNo:"933328",
+    siteAddress:"add site",
+    billingAddress:"billing address",
+    tel:"07734534",
+    profilePic: "https://example.com/profiles/john_doe.jpg",
     displayName: "MSK perera",
     iud: "I",//"U"-update,"I"-insert
     gmt_Offset: "+05:30"

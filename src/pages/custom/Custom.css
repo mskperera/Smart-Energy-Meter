@@ -50,7 +50,7 @@
         align-items: center;
         display: flex;
         margin-bottom: 0;
-        padding: 4rem;
+        padding: 1rem;
         /* margin-left: -150px; */
     }
 
@@ -70,11 +70,22 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        padding-left: 80px;
-        height: 50vh;
-        margin-top: 60px;
-        margin-bottom: 91px;
+        /* padding-left: 80px; */
+        height: 82.3vh;
+        margin-top: 0px;
+        margin-bottom: 0px;
 
+    }
+
+    .chart-pick-kw{
+        width: 100%;
+        padding: 1rem;
+        /* margin-left: -70px; */
+    }
+
+    .chart-pick-cost{
+        width: 100%;
+        padding: 1rem;
     }
 }
 
@@ -83,10 +94,21 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        margin: 2.55rem ;
+        margin: 0rem ;
         height: 60.4vh;
-        margin-top: 50px;
-        margin-left: -20px;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+
+    .chart-pick-kw{
+        width: 100%;
+        padding: 1rem;
+        /* margin-top: 10px; */
+    }
+
+    .chart-pick-cost{
+        width: 100%;
+        padding: 1rem;
     }
 }
 
@@ -96,10 +118,10 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 69vh;
-        margin: 1rem;
-        margin-top: -10px;
-        margin-left: -10px;
+        height: 82.4vh;
+        margin: 0rem;
+        margin-top: 0px;
+        margin-left: 0px;
     }
     .chart-pick-kw{
         flex: 1;
@@ -108,7 +130,7 @@
         justify-content: flex-end;
         align-items: center;
         margin: 0%;
-
+        margin-left: -65px;
         padding: 0rem;
 }
 
@@ -120,6 +142,7 @@
         align-items: center;
         margin: 0%;
         padding: 0rem;
+        margin-left: -65px;
 }
     
 }

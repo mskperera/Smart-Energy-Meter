@@ -126,25 +126,29 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        margin-top: -2px;
-        margin-bottom: 20px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        height: 54.99vh;
     }
-    /* .chart-now-kw{ */
-        /* width:30%;
-       
+    .chart-now-kw{
+        height: 350px;
+        padding: 0rem;
+        margin-top: 40px;
+    }
+
+    .chart-now-cost{
+        height: 350px;
+        padding: 0rem;
+        margin-top: 40px;
+    }
+
+    .bottom-3{
+        width: 20px;
+        margin: 0%;
+        justify-content: space-between;
         align-items: center;
-        justify-content: center;
-        padding: 2px;
-        margin: 2px; */
-    /* } */
-    /* .chart-now-cost{ */
-        /* width: 30%;
-        
-        align-items: center;
-        justify-content: center;
-        padding: 2px;
-        margin: 2px; */
-    /* } */
+        flex-direction: column;
+}
 }
 
 @media screen and (max-width:850px){
@@ -152,21 +156,22 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        margin-top: 5px;
-        margin-bottom: 40px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        height: 59.7vh;
     }
     .chart-now-kw{
         width:30%; 
         align-items: center;
         justify-content: center;
-        padding: 50px;
+        padding: 0px;
        
     }
     .chart-now-cost{
         width: 30%;
         align-items: center;
         justify-content: center;
-        padding: 50px;
+        padding: 0px;
     }
 
     .page-bottom{
@@ -175,13 +180,13 @@
         justify-content: center;
         align-items: center;
         margin: 0%;
-        margin-top: -57px;
+        margin-top: 0px;
     }
     
     .page-bottom div{
         width: 150px;
-        padding: 10px;
-        margin-bottom: 3px;
+        padding: 0px;
+        margin-bottom: 15px;
     }
 
     .bottom-3{

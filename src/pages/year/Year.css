@@ -45,12 +45,12 @@
     }
 
     .chart-year-kw{
-        width: 500px;
+        width: 100%;
         padding: 1rem;
     }
 
     .chart-year-cost{
-        width: 500px;
+        width: 100%;
         padding: 1rem;
     }
 }
@@ -60,11 +60,11 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        height: 50vh;
+        height: 82.3vh;
         margin: 0rem;
-        margin-top: 90px;
-        margin-bottom: 3.8rem;
-        padding: 50px;
+        margin-top: 0px;
+        margin-bottom: 0rem;
+        /* padding: 50px; */
     }
 
     .chart-year-kw{
