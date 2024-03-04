@@ -61,7 +61,7 @@ function Login() {
                 </div>
                 <button type='submit' className='btn btn-primary w-100 mt-2'>Login</button>
                 {errorMessage &&   <p>{errorMessage}</p>}
-                <Link to={'/register'}><p>Register Here</p></Link>
+                {/* <Link to={'/register'}><p>Register Here</p></Link> */}
             </form>
         </div>
     </div>
