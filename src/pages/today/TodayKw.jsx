@@ -11,19 +11,19 @@ const TodayKw = () => {
     loadEngergyUsageKwhByDateRange();
   },);
 
-  // const getCurrentDateWithoutTime = () => {
-  //   const currentDate = new Date();
-  //   currentDate.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
-  //   return currentDate;
-  // };
+  const getCurrentDateWithoutTime = () => {
+    const currentDate = new Date();
+    currentDate.setHours(24, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
+    return currentDate;
+  };
 
   const loadEngergyUsageKwhByDateRange=async()=>{
     const payload={
         deviceId:"4",
         mesurementUnitId:1,//1-kwh,7-usage bill
         frequencyId:1,
-        startDate:"2024-02-20",
-        endDate:"2024-02-20",
+        startDate:getCurrentDateWithoutTime(),
+        endDate:getCurrentDateWithoutTime(),
     }
    const result=await getEngergyUsageKwhByDateRange(payload);
    console.log('engergyUsagekwhByDateRange',result.data)
@@ -76,7 +76,7 @@ const TodayKw = () => {
     
         datasets:[
             {
-            label:'kW',
+            label:'kWh',
             data:[],
             backgroundColor:'#36A2EB',
             borderWidath:1,
@@ -94,7 +94,14 @@ const TodayKw = () => {
       scales: {
         x: {
           grid: {
+            display:false,
             color: 'Gray', //  color of x-axis grid lines
+          },
+          beginAtZero: true,
+          title:{
+            display:true,
+            text:"h",
+            color:'white'
           },
           ticks: {
             color: 'white', // color of x-axis labels
@@ -105,6 +112,11 @@ const TodayKw = () => {
             color: 'Gray', //  color of x-axis grid lines
           },
           beginAtZero: true,
+          title:{
+            display:true,
+            text:"kWh",
+            color:'white'
+          },
           ticks: {
             color: 'white', //color of y-axis labels
           },
@@ -113,14 +125,17 @@ const TodayKw = () => {
       
       plugins: {
         legend: {
-          labels: {
-            color: 'white', 
-          },
+          display:false,
+          // labels: {
+          //   color: 'white', 
+          //   display:false
+          // },
         },
+        
       },
     }
  return(
-     <Bar data={data} options={options} />
+     <Bar data={data} options={options} className='chart'/>
      )
      
     

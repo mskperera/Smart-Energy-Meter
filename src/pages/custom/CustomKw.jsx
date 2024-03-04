@@ -40,7 +40,7 @@ const CustomKw = () => {
           
            const datasets0=[
             {
-              label:'kW',
+              label:'kWh',
               data:monthKwArr,
               backgroundColor:'#36A2EB',
               borderWidath:1,
@@ -54,7 +54,7 @@ const CustomKw = () => {
     
         datasets:[
             {
-            label:'kW',
+            label:'kWh',
             data:[],
             backgroundColor:'#36A2EB',
             borderWidath:1,
@@ -71,6 +71,7 @@ const CustomKw = () => {
         scales: {
             x: {
               grid: {
+                display:false,
                 color: 'gray', // color of x-axis labels
               },
               ticks: {
@@ -90,12 +91,13 @@ const CustomKw = () => {
           
         plugins: {
             legend: {
+              display:false,
               labels: {
                 color: 'white',//color for the chart labels
               },
             },
           },
     }
- return <Bar data={data} options={options}/>
+ return <Bar data={data} options={options} className='chart'/>
 }
 export default CustomKw

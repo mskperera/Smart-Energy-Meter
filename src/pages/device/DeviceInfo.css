@@ -1,5 +1,6 @@
 .wrapper2{
     height: 82.51vh;
+    background-color:#191970;
 }
 
 .deviceinfo{
@@ -20,6 +21,7 @@
 
 @media screen and (max-width:450px) {
     .wrapper2{
-        height: 88.1vh;
+        height: 88.35vh;
     }
+    
 }

@@ -41,7 +41,7 @@ const WeekKw = () => {
         
          const datasets0=[
           {
-            label:'kW',
+            label:'kWh',
             data:weekKwArr,
             backgroundColor:'#36A2EB',
             borderWidath:1,
@@ -74,6 +74,7 @@ const WeekKw = () => {
       scales: {
         x: {
             grid: {
+              display:false,
               color: 'Gray', //  color of x-axis grid lines
             },
           ticks: {
@@ -93,6 +94,7 @@ const WeekKw = () => {
       
       plugins: {
         legend: {
+          display:false,
           labels: {
             color: 'white', 
           },
@@ -101,7 +103,7 @@ const WeekKw = () => {
     }
 
  return (
-   <Bar data={data} options={options}/>
+   <Bar data={data} options={options} className='chart'/>
  )
 }
 

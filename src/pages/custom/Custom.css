@@ -129,30 +129,44 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        height: 77.6vh;
+        height: 88.35vh;
         margin: 1rem;
-        margin-top: -80px;
-        margin-left: -15px;
-        margin-bottom: 7.8px;
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-bottom: 0px;
     }
 
     .chart-pick-kw{
         flex: 1;
-        width: 400px;
+        width: 390px;
         display: flex;
+
         justify-content: center;
         align-items: center;
         margin: 0%;
-        padding: 2rem;
-    }
-    
+        margin-left: -15px;
+        padding: 1rem;
+}
+
     .chart-pick-cost{
         flex: 1;
-        width:400px;
+        width: 390px;
         display: flex;
-        justify-content: center;
+        justify-content:center;
         align-items: center;
         margin: 0%;
-        padding: 2rem;
+        margin-left: -15px;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .date{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        width: 80%;
+        margin-top: 70px;
+        margin-left: 40px;
+        position: absolute;
     }
 }

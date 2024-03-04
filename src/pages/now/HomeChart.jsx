@@ -58,9 +58,9 @@ const HomeChart = () => {
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
         rotation:225,
-        cutout:'75%',
+        cutout:'80%',
         borderWidth: 0,
-        borderRadius: 50,
+        borderRadius: 0,
       },
     ],
   };
@@ -80,7 +80,11 @@ const HomeChart = () => {
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
       ctx.fillText(data.datasets[0].data[0],centerX,centerY)
-      ctx.fillText("kW",centerX,centerY +40)
+      ctx.fillText("kWh",centerX,centerY +40)
+
+      ctx.font = '20px Trebuchet MS ';
+      ctx.fillText("Energy Usage", centerX, centerY + 80);
+    
     }
   }
 
@@ -100,9 +104,9 @@ const HomeChart = () => {
 
 
   return (
-      <Doughnut data={data} options={options} plugins={[gaugeText]} className="chart" />
-    // <div className="chart-container bg-transparent" >
-    // </div>
+    <div className='c1'>
+      <Doughnut data={data} options={options} plugins={[gaugeText]} className='chart'/>
+    </div>
   );
   
 };
