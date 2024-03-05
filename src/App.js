@@ -20,6 +20,7 @@ import Register from './pages/register/Register';
 import Profile from './pages/profile/Profile';
 import Userlist from './pages/userlist/Userlist';
 import Management from './pages/management/Management';
+import DeviceMan from './pages/apiData/deviceMan';
 // import Connection from './pages/settings/Connection';
 
 
@@ -46,6 +47,7 @@ function App() {
         <Route path='/management' element={<Management/>}/>
         <Route path='/apiData/deviceSettings' element={<DeviceSettings/>}/>
         <Route path='/apiData' element={<APIData/>}/>
+        <Route path='/device' element={<DeviceMan/>}/>
       </Routes>
     </BrowserRouter>
   );

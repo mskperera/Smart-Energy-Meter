@@ -122,3 +122,84 @@ export const getDeviceDetailsByDeviceId= async (deviceId) => {
   }
 }
 
+
+
+///////////////////////////////
+
+
+export const  deleteDevice= async (deviceId) => {
+  try {
+    return await customAxios
+      .delete(`/deleteDevice/${deviceId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+export const getDeviceByDeviceId= async (deviceId) => {
+  try {
+    return await customAxios
+      .get(`/getDeviceByDeviceId/${deviceId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+//////////
+export const getDevices= async () => {
+  try {
+    return await customAxios
+      .get(`/getDevices`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+///////////
+
+export const addDevice= async (payload) => {
+  try {
+    return await customAxios
+      .post(`/addDevice`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
