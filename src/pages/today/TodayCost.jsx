@@ -13,19 +13,19 @@ const TodayCost = () => {
       },);
     
 
-      // const getCurrentDateWithoutTime = () => {
-      //   const currentDate = new Date();
-      //   currentDate.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
-      //   return currentDate;
-      // };
+      const getCurrentDateWithoutTime = () => {
+        const currentDate = new Date();
+        currentDate.setHours(24, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
+        return currentDate;
+      };
 
       const loadEngergyUsageKwhByDateRange=async()=>{
         const payload={
             deviceId:"4",
             mesurementUnitId:7,//1-kwh,7-usage bill
             frequencyId:1,
-            startDate: "2024-02-20",
-            endDate: "2024-02-20",
+            startDate:getCurrentDateWithoutTime(),
+            endDate:getCurrentDateWithoutTime(),
         }
        const result=await getEngergyUsageKwhByDateRange(payload);
        console.log('engergyUsagekwhByDateRange',result.data)
@@ -96,9 +96,15 @@ const TodayCost = () => {
               
                 x: {
                   grid: {
+                    display:false,
                     color: 'Gray', //  color of x-axis grid lines
                   },
-
+                  beginAtZero: true,
+                  title:{
+                    display:true,
+                    text:"h",
+                    color:'white'
+                  },
                   ticks: {
                     color: 'white', // color of x-axis labels
                   },
@@ -110,6 +116,11 @@ const TodayCost = () => {
                   },
 
                   beginAtZero: true,
+                  title:{
+                    display:true,
+                    text:"Rs",
+                    color:'white'
+                  },
                   ticks: {
                     color: 'white', //color of y-axis labels
                   },
@@ -118,6 +129,7 @@ const TodayCost = () => {
               
             plugins: {
                 legend: {
+                  display:false,
                   labels: {
                     color: 'white', 
                   },
@@ -125,7 +137,7 @@ const TodayCost = () => {
               },
         }
      return(
-         <Bar data={data} options={options} />
+         <Bar data={data} options={options} className='chart'/>
   )
 }
 

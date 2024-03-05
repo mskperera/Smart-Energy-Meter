@@ -73,6 +73,7 @@ const YearCost = () => {
         scales: {
             x: {
               grid: {
+                display:false,
                 color: 'gray', // color of x-axis labels
               },
               ticks: {
@@ -92,13 +93,14 @@ const YearCost = () => {
           
         plugins: {
             legend: {
+              display:false,
               labels: {
                 color: 'white', // color for the chart labels
               },
             },
           },
     }
- return <Bar data={data} options={options}/>
+ return <Bar data={data} options={options} className='chart'/>
  
 }
 

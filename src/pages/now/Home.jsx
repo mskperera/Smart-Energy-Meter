@@ -37,16 +37,17 @@ const Home = () => {
           <div className='chart-now-cost'>
             <HomeCostChart data=''/>
           </div>
-
         </div>
         <div className='page-bottom'>
           <div className='vol'><Voltage/></div>
           <div className='vol'><Current/></div>
           <div className='vol'><Power/></div>
-          <div className='bottom-3'>
+          <div className='pow'><Powerfact/></div>
+          <div className='pow'><Hertz/></div>
+          {/* <div className='bottom-3'>
                 <Hertz/>
                 <Powerfact/>
-          </div>
+          </div> */}
         </div>
 
         <BottomNav className="bar1"/>

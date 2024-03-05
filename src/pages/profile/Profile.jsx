@@ -1,47 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Profile.css'
+import './Profile.css';
 import BottomNav from '../../components/bottommenu/BottomNav';
+import { getUsers } from '../../action/user';
 
 const Profile = () => {
-  
-  const user = {
-    id: 1,
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    // profilePicture: 'https://placekitten.com/150/150',
-  };
+  const [profileData, setProfileData] = useState(null);
 
-  const handleEditProfile = () => {
-    // Handle edit profile logic here
-    console.log('Edit profile clicked');
-  };
+  useEffect(() => {
+    loadUserProfile();
+  }, []);
 
-  // const handleDeleteProfile = () => {
-  //    Handle delete profile logic here
-  //   console.log('Delete profile clicked');
-  // };
+  const loadUserProfile = async () => {
+    try {
+      const result = await getUsers();
+      setProfileData(result.data);
+    } catch (error) {
+      console.error('Error loading user profile:', error);
+    }
+  };
 
   return (
     <>
-      <div className="wrap container mt-5 ">
+    <div className='wrap'>
+      <div className="body">
         <div className="card text-center">
-          <div className="card-header">
-            {/* <img
-              src={user.profilePicture}
-              alt="Profile"
-              className="rounded-circle"
-              style={{ width: '150px', height: '150px', objectFit: 'cover' }}
-            /> */}
-          </div>
-          <div className="card-body">
-            <h5 className="card-title">{user.name}</h5>
-            <p className="card-text">{user.email}</p>
-          </div>
+          {profileData && profileData.length > 0 && (
+            <>
+              <div className="card-header">
+                <img
+                  src={profileData[0].profilePic}
+                  alt="Profile"
+                  className="rounded-circle"
+                  style={{ width: '150px', height: '150px', objectFit: 'cover' }}
+                />
+              </div>
+              <div className="card-body">
+                <h5 className="card-title">{profileData[0].userName}</h5>
+                <p className="card-text">{profileData[0].email}</p>
+              </div>
+            </>
+          )}
           <div className="card-footer">
-            <button className="btn btn-primary mr-2" onClick={handleEditProfile}>
-              Save
-            </button>
+            <button className="btn btn-primary mr-2">Save</button>
             {/* &nbsp;
             <button className="btn btn-danger" onClick={handleDeleteProfile}>
               Delete Profile
@@ -49,7 +50,8 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <BottomNav/>
+    </div>
+      <BottomNav />
     </>
   );
 };

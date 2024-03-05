@@ -53,7 +53,8 @@ const Voltage = () => {
         rotation:225,
         cutout:'80%',
         borderWidth: 0,
-        borderRadius: 50,      },
+        borderRadius: 25,      
+      },
     ],
   };
 
@@ -71,8 +72,12 @@ const Voltage = () => {
       ctx.font ='20px Trebuchet MS';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
-      ctx.fillText(data.datasets[0].data[0],xCenter,yCenter)
-      ctx.fillText("V",xCenter,yCenter +20)
+      ctx.fillText(data.datasets[0].data[0],xCenter,yCenter -10)
+      ctx.fillText("V",xCenter,yCenter +10)
+
+
+      ctx.font = '15px Trebuchet MS ';
+      ctx.fillText("Voltage", xCenter, yCenter + 28);
     }
   }
 
@@ -106,7 +111,7 @@ const Voltage = () => {
   //   },
   // };
 
-  return <Doughnut data={data} options={options} plugins={[gaugeText]}/>;
+  return <Doughnut data={data} options={options} plugins={[gaugeText]} className='chart'/>;
 };
 
 export default Voltage;
