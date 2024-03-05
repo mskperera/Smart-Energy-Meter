@@ -16,10 +16,12 @@ import APIData from './pages/apiData/charts';
 
 import DeviceInfo from './pages/device/DeviceInfo';
 import Service from './pages/settings/Service';
-import Register from './pages/register/Register';
+// import Register from './pages/register/Register';
 import Profile from './pages/profile/Profile';
 import Userlist from './pages/userlist/Userlist';
 import Management from './pages/management/Management';
+import UserRegister from './pages/register/UserRegister';
+import DeviceRegister from './pages/register/DeviceRegister';
 // import Connection from './pages/settings/Connection';
 
 
@@ -30,7 +32,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Login/>}/>
-        <Route path='/register' element={<Register/>}/>
+        <Route path='/userregister' element={<UserRegister/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/userlist' element={<Userlist/>}/>
         <Route path='/home' element={<Home/>}/>
@@ -44,6 +46,7 @@ function App() {
         <Route path='/service' element={<Service/>}/>
         {/* <Route path='/connection' element={<Connection/>}/> */}
         <Route path='/management' element={<Management/>}/>
+        <Route path='/deviceregister' element={<DeviceRegister/>}/>
         <Route path='/apiData/deviceSettings' element={<DeviceSettings/>}/>
         <Route path='/apiData' element={<APIData/>}/>
       </Routes>

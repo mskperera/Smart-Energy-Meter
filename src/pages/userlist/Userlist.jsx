@@ -30,7 +30,7 @@ function Userlist() {
       <div className= "rounded p-2 ">
         <h2 className='d-flex justify-content-center align-items-center'>User List</h2>
         <div className="d-flex justify-content-end">
-          <Link to="/register" className="btn btn-info">Add User</Link>
+          <Link to="/userregister" className="btn btn-info">Add User</Link>
         </div>
         <table className="table1 table rounded">
           <thead>
@@ -49,8 +49,7 @@ function Userlist() {
           <tbody>
             
             {/* {JSON.stringify(userData)} */}
-            {userData &&
-                userData.map((user) => (
+            {userData && userData.map((user) => (
                   <tr key={user.userID}>
                     <td>{user.userName}</td>
                     <td>{user.displayName}</td>

@@ -6,7 +6,7 @@ ChartJS.register(ArcElement, Tooltip);
 
 const HomeCostChart = () => {
   const [obj,setObj]=useState({
-    maxValue:45000,
+    maxValue:4500,
     minValue:0,
     currentValue:0,
     mesurementUnit:"Rs"
@@ -49,7 +49,7 @@ const HomeCostChart = () => {
         data: [obj.currentValue,remaningvalue],
         // backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
         // hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        backgroundColor: ['yellow','#F5F5DC'],
+        backgroundColor: ['#ff0066','#F5F5DC'],
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
         rotation:225,

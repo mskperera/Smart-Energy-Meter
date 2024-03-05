@@ -54,7 +54,7 @@ const HomeChart = () => {
     datasets: [
       {
         data: [objKw.currentKwValue,remaningkwvalue],
-        backgroundColor: [ 'yellow','#F5F5DC'],
+        backgroundColor: [ '#00ff99','#F5F5DC'],
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
         rotation:225,

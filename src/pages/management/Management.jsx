@@ -3,6 +3,7 @@ import './Management.css'
 import BottomNav from '../../components/bottommenu/BottomNav'
 import Navbar from '../../components/navbar/Navbar'
 import { getUsers } from '../../action/user';
+import { Link } from 'react-router-dom';
 
 function Management() {
 
@@ -50,7 +51,9 @@ function Management() {
     <div className="body">
       <div className= "rounded p-2 ">
         <h2 className='d-flex justify-content-center align-items-center'>Device Management</h2>
-        
+        <div className='d-flex justify-content-end'>
+          <Link to={'/deviceregister'} className='btn btn-info'>Add Device</Link>
+        </div>
         <table className="table1 table">
           <thead>
             <tr>
@@ -68,7 +71,7 @@ function Management() {
           <tbody>
             
               {/* {drpData2.map(u=>( */}
-                {/* {JSON.stringify(data)} */}
+              {/* {JSON.stringify(data)} */}
                 <tr>
                   <td></td>
                   <td></td>

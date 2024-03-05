@@ -7,6 +7,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdClose } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { MdLogout } from "react-icons/md";
+import logo from '../../assent/logo.png';
 
 const Navbar = () => {
 
@@ -17,6 +18,9 @@ const Navbar = () => {
         <BiTachometer color='white' size={80}/> 
       </div> */}
       <div className='title'>
+        <div className='logo'>
+          <img src={logo} alt='logo'/>
+        </div>
         <p>Smart Energy Meter</p>
       </div>
 
