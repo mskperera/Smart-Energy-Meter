@@ -203,3 +203,23 @@ export const addDevice= async (payload) => {
     return err;
   }
 }
+
+
+export const updateDevice= async (payload,deviceId) => {
+  try {
+    return await customAxios
+      .put(`/updateDevice/${deviceId}`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}

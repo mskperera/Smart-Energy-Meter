@@ -77,3 +77,22 @@ export const addUser= async (payload) => {
     return err;
   }
 }
+
+export const updateUser= async (payload,userRegId) => {
+  try {
+    return await customAxios
+      .put(`/updateUser/${userRegId}`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
