@@ -34,13 +34,13 @@ function Custom() {
                 onClick={() => handleTabClick('Now')}>Custom</li></Link>
                 </ul>
         </div>
-        <div className='date'>
-          <Date onDateChange={(startDate, endDate) => {
-            setSelectedStartDate(startDate);
-            setSelectedEndDate(endDate);
-          }}/>
-        </div>
         <div className='page-5'>
+          <div className='date'>
+            <Date onDateChange={(startDate, endDate) => {
+              setSelectedStartDate(startDate);
+              setSelectedEndDate(endDate);
+            }}/>
+          </div>
           <div className='chart-pick-kw'>
             <CustomKw startDate={selectedStartDate} endDate={selectedEndDate}/>
           </div>

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import {getEngergyUsageNow} from '../../action/device';
+// import { TbHomeStats } from "react-icons/tb";
 import './Homechart.css'
-
+import { TbHomeStats } from "react-icons/tb";
 import { Chart as ChartJS, ArcElement, Tooltip, Colors } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
 
@@ -14,7 +15,7 @@ const HomeChart = () => {
     // minKwValue:0,
     // currentKwValue:0,
     // mesurementUnitKw:"kW",
-    maxKwValue:450,
+    maxKwValue:8000,
     minKwValue:0,
     currentKwValue:0,
     mesurementUnitKw:"kWh",
@@ -80,7 +81,12 @@ const HomeChart = () => {
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
       ctx.fillText(data.datasets[0].data[0],centerX,centerY)
-      ctx.fillText("kWh",centerX,centerY +40)
+      // ctx.fillText("kWh",centerX,centerY +40)
+
+      // ctx.fillText(<TbHomeStats color='white' size={10}/>, centerX, centerY  -10);
+
+      ctx.font = '30px Trebuchet MS ';
+      ctx.fillText("kWh", centerX, centerY + 40);
 
       ctx.font = '20px Trebuchet MS ';
       ctx.fillText("Energy Usage", centerX, centerY + 80);
@@ -103,9 +109,10 @@ const HomeChart = () => {
   
 
 
-  return (
-    <div className='c1'>
-      <Doughnut data={data} options={options} plugins={[gaugeText]} className='chart'/>
+  return(
+    <div>
+      <TbHomeStats color='#36A2EB' size={45} className='icon'/>
+      <Doughnut data={data} options={options} plugins={[gaugeText]} id='box' className='chart'/> 
     </div>
   );
   

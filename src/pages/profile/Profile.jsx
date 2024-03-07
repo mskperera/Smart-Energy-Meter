@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Profile.css';
 import BottomNav from '../../components/bottommenu/BottomNav';
 import { getUsers } from '../../action/user';
+import Navbar from '../../components/navbar/Navbar';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
@@ -22,6 +23,7 @@ const Profile = () => {
 
   return (
     <>
+    <Navbar/>
     <div className='wrap'>
       <div className="body">
         <div className="card text-center">

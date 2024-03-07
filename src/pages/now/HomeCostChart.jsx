@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import {getEngergyUsageNow} from '../../action/device';
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
+import { FaMoneyBill1Wave } from "react-icons/fa6";
 ChartJS.register(ArcElement, Tooltip);
 
 const HomeCostChart = () => {
   const [obj,setObj]=useState({
-    maxValue:4500,
+    maxValue:50000,
     minValue:0,
     currentValue:0,
     mesurementUnit:"Rs"
@@ -74,8 +75,9 @@ const HomeCostChart = () => {
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
       ctx.fillText(data.datasets[0].data[0],xCenter,yCenter)
+      
+      ctx.font ='30px Trebuchet MS ';
       ctx.fillText("Rs",xCenter,yCenter +40)
-
 
       ctx.font = '20px Trebuchet MS ';
       ctx.fillText("Usage Bill", xCenter, yCenter + 80);
@@ -95,8 +97,9 @@ const HomeCostChart = () => {
 
 
   return(
-    <div className='c1'>
-      <Doughnut data={data} options={options} plugins={[gaugeText]} className='chart' />
+    <div> 
+      <FaMoneyBill1Wave size={45} color='#36A2EB' className='icon'/>
+      <Doughnut data={data} options={options} plugins={[gaugeText]} className='chart' id='box' />
     </div>
    ) 
 };

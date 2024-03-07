@@ -8,8 +8,8 @@ const DeviceMan=()=> {
 
   useEffect(() => {
 
-   // loadDevices();
-   // loadDeviceById();
+   loadDevices();
+   loadDeviceById();
   }, []);
 
 

@@ -8,6 +8,7 @@ import { MdClose } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { MdLogout } from "react-icons/md";
 import logo from '../../assent/logo.png';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 
@@ -19,7 +20,9 @@ const Navbar = () => {
       </div> */}
       <div className='title'>
         <div className='logo'>
+          <Link to={'/home'}>
           <img src={logo} alt='logo'/>
+          </Link>
         </div>
         <p>Smart Energy Meter</p>
       </div>

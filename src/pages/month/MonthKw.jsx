@@ -42,7 +42,7 @@ const MonthKw = () => {
             {
               label:'kWh',
               data:monthKwArr,
-              backgroundColor:'#36A2EB',
+              backgroundColor:'#00ff99',
               borderWidath:1,
             }
           ]

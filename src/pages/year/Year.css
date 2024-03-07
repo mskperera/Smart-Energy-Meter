@@ -3,9 +3,9 @@
     align-items: center;
     justify-content: center;
     /* padding-left: 270px; */
-    height: 82.54vh;
+    height: 79.3vh;
     margin: 0%;
-    background-color:#191970;
+    background-color:#05052a;
 }
 
 .chart-year-kw{
@@ -60,7 +60,7 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        height: 82.3vh;
+        height: 79vh;
         margin: 0rem;
         margin-top: 0px;
         margin-bottom: 0rem;

@@ -3,8 +3,8 @@
     align-items: center;
     justify-content: center;
     /* padding-left: 270px; */
-    background-color:#191970;
-    height: 82.54vh;
+    background-color:#05052a;
+    height: 79.3vh;
     margin: 0%;
 }
 
@@ -17,7 +17,7 @@
     align-items: center;
     margin: 0%;
     flex-direction: column;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .chart-pick-cost{
@@ -29,7 +29,7 @@
     align-items: center;
     margin: 0%;
     flex-direction: column;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .date{
@@ -37,7 +37,7 @@
     justify-content: center;
     display: flex;
     width: 100%;
-    margin-top: 70px;
+    margin-top: -410px;
     position: absolute;
 }
 
@@ -55,11 +55,13 @@
     }
 
     .chart-pick-kw{
+        margin-top: 40px;
         width: 100%;
         padding: 1rem;
     }
 
     .chart-pick-cost{
+        margin-top: 40px;
         width: 100%;
         padding: 1rem;
     }
@@ -71,7 +73,7 @@
         align-items: center;
         justify-content: center;
         /* padding-left: 80px; */
-        height: 82.3vh;
+        height: 79vh;
         margin-top: 0px;
         margin-bottom: 0px;
 
@@ -118,7 +120,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 82.4vh;
+        height: 90vh;
         margin: 0rem;
         margin-top: 0px;
         margin-left: 0px;
@@ -130,7 +132,7 @@
         justify-content: flex-end;
         align-items: center;
         margin: 0%;
-        margin-left: -65px;
+        margin-left: 0px;
         padding: 0rem;
 }
 
@@ -142,8 +144,17 @@
         align-items: center;
         margin: 0%;
         padding: 0rem;
-        margin-left: -65px;
+        margin-left: 0px;
 }
+
+    .date{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        width: 100%;
+        margin-top: -520px;
+        position: absolute;
+    }
     
 }
 
@@ -152,7 +163,7 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        height: 88.35vh;
+        height: 86vh;
         margin: 1rem;
         margin-top: 0px;
         margin-left: 0px;
@@ -163,7 +174,6 @@
         flex: 1;
         width: 390px;
         display: flex;
-
         justify-content: center;
         align-items: center;
         margin: 0%;
@@ -181,6 +191,7 @@
         margin-left: -5px;
         flex-direction: column;
         padding: 1rem;
+        margin-top: -150px;
     }
 
     .date{
@@ -188,8 +199,8 @@
         justify-content: center;
         display: flex;
         width: 80%;
-        margin-top: 70px;
-        margin-left: 40px;
+        margin-top: -550px;
+        margin-left: 0px;
         position: absolute;
     }
 }

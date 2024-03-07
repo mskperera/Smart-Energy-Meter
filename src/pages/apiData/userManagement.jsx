@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { getDeviceDetailsByDeviceId, get_DeviceSettingsByDeviceId, saveDeviceSettings } from '../../action/device';
 import { getDrpConsumerCategories, getDrpConsumerSubCategoriesById, getDrpSupplier, getDrpSupplyType, getDrpUserRole } from '../../action/dropdown';
 import { addUser, deleteUser, getUserbyUserId, getUsers } from '../../action/user';
+import { useLocation } from 'react-router-dom';
 
 const UserManagement=()=> {
 
+  const location = useLocation();
 
   const [drpData2,setDrpData2]=useState(null);
   const [drpData3,setDrpData3]=useState(null);
@@ -66,7 +68,7 @@ const UserManagement=()=> {
 const addUpdateUser=async()=>{
   const payload = {
     userRegId:null,
-    userRoleId:2,
+    userRoleId:1,
     userName: "tes1t",
     password: "1234",
     isActive: true,
@@ -105,8 +107,10 @@ const DeleteUser=async()=>{
 }
 
 
+
   return (
     <>
+ 
     <h4>Save User</h4>
      <button onClick={addUpdateUser}>Save</button>
  

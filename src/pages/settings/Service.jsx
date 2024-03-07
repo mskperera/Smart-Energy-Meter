@@ -11,9 +11,13 @@ import { get_DeviceSettingsByDeviceId, saveDeviceSettings } from '../../action/d
 function Service () {
 
     const [editedDeviceName, setEditedDeviceName] = useState();
-    const [editedConnection, setEditedConnection] = useState();
-    const [editedPortNo, setEditedPortNo] = useState();
+    // const [newDeviceName, setNewDeviceName] = useState();
 
+    const [editedConnection, setEditedConnection] = useState();
+    // const [newConnection, setNewConnection] = useState();
+
+    const [editedPortNo, setEditedPortNo] = useState();
+    // const [newPortNo, setNewPortNo] = useState();
 
     const [dropoptionsConsumerCatogery, setDropoptionsConsumerCatogery] = useState([]);
     const [consumerCategoryselectedValue, setConsumerCategoryselectedValue] = useState('');
@@ -21,10 +25,10 @@ function Service () {
     const [dropoptionsConsumerSubCatogery, setDropoptionsConsumerSubCatogery] = useState([]);
     const [consumerSubCategoryselectedValue, setConsumerSubCategoryselectedValue] = useState('');
 
-    const [dropoptionsSupplier, setDropoptionsSupplier] = useState(['Option 1', 'Option 2', 'Option 3']);
+    const [dropoptionsSupplier, setDropoptionsSupplier] = useState([]);
     const [supplierSelectedValue, setSupplierselectedValue] = useState('');
 
-    const [dropoptionsSupplyType, setDropoptionsSupplyType] = useState(['Option 1', 'Option 2', 'Option 3']);
+    const [dropoptionsSupplyType, setDropoptionsSupplyType] = useState([]);
     const [supplyTypeSelectedValue, setSupplyTypeselectedValue] = useState('');
 
     const [load,setLoad]=useState(false);
@@ -241,9 +245,10 @@ console.log("testingsave")
                             <h4 className='d-flex align-items-center justify-content-center mb-3'>Device Settings</h4>
                             <form className='needs-validation' onSubmit={(e) => {e.preventDefault(); addUpdateDeviceSettings();}}>
                                 <div className='form-group mb-2'>
+                                    {JSON.stringify(editedDeviceName)}
                                     <label htmlFor='devicename' className='form-label'>Device Name</label>
                                     <input type='text' className='form-control' value={editedDeviceName}
-                                     onChange={(e) => setEditedDeviceName(e.target.value)}/>
+                                     onChange={(e) => setEditedDeviceName(e.target.value)} />
                                 </div>
 
                                 <div className='form-group mb-2'>

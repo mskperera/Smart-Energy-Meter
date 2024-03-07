@@ -43,7 +43,7 @@ const YearCost = () => {
             {
               label:'Rs',
               data:monthCostArr,
-              backgroundColor:'aqua',
+              backgroundColor:'#ff0066',
               borderWidath:1,
             }
           ]

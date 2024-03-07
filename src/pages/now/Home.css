@@ -4,11 +4,12 @@
     justify-content:center;
     align-items: center;
     display: flex;
-    background-color:#020239;
+    background-color:#05052a;
 
     /* position: absolute; */
-    height: 64.19vh;
+    height: 61vh;
 }
+
 
 .chart-now-kw{
     flex: 1;
@@ -48,8 +49,8 @@
     justify-content: center;
     align-items: center;
     margin-top: 0px;
-    /* background-color:yellow; */
-    background-color:#020239;
+    background-color:#05052a;
+    /* background-color:#020239; */
     /* position: absolute; */
     margin: 0%;
 }
@@ -131,18 +132,20 @@
         justify-content: center;
         margin-top: 0px;
         margin-bottom: 0px;
-        height: 54.99vh;
+        height: 51.8vh;
     }
     .chart-now-kw{
         height: 350px;
         padding: 0rem;
         margin-top: 40px;
+        margin-left: 0px;
     }
 
     .chart-now-cost{
         height: 350px;
         padding: 0rem;
         margin-top: 40px;
+        margin-right: 0px;
     }
 
     .bottom-3{
@@ -161,20 +164,21 @@
         justify-content: center;
         margin-top: 0px;
         margin-bottom: 0px;
-        height: 59.7vh;
+        height: 56.5vh;
     }
     .chart-now-kw{
         width:30%; 
         align-items: center;
         justify-content: center;
         padding: 0px;
-       
+       margin-left: 0px;
     }
     .chart-now-cost{
         width: 30%;
         align-items: center;
         justify-content: center;
         padding: 0px;
+        margin-right: 0px;
     }
 
     .page-bottom{
@@ -217,6 +221,7 @@
         align-items: center;
         justify-content: center;
         margin-bottom: 0px;
+        margin-right: 0px;
     }
 
     .chart-now-kw{
@@ -224,6 +229,7 @@
         width: 400px;
         align-items: center;
         justify-content: center;
+        margin-left: 0px;
     }
 
     .page-bottom{
@@ -239,9 +245,9 @@
     
     .page-bottom div{
         width: 100%;
-        margin-top: 20px;
+        margin-top: 10px;
         margin-bottom: 10px;
-        padding: 5px;
+        padding: 2px;
     }
 
     .page-bottom .vol{
@@ -302,7 +308,7 @@
         width: 100%;
         margin-top: -20px;
         margin-bottom: 24px;
-        padding: 0px;
+        padding: 5px;
         flex: 1;
         justify-content: space-between;
         align-items: center;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Userlist.css'
 import BottomNav from '../../components/bottommenu/BottomNav'
 import Navbar from '../../components/navbar/Navbar'
-import { getUsers } from '../../action/user';
+import { deleteUser, getUsers } from '../../action/user';
 import { Link } from 'react-router-dom';
 
 function Userlist() {
@@ -21,6 +21,19 @@ function Userlist() {
     setUserData(result.data);
    }
 
+
+   const DeleteUser=async()=>{
+
+
+    const res = await deleteUser(10);
+    console.log(res);
+    const { responseStatus, outputMessage } = res.data.output;
+    if (responseStatus === "failed") {
+      console.log("exception:", outputMessage);
+    }
+  
+    console.log("successful:", outputMessage);
+  }
   
 
   return (
@@ -30,7 +43,7 @@ function Userlist() {
       <div className= "rounded p-2 ">
         <h2 className='d-flex justify-content-center align-items-center'>User List</h2>
         <div className="d-flex justify-content-end">
-          <Link to="/userregister" className="btn btn-info">Add User</Link>
+          <Link to="/userregister/0/I" className="btn btn-info">Add User</Link>
         </div>
         <table className="table1 table rounded">
           <thead>
@@ -60,8 +73,8 @@ function Userlist() {
                     <td>{user.email}</td>
                     <td>{user.billingAddress}</td>
                     <td>
-                      <Link to={`/register/${user.userID}`} className="btn btn-sm btn-primary">Edit</Link>&nbsp;
-                      <button className="btn btn-sm btn-danger">Delete</button>
+                      <Link to={`/userregister/${user.userID}/U`} className="btn btn-sm btn-primary">Edit</Link>&nbsp;
+                      <button className="btn btn-sm btn-danger" onClick={DeleteUser}>Delete</button>
                     </td>
                   </tr>
                 ))}
@@ -76,15 +89,9 @@ function Userlist() {
 
 export default Userlist
 
-
-
-
-
 //   const [data, setData] = useState([]);
 //   useEffect(() => {
 //     axios.get('http://localhost:8000/')
 //       .then(res => setData(res.data))
 //       .catch(err => console.log(err));
 //   }, [])
-
- 
