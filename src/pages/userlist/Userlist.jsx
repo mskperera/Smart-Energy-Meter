@@ -1,21 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Userlist.css'
 import BottomNav from '../../components/bottommenu/BottomNav'
 import Navbar from '../../components/navbar/Navbar'
+import { getUsers } from '../../action/user';
+import { Link } from 'react-router-dom';
 
 function Userlist() {
+
+
+  const [userData,setUserData]=useState(null);
+
+  useEffect(() => {
+
+    loadusers();
+   
+  }, []);
+
+  const loadusers=async()=>{
+    const result=await getUsers();
+    setUserData(result.data);
+   }
+
+  
+
   return (
     <>
     <Navbar/>
-    <div className="body bg-white">
+    <div className="body">
       <div className= "rounded p-2 ">
         <h2 className='d-flex justify-content-center align-items-center'>User List</h2>
-        
-        <table className="table1 table">
+        <div className="d-flex justify-content-end">
+          <Link to="/userregister" className="btn btn-info">Add User</Link>
+        </div>
+        <table className="table1 table rounded">
           <thead>
             <tr>
               <th>User Name</th>
-              <th>Login Name</th>
+              <th>Display Name</th>
               <th>Password</th>
               <th>Mobile</th>
               <th>Tel</th>
@@ -27,25 +48,23 @@ function Userlist() {
           </thead>
           <tbody>
             
-              {/* return ( */}
-                <tr>
-                  <td>lasitha</td>
-                  <td>lasitha</td>
-                  <td>123456</td>
-                  <td>0722211710</td>
-                  <td>0722211710</td>
-                  <td>136 siyambala polgasowita</td>
-                  <td>lasithagimhan99@gmail.com</td>
-                  <td>136 siyambala polgasowita</td>
-                  <td>
-                    {/* <Link to={`/read/${student.Id}`} className="btn btn-sm btn-info" >Read </Link> */}
-                    <button className="btn btn-sm btn-primary"> Edit</button>&nbsp;
-                    <button className="btn btn-sm btn-danger">Delete</button>
-                  </td>
-                </tr>
-                
-              {/* ); */}
-
+            {/* {JSON.stringify(userData)} */}
+            {userData && userData.map((user) => (
+                  <tr key={user.userID}>
+                    <td>{user.userName}</td>
+                    <td>{user.displayName}</td>
+                    <td>{user.password}</td>
+                    <td>{user.mobileNo}</td>
+                    <td>{user.tel}</td>
+                    <td>{user.siteAddress}</td>
+                    <td>{user.email}</td>
+                    <td>{user.billingAddress}</td>
+                    <td>
+                      <Link to={`/register/${user.userID}`} className="btn btn-sm btn-primary">Edit</Link>&nbsp;
+                      <button className="btn btn-sm btn-danger">Delete</button>
+                    </td>
+                  </tr>
+                ))}
           </tbody>
         </table>
       </div>

@@ -2,10 +2,9 @@
     width: 100%;
     align-items: center;
     justify-content: center;
-    /* padding-left: 270px; */
-    height: 82.54vh;
-    margin: 0%;
     background-color:#191970;
+    height: 82.52vh;
+    margin: 0%;
 }
 
 .chart-month-kw{
@@ -17,7 +16,7 @@
     align-items: center;
     margin: 0%;
     flex-direction: column;
-    padding: 2rem;
+    padding: 5rem;
 }
 
 .chart-month-cost{
@@ -29,17 +28,18 @@
     align-items: center;
     margin: 0%;
     flex-direction: column;
-    padding: 2rem;
+    padding: 5rem;
 }
-@media screen and (max-width:2000px) {
+
+@media screen and (max-width:2000px){
     .page-3{
         width: 100%;
-        margin-top: 0;
+        margin-top: 0rem;
         justify-content:center;
         align-items: center;
         display: flex;
-        margin-bottom: 0;
-        padding: 4rem;
+        margin-bottom: 0rem;
+        padding: 1rem;
         /* margin-left: -150px; */
     }
 
@@ -54,41 +54,64 @@
     }
 }
 
-@media screen and (max-width:1150px) {
+@media screen and (max-width:1150px){
     .page-3{
         width: 100%;
         align-items: center;
         justify-content: center;
-        padding-left: 80px;
-        height: 50vh;
-        margin-top: 60px;
-        margin-bottom: 91px;
-
+        height: 82.3vh;
+        margin: 0rem;
+        margin-top: 0px;
+        margin-bottom: 0rem;
+        /* padding: 50px; */
     }
+
+    .chart-month-kw{
+        flex: 1;
+        width: 100%;
+        display: flex;
+        /* position: absolute; */
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
 }
 
-@media screen and (max-width:850px) {
+    .chart-month-cost{
+        flex: 1;
+        width: 100%;
+        display: flex;
+        /* position: absolute; */
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
+}
+}
+
+@media screen and (max-width:850px){
     .page-3{
         width: 100%;
         align-items: center;
         justify-content: center;
-        margin: 2.55rem ;
-        height: 60.4vh;
-        margin-top: 50px;
-        margin-left: -20px;
+        height: 82.3vh;
+        margin: 0rem;
+        margin-top: 0px;
     }
 }
 
-@media screen and (max-width:650px) {
+@media screen and (max-width:650px){
     .page-3{
         width: 100%;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 73vh;
-        margin: 1rem;
-        margin-top: -10px;
-        margin-left: -10px;
+        height: 82.4vh;
+        margin: 0%;
+        /* margin-top: 10px;
+        margin-left: 0px; */
     }
     .chart-month-kw{
         flex: 1;
@@ -97,7 +120,6 @@
         justify-content: flex-end;
         align-items: center;
         margin: 0%;
-
         padding: 0rem;
 }
 
@@ -110,38 +132,40 @@
         margin: 0%;
         padding: 0rem;
 }
-    
 }
 
-@media screen and (max-width:450px) {
+@media screen and (max-width:450px){
     .page-3{
         width: 100%;
         align-items: center;
         justify-content: center;
-        height: 86vh;
-        margin: 1rem;
-        margin-top: -80px;
-        margin-left: -15px;
-        margin-bottom: 7.8px;
+        height: 88.35vh;
+        margin: 0rem;
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-bottom: 0px;
     }
 
     .chart-month-kw{
         flex: 1;
-        width: 400px;
+        width: 390px;
         display: flex;
+        margin-top: 30px;
         justify-content: center;
         align-items: center;
         margin: 0%;
-        padding: 2rem;
-    }
-    
+
+        padding: 1rem;
+}
+
     .chart-month-cost{
         flex: 1;
-        width:400px;
+        width: 390px;
         display: flex;
-        justify-content: center;
+        justify-content:center;
         align-items: center;
         margin: 0%;
-        padding: 2rem;
-    }
+        flex-direction: column;
+        padding: 1rem;
+}
 }

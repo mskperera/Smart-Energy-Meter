@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background:  rgb(186, 153, 217);
+    /* background:  rgb(186, 153, 217); */
     padding: 1rem 2rem;
 }
 
@@ -14,10 +14,27 @@
     
 } */
 
+
+.title .logo{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.title .logo img{
+    width: 70px;
+    margin-left: 20px;
+    /* padding-bottom: 5px; */
+}
+
+
 .title p{
     font-size: 25px;
-    margin-left: 20px;
+    margin-left: 100px;
+    margin-top: -60px;
     justify-content: center;
+    padding-bottom: 5px;
+    color: #191970;
     align-items: center;
     display: flex;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -33,7 +50,7 @@
     margin: 0 1rem;
     text-decoration: none;
     transition: 0.5s ease;
-    color: black;
+    color: #030349;
     list-style: none;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -81,7 +98,7 @@
 }
 
 .app__navbar-smaillscreen-links a{
-    color: black;
+    color: #191970;
     text-decoration: none;
 }
 
@@ -106,13 +123,17 @@
     }
 
     .app__navbar-smallscreen{
-        display: flex;
+        display: none;
     }
 }
 
 @media screen and (max-width:850px) {
     .app__navbar-login{
         display: none;
+    }
+
+    .app__navbar-smallscreen{
+        display: flex;
     }
 
     .app__navbar-smallscreen .hammenu{
@@ -131,11 +152,26 @@
 }
 
 @media screen and (max-width:450px) {
+    .title .logo{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    
+    .title .logo img{
+        width: 55px;
+        margin-left: 15px;
+        /* padding-bottom: 5px; */
+    }
+    
+    
     .title p{
-        padding: 5px;
         font-size: 20px;
-        margin-bottom: 0px;
-        font-weight: 540;
+        margin-left: 75px;
+        margin-top: -50px;
+        display: flex;
+        padding-bottom: 0px;
+        /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
     }
 
     .app__navbar-smallscreen .hammenu{

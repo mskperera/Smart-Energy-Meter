@@ -44,12 +44,12 @@
     }
 
     .chart-today-kw{
-        width: 500px;
+        width: 100%;
         padding: 1rem;
     }
 
     .chart-today-cost{
-        width: 500px;
+        width: 100%;
         padding: 1rem;
     }
 }
@@ -59,11 +59,11 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        height: 50vh;
+        height: 82.3vh;
         margin: 0rem;
-        margin-top: 90px;
-        margin-bottom: 3.8rem;
-        padding: 50px;
+        margin-top: 0px;
+        margin-bottom: 0rem;
+        /* padding: 50px; */
     }
 
     .chart-today-kw{
@@ -96,9 +96,9 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        height: 71.4vh;
+        height: 82.3vh;
         margin: 0rem;
-        margin-top: 10px;
+        margin-top: 0px;
     }
 }
 
@@ -108,10 +108,10 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 70.3vh;
-        margin: 1rem;
-        margin-top: 10px;
-        margin-left: 0px;
+        height: 82.4vh;
+        margin: 0%;
+        /* margin-top: 10px;
+        margin-left: 0px; */
     }
     .chart-today-kw{
         flex: 1;
@@ -139,18 +139,18 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        height: 84.2vh;
-        margin: 1rem;
-        margin-top: -50px;
-        margin-left: -5px;
-        margin-bottom: 20px;
+        height: 88.35vh;
+        margin: 0rem;
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-bottom: 0px;
     }
 
     .chart-today-kw{
         flex: 1;
-        width: 380px;
+        width: 390px;
         display: flex;
-
+        margin-top: 30px;
         justify-content: center;
         align-items: center;
         margin: 0%;
@@ -160,7 +160,7 @@
 
     .chart-today-cost{
         flex: 1;
-        width: 380px;
+        width: 390px;
         display: flex;
         justify-content:center;
         align-items: center;

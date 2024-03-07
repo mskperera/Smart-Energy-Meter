@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgb(186, 153, 217);
+    /* background: rgb(186, 153, 217); */
     /* position: absolute; */
     height: 60px;
 }

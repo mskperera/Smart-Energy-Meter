@@ -72,6 +72,7 @@ const WeekCost = () => {
         scales: {
           x: {
             grid: {
+              display:false,
               color: 'Gray', //  color of x-axis grid lines
             },
             ticks: {
@@ -91,6 +92,7 @@ const WeekCost = () => {
         
         plugins: {
           legend: {
+            display:false,
             labels: {
               color: 'white', 
             },
@@ -99,7 +101,7 @@ const WeekCost = () => {
       }
   
    return (
-     <Bar data={data} options={options}/>
+     <Bar data={data} options={options} className='chart'/>
    )
    }
 export default WeekCost

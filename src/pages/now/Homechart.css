@@ -1,7 +1,33 @@
-/* .chart-container {
-    background-color:rgb(167, 139, 237);
-    padding-left: 30px;
-    padding-right: 30px;
-    box-shadow: 0px 2px 5px -2px #333;
-  }
-   */
+.chart {
+  position: relative;
+  border-radius: 5%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}
+
+/* Add shadow only outside of the chart */
+.chart::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Adjust the shadow size and color */
+  z-index: -1;
+}
+
+#gaugeText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  font-size: 20px; /* Adjust the font size as needed */
+}
+
+/* .c1{
+  width: 360px;
+} */

@@ -1,27 +1,33 @@
-import React from 'react';
-import './Register.css';
+import React from 'react'
 
-function Register() {
+function DeviceRegister() {
   return (
     <div className='wrapper-register d-flex align-items-center justify-content-center w-100'>
       <div className='register'>
-        <h2 className='d-flex align-items-center justify-content-center mb-2'>Register</h2>
+        <h2 className='d-flex align-items-center justify-content-center mb-2'>Device Registration</h2>
         <form className='needs-validation'>
           <div className='row'>
             {/* First Column */}
             <div className='col-md-6 mb-1'>
               <div className='form-group was-validated'>
-                <label htmlFor='username' className='form-label'>
-                  Username
+                <label htmlFor='devicename' className='form-label'>
+                  Device Name
                 </label>
                 <input type='text' className='form-control' required />
               </div>
 
               <div className='form-group was-validated'>
-                <label htmlFor='password' className='form-label'>
-                  Password
+                <label htmlFor='deviceno' className='form-label'>
+                  Device No
                 </label>
-                <input type='password' className='form-control' required />
+                <input type='text' className='form-control' required />
+              </div>
+
+              <div className='form-group was-validated'>
+                <label htmlFor='version' className='form-label'>
+                  Firmware Version
+                </label>
+                <input type='text' className='form-control' required />
               </div>
 
               <div className='form-group was-validated'>
@@ -29,13 +35,6 @@ function Register() {
                   Email
                 </label>
                 <input type='email' className='form-control' required />
-              </div>
-
-              <div className='form-group was-validated'>
-                <label htmlFor='userrole' className='form-label'>
-                  User Role
-                </label>
-                <input type='text' className='form-control' required />
               </div>
             </div>
 
@@ -77,6 +76,7 @@ function Register() {
         </form>
       </div>
     </div>
-  );
+  )
 }
-export default Register;
+
+export default DeviceRegister

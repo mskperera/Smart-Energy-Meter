@@ -15,10 +15,10 @@ function Service () {
     const [editedPortNo, setEditedPortNo] = useState();
 
 
-    const [dropoptionsConsumerCatogery, setDropoptionsConsumerCatogery] = useState(['Option 1', 'Option 2', 'Option 3']);
+    const [dropoptionsConsumerCatogery, setDropoptionsConsumerCatogery] = useState([]);
     const [consumerCategoryselectedValue, setConsumerCategoryselectedValue] = useState('');
 
-    const [dropoptionsConsumerSubCatogery, setDropoptionsConsumerSubCatogery] = useState(['Option 1', 'Option 2', 'Option 3']);
+    const [dropoptionsConsumerSubCatogery, setDropoptionsConsumerSubCatogery] = useState([]);
     const [consumerSubCategoryselectedValue, setConsumerSubCategoryselectedValue] = useState('');
 
     const [dropoptionsSupplier, setDropoptionsSupplier] = useState(['Option 1', 'Option 2', 'Option 3']);
@@ -30,11 +30,13 @@ function Service () {
     const [load,setLoad]=useState(false);
 
     useEffect(()=>{
-        loadDrpConsumerSubCategoriesById();
-    },[consumerCategoryselectedValue])
+        loadDeviceSettingstData()
+    },[
+        load
+    ])
+
     useEffect(() => {
 
-      
         loadDrpConsumerCategories();
        
         loadDrpSupplier();
@@ -43,10 +45,10 @@ function Service () {
     }, []);
 
     useEffect(()=>{
-        loadDeviceSettingstData()
-    },[
-        load
-    ])
+        loadDrpConsumerSubCategoriesById();
+    },[consumerCategoryselectedValue]);
+
+ 
 
   const deviceId = 4;
 //   const consumerCategoryId = 3;
@@ -61,7 +63,9 @@ function Service () {
        console.log("test",result);
        const deviceSetttings=result.data;
        setConsumerCategoryselectedValue(deviceSetttings.consumerCategoryId);
-
+       setEditedDeviceName(deviceSetttings.deviceName);
+       setEditedConnection(deviceSetttings.connection);
+       setEditedPortNo(deviceSetttings.portNo);
     }
 
     const loadDrpConsumerCategories=async()=>{
@@ -71,10 +75,15 @@ function Service () {
 
     const loadDrpConsumerSubCategoriesById=async()=>{
         const result=await getDrpConsumerSubCategoriesById(consumerCategoryselectedValue);
-        console.log("consumer",result);
+        
         const subCategory = result.data;
-        setDropoptionsConsumerSubCatogery(result.data);
-        setConsumerSubCategoryselectedValue(subCategory.ConsumerSubCategoryId);
+        console.log("subCategory",subCategory);
+
+        if (Array.isArray(subCategory)) {
+            setDropoptionsConsumerSubCatogery(subCategory);
+        }
+  
+        // setConsumerSubCategoryselectedValue(subCategory.ConsumerSubCategoryId);
        }
 
     const loadDrpSupplier=async()=>{
@@ -82,7 +91,7 @@ function Service () {
         console.log("sup",result);
         const supplier = result.data;
         setDropoptionsSupplier(result.data);
-        setSupplierselectedValue(supplier.supplierId)
+      //  setSupplierselectedValue(supplier.supplierId)
        }
 
     const loadDrpSupplyType=async()=>{
@@ -154,8 +163,8 @@ console.log("testingsave")
     <Navbar/> 
     <div className='tab'>
             <ul className='tab-links nav nav-pills' id='v-pills-tab' role='tablist'>
-                <li onClick={()=>updateToggle(1)} className='flex-fill nav-link active' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Tarrif </li>
-                <li onClick={()=>updateToggle(2)} className='flex-fill nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Device </li>
+                <li onClick={()=>updateToggle(1)} className='nav-link active' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Tarrif </li>
+                <li onClick={()=>updateToggle(2)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Device </li>
             </ul>
     </div>          
 
@@ -163,11 +172,13 @@ console.log("testingsave")
                       <div className='wrapper3 d-flex align-items-center justify-content-center w-100'>
                         <div className='service'>
                             <h4 className='d-flex align-items-center justify-content-center mb-3'>Tarrif Settings</h4>
+                         
                             <form form className='needs-validation' onSubmit={(e) => {e.preventDefault(); addUpdateDeviceSettings();}}>
                                 <div className='form-group mb-2'>
+                                    {/* {JSON.stringify(dropoptionsConsumerSubCatogery)} */}
                                     <label htmlFor='consumerCategoryId' className='form-label'>Consumer Category</label>
                                         <select onChange={(e)=>{
-                                            console.log(e.target.value)
+                                            console.log("consumer category",e.target.value)
                                             setConsumerCategoryselectedValue(e.target.value) 
                                         }} value={consumerCategoryselectedValue} name="consumerCategoryId" className='form-control'>
                                         {dropoptionsConsumerCatogery.map(d=>(
@@ -175,18 +186,20 @@ console.log("testingsave")
                                         ))}            
                                         </select>   
                                 </div>
+
+
                 {/* {JSON.stringify(consumerCategoryselectedValue)} */}
-                               {false && <div className='form-group mb-2'>
+                               {  <div className='form-group mb-2'>
                                     <label htmlFor='ConsumerSubCategoryId' className='form-label'>Consumer SubCategory</label>
                                         <select onChange={(e)=>{
                                             setConsumerSubCategoryselectedValue(e.target.value)
                                         }}value={consumerSubCategoryselectedValue} name="ConsumerSubCategoryId" className='form-control'>
-                                            {dropoptionsConsumerSubCatogery.map(s=>(
+                                            {dropoptionsConsumerSubCatogery.length>0 && dropoptionsConsumerSubCatogery.map(s=>(
                                             <option key={s.ConsumerSubCategoryId} value={s.ConsumerSubCategoryId}>{s.ConsumerSubCategoryName}</option>
                                         ))}
                                         </select>
                                 </div>}
-                {/* {JSON.stringify(consumerSubCategoryselectedValue)} */}
+                
 
                                 <div className='form-group mb-2'>
                                     <label htmlFor='supplierId' className='form-label'>Supplier</label>

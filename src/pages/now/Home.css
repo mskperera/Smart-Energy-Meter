@@ -4,9 +4,10 @@
     justify-content:center;
     align-items: center;
     display: flex;
-    background-color:#191970;
+    background-color:#020239;
+
     /* position: absolute; */
-    height: 64.48vh;
+    height: 64.19vh;
 }
 
 .chart-now-kw{
@@ -18,8 +19,8 @@
     align-items: center;
     margin: 0%;
     flex-direction: column;
-    padding: 1rem;
-    margin-top: 40px;
+    padding: 0rem;
+    margin-top: 0px;
 }
 
 .chart-now-cost{
@@ -31,7 +32,8 @@
     align-items: center;
     margin: 0%;
     flex-direction: column;
-    padding: 1rem;
+    padding: 0rem;
+    margin-top: 0px;
 }
 
 /* .bottom{
@@ -45,9 +47,9 @@
     width: 100%;
     justify-content: center;
     align-items: center;
-    margin-top: 150px;
+    margin-top: 0px;
     /* background-color:yellow; */
-    background-color:#191970;
+    background-color:#020239;
     /* position: absolute; */
     margin: 0%;
 }
@@ -60,20 +62,20 @@
 } */
 
 .page-bottom div{
-    width: 198px;
-    padding: 1rem;
+    width: 200px;
+    padding: 2rem;
     /* margin-top: -50px; */
 }
 
 
-.bottom-3{
-    width: 50px;
-    margin-top: 50px;
+/* .bottom-3{ */
+    /* width: 50px;
+    margin-top: 0px; */
     /* justify-content: space-between;
     align-items: center;
     flex-direction: column; */
     
-}
+/* } */
 
 /* .bottom-3 .box1{
     flex: 1;
@@ -92,21 +94,25 @@
 @media screen and (max-width:2000px){
     .page{
         width: 100%;
-        margin-top: -1rem;
+        margin-top: 0rem;
         justify-content:center;
         align-items: center;
         display: flex;
-        margin-bottom: -3rem;
+        margin-bottom: -4rem;
     }
 
     .chart-now-kw{
-        height: 400px;
+        height: 350px;
         padding: 2rem;
+        margin-top: 40px;
+        margin-left: 280px;
     }
 
     .chart-now-cost{
-        height: 400px;
+        height: 350px;
         padding: 2rem;
+        margin-top: 40px;
+        margin-right: 280px;
     }
 
     .bottom-3{
@@ -123,25 +129,29 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        margin-top: -2px;
-        margin-bottom: 20px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        height: 54.99vh;
     }
-    /* .chart-now-kw{ */
-        /* width:30%;
-       
+    .chart-now-kw{
+        height: 350px;
+        padding: 0rem;
+        margin-top: 40px;
+    }
+
+    .chart-now-cost{
+        height: 350px;
+        padding: 0rem;
+        margin-top: 40px;
+    }
+
+    .bottom-3{
+        width: 20px;
+        margin: 0%;
+        justify-content: space-between;
         align-items: center;
-        justify-content: center;
-        padding: 2px;
-        margin: 2px; */
-    /* } */
-    /* .chart-now-cost{ */
-        /* width: 30%;
-        
-        align-items: center;
-        justify-content: center;
-        padding: 2px;
-        margin: 2px; */
-    /* } */
+        flex-direction: column;
+}
 }
 
 @media screen and (max-width:850px){
@@ -149,21 +159,22 @@
         width: 100%;
         align-items: center;
         justify-content: center;
-        margin-top: 5px;
-        margin-bottom: 40px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        height: 59.7vh;
     }
     .chart-now-kw{
         width:30%; 
         align-items: center;
         justify-content: center;
-        padding: 50px;
+        padding: 0px;
        
     }
     .chart-now-cost{
         width: 30%;
         align-items: center;
         justify-content: center;
-        padding: 50px;
+        padding: 0px;
     }
 
     .page-bottom{
@@ -172,13 +183,13 @@
         justify-content: center;
         align-items: center;
         margin: 0%;
-        margin-top: -57px;
+        margin-top: 0px;
     }
     
     .page-bottom div{
         width: 150px;
-        padding: 10px;
-        margin-bottom: 3px;
+        padding: 0px;
+        margin-bottom: 15px;
     }
 
     .bottom-3{
@@ -191,26 +202,26 @@
 
 @media screen and (max-width:650px){
     .page{
-        width: 80%;
+        width: 100%;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
         margin: 0%;
-        margin-left: 50px;
-        height: 53.5vh;
+        margin-left: 0px;
+        height: 100.5vh;
     }
 
     .chart-now-cost{
-        width: 80%;
-        margin-top: -90px;
+        width: 400px;
+        margin-top: 0px;
         align-items: center;
         justify-content: center;
-        margin-bottom: 10px;
+        margin-bottom: 0px;
     }
 
     .chart-now-kw{
-        margin-top: -60px;
-        width: 80%;
+        margin-top: 50px;
+        width: 400px;
         align-items: center;
         justify-content: center;
     }
@@ -221,52 +232,59 @@
         justify-content: center;
         align-items: center;
         margin: 0%;
-        margin-top: 20px;
+        margin-top: 0px;
+        flex-direction: column;
+        
     }
     
     .page-bottom div{
-        width: 90px;
-        padding: 8px;
+        width: 100%;
+        margin-top: 20px;
         margin-bottom: 10px;
+        padding: 5px;
     }
 
     .page-bottom .vol{
-        width: 25%;
+        width: 200px;
+        flex: 1;
     }
 
-    .page-bottom .bottom-3{
-        margin-top: 16px;
+    .page-bottom .pow{
+        width: 200px;
+        flex: 1;
     }
+
+    /* .page-bottom .bottom-3{
+        margin-top: 16px;
+    } */
 }
 
 @media screen and (max-width:450px){
     .page{
-        width: 80%;
+        width: 100%;
         flex-direction: column;
         align-items: center;
-        justify-content:center;
+        justify-content: space-between;
         margin: 0%;
-        margin-left: 40px;
-        height: 60vh;
-        padding: 0%;
+        margin-left: 0px;
+        height: 98vh;
     }
 
     .chart-now-cost{
-        width: 80%;
-        margin-top:0;
+        width: 100%;
+        margin-top: -100px;
         align-items: center;
         justify-content: center;
-        margin-bottom: 0;
-        padding: 10px;
+        margin-bottom: 0px;
+        margin-right: 0px;
     }
 
     .chart-now-kw{
-        margin-top: 0;
-        width: 80%;
+        margin-top: 0px;
+        width: 100%;
         align-items: center;
         justify-content: center;
-        margin-bottom: 0;
-        padding: 10px;
+        margin-left: 0px;
     }
 
     .page-bottom{
@@ -274,18 +292,31 @@
         width: 100%;
         justify-content: center;
         align-items: center;
-        margin-bottom: 10px;
-        height: 17.1vh;
+        margin: 0%;
+        margin-top: -10px;
+        flex-direction: column;
+        
     }
     
     .page-bottom div{
-        width: 80px;
-        padding: 5px;
-        margin-bottom:0;
+        width: 100%;
+        margin-top: -20px;
+        margin-bottom: 24px;
+        padding: 0px;
+        flex: 1;
+        justify-content: space-between;
+        align-items: center;
     }
 
-    /* .bottom-3{
-        margin-top: 0;
-    } */
+    .page-bottom .vol{
+        width: 180px;
+        flex: 1;
+        
+    }
+
+    .page-bottom .pow{
+        width: 180px;
+        flex: 1;
+    }
 }
 
