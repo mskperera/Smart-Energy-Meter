@@ -22,10 +22,10 @@ function Userlist() {
    }
 
 
-   const DeleteUser=async()=>{
+   const DeleteUser=async(userID)=>{
 
 
-    const res = await deleteUser(10);
+    const res = await deleteUser(userID);
     console.log(res);
     const { responseStatus, outputMessage } = res.data.output;
     if (responseStatus === "failed") {
@@ -34,7 +34,7 @@ function Userlist() {
   
     console.log("successful:", outputMessage);
   }
-  
+
 
   return (
     <>
@@ -74,7 +74,7 @@ function Userlist() {
                     <td>{user.billingAddress}</td>
                     <td>
                       <Link to={`/userregister/${user.userID}/U`} className="btn btn-sm btn-primary">Edit</Link>&nbsp;
-                      <button className="btn btn-sm btn-danger" onClick={DeleteUser}>Delete</button>
+                      <button className="btn btn-sm btn-danger" onClick={() => DeleteUser(user.userID)}>Delete</button>
                     </td>
                   </tr>
                 ))}

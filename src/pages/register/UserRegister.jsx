@@ -47,7 +47,7 @@ function UserRegister() {
    const [message,setMessage]=useState('');
    const [errormessage,setErrorMessage]=useState('');
 
-   const addUpdateUser=async()=>{
+   const addUser=async()=>{
 
     try{
 
@@ -55,7 +55,6 @@ function UserRegister() {
       setMessage('');
       console.log("run");
       const payload = {
-        userRegId:saveType==="I"? null : userRegId,
         userRoleId:1,
         userName: userName,
         password: userPassword,
@@ -67,7 +66,6 @@ function UserRegister() {
         tel:userTel,
         profilePic: "https://example.com/profiles/john_doe.jpg",
         displayName: userDisplayName,
-        iud:saveType==="I" ? "I":"U",//"U"-update,"I"-insert
         gmt_Offset: "+05:30"
         
       };
@@ -90,13 +88,64 @@ function UserRegister() {
       console.log(err);
     }
     }
+
+
+    const updateUser=async()=>{
+
+      try{
+  
+        setErrorMessage('');
+        setMessage('');
+        console.log("run");
+        const payload = {
+          userRoleId:1,
+          userName: userName,
+          password: userPassword,
+          isActive: true,
+          email: userEmail,
+          mobileNo: userEmail,
+          siteAddress: userAddress,
+          billingAddress:userBillAddress,
+          tel:userTel,
+          profilePic: "https://example.com/profiles/john_doe.jpg",
+          displayName: userDisplayName,
+          gmt_Offset: "+05:30"
+          
+        };
+      console.log("payload:",payload);
+  
+        const res = await updateUser(payload,userRegId);
+        console.log(res);
+        const { responseStatus, outputMessage } = res.data.output;
+        if (responseStatus === "failed") {
+          setErrorMessage(outputMessage)
+          return;
+          // console.log("exception:", outputMessage);
+        }
+      
+        // console.log("successful:", outputMessage);
+        setMessage(outputMessage)
+        
+      }
+      catch(err){
+        console.log(err);
+      }
+      }
  
   return (
     <div className='wrapper-register d-flex align-items-center justify-content-center w-100'>
       <div className='register'>
      {saveType==="I" ?  <h2 className='d-flex align-items-center justify-content-center mb-2'>User Registration</h2> : <h2 className='d-flex align-items-center justify-content-center mb-2'>Update User Details</h2>}
       
-        <form className='needs-validation' onSubmit={(e)=> {e.preventDefault(); addUpdateUser();}}>
+        <form className='needs-validation' onSubmit={(e)=> {
+          e.preventDefault(); 
+          if(saveType==="I"){
+            addUser();
+          }
+          if(saveType==="U"){
+            updateUser();
+          }
+          }}>
           <div className='row'>
             {/* First Column */}
             {/* {JSON.stringify(userName)} */}
