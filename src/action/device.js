@@ -130,7 +130,7 @@ export const getDeviceDetailsByDeviceId= async (deviceId) => {
 export const  deleteDevice= async (deviceId) => {
   try {
     return await customAxios
-      .delete(`/deleteDevice/${deviceId}`, {
+      .delete(`/device/deleteDevice/${deviceId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -149,7 +149,7 @@ export const  deleteDevice= async (deviceId) => {
 export const getDeviceByDeviceId= async (deviceId) => {
   try {
     return await customAxios
-      .get(`/getDeviceByDeviceId/${deviceId}`, {
+      .get(`/device/getDeviceByDeviceId/${deviceId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -168,7 +168,7 @@ export const getDeviceByDeviceId= async (deviceId) => {
 export const getDevices= async () => {
   try {
     return await customAxios
-      .get(`/getDevices`, {
+      .get(`/device/getDevices`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -188,7 +188,7 @@ export const getDevices= async () => {
 export const addDevice= async (payload) => {
   try {
     return await customAxios
-      .post(`/addDevice`,payload, {
+      .post(`/device/addDevice`,payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -208,7 +208,7 @@ export const addDevice= async (payload) => {
 export const updateDevice= async (payload,deviceId) => {
   try {
     return await customAxios
-      .put(`/updateDevice/${deviceId}`,payload, {
+      .put(`/device/updateDevice/${deviceId}`,payload, {
         headers: {
           'Content-Type': 'application/json',
         },

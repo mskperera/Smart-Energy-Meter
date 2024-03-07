@@ -4,7 +4,7 @@ import customAxios from "../utils/axios";
 export const  deleteUser= async (userId) => {
   try {
     return await customAxios
-      .delete(`/deleteUser/${userId}`, {
+      .delete(`/user/deleteUser/${userId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -23,7 +23,7 @@ export const  deleteUser= async (userId) => {
 export const getUserbyUserId= async (userId) => {
   try {
     return await customAxios
-      .get(`/getUserbyUserId/${userId}`, {
+      .get(`/user/getUserbyUserId/${userId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -42,7 +42,7 @@ export const getUserbyUserId= async (userId) => {
 export const getUsers= async () => {
   try {
     return await customAxios
-      .get(`/getUsers`, {
+      .get(`/user/getUsers`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -62,7 +62,7 @@ export const getUsers= async () => {
 export const addUser= async (payload) => {
   try {
     return await customAxios
-      .post(`/addUser`,payload, {
+      .post(`/user/addUser`,payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -81,7 +81,7 @@ export const addUser= async (payload) => {
 export const updateUser= async (payload,userRegId) => {
   try {
     return await customAxios
-      .put(`/updateUser/${userRegId}`,payload, {
+      .put(`/user/updateUser/${userRegId}`,payload, {
         headers: {
           'Content-Type': 'application/json',
         },
