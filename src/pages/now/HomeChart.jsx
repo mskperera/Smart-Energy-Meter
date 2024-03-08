@@ -15,7 +15,7 @@ const HomeChart = () => {
     // minKwValue:0,
     // currentKwValue:0,
     // mesurementUnitKw:"kW",
-    maxKwValue:8000,
+    maxKwValue:1000,
     minKwValue:0,
     currentKwValue:0,
     mesurementUnitKw:"kWh",
@@ -47,7 +47,7 @@ const HomeChart = () => {
    const {kwh,kwh_MeasurementValue_max,kwh_MeasurementValue_min}=result.data;
   
   
-   setObjKw({...objKw,maxKwValue:kwh_MeasurementValue_max,minKwValue:kwh_MeasurementValue_min,currentKwValue:kwh,kwhPerSeconds:objKw.kwhPerSec});
+   setObjKw({...objKw,currentKwValue:kwh});
   }
 
   const data = {

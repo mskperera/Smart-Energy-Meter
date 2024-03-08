@@ -53,6 +53,7 @@
     /* background-color:#020239; */
     /* position: absolute; */
     margin: 0%;
+    /* height: 10vh; */
 }
 
 /* .page-bottom-1{
@@ -125,6 +126,41 @@
 }
 }
 
+/* @media screen and (max-width:1280px) {
+    .page{
+        width: 100%;
+        margin-top: 0rem;
+        justify-content:center;
+        align-items: center;
+        display: flex;
+        margin-bottom: 0rem;
+        height: 100vh;
+    }
+
+    .chart-now-kw{
+        height: 350px;
+        padding: 2rem;
+        margin-top: 40px;
+        margin-left: 280px;
+    }
+
+    .chart-now-cost{
+        height: 350px;
+        padding: 2rem;
+        margin-top: 40px;
+        margin-right: 280px;
+    }
+
+.page-bottom div{
+    width: 150px;
+    padding: 0px;
+    margin-top: -50px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+} */
+
 @media screen and (max-width:1150px){
     .page{
         width: 100%;
@@ -164,7 +200,7 @@
         justify-content: center;
         margin-top: 0px;
         margin-bottom: 0px;
-        height: 56.5vh;
+        height: 57.9vh;
     }
     .chart-now-kw{
         width:30%; 
@@ -191,18 +227,15 @@
     }
     
     .page-bottom div{
-        width: 150px;
+        width: 140px;
         padding: 0px;
         margin-bottom: 15px;
-    }
-
-    .bottom-3{
-        width: 0px;
-        
-    
+        padding: 4px;
     }
 
 }
+
+
 
 @media screen and (max-width:650px){
     .page{
@@ -273,7 +306,7 @@
         justify-content: space-between;
         margin: 0%;
         margin-left: 0px;
-        height: 98vh;
+        height: 85vh;
     }
 
     .chart-now-cost{

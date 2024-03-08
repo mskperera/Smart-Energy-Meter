@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './UserRegister.css';
 import { useParams } from 'react-router-dom';
-import { addUser, deleteUser, getUserbyUserId, getUsers } from '../../action/user';
+import { addUser, getUserbyUserId, updateUser } from '../../action/user';
+import swal from 'sweetalert';
 
 function UserRegister() {
   
@@ -31,7 +32,7 @@ function UserRegister() {
     console.log("loaduser");
     const result=await getUserbyUserId(userRegId);
     //setUserData(result.data);
-    const {user} =result.data;
+    const user =result.data;
     console.log("result data:",user);
     setUserName(user.userName);
     setUserPassword(user.password);
@@ -47,8 +48,8 @@ function UserRegister() {
    const [message,setMessage]=useState('');
    const [errormessage,setErrorMessage]=useState('');
 
-   const addUser=async()=>{
-
+   const onsubmitHandler=async(e)=>{
+    e.preventDefault(); 
     try{
 
       setErrorMessage('');
@@ -60,7 +61,7 @@ function UserRegister() {
         password: userPassword,
         isActive: true,
         email: userEmail,
-        mobileNo: userEmail,
+        mobileNo: userMobile,
         siteAddress: userAddress,
         billingAddress:userBillAddress,
         tel:userTel,
@@ -71,8 +72,10 @@ function UserRegister() {
       };
     console.log("payload:",payload);
 
+    if(saveType==="I"){
       const res = await addUser(payload);
       console.log(res);
+
       const { responseStatus, outputMessage } = res.data.output;
       if (responseStatus === "failed") {
         setErrorMessage(outputMessage)
@@ -81,71 +84,42 @@ function UserRegister() {
       }
     
       // console.log("successful:", outputMessage);
-      setMessage(outputMessage)
-      
+      setMessage(outputMessage);
+      swal("User Added Successfully", "", "success").then(() => {
+        window.location = "/userlist";
+      });
+    }
+
+   else if(saveType==="U"){
+      const res = await updateUser(payload,userRegId);
+      console.log(res);
+
+      const { responseStatus, outputMessage } = res.data.output;
+      if (responseStatus === "failed") {
+        setErrorMessage(outputMessage)
+        return;
+        // console.log("exception:", outputMessage);
+      }
+    
+      // console.log("successful:", outputMessage);
+      setMessage(outputMessage);
+      swal("User Updated Successfully", "", "success").then(() => {
+        window.location = "/userlist";
+      });
+    }
     }
     catch(err){
       console.log(err);
     }
     }
 
-
-    const updateUser=async()=>{
-
-      try{
-  
-        setErrorMessage('');
-        setMessage('');
-        console.log("run");
-        const payload = {
-          userRoleId:1,
-          userName: userName,
-          password: userPassword,
-          isActive: true,
-          email: userEmail,
-          mobileNo: userEmail,
-          siteAddress: userAddress,
-          billingAddress:userBillAddress,
-          tel:userTel,
-          profilePic: "https://example.com/profiles/john_doe.jpg",
-          displayName: userDisplayName,
-          gmt_Offset: "+05:30"
-          
-        };
-      console.log("payload:",payload);
-  
-        const res = await updateUser(payload,userRegId);
-        console.log(res);
-        const { responseStatus, outputMessage } = res.data.output;
-        if (responseStatus === "failed") {
-          setErrorMessage(outputMessage)
-          return;
-          // console.log("exception:", outputMessage);
-        }
-      
-        // console.log("successful:", outputMessage);
-        setMessage(outputMessage)
-        
-      }
-      catch(err){
-        console.log(err);
-      }
-      }
  
   return (
     <div className='wrapper-register d-flex align-items-center justify-content-center w-100'>
       <div className='register'>
      {saveType==="I" ?  <h2 className='d-flex align-items-center justify-content-center mb-2'>User Registration</h2> : <h2 className='d-flex align-items-center justify-content-center mb-2'>Update User Details</h2>}
       
-        <form className='needs-validation' onSubmit={(e)=> {
-          e.preventDefault(); 
-          if(saveType==="I"){
-            addUser();
-          }
-          if(saveType==="U"){
-            updateUser();
-          }
-          }}>
+        <form className='needs-validation' onSubmit={onsubmitHandler}>
           <div className='row'>
             {/* First Column */}
             {/* {JSON.stringify(userName)} */}
@@ -214,7 +188,7 @@ function UserRegister() {
           <button type='submit' className='btn btn-primary w-100 mt-3'>
             Save
           </button>
-            {message && <p>{message}</p>}
+            {/* {message && <p>{message}</p>} */}
             {errormessage && <p>{errormessage}</p>}
         </form>
       </div>

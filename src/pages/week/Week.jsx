@@ -19,7 +19,8 @@ function Week() {
   return (
     <>  
       <Navbar/>
-      <nav className='nav-bar'>
+      <nav className='nav-bar d-flex align-items-center justify-content-center w-100'>
+        <div className='back'>
             <ul className='nav-bar-links'>
                 <Link to={"/home"}><li className='btn btn-sm btn-info bg-transparent'>Now</li></Link> 
                 <Link to={"/today"}><li className='btn btn-sm btn-info bg-transparent'>Today</li></Link>  
@@ -29,7 +30,7 @@ function Week() {
                 <Link to={"/year"}><li className='btn btn-sm btn-info bg-transparent'>Year</li></Link>
                 <Link to={"/custom"}><li className='btn btn-sm btn-info bg-transparent'>Custom</li></Link>
             </ul>
-   
+        </div>
     </nav>
     <div className='page-2'>
       <div className='chart-week-kw'>

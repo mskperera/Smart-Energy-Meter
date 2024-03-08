@@ -100,6 +100,6 @@ const MonthCost = () => {
             },
           },
     }
- return <Bar data={data} options={options}className='chart'/>
+ return <Bar data={data} options={options}className='chart' id='box'/>
 }
 export default MonthCost

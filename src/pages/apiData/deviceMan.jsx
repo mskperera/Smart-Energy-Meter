@@ -30,7 +30,6 @@ const addDeviceHandler=async()=>{
  
  
 
- 
   const payload = {
     deviceId: 2,
     deviceNo: "D992",

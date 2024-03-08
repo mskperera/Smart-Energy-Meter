@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { addDevice, getDevices } from '../../action/device';
+import { addDevice, getDeviceByDeviceId, getDeviceDetailsByDeviceId, getDevices, updateDevice } from '../../action/device';
 import { useParams } from 'react-router-dom';
-import { de } from 'date-fns/locale';
+import swal from 'sweetalert';
+
 
 function DeviceRegister() {
 
@@ -23,10 +24,14 @@ function DeviceRegister() {
   }, []);
 
   const loadDevices = async () => {
-    console.log("loadDevices");
-    const result = await getDevices(deviceRegId);
-      // setDeviceDetails(result.data);
-      const {device} =result.data;
+    console.log("loadDevices",deviceRegId);
+    const result = await getDeviceByDeviceId(deviceRegId);
+    // // setDeviceDetails(result.data);
+      const device = result.data;
+      console.log("result data:",result);
+    
+
+    //   console.log("result data:",device);
       
       setDeviceNo(device.deviceNo);
       setHardwareVersion(device.hardwareVersion);
@@ -38,8 +43,8 @@ function DeviceRegister() {
   const [message,setMessage]=useState('');
    const [errormessage,setErrorMessage]=useState('');
 
-  const addDeviceHandler=async()=>{
-
+  const onsubmitHandler=async(e)=>{
+    e.preventDefault();
     try{
 
       setErrorMessage('');
@@ -51,33 +56,52 @@ function DeviceRegister() {
     hardwareVersion: hardwareVersion,
     serialNo: serialNo,
     firmwareVersion:firmwareVersion,
-    product:product,
-    iud:"I"
+    product:product
+    // iud:"I"
 
   };
 
+  if(saveType==="I"){
   const res = await addDevice(payload);
   console.log(res);
   const { responseStatus, outputMessage } = res.data.output;
   if (responseStatus === "failed") {
-    // console.log("exception:", outputMessage);
+    setErrorMessage(outputMessage);
+    return;
+  }
+  setMessage(outputMessage);
+  swal("Device Added Successfully", "", "success").then(() => {
+    window.location = "/management";
+  });
+}
+
+else if(saveType==="U"){
+  
+  const res = await updateDevice(payload,deviceRegId);
+  console.log(res);
+  const { responseStatus, outputMessage } = res.data.output;
+  if (responseStatus === "failed") {
+    
     setErrorMessage(outputMessage)
         return;
   }
   setMessage(outputMessage)
-  // console.log("successful:", outputMessage);
+  swal("Device Updated Successfully", "", "success").then(() => {
+    window.location = "/management";
+  }); 
+}
 }
 catch(err){
   console.log(err);
 }
-}
+  }
 
 return (
   <div className='wrapper-register d-flex align-items-center justify-content-center w-100'>
     <div className='register'>
    {saveType==="I" ?  <h2 className='d-flex align-items-center justify-content-center mb-2'>Device Registration</h2> : <h2 className='d-flex align-items-center justify-content-center mb-2'>Update Device Details</h2>} 
       
-      <form className='needs-validation' onSubmit={(e)=>{e.preventDefault(); addDeviceHandler();}} >
+      <form className='needs-validation' onSubmit={onsubmitHandler} >
         <div className='row'>
           
           <div className='mb-1'>
@@ -87,6 +111,7 @@ return (
               </label>
               <input type='text' className='form-control' value={deviceNo} onChange={(e)=>{setDeviceNo(e.target.value)}}  required />
             </div>
+            {JSON.stringify(deviceNo)}
 
             <div className='form-group was-validated'>
               <label htmlFor='firmwareVersion' className='form-label'>
@@ -121,17 +146,14 @@ return (
         <button type='submit' className='btn btn-primary w-100 mt-3'>
           Save
         </button>
-          {message && <p>{message}</p>}
-          {errormessage && <p>{errormessage}</p>}
+          {/* {message && <p>{message}</p>}
+          {errormessage && <p>{errormessage}</p>} */}
       </form>
     </div>
   </div>
 );
 }
 
+export default DeviceRegister;
 
-export default DeviceRegister
 
-
-// {First Column }
-//  {JSON.stringify(userName)} 

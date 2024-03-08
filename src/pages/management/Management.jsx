@@ -4,7 +4,8 @@ import BottomNav from '../../components/bottommenu/BottomNav'
 import Navbar from '../../components/navbar/Navbar'
 // import { getUsers } from '../../action/user';
 import { Link } from 'react-router-dom';
-import { getDevices } from '../../action/device';
+import { deleteDevice, getDevices } from '../../action/device';
+import swal from 'sweetalert';
 
 function Management() {
 
@@ -24,6 +25,35 @@ function Management() {
     setDeviceDetails(result.data);
    }
 
+
+   const onDeleteDeviceHandler=async(deviceId)=>{
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, You will not be able to recover this Device Details!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then(async (willDelete) => {
+      if (willDelete) {
+    const res = await deleteDevice(deviceId);
+    console.log(res);
+    const { responseStatus, outputMessage } = res.data.output;
+    if (responseStatus === "failed") {
+      console.log("exception:", outputMessage);
+    }
+    else {
+      console.log("successful:", outputMessage);
+      swal("Success!", "Your Device Details have been deleted!", "success");
+      loadDevices();
+  } 
+      } else {
+        swal("Your Device Detalis are safe!");
+      }
+    }
+    );
+  }
+  
   
 
   return (
@@ -33,7 +63,7 @@ function Management() {
       <div className= "rounded p-2 ">
         <h2 className='d-flex justify-content-center align-items-center'>Device Management</h2>
         <div className='d-flex justify-content-end'>
-          <Link to="/deviceregister/0/I" className='btn btn-info'>Add Device</Link>
+          <Link to="/deviceregister/0/I" className='btn btn-info bbttnn'>Add Device</Link>
         </div>
         <table className="table1 table">
           <thead>
@@ -61,7 +91,7 @@ function Management() {
                   <td>{device.serialNo}</td>
                   <td>
                     <Link to={`/deviceregister/${device.deviceId}/U`} className="btn btn-sm btn-primary"> Edit</Link>&nbsp;
-                    <button className="btn btn-sm btn-danger">Delete</button>
+                    <button className="btn btn-sm btn-danger" onClick={()=>onDeleteDeviceHandler(device.deviceId)}>Delete</button>
                   </td>
                 </tr>
                 ))}
