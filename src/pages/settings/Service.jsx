@@ -5,7 +5,7 @@ import Navbar from '../../components/navbar/Navbar'
 // import { Link } from 'react-router-dom'
 import './Service.css'
 import { getDrpConsumerCategories, getDrpConsumerSubCategoriesById, getDrpSupplier, getDrpSupplyType } from '../../action/dropdown'
-import { get_DeviceSettingsByDeviceId, saveDeviceSettings } from '../../action/device'
+import { get_DeviceSettingsByDeviceId, saveDeviceSettings } from '../../action/deviceSettings'
 // import { Link } from 'react-router-dom'
 
 function Service () {

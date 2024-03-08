@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { addDevice, getDeviceByDeviceId, getDeviceDetailsByDeviceId, getDevices, updateDevice } from '../../action/device';
+import { addDevice, getDeviceByDeviceId, getDevices, updateDevice } from '../../action/device';
 import { useParams } from 'react-router-dom';
 import swal from 'sweetalert';
 

@@ -33,10 +33,9 @@
 
 
   .bottombar{
-    /* position: absolute; */
     margin: 0%;
-    /* margin-top: 100px; */
     position: fixed;
+    z-index: 5;
   }
   
  

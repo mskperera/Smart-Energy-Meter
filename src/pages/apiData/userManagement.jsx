@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { getDeviceDetailsByDeviceId, get_DeviceSettingsByDeviceId, saveDeviceSettings } from '../../action/device';
 import { getDrpConsumerCategories, getDrpConsumerSubCategoriesById, getDrpSupplier, getDrpSupplyType, getDrpUserRole } from '../../action/dropdown';
 import { addUser, deleteUser, getUserbyUserId, getUsers } from '../../action/user';
 import { useLocation } from 'react-router-dom';
