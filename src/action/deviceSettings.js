@@ -1,10 +1,11 @@
 import customAxios from "../utils/axios";
 
 
-export const  getEngergyUsageNow= async (payload) => {
+
+export const saveThresholdSettings= async (payload) => {
   try {
     return await customAxios
-      .post(`/device/energymeter/getEngergyUsageNow`,payload, {
+      .post(`/deviceSettings/saveThresholdSettings`,payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -20,10 +21,10 @@ export const  getEngergyUsageNow= async (payload) => {
   }
 }
 
-export const getEngergyUsageKwhByDateRange= async (payload) => {
+export const getThresholdSettingsByDeviceId= async (deviceId) => {
   try {
     return await customAxios
-      .post(`/device/energymeter/getEngergyUsageKwhByDateRange`,payload, {
+      .get(`/deviceSettings/getThresholdSettingsByDeviceId/${deviceId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -39,10 +40,10 @@ export const getEngergyUsageKwhByDateRange= async (payload) => {
   }
 }
 
-export const getEnergyMeterDataKwhPersecsByDateRange= async (payload) => {
+export const saveBudgetSettings= async (payload) => {
   try {
     return await customAxios
-      .post(`/device/energymeter/getEnergyMeterDataKwhPersecsByDateRange`,payload, {
+      .post(`/deviceSettings/saveBudgetSettings`,payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -58,95 +59,10 @@ export const getEnergyMeterDataKwhPersecsByDateRange= async (payload) => {
   }
 }
 
-
-
-
-export const getDeviceDetailsByDeviceId= async (deviceId) => {
+export const getBudgetSettingsByDeviceId= async (deviceId) => {
   try {
     return await customAxios
-      .get(`/device/energymeter/getDeviceDetailsByDeviceId/${deviceId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return err.response;
-      });
-  } catch (err) {
-    return err;
-  }
-}
-
-
-
-///////////////////////////////
-
-
-export const  deleteDevice= async (deviceId) => {
-  try {
-    return await customAxios
-      .delete(`/device/deleteDevice/${deviceId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return err.response;
-      });
-  } catch (err) {
-    return err;
-  }
-}
-
-export const getDeviceByDeviceId= async (deviceId) => {
-  try {
-    return await customAxios
-      .get(`/device/getDeviceByDeviceId/${deviceId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return err.response;
-      });
-  } catch (err) {
-    return err;
-  }
-}
-//////////
-export const getDevices= async () => {
-  try {
-    return await customAxios
-      .get(`/device/getDevices`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return err.response;
-      });
-  } catch (err) {
-    return err;
-  }
-}
-///////////
-
-export const addDevice= async (payload) => {
-  try {
-    return await customAxios
-      .post(`/device/addDevice`,payload, {
+      .get(`/deviceSettings/getBudgetSettingsByDeviceId/${deviceId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -163,10 +79,69 @@ export const addDevice= async (payload) => {
 }
 
 
-export const updateDevice= async (payload,deviceId) => {
+
+export const saveDeviceSettings= async (payload) => {
   try {
     return await customAxios
-      .put(`/device/updateDevice/${deviceId}`,payload, {
+      .post(`/deviceSettings/saveDeviceSettings`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+export const get_DeviceSettingsByDeviceId= async (deviceId) => {
+  try {
+    return await customAxios
+      .get(`/deviceSettings/get_DeviceSettingsByDeviceId/${deviceId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+
+export const saveConnectionSettings= async (payload) => {
+  try {
+    return await customAxios
+      .post(`/deviceSettings/saveConnectionSettings`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+export const getConnectionSettingsByDeviceId= async (deviceId) => {
+  try {
+    return await customAxios
+      .get(`/deviceSettings/getConnectionSettingsByDeviceId/${deviceId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
