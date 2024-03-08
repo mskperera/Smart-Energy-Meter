@@ -5,15 +5,19 @@ import Navbar from '../../components/navbar/Navbar'
 // import { Link } from 'react-router-dom'
 import './Service.css'
 import { getDrpConsumerCategories, getDrpConsumerSubCategoriesById, getDrpSupplier, getDrpSupplyType } from '../../action/dropdown'
-import { get_DeviceSettingsByDeviceId, saveDeviceSettings } from '../../action/device'
+import { get_DeviceSettingsByDeviceId, saveDeviceSettings } from '../../action/deviceSettings'
 // import { Link } from 'react-router-dom'
 
 function Service () {
 
     const [editedDeviceName, setEditedDeviceName] = useState();
-    const [editedConnection, setEditedConnection] = useState();
-    const [editedPortNo, setEditedPortNo] = useState();
+    // const [newDeviceName, setNewDeviceName] = useState();
 
+    const [editedConnection, setEditedConnection] = useState();
+    // const [newConnection, setNewConnection] = useState();
+
+    const [editedPortNo, setEditedPortNo] = useState();
+    // const [newPortNo, setNewPortNo] = useState();
 
     const [dropoptionsConsumerCatogery, setDropoptionsConsumerCatogery] = useState([]);
     const [consumerCategoryselectedValue, setConsumerCategoryselectedValue] = useState('');
@@ -21,10 +25,10 @@ function Service () {
     const [dropoptionsConsumerSubCatogery, setDropoptionsConsumerSubCatogery] = useState([]);
     const [consumerSubCategoryselectedValue, setConsumerSubCategoryselectedValue] = useState('');
 
-    const [dropoptionsSupplier, setDropoptionsSupplier] = useState(['Option 1', 'Option 2', 'Option 3']);
+    const [dropoptionsSupplier, setDropoptionsSupplier] = useState([]);
     const [supplierSelectedValue, setSupplierselectedValue] = useState('');
 
-    const [dropoptionsSupplyType, setDropoptionsSupplyType] = useState(['Option 1', 'Option 2', 'Option 3']);
+    const [dropoptionsSupplyType, setDropoptionsSupplyType] = useState([]);
     const [supplyTypeSelectedValue, setSupplyTypeselectedValue] = useState('');
 
     const [load,setLoad]=useState(false);
@@ -161,11 +165,15 @@ console.log("testingsave")
   return (
     <>
     <Navbar/> 
-    <div className='tab'>
+    <div className='tab d-flex align-items-center justify-content-center w-100'>
+        <div className='back2'>
             <ul className='tab-links nav nav-pills' id='v-pills-tab' role='tablist'>
                 <li onClick={()=>updateToggle(1)} className='nav-link active' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Tarrif </li>
                 <li onClick={()=>updateToggle(2)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Device </li>
+                <li onClick={()=>updateToggle(3)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Budget</li>
+                <li onClick={()=>updateToggle(4)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Notification </li>
             </ul>
+        </div>
     </div>          
 
                     <div className={toggle === 1 ? "show-content":"content"}>
@@ -173,7 +181,7 @@ console.log("testingsave")
                         <div className='service'>
                             <h4 className='d-flex align-items-center justify-content-center mb-3'>Tarrif Settings</h4>
                          
-                            <form form className='needs-validation' onSubmit={(e) => {e.preventDefault(); addUpdateDeviceSettings();}}>
+                            <form form className='needs-valid</div>ation' onSubmit={(e) => {e.preventDefault(); addUpdateDeviceSettings();}}>
                                 <div className='form-group mb-2'>
                                     {/* {JSON.stringify(dropoptionsConsumerSubCatogery)} */}
                                     <label htmlFor='consumerCategoryId' className='form-label'>Consumer Category</label>
@@ -241,9 +249,10 @@ console.log("testingsave")
                             <h4 className='d-flex align-items-center justify-content-center mb-3'>Device Settings</h4>
                             <form className='needs-validation' onSubmit={(e) => {e.preventDefault(); addUpdateDeviceSettings();}}>
                                 <div className='form-group mb-2'>
+                                    <div className='form-group mb-2'></div>
                                     <label htmlFor='devicename' className='form-label'>Device Name</label>
                                     <input type='text' className='form-control' value={editedDeviceName}
-                                     onChange={(e) => setEditedDeviceName(e.target.value)}/>
+                                     onChange={(e) => setEditedDeviceName(e.target.value)} />
                                 </div>
 
                                 <div className='form-group mb-2'>
@@ -264,8 +273,96 @@ console.log("testingsave")
                                 {errormessage && <p>{errormessage}</p>}
                             </form>
                         </div>
+                       </div>
                     </div>
-                </div>
+
+
+                    <div className={toggle === 3 ? "show-content":"content"}>
+                        <div className='wrapper5 d-flex align-items-center justify-content-center w-100'>
+                            <div className='service'>
+                                <h4 className='d-flex align-items-center justify-content-center mb-3'>Budget Settings</h4>
+                                <form className='need-validation'>
+                                    <div className='form-group mb-2'>
+                                        <label htmlFor='setbudget' className='form-label'>Set my Budget</label>
+                                        <input type='text' className='form-control' placeholder='Rs'/>
+                                    </div>
+
+                                    <button type='submit' className='btn btn-primary w-100 mt-2'>Save</button>                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={toggle === 4 ? "show-content":"content"}>
+                    <div className='wrapper6 d-flex align-items-center justify-content-center w-100'>
+                            <div className='notification'>
+                                <h4 className='d-flex align-items-center justify-content-center mb-3'>Notification Settings</h4>
+                                <form className='need-validation'>
+                                    <div className='form-group mb-2'>
+                                        <label htmlFor='notification' className='form-label'>Notify me when Budget reaches</label>
+                                        <div className='form-group mb-2'></div>
+                                        <div className="form-check form-check-inline">
+                                            <input type="checkbox" className="form-check-input" id="check1"/>
+                                            <label className="form-check-label" htmlFor="check1">25%</label>
+                                        </div>
+                                        <div className="form-check form-check-inline">
+                                            <input type="checkbox" className="form-check-input" id="check2"/>
+                                            <label className="form-check-label" htmlFor="check2">50%</label>
+                                        </div>
+                                        <div className="form-check form-check-inline">
+                                            <input type="checkbox" className="form-check-input" id="check3"/>
+                                            <label className="form-check-label" htmlFor="check3">75%</label>
+                                        </div>
+                                        <div className="form-check form-check-inline">
+                                            <input type="checkbox" className="form-check-input" id="check4"/>
+                                            <label className="form-check-label" htmlFor="check4">100%</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                                 <input class="form-check-input" type="checkbox" id="check5"/>
+                                                 <label class="form-check-label" for="check5">Notify me when Bill reaches</label>
+                                                 <input type='text' className='form-control' placeholder='Rs'/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                                <input type="checkbox" className="form-check-input" id="check6"/>
+                                                <label className="form-check-label" for="check6">Notify me when Voltage reaches</label>
+                                                <input type='text' className='form-control' placeholder='V'/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                            <input type="checkbox" className="form-check-input" id="check7"/>
+                                            <label className="form-check-label" for="check7">Notify me when Kwh reaches</label>
+                                            <input type='text' className='form-control' placeholder='kWh'/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                            <input type="checkbox" className="form-check-input" id="check8"/>
+                                            <label className="form-check-label" for="check8">Notify me when Power reaches</label>
+                                            <input type='text' className='form-control' placeholder='kWh'/>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <button type='submit' className='btn btn-primary w-100 mt-2'>Save</button>
+                                </form>       
+                            </div>
+                        </div>
+                    </div>
         <BottomNav/>
     </>
   )

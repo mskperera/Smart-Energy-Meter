@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { getDeviceDetailsByDeviceId, get_DeviceSettingsByDeviceId, saveDeviceSettings } from '../../action/device';
+import { get_DeviceSettingsByDeviceId, saveDeviceSettings } from '../../action/deviceSettings';
 import { getDrpConsumerCategories, getDrpConsumerSubCategoriesById, getDrpSupplier, getDrpSupplyType } from '../../action/dropdown';
+import { getDeviceDetailsByDeviceId } from '../../action/device';
 
 const DeviceSettings=()=> {
 

@@ -13,6 +13,12 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+@media screen and (max-width:1150px) {
+    .wrapper2{
+        height: 79vh;
+    }
+}
+
 @media screen and (max-width:650px) {
     .wrapper2{
         height: 82.3vh;
@@ -21,7 +27,7 @@
 
 @media screen and (max-width:450px) {
     .wrapper2{
-        height: 88.35vh;
+        height: 86vh;
     }
     
 }

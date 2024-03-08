@@ -43,7 +43,7 @@ const YearCost = () => {
             {
               label:'Rs',
               data:monthCostArr,
-              backgroundColor:'aqua',
+              backgroundColor:'#ff0066',
               borderWidath:1,
             }
           ]
@@ -100,7 +100,7 @@ const YearCost = () => {
             },
           },
     }
- return <Bar data={data} options={options} className='chart'/>
+ return <Bar data={data} options={options} className='chart' id='box'/>
  
 }
 

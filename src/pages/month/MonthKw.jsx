@@ -42,7 +42,7 @@ const MonthKw = () => {
             {
               label:'kWh',
               data:monthKwArr,
-              backgroundColor:'#36A2EB',
+              backgroundColor:'#00ff99',
               borderWidath:1,
             }
           ]
@@ -101,6 +101,6 @@ const MonthKw = () => {
 
           },  
     }
- return <Bar data={data} options={options}className='chart'/>
+ return <Bar data={data} options={options}className='chart' id='box'/>
 }
 export default MonthKw

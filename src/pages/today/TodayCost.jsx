@@ -59,7 +59,7 @@ const TodayCost = () => {
         {
             label:'Rs',
             data:ruppyArr,
-            backgroundColor:'aqua',
+            backgroundColor:'#ff0066',
             borderWidath:1,
         }];
     
@@ -137,7 +137,7 @@ const TodayCost = () => {
               },
         }
      return(
-         <Bar data={data} options={options} className='chart'/>
+         <Bar data={data} options={options} id='box' className='chart'/>
   )
 }
 

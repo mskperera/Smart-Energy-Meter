@@ -36,7 +36,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Login/>}/>
-        <Route path='/userregister' element={<UserRegister/>}/>
+        <Route path='/userregister/:userRegId/:saveType' element={<UserRegister/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/userlist' element={<Userlist/>}/>
         <Route path='/home' element={<Home/>}/>
@@ -50,7 +50,7 @@ function App() {
         <Route path='/service' element={<Service/>}/>
         {/* <Route path='/connection' element={<Connection/>}/> */}
         <Route path='/management' element={<Management/>}/>
-        <Route path='/deviceregister' element={<DeviceRegister/>}/>
+        <Route path='/deviceregister/:deviceRegId/:saveType' element={<DeviceRegister/>}/>
         <Route path='/apiData/deviceSettings' element={<DeviceSettings/>}/>
         <Route path='/apiData' element={<APIData/>}/>
         <Route path='/device' element={<DeviceMan/>}/>

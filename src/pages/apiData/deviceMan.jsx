@@ -8,8 +8,8 @@ const DeviceMan=()=> {
 
   useEffect(() => {
 
-   // loadDevices();
-   // loadDeviceById();
+   loadDevices();
+   loadDeviceById();
   }, []);
 
 
@@ -30,7 +30,6 @@ const addDeviceHandler=async()=>{
  
  
 
- 
   const payload = {
     deviceId: 2,
     deviceNo: "D992",

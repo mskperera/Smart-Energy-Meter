@@ -1,7 +1,7 @@
 import customAxios from "../utils/axios";
 
 
-
+//notification settings
 export const saveThresholdSettings= async (payload) => {
   try {
     return await customAxios
@@ -118,7 +118,7 @@ export const get_DeviceSettingsByDeviceId= async (deviceId) => {
   }
 }
 
-
+//device setting save
 export const saveConnectionSettings= async (payload) => {
   try {
     return await customAxios
@@ -137,7 +137,7 @@ export const saveConnectionSettings= async (payload) => {
     return err;
   }
 }
-
+//device setting get
 export const getConnectionSettingsByDeviceId= async (deviceId) => {
   try {
     return await customAxios

@@ -1,82 +1,159 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { addDevice, getDeviceByDeviceId, getDevices, updateDevice } from '../../action/device';
+import { useParams } from 'react-router-dom';
+import swal from 'sweetalert';
+
 
 function DeviceRegister() {
-  return (
-    <div className='wrapper-register d-flex align-items-center justify-content-center w-100'>
-      <div className='register'>
-        <h2 className='d-flex align-items-center justify-content-center mb-2'>Device Registration</h2>
-        <form className='needs-validation'>
-          <div className='row'>
-            {/* First Column */}
-            <div className='col-md-6 mb-1'>
-              <div className='form-group was-validated'>
-                <label htmlFor='devicename' className='form-label'>
-                  Device Name
-                </label>
-                <input type='text' className='form-control' required />
-              </div>
 
-              <div className='form-group was-validated'>
-                <label htmlFor='deviceno' className='form-label'>
-                  Device No
-                </label>
-                <input type='text' className='form-control' required />
-              </div>
+  const {deviceRegId, saveType} = useParams();
 
-              <div className='form-group was-validated'>
-                <label htmlFor='version' className='form-label'>
-                  Firmware Version
-                </label>
-                <input type='text' className='form-control' required />
-              </div>
 
-              <div className='form-group was-validated'>
-                <label htmlFor='email' className='form-label'>
-                  Email
-                </label>
-                <input type='email' className='form-control' required />
-              </div>
-            </div>
+  const [deviceDetails,setDeviceDetails]=useState(null);
 
-            {/* Second Column */}
-            <div className='col-md-6 mb-1'>
-              <div className='form-group was-validated'>
-                <label htmlFor='address' className='form-label'>
-                  Address
-                </label>
-                <input type='text' className='form-control' required />
-              </div>
+  const [deviceNo,setDeviceNo]=useState('');
+  const [hardwareVersion,setHardwareVersion]=useState('');
+  const [serialNo,setSerialNo]=useState('');
+  const [firmwareVersion,setFirmwareVersion]=useState('');
+  const [product,setProduct]=useState('');
 
-              <div className='form-group was-validated'>
-                <label htmlFor='billingaddress' className='form-label'>
-                  Billing Address
-                </label>
-                <input type='text' className='form-control' required />
-              </div>
+  useEffect(() => {
+    if(saveType==="U"){
+      loadDevices();
+    }
+  }, []);
 
-              <div className='form-group was-validated'>
-                <label htmlFor='mobile' className='form-label'>
-                  Mobile
-                </label>
-                <input type='number' className='form-control' required />
-              </div>
+  const loadDevices = async () => {
+    console.log("loadDevices",deviceRegId);
+    const result = await getDeviceByDeviceId(deviceRegId);
+    // // setDeviceDetails(result.data);
+      const device = result.data;
+      console.log("result data:",result);
+    
 
-              <div className='form-group was-validated'>
-                <label htmlFor='tel' className='form-label'>
-                  Tel
-                </label>
-                <input type='number' className='form-control' required />
-              </div>
-            </div>
-          </div>
+    //   console.log("result data:",device);
+      
+      setDeviceNo(device.deviceNo);
+      setHardwareVersion(device.hardwareVersion);
+      setSerialNo(device.serialNo);
+      setFirmwareVersion(device.firmwareVersion);
+      setProduct(device.product);
+  }
 
-          <button type='submit' className='btn btn-primary w-100 mt-3'>
-            Save
-          </button>
-        </form>
-      </div>
-    </div>
-  )
+  const [message,setMessage]=useState('');
+   const [errormessage,setErrorMessage]=useState('');
+
+  const onsubmitHandler=async(e)=>{
+    e.preventDefault();
+    try{
+
+      setErrorMessage('');
+      setMessage('');
+
+  const payload = {
+    deviceId: 2,
+    deviceNo: deviceNo,
+    hardwareVersion: hardwareVersion,
+    serialNo: serialNo,
+    firmwareVersion:firmwareVersion,
+    product:product
+    // iud:"I"
+
+  };
+
+  if(saveType==="I"){
+  const res = await addDevice(payload);
+  console.log(res);
+  const { responseStatus, outputMessage } = res.data.output;
+  if (responseStatus === "failed") {
+    setErrorMessage(outputMessage);
+    return;
+  }
+  setMessage(outputMessage);
+  swal("Device Added Successfully", "", "success").then(() => {
+    window.location = "/management";
+  });
 }
 
-export default DeviceRegister
+else if(saveType==="U"){
+  
+  const res = await updateDevice(payload,deviceRegId);
+  console.log(res);
+  const { responseStatus, outputMessage } = res.data.output;
+  if (responseStatus === "failed") {
+    
+    setErrorMessage(outputMessage)
+        return;
+  }
+  setMessage(outputMessage)
+  swal("Device Updated Successfully", "", "success").then(() => {
+    window.location = "/management";
+  }); 
+}
+}
+catch(err){
+  console.log(err);
+}
+  }
+
+return (
+  <div className='wrapper-register d-flex align-items-center justify-content-center w-100'>
+    <div className='register'>
+   {saveType==="I" ?  <h2 className='d-flex align-items-center justify-content-center mb-2'>Device Registration</h2> : <h2 className='d-flex align-items-center justify-content-center mb-2'>Update Device Details</h2>} 
+      
+      <form className='needs-validation' onSubmit={onsubmitHandler} >
+        <div className='row'>
+          
+          <div className='mb-1'>
+            <div className='form-group was-validated'>
+              <label htmlFor='username' className='form-label'>
+                Device No
+              </label>
+              <input type='text' className='form-control' value={deviceNo} onChange={(e)=>{setDeviceNo(e.target.value)}}  required />
+            </div>
+            {JSON.stringify(deviceNo)}
+
+            <div className='form-group was-validated'>
+              <label htmlFor='firmwareVersion' className='form-label'>
+              Firmware Version
+              </label>
+              <input type='text' className='form-control' value={firmwareVersion} onChange={(e)=>{setFirmwareVersion(e.target.value)}} required />
+            </div>
+
+            <div className='form-group was-validated'>
+              <label htmlFor='hardwareVersion' className='form-label'>
+              Hardware Version
+              </label>
+              <input type='text' className='form-control' value={hardwareVersion} onChange={(e)=>{setHardwareVersion(e.target.value)}} required />
+            </div>
+
+            <div className='form-group was-validated'>
+              <label htmlFor='product' className='form-label'>
+              Product
+              </label>
+              <input type='text' className='form-control' value={product} onChange={(e)=>{setProduct(e.target.value)}} required />
+            </div>
+            
+            <div className='form-group was-validated'>
+              <label htmlFor='address' className='form-label'>
+              Serial No
+              </label>
+              <input type='text' className='form-control' value={serialNo} onChange={(e)=>{setSerialNo(e.target.value)}} required />
+            </div>
+          </div>
+        </div>
+
+        <button type='submit' className='btn btn-primary w-100 mt-3'>
+          Save
+        </button>
+          {/* {message && <p>{message}</p>}
+          {errormessage && <p>{errormessage}</p>} */}
+      </form>
+    </div>
+  </div>
+);
+}
+
+export default DeviceRegister;
+
+
