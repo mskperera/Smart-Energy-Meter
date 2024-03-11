@@ -288,7 +288,7 @@ const payload = {
                                         ))}
                                         </select>
                                 </div>
-                {/* {JSON.stringify(supplyTypeSelectedValue)} */}
+                {JSON.stringify(supplyTypeSelectedValue)}
                                 
                                 <button type='button' className='btn btn-primary w-100 mt-2' onClick={addUpdateDeviceSettings}>Save</button>
 
