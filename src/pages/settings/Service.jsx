@@ -5,7 +5,9 @@ import Navbar from '../../components/navbar/Navbar'
 // import { Link } from 'react-router-dom'
 import './Service.css'
 import { getDrpConsumerCategories, getDrpConsumerSubCategoriesById, getDrpSupplier, getDrpSupplyType } from '../../action/dropdown'
-import { get_DeviceSettingsByDeviceId, saveDeviceSettings } from '../../action/deviceSettings'
+import { getConnectionSettingsByDeviceId, get_DeviceSettingsByDeviceId, saveConnectionSettings, saveDeviceSettings } from '../../action/deviceSettings'
+import swal from 'sweetalert'
+import { get } from 'lodash'
 // import { Link } from 'react-router-dom'
 
 function Service () {
@@ -33,11 +35,7 @@ function Service () {
 
     const [load,setLoad]=useState(false);
 
-    useEffect(()=>{
-        loadDeviceSettingstData()
-    },[
-        load
-    ])
+  
 
     useEffect(() => {
 
@@ -67,10 +65,30 @@ function Service () {
        console.log("test",result);
        const deviceSetttings=result.data;
        setConsumerCategoryselectedValue(deviceSetttings.consumerCategoryId);
+       setSupplierselectedValue(deviceSetttings.supplierId);
+       setSupplyTypeselectedValue(deviceSetttings.supplyTypeId);
+setConsumerSubCategoryselectedValue(deviceSetttings.consumerSubCategoryId);
+
+       
+     // setConsumerSubCategoryselectedValue
+       
+    }
+
+    const loadDeviceConnectionData=async()=>{
+ 
+        const result=await getConnectionSettingsByDeviceId(deviceId);
+       // setDeviceSettings(result.data);
+       console.log("test",result);
+       const deviceSetttings=result.data;
        setEditedDeviceName(deviceSetttings.deviceName);
        setEditedConnection(deviceSetttings.connection);
        setEditedPortNo(deviceSetttings.portNo);
     }
+
+    useEffect(()=>{
+        loadDeviceSettingstData();
+        loadDeviceConnectionData();
+    },[  load])
 
     const loadDrpConsumerCategories=async()=>{
         const result=await getDrpConsumerCategories();
@@ -111,32 +129,68 @@ function Service () {
        const [errormessage,setErrorMessage]=useState('');
 
 
-      
-
-
-const addUpdateDeviceSettings=async()=>{
-
+const addUpdateDeviceSettings=async(e)=>{
+    e.preventDefault();
     try{
     
     setErrorMessage('');
     setMessage('');
 
 console.log("testingsave")
+
+
     const payload = {
       deviceId:4 ,
       supplierId: supplierSelectedValue,
       supplyTypeId: supplyTypeSelectedValue,
       consumerCategoryid: consumerCategoryselectedValue,
       consumerSubCategoryId:consumerSubCategoryselectedValue,
-      connection:"192.12.1.2",
-      deviceName: "Device name 1",
-      portNo: 1221
+
 
     };
-
-
-  
+    console.log('payload',payload);
     const res = await saveDeviceSettings(payload);
+    console.log('saveDeviceSettings',res);
+    const { responseStatus, outputMessage } = res.data.output;
+    if (responseStatus === "failed") {
+      setErrorMessage(outputMessage)
+      return;
+    }
+  
+    setMessage(outputMessage)
+    swal("User Updated Successfully", "", "success").then(() => {
+        setLoad(!load);
+      });
+    
+  }
+
+  catch(err){
+    //const jsonString = JSON.parse(err);
+    //setErrorMessage(jsonString);
+    console.log(err);
+  }
+  
+}
+
+
+
+
+const saveConnectionSettingsHandler=async(e)=>{
+    e.preventDefault();
+    try{
+    
+    setErrorMessage('');
+    setMessage('');
+
+console.log("testingsave")
+const payload = {
+    deviceId: 4,
+    connection: editedConnection,
+    deviceName: editedDeviceName,
+    portNo: editedPortNo
+    };
+  
+    const res = await saveConnectionSettings(payload);
     console.log(res);
     const { responseStatus, outputMessage } = res.data.output;
     if (responseStatus === "failed") {
@@ -145,7 +199,10 @@ console.log("testingsave")
     }
   
     setMessage(outputMessage)
-    setLoad(!load)
+    swal("User Updated Successfully", "", "success").then(() => {
+        setLoad(!load);
+      });
+    
   }
 
   catch(err){
@@ -179,9 +236,9 @@ console.log("testingsave")
                     <div className={toggle === 1 ? "show-content":"content"}>
                       <div className='wrapper3 d-flex align-items-center justify-content-center w-100'>
                         <div className='service'>
-                            <h4 className='d-flex align-items-center justify-content-center mb-3'>Tarrif Settings</h4>
+                            <h3 className='d-flex align-items-center justify-content-center mb-3'>Tarrif Settings</h3>
                          
-                            <form form className='needs-valid</div>ation' onSubmit={(e) => {e.preventDefault(); addUpdateDeviceSettings();}}>
+                            <form form className='needs-valid</div>ation' >
                                 <div className='form-group mb-2'>
                                     {/* {JSON.stringify(dropoptionsConsumerSubCatogery)} */}
                                     <label htmlFor='consumerCategoryId' className='form-label'>Consumer Category</label>
@@ -197,7 +254,7 @@ console.log("testingsave")
 
 
                 {/* {JSON.stringify(consumerCategoryselectedValue)} */}
-                               {  <div className='form-group mb-2'>
+                               {dropoptionsConsumerSubCatogery.length>0 &&  <div className='form-group mb-2'>
                                     <label htmlFor='ConsumerSubCategoryId' className='form-label'>Consumer SubCategory</label>
                                         <select onChange={(e)=>{
                                             setConsumerSubCategoryselectedValue(e.target.value)
@@ -219,7 +276,7 @@ console.log("testingsave")
                                         ))}
                                         </select>
                                 </div>
-                {/* {JSON.stringify(supplierSelectedValue)} */}
+              
 
                                 <div className='form-group mb-2'>
                                     <label htmlFor='supplytype' className='form-label'>Supply Type</label>
@@ -233,9 +290,9 @@ console.log("testingsave")
                                 </div>
                 {/* {JSON.stringify(supplyTypeSelectedValue)} */}
                                 
-                                <button type='submit' className='btn btn-primary w-100 mt-2'>Save</button>
+                                <button type='button' className='btn btn-primary w-100 mt-2' onClick={addUpdateDeviceSettings}>Save</button>
 
-                                {message && <p>{message}</p>}
+                                {/* {message && <p>{message}</p>} */}
                                 {errormessage && <p>{errormessage}</p>}
                             </form>
                         </div>
@@ -246,10 +303,11 @@ console.log("testingsave")
                     <div className={toggle === 2 ? "show-content":"content"}>
                      <div className='wrapper4 d-flex align-items-center justify-content-center w-100'>
                         <div className='connection'>
-                            <h4 className='d-flex align-items-center justify-content-center mb-3'>Device Settings</h4>
-                            <form className='needs-validation' onSubmit={(e) => {e.preventDefault(); addUpdateDeviceSettings();}}>
+                            <h3 className='d-flex align-items-center justify-content-center mb-3'>Connection Settings</h3>
+                            <form className='needs-validation' >
                                 <div className='form-group mb-2'>
                                     <div className='form-group mb-2'></div>
+                                    {/* {JSON.stringify(editedDeviceName)} */}
                                     <label htmlFor='devicename' className='form-label'>Device Name</label>
                                     <input type='text' className='form-control' value={editedDeviceName}
                                      onChange={(e) => setEditedDeviceName(e.target.value)} />
@@ -267,10 +325,10 @@ console.log("testingsave")
                                      onChange={(e) => setEditedPortNo(e.target.value)}/>
                                 </div>
                                 
-                                <button type='submit' className='btn btn-primary w-100 mt-2'>Save</button>
+                                <button type='button' className='btn btn-primary w-100 mt-2' onClick={ saveConnectionSettingsHandler}>Save</button>
 
-                                {message && <p>{message}</p>}
-                                {errormessage && <p>{errormessage}</p>}
+                                {/* {message && <p>{message}</p>} */}
+                                {/* {errormessage && <p>{errormessage}</p>} */}
                             </form>
                         </div>
                        </div>
@@ -280,7 +338,7 @@ console.log("testingsave")
                     <div className={toggle === 3 ? "show-content":"content"}>
                         <div className='wrapper5 d-flex align-items-center justify-content-center w-100'>
                             <div className='service'>
-                                <h4 className='d-flex align-items-center justify-content-center mb-3'>Budget Settings</h4>
+                                <h3 className='d-flex align-items-center justify-content-center mb-3'>Budget Settings</h3>
                                 <form className='need-validation'>
                                     <div className='form-group mb-2'>
                                         <label htmlFor='setbudget' className='form-label'>Set my Budget</label>
@@ -296,9 +354,9 @@ console.log("testingsave")
                     <div className={toggle === 4 ? "show-content":"content"}>
                     <div className='wrapper6 d-flex align-items-center justify-content-center w-100'>
                             <div className='notification'>
-                                <h4 className='d-flex align-items-center justify-content-center mb-3'>Notification Settings</h4>
+                                <h3 className='d-flex align-items-center justify-content-center mb-2'>Notification Settings</h3>
                                 <form className='need-validation'>
-                                    <div className='form-group mb-2'>
+                                    <div className='form-group mb-1'>
                                         <label htmlFor='notification' className='form-label'>Notify me when Budget reaches</label>
                                         <div className='form-group mb-2'></div>
                                         <div className="form-check form-check-inline">
@@ -319,7 +377,7 @@ console.log("testingsave")
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
+                                    <div class="form-group mb-1">
                                         <div class="col-sm-10">
                                             <div class="form-check">
                                                  <input class="form-check-input" type="checkbox" id="check5"/>
@@ -329,7 +387,7 @@ console.log("testingsave")
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
+                                    <div class="form-group mb-1">
                                         <div class="col-sm-10">
                                             <div class="form-check">
                                                 <input type="checkbox" className="form-check-input" id="check6"/>
@@ -339,7 +397,7 @@ console.log("testingsave")
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
+                                    <div class="form-group mb-1">
                                         <div class="col-sm-10">
                                             <div class="form-check">
                                             <input type="checkbox" className="form-check-input" id="check7"/>
@@ -349,7 +407,7 @@ console.log("testingsave")
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
+                                    <div class="form-group mb-1">
                                         <div class="col-sm-10">
                                             <div class="form-check">
                                             <input type="checkbox" className="form-check-input" id="check8"/>

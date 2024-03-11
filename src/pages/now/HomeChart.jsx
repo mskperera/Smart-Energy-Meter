@@ -51,7 +51,7 @@ const HomeChart = () => {
   }
 
   const data = {
-    // labels: ['kWh'],
+    // labels: ['Used kWh'],
     datasets: [
       {
         data: [objKw.currentKwValue,remaningkwvalue],
@@ -100,7 +100,7 @@ const HomeChart = () => {
     plugins: {
       legend: {
         labels: {
-          color: 'Black', 
+          color: 'white', 
         },
       },
     },

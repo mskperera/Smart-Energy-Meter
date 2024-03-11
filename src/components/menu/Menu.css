@@ -65,13 +65,13 @@
 
 @media screen and (max-width:1150px){
     .nav-bar{
-        width: 55%;
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #F5F5DC;
+        /* background-color: #F5F5DC; */
         border-radius: 50px;
-        margin-left: 265px;
+        margin-left: 0px;
         margin-top: 10px;
         height: 40px;
         box-shadow: 0px 2px 5px -2px #333;
@@ -83,15 +83,15 @@
         justify-content: center;
         align-items: center;
         list-style: none;
-        margin-top: 15px;
-        margin-left: -33px;
+        padding: 2px 2px;
+        margin: 2px 2px;
         cursor: pointer;
         text-align: center;
         
     }
     
     .nav-bar-links li{
-        margin: 20px;
+        margin: 0.5px 5px;
         align-items: center;
         display: flex;
         justify-content: center;
@@ -109,8 +109,8 @@
 
 @media screen and (max-width:850px){
     .nav-bar{
-       width: 68%;
-       margin-left: 120px;
+       width: 100%;
+       margin-left: 0px;
        align-items: center;
        justify-content: center;
        display: flex;
@@ -121,8 +121,8 @@
         justify-content: center;
         align-items: center;
         list-style: none;
-        margin-top: 15px;
-        margin-left: -33px;
+        padding: 2px 2px;
+        margin: 2px 2px;
         cursor: pointer;
     }
     
@@ -132,7 +132,7 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        width: 72px;
+        margin: 0.5px 5px;
         font-size: 14px;
         box-shadow: 0px 2px 5px -2px #333;
         border-radius: 50px;
@@ -142,13 +142,13 @@
 
 @media screen and (max-width:650px){
     .nav-bar{
-        width: 90%;
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #F5F5DC;
+        /* background-color: #F5F5DC; */
         border-radius: 50px;
-        margin-left: 20px;
+        margin-left: 0px;
         margin-top: 10px;
         height: 35px;
         box-shadow: 0px 2px 5px -2px #333;
@@ -159,18 +159,18 @@
         justify-content: center;
         align-items: center;
         list-style: none;
-        margin-top: 15px;
-        margin-left: -33px;
+        padding: 2px 2px;
+        margin: 2px 2px;
         cursor: pointer;
     }
     
     .nav-bar-links li{
-        margin: 2.5px;
+        /* margin: 2.5px; */
         text-align: center;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        width: 60px;
+        margin: 0.5px 2px;
         font-size: 14px;
         box-shadow: 0px 2px 5px -2px #333;
         border-radius: 50px;
@@ -182,42 +182,42 @@
 
 @media screen and (max-width:450px){
     
-.nav-bar{
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #F5F5DC;
-    border-radius: 50px;
-    margin-left: 20px;
-    margin-top: 10px;
-    height: 40px;
-    box-shadow: 0px 2px 5px -2px #333;
-}
+    .nav-bar{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background-color: #F5F5DC; */
+        border-radius: 50px;
+        margin-left: 0px;
+        margin-top: 10px;
+        height: 35px;
+        box-shadow: 0px 2px 5px -2px #333;
+    }
 
-.nav-bar-links{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-    margin-top: 15px;
-    margin-left: -32px;
-    cursor: pointer;
-}
-
-.nav-bar-links li{
-    margin: 2px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    width: 53px;
-    font-size: 14px;
-    box-shadow: 0px 2px 5px -2px #333;
+    .nav-bar-links{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        padding: 2px 2px;
+        margin: 2px 2px;
+        cursor: pointer;
+        
+    }
     
-    border-radius: 50px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
-}
+    .nav-bar-links li{
+        width: 54px;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin: 0.5px 1px;
+        font-size: 14px;
+        box-shadow: 0px 2px 5px -2px #333;
+        border-radius: 50px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    }
 
 
     
