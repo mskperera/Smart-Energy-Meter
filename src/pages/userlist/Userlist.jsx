@@ -61,7 +61,7 @@ function Userlist() {
   // }
   return (
     <>
-    <Navbar/>
+    <Navbar className='navnav'/>
     <div className="body">
       <div className= "rounded p-2 ">
         <h2 className='d-flex justify-content-center align-items-center'>User List</h2>

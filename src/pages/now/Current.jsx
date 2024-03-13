@@ -68,10 +68,15 @@ const Current = () => {
 
       ctx.save();
       ctx.fillStyle='white';
-      ctx.font ='20px Trebuchet MS';
+      ctx.font ='25px Trebuchet MS';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
       ctx.fillText(data.datasets[0].data[0],xCenter,yCenter -10)
+      // ctx.fillText("A",xCenter,yCenter +10)
+
+
+      ctx.fillStyle='white';
+      ctx.font ='15px Trebuchet MS';
       ctx.fillText("A",xCenter,yCenter +10)
 
       ctx.font ='15px Trebuchet MS';

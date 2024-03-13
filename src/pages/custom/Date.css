@@ -107,6 +107,67 @@
     display: none;
   }
 
+
+
+@media screen and (max-width:850px) {
+.picker div{
+  padding: 0px;
+}
+
+.picker {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  max-width: 300px; /* max-width */
+  margin: auto;
+  padding: 1px;
+} 
+
+.react-datepicker__input-container input {
+  width: 100%;
+  padding: 3px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.react-datepicker__day-name, .react-datepicker__day {
+  width: 1.5rem;
+  line-height: 1.5rem;
+  margin: 0.08rem;
+  font-size: 0.9rem;
+}
+
+.react-datepicker__month-container {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.react-datepicker__month {
+  margin: 6px;
+}
+
+.react-datepicker__navigation {
+  top: 0rem;
+}
+
+.react-datepicker__navigation--next {
+  right: 1rem;
+}
+
+.react-datepicker__navigation--previous {
+  left: 1rem;
+}
+
+.react-datepicker__current-month {
+  font-size: 0.9rem;
+}
+
+}
   
 @media screen and (max-width:450px){
     .picker{

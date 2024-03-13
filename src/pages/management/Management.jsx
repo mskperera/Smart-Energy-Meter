@@ -58,7 +58,7 @@ function Management() {
 
   return (
     <>
-    <Navbar/>
+    <Navbar className='navnav'/>
     <div className="body">
       <div className= "rounded p-2 ">
         <h2 className='d-flex justify-content-center align-items-center'>Device Management</h2>

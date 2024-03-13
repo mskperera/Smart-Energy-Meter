@@ -9,7 +9,7 @@ function DeviceRegister() {
   const {deviceRegId, saveType} = useParams();
 
 
-  const [deviceDetails,setDeviceDetails]=useState(null);
+  // const [deviceDetails,setDeviceDetails]=useState(null);
 
   const [deviceNo,setDeviceNo]=useState('');
   const [hardwareVersion,setHardwareVersion]=useState('');
@@ -24,82 +24,72 @@ function DeviceRegister() {
   }, []);
 
   const loadDevices = async () => {
-    console.log("loadDevices",deviceRegId);
+    try{
+    // console.log("loadDevices",deviceRegId);
     const result = await getDeviceByDeviceId(deviceRegId);
     // // setDeviceDetails(result.data);
       const device = result.data;
-      console.log("result data:",result);
+      // console.log("result data:",result);
     
 
     //   console.log("result data:",device);
       
-      setDeviceNo(device.deviceNo);
-      setHardwareVersion(device.hardwareVersion);
-      setSerialNo(device.serialNo);
-      setFirmwareVersion(device.firmwareVersion);
-      setProduct(device.product);
+      setDeviceNo(device.deviceNo || '');
+      setHardwareVersion(device.hardwareVersion || '');
+      setSerialNo(device.serialNo || ''); 
+      setFirmwareVersion(device.firmwareVersion || '');
+      setProduct(device.product || '');
+  } catch(err){
+    console.log(err);
   }
+};
 
   const [message,setMessage]=useState('');
    const [errormessage,setErrorMessage]=useState('');
 
-  const onsubmitHandler=async(e)=>{
+   const onsubmitHandler = async (e) => {
     e.preventDefault();
-    try{
-
+    try {
       setErrorMessage('');
       setMessage('');
 
-  const payload = {
-    deviceId: 2,
-    deviceNo: deviceNo,
-    hardwareVersion: hardwareVersion,
-    serialNo: serialNo,
-    firmwareVersion:firmwareVersion,
-    product:product
-    // iud:"I"
+      const payload = {
+        deviceId: 2,
+        deviceNo: deviceNo,
+        hardwareVersion: hardwareVersion,
+        serialNo: serialNo,
+        firmwareVersion: firmwareVersion,
+        product: product,
+      };
 
+      if (saveType === 'I') {
+        const res = await addDevice(payload);
+        handleResponse(res);
+      } else if (saveType === 'U') {
+        const res = await updateDevice(payload, deviceRegId);
+        handleResponse(res);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  if(saveType==="I"){
-  const res = await addDevice(payload);
-  console.log(res);
-  const { responseStatus, outputMessage } = res.data.output;
-  if (responseStatus === "failed") {
-    setErrorMessage(outputMessage);
-    return;
-  }
-  setMessage(outputMessage);
-  swal("Device Added Successfully", "", "success").then(() => {
-    window.location = "/management";
-  });
-}
-
-else if(saveType==="U"){
-  
-  const res = await updateDevice(payload,deviceRegId);
-  console.log(res);
-  const { responseStatus, outputMessage } = res.data.output;
-  if (responseStatus === "failed") {
-    
-    setErrorMessage(outputMessage)
-        return;
-  }
-  setMessage(outputMessage)
-  swal("Device Updated Successfully", "", "success").then(() => {
-    window.location = "/management";
-  }); 
-}
-}
-catch(err){
-  console.log(err);
-}
-  }
+  const handleResponse = (res) => {
+    const { responseStatus, outputMessage } = res.data.output;
+    if (responseStatus === 'failed') {
+      setErrorMessage(outputMessage);
+    } else {
+      setMessage(outputMessage);
+      swal('Added Successful', '', 'success').then(() => {
+        window.location = '/management';
+      });
+    }
+  };
 
 return (
   <div className='wrapper-register d-flex align-items-center justify-content-center w-100'>
     <div className='register'>
-   {saveType==="I" ?  <h2 className='d-flex align-items-center justify-content-center mb-2'>Device Registration</h2> : <h2 className='d-flex align-items-center justify-content-center mb-2'>Update Device Details</h2>} 
+   {saveType==="I" ? ( <h2 className='d-flex align-items-center justify-content-center mb-2'>Device Registration</h2>) : (<h2 className='d-flex align-items-center justify-content-center mb-2'>Update Device Details</h2>)} 
       
       <form className='needs-validation' onSubmit={onsubmitHandler} >
         <div className='row'>
@@ -109,36 +99,36 @@ return (
               <label htmlFor='username' className='form-label'>
                 Device No
               </label>
-              <input type='text' className='form-control' value={deviceNo} onChange={(e)=>{setDeviceNo(e.target.value)}}  required />
+              <input type='text' className='form-control' value={deviceNo} onChange={(e)=>setDeviceNo(e.target.value)}  required />
             </div>
-            {JSON.stringify(deviceNo)}
+            {/* {JSON.stringify(deviceNo)} */}
 
             <div className='form-group was-validated'>
               <label htmlFor='firmwareVersion' className='form-label'>
               Firmware Version
               </label>
-              <input type='text' className='form-control' value={firmwareVersion} onChange={(e)=>{setFirmwareVersion(e.target.value)}} required />
+              <input type='text' className='form-control' value={firmwareVersion} onChange={(e)=>setFirmwareVersion(e.target.value)} required />
             </div>
 
             <div className='form-group was-validated'>
               <label htmlFor='hardwareVersion' className='form-label'>
               Hardware Version
               </label>
-              <input type='text' className='form-control' value={hardwareVersion} onChange={(e)=>{setHardwareVersion(e.target.value)}} required />
+              <input type='text' className='form-control' value={hardwareVersion} onChange={(e)=>setHardwareVersion(e.target.value)} required />
             </div>
 
             <div className='form-group was-validated'>
               <label htmlFor='product' className='form-label'>
               Product
               </label>
-              <input type='text' className='form-control' value={product} onChange={(e)=>{setProduct(e.target.value)}} required />
+              <input type='text' className='form-control' value={product} onChange={(e)=>setProduct(e.target.value)} required />
             </div>
             
             <div className='form-group was-validated'>
               <label htmlFor='address' className='form-label'>
               Serial No
               </label>
-              <input type='text' className='form-control' value={serialNo} onChange={(e)=>{setSerialNo(e.target.value)}} required />
+              <input type='text' className='form-control' value={serialNo} onChange={(e)=>setSerialNo(e.target.value)} required />
             </div>
           </div>
         </div>
