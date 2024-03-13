@@ -23,7 +23,7 @@ const Profile = () => {
 
   return (
     <>
-    <Navbar/>
+    <Navbar className='navnav'/>
     <div className='wrap'>
       <div className="body">
         <div className="card text-center">
@@ -53,7 +53,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
-      <BottomNav />
+      <BottomNav className='bottombar'/>
     </>
   );
 };

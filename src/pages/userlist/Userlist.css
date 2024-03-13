@@ -3,6 +3,25 @@
     background-color:#191970;
   }
 
+
+  .body {
+    padding-top: 30px;
+    padding-bottom: 60px; 
+    overflow-y: auto; 
+    height: calc(98.1vh - 80px - 60px); 
+  }
+  
+
+  .navnav {
+    height: 80px; 
+    background-color: #fff; 
+  }
+  
+  .bottombar {
+    height: 60px;
+    background-color: #fff; 
+  }
+
 .body h2{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: white;
@@ -21,8 +40,8 @@
   .table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
-    margin-bottom: 49.7vh;
+    margin-top: 10px;
+    /* margin-bottom: 49.7vh; */
     
   }
   
