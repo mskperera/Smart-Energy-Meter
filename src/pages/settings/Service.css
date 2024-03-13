@@ -17,6 +17,14 @@
 .body{
     overflow-y: auto; /* Allow the body to scroll vertically */
   }
+
+  .form-row {
+    display: flex;
+}
+
+.form-group {
+    margin-right: 10px; /* Optional: Adjust the spacing between the input fields */
+}
   
   .navnav,
   .bottombar {
@@ -29,7 +37,7 @@
     position: fixed;
     top: 90px; /* Adjust the top position based on the height of your Navbar */
     width: 100%;
-    z-index: 1000; /* Ensure the tab appears on top of other elements */
+    z-index: 500; /* Ensure the tab appears on top of other elements */
   }
   
   .tab-links {

@@ -7,6 +7,7 @@ import './Service.css'
 import { getDrpConsumerCategories, getDrpConsumerSubCategoriesById, getDrpSupplier, getDrpSupplyType } from '../../action/dropdown'
 import { getConnectionSettingsByDeviceId, get_DeviceSettingsByDeviceId, saveConnectionSettings, saveDeviceSettings } from '../../action/deviceSettings'
 import swal from 'sweetalert'
+import Budget from './Budget'
 // import { get } from 'lodash'
 // import { Link } from 'react-router-dom'
 
@@ -227,8 +228,8 @@ const payload = {
             <ul className='tab-links nav nav-pills' id='v-pills-tab' role='tablist'>
                 <li onClick={()=>updateToggle(1)} className='nav-link active' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Tarrif </li>
                 <li onClick={()=>updateToggle(2)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Device </li>
-                {/* <li onClick={()=>updateToggle(3)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Budget</li> */}
-                <li onClick={()=>updateToggle(3)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Notification </li>
+                <li onClick={()=>updateToggle(3)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Budget</li>
+                <li onClick={()=>updateToggle(4)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Notification </li>
             </ul>
         </div>
     </div>          
@@ -334,36 +335,31 @@ const payload = {
                                                                </div>
                                                             </div>
 
-
-
                                                             <div className={toggle === 3 ? "show-content" : "content"}>
                                                                 <div className='body d-flex align-items-center justify-content-center w-100'>
-                                                                    <div className='notification'>
-                                                                        <h5 className='d-flex align-items-center justify-content-center mb-1'>Device Preferences and Settings</h5>
-                                                                        <form className='need-validation'>
+                                                                    <Budget/>
+                                                                </div>
+                                                            </div>             
 
+                                                            <div className={toggle === 4 ? "show-content" : "content"}>
+                                                                <div className='body d-flex align-items-center justify-content-center w-100'>
+                                                                    <div className='notification'>
+                                                                        <h3 className='d-flex align-items-center justify-content-center mb-1'>Device Preferences and Settings</h3>
+                                                                        <form className='need-validation'>
+                                                                        <h5 className='d-flex align-items-center justify-content-center mb-1'>Operational Preferences</h5>
                                                                         <div className="form-group mb-1">
-                                                                                <div className="col-sm-10">
+                                                                                <div className="form-group">
                                                                                     <div className="form-check">
                                                                                          <input type="checkbox"  className="form-check-input" id="check5"/>
                                                                                          <label className="form-check-label" htmlFor="check5">Notify me when Bill reaches</label>
                                                                                          <input type='text' className='form-control' placeholder='Rs'/>
+                                                                                         
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
 
                                                                             <div className="form-group mb-1">
-                                                                                <div className="col-sm-10">
-                                                                                    <div className="form-check">
-                                                                                        <input type="checkbox" className="form-check-input" id="check6"/>
-                                                                                        <label className="form-check-label" htmlFor="check6">Notify me when Voltage reaches</label>
-                                                                                        <input type='text' className='form-control' placeholder='V'/>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div className="form-group mb-1">
-                                                                                <div className="col-sm-10">
+                                                                                <div className="form-group">
                                                                                     <div className="form-check">
                                                                                     <input type="checkbox" className="form-check-input" id="check7"/>
                                                                                     <label className="form-check-label" htmlFor="check7">Notify me when Kwh reaches</label>
@@ -373,43 +369,33 @@ const payload = {
                                                                             </div>
 
                                                                             <div className="form-group mb-1">
-                                                                                <div className="col-sm-10">
+                                                                                <div className="form-group">
                                                                                     <div className="form-check">
                                                                                     <input type="checkbox" className="form-check-input" id="check8"/>
                                                                                     <label className="form-check-label" htmlFor="check8">Notify me when Power reaches</label>
-                                                                                    <input type='text' className='form-control' placeholder='kWh'/>
+                                                                                    <input type='text' className='form-control' placeholder='W'/>
                                                                                 </div>
                                                                                 </div>
                                                                             </div>
 
-                                                                            <h5 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h5>
-
-                                                                                <div className='form-group mb-1'>
-                                                                                    <label htmlFor='setbudget' className='form-label'>Set my Budget</label>
-                                                                                    <input type='text' className='form-control' placeholder='Rs'/>
-                                                                                </div>
-
-                                                                                <div className="form-group mb-1">
-                                                                                    <label htmlFor="notification" className="form-label">Notify me when Budget reaches</label>
-                                                                                    <div className="form-group mb-1"></div>
-                                                                                    <div className="form-check form-check-inline">
-                                                                                        <input type="checkbox" className="form-check-input" id="check1"/>
-                                                                                        <label className="form-check-label" htmlFor="check1">25%</label>
-                                                                                    </div>
-                                                                                    <div className="form-check form-check-inline">
-                                                                                        <input type="checkbox" className="form-check-input" id="check2"/>
-                                                                                        <label className="form-check-label" htmlFor="check2">50%</label>
-                                                                                    </div>
-                                                                                    <div className="form-check form-check-inline">
-                                                                                        <input type="checkbox" className="form-check-input" id="check3"/>
-                                                                                        <label className="form-check-label" htmlFor="check3">75%</label>
-                                                                                    </div>
-                                                                                    <div className="form-check form-check-inline">
-                                                                                        <input type="checkbox" className="form-check-input" id="check4"/>
-                                                                                        <label className="form-check-label" htmlFor="check4">100%</label>
+                                                                            <div className="form-group mb-1">
+                                                                                <div className="form-group">
+                                                                                    <div className="form-check">
+                                                                                        <input type="checkbox" className="form-check-input" id="check6"/>
+                                                                                        <label className="form-check-label" htmlFor="check6">Notify me when Voltage reaches</label>
+                                                                                        <div className="form-row">
+                                                                                            <div className="form-group col-md-5.5">
+                                                                                                <label htmlFor="max">Max</label>
+                                                                                                <input type="text" className="form-control" id="max" placeholder="Max Value"/>
+                                                                                            </div>
+                                                                                            <div className="form-group col-md-5.5">
+                                                                                                <label htmlFor="min">Min</label>
+                                                                                                <input type="text" className="form-control" id="min" placeholder="Min Value"/>
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
-
+                                                                            </div>
 
                                                                             <button type='submit' className='btn btn-primary w-100 mt-1'>Save</button>                    
                                                                         </form>
