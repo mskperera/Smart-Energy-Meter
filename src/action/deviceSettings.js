@@ -2,10 +2,10 @@ import customAxios from "../utils/axios";
 
 
 //notification settings
-export const saveThresholdSettings= async (payload) => {
+export const saveOperationalLimit= async (payload) => {
   try {
     return await customAxios
-      .post(`/deviceSettings/saveThresholdSettings`,payload, {
+      .post(`/deviceSettings/saveOperationalLimit`,payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -21,10 +21,10 @@ export const saveThresholdSettings= async (payload) => {
   }
 }
 
-export const getThresholdSettingsByDeviceId= async (deviceId) => {
+export const getOperationalLimitByDeviceId= async (deviceId) => {
   try {
     return await customAxios
-      .get(`/deviceSettings/getThresholdSettingsByDeviceId/${deviceId}`, {
+      .get(`/deviceSettings/getOperationalLimitByDeviceId/${deviceId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -40,10 +40,10 @@ export const getThresholdSettingsByDeviceId= async (deviceId) => {
   }
 }
 
-export const saveBudgetSettings= async (payload) => {
+export const saveBudgetedLimit= async (payload) => {
   try {
     return await customAxios
-      .post(`/deviceSettings/saveBudgetSettings`,payload, {
+      .post(`/deviceSettings/saveBudgetedLimit`,payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -59,10 +59,10 @@ export const saveBudgetSettings= async (payload) => {
   }
 }
 
-export const getBudgetSettingsByDeviceId= async (deviceId) => {
+export const getBudgetedSettingsByDeviceId= async (deviceId) => {
   try {
     return await customAxios
-      .get(`/deviceSettings/getBudgetSettingsByDeviceId/${deviceId}`, {
+      .get(`/deviceSettings/getBudgetedSettingsByDeviceId/${deviceId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
