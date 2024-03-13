@@ -21,16 +21,16 @@ function Custom() {
     
     return (
       
-        <>
+        <div className='home'>
           <Navbar/>
           <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
             <div className='back'>
                 <ul className='nav-bar-links'>
-                    <Link to={"/home"}><li className='btn btn-sm btn-info bg-transparent'>Now</li></Link> 
-                    <Link to={"/today"}><li className='btn btn-sm btn-info bg-transparent'>Today</li></Link>  
-                    <Link to={"/week"}><li className='btn btn-sm btn-info bg-transparent'>Week</li></Link>
-                    <Link to={"/month"}><li className='btn btn-sm btn-info bg-transparent'>Month</li></Link>
-                    <Link to={"/year"}><li className='btn btn-sm btn-info bg-transparent'>Year</li></Link>
+                    <Link to={"/home"}><li className='btn btn-sm btn-light'>Now</li></Link> 
+                    <Link to={"/today"}><li className='btn btn-sm btn-light'>Today</li></Link>  
+                    <Link to={"/week"}><li className='btn btn-sm btn-light'>Week</li></Link>
+                    <Link to={"/month"}><li className='btn btn-sm btn-light'>Month</li></Link>
+                    <Link to={"/year"}><li className='btn btn-sm btn-light'>Year</li></Link>
                     <Link to={"/custom"}><li className={`btn btn-sm btn-primary ${activeTab === 'Now' ? 'active' : ''}`}
                 onClick={() => handleTabClick('Now')}>Custom</li></Link>
                 </ul>
@@ -51,7 +51,7 @@ function Custom() {
           </div>
         </div>
             <BottomNav/>
-        </>
+        </div>
       )
 }
 
