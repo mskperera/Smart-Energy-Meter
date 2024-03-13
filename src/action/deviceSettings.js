@@ -59,10 +59,67 @@ export const saveBudgetedLimit= async (payload) => {
   }
 }
 
-export const getBudgetedSettingsByDeviceId= async (deviceId) => {
+export const getBugetedLimitByDeviceId= async (deviceId) => {
   try {
     return await customAxios
-      .get(`/deviceSettings/getBudgetedSettingsByDeviceId/${deviceId}`, {
+      .get(`/deviceSettings/getBugetedLimitByDeviceId/${deviceId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+export const saveBugetedLimitDetails= async (payload) => {
+  try {
+    return await customAxios
+      .post(`/deviceSettings/saveBugetedLimitDetails`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+export const getBugetedLimitDetailsByBudgetedLimitId= async (budgetedLimitId) => {
+  try {
+    return await customAxios
+      .get(`/deviceSettings/getBugetedLimitDetailsByBudgetedLimitId/${budgetedLimitId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+export const deleteBugetedLimitDetailBybudgetedLimitDetailsId= async (budgetedLimitDetailId) => {
+  try {
+    return await customAxios
+      .delete(`/deviceSettings/deleteBugetedLimitDetailBybudgetedLimitDetailsId/${budgetedLimitDetailId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
