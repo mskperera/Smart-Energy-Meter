@@ -2,10 +2,10 @@ import customAxios from "../utils/axios";
 
 
 //notification settings
-export const saveThresholdSettings= async (payload) => {
+export const saveOperationalLimit= async (payload) => {
   try {
     return await customAxios
-      .post(`/deviceSettings/saveThresholdSettings`,payload, {
+      .post(`/deviceSettings/saveOperationalLimit`,payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -21,10 +21,10 @@ export const saveThresholdSettings= async (payload) => {
   }
 }
 
-export const getThresholdSettingsByDeviceId= async (deviceId) => {
+export const getOperationalLimitByDeviceId= async (deviceId) => {
   try {
     return await customAxios
-      .get(`/deviceSettings/getThresholdSettingsByDeviceId/${deviceId}`, {
+      .get(`/deviceSettings/getOperationalLimitByDeviceId/${deviceId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -40,10 +40,10 @@ export const getThresholdSettingsByDeviceId= async (deviceId) => {
   }
 }
 
-export const saveBudgetSettings= async (payload) => {
+export const saveBudgetedLimit= async (payload) => {
   try {
     return await customAxios
-      .post(`/deviceSettings/saveBudgetSettings`,payload, {
+      .post(`/deviceSettings/saveBudgetedLimit`,payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -59,10 +59,67 @@ export const saveBudgetSettings= async (payload) => {
   }
 }
 
-export const getBudgetSettingsByDeviceId= async (deviceId) => {
+export const getBugetedLimitByDeviceId= async (deviceId) => {
   try {
     return await customAxios
-      .get(`/deviceSettings/getBudgetSettingsByDeviceId/${deviceId}`, {
+      .get(`/deviceSettings/getBugetedLimitByDeviceId/${deviceId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+export const saveBugetedLimitDetails= async (payload) => {
+  try {
+    return await customAxios
+      .post(`/deviceSettings/saveBugetedLimitDetails`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+export const getBugetedLimitDetailsByBudgetedLimitId= async (budgetedLimitId) => {
+  try {
+    return await customAxios
+      .get(`/deviceSettings/getBugetedLimitDetailsByBudgetedLimitId/${budgetedLimitId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+export const deleteBugetedLimitDetailBybudgetedLimitDetailsId= async (budgetedLimitDetailId) => {
+  try {
+    return await customAxios
+      .delete(`/deviceSettings/deleteBugetedLimitDetailBybudgetedLimitDetailsId/${budgetedLimitDetailId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
