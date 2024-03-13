@@ -5,6 +5,7 @@
     background-color:#05052a;
     height: 79.3vh;
     margin: 0%;
+    display: flex;
 }
 
 .chart-month-kw{
@@ -15,7 +16,7 @@
     justify-content: flex-end;
     align-items: center;
     margin: 0%;
-    flex-direction: column;
+    /* flex-direction: column; */
     padding: 5rem;
 }
 
@@ -27,7 +28,7 @@
     justify-content: flex-end;
     align-items: center;
     margin: 0%;
-    flex-direction: column;
+    /* flex-direction: column; */
     padding: 5rem;
 }
 
@@ -171,6 +172,7 @@
         margin-top: 0px;
         margin-left: 0px;
         margin-bottom: 0px;
+        flex-direction: column;
     }
 
     .chart-month-kw{
@@ -181,9 +183,9 @@
         justify-content: center;
         align-items: center;
         margin: 0%;
-
+        flex-direction: column;
         padding: 1rem;
-}
+    }
 
     .chart-month-cost{
         flex: 1;
@@ -194,5 +196,5 @@
         margin: 0%;
         flex-direction: column;
         padding: 1rem;
-}
+    }
 }

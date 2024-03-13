@@ -69,12 +69,15 @@ const Powerfact = () => {
 
       ctx.save();
       ctx.fillStyle='white';
-      ctx.font ='20px Trebuchet MS';
+      ctx.font ='25px Trebuchet MS';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
       ctx.fillText(data.datasets[0].data[0],xCenter,yCenter -10)
+      // ctx.fillText("pf",xCenter,yCenter +10)
+      
+      ctx.fillStyle='white';
+      ctx.font ='15px Trebuchet MS';
       ctx.fillText("pf",xCenter,yCenter +10)
-
 
       ctx.font = '15px Trebuchet MS ';
       ctx.fillText("PowerFactor", xCenter, yCenter + 28);

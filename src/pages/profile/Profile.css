@@ -1,5 +1,11 @@
 .wrap{
-    height: 79vh;
+    height: 79.3vh;
     background-color:#191970;
     margin: 0%;
+}
+
+@media screen and (max-width:450px){
+    .wrap{
+        height: 86vh;
+    }
 }

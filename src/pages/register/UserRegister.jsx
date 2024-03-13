@@ -7,7 +7,7 @@ import swal from 'sweetalert';
 function UserRegister() {
   
   const { userRegId, saveType } = useParams();
-  const [userData, setUserData] = useState(null);
+  // const [userData, setUserData] = useState(null);
   const [userName,setUserName] = useState('');
   const [userDisplayName, setUserDisplayName] = useState('');
   const [userPassword,setUserPassword] = useState('');
@@ -128,28 +128,28 @@ function UserRegister() {
                 <label htmlFor='username' className='form-label'>
                   Username
                 </label>
-                <input type='text' className='form-control' value={userName} onChange={(e)=>{setUserName(e.target.value)}} required />
+                <input type='text' className='form-control' value={userName || ''} onChange={(e)=>{setUserName(e.target.value)}} required />
               </div>
 
               <div className='form-group was-validated'>
                 <label htmlFor='password' className='form-label'>
                   Password
                 </label>
-                <input type='password' className='form-control' value={userPassword} onChange={(e)=>{setUserPassword(e.target.value)}} required />
+                <input type='password' className='form-control' value={userPassword || ''} onChange={(e)=>{setUserPassword(e.target.value)}} required />
               </div>
 
               <div className='form-group was-validated'>
                 <label htmlFor='email' className='form-label'>
                   Email
                 </label>
-                <input type='email' className='form-control' value={userEmail} onChange={(e)=>{setUserEmail(e.target.value)}} required />
+                <input type='email' className='form-control' value={userEmail || ''} onChange={(e)=>{setUserEmail(e.target.value)}} required />
               </div>
 
               <div className='form-group was-validated'>
                 <label htmlFor='displayname' className='form-label'>
                   Display Name
                 </label>
-                <input type='text' className='form-control' value={userDisplayName} onChange={(e)=>{setUserDisplayName(e.target.value)}} required />
+                <input type='text' className='form-control' value={userDisplayName || ''} onChange={(e)=>{setUserDisplayName(e.target.value)}} required />
               </div>
             </div>
 
@@ -159,28 +159,28 @@ function UserRegister() {
                 <label htmlFor='address' className='form-label'>
                   Address
                 </label>
-                <input type='text' className='form-control' value={userAddress} onChange={(e)=>{setUserAddress(e.target.value)}} required />
+            <input type='text' className='form-control' value={userAddress || ''} onChange={(e)=>{setUserAddress(e.target.value)}}required />
               </div>
 
               <div className='form-group was-validated'>
                 <label htmlFor='billingaddress' className='form-label'>
                   Billing Address
                 </label>
-                <input type='text' className='form-control' value={userBillAddress} onChange={(e)=>{setUserBillAddress(e.target.value)}} required />
+                <input type='text' className='form-control' value={userBillAddress || ''} onChange={(e)=>{setUserBillAddress(e.target.value)}} required />
               </div>
 
               <div className='form-group was-validated'>
                 <label htmlFor='mobile' className='form-label'>
                   Mobile
                 </label>
-                <input type='text' className='form-control' value={userMobile} onChange={(e)=>{setUserMobile(e.target.value)}} required />
+                <input type='text' className='form-control' value={userMobile || ''} onChange={(e)=>{setUserMobile(e.target.value)}} required />
               </div>
 
               <div className='form-group was-validated'>
                 <label htmlFor='tel' className='form-label'>
                   Tel
                 </label>
-                <input type='text' className='form-control' value={userTel} onChange={(e)=>{setUserTel(e.target.value)}} required />
+                <input type='text' className='form-control' value={userTel || ''} onChange={(e)=>setUserTel(e.target.value)} required />
               </div>
             </div>
           </div>

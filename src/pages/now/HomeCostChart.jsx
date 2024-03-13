@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Doughnut } from 'react-chartjs-2';
+import './Homechart.css'
 import {getEngergyUsageNow} from '../../action/device';
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
-import { FaMoneyBill1Wave } from "react-icons/fa6";
+// import { FaMoneyBill1Wave } from "react-icons/fa6";
+// import { FaSackDollar } from "react-icons/fa6";
+import { BiSolidDollarCircle } from "react-icons/bi";
 ChartJS.register(ArcElement, Tooltip);
 
 const HomeCostChart = () => {
@@ -44,7 +47,7 @@ const HomeCostChart = () => {
 
   const data = {
     // labels: ['Label 1', 'Label 2', 'Label 3'],
-    // labels: ['Rs.'],
+    labels: ['Used Budget','Remaining Budget'],
     datasets: [
       {
         data: [obj.currentValue,remaningvalue],
@@ -64,23 +67,40 @@ const HomeCostChart = () => {
   const gaugeText={
     id:'gaugeText',
     beforeDatasetsDraw(chart,args, pluginOption){
-      const {ctx,data} = chart;
+      const {ctx,data,chartArea:{top,bottom,left,right,width,height}} = chart;
 
       const xCenter = chart.getDatasetMeta(0).data[0].x;
       const yCenter = chart.getDatasetMeta(0).data[0].y;
 
       ctx.save();
-      ctx.fillStyle='white';
+      // ctx.fillStyle='black';
       ctx.font ='50px Trebuchet MS ';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
-      ctx.fillText(data.datasets[0].data[0],xCenter,yCenter)
+      // ctx.strokeStyle = 'white';
+      // ctx.lineWidth = 1;
+      // ctx.strokeText(data.datasets[0].data[0], xCenter, yCenter);
+      // ctx.strokeStyle = 'black';
+      // ctx.stroke();
+      ctx.fillStyle = 'white';
+      ctx.fillText(data.datasets[0].data[0], xCenter, yCenter);
       
       ctx.font ='30px Trebuchet MS ';
       ctx.fillText("Rs",xCenter,yCenter +40)
 
       ctx.font = '20px Trebuchet MS ';
       ctx.fillText("Usage Bill", xCenter, yCenter + 80);
+
+      // const xCoor = chart.getDatasetMeta(0).data[0].x;
+      // const yCoor = chart.getDatasetMeta(0).data[0].y;
+
+      // // ctx.fillRect(xCoor, yCoor, -200, 1);
+      // ctx.font = '20px Trebuchet MS ';
+      // ctx.fillStyle = 'white';
+      // ctx.textBaseline = 'top';
+      // ctx.textAlign = 'left';
+      // ctx.fillText('0',left, yCoor +100);
+  
     }
   }
 
@@ -88,8 +108,11 @@ const HomeCostChart = () => {
     // customize chart options
     plugins: {
       legend: {
+        position: 'bottom',
         labels: {
-          color: 'black', // specify the color for the chart labels
+          color: 'white',
+          usePointStyle: true,
+          pointStyle: 'square', // specify the color for the chart labels
         },
       },
     },
@@ -98,7 +121,7 @@ const HomeCostChart = () => {
 
   return(
     <div> 
-      <FaMoneyBill1Wave size={45} color='#36A2EB' className='icon'/>
+      <BiSolidDollarCircle size={45} className='icon'/>
       <Doughnut data={data} options={options} plugins={[gaugeText]} className='chart' id='box' />
     </div>
    ) 

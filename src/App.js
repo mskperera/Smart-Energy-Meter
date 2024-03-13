@@ -8,28 +8,24 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/js/dist/tab'
 import Charts from './pages/apiData/charts';
 import DeviceSettings from './pages/apiData/deviceSettings';
-
 import Login from './pages/login/Login';
 import Year from './pages/year/Year';
 import Custom from './pages/custom/Custom';
 import APIData from './pages/apiData/charts';
-
 import DeviceInfo from './pages/device/DeviceInfo';
 import Service from './pages/settings/Service';
-// import Register from './pages/register/Register';
 import Profile from './pages/profile/Profile';
 import Userlist from './pages/userlist/Userlist';
 import Management from './pages/management/Management';
-
 import DeviceMan from './pages/apiData/deviceMan';
-
 import UserRegister from './pages/register/UserRegister';
 import DeviceRegister from './pages/register/DeviceRegister';
+import Notify from './pages/alert/Notify';
+import BillingSession from './pages/session/BillingSession';
 
-// import Connection from './pages/settings/Connection';
 
 
-
+/// thisis new comment2 from fidasp
 
 function App() {
   return (
@@ -38,6 +34,8 @@ function App() {
         <Route path='/' element={<Login/>}/>
         <Route path='/userregister/:userRegId/:saveType' element={<UserRegister/>}/>
         <Route path='/profile' element={<Profile/>}/>
+        <Route path='/billingsession' element={<BillingSession/>}/>
+        <Route path='/Notify' element={<Notify/>}/>
         <Route path='/userlist' element={<Userlist/>}/>
         <Route path='/home' element={<Home/>}/>
         <Route path='/today' element={<Today/>}/>
@@ -48,7 +46,6 @@ function App() {
         <Route path='/custom' element={<Custom/>}/>
         <Route path='/deviceinfo' element={<DeviceInfo/>}/>
         <Route path='/service' element={<Service/>}/>
-        {/* <Route path='/connection' element={<Connection/>}/> */}
         <Route path='/management' element={<Management/>}/>
         <Route path='/deviceregister/:deviceRegId/:saveType' element={<DeviceRegister/>}/>
         <Route path='/apiData/deviceSettings' element={<DeviceSettings/>}/>

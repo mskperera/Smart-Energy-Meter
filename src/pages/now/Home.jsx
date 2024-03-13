@@ -11,6 +11,7 @@ import Current from './Current'
 import Power from './Power'
 import Hertz from './Hertz'
 import Powerfact from './Powerfact'
+// import home from '../../assent/home.jpg'
 // import { Link } from 'react-router-dom'
 
 
@@ -18,19 +19,11 @@ import Powerfact from './Powerfact'
 const Home = () => {
 
   return (
-    <>
-        <Navbar/>
-        <Menu/>
-        {/* <div className='nav-bar'>
-            <ul className='nav-bar-links'>
-                <Link to={"/home"}><li className='btn btn-sm btn-primary'>Now</li></Link> 
-                <Link to={"/today"}><li className='btn btn-sm btn-primary'>Today</li></Link>  
-                <Link to={"/week"}><li className='btn btn-sm btn-primary'>Week</li></Link>
-                <Link to={"/month"}><li className='btn btn-sm btn-primary'>Month</li></Link>
-                <Link to={"/year"}><li className='btn  btn-sm btn-primary'>Year</li></Link>
-                <Link to={"/custom"}><li className='btn btn-sm btn-primary'>Custom</li></Link>
-            </ul>
-    </div> */}
+    <div className='home'>
+        <Navbar className='navnav'/>
+        <Menu className='navnav1'/>
+        
+    <div className='body2'>
         <div className='page'>
           <div className='chart-now-kw'>
             <HomeChart data=''/>
@@ -45,14 +38,11 @@ const Home = () => {
           <div className='vol'><Power/></div>
           <div className='pow'><Powerfact/></div>
           <div className='pow'><Hertz/></div>
-          {/* <div className='bottom-3'>
-                <Hertz/>
-                <Powerfact/>
-          </div> */}
         </div>
+    </div>
 
-        <BottomNav className="bar1"/>
-      </>
+        <BottomNav className='bottombar1'/>
+      </div>
   )
 }
 

@@ -12,7 +12,7 @@ const Menu = () => {
   
   return (
     // <div className='row'>
-      <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
+      <div className='navnav1 nav-bar d-flex align-items-center justify-content-center w-100'>
         <div className='back'>
               <ul className='nav-bar-links'>
                   <Link to={"/home"}><li className={`btn btn-sm btn-primary ${activeTab === 'Now' ? 'active' : ''}`}

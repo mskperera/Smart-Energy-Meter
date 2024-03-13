@@ -51,7 +51,7 @@ const HomeChart = () => {
   }
 
   const data = {
-    // labels: ['kWh'],
+    labels: ['Used kWh','Remaining kWh'], 
     datasets: [
       {
         data: [objKw.currentKwValue,remaningkwvalue],
@@ -77,11 +77,15 @@ const HomeChart = () => {
       ctx.save();
       ctx.fillStyle='white';
       ctx.font ='50px Trebuchet MS ';
-
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
-      ctx.fillText(data.datasets[0].data[0],centerX,centerY)
-      // ctx.fillText("kWh",centerX,centerY +40)
+      // ctx.strokeStyle = 'white';
+      // ctx.lineWidth = 1;
+      // ctx.strokeText(data.datasets[0].data[0], centerX, centerY);
+      // ctx.strokeStyle = 'black';
+      // ctx.stroke();
+      ctx.fillStyle = 'white';
+      ctx.fillText(data.datasets[0].data[0], centerX, centerY);
 
       // ctx.fillText(<TbHomeStats color='white' size={10}/>, centerX, centerY  -10);
 
@@ -99,8 +103,11 @@ const HomeChart = () => {
     // customize chart options
     plugins: {
       legend: {
+        position: 'bottom',
         labels: {
-          color: 'Black', 
+          color: 'white', 
+          usePointStyle: true,
+          pointStyle: 'square',
         },
       },
     },
@@ -111,7 +118,7 @@ const HomeChart = () => {
 
   return(
     <div>
-      <TbHomeStats color='#36A2EB' size={45} className='icon'/>
+      <TbHomeStats size={45} className='icon'/>
       <Doughnut data={data} options={options} plugins={[gaugeText]} id='box' className='chart'/> 
     </div>
   );
