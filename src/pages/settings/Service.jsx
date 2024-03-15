@@ -5,10 +5,10 @@ import Navbar from '../../components/navbar/Navbar'
 // import { Link } from 'react-router-dom'
 import './Service.css'
 import { getDrpConsumerCategories, getDrpConsumerSubCategoriesById, getDrpSupplier, getDrpSupplyType } from '../../action/dropdown'
-import { getConnectionSettingsByDeviceId, get_DeviceSettingsByDeviceId, saveConnectionSettings, saveDeviceSettings } from '../../action/deviceSettings'
+import { getConnectionSettingsByDeviceId, getOperationalLimitByDeviceId, get_DeviceSettingsByDeviceId, saveConnectionSettings, saveDeviceSettings, saveOperationalLimit } from '../../action/deviceSettings'
 import swal from 'sweetalert'
 import Budget from './Budget'
-// import { get } from 'lodash'
+
 // import { Link } from 'react-router-dom'
 
 function Service () {
@@ -33,6 +33,15 @@ function Service () {
 
     const [dropoptionsSupplyType, setDropoptionsSupplyType] = useState([]);
     const [supplyTypeSelectedValue, setSupplyTypeselectedValue] = useState('');
+
+    const [operationalDataBill,setOperationalDataBill] = useState({});
+
+    // const [operationalVoltMin,setOperationalVoltMin] = useState({});
+    const [operationalVoltage,setOperationalVoltage] = useState({});
+
+    const [operationalKwMax,setOperationalKwMax] = useState({});
+
+    const [operationalPowerMax,setOperationalPowerMax] = useState([]);
 
     const [load,setLoad]=useState(false);
 
@@ -68,7 +77,7 @@ function Service () {
        setConsumerCategoryselectedValue(deviceSetttings.consumerCategoryId);
        setSupplierselectedValue(deviceSetttings.supplierId);
        setSupplyTypeselectedValue(deviceSetttings.supplyTypeId);
-setConsumerSubCategoryselectedValue(deviceSetttings.consumerSubCategoryId);
+    setConsumerSubCategoryselectedValue(deviceSetttings.consumerSubCategoryId);
 
        
      // setConsumerSubCategoryselectedValue
@@ -173,7 +182,135 @@ console.log("testingsave")
   
 }
 
+useEffect(() => {
+    loadOperationalLimitByDeviceId();
+},[]);
 
+
+const loadOperationalLimitByDeviceId = async () => {
+    const res = await getOperationalLimitByDeviceId(deviceId);
+    // console.log("device",res.data); 
+
+    const operationalDataArr= res.data;
+    for (let i = 0; i < operationalDataArr.length; i++) {
+        const operationalData = operationalDataArr[i];
+        // console.log("operationalData",operationalData);
+
+        if (operationalData.operationalMetricId === 7 )
+        {
+            console.log("operationmetricId",operationalData);
+            setOperationalDataBill(operationalData);
+        }
+        if (operationalData.operationalMetricId === 2 )
+        {
+            // console.log("operationmetricId",operationalData.operationalMetricId);
+            setOperationalVoltage(operationalData);
+        }
+        if (operationalData.operationalMetricId === 1 )
+        {
+            // console.log("operationmetricId",operationalData.operationalMetricId);
+            setOperationalKwMax(operationalData);
+        }
+        if (operationalData.operationalMetricId === 4 )
+        {
+            // console.log("operationmetricId",operationalData.operationalMetricId);
+            setOperationalPowerMax(operationalData);
+        }
+    }
+
+    // const payload = {
+    //     deviceId: 123,
+    //     operationalMetricId: 456,
+    //     thresholdAmountMin: 10,
+    //     thresholdAmountMax: 20,
+    //     userLogId: 789,
+    //     utcOffset: '+05:00'
+    //   };
+}
+
+const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActive)=>{
+
+        setErrorMessage('');
+        setMessage('');
+
+        
+
+        const payload = {
+            deviceId: 4,
+            operationalMetricId: operationalMetricId,
+            thresholdAmountMin: null,
+            thresholdAmountMax: thresholdAmount,
+            userLogId: 1,
+            isActive,
+            utcOffset: '+05:00'
+          };
+       
+      const res = await saveOperationalLimit(payload);
+      console.log(res);
+      const { responseStatus, outputMessage } = res.data.output;
+      if (responseStatus === "failed") {
+        setErrorMessage(outputMessage)
+        return;
+        }
+        setMessage(outputMessage)
+        swal("User Updated Successfully", "", "success").then(() => {
+            setLoad(!load);
+            });
+        
+        
+}
+
+
+const saveOperationVloSettings = async (thresholdAmountMin,thresholdAmountMax,operationalMetricId,isActive)=>{
+
+    setErrorMessage('');
+    setMessage('');
+
+    
+
+    const payload = {
+        deviceId: 4,
+        operationalMetricId: operationalMetricId,
+        thresholdAmountMin,
+        thresholdAmountMax,
+        userLogId: 1,
+        isActive,
+        utcOffset: '+05:00'
+      };
+   
+  const res = await saveOperationalLimit(payload);
+  console.log(res);
+  const { responseStatus, outputMessage } = res.data.output;
+  if (responseStatus === "failed") {
+    setErrorMessage(outputMessage)
+    return;
+    }
+    setMessage(outputMessage)
+    swal("User Updated Successfully", "", "success").then(() => {
+        setLoad(!load);
+        });
+    
+    
+}
+
+
+
+const saveOperationalLimitHandler = async (e) => {
+    e.preventDefault();
+    try {
+        setErrorMessage('');
+        setMessage('');
+
+        saveOperationSettings(operationalDataBill.thresholdAmount_max,7,operationalDataBill.isActive);
+        saveOperationSettings(operationalKwMax.thresholdAmount_max,1,operationalKwMax.isActive);
+        saveOperationSettings(operationalPowerMax.thresholdAmount_max,4,operationalPowerMax.isActive);
+        saveOperationVloSettings(operationalVoltage.thresholdAmount_min,operationalVoltage.thresholdAmount_max,2);
+
+    }
+        catch(err){
+            console.log(err);
+        }
+    }   
 
 
 const saveConnectionSettingsHandler=async(e)=>{
@@ -208,7 +345,7 @@ const payload = {
 
   catch(err){
     //const jsonString = JSON.parse(err);
-    //setErrorMessage(jsonString);
+    // setErrorMessage(jsonString);
     console.log(err);
   }
   
@@ -336,7 +473,7 @@ const payload = {
                                                             </div>
 
                                                             <div className={toggle === 3 ? "show-content" : "content"}>
-                                                                <div className='body d-flex align-items-center justify-content-center w-100'>
+                                                                <div className='d-flex align-items-center justify-content-center w-100'>
                                                                     <Budget/>
                                                                 </div>
                                                             </div>             
@@ -350,10 +487,14 @@ const payload = {
                                                                         <div className="form-group mb-1">
                                                                                 <div className="form-group">
                                                                                     <div className="form-check">
-                                                                                         <input type="checkbox"  className="form-check-input" id="check5"/>
-                                                                                         <label className="form-check-label" htmlFor="check5">Notify me when Bill reaches</label>
-                                                                                         <input type='text' className='form-control' placeholder='Rs'/>
+                                                                                         <input type="checkbox"  className="form-check-input" checked={operationalDataBill.isActive} onChange={(e)=>{
                                                                                          
+                                                                                            setOperationalDataBill({...operationalDataBill,isActive:!operationalDataBill.isActive})}} id="check5"/>
+
+                                                                                         <label className="form-check-label" htmlFor="check5">Notify me when Bill reaches</label>
+                                                                                   
+                                                                                         <input disabled={!operationalDataBill.isActive} type='text' className='form-control' placeholder='Rs' value={operationalDataBill.thresholdAmount_max} onChange={(e) => setOperationalDataBill({...operationalDataBill,thresholdAmount_max:e.target.value})}/>
+                                                                                         {/* {JSON.stringify(operationalDataBill.isActive)} */}
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -361,9 +502,9 @@ const payload = {
                                                                             <div className="form-group mb-1">
                                                                                 <div className="form-group">
                                                                                     <div className="form-check">
-                                                                                    <input type="checkbox" className="form-check-input" id="check7"/>
+                                                                                    <input type="checkbox" className="form-check-input" checked={operationalKwMax.isActive} onChange={(e)=>{setOperationalKwMax({...operationalKwMax,isActive:!operationalKwMax.isActive})}} id="check7"/>
                                                                                     <label className="form-check-label" htmlFor="check7">Notify me when Kwh reaches</label>
-                                                                                    <input type='text' className='form-control' placeholder='kWh'/>
+                                                                                    <input disabled={!operationalKwMax.isActive} type='text' className='form-control' placeholder='kWh' value={operationalKwMax.thresholdAmount_max} onChange={(e) => setOperationalKwMax({...operationalKwMax,thresholdAmount_max:e.target.value})}/>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -371,9 +512,9 @@ const payload = {
                                                                             <div className="form-group mb-1">
                                                                                 <div className="form-group">
                                                                                     <div className="form-check">
-                                                                                    <input type="checkbox" className="form-check-input" id="check8"/>
+                                                                                    <input type="checkbox" className="form-check-input" checked={operationalPowerMax.isActive} onChange={(e)=> {setOperationalPowerMax({...operationalPowerMax,isActive:!operationalPowerMax.isActive})}} id="check8"/>
                                                                                     <label className="form-check-label" htmlFor="check8">Notify me when Power reaches</label>
-                                                                                    <input type='text' className='form-control' placeholder='W'/>
+                                                                                    <input disabled={!operationalPowerMax.isActive} type='text' className='form-control' placeholder='W' value={operationalPowerMax.thresholdAmount_max} onChange={(e) => setOperationalPowerMax({...operationalPowerMax,thresholdAmount_max:e.target.value})}/>
                                                                                 </div>
                                                                                 </div>
                                                                             </div>
@@ -381,23 +522,23 @@ const payload = {
                                                                             <div className="form-group mb-1">
                                                                                 <div className="form-group">
                                                                                     <div className="form-check">
-                                                                                        <input type="checkbox" className="form-check-input" id="check6"/>
+                                                                                        <input type="checkbox" className="form-check-input" checked={operationalVoltage.isActive} id="check6"/>
                                                                                         <label className="form-check-label" htmlFor="check6">Notify me when Voltage reaches</label>
                                                                                         <div className="form-row">
                                                                                             <div className="form-group col-md-5.5">
                                                                                                 <label htmlFor="max">Max</label>
-                                                                                                <input type="text" className="form-control" id="max" placeholder="Max Value"/>
+                                                                                                <input disabled={!operationalVoltage.isActive} type="text" className="form-control" id="max" placeholder="Max Value" value={operationalVoltage.thresholdAmount_max} onChange={(e) => setOperationalVoltage({...operationalVoltage,thresholdAmount_max:e.target.value})}/>
                                                                                             </div>
                                                                                             <div className="form-group col-md-5.5">
                                                                                                 <label htmlFor="min">Min</label>
-                                                                                                <input type="text" className="form-control" id="min" placeholder="Min Value"/>
+                                                                                                <input disabled={!operationalVoltage.isActive} type="text" className="form-control" id="min" placeholder="Min Value" value={operationalVoltage.thresholdAmount_min} onChange={(e) => setOperationalVoltage({...operationalVoltage,thresholdAmount_min:e.target.value})}/>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
 
-                                                                            <button type='submit' className='btn btn-primary w-100 mt-1'>Save</button>                    
+                                                                            <button type='submit' className='btn btn-primary w-100 mt-1' onClick={saveOperationalLimitHandler}>Save</button>                    
                                                                         </form>
                                                                     </div>
                                                                 </div>
