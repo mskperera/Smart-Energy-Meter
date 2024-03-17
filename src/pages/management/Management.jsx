@@ -57,7 +57,7 @@ function Management() {
   
 
   return (
-    <>
+    <div className='home'>
     <Navbar className='navnav'/>
     <div className="body">
       <div className= "rounded p-2 ">
@@ -101,7 +101,7 @@ function Management() {
       </div>
   </div>
   <BottomNav className="bottombar"/>
-    </>
+    </div>
   )
 }
 

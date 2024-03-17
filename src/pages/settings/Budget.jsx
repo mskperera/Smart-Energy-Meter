@@ -1,44 +1,83 @@
-import React, { useState } from 'react'
-import { CgCloseO } from "react-icons/cg";
+import React, { useEffect, useState } from 'react'
+import './Budget.css'
+import { getBugetedLimitByDeviceId, saveBugetedLimitDetails } from '../../action/deviceSettings';
 
 
 function Budget() {
 
+    const [myBudget, setMyBudget] = useState('');
+
     const [value, setValue] = useState(0); 
-    const [maxValue, setMaxValue] = useState('');
+    // const [maxValue, setMaxValue] = useState('');
     const [selectedValues, setSelectedValues] = useState([]);
 
-    const handleChange = (event) => {
-        setValue(event.target.value);
+    useEffect(() => {
+        loadBugetedLimitByDeviceId();
+    }, []);
+
+
+const loadBugetedLimitByDeviceId = async () => {
+
+    const result = await getBugetedLimitByDeviceId(4);
+    // console.log('tttttttttttt', result);
+    const budgetSettings = result.data;
+    console.log('budgetSettings', budgetSettings);
+   // setMyBudget(budgetSettings.BudgetedAmount);
+    const billingBuget=budgetSettings.filter(b=>b.budgetingMetricId===2);
+// const billingBuget=myBudget.filter(b=>b.budgettingMetricId===2);
+// console.log('billingBudget',billingBuget[0]);
+    setMyBudget(billingBuget[0].budgetedAmount);
+
+}
+
+
+const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    const payload = {
+        deviceId: 4,
+        budgetedAmount: myBudget,
+        budgetingMetricId: 2,
+    };
+    const result = await saveBugetedLimitDetails(payload);
+    console.log('result', result);
+    if (result.data.responseStatus === 'success') {
+        console.log('success');
+    }
+};
+
+
+    const handleChange = (e) => {
+        setValue(e.target.value);
       };
 
-      const handleMaxChange = (event) => {
-        const max = parseInt(event.target.value);
-        setMaxValue(max);
-      };
-    
-      const handleAdd = (e) => {
+      
+
+      const handleAdd = async (e) => {
         e.preventDefault();
+        
         setSelectedValues([...selectedValues, value]);
       };
     
-      const handleDelete = (index) => {
+
+
+    const onDelete = (index) => {
         const newValues = [...selectedValues];
         newValues.splice(index, 1);
         setSelectedValues(newValues);
-      };
+    };
+
+
 
   return (
-
-    <div className='body d-flex align-items-center justify-content-center w-100'>
-        <div className='notification'>
-            <h3 className='d-flex align-items-center justify-content-center mb-1'>Device Preferences and Settings
-</h3>
-            <form className='need-validation'>
-            <h5 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h5>
+<div className='body d-flex align-items-center justify-content-center w-100'>
+    <div className='bodyb'>
+        <div className='rounded p-2'>
+            <h4 className='d-flex align-items-center justify-content-center'>Device Preferences and Settings</h4>
+            <form className='need-validation' onSubmit={onSubmitHandler}>
+            <h6 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h6>
                 <div className='form-group mb-1'>
                     <label htmlFor='setbudget' className='form-label'>Set my Budget</label>
-                    <input type='text' className='form-control' placeholder='Rs' onChange={handleMaxChange}/>
+                    <input type='text' className='form-control' placeholder='Rs' value={myBudget} onChange={(e)=>setMyBudget(e.target.value)}/>
                 </div>
 
                 <div className='form-group mb-1'>
@@ -50,7 +89,7 @@ function Budget() {
                             className='form-control-range'
                             style={{ width: '100%', color: 'blue' }}
                             min="0"   
-                            max={maxValue}  
+                            max={myBudget}  
                             step="10"
                             value={value}  
                             onChange={handleChange} />
@@ -61,7 +100,7 @@ function Budget() {
                 </div>
 
                 <div>
-    <table className="table">
+    <table className="table tableb">
     <thead>
         <tr>
         {/* <th>Notify when reach</th> */}
@@ -74,7 +113,9 @@ function Budget() {
         <tr key={index}>
             <td>Notify when reach {selectedValue}</td>
             <td>
-            <button className='btn' onClick={() => handleDelete(index)}><CgCloseO color='red' size={20}/></button>
+            <button className='btn btn-sm btn-danger' onClick={() => onDelete(index)}>Delete</button>
+            {/* <button className='btn' onClick={() => handleDelete(index)}><CgCloseO color='red' size={20}/></button> */}
+
             </td>
         </tr>
         ))}
@@ -86,7 +127,7 @@ function Budget() {
             </form>
         </div>
     </div>
-                                                        
+      </div>                                                  
   )
 }
 

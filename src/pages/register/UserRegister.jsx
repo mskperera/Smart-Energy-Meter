@@ -76,7 +76,7 @@ function UserRegister() {
       const res = await addUser(payload);
       console.log(res);
 
-      const { responseStatus, outputMessage } = res.data.output;
+      const { responseStatus, outputMessage } = res.data;
       if (responseStatus === "failed") {
         setErrorMessage(outputMessage)
         return;
@@ -94,7 +94,7 @@ function UserRegister() {
       const res = await updateUser(payload,userRegId);
       console.log(res);
 
-      const { responseStatus, outputMessage } = res.data.output;
+      const { responseStatus, outputMessage } = res.data;
       if (responseStatus === "failed") {
         setErrorMessage(outputMessage)
         return;

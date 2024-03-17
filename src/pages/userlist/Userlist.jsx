@@ -60,7 +60,7 @@ function Userlist() {
   //   console.log("successful:", outputMessage);
   // }
   return (
-    <>
+    <div className='home'>
     <Navbar className='navnav'/>
     <div className="body">
       <div className= "rounded p-2 ">
@@ -106,7 +106,7 @@ function Userlist() {
       </div>
   </div>
   <BottomNav className="bottombar"/>
-    </>
+    </div>
   )
 }
 
