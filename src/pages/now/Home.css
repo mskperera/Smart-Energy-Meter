@@ -48,6 +48,7 @@
     background-size: cover;
     /* background-color: rgba(255,255,255,0.1); */
     background-blend-mode: darken;
+    height: 100vh;
 }
 
 .chart-now-kw{
@@ -55,7 +56,7 @@
     width: 40%;
     display: flex;
     /* position: absolute; */
-    justify-content: flex-end;
+    justify-content:center;
     align-items: center;
     margin: 0%;
     flex-direction: column;
@@ -68,7 +69,7 @@
     width: 40%;
     display: flex;
     /* position: absolute; */
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     margin: 0%;
     flex-direction: column;
@@ -182,6 +183,13 @@
         padding: 2rem;
         margin-top: 40px;
         margin-right: 280px;
+    }
+
+    .chart-area{
+        height: 300px;
+        padding: 2rem;
+        margin-top: -30px;
+        margin-right: 0px;
     }
     .navnav1{
         top: 93px;
@@ -316,13 +324,26 @@
     }
 
     .page-bottom .vol{
-        width: 200px;
+        width: 150px;
         flex: 1;
     }
 
     .page-bottom .pow{
-        width: 200px;
+        width: 150px;
         flex: 1;
+    }
+
+    .body2{
+        width: 100%;
+        z-index: 1;
+        border-collapse: collapse;
+        margin-top: 10px; 
+        width: 100%;
+        overflow-x: auto;
+        padding-top: 30px;
+        padding-bottom: 60px; 
+        overflow-y: auto; 
+        height: calc(96.85vh - 80px - 60px); 
     }
 
     /* .page-bottom .bottom-3{
@@ -343,7 +364,7 @@
 
     .chart-now-cost{
         width: 10px;
-        margin-top:10px;
+        margin-top:20px;
         align-items: center;
         justify-content: center;
         margin-bottom: 50px;
@@ -351,7 +372,7 @@
     }
 
     .chart-now-kw{
-        margin-top: 30px;
+        margin-top: 70px;
         width: 10px;
         align-items: center;
         justify-content: center;
@@ -372,7 +393,7 @@
     .page-bottom div{
         width: 100%;
         margin-top: 0px;
-        margin-bottom: 8px;
+        margin-bottom: 7px;
         padding: 1px;
         flex: 1;
         justify-content: space-between;
