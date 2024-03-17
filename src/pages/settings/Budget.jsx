@@ -27,25 +27,40 @@ const loadBugetedLimitByDeviceId = async () => {
 // const billingBuget=myBudget.filter(b=>b.budgettingMetricId===2);
 // console.log('billingBudget',billingBuget[0]);
     setMyBudget(billingBuget[0].budgetedAmount);
+
 }
+
+
+const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    const payload = {
+        deviceId: 4,
+        budgetedAmount: myBudget,
+        budgetingMetricId: 2,
+    };
+    const result = await saveBugetedLimitDetails(payload);
+    console.log('result', result);
+    if (result.data.responseStatus === 'success') {
+        console.log('success');
+    }
+};
+
 
     const handleChange = (e) => {
         setValue(e.target.value);
       };
 
+      
 
-
-    
       const handleAdd = async (e) => {
         e.preventDefault();
-        const res = await saveBugetedLimitDetails();
-        console.log('ressssss', res);
-        // setSelectedValues([...selectedValues, value]);
+        
+        setSelectedValues([...selectedValues, value]);
       };
     
 
 
-    const handleDelete = (index) => {
+    const onDelete = (index) => {
         const newValues = [...selectedValues];
         newValues.splice(index, 1);
         setSelectedValues(newValues);
@@ -58,7 +73,7 @@ const loadBugetedLimitByDeviceId = async () => {
     <div className='bodyb'>
         <div className='rounded p-2'>
             <h4 className='d-flex align-items-center justify-content-center'>Device Preferences and Settings</h4>
-            <form className='need-validation'>
+            <form className='need-validation' onSubmit={onSubmitHandler}>
             <h6 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h6>
                 <div className='form-group mb-1'>
                     <label htmlFor='setbudget' className='form-label'>Set my Budget</label>
@@ -98,7 +113,7 @@ const loadBugetedLimitByDeviceId = async () => {
         <tr key={index}>
             <td>Notify when reach {selectedValue}</td>
             <td>
-            <button className='btn btn-sm btn-danger' onClick={() => handleDelete(index)}>Delete</button>
+            <button className='btn btn-sm btn-danger' onClick={() => onDelete(index)}>Delete</button>
             {/* <button className='btn' onClick={() => handleDelete(index)}><CgCloseO color='red' size={20}/></button> */}
 
             </td>

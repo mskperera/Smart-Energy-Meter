@@ -70,8 +70,9 @@ const [open, setOpen] = useState(false);
           <ul className='app__navbar-smaillscreen-links'>
             {/* <li> <a href='/userlist'>User Management</a></li> */}
             <li> <a href='/management'>Device Management</a></li>
-            <li> <a href='/profile'><CgProfile color='#191970' size={30}/> Profile</a></li>
-            <li> <a href='/'><MdLogout size={30} color='#191970'/>Logout</a></li>
+            <li> <a href='/profile'> Profile</a></li>
+            <li><a href='/billingsession' onClick={()=>setOpen(false)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>Session</a></li>
+            <li> <a href='/'>Logout</a></li>
           </ul>
         </div>
         )}

@@ -161,7 +161,7 @@ console.log("testingsave")
     console.log('payload',payload);
     const res = await saveDeviceSettings(payload);
     console.log('saveDeviceSettings',res);
-    const { responseStatus, outputMessage } = res.data.output;
+    const { responseStatus, outputMessage } = res.data;
     if (responseStatus === "failed") {
       setErrorMessage(outputMessage)
       return;
@@ -247,7 +247,7 @@ const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActiv
        
       const res = await saveOperationalLimit(payload);
       console.log(res);
-      const { responseStatus, outputMessage } = res.data.output;
+      const { responseStatus, outputMessage } = res.data;
       if (responseStatus === "failed") {
         setErrorMessage(outputMessage)
         return;
@@ -280,7 +280,7 @@ const saveOperationVloSettings = async (thresholdAmountMin,thresholdAmountMax,op
    
   const res = await saveOperationalLimit(payload);
   console.log(res);
-  const { responseStatus, outputMessage } = res.data.output;
+  const { responseStatus, outputMessage } = res.data;
   if (responseStatus === "failed") {
     setErrorMessage(outputMessage)
     return;
@@ -330,7 +330,7 @@ const payload = {
   
     const res = await saveConnectionSettings(payload);
     console.log(res);
-    const { responseStatus, outputMessage } = res.data.output;
+    const { responseStatus, outputMessage } = res.data;
     if (responseStatus === "failed") {
       setErrorMessage(outputMessage)
       return;
@@ -358,7 +358,7 @@ const payload = {
   }
 
   return (
-    <>
+    <div className='home'>
     <Navbar/> 
     <div className='tab d-flex align-items-center justify-content-center'>
         <div className='back2'>
@@ -522,7 +522,7 @@ const payload = {
                                                                             <div className="form-group mb-1">
                                                                                 <div className="form-group">
                                                                                     <div className="form-check">
-                                                                                        <input type="checkbox" className="form-check-input" checked={operationalVoltage.isActive} id="check6"/>
+                                                                                        <input type="checkbox" className="form-check-input" checked={operationalVoltage.isActive} onChange={(e)=>{setOperationalVoltage({...operationalVoltage,isActive:!operationalVoltage.isActive})}} id="check6"/>
                                                                                         <label className="form-check-label" htmlFor="check6">Notify me when Voltage reaches</label>
                                                                                         <div className="form-row">
                                                                                             <div className="form-group col-md-5.5">
@@ -544,7 +544,7 @@ const payload = {
                                                                 </div>
                                                             </div>
                                                 <BottomNav/>
-                                            </>
+                                            </div>
                                           )
                                         }
 

@@ -1,3 +1,16 @@
+.notification2{
+  width: 650px;
+  padding: 15px;
+  height: min-content;
+  border-radius: 5px;
+  background-color: rgb(186, 153, 217);
+  color: black;
+  margin-top: 500px;
+
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
 .picker1{
     width: 100%;
     display: flex;
@@ -168,8 +181,60 @@
 }
 
 }
+
+@media screen and (max-width:650px){
+   
+
+  .notification2{
+      width: 350px;
+      padding: 15px;
+      height: min-content;
+      border-radius: 5px;
+      background-color: rgb(186, 153, 217);
+      /* color: black; */
+      margin-top: 420px;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  .body2{
+    height: 79.1vh;
+    margin-top: 0px;
+    padding-bottom: 90px;
+  }
+}
   
 @media screen and (max-width:450px){
+
+  .notification2{
+    width: 400px;
+    padding: 15px;
+    height: min-content;
+    border-radius: 5px;
+    background-color: rgb(186, 153, 217);
+    color: black;
+    margin-top: 310px;
+
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.body2{
+  padding-top: 0px;
+}
+
+.body2{
+  height: 86vh;
+  margin-top: 0px;
+  padding-bottom: 90px;
+}
+
+.react-datepicker__navigation--next {
+  left: 9.7rem;
+}
+
+.react-datepicker__navigation--previous {
+  left: 1rem;
+}
+
     .picker1{
         /* flex-direction: column; */
         width: 70%;
