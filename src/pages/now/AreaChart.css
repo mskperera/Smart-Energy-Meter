@@ -1,0 +1,10 @@
+.chart2{
+ width: 400px;
+}
+
+
+@media screen and (max-width:450px){
+    .chart2 {
+        width: 10px;
+    }
+}

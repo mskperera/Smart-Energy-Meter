@@ -11,8 +11,11 @@ import Current from './Current'
 import Power from './Power'
 import Hertz from './Hertz'
 import Powerfact from './Powerfact'
+import KwChartData from './boxdata/KwChartData'
 
 import AreaChart from './AreaChart'
+import CostChartData from './boxdata/CostChartData'
+// import ChartChart from './ChartChart'
 // import home from '../../assent/home.jpg'
 // import { Link } from 'react-router-dom'
 
@@ -27,15 +30,23 @@ const Home = () => {
         
     <div className='body2'>
         <div className='page'>
+          <div className='chart-kw'>
+            <CostChartData/>
+            <KwChartData/>
+          </div>
+          
           <div className='chart-now-kw'>
             <HomeChart data=''/>
           </div>
           <div className='chart-now-cost'>
             <HomeCostChart data=''/>
           </div>
-          {/* <div className='chart-area'>
+
+          <div className='chart-area'>
             <AreaChart/>
-          </div> */}
+            {/* <ChartChart/> */}
+          </div>
+          
         </div>
         <div className='page-bottom'>
           <div className='vol'><Voltage/></div>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
 import { Doughnut } from 'react-chartjs-2';
-import './Homechart.css'
-import {getEngergyUsageNow} from '../../action/device';
+import '../Home.css'
+import {getEngergyUsageNow} from '../../../action/device';
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 // import { FaMoneyBill1Wave } from "react-icons/fa6";
 // import { FaSackDollar } from "react-icons/fa6";
@@ -10,7 +10,7 @@ import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 import { FaCoins } from "react-icons/fa";
 ChartJS.register(ArcElement, Tooltip);
 
-function HomeCostChart  ()  {
+function CostChartData  ()  {
   const [obj,setObj]=useState({
     maxValue:100000,
     minValue:0,
@@ -50,7 +50,7 @@ function HomeCostChart  ()  {
   const data = {
     // labels: ['Label 1', 'Label 2', 'Label 3'],
     // labels: ['Used Budget', `Remaining Budget ${remaningvalue.toFixed(2)}`],
-    labels: ['Used Amount', `Remaining Rs : ${remaningvalue ? remaningvalue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","  ) : 0}`],
+    labels: ['Used Budget', `Remaining Rs : ${remaningvalue ? remaningvalue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","  ) : 0}`],
   
     datasets: [
       {
@@ -95,7 +95,7 @@ function HomeCostChart  ()  {
       ctx.fillText("Rs", xCenter, yCenter + 40)
 
       ctx.font = '20px Trebuchet MS ';
-      ctx.fillText("Usage Amount", xCenter, yCenter + 80);
+      ctx.fillText("Usage Bill", xCenter, yCenter + 80);
 
       // const xCoor = chart.getDatasetMeta(0).data[0].x;
       // const yCoor = chart.getDatasetMeta(0).data[0].y;
@@ -126,14 +126,14 @@ function HomeCostChart  ()  {
 
   return(
     <div className='text-p'> 
-      {/* <p className=' text d-flex justify-content-center align-items-center'>Budgeted : {obj.maxValue.toFixed(2)} Rs</p> */}
-      <FaCoins size={45} className='icon'/>
-      {/* <div>
-       <img src='../../../public/image/coins.png' alt="money" className='image'/>
-      </div> */}
-      <Doughnut data={data} options={options} plugins={[gaugeText]} className='chart' id='box' />
+    <div className='text2'>
+      <h2 className='  d-flex justify-content-center align-items-center'>Budget</h2>
+        <p className='  d-flex justify-content-center align-items-center'>{obj.maxValue.toFixed(2)} Rs</p>
+    </div>
+      {/* <FaCoins size={45} className='icon'/> */}
+      {/* <Doughnut data={data} options={options} plugins={[gaugeText]} className='chart' id='box' /> */}
     </div>
    ) 
 };
 
-export default HomeCostChart;
+export default CostChartData;

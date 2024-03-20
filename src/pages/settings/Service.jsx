@@ -77,7 +77,7 @@ function Service () {
        setConsumerCategoryselectedValue(deviceSetttings.consumerCategoryId);
        setSupplierselectedValue(deviceSetttings.supplierId);
        setSupplyTypeselectedValue(deviceSetttings.supplyTypeId);
-    setConsumerSubCategoryselectedValue(deviceSetttings.consumerSubCategoryId);
+       setConsumerSubCategoryselectedValue(deviceSetttings.consumerSubCategoryId);
 
        
      // setConsumerSubCategoryselectedValue
@@ -168,7 +168,7 @@ console.log("testingsave")
     }
   
     setMessage(outputMessage)
-    swal("User Updated Successfully", "", "success").then(() => {
+    swal("Updated Successfully", "", "success").then(() => {
         setLoad(!load);
       });
     
@@ -253,7 +253,7 @@ const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActiv
         return;
         }
         setMessage(outputMessage)
-        swal("User Updated Successfully", "", "success").then(() => {
+        swal("Updated Successfully", "", "success").then(() => {
             setLoad(!load);
             });
         
@@ -286,7 +286,7 @@ const saveOperationVloSettings = async (thresholdAmountMin,thresholdAmountMax,op
     return;
     }
     setMessage(outputMessage)
-    swal("User Updated Successfully", "", "success").then(() => {
+    swal("Updated Successfully", "", "success").then(() => {
         setLoad(!load);
         });
     
@@ -337,7 +337,7 @@ const payload = {
     }
   
     setMessage(outputMessage)
-    swal("User Updated Successfully", "", "success").then(() => {
+    swal("Updated Successfully", "", "success").then(() => {
         setLoad(!load);
       });
     
@@ -363,7 +363,7 @@ const payload = {
     <div className='tab d-flex align-items-center justify-content-center'>
         <div className='back2'>
             <ul className='tab-links nav nav-pills' id='v-pills-tab' role='tablist'>
-                <li onClick={()=>updateToggle(1)} className='nav-link active' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Tarrif </li>
+                <li onClick={()=>updateToggle(1)} className='nav-link active' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Tariff </li>
                 <li onClick={()=>updateToggle(2)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Device </li>
                 <li onClick={()=>updateToggle(3)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Budget</li>
                 <li onClick={()=>updateToggle(4)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Notification </li>
