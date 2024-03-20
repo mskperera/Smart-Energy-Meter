@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import {getEngergyUsageNow} from '../../action/device';
 
+
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
 

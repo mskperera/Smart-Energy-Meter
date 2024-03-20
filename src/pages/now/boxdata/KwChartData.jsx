@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Doughnut } from 'react-chartjs-2';
-import {getEngergyUsageNow} from '../../action/device';
+import {getEngergyUsageNow} from '../../../action/device';
 // import { TbHomeStats } from "react-icons/tb";
-import './Homechart.css'
+import '../Homechart.css'
 import { TbHomeStats } from "react-icons/tb";
 import { Chart as ChartJS, ArcElement, Tooltip, Colors } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
 
-const HomeChart = () => {
+const KwChartData = () => {
 
   const [objKw,setObjKw] = useState({
 
@@ -129,12 +129,15 @@ const HomeChart = () => {
 
   return(
     <div className='text-p'>
-      {/* <p className='text d-flex justify-content-center align-items-center'>Budgeted : {objKw.maxKwValue} kWh</p> */}
-      <TbHomeStats size={45} className='icon'/>
-      <Doughnut data={data} options={options} plugins={[gaugeText]} id='box' className='chart'/> 
+        <div className='text1'>
+            <h2 className='d-flex justify-content-center align-items-center'>Budget</h2>
+            <p className=' d-flex justify-content-center align-items-center'>{objKw.maxKwValue} kWh</p>
+        </div>
+      {/* <TbHomeStats size={45} className='icon'/> */}
+      {/* <Doughnut data={data} options={options} plugins={[gaugeText]} id='box' className='chart'/>  */}
     </div>
   );
   
 };
 
-export default HomeChart;
+export default KwChartData;
