@@ -20,7 +20,7 @@ const WeekKw = () => {
           endDate:'2024-02-24',
       }
       const resultweeks=await getEngergyUsageKwhByDateRange(payload);
-      console.log('engergyUsagekwhByDateRangeWeeks',resultweeks.data)
+      // console.log('engergyUsagekwhByDateRangeWeeks',resultweeks.data)
       // setEngergyUsagekwhByDateRangeWeeks(resultweeks.data.recordsets);
     
        

@@ -16,7 +16,7 @@ const AreaChart = () => {
           name: 'Prediction',
           type: 'line',
           data: [40, 50, 60, 70, 80, 90, 100, 110, 120],
-          color: 'red' 
+          color: 'rgba(255, 99, 71)' 
         }
       ],
       title: {
@@ -24,7 +24,7 @@ const AreaChart = () => {
         align: 'left',
         style: {
           fontSize: '15px',
-          color: 'black',
+          color: 'white',
           fontFamily: 'Trebuchet MS',
         }
       },
@@ -32,27 +32,27 @@ const AreaChart = () => {
           categories: [1, 2, 3, 4, 5, 6, 7, 8, 9],
           labels: {
             style: {
-              colors: ['black'],
+              colors: ['white'],
             },
           },
       },
       yaxis: {
         labels: {
           style: {
-            colors: ['black'],
+            colors: ['white'],
           },
         },
       },
       dataLabels: {
         enabled: false
-      }
+      },
   };
  
 
 
   return (
       <div className="chart2">
-          <Chart options={options} series={options.series} type="area" id='box2' width={430} />
+          <Chart options={options} series={options.series} type="area" id='box2' width={380} />
       </div>
   );
 };

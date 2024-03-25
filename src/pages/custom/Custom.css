@@ -39,6 +39,7 @@
     width: 100%;
     margin-top: -410px;
     position: absolute;
+   
 }
 
 
@@ -189,7 +190,9 @@
         justify-content: center;
         display: flex;
         width: 100%;
-        margin-top: -440px;
+        margin-top: 30px;
+        position: static;
+        transform: none;
         /* position: absolute; */
     }
     
@@ -236,8 +239,8 @@
         justify-content: center;
         display: flex;
         width: 80%;
-        margin-top: -570px;
-        margin-left: 0px;
-        position: absolute;
+        margin-top: 50px;
+        position: static;
+        transform: none;
     }
 }

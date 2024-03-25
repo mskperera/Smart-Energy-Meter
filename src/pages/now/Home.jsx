@@ -15,9 +15,10 @@ import KwChartData from './boxdata/KwChartData'
 
 import AreaChart from './AreaChart'
 import CostChartData from './boxdata/CostChartData'
-// import ChartChart from './ChartChart'
+
+// import LineChart from './LineChart'
+
 // import home from '../../assent/home.jpg'
-// import { Link } from 'react-router-dom'
 
 
 
@@ -28,9 +29,10 @@ const Home = () => {
         <Navbar className='navnav'/>
         <Menu className='navnav1'/>
         
-    <div className='body2'>
+    <div className='body'>
         <div className='page'>
           <div className='chart-kw'>
+            {/* <Link to={'/service'}><CostChartData/></Link> */}
             <CostChartData/>
             <KwChartData/>
           </div>
@@ -42,12 +44,11 @@ const Home = () => {
             <HomeCostChart data=''/>
           </div>
 
-          <div className='chart-area'>
-            <AreaChart/>
-            {/* <ChartChart/> */}
-          </div>
-          
         </div>
+          {/* <div className='chart-area d-flex align-items-center justify-content-center'> */}
+            {/* <AreaChart/> */}
+            {/* <LineChart/> */}
+          {/* </div> */}
         <div className='page-bottom'>
           <div className='vol'><Voltage/></div>
           <div className='vol'><Current/></div>

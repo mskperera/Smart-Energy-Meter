@@ -15,7 +15,10 @@
 }
 
 /* Allow only the table area to scroll */
-.table1 {
+.table1{
     overflow-y: auto;
-    height: calc(80vh - (20vh)); /* Adjust the height based on your Navbar and BottomNav height */
+    height: calc(90vh - (20vh)); 
+    
 }
+
+

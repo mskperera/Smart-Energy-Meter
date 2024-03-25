@@ -298,13 +298,13 @@ const saveOperationVloSettings = async (thresholdAmountMin,thresholdAmountMax,op
 const saveOperationalLimitHandler = async (e) => {
     e.preventDefault();
     try {
-        setErrorMessage('');
-        setMessage('');
+            setErrorMessage('');
+            setMessage('');
 
-        saveOperationSettings(operationalDataBill.thresholdAmount_max,7,operationalDataBill.isActive);
-        saveOperationSettings(operationalKwMax.thresholdAmount_max,1,operationalKwMax.isActive);
-        saveOperationSettings(operationalPowerMax.thresholdAmount_max,4,operationalPowerMax.isActive);
-        saveOperationVloSettings(operationalVoltage.thresholdAmount_min,operationalVoltage.thresholdAmount_max,2);
+            saveOperationSettings(operationalDataBill.thresholdAmount_max,7,operationalDataBill.isActive);
+            saveOperationSettings(operationalKwMax.thresholdAmount_max,1,operationalKwMax.isActive);
+            saveOperationSettings(operationalPowerMax.thresholdAmount_max,4,operationalPowerMax.isActive);
+            saveOperationVloSettings(operationalVoltage.thresholdAmount_min,operationalVoltage.thresholdAmount_max,2);
 
     }
         catch(err){
@@ -335,6 +335,7 @@ const payload = {
       setErrorMessage(outputMessage)
       return;
     }
+    
   
     setMessage(outputMessage)
     swal("Updated Successfully", "", "success").then(() => {
@@ -363,15 +364,25 @@ const payload = {
     <div className='tab d-flex align-items-center justify-content-center'>
         <div className='back2'>
             <ul className='tab-links nav nav-pills' id='v-pills-tab' role='tablist'>
-                <li onClick={()=>updateToggle(1)} className='nav-link active' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Tariff </li>
-                <li onClick={()=>updateToggle(2)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Device </li>
-                <li onClick={()=>updateToggle(3)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Budget</li>
+                <li onClick={()=>updateToggle(1)} className='nav-link active' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Budget</li>
+                <li onClick={()=>updateToggle(2)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Tariff </li>
+                <li onClick={()=>updateToggle(3)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Device </li>
                 <li onClick={()=>updateToggle(4)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Notification </li>
             </ul>
         </div>
     </div>          
 
+
+
                     <div className={toggle === 1 ? "show-content" : "content"}>
+                        <div className='body d-flex align-items-center justify-content-center w-100'>
+                            <Budget/>
+                        </div>
+                    </div>  
+
+
+
+                    <div className={toggle === 2 ? "show-content" : "content"}>
                       <div className='body d-flex align-items-center justify-content-center'>
                         <div className='service'>
                             <h3 className='d-flex align-items-center justify-content-center mb-3'>Tarrif Settings</h3>
@@ -438,7 +449,7 @@ const payload = {
                                                         </div>
                                                         
 
-                                                        <div className={toggle === 2 ? "show-content" : "content"}>
+                                                        <div className={toggle === 3 ? "show-content" : "content"}>
                                                              <div className='body d-flex align-items-center justify-content-center '>
                                                                 <div className='connection'>
                                                                     <h3 className='d-flex align-items-center justify-content-center mb-3'>Connection Settings</h3>
@@ -471,12 +482,7 @@ const payload = {
                                                                 </div>
                                                                </div>
                                                             </div>
-
-                                                            <div className={toggle === 3 ? "show-content" : "content"}>
-                                                                <div className='d-flex align-items-center justify-content-center w-100'>
-                                                                    <Budget/>
-                                                                </div>
-                                                            </div>             
+           
 
                                                             <div className={toggle === 4 ? "show-content" : "content"}>
                                                                 <div className='body d-flex align-items-center justify-content-center w-100'>

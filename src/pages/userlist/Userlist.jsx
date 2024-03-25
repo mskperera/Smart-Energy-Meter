@@ -68,8 +68,8 @@ function Userlist() {
         <div className="d-flex justify-content-end">
           <Link to="/userregister/0/I" className="btn btn-info bbttnn">Add User</Link>
         </div>
-        <table className="table1 table rounded">
-          <thead>
+        <table className="table1 table table-hover rounded">
+          <thead className='table-dark'>
         {/* change */}
             <tr>
               <th>User Name</th>

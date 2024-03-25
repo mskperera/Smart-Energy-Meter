@@ -21,7 +21,7 @@ const YearCost = () => {
         }
 
     const resultMonth=await getEngergyUsageKwhByDateRange(payload);
-    console.log('engergyUsagekwhByDateRange Month',resultMonth.data)
+    // console.log('engergyUsagekwhByDateRange Month',resultMonth.data)
     // setEngergyUsagekwhByDateRangeMonth(resultMonth.data.recordsets);
 
     console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data.recordsets)

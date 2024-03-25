@@ -32,7 +32,7 @@ function Week() {
             </ul>
         </div>
     </nav>
-    <div className='page-2'>
+    <div className='page-2 body'>
       <div className='chart-week-kw'>
        <WeekKw/>
       </div>

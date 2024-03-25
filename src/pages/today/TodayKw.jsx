@@ -26,11 +26,11 @@ const TodayKw = () => {
         endDate:getCurrentDateWithoutTime(),
     }
    const result=await getEngergyUsageKwhByDateRange(payload);
-   console.log('engergyUsagekwhByDateRange',result.data)
+  //  console.log('engergyUsagekwhByDateRange',result.data)
 //    setEngergyUsagekwhByDateRange(result.data.recordsets);
   
      
-       console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
+      //  console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
      
        const charData=result.data.recordsets[0];
      

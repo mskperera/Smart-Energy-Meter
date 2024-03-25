@@ -38,7 +38,7 @@ const DeviceInfo = () => {
                 <Link to={"/connection"}><li className='btn btn-sm btn-primary'>Connection</li></Link>
             </ul>
     </div> */}
-    <div className='wrapper2 d-flex align-items-center justify-content-center w-100'>
+    <div className='wrapper2 body d-flex align-items-center justify-content-center w-100'>
         <div className='deviceinfo'>
            <h2 className='d-flex align-items-center justify-content-center mb-3'>Device Info</h2>
            <div className='form-group mb-2'>

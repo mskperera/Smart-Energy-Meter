@@ -32,7 +32,7 @@ function Year() {
             </div>
         </div>
     
-        <div className='page-4'>
+        <div className='page-4 body'>
           <div className='chart-year-kw'>
              <YearKw/>
           </div>
