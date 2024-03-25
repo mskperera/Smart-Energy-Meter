@@ -26,7 +26,7 @@ const Profile = () => {
     <Navbar className='navnav'/>
     <div className='wrap'>
       <div className="body">
-        <div className="card text-center">
+        <div className="card text-center ">
           {profileData && profileData.length > 0 && (
             <>
               <div className="card-header">

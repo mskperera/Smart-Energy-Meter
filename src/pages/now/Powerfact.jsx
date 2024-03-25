@@ -33,7 +33,7 @@ const Powerfact = () => {
       mesurementUnitId:6
     }
    const result=await getEngergyUsageNow(payload);
-   console.log('resultwww',result.data)
+  //  console.log('resultwww',result.data)
   //  {"kwh":308.02,"deviceTimeStamp":1708324999,"kwhPerSec":0,"deviceTimeStampDate_UTC":"2024-02-19T06:43:19.000Z","kwh_MeasurementValue_max":100,"kwh_MeasurementValue_min":0,"Voltage":233.4}
  
    const {pf}=result.data;

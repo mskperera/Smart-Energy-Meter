@@ -31,7 +31,7 @@ function Month() {
           </div>
     </div>
 
-    <div className='page-3'>
+    <div className='page-3 body'>
       <div className='chart-month-kw'>
         <MonthKw/>
       </div>

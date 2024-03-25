@@ -9,25 +9,34 @@
   /* z-index: 1; */
 }
 
+.text1 h2{
+  padding-top: 35px;
+}
+
+.text2 h2{
+  padding-top: 35px;
+}
+
 .text1{
     margin-top: 10px;
-    width: 150px;
-    height: 80px;
+    width: 300px;
+    height: 145px;
     color: #00ff99;
+    /* color: black; */
     align-items: center;
-    border-radius: 5px;
+    border-radius: 10px;
     justify-content: center;
     background:  rgba(11, 11, 11, 0.5);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .text2{
-  margin-top: 10px;
-  width: 150px;
-  height: 80px;
+  margin-top: 135px;
+  width: 300px;
+  height: 145px;
   color: #ff0066;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 10px;
   justify-content: center;
   background:  rgba(11, 11, 11, 0.5);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
@@ -67,7 +76,7 @@
 #box2 {
   /* border: solid rgb(180, 246, 72) 1px; */
   margin: 0px;
-  width: 440px;
+  width: 380px;
   height: 150px;
   border-radius: 3%;
   background:  rgba(11, 11, 11, 0.5);
@@ -101,12 +110,188 @@
   width: 360px;
 } */
 
+@media only screen and (max-width: 2000px) {
+  .icon {
+    position: static;
+    transform: none;
+    margin-bottom: -130px; /* Adjust the bottom margin based on your design */
+  }
+
+  .text1{
+    margin-top: 12px;
+    width: 300px;
+    height: 145px;
+    /* color: #00ff99; */
+    color: white;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    background:  rgba(11, 11, 11, 0.5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.text1 h2{
+  padding-top: 35px;
+}
+
+.text2 h2{
+  padding-top: 35px;
+}
+
+.text2{
+  margin-top: 135px;
+  width: 300px;
+  height: 145px;
+  color: white;
+  align-items: center;
+  border-radius: 10px;
+  justify-content: center;
+  background:  rgba(11, 11, 11, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+  .chart {
+    margin-top: 0;
+  }
+}
+
+
+@media only screen and (max-width: 1150px) {
+  .icon {
+    position: static;
+    transform: none;
+    margin-bottom: -130px; /* Adjust the bottom margin based on your design */
+  }
+
+  .text1{
+    margin-top: 10px;
+    width: 300px;
+    margin-left: 0px;
+    height: 147px;
+    /* color: #00ff99; */
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    background:  rgba(11, 11, 11, 0.5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.text1 h2{
+  padding-top: 35px;
+}
+
+.text2 h2{
+  padding-top: 35px;
+}
+
+.text2{
+  margin-top: -25px;
+  width: 300px;
+  margin-left: 0px;
+  height: 147px;
+  /* color: #ff0066; */
+  align-items: center;
+  border-radius: 10px;
+  justify-content: center;
+  background:  rgba(11, 11, 11, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+  .chart {
+    margin-top: 0;
+  }
+}
+
+
+
+@media only screen and (max-width: 850px) {
+  .icon {
+    position: static;
+    transform: none;
+    margin-bottom: -130px; /* Adjust the bottom margin based on your design */
+  }
+
+  .text1{
+    margin-top: 10px;
+    width: 301px;
+    margin-left: 4px;
+    height: 80px;
+    /* color: #00ff99; */
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    background:  rgba(11, 11, 11, 0.5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.text1 h2{
+  padding-top: 10px;
+}
+
+.text2 h2{
+  padding-top: 10px;
+}
+
+.text2{
+  margin-top: 10px;
+  width: 301px;
+  margin-left: 4px;
+  height: 80px;
+  /* color: #ff0066; */
+  align-items: center;
+  border-radius: 10px;
+  justify-content: center;
+  background:  rgba(11, 11, 11, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+  .chart {
+    margin-top: 0;
+  }
+}
+
+
 @media only screen and (max-width: 650px) {
   .icon {
     position: static;
     transform: none;
     margin-bottom: -130px; /* Adjust the bottom margin based on your design */
   }
+
+  .text1{
+    margin-top: 10px;
+    width: 301px;
+    margin-left: 4px;
+    height: 80px;
+    /* color: #00ff99; */
+    color:white;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    background:  rgba(11, 11, 11, 0.5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.text1 h2{
+  padding-top: 10px;
+}
+
+.text2 h2{
+  padding-top: 10px;
+}
+
+.text2{
+  margin-top: 10px;
+  width: 301px;
+  margin-left: 4px;
+  height: 80px;
+  /* color: #ff0066; */
+  align-items: center;
+  border-radius: 10px;
+  justify-content: center;
+  background:  rgba(11, 11, 11, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
 
   .chart {
     margin-top: 0;
@@ -122,27 +307,33 @@
 
   .text1{
     margin-top: 10px;
-    width: 300px;
+    width: 301px;
+    margin-left: 4px;
     height: 80px;
-    color: #00ff99;
+    /* color: #00ff99; */
     align-items: center;
-    border-radius: 5px;
+    border-radius: 10px;
     justify-content: center;
     background:  rgba(11, 11, 11, 0.5);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-.text1 p h2{
-  margin-top: 10px;
+.text1 h2{
+  padding-top: 10px;
+}
+
+.text2 h2{
+  padding-top: 10px;
 }
 
 .text2{
   margin-top: 10px;
-  width: 300px;
+  width: 301px;
+  margin-left: 4px;
   height: 80px;
-  color: #ff0066;
+  /* color: #ff0066; */
   align-items: center;
-  border-radius: 5px;
+  border-radius: 10px;
   justify-content: center;
   background:  rgba(11, 11, 11, 0.5);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);

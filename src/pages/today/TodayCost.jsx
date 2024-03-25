@@ -47,7 +47,7 @@ const TodayCost = () => {
             ruppyArr.push(charData[i].usageBillPerHour)
            }
           
-           console.log('lll',ruppys)
+          //  console.log('lll',ruppys)
           
           const datasets0=[
         //     {

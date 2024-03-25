@@ -25,7 +25,7 @@ function Budget() {
     }, []);
 
     useEffect(() => {
-       
+        // loadBugetedLimitDetailsByDeviceId();
     }, [load]);
 
 
@@ -34,11 +34,11 @@ const loadBugetedLimitByDeviceId = async () => {
     const result = await getBugetedLimitByDeviceId(4);
     // console.log('tttttttttttt', result);
     const budgetSettings = result.data;
-    console.log('budgetSettings', budgetSettings);
+    // console.log('budgetSettings', budgetSettings);
    // setMyBudget(budgetSettings.BudgetedAmount);
     const billingBuget=budgetSettings.filter(b=>b.budgetingMetricId===2);
 // const billingBuget=myBudget.filter(b=>b.budgettingMetricId===2);
-    console.log('billing Budget',billingBuget);
+    // console.log('billing Budget',billingBuget);
     setMyBudget(billingBuget[0].budgetedAmount);
     const budgetedlimitId=billingBuget[0].budgetedLimitId;
     setLoadedBudgetedLimitId(budgetedlimitId);
@@ -50,55 +50,61 @@ const [message,setMessage]=useState('');
 const [errormessage,setErrorMessage]=useState('');
 
 
-const _saveBugetedLimit=()=>{
-    const payload={
-        deviceId:4,
-        budgetedAmount:myBudget,
-        budgetingMetricId:2
-    
-    }
-saveBudgetedLimit(payload);
-}
+// const _saveBugetedLimit=()=>{
+//     const payload={
+//         deviceId:4,
+//         budgetedAmount:myBudget,
+//         budgetingMetricId:2
+        
+//     }
+// saveBudgetedLimit(payload);
+// }
 
 const onSubmitHandler = async (e) => {
     e.preventDefault();
 
-    setErrorMessage('');
-    setMessage('');
-
-
     try {
-        _saveBugetedLimit();
-        console.log("myBudget",selectedValues);
 
-        for(let i=0;i<selectedValues.length;i++){
-           const budgetedLimit = selectedValues[i];
-           console.log('budget list',budgetedLimit);
-              const payload = {
-                budgetedLimitId: loadedBudgetedLimitId,
-                thresholdAmount: budgetedLimit,
-                budgetedAmount: myBudget,
+        setErrorMessage('');
+        setMessage('');
+        
+      
+        const payload = {
+            deviceId: 4,
+            budgetedAmount: myBudget,
+            budgetingMetricId: 2,
+            budgetedLimitId: loadedBudgetedLimitId,
+            thresholdAmountsArr: selectedValues.map(a=>a.thresholdAmount)
+        };
 
-              };
-                console.log('payload', payload);
-                const res = await saveBugetedLimitDetails(payload);
+        console.log("payload",payload);
+                const res = await saveBudgetedLimit(payload);
                 console.log('limit result', res);
-                const { responseStatus, outputMessage } = res.data.output;
+                const { responseStatus, outputMessage } = res.data;
                   if (responseStatus === "failed") {
                   setErrorMessage(outputMessage)
                   return;
         }
 
+        if(res.status===400){
+            setMessage('Error Occure');
+            swal("Error Occure", "", "danger").then(() => {
+                setLoad(!load);
+            });
+            return
+        }
+        
         setMessage(outputMessage)
         swal("Updated Successfully", "", "success").then(() => {
             setLoad(!load);
         });
     }
-}
+
     catch (err) {   
         console.log('error', err);
-    }
-};
+  }
+}
+
 
 
 
@@ -107,6 +113,13 @@ const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
     const result = await getBugetedLimitDetailsByBudgetedLimitId(budgetedlimitId);
     const thresholdList = result.data;
     console.log('thresholdList', thresholdList);
+
+    // const thresholdListArr = [];
+    // thresholdList.map((threshold) => {
+    //     thresholdListArr.push({ thresholdAmount: threshold.thresholdAmount });
+    //     return null; 
+    // });
+    // console.log('thresholdListArr', thresholdListArr);
   
     setSelectedValues(thresholdList)
 }
@@ -133,9 +146,9 @@ const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
 
 
   return (
-<div className='body d-flex align-items-center justify-content-center w-100'>
-    <div className='bodyb'>
-        <div className='rounded p-2'>
+<div className='d-flex align-items-center justify-content-center w-100'>
+    <div className='notification'>
+        <div className='rounded'>
             <h4 className='d-flex align-items-center justify-content-center'>Device Preferences and Settings</h4>
             <form className='need-validation' onSubmit={onSubmitHandler}>
             <h6 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h6>
@@ -159,32 +172,37 @@ const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
                             onChange={(e)=>setValue(e.target.value)} />
                     </div>
                     <div className='form-group mb-1 d-flex justify-content-center'>
-                        <button className='btn btn-primary w-25 mt-1'onClick={handleAdd}>Add</button>
+                        <button type='submit' className='btn btn-sm btn-primary w-25 mt-1'onClick={handleAdd}>Add</button>
                     </div>
                 </div>
 
                 <div>
-    <table className="table tableb">
-    <thead>
-        <tr>
-        {/* <th>Notify when reach</th> */}
-        {/* <th>Actions</th> */}
-        </tr>
-    </thead>
-    <tbody>
-        {/* {JSON.stringify(thresholdList)} */}
-        {selectedValues && selectedValues.map((selectedValue, index) => (
-        <tr key={index}>
-            <td>Notify when reach {selectedValue.thresholdAmount}</td>
-            <td>
-            <button className='btn btn-sm btn-danger' onClick={() => onDelete(index)}>Delete</button>
-            {/* <button className='btn' onClick={() => handleDelete(index)}><CgCloseO color='red' size={20}/></button> */}
+    <div className="table-responsive-sm">
+        <table className="table tableb rounded">
+        <thead>
+            <tr>
+            {/* <th>Notify when reach</th> */}
+            {/* <th>Actions</th> */}
+            </tr>
+        </thead>
+        <tbody>
+            {/* {JSON.stringify(thresholdList)} */}
+            {selectedValues && selectedValues.map((selectedValue, index) => (
+            <tr key={index}>
+                <td className=''>Notify when reach {selectedValue.thresholdAmount}</td>
+                <td>
+                    <div className='d-flex justify-content-start'>
+                        <button type='button' className='btn btn-sm btn-danger' onClick={() => onDelete(index)}>Delete</button>
+                    </div>
+                {/* <button className='btn' onClick={() => handleDelete(index)}><CgCloseO color='red' size={20}/></button> */}
 
-            </td>
-        </tr>
-        ))}
-    </tbody>
-    </table>
+                </td>
+            </tr>
+            ))}
+        </tbody>
+        </table>
+
+    </div>
 </div>
 
                 <button type='submit' className='btn btn-primary w-100 mt-1'>Save</button>

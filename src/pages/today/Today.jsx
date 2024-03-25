@@ -33,7 +33,7 @@ function Today() {
               </ul>
           </div>
       </div>
-        <div className='page-1'>
+        <div className='page-1 body'>
           <div className='chart-today-kw'>
             <TodayKw/>
           </div>

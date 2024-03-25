@@ -201,6 +201,14 @@
     margin-top: 0px;
     padding-bottom: 90px;
   }
+
+  .react-datepicker__navigation--next {
+    left: 9.5rem;
+  }
+  
+  .react-datepicker__navigation--previous {
+    left: 1rem;
+  }
 }
   
 @media screen and (max-width:450px){

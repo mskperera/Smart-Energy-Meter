@@ -36,7 +36,7 @@ function Custom() {
                 </ul>
               </div>
         </div>
-        <div className='page-5'>
+        <div className='page-5 body icon'>
           <div className='date'>
             <Date onDateChange={(startDate, endDate) => {
               setSelectedStartDate(startDate);

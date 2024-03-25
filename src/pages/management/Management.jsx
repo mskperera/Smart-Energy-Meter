@@ -65,8 +65,8 @@ function Management() {
         <div className='d-flex justify-content-end'>
           <Link to="/deviceregister/0/I" className='btn btn-info bbttnn'>Add Device</Link>
         </div>
-        <table className="table1 table">
-          <thead>
+        <table className="table1 table table-hover rounded">
+          <thead className='table-dark'>
             <tr>
               {/* <th>Device ID</th> */}
               <th>Device No</th>
