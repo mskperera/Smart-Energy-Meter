@@ -27,10 +27,12 @@
     display: inline-block;
     width: 100%;
     position: relative;
+    
   }
   
   .react-datepicker__input-container {
     width: 100%;
+    
   }
   
   .react-datepicker__input-container input {

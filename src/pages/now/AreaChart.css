@@ -1,10 +1,43 @@
 .chart2{
- width: 400px;
+ width: auto;
 }
 
+#box2{
+    width: 700px;
+}
+
+@media screen and (max-width:1150px){
+    .chart2 {
+      
+    }
+}
+
+@media screen and (max-width:850px){
+    .chart2 {
+        display: flex;
+    }
+    #box2 {
+        width: 500px;
+    }
+}
+
+@media screen and (max-width:650px){
+    .chart2 {
+        display: flex;
+    }
+
+    #box2 {
+        width: 343px;
+    }
+}
 
 @media screen and (max-width:450px){
     .chart2 {
-        display: none;
+        display: flex;
     }
+
+    #box2 {
+        width: 343px;
+    }
+
 }

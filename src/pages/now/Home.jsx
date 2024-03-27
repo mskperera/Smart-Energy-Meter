@@ -13,10 +13,10 @@ import Hertz from './Hertz'
 import Powerfact from './Powerfact'
 import KwChartData from './boxdata/KwChartData'
 
-import AreaChart from './AreaChart'
+// import AreaChart from './AreaChart'
 import CostChartData from './boxdata/CostChartData'
 
-// import LineChart from './LineChart'
+import LineChart from './LineChart'
 
 // import home from '../../assent/home.jpg'
 
@@ -45,10 +45,10 @@ const Home = () => {
           </div>
 
         </div>
-          {/* <div className='chart-area d-flex align-items-center justify-content-center'> */}
+          <div className='chart-area d-flex align-items-center justify-content-center'>
             {/* <AreaChart/> */}
-            {/* <LineChart/> */}
-          {/* </div> */}
+            <LineChart/>
+          </div>
         <div className='page-bottom'>
           <div className='vol'><Voltage/></div>
           <div className='vol'><Current/></div>

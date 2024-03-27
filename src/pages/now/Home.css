@@ -62,7 +62,7 @@
     margin: 0%;
     flex-direction: column;
     padding: 1rem;
-    margin-top: -132px;
+    margin-top: -134px;
     margin-left: 200px;
 }
 
@@ -300,7 +300,7 @@
         flex-direction: column;
         padding: 0rem;
         margin-top: 15px;
-        margin-left: 400px;
+        margin-left: 380px;
     }
 
     .chart-now-kw{
@@ -395,7 +395,7 @@
         flex-direction: column;
         padding: 0rem;
         margin-top: 15px;
-        margin-left: 230px;
+        margin-left: 180px;
     }
 
     .chart-now-cost{
@@ -497,7 +497,7 @@
         flex-direction: column;
         padding: 0rem;
         margin-top: 15px;
-        margin-left: 50px;
+        margin-left: 49px;
     }
 
     .chart-now-cost{
@@ -586,7 +586,7 @@
         margin: 0%;
         flex-direction: column;
         padding: 0rem;
-        margin-top: -100px;
+        margin-top: -150px;
         margin-left: 0px;
     }
     
@@ -600,13 +600,13 @@
         margin: 0%;
         flex-direction: column;
         padding: 0rem;
-        margin-top: -120px;
-        margin-left: -140px;
+        margin-top: -150px;
+        margin-left: 26px;
     }
 
     .chart-now-cost{
         width: 10px;
-        margin-top:-150px;
+        margin-top:-220px;
         align-items: center;
         justify-content: center;
         margin-bottom: 50px;
@@ -614,7 +614,7 @@
     }
 
     .chart-now-kw{
-        margin-top: -200px;
+        margin-top: -280px;
         width: 10px;
         align-items: center;
         justify-content: center;

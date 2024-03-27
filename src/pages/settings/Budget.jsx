@@ -88,12 +88,16 @@ const onSubmitHandler = async (e) => {
 
         if(res.status===400){
             setMessage('Error Occure');
-            swal("Error Occure", "", "danger").then(() => {
+            swal({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!"
+            }).then(() => {
                 setLoad(!load);
             });
             return
         }
-        
+
         setMessage(outputMessage)
         swal("Updated Successfully", "", "success").then(() => {
             setLoad(!load);
@@ -141,6 +145,26 @@ const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
         const newValues = [...selectedValues];
         newValues.splice(index, 1);
         setSelectedValues(newValues);
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this item!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                onDelete(index);
+                swal("Item has been deleted!", {
+                    icon: "success",
+                });
+                setLoad(!load);
+            }
+             else {
+                swal("Item deletion has been cancelled!");
+            }
+            setLoad(!load);
+        });
     };
 
 
