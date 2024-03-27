@@ -48,7 +48,7 @@ function Management() {
       loadDevices();
   } 
       } else {
-        swal("Your Device Detalis are safe!");
+        swal("Device Details deletion has been cancelled!");
       }
     }
     );

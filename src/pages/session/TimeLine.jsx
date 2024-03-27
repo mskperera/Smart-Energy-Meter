@@ -38,9 +38,10 @@ const TimeLine = () => {
                     />
                 </div>
 
-                <p className='col text-center'>Rs : 2500</p>
-                <p className='col text-center'>kWh : 300</p>
+                <p className='col text-center'>Rs : 2500 &nbsp; kWh : 300</p>
+                {/* <p className='col text-center'>kWh : 300</p> */}
             </VerticalTimelineElement>
+
             <VerticalTimelineElement
                 className="vertical-timeline-element--work col text-center"
                 contentStyle={{ background: 'rgb(33, 150, 243)', color: 'black' }}
@@ -63,8 +64,10 @@ const TimeLine = () => {
                     timeFormat='HH:mm'
                 />
                 </div>
-                <p className='col text-center'>Rs : 2600 </p>
+                <p className='col text-center'>Rs : 2600 &nbsp; kWh : 350</p>
+                {/* <p className='col text-center'>kWh : 350</p> */}
             </VerticalTimelineElement>
+
             <VerticalTimelineElement
                 className="vertical-timeline-element--work col text-center"
                 contentStyle={{ background: 'rgb(33, 150, 243)', color: 'black' }}
@@ -87,7 +90,8 @@ const TimeLine = () => {
                     timeFormat='HH:mm'
                 />
                 </div>
-                <p className='col text-center'>Rs : 1500</p>
+                <p className='col text-center'>Rs : 1500 &nbsp; kWh : 230</p>
+                {/* <p className='col text-center'>kWh : 230</p> */}
             </VerticalTimelineElement>
         </VerticalTimeline>
     </div>

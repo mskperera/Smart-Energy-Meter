@@ -45,7 +45,7 @@ function Userlist() {
           loadusers();
         }
       } else {
-        swal("Your User Detalis are safe!");
+        swal("User Details deletion has been cancelled!");
       }
     });
   }
