@@ -22,7 +22,7 @@ export const  saveBillingSession= async (payload) => {
 
 
 
-export const getOperationalLimitByDeviceId= async (deviceId) => {
+export const getbillingSessionByDeviceId= async (deviceId) => {
   try {
     return await customAxios
       .get(`/billingSession/getbillingSessionByDeviceId?deviceId=${deviceId}`, {
