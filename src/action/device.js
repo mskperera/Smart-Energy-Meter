@@ -39,6 +39,26 @@ export const getEngergyUsageKwhByDateRange= async (payload) => {
   }
 }
 
+export const getEngergyUsageKwhByDateRangePrediction= async (payload) => {
+  try {
+    return await customAxios
+      .post(`/device/energymeter/getEngergyUsageKwhByDateRangePrediction`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+
 export const getEnergyMeterDataKwhPersecsByDateRange= async (payload) => {
   try {
     return await customAxios
