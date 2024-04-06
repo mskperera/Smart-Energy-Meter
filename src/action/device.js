@@ -201,3 +201,23 @@ export const updateDevice= async (payload,deviceId) => {
     return err;
   }
 }
+
+
+export const getDevicesByUserId= async (userId) => {
+  try {
+    return await customAxios
+      .get(`/device/getDevicesByUserId/${userId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
