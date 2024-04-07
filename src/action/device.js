@@ -39,6 +39,26 @@ export const getEngergyUsageKwhByDateRange= async (payload) => {
   }
 }
 
+export const getEngergyUsageKwhByDateRangePrediction= async (payload) => {
+  try {
+    return await customAxios
+      .post(`/device/energymeter/getEngergyUsageKwhByDateRangePrediction`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+
 export const getEnergyMeterDataKwhPersecsByDateRange= async (payload) => {
   try {
     return await customAxios
@@ -167,6 +187,26 @@ export const updateDevice= async (payload,deviceId) => {
   try {
     return await customAxios
       .put(`/device/updateDevice/${deviceId}`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+
+export const getDevicesByUserId= async (userId) => {
+  try {
+    return await customAxios
+      .get(`/device/getDevicesByUserId/${userId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
