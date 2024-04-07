@@ -39,6 +39,8 @@ const DateRangePicker = () => {
                 placeholderText="End Date"
             />
          </div>
+         
+         <button className='btn-search btn btn-sm btn-primary'>Search</button>
     </div>
   );
 };

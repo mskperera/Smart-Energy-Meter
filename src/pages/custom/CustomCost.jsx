@@ -4,50 +4,50 @@ import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legen
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
-const CustomCost = () => {
+const CustomCost = ({startDate,endDate,isSearchLoading}) => {
 
     useEffect(()=>{
         loadEngergyUsageKwhByDateRange();
-    });
+    },[isSearchLoading]);
 
     const loadEngergyUsageKwhByDateRange=async()=>{
         const payload={
             deviceId:"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:3,
-            startDate:'2024-02-01',
-            endDate:'2024-02-29',
+            startDate:startDate,
+            endDate:endDate,
         }
 
     const resultMonth=await getEngergyUsageKwhByDateRange(payload);
     console.log('engergyUsagekwhByDateRange Month',resultMonth.data)
     // setEngergyUsagekwhByDateRangeMonth(resultMonth.data.recordsets);
 
-    console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data.recordsets)
+    console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data);
          
-           const charData=resultMonth.data.recordsets[0];
-         
-        
-           const months=[];
-           const monthCostArr=[];
-        //    const ruppyArr=[];
-    
-           for(let i=0;i<charData.length;i++){
-            months.push(charData[i].day);
-            monthCostArr.push(charData[i].usageBillPerDay)
-           // ruppyArr.push(charData[i].usageBill)
-           }
-          
-           const datasets0=[
-            {
-              label:'Rs',
-              data:monthCostArr,
-              backgroundColor:'#ff0066',
-              borderWidath:1,
-            }
-          ]
-            setData({...data,labels:months,datasets:datasets0})
+    if (resultMonth.data.recordset) { // Add a check for undefined recordset
+      const charData = resultMonth.data.recordset;
+
+      const months = [];
+      const monthCostArr = [];
+
+      for (let i = 0; i < charData.length; i++) {
+          months.push(charData[i].day);
+          monthCostArr.push(charData[i].usageBillPerDay);
+      }
+
+      const datasets0 = [
+          {
+              label: 'Rs',
+              data: monthCostArr,
+              backgroundColor: '#ff0066',
+              borderWidth: 1,
           }
+      ];
+
+      setData({ ...data, labels: months, datasets: datasets0 });
+  }
+}
 
     const [data,setData]=useState({
         labels:[],

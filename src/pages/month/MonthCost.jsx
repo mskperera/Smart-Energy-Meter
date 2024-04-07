@@ -8,24 +8,24 @@ const MonthCost = () => {
 
     useEffect(()=>{
         loadEngergyUsageKwhByDateRange();
-    });
+    },[]);
 
     const loadEngergyUsageKwhByDateRange=async()=>{
         const payload={
             deviceId:"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:3,
-            startDate:'2024-02-01',
-            endDate:'2024-02-29',
+            startDate:'2024-03-01',
+            endDate:'2024-03-31',
         }
 
     const resultMonth=await getEngergyUsageKwhByDateRange(payload);
     console.log('engergyUsagekwhByDateRange Month',resultMonth.data)
     // setEngergyUsagekwhByDateRangeMonth(resultMonth.data.recordsets);
 
-    console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data.recordsets)
+    console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data);
          
-           const charData=resultMonth.data.recordsets[0];
+           const charData=resultMonth.data.recordset;
          
         
            const months=[];

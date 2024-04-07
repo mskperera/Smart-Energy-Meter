@@ -9,6 +9,8 @@ ChartJS.register(ArcElement, Tooltip);
 
 const HomeChart = () => {
 
+
+  
   const [objKw,setObjKw] = useState({
 
     // maxKwValue:1000,
@@ -32,7 +34,7 @@ const HomeChart = () => {
 
   useEffect(()=>{
     loadChartData();
-  },);
+  },[]);
 
   const loadChartData=async()=>{
     const payload={
@@ -49,6 +51,7 @@ const HomeChart = () => {
   
    setObjKw({...objKw,currentKwValue:kwh});
   }
+  
 
   const data = {
   

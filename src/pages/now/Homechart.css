@@ -1,8 +1,8 @@
 .chart {
   position: relative;
   border-radius: 3%;
-  background: rgba(11, 11, 11, 0.5);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
   padding: 10px;
   /* background-color: rgb(38, 37, 37); */
   /* opacity: 50%; */
@@ -26,8 +26,8 @@
     align-items: center;
     border-radius: 10px;
     justify-content: center;
-    background:  rgba(11, 11, 11, 0.5);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    background:  rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 .text2{
@@ -39,7 +39,7 @@
   border-radius: 10px;
   justify-content: center;
   background:  rgba(11, 11, 11, 0.5);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 
@@ -70,7 +70,8 @@
     width: 300px;
     height: 100px;
     background:  rgba(11, 11, 11, 0.5);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 #box2 {
@@ -79,7 +80,7 @@
   padding: 2px;
   border-radius: 3%;
   background:  rgba(11, 11, 11, 0.5);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 /* shadow only outside of the chart */
@@ -91,7 +92,7 @@
   right: 0;
   bottom: 0;
   border-radius: 50%;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Adjust the shadow size and color */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.7); /* Adjust the shadow size and color */
   /* z-index: -1; */
 }
 
@@ -126,7 +127,8 @@
     border-radius: 10px;
     justify-content: center;
     background:  rgba(11, 11, 11, 0.5);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 .text1 h2{
@@ -146,7 +148,8 @@
   border-radius: 10px;
   justify-content: center;
   background:  rgba(11, 11, 11, 0.5);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
 }
 
   .chart {
@@ -172,7 +175,7 @@
     border-radius: 10px;
     justify-content: center;
     background:  rgba(11, 11, 11, 0.5);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
 }
 
 .text1 h2{
@@ -193,7 +196,7 @@
   border-radius: 10px;
   justify-content: center;
   background:  rgba(11, 11, 11, 0.5);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
 }
 
   .chart {
@@ -220,7 +223,7 @@
     border-radius: 10px;
     justify-content: center;
     background:  rgba(11, 11, 11, 0.5);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
 }
 
 .text1 h2{
@@ -241,7 +244,7 @@
   border-radius: 10px;
   justify-content: center;
   background:  rgba(11, 11, 11, 0.5);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
 }
 
   .chart {
@@ -268,7 +271,7 @@
     border-radius: 10px;
     justify-content: center;
     background:  rgba(11, 11, 11, 0.5);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
 }
 
 .text1 h2{
@@ -289,7 +292,7 @@
   border-radius: 10px;
   justify-content: center;
   background:  rgba(11, 11, 11, 0.5);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
 }
 
   .chart {
@@ -314,7 +317,7 @@
     border-radius: 10px;
     justify-content: center;
     background:  rgba(11, 11, 11, 0.5);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 1); */
 }
 
 .text1 h2{
@@ -335,7 +338,7 @@
   border-radius: 10px;
   justify-content: center;
   background:  rgba(11, 11, 11, 0.5);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
 }
 
   .chart {

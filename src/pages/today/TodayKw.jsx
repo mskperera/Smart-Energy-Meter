@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
@@ -9,15 +10,14 @@ const TodayKw = () => {
     
   useEffect(()=>{
     loadEngergyUsageKwhByDateRange();
-  },);
+  },[]);
 
   const getCurrentDateWithoutTime = () => {
-    const currentDate = new Date();
-    currentDate.setHours(24, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
-    return currentDate;
+    return moment().startOf('day').add(24, 'hours').toDate();
   };
 
   const loadEngergyUsageKwhByDateRange=async()=>{
+    // console.log('loadEngergyUsageKwhByDateRange')
     const payload={
         deviceId:"4",
         mesurementUnitId:1,//1-kwh,7-usage bill
@@ -25,14 +25,16 @@ const TodayKw = () => {
         startDate:getCurrentDateWithoutTime(),
         endDate:getCurrentDateWithoutTime(),
     }
+    
    const result=await getEngergyUsageKwhByDateRange(payload);
-  //  console.log('engergyUsagekwhByDateRange',result.data)
+   console.log(' hour ',result.data);
 //    setEngergyUsagekwhByDateRange(result.data.recordsets);
   
      
       //  console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
      
-       const charData=result.data.recordsets[0];
+       const charData=result.data.recordset;
+       console.log(' chartdata ',charData);
      
     
        const hours=[];
@@ -42,6 +44,7 @@ const TodayKw = () => {
        for(let i=0;i<charData.length;i++){
         hours.push(charData[i].hour);
         dataKwArr.push(charData[i].kwhPerHour)
+        // console.log('kwhPerHour',charData[i].kwhPerHour)
        // ruppyArr.push(charData[i].usageBill)
        }
       
@@ -87,7 +90,8 @@ const TodayKw = () => {
         //     backgroundColor:'aqua',
         //     borderWidath:1,
         // },
-    ]     
+    ]   
+
     });
     const options={
 
@@ -98,11 +102,11 @@ const TodayKw = () => {
             color: 'Gray', //  color of x-axis grid lines
           },
           beginAtZero: true,
-          title:{
-            display:true,
-            text:"h",
-            color:'white'
-          },
+          // title:{
+          //   display:true,
+          //   text:"h",
+          //   color:'white'
+          // },
           ticks: {
             color: 'white', // color of x-axis labels
           },
@@ -112,11 +116,11 @@ const TodayKw = () => {
             color: 'Gray', //  color of x-axis grid lines
           },
           beginAtZero: true,
-          title:{
-            display:true,
-            text:"kWh",
-            color:'white'
-          },
+          // title:{
+          //   display:true,
+          //   text:"kWh",
+          //   color:'white'
+          // },
           ticks: {
             color: 'white', //color of y-axis labels
           },

@@ -74,7 +74,8 @@
 }
 
 
-.title p{
+.topic{
+    position: absolute;
     font-size: 25px;
     margin-left: 100px;
     margin-top: -60px;
@@ -235,7 +236,7 @@
     }
     
     
-    .title p{
+    .topic{
         font-size: 20px;
         margin-left: 75px;
         margin-top: -50px;

@@ -4,28 +4,34 @@ import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legen
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
-const CustomKw = () => {
+const CustomKw = ({startDate,endDate,isSearchLoading}) => {
 
     useEffect(()=>{
+      console.log('startDate',startDate);
         loadEngergyUsageKwhByDateRange();
-    });
+    },[isSearchLoading]);
+
+
+    
 
     const loadEngergyUsageKwhByDateRange=async()=>{
         const payload={
             deviceId:"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:3,
-            startDate:'2024-02-01',
-            endDate:'2024-02-29',
+            startDate:startDate,
+            endDate:endDate,
         }
 
     const resultMonth=await getEngergyUsageKwhByDateRange(payload);
     console.log('engergyUsagekwhByDateRange Month',resultMonth.data)
     // setEngergyUsagekwhByDateRangeMonth(resultMonth.data.recordsets);
 
-    console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data.recordsets)
+    
+    console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data)
          
-           const charData=resultMonth.data.recordsets[0];
+    if (resultMonth.data.recordset) { // Add a check for undefined recordset
+           const charData=resultMonth.data.recordset;
          
         
            const months=[];
@@ -48,6 +54,7 @@ const CustomKw = () => {
           ]
             setData({...data,labels:months,datasets:datasets0})
           }
+        }
           
     const [data,setData]=useState({
         labels:[],
@@ -99,5 +106,6 @@ const CustomKw = () => {
           },
     }
  return <Bar data={data} options={options} className='chart' id='box'/>
+ 
 }
 export default CustomKw

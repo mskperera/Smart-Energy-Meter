@@ -8,7 +8,7 @@
     padding-top: 30px;
     padding-bottom: 60px; 
     overflow-y: auto; 
-    height: calc(100vh - 80px - 73.5px); 
+    height: calc(100vh - 80px - 74.41px); 
   }
   
 
@@ -89,6 +89,6 @@
       padding-top: 30px;
       padding-bottom: 60px; 
       overflow-y: auto; 
-      height: calc(102.55vh - 80px - 60px); 
+      height: calc(102.55vh - 80px - 59.5px); 
     }
   }

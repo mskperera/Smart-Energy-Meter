@@ -2,21 +2,34 @@ import React, { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
+import moment from 'moment';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 const YearKw = () => {
     
+  const getCurrentYearDates = () => {
+    const startOfYear = moment().startOf('year').toDate();
+    const endOfYear = moment().endOf('year').toDate();
+    return { startDate: startOfYear, endDate: endOfYear };
+};
+
+// const { startDate, endDate } = getCurrentYearDates();
+const { startDate, endDate } = getCurrentYearDates(); 
+
     useEffect(()=>{
         loadEngergyUsageKwhByDateRange();
-    });
+    },[]);
 
     const loadEngergyUsageKwhByDateRange=async()=>{
+
         const payload={
             deviceId:"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:4,
-            startDate:'2024-02-01',
-            endDate:'2024-02-29',
+            // startDate:'2024-01-01',
+            // endDate:'2024-12-31',
+            startDate: startDate.toDateString(),
+            endDate: endDate.toDateString(),
         }
 
     const resultMonth=await getEngergyUsageKwhByDateRange(payload);
@@ -25,7 +38,7 @@ const YearKw = () => {
 
     // console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data.recordsets)
          
-           const charData=resultMonth.data.recordsets[0];
+           const charData=resultMonth.data.recordset;
          
         
            const months=[];

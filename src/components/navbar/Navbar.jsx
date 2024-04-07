@@ -10,6 +10,7 @@ import { MdLogout } from "react-icons/md";
 import { BiSolidBellRing } from "react-icons/bi";
 import logo from '../../assent/logo.png';
 import { Link } from 'react-router-dom';
+// import DeviceName from '../../pages/now/DeviceName';
 
 const Navbar = () => {
 const [open, setOpen] = useState(false);
@@ -22,7 +23,8 @@ const [open, setOpen] = useState(false);
           <img src={logo} alt='logo'/>
           </Link>
         </div>
-        <p>Smart Energy Meter</p>
+        <p className='topic'>Smart Energy Meter</p>
+        {/* <DeviceName/> */}
       </div>
 
       <div className='app__navbar-login'>

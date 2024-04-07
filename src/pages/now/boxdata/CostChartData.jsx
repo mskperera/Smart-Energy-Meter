@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
+import '../../settings/Budget.jsx';
 // import { Doughnut } from 'react-chartjs-2';
 import '../Home.css'
 import {getEngergyUsageNow} from '../../../action/device';
@@ -9,7 +10,7 @@ ChartJS.register(ArcElement, Tooltip);
 
 function CostChartData  ()  {
   const [obj,setObj]=useState({
-    maxValue:100000,
+    maxValue:10000,
     minValue:0,
     currentValue:0,
     mesurementUnit:"Rs"
@@ -102,7 +103,7 @@ function CostChartData  ()  {
     <div className='text-p'> 
     <div className='text2'>
       <h2 className='  d-flex justify-content-center align-items-center'>Budget</h2>
-        <p className='  d-flex justify-content-center align-items-center'>{obj.maxValue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} Rs</p>
+        <h5 className='  d-flex justify-content-center align-items-center'>Rs {obj.maxValue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h5>
     </div>
       {/* <FaCoins size={45} className='icon'/> */}
       {/* <Doughnut data={data} options={options} plugins={[gaugeText]} className='chart' id='box' /> */}

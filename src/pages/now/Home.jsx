@@ -18,6 +18,8 @@ import CostChartData from './boxdata/CostChartData'
 
 import LineChart from './LineChart'
 
+import DeviceName from './DeviceName'
+
 // import home from '../../assent/home.jpg'
 
 
@@ -28,8 +30,11 @@ const Home = () => {
     <div className='home'>
         <Navbar className='navnav'/>
         <Menu className='navnav1'/>
-        
     <div className='body'>
+        <div className='device-active'>
+          <div className='curcle'></div>
+          <div className='device-name'><DeviceName/></div>
+        </div>
         <div className='page'>
           <div className='chart-kw'>
             {/* <Link to={'/service'}><CostChartData/></Link> */}
