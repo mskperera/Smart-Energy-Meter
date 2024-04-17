@@ -22,7 +22,7 @@ import UserRegister from './pages/register/UserRegister';
 import DeviceRegister from './pages/register/DeviceRegister';
 import Notify from './pages/alert/Notify';
 import BillingSession from './pages/session/BillingSession';
-import { GlobalContext } from './context/GlobalContext';
+// import { GlobalContext } from './context/GlobalContext';
 
 
 
