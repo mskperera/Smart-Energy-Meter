@@ -8,20 +8,26 @@ ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 const YearCost = () => {
 
-  const getCurrentYearDates = () => {
-    const startOfYear = moment().startOf('year').toDate();
-    const endOfYear = moment().endOf('year').toDate();
-    return { startDate: startOfYear, endDate: endOfYear };
-};
+//   const getCurrentYearDates = () => {
+//     const startOfYear = moment().startOf('year').toDate();
+//     const endOfYear = moment().endOf('year').toDate();
+//     return { startDate: startOfYear, endDate: endOfYear };
+// };
 
 
-const { startDate, endDate } = getCurrentYearDates();
+// const { startDate, endDate } = getCurrentYearDates();
 
 useEffect(()=>{
   loadEngergyUsageKwhByDateRange();
 },[]);
 
 const loadEngergyUsageKwhByDateRange=async()=>{
+
+  const currentYear = moment().utc();
+  const startOfYear = currentYear.startOf('year').format('YYYY-MM-DD');
+  const endOfYear = currentYear.endOf('year').format('YYYY-MM-DD');
+
+  console.log('year Range',startOfYear,endOfYear);
       
         const payload={
             deviceId:"4",
@@ -29,8 +35,8 @@ const loadEngergyUsageKwhByDateRange=async()=>{
             frequencyId:4,
             // startDate:'2024-01-01',
             // endDate:'2024-12-31',
-            startDate: startDate.toDateString(),
-            endDate: endDate.toDateString() ,
+            startDate: startOfYear,
+            endDate:  endOfYear,
         }
 
     const resultMonth=await getEngergyUsageKwhByDateRange(payload);

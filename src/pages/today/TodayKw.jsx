@@ -1,30 +1,76 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
-import { getEngergyUsageKwhByDateRange } from '../../action/device';
+import { getDeviceDetailsByDeviceId, getDevicesByUserId, getEngergyUsageKwhByDateRange } from '../../action/device';
+import { GlobalContext } from '../../context/GlobalContext';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 
 const TodayKw = () => {
+
+  const [deviceIdDetails, setDeviceIdDetails] = useState('');
+  
+ const {device,setDevice}=useContext(GlobalContext);
     
   useEffect(()=>{
     loadEngergyUsageKwhByDateRange();
-  },[]);
+    console.log('device context',device);
 
-  const getCurrentDateWithoutTime = () => {
-    return moment().startOf('day').add(24, 'hours').toDate();
-  };
+  },[device]);
+
+useEffect(()=>{
+  // loadDevicesByUserId();
+},[]);
+
+  // const getCurrentDateWithoutTime = () => {
+    // return moment().startOf('day').add(24, 'hours').toDate();
+  // };
+
+/////
+// const loadDevicesByUserId = async (userId) => {
+//   const userData=JSON.parse(localStorage.getItem('userData'));  
+  
+//   console.log('userData',userData.userId);
+//     const result = await getDevicesByUserId(userData.userId);
+//     console.log('deviceDetails', result);
+    
+// }
+ ////  
+
 
   const loadEngergyUsageKwhByDateRange=async()=>{
+    const todayUtc = moment(); 
+    const startOfDay = todayUtc.startOf('day').format('YYYY-MM-DD HH:mm:ss');
+
+    const endOfDay = todayUtc.endOf('day').format('YYYY-MM-DD HH:mm:ss');
+
+    const utcOffSet= moment().utcOffset();
+
+    const startOfDayUtc = moment(startOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+    const endOfDayUtc = moment(endOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+
+
+
+    console.log('startOfDayUtc',startOfDayUtc);
+
+    
+    console.log("66666666",startOfDay,endOfDay);
+    // date.utcOffset(moment().utcOffset());
+console.log('startOfDayUtc',moment().utcOffset());
     // console.log('loadEngergyUsageKwhByDateRange')
     const payload={
         deviceId:"4",
         mesurementUnitId:1,//1-kwh,7-usage bill
         frequencyId:1,
-        startDate:getCurrentDateWithoutTime(),
-        endDate:getCurrentDateWithoutTime(),
+        // startDate:getCurrentDateWithoutTime(),
+        // endDate:getCurrentDateWithoutTime(),
+        // startDate:"2024-04-06 12:00",
+        // endDate:"2024-04-06 11:59:59",
+        startDate: startOfDayUtc,
+        endDate: endOfDayUtc,
     }
+console.log('payload',payload);
     
    const result=await getEngergyUsageKwhByDateRange(payload);
    console.log(' hour ',result.data);

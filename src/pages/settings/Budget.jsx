@@ -191,7 +191,7 @@ const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
                             style={{ width: '100%', color: 'blue' }}
                             min="0"   
                             max={myBudget}  
-                            step="1"
+                            step="20"
                             value={value}  
                             onChange={(e)=>setValue(e.target.value)} />
                     </div>

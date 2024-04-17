@@ -163,7 +163,7 @@
 }
 
 .react-datepicker__navigation--next {
-  right: 1rem;
+  right: 100px;
 }
 
 .react-datepicker__navigation--previous {

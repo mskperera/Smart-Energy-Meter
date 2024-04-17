@@ -223,7 +223,7 @@
 @media screen and (max-width:2000px){
     .page{
         width: 100%;
-        margin-top: -2rem;
+        margin-top: -4rem;
         justify-content:center;
         align-items: center;
         display: flex;
@@ -616,7 +616,7 @@
         align-items: center;
         justify-content: space-between;
         margin: 0%;
-        margin-left: 0px;
+        margin-top: -20px;
         height: 120vh;
     }
 

@@ -7,36 +7,42 @@ ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 const WeekCost = () => {
 
-  const getCurrentWeekDates = () => {
-    const startOfWeek = moment().startOf('week'); 
-    const endOfWeek = moment().endOf('week'); 
+  // const getCurrentWeekDates = () => {
+  //   const startOfWeek = moment().utc().startOf('week');
+  //   const endOfWeek = moment().utc().endOf('week');
 
-    return { startDate: startOfWeek.toDate(), endDate: endOfWeek.toDate() }; 
-  };
+  //   return { startDate: startOfWeek.toDate(), endDate: endOfWeek.toDate() };
+  // };
 
-  const { startDate, endDate } = getCurrentWeekDates();
+  // const { startDate, endDate } = getCurrentWeekDates();
   
     useEffect(()=>{
         loadEngergyUsageKwhByDateRange();
       },[]);
   
       const loadEngergyUsageKwhByDateRange=async()=>{
+        const currentDate = moment.utc();
+      const startDate = currentDate.startOf('week').format('YYYY-MM-DD');
+      const endDate = currentDate.endOf('week').format('YYYY-MM-DD');
+      
+
         const payload={
             deviceId:"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:3,
-            // startDate:'2024-03-25',
-            // endDate:'2024-03-31',
-            startDate:startDate.toDateString(),
-            endDate:endDate.toDateString(),
+            // startDate:'2024-04-01 12:00',
+            // endDate:'2024-04-05 11:59:59',
+            startDate:startDate,
+            endDate:endDate,
         }
         const resultweeks=await getEngergyUsageKwhByDateRange(payload);
-        console.log('daysss',resultweeks.data);
+        // console.log('daysss',resultweeks.data);
         // console.log('engergyUsagekwhByDateRangeWeeks',resultweeks.data)
         // setEngergyUsagekwhByDateRangeWeeks(resultweeks.data.recordsets);
       
          
-           console.log('55555555555',resultweeks);
+          //  console.log('55555555555',resultweeks);
+           
          
            const charData=resultweeks.data.recordset;
          
@@ -46,7 +52,9 @@ const WeekCost = () => {
         //    const ruppyArr=[];
     
            for(let i=0;i<charData.length;i++){
-            weeks.push(charData[i].DayName);
+            weeks.push(charData[i].day);
+            // console.log('daysss154954851649',charData[i].day)
+            // weeks.push(moment(charData[i].day).format('D'));
             weekCostArr.push(charData[i].usageBillPerDay)
            // ruppyArr.push(charData[i].usageBill)
            }

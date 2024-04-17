@@ -2,22 +2,31 @@ import React, { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
+import moment from 'moment';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 const CustomCost = ({startDate,endDate,isSearchLoading}) => {
 
     useEffect(()=>{
-        loadEngergyUsageKwhByDateRange();
+        loadEngergyUsageKwhByDateRange1();
     },[isSearchLoading]);
 
-    const loadEngergyUsageKwhByDateRange=async()=>{
-        const payload={
-            deviceId:"4",
-            // mesurementUnitId:1,//1-kwh,7-usage bill
-            frequencyId:3,
-            startDate:startDate,
-            endDate:endDate,
-        }
+    useEffect(()=>{
+      loadEngergyUsageKwhByDateRange();
+  },[]);
+
+    const loadEngergyUsageKwhByDateRange1=async()=>{
+
+      const utcStartDate = moment.utc(startDate).add(1, 'day').utc().format();
+      const utcEndDate = moment.utc(endDate).add(1, 'day').utc().format();
+       
+         const payload={
+             deviceId:"4",
+             // mesurementUnitId:1,//1-kwh,7-usage bill
+             frequencyId:3,
+             startDate:utcStartDate,
+             endDate:utcEndDate,
+         }
 
     const resultMonth=await getEngergyUsageKwhByDateRange(payload);
     console.log('engergyUsagekwhByDateRange Month',resultMonth.data)
@@ -49,24 +58,92 @@ const CustomCost = ({startDate,endDate,isSearchLoading}) => {
   }
 }
 
-    const [data,setData]=useState({
-        labels:[],
+    // const [data,setData]=useState({
+    //     labels:[],
     
-        datasets:[
-        //     {
-        //     label:'kW',
-        //     data:[18,50,10,25,35,36,89,98,50,90,75,62],
-        //     backgroundColor:'#36A2EB',
-        //     borderWidath:1,
-        // },
-        {
+    //     datasets:[
+    //     //     {
+    //     //     label:'kW',
+    //     //     data:[18,50,10,25,35,36,89,98,50,90,75,62],
+    //     //     backgroundColor:'#36A2EB',
+    //     //     borderWidath:1,
+    //     // },
+    //     {
+    //         label:'Rs',
+    //         data:[],
+    //         backgroundColor:'aqua',
+    //         borderWidath:1,
+    //     },
+    // ]     
+    // });
+
+
+    
+
+  const loadEngergyUsageKwhByDateRange=async()=>{
+
+    const startOfMonth = moment().utc().startOf('month').add('minutes').format('YYYY-MM-DD'); 
+    const endOfMonth = moment().utc().endOf('month').add('minutes').format('YYYY-MM-DD');
+
+      const payload={
+          deviceId:"4",
+          // mesurementUnitId:1,//1-kwh,7-usage bill
+          frequencyId:3,
+          // startDate:'2024-03-01',
+          // endDate:'2024-03-31',
+          startDate: startOfMonth, 
+          endDate: endOfMonth,
+      }
+
+  const resultMonth=await getEngergyUsageKwhByDateRange(payload);
+  console.log('engergyUsagekwhByDateRange Month',resultMonth.data)
+  // setEngergyUsagekwhByDateRangeMonth(resultMonth.data.recordsets);
+
+  console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data);
+       
+         const charData=resultMonth.data.recordset;
+       
+      
+         const months=[];
+         const monthCostArr=[];
+      //    const ruppyArr=[];
+  
+         for(let i=0;i<charData.length;i++){
+          months.push(charData[i].day);
+          monthCostArr.push(charData[i].usageBillPerDay)
+         // ruppyArr.push(charData[i].usageBill)
+         }
+        
+         const datasets0=[
+          {
             label:'Rs',
-            data:[],
-            backgroundColor:'aqua',
+            data:monthCostArr,
+            backgroundColor:'#ff0066',
             borderWidath:1,
-        },
-    ]     
-    });
+          }
+        ]
+          setData({...data,labels:months,datasets:datasets0})
+        }
+
+  const [data,setData]=useState({
+      labels:[],
+  
+      datasets:[
+      //     {
+      //     label:'kW',
+      //     data:[18,50,10,25,35,36,89,98,50,90,75,62],
+      //     backgroundColor:'#36A2EB',
+      //     borderWidath:1,
+      // },
+      {
+          label:'Rs',
+          data:[],
+          backgroundColor:'aqua',
+          borderWidath:1,
+      },
+  ]     
+  });
+
     const options={
         scales: {
             x: {

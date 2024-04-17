@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './Login.css'
 import {login} from '../../action/userAuth'
 import {useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 
 
@@ -12,10 +13,10 @@ function Login() {
 
     const [formData, setFormData]=useState({
 
-            "userName":"admin",
-            "password":"1234",
-            "gmtOffset":"+5:30",
-            "publicIP":"212.121"  
+            userName:"lasitha",
+            password:"1234",
+            gmtOffset:moment().utcOffset(),
+            publicIP:"212.121"  
     });
     
 

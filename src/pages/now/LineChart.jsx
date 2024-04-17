@@ -1,87 +1,104 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './AreaChart.css';
 import { Line } from 'react-chartjs-2';
-import {Chart as ChartJS,LineElement, CategoryScale, LinearScale,PointElement,Filler} from 'chart.js';
+import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Filler } from 'chart.js';
+import moment from 'moment';
+import { getEngergyUsageKwhByDateRange } from '../../action/device';
 
-ChartJS.register(LineElement, CategoryScale, LinearScale,PointElement,Filler);
-
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler);
 
 function LineChart() {
-  const data = {
-    labels: ['01', '02', '03', '04', '05', '06', '07','08','09'],
-    datasets: [
+
+  useEffect(() => {
+    loadEngergyUsageKwhByDateRange();
+  }, []);
+
+  const loadEngergyUsageKwhByDateRange = async () => {
+    const currentYear = moment().utc();
+    const startOfYear = currentYear.startOf('year').format('YYYY-MM-DD HH:mm:ss');
+    const endOfYear = currentYear.endOf('year').format('YYYY-MM-DD HH:mm:ss');
+
+    const payload = {
+      deviceId: "4",
+      frequencyId: 4,
+      // measurementUnitId: 0,
+      startDate: startOfYear,
+      endDate: endOfYear,
+    }
+
+    const resultMonth = await getEngergyUsageKwhByDateRange(payload);
+    console.log('1 Month', resultMonth.data)
+
+    const charData = resultMonth.data.recordset;
+    const months = [];
+    const monthKwArr = [];
+    const predictArr = [];
+
+    for (let i = 0; i < charData.length; i++) {
+      months.push(charData[i].month);
+      monthKwArr.push(charData[i].kwhPerMonth);
+      // predictArr.push(charData[i].predictedKwhPerMonth);
+    }
+
+    for (let i = 0; i < charData.length; i++) {
+      months.push(charData[i].month);
+      // monthKwArr.push(charData[i].kwhPerMonth);
+      predictArr.push(charData[i].predictedKwhPerMonth);
+    }
+
+    const datasets0 = [
       {
         label: 'kWh',
-        data: [35, 38, 48, 59, 66, 76, 89, 98, 113], 
+        data: monthKwArr,
         borderColor: 'rgba(0, 255, 153)',
         pointBortderColor: 'aqua',
-        // pointStyle: 'rect',
-        tension: 0.3,
+        tension: 0.5,
         backgroundColor: 'rgba(0, 255, 153, 0.5)',
         fill: true,
         showLine: false,
       },
       {
         label: 'Prediction',
-        data: [40, 45, 57, 68, 80, 90, 100, 110, 120], 
-        borderColor: 'rgba(54, 162, 235)',
+        data: predictArr,
+        borderColor: 'rgba(54,162,235)',
         pointBortderColor: 'aqua',
-        tension: 0.5,
-        backgroundColor: 'rgba(54, 162, 235, 0.3)',
+        tension: 0.4,
+        // backgroundColor: 'black',
+        backgroundColor: 'rgba(54,162,235, 0.3)',
         fill: true,
-      },
-    ],
-  };
+      }
+    ];
 
-  const gaugeText={
-    id:'gaugeText',
-    beforeDatasetsDraw(chart,args, plugins){
-      const {ctx,data} = chart;
-
-      const centerX = chart.getDatasetMeta(0).data[0].x;
-      const centerY = chart.getDatasetMeta(0).data[0].y;
-
-      ctx.save();
-      ctx.fillStyle='white';
-      // ctx.font ='35px Trebuchet MS ';
-      // ctx.textAlign= 'center';
-      // ctx.textBaseline = 'baseline';
-      // ctx.strokeStyle = 'white';
-      // ctx.lineWidth = 1;
-      // ctx.strokeText(data.datasets[0].data[0], centerX, centerY);
-      // ctx.strokeStyle = 'black';
-      // ctx.stroke();
-      ctx.fillStyle = 'white';
-      // ctx.fillText(data.datasets[0].data[0], centerX +200 , centerY -190);
-
-      // ctx.fillText(<TbHomeStats color='white' size={10}/>, centerX, centerY  -10);
-
-      ctx.font = '15px Trebuchet MS ';
-      ctx.fillText("Prediction Rs", centerX +250, centerY -190);
-
-      // ctx.font = '20px Trebuchet MS ';
-      // ctx.fillText("Energy Usage", centerX, centerY + 80);
-    
-    }
+    setData({ ...data, labels: months, datasets: datasets0 });
   }
 
-  
+  const [data, setData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: ['kWh', 'Prediction'],
+        data: [],
+      }
+      
+    ],
+  });
+
   const options = {
     scales: {
       x: {
         grid: {
-          display:false,
+          display: false,
           color: 'white', //  color-x-axis grid lines
         },
         beginAtZero: true,
-        title:{
-          position:'top',
-          display:true,
-          text:"Trending To:",
-          font:{
-            size:20
+        title: {
+          position: 'top',
+          display: true,
+          text: "Trending To:",
+          font: {
+            size: 20
           },
-          color:'white'
+          color: 'white'
         },
         ticks: {
           color: 'white', // color-x-axis labels
@@ -92,10 +109,10 @@ function LineChart() {
           color: 'Gray', //  color-x-axis grid lines
         },
         beginAtZero: true,
-        title:{
-          display:true,
-          text:"kWh",
-          color:'white'
+        title: {
+          display: true,
+          text: "kWh",
+          color: 'white'
         },
         ticks: {
           color: 'white', //color of y-axis labels
@@ -110,20 +127,20 @@ function LineChart() {
         display: true,
         text: 'Trending Power Usage',
       },
-        legend: {
-          //  position:'bottom',
-            display: true,
-            labels: {
-                color: 'white',
-                border: 'none',
-            },
+      legend: {
+        //  position:'bottom',
+        display: true,
+        labels: {
+          color: 'white',
+          border: 'none',
         },
+      },
     },
   };
 
   return (
     <div className='chart2'>
-        <Line data={data} options={options} id='box2'/>
+      <Line data={data} options={options} id='box2' />
     </div>
   );
 }
