@@ -62,11 +62,11 @@
 
 @media screen and (max-width:450px){
     .bottom-bar-links li{
-        margin: 2rem 2rem;
+        margin: 2rem 2.3rem;
         padding: auto;
         align-items: center;
         justify-content: space-between;
-        margin-left: 10px;
+        margin-left: 20px;
     }
 
     .bottom-bar{

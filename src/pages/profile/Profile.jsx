@@ -22,9 +22,9 @@ const Profile = () => {
   };
 
   return (
-    <>
+    <div className='home'>
     <Navbar className='navnav'/>
-    <div className='wrap'>
+    <div className='wrap '>
       <div className="body">
         <div className="card text-center ">
           {profileData && profileData.length > 0 && (
@@ -54,7 +54,7 @@ const Profile = () => {
       </div>
     </div>
       <BottomNav className='bottombar'/>
-    </>
+    </div>
   );
 };
 

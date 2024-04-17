@@ -25,7 +25,7 @@ const Powerfact = () => {
 
   useEffect(()=>{
     loadChartData();
-  },);
+  },[]);
 
   const loadChartData=async()=>{
     const payload={

@@ -28,7 +28,7 @@ function HomeCostChart  ()  {
 
   useEffect(()=>{
     loadChartData();
-  },);
+  },[]);
 
   const loadChartData=async()=>{
     const payload={

@@ -2,31 +2,50 @@ import React, { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
+import moment from 'moment';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 
 const YearCost = () => {
 
-    useEffect(()=>{
-        loadEngergyUsageKwhByDateRange();
-    });
+//   const getCurrentYearDates = () => {
+//     const startOfYear = moment().startOf('year').toDate();
+//     const endOfYear = moment().endOf('year').toDate();
+//     return { startDate: startOfYear, endDate: endOfYear };
+// };
 
-    const loadEngergyUsageKwhByDateRange=async()=>{
+
+// const { startDate, endDate } = getCurrentYearDates();
+
+useEffect(()=>{
+  loadEngergyUsageKwhByDateRange();
+},[]);
+
+const loadEngergyUsageKwhByDateRange=async()=>{
+
+  const currentYear = moment().utc();
+  const startOfYear = currentYear.startOf('year').format('YYYY-MM-DD');
+  const endOfYear = currentYear.endOf('year').format('YYYY-MM-DD');
+
+  console.log('year Range',startOfYear,endOfYear);
+      
         const payload={
             deviceId:"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:4,
-            startDate:'2024-02-01',
-            endDate:'2024-02-29',
+            // startDate:'2024-01-01',
+            // endDate:'2024-12-31',
+            startDate: startOfYear,
+            endDate:  endOfYear,
         }
 
     const resultMonth=await getEngergyUsageKwhByDateRange(payload);
     // console.log('engergyUsagekwhByDateRange Month',resultMonth.data)
     // setEngergyUsagekwhByDateRangeMonth(resultMonth.data.recordsets);
 
-    console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data.recordsets)
+    console.log('22222',resultMonth.data)
          
-           const charData=resultMonth.data.recordsets[0];
+           const charData=resultMonth.data.recordset;
          
         
            const months=[];

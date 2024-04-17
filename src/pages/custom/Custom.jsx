@@ -5,7 +5,9 @@ import Navbar from '../../components/navbar/Navbar'
 import './Custom.css'
 import CustomKw from './CustomKw'
 import CustomCost from './CustomCost'
-import Date from './Date'
+import './Date.css'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 function Custom() {
@@ -16,8 +18,27 @@ function Custom() {
     setActiveTab(tab);
   };
 
-  const [selectedStartDate, setSelectedStartDate] = useState(null);
-  const [selectedEndDate, setSelectedEndDate] = useState(null);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+ 
+  const [isSearchLoading, setIsSearchLoading] = useState(false);
+
+  // const [search, setSearch] = useState(null);
+
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
+  };
+
+  const handleEndDateChange = (date) => {
+    setEndDate(date);
+  };
+
+  const handleSearch = () => {
+   setIsSearchLoading(!isSearchLoading);
+  };
+
+
+
     
     return (
       
@@ -38,17 +59,41 @@ function Custom() {
         </div>
         <div className='page-5 body icon'>
           <div className='date'>
-            <Date onDateChange={(startDate, endDate) => {
-              setSelectedStartDate(startDate);
-              setSelectedEndDate(endDate);
-            }}/>
+          <div className='picker'>
+        <div>
+            <DatePicker
+                selected={startDate}
+                onChange={handleStartDateChange}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                placeholderText="Start Date"
+            />
+        </div>
+        
+         <div>
+            <DatePicker
+                selected={endDate}
+                onChange={handleEndDateChange}
+                selectsEnd
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+                placeholderText="End Date"
+            />
+         </div>
+         
+         <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button>
+    </div>
           </div>
+          
           <div className='chart-pick-kw'>
-            <CustomKw startDate={selectedStartDate} endDate={selectedEndDate}/>
+            <CustomKw startDate={startDate } endDate={endDate} isSearchLoading={isSearchLoading}/>
           </div>
           <div className='chart-pick-cost'>
-            <CustomCost startDate={selectedStartDate} endDate={selectedEndDate}/>
+            <CustomCost startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
           </div>
+
         </div>
             <BottomNav/>
         </div>

@@ -15,7 +15,7 @@ const KwChartData = () => {
     // minKwValue:0,
     // currentKwValue:0,
     // mesurementUnitKw:"kW",
-    maxKwValue:1000,
+    maxKwValue:10000,
     minKwValue:0,
     currentKwValue:0,
     mesurementUnitKw:"kWh",
@@ -32,7 +32,7 @@ const KwChartData = () => {
 
   useEffect(()=>{
     loadChartData();
-  },);
+  },[]);
 
   const loadChartData=async()=>{
     const payload={
@@ -130,8 +130,8 @@ const KwChartData = () => {
   return(
     <div className='text-p'>
         <div className='text1'>
-            <h2 className='d-flex justify-content-center align-items-center'>Budget</h2>
-            <p className=' d-flex justify-content-center align-items-center'>{objKw.maxKwValue} kWh</p>
+            <h2 className='d-flex justify-content-center align-items-center'>Predicted Bill</h2>
+            <h5 className=' d-flex justify-content-center align-items-center'>Rs {objKw.maxKwValue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h5>
         </div>
       {/* <TbHomeStats size={45} className='icon'/> */}
       {/* <Doughnut data={data} options={options} plugins={[gaugeText]} id='box' className='chart'/>  */}

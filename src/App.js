@@ -22,6 +22,7 @@ import UserRegister from './pages/register/UserRegister';
 import DeviceRegister from './pages/register/DeviceRegister';
 import Notify from './pages/alert/Notify';
 import BillingSession from './pages/session/BillingSession';
+import { GlobalContext } from './context/GlobalContext';
 
 
 
@@ -30,8 +31,9 @@ import BillingSession from './pages/session/BillingSession';
 // 2024-03-17 change testing
 function App() {
   return (
+    // <GlobalContext>
     <BrowserRouter>
-      <Routes>
+         <Routes>
         <Route path='/' element={<Login/>}/>
         <Route path='/userregister/:userRegId/:saveType' element={<UserRegister/>}/>
         <Route path='/profile' element={<Profile/>}/>
@@ -54,6 +56,7 @@ function App() {
         <Route path='/device' element={<DeviceMan/>}/>
       </Routes>
     </BrowserRouter>
+      // </GlobalContext> 
   );
 }
 

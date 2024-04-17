@@ -11,6 +11,11 @@
     
 }
 
+.btn-search{
+  border-radius: 25px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 
 .picker {
     display: flex;
@@ -27,10 +32,12 @@
     display: inline-block;
     width: 100%;
     position: relative;
+    
   }
   
   .react-datepicker__input-container {
     width: 100%;
+    
   }
   
   .react-datepicker__input-container input {
@@ -156,7 +163,7 @@
 }
 
 .react-datepicker__navigation--next {
-  right: 1rem;
+  right: 100px;
 }
 
 .react-datepicker__navigation--previous {
@@ -233,7 +240,7 @@
 @media screen and (max-width:450px){
     .picker{
         /* flex-direction: column; */
-        width: 70%;
+        width: 85%;
         margin-top: -15px;
         /* margin-left: 70px; */
     }
