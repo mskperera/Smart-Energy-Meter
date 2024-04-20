@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Home.css'
 
 import Navbar from '../../components/navbar/Navbar'
@@ -26,9 +26,15 @@ import DeviceName from './DeviceName'
 
 const Home = () => {
 
+  const [device, setDevice] = useState('');
+
+  const onchangeDeviceHandler=(device)=>{
+    setDevice(device);
+  }
+
   return (
     <div className='home'>
-        <Navbar className='navnav'/>
+        <Navbar className='navnav' onChangeDevice={onchangeDeviceHandler}/>
         <Menu className='navnav1'/>
     <div className='body'>
         <div className='device-active'>

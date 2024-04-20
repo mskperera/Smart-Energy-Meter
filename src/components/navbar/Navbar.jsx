@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdDevices, MdClose } from "react-icons/md";
 import { BiSolidBellRing } from "react-icons/bi";
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -7,10 +7,9 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { CgProfile } from 'react-icons/cg';
 import { getDevicesByUserId } from '../../action/device';
-import { set } from 'date-fns';
-import { GlobalContext } from '../../context/GlobalContext';
+// import { GlobalContext } from '../../context/GlobalContext';
 
-const Navbar = () => {
+const Navbar = ({onChangeDevice}) => {
 
   const [selectedDevice, setSelectedDevice] = useState(""); 
   const [open, setOpen] = useState(false);
@@ -34,19 +33,19 @@ const Navbar = () => {
     console.log('deviceDetails', result);
     
     if (result.status === 200) {
-      const names = result.data.map(device => device.deviceName);
-      setDeviceNames(names);
+      const devices = result.data.map(device => ({ id: device.deviceId, name: device.deviceName }));
+      setDeviceNames(devices);
     }
     
   }
   
   const handleDeviceSelect = (device) => {
-   // setDevice(device);
-    //setSelectedDevice(device); 
-    setOpen(false); 
+    const selectedDeviceObject = deviceNames.find(item => item.name === device);
+    if (selectedDeviceObject) {
+      onChangeDevice(selectedDeviceObject); 
+      setOpen(false);
+    }
   };
-
- // const {device,setDevice}=useContext(GlobalContext);
 
   return (
     <div className='navbar'>
@@ -57,7 +56,7 @@ const Navbar = () => {
           </Link>
         </div>
         <p className='topic'>Smart Energy Meter</p>
-        {JSON.stringify(selectedDevice)}
+        {/* {JSON.stringify(selectedDevice)} */}
       </div>
 
       <div className='app__navbar-login'>
@@ -65,13 +64,13 @@ const Navbar = () => {
         <div className='menu-trigger relative'>
           <label>
             <MdDevices onClick={() => setOpenDevicesName(!openDevicesName)} color='#191970' size={25} />
-            {selectedDevice && <span className="selected-device-label">{" "+selectedDevice}</span>}
+            {selectedDevice && <span className="selected-device-label">{" "+selectedDevice.name}</span>}
           </label>
           {openDevicesName && (
             <div className='drop'>
               <ul>
                 {deviceNames.map((device, index) => (
-                  <li key={index} onClick={() => handleDeviceSelect(device)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>{device}</li>
+                  <li key={index} onClick={() => handleDeviceSelect(device.name)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>{device.name}</li>
                 ))}
               </ul>
             </div>
@@ -84,7 +83,7 @@ const Navbar = () => {
             <div className='drop'>
               <ul>
                 <li><a href='/profile' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>Profile</a></li>
-                <br />
+                <br/>
                 <li><a href='/billingsession' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>Session</a></li>
                 <li><a href='/' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>Logout</a></li>
               </ul>
@@ -104,7 +103,7 @@ const Navbar = () => {
             <div className='drop'>
               <ul>
                 {deviceNames.map((device, index) => (
-                  <li key={index} onClick={() => handleDeviceSelect(device)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>{device}</li>
+                  <li key={index} onClick={() => handleDeviceSelect(device.name)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>{device.name}</li>
                 ))}
               </ul>
             </div>

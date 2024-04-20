@@ -14,9 +14,16 @@ function Month() {
     setActiveTab(tab);
   };
 
+
+  const [device, setDevice] = useState('');
+
+  const onChangeDeviceHandler=(device)=>{
+    setDevice(device);
+  }
+
   return (
     <div className='home'>
-      <Navbar/>
+      <Navbar onChangeDevice={onChangeDeviceHandler}/>
       <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
         <div className='back'>
             <ul className='nav-bar-links'>
@@ -33,10 +40,10 @@ function Month() {
 
     <div className='page-3 body'>
       <div className='chart-month-kw'>
-        <MonthKw/>
+        <MonthKw  selectedDevice={device}/>
       </div>
       <div className='chart-month-cost'>
-        <MonthCost/>
+        <MonthCost selectedDevice={device}/>
       </div>
     </div>
            <BottomNav/>

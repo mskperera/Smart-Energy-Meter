@@ -5,11 +5,11 @@ import { getEngergyUsageKwhByDateRange } from '../../action/device';
 import moment from 'moment';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
-const MonthCost = () => {
+const MonthCost = ({selectedDevice}) => {
 
     useEffect(()=>{
         loadEngergyUsageKwhByDateRange();
-    },[]);
+    },[selectedDevice]);
 
     const loadEngergyUsageKwhByDateRange=async()=>{
 
@@ -17,7 +17,7 @@ const MonthCost = () => {
       const endOfMonth = moment().utc().endOf('month').add('minutes').format('YYYY-MM-DD');
 
         const payload={
-            deviceId:"4",
+            deviceId:selectedDevice.id, //"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:3,
             // startDate:'2024-03-01',

@@ -15,9 +15,15 @@ function Year() {
     setActiveTab(tab);
   };
 
+  const [device, setDevice] = useState('');
+
+  const onChangeDeviceHandler=(device)=>{
+    setDevice(device);
+  }
     return (
         <div className='home'>
-          <Navbar/>
+          <Navbar onChangeDevice={onChangeDeviceHandler}/>
+          
           <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
             <div className='back'>
                 <ul className='nav-bar-links'>
@@ -34,10 +40,10 @@ function Year() {
     
         <div className='page-4 body'>
           <div className='chart-year-kw'>
-             <YearKw/>
+             <YearKw selectedDevice={device} />
           </div>
           <div className='chart-year-cost'>
-             <YearCost/>
+             <YearCost selectedDevice={device} />
           </div>
         </div>
                <BottomNav/>
