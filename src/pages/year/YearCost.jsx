@@ -6,7 +6,7 @@ import moment from 'moment';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 
-const YearCost = () => {
+const YearCost = ({selectedDevice}) => {
 
 //   const getCurrentYearDates = () => {
 //     const startOfYear = moment().startOf('year').toDate();
@@ -19,7 +19,7 @@ const YearCost = () => {
 
 useEffect(()=>{
   loadEngergyUsageKwhByDateRange();
-},[]);
+},[selectedDevice]);
 
 const loadEngergyUsageKwhByDateRange=async()=>{
 
@@ -30,7 +30,7 @@ const loadEngergyUsageKwhByDateRange=async()=>{
   console.log('year Range',startOfYear,endOfYear);
       
         const payload={
-            deviceId:"4",
+            deviceId:selectedDevice.id, //"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:4,
             // startDate:'2024-01-01',

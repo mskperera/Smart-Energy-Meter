@@ -37,13 +37,17 @@ function Custom() {
    setIsSearchLoading(!isSearchLoading);
   };
 
+  const [device, setDevice] = useState('');
 
+  const onChangeDeviceHandler=(device)=>{
+    setDevice(device);
+  }
 
     
     return (
       
         <div className='home'>
-          <Navbar/>
+          <Navbar onChangeDevice={onChangeDeviceHandler}/>
           <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
             <div className='back'>
                 <ul className='nav-bar-links'>
@@ -88,10 +92,10 @@ function Custom() {
           </div>
           
           <div className='chart-pick-kw'>
-            <CustomKw startDate={startDate } endDate={endDate} isSearchLoading={isSearchLoading}/>
+            <CustomKw  selectedDevice={device}  startDate={startDate } endDate={endDate} isSearchLoading={isSearchLoading}/>
           </div>
           <div className='chart-pick-cost'>
-            <CustomCost startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
+            <CustomCost selectedDevice={device}  startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
           </div>
 
         </div>

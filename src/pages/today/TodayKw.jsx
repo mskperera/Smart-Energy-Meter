@@ -3,21 +3,22 @@ import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { getDeviceDetailsByDeviceId, getDevicesByUserId, getEngergyUsageKwhByDateRange } from '../../action/device';
-import { GlobalContext } from '../../context/GlobalContext';
+// import { GlobalContext } from '../../context/GlobalContext';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 
-const TodayKw = () => {
+const TodayKw = ({selectedDevice}) => {
 
-  const [deviceIdDetails, setDeviceIdDetails] = useState('');
+  // const [deviceIdDetails, setDeviceIdDetails] = useState('');
   
- const {device,setDevice}=useContext(GlobalContext);
+//  const {device,setDevice}=useContext(GlobalContext);
     
   useEffect(()=>{
-    loadEngergyUsageKwhByDateRange();
-    console.log('device context',device);
 
-  },[device]);
+    loadEngergyUsageKwhByDateRange();
+    console.log('device context',selectedDevice);
+
+  },[selectedDevice]);
 
 useEffect(()=>{
   // loadDevicesByUserId();
@@ -52,7 +53,7 @@ useEffect(()=>{
 
 
 
-    console.log('startOfDayUtc',startOfDayUtc);
+    console.log('selectedDevice.deviceId',selectedDevice);
 
     
     console.log("66666666",startOfDay,endOfDay);
@@ -60,7 +61,7 @@ useEffect(()=>{
 console.log('startOfDayUtc',moment().utcOffset());
     // console.log('loadEngergyUsageKwhByDateRange')
     const payload={
-        deviceId:"4",
+        deviceId:selectedDevice.id,//"4",
         mesurementUnitId:1,//1-kwh,7-usage bill
         frequencyId:1,
         // startDate:getCurrentDateWithoutTime(),

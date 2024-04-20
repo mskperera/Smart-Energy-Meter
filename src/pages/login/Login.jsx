@@ -15,7 +15,7 @@ function Login() {
 
             userName:"lasitha",
             password:"1234",
-            gmtOffset:moment().utcOffset(),
+            gmtOffset:"+5.30", //moment().utcOffset(),
             publicIP:"212.121"  
     });
     

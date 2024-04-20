@@ -16,9 +16,15 @@ function Today() {
     setActiveTab(tab);
   };
 
+  const [device, setDevice] = useState('');
+
+const onChangeDeviceHandler=(device)=>{
+  setDevice(device);
+}
   return (
     <div className='home'>
-        <Navbar/>
+        <Navbar onChangeDevice={onChangeDeviceHandler}/>
+      
         <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
           <div className='back'>
 
@@ -35,10 +41,10 @@ function Today() {
       </div>
         <div className='page-1 body'>
           <div className='chart-today-kw'>
-            <TodayKw/>
+            <TodayKw selectedDevice={device} />
           </div>
           <div className='chart-today-cost'>
-            <TodayCost/>
+            <TodayCost selectedDevice={device}/>
           </div>
         </div>
             <BottomNav/>

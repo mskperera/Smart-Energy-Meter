@@ -7,11 +7,11 @@ ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 
 
-const TodayCost = () => {
+const TodayCost = ({selectedDevice}) => {
 
     useEffect(()=>{
         loadEngergyUsageKwhByDateRange();
-      },[]);
+      },[selectedDevice]);
     
 
       // const getCurrentDateWithoutTime = () => {
@@ -34,7 +34,7 @@ const TodayCost = () => {
     
 
         const payload={
-            deviceId:"4",
+            deviceId:selectedDevice.id, //"4",
             mesurementUnitId:7,//1-kwh,7-usage bill
             frequencyId:1,
             startDate: startOfDayUtc, 
