@@ -26,15 +26,15 @@ import DeviceName from './DeviceName'
 
 const Home = () => {
 
-  const [device, setDevice] = useState('');
+  // const [device, setDevice] = useState('');
 
-  const onchangeDeviceHandler=(device)=>{
-    setDevice(device);
-  }
+  // const onchangeDeviceHandler=(device)=>{
+  //   setDevice(device);
+  // }
 
   return (
     <div className='home'>
-        <Navbar className='navnav' onChangeDevice={onchangeDeviceHandler}/>
+        <Navbar className='navnav' />
         <Menu className='navnav1'/>
     <div className='body'>
         <div className='device-active'>

@@ -7,7 +7,7 @@ import { getEngergyUsageKwhByDateRange } from '../../action/device';
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler);
 
-function LineChart() {
+function LineChart(z) {
 
   useEffect(() => {
     loadEngergyUsageKwhByDateRange();
@@ -37,14 +37,15 @@ function LineChart() {
     for (let i = 0; i < charData.length; i++) {
       months.push(charData[i].month);
       monthKwArr.push(charData[i].kwhPerMonth);
+      predictArr.push(charData[i].predictedKwhPerMonth);
       // predictArr.push(charData[i].predictedKwhPerMonth);
     }
 
-    for (let i = 0; i < charData.length; i++) {
-      months.push(charData[i].month);
-      // monthKwArr.push(charData[i].kwhPerMonth);
-      predictArr.push(charData[i].predictedKwhPerMonth);
-    }
+    // for (let i = 0; i < charData.length; i++) {
+    //   months.push(charData[i].month);
+    //   // monthKwArr.push(charData[i].kwhPerMonth);
+      
+    // }
 
     const datasets0 = [
       {
@@ -94,10 +95,11 @@ function LineChart() {
         title: {
           position: 'top',
           display: true,
-          text: "Trending To:",
-          font: {
-            size: 20
-          },
+          text: "Months",
+          // text: "Trending To:",
+          // font: {
+          //   size: 20
+          // },
           color: 'white'
         },
         ticks: {

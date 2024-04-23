@@ -6,13 +6,13 @@ import { getEngergyUsageKwhByDateRange } from '../../action/device';
 import moment from 'moment';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
-const WeekKw = () => {
+const WeekKw = ({selectedDevice}) => {
 
  
 
     useEffect(()=>{
       loadEngergyUsageKwhByDateRange();
-    },[]);
+    },[selectedDevice]);
 
     const loadEngergyUsageKwhByDateRange=async()=>{
       const todayUtc = moment(); 
@@ -28,7 +28,7 @@ const WeekKw = () => {
       console.log('78787878',startOfDayUtc,endOfDayUtc);
       const payload={
         
-          deviceId:"4",
+          deviceId:selectedDevice.id,//"4",
           // mesurementUnitId:1,//1-kwh,7-usage bill
           frequencyId:3,
           // startDate:'2024-04-01 00:00:00',

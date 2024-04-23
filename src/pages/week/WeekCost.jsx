@@ -5,7 +5,7 @@ import { getEngergyUsageKwhByDateRange } from '../../action/device';
 import moment from 'moment';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
-const WeekCost = () => {
+const WeekCost = ({selectedDevice}) => {
 
   // const getCurrentWeekDates = () => {
   //   const startOfWeek = moment().utc().startOf('week');
@@ -18,7 +18,7 @@ const WeekCost = () => {
   
     useEffect(()=>{
         loadEngergyUsageKwhByDateRange();
-      },[]);
+      },[selectedDevice]);
   
       const loadEngergyUsageKwhByDateRange=async()=>{
         const currentDate = moment.utc();
@@ -27,7 +27,7 @@ const WeekCost = () => {
       
 
         const payload={
-            deviceId:"4",
+            deviceId:selectedDevice.id,//"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:3,
             // startDate:'2024-04-01 12:00',
