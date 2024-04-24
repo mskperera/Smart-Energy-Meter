@@ -6,7 +6,7 @@ import {getEngergyUsageNow} from '../../action/device';
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
 
-const Current = () => {
+const Current = ({selectedDevice}) => {
 
   const [objC,setObjC] = useState({
     maxCValue:15,
@@ -26,11 +26,11 @@ const Current = () => {
 
   useEffect(()=>{
     loadChartData();
-  },[]);
+  },[selectedDevice]);
 
   const loadChartData=async()=>{
     const payload={
-      deviceId:"4",
+      deviceId:selectedDevice.id,//"4",
       mesurementUnitId:3
     }
    const result=await getEngergyUsageNow(payload);

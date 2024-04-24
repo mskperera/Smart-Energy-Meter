@@ -15,7 +15,7 @@ const AreaChart = () => {
       {
         name: 'Prediction',
         type: 'line',
-        data: [40, 50, 60, 70, 80, 90, 100, 110, 120],
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 120],
         color: 'rgba(255, 99, 71)',
       }
     ],
@@ -30,7 +30,7 @@ const AreaChart = () => {
       }
     },
     xaxis: {
-      categories: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      categories: [1, 2, 3, 4, 5, 6, 7, 8, 9,10],
       labels: {
         style: {
           colors: ['white'],

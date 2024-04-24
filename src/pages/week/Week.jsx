@@ -15,10 +15,15 @@ function Week() {
     setActiveTab(tab);
   };
 
+  const [device, setDevice] = useState('');
+
+  const onChangeDeviceHandler=(device)=>{
+    setDevice(device);
+  }
 
   return (
     <div className='home'>  
-      <Navbar/>
+      <Navbar  onChangeDevice={onChangeDeviceHandler}/>
       <nav className='nav-bar d-flex align-items-center justify-content-center w-100'>
         <div className='back'>
             <ul className='nav-bar-links'>
@@ -34,10 +39,10 @@ function Week() {
     </nav>
     <div className='page-2 body'>
       <div className='chart-week-kw'>
-       <WeekKw/>
+       <WeekKw selectedDevice={device}/>
       </div>
       <div className='chart-week-cost'>
-        <WeekCost/>
+        <WeekCost selectedDevice={device}/>
       </div>
     </div>
       <BottomNav/>

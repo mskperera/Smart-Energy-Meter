@@ -34,7 +34,7 @@ const TodayCost = ({selectedDevice}) => {
     
 
         const payload={
-            deviceId:selectedDevice.id, //"4",
+            deviceId:selectedDevice.id,//"4",
             mesurementUnitId:7,//1-kwh,7-usage bill
             frequencyId:1,
             startDate: startOfDayUtc, 

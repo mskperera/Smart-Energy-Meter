@@ -19,6 +19,7 @@ import CostChartData from './boxdata/CostChartData'
 import LineChart from './LineChart'
 
 import DeviceName from './DeviceName'
+import AreaChart from './AreaChart'
 
 // import home from '../../assent/home.jpg'
 
@@ -28,18 +29,18 @@ const Home = () => {
 
   const [device, setDevice] = useState('');
 
-  const onchangeDeviceHandler=(device)=>{
+  const onChangeDeviceHandler=(device)=>{
     setDevice(device);
   }
 
   return (
     <div className='home'>
-        <Navbar className='navnav' onChangeDevice={onchangeDeviceHandler}/>
+        <Navbar className='navnav' onChangeDevice={onChangeDeviceHandler}/>
         <Menu className='navnav1'/>
     <div className='body'>
         <div className='device-active'>
           <div className='curcle'></div>
-          <div className='device-name'><DeviceName/></div>
+          <div className='device-name'><DeviceName selectedDevice={device}/></div>
         </div>
         <div className='page'>
           <div className='chart-kw'>
@@ -49,23 +50,23 @@ const Home = () => {
           </div>
           
           <div className='chart-now-kw'>
-            <HomeChart data=''/>
+            <HomeChart data=''selectedDevice={device}/>
           </div>
           <div className='chart-now-cost'>
-            <HomeCostChart data=''/>
+            <HomeCostChart data=''selectedDevice={device}/>
           </div>
 
         </div>
           <div className='chart-area d-flex align-items-center justify-content-center'>
             {/* <AreaChart/> */}
-            <LineChart/>
+            <LineChart selectedDevice={device}/>
           </div>
         <div className='page-bottom'>
-          <div className='vol'><Voltage/></div>
-          <div className='vol'><Current/></div>
-          <div className='vol'><Power/></div>
-          <div className='pow'><Powerfact/></div>
-          <div className='pow'><Hertz/></div>
+          <div className='vol'><Voltage selectedDevice={device}/></div>
+          <div className='vol'><Current selectedDevice={device}/></div>
+          <div className='vol'><Power selectedDevice={device}/></div>
+          <div className='pow'><Powerfact selectedDevice={device}/></div>
+          <div className='pow'><Hertz selectedDevice={device}/></div>
         </div>
     </div>
 

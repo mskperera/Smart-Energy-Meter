@@ -67,7 +67,7 @@ const Navbar = ({onChangeDevice}) => {
             {selectedDevice && <span className="selected-device-label">{" "+selectedDevice.name}</span>}
           </label>
           {openDevicesName && (
-            <div className='drop'>
+            <div className='drop1'>
               <ul>
                 {deviceNames.map((device, index) => (
                   <li key={index} onClick={() => handleDeviceSelect(device.name)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>{device.name}</li>
@@ -90,17 +90,21 @@ const Navbar = ({onChangeDevice}) => {
             </div>
           )}
         </div>
-        <a href='/notify'><BiSolidBellRing color='#191970' size={25} /></a>
+        <div className='bell'>
+          <a href='/notify'><BiSolidBellRing color='#191970' size={25} className='overlay__close'/></a>
+          <span className="badge1">2</span>
+        </div>
       </div>
 
       <div className='small'>
         <div className='bell'>
-          <a href='/notify'><BiSolidBellRing color='#191970' size={25} /></a>
+          <a href='/notify'><BiSolidBellRing color='#191970' size={25} className='overlay__close'/></a>
+          <span className="badge">2</span>
         </div>
         <div className='menu-trigger relative devicess'>
-          <MdDevices onClick={() => setOpenDevicesName(!openDevicesName)} color='#191970' size={25}  />
+          <MdDevices onClick={() => setOpenDevicesName(!openDevicesName)} color='#191970' size={25} className='overlay__close'  />
           {openDevicesName && (
-            <div className='drop'>
+            <div className='drop1'>
               <ul>
                 {deviceNames.map((device, index) => (
                   <li key={index} onClick={() => handleDeviceSelect(device.name)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>{device.name}</li>
@@ -113,7 +117,7 @@ const Navbar = ({onChangeDevice}) => {
           <GiHamburgerMenu color='#191970' fontSize={27} className='hammenu' onClick={() => setToggleMenu(true)} />
           {toggleMenu && (
             <div className='app__navbar-smallscreen_overlay flex__center slide-bottom'>
-              <MdClose fontSize={27} color='#191970' className='overlay__close' onClick={() => setToggleMenu(false)} />
+              <MdClose fontSize={27} className='overlay__close' onClick={() => setToggleMenu(false)} />
               <ul className='app__navbar-smaillscreen-links'>
                 <li><a href='/management'>Device Management</a></li>
                 <li><a href='/profile'> Profile</a></li>

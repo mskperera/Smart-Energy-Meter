@@ -329,7 +329,7 @@
         margin: 0%;
         flex-direction: column;
         padding: 0rem;
-        margin-top: 15px;
+        margin-top: 30px;
         margin-left: 380px;
     }
 
@@ -617,7 +617,7 @@
         justify-content: space-between;
         margin: 0%;
         margin-top: -20px;
-        height: 120vh;
+        height: 110vh;
     }
 
     .chart-kw{
@@ -630,13 +630,13 @@
         margin: 0%;
         flex-direction: column;
         padding: 0rem;
-        margin-top: -150px;
+        margin-top: -110px;
         margin-left: 0px;
     }
     
     .chart-area{
         flex: 1;
-        width: 300px;
+        width: 280px;
         display: flex;
         /* position: absolute; */
         justify-content:center;
@@ -644,21 +644,21 @@
         margin: 0%;
         flex-direction: column;
         padding: 0rem;
-        margin-top: -150px;
-        margin-left: 26px;
+        margin-top: -70px;
+        margin-left: 36px;
     }
 
     .chart-now-cost{
-        width: 10px;
-        margin-top:-220px;
+        width: 100px;
+        margin-top:-160px;
         align-items: center;
         justify-content: center;
-        margin-bottom: 50px;
+        margin-bottom: 0px;
         margin-right: 0px;
     }
 
     .chart-now-kw{
-        margin-top: -280px;
+        margin-top: -220px;
         width: 10px;
         align-items: center;
         justify-content: center;
@@ -725,15 +725,15 @@
     .device-active{
         display: flex;
         /* position: absolute; */
-        width: 125px;
-        height: 50px;
+        width: 150px;
+        height: 40px;
         color: #ff0066;
         align-items: center;
         border-radius: 10px;
         justify-content: center;
         background:  rgba(11, 11, 11, 0.5);
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-        margin-top: 20px;
+        margin-top: 25px;
     }
 
     .device-name{
@@ -758,4 +758,19 @@
     }
 
     }
+
+    /* @media screen and (max-width:414px){
+        .chart-area{
+            flex: 1;
+            width: 280px;
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            margin: 0%;
+            flex-direction: column;
+            padding: 0rem;
+            margin-top: -70px;
+            margin-left: 50px;
+        }
+    } */
 

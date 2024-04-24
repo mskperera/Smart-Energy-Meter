@@ -5,7 +5,7 @@ import {getEngergyUsageNow} from '../../action/device';
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
 
-const Voltage = () => {
+const Voltage = ({selectedDevice}) => {
 
   const [objV,setObjV] = useState({
     maxVValue:250,
@@ -25,11 +25,11 @@ const Voltage = () => {
 
   useEffect(()=>{
     loadChartData();
-  },[]);
+  },[selectedDevice]);
 
   const loadChartData=async()=>{
     const payload={
-      deviceId:"4",
+      deviceId:selectedDevice.id,//"4",
       mesurementUnitId:3
     }
    const result=await getEngergyUsageNow(payload);

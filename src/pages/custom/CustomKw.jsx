@@ -27,7 +27,7 @@ const CustomKw = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
      console.log('utcEndDate',utcEndDate);     
       
         const payload={
-            deviceId:"4",
+            deviceId:selectedDevice.id,//"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:3,
             startDate:utcStartDate,
