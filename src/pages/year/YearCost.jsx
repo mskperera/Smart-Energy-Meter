@@ -53,8 +53,8 @@ const loadEngergyUsageKwhByDateRange=async()=>{
         //    const ruppyArr=[];
     
            for(let i=0;i<charData.length;i++){
-            months.push(charData[i].monthName);
-            monthCostArr.push(charData[i].usageBillPerMonth)
+            months.push(charData[i].month);
+            monthCostArr.push(charData[i].maxKwh)
            // ruppyArr.push(charData[i].usageBill)
            }
           

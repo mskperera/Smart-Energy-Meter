@@ -58,8 +58,8 @@ const YearKw = ({selectedDevice}) => {
         //    const ruppyArr=[];
     
            for(let i=0;i<charData.length;i++){
-            months.push(charData[i].monthName);
-            monthKwArr.push(charData[i].kwhPerMonth)
+            months.push(charData[i].month);
+            monthKwArr.push(charData[i].maxKwh)
            // ruppyArr.push(charData[i].usageBill)
            }
           

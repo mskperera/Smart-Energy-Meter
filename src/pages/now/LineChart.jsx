@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import './AreaChart.css';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Filler } from 'chart.js';
+import { Line,Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Filler, BarController, BarElement } from 'chart.js';
 import moment from 'moment';
-import { getEngergyUsageKwhByDateRange } from '../../action/device';
+import {  getEngergyUsageKwhByDateRangePrediction } from '../../action/device';
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler);
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler, BarController, BarElement);
 
-function LineChart(z) {
+function LineChart({ selectedDevice}) {
 
   useEffect(() => {
-    loadEngergyUsageKwhByDateRange();
-  }, []);
+    loadEngergyUsageKwhByDateRangePrediction();
+  }, [selectedDevice]);
 
-  const loadEngergyUsageKwhByDateRange = async () => {
+  const loadEngergyUsageKwhByDateRangePrediction = async () => {
     const currentYear = moment().utc();
     const startOfYear = currentYear.startOf('year').format('YYYY-MM-DD HH:mm:ss');
     const endOfYear = currentYear.endOf('year').format('YYYY-MM-DD HH:mm:ss');
 
     const payload = {
-      deviceId: "4",
-      frequencyId: 4,
+      deviceId:selectedDevice.id,// "4",
+      frequencyId:3,
       // measurementUnitId: 0,
-      startDate: startOfYear,
-      endDate: endOfYear,
+      startDate:"2024-04-01 18:30",// startOfYear,
+      endDate:"2024-04-30 18:30",// endOfYear,
     }
 
-    const resultMonth = await getEngergyUsageKwhByDateRange(payload);
+    const resultMonth = await getEngergyUsageKwhByDateRangePrediction(payload);
     console.log('1 Month', resultMonth.data)
 
     const charData = resultMonth.data.recordset;
@@ -35,9 +35,9 @@ function LineChart(z) {
     const predictArr = [];
 
     for (let i = 0; i < charData.length; i++) {
-      months.push(charData[i].month);
-      monthKwArr.push(charData[i].kwhPerMonth);
-      predictArr.push(charData[i].predictedKwhPerMonth);
+      months.push(charData[i].day);
+      monthKwArr.push(charData[i].kwhPerDay);
+      predictArr.push(charData[i].predictedKwhPerDay);
       // predictArr.push(charData[i].predictedKwhPerMonth);
     }
 
@@ -67,6 +67,12 @@ function LineChart(z) {
         // backgroundColor: 'black',
         backgroundColor: 'rgba(54,162,235, 0.3)',
         fill: true,
+      },
+      {
+        label: 'Bar Data',
+        data: [10, 20, 30, 40, 50], // Sample data for the bar graph
+        backgroundColor: 'rgba(255, 99, 132, 0.8)',
+        type: 'bar', // Set the type to 'bar' for bar graph
       }
     ];
 
@@ -95,7 +101,7 @@ function LineChart(z) {
         title: {
           position: 'top',
           display: true,
-          text: "Months",
+          text: "Month",
           // text: "Trending To:",
           // font: {
           //   size: 20

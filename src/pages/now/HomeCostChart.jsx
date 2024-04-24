@@ -10,7 +10,7 @@ import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 import { FaCoins } from "react-icons/fa";
 ChartJS.register(ArcElement, Tooltip);
 
-function HomeCostChart  ()  {
+function HomeCostChart  ({selectedDevice})  {
   const [obj,setObj]=useState({
     maxValue:100000,
     minValue:0,
@@ -28,11 +28,11 @@ function HomeCostChart  ()  {
 
   useEffect(()=>{
     loadChartData();
-  },[]);
+  },[selectedDevice]);
 
   const loadChartData=async()=>{
     const payload={
-      deviceId:"4",
+      deviceId:selectedDevice.id,//"4",
       mesurementUnitId:1,
       // mesurementUnitId:1,
     }

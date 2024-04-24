@@ -87,7 +87,7 @@ h2{
   }
   .notification-item .time{
     color: #fff;
-    text-align: center;
+    text-align: right;
     font-size: 14px;
     flex:2;
   }

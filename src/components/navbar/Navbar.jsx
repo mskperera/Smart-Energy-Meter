@@ -92,7 +92,7 @@ const Navbar = ({onChangeDevice}) => {
         </div>
         <div className='bell'>
           <a href='/notify'><BiSolidBellRing color='#191970' size={25} className='overlay__close'/></a>
-          <span className="badge1">100</span>
+          <span className="badge1">2</span>
         </div>
       </div>
 

@@ -4,10 +4,10 @@ import {getEngergyUsageNow} from '../../action/device';
 // import { TbHomeStats } from "react-icons/tb";
 import './Homechart.css'
 import { TbHomeStats } from "react-icons/tb";
-import { Chart as ChartJS, ArcElement, Tooltip, Colors } from "chart.js";
+import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
 
-const HomeChart = () => {
+const HomeChart = ({selectedDevice}) => {
 
 
   
@@ -34,11 +34,11 @@ const HomeChart = () => {
 
   useEffect(()=>{
     loadChartData();
-  },[]);
+  },[selectedDevice]);
 
   const loadChartData=async()=>{
     const payload={
-      deviceId:"4",
+      deviceId:selectedDevice.id,//"4",
       mesurementUnitId:1,
       // mesurementUnitId:8
     }

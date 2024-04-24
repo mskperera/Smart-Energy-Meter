@@ -5,14 +5,14 @@ import { getConnectionSettingsByDeviceId} from '../../action/deviceSettings'
 
 // import { Link } from 'react-router-dom'
 
-function DeviceName () {
+function DeviceName ({selectedDevice}) {
 
     const [editedDeviceName, setEditedDeviceName] = useState('');
     // const [newDeviceName, setNewDeviceName] = useState();
 
  
 
-  const deviceId = 4;
+  const deviceId = selectedDevice.id;
 //   const consumerCategoryId = 3;
 //   const supplierId = 2;
 
@@ -30,7 +30,7 @@ function DeviceName () {
 
     useEffect(()=>{
         loadDeviceConnectionData();
-    },[])
+    },[selectedDevice])
        
 
 
