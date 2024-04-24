@@ -22,6 +22,8 @@ import UserRegister from './pages/register/UserRegister';
 import DeviceRegister from './pages/register/DeviceRegister';
 import Notify from './pages/alert/Notify';
 import BillingSession from './pages/session/BillingSession';
+// import Navbar from './components/navbar/Navbar';
+
 // import { GlobalContext } from './context/GlobalContext';
 
 
@@ -32,7 +34,10 @@ import BillingSession from './pages/session/BillingSession';
 function App() {
   return (
     // <GlobalContext>
+    <>
+    {/* <Navbar className='navnav'/> */}
     <BrowserRouter>
+   
          <Routes>
         <Route path='/' element={<Login/>}/>
         <Route path='/userregister/:userRegId/:saveType' element={<UserRegister/>}/>
@@ -56,6 +61,7 @@ function App() {
         <Route path='/device' element={<DeviceMan/>}/>
       </Routes>
     </BrowserRouter>
+    </>
       // </GlobalContext> 
   );
 }

@@ -3,10 +3,15 @@ import './Login.css'
 import {login} from '../../action/userAuth'
 import {useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import { getDevicesByUserId } from '../../action/device';
+import { useDispatch } from 'react-redux';
+import deviceReducer, { setDropDevices } from '../../state/device/deviceReducer';
 
 
 
 function Login() {
+
+  const dispatch = useDispatch();
  
     const navigate=useNavigate();
     const [errorMessage,setErrorMessage]=useState('');
@@ -20,12 +25,23 @@ function Login() {
     });
     
 
+
+   
+  
+    
+    
+ 
+
+
       const handleLogin = async (e) => {
         e.preventDefault();
+
+      
     
         try {
           const response = await login(formData);
           console.log('response',response);
+         // loadDevicesByUserId();
           // if (response.status === 200) {
              navigate('/home');
           //   console.log('Login successful! Navigate to home page.');

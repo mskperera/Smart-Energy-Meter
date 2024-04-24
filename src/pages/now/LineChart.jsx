@@ -4,12 +4,14 @@ import { Line,Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Filler, BarController, BarElement } from 'chart.js';
 import moment from 'moment';
 import {  getEngergyUsageKwhByDateRangePrediction } from '../../action/device';
+import { getbillingSessionByDeviceId } from '../../action/billingSession';
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler, BarController, BarElement);
 
 function LineChart({ selectedDevice}) {
 
   useEffect(() => {
+    if(selectedDevice)
     loadEngergyUsageKwhByDateRangePrediction();
   }, [selectedDevice]);
 
@@ -18,12 +20,19 @@ function LineChart({ selectedDevice}) {
     const startOfYear = currentYear.startOf('year').format('YYYY-MM-DD HH:mm:ss');
     const endOfYear = currentYear.endOf('year').format('YYYY-MM-DD HH:mm:ss');
 
+const sesstionDetailsRes= await getbillingSessionByDeviceId(selectedDevice.id);
+const sesstionDetailsArr = sesstionDetailsRes.data;
+console.log('sesstionDetailsArr',sesstionDetailsArr);
+const currentSession=sesstionDetailsArr[sesstionDetailsArr.length-1];
+console.log('currentSession',currentSession);
+
+
     const payload = {
       deviceId:selectedDevice.id,// "4",
       frequencyId:3,
       // measurementUnitId: 0,
-      startDate:"2024-04-01 18:30",// startOfYear,
-      endDate:"2024-04-30 18:30",// endOfYear,
+      startDate:currentSession.startDate,//currentSession"2024-04-01 18:30",// startOfYear,
+      endDate:currentSession.endDate,//"2024-04-30 18:30",// endOfYear,
     }
 
     const resultMonth = await getEngergyUsageKwhByDateRangePrediction(payload);
@@ -68,12 +77,12 @@ function LineChart({ selectedDevice}) {
         backgroundColor: 'rgba(54,162,235, 0.3)',
         fill: true,
       },
-      {
-        label: 'Bar Data',
-        data: [10, 20, 30, 40, 50], // Sample data for the bar graph
-        backgroundColor: 'rgba(255, 99, 132, 0.8)',
-        type: 'bar', // Set the type to 'bar' for bar graph
-      }
+      // {
+      //   label: 'Bar Data',
+      //   data: [10, 20, 30, 40, 50], 
+      //   backgroundColor: 'rgba(255, 99, 132, 0.8)',
+      //   type: 'bar', 
+      // }
     ];
 
     setData({ ...data, labels: months, datasets: datasets0 });
