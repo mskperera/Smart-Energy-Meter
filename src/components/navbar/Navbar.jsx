@@ -88,7 +88,7 @@ const dispatch=useDispatch();
           {openDevicesName && (
             <div className='drop1'>
               <ul>
-                {deviceNames?.map((device, index) => (
+                {deviceNames.map((device, index) => (
                   <li key={index} onClick={() => handleDeviceSelect(device.name)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>{device.name}</li>
                 ))}
               </ul>

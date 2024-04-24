@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Home.css'
 
 import Navbar from '../../components/navbar/Navbar'
@@ -36,13 +36,16 @@ const Home = () => {
 
    const deviceNames=useSelector(state=>state.device.dropDeviceList);
    const defautSeelctedDevie=deviceNames[0]
+   useEffect(()=>{
+setDevice(defautSeelctedDevie);
+   },[deviceNames])
 
 
   return (
     <div className='home'>
         <Navbar className='navnav' onChangeDevice={onChangeDeviceHandler}/>
         <Menu className='navnav1'/>
-  {deviceNames && <div className='body'>
+  {device && <div className='body'>
         <div className='device-active'>
           <div className='curcle'></div>
           <div className='device-name'><DeviceName selectedDevice={device}/></div>
@@ -57,24 +60,24 @@ const Home = () => {
           </div>
           
           <div className='chart-now-kw'>
-            <HomeChart data='' selectedDevice={device}/>
+            <HomeChart data='' selectedDevice={device || defautSeelctedDevie}/>
           </div>
           <div className='chart-now-cost'>
-            <HomeCostChart data=''selectedDevice={device}/>
+            <HomeCostChart data=''selectedDevice={device  || defautSeelctedDevie}/>
           </div>
 
         </div>
           <div className='chart-area d-flex align-items-center justify-content-center'>
             {/* <AreaChart/> */}
-            <LineChart selectedDevice={device}/>
+            <LineChart selectedDevice={device  || defautSeelctedDevie}/>
            
           </div>
         <div className='page-bottom'>
-          <div className='vol'><Voltage selectedDevice={device}/></div>
-          <div className='vol'><Current selectedDevice={device}/></div>
-          <div className='vol'><Power selectedDevice={device}/></div>
-          <div className='pow'><Powerfact selectedDevice={device}/></div>
-          <div className='pow'><Hertz selectedDevice={device}/></div>
+          <div className='vol'><Voltage selectedDevice={device  || defautSeelctedDevie}/></div>
+          <div className='vol'><Current selectedDevice={device  || defautSeelctedDevie}/></div>
+          <div className='vol'><Power selectedDevice={device  || defautSeelctedDevie}/></div>
+          <div className='pow'><Powerfact selectedDevice={device  || defautSeelctedDevie}/></div>
+          <div className='pow'><Hertz selectedDevice={device  || defautSeelctedDevie}/></div>
         </div>
     </div>}
 
