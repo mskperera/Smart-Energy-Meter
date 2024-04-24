@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { CgProfile } from 'react-icons/cg';
 import { getDevicesByUserId } from '../../action/device';
+import { useDispatch, useSelector } from 'react-redux';
+import { setDropDevices } from '../../state/device/deviceReducer';
 // import { GlobalContext } from '../../context/GlobalContext';
 
 const Navbar = ({onChangeDevice}) => {
@@ -18,26 +20,43 @@ const Navbar = ({onChangeDevice}) => {
 
   const [deviceNames, setDeviceNames] = useState([]);
 
+const dispatch=useDispatch();
 
+
+ const loadDevicesByUserId = async () => {
+  const userData=JSON.parse(localStorage.getItem('userData'));  
+  
+  console.log('userData',userData.userId);
+  const result = await getDevicesByUserId(userData.userId);
+  console.log('deviceDetails', result);
+  
+  if (result.status === 200) {
+    const devices = result.data.map(device => ({ id: device.deviceId, name: device.deviceName }));
+    console.log('devices12123313',devices);
+     setDeviceNames(devices);
+   dispatch(setDropDevices({dropDeviceList:devices}));
+  }
+  
+}
   useEffect(() => {
     loadDevicesByUserId();
   }, []); 
 
   
   
-  const loadDevicesByUserId = async (userId) => {
-    const userData=JSON.parse(localStorage.getItem('userData'));  
+  // const loadDevicesByUserId = async (userId) => {
+  //   const userData=JSON.parse(localStorage.getItem('userData'));  
     
-    console.log('userData',userData.userId);
-    const result = await getDevicesByUserId(userData.userId);
-    console.log('deviceDetails', result);
+  //   console.log('userData',userData.userId);
+  //   const result = await getDevicesByUserId(userData.userId);
+  //   console.log('deviceDetails', result);
     
-    if (result.status === 200) {
-      const devices = result.data.map(device => ({ id: device.deviceId, name: device.deviceName }));
-      setDeviceNames(devices);
-    }
+  //   if (result.status === 200) {
+  //     const devices = result.data.map(device => ({ id: device.deviceId, name: device.deviceName }));
+  //     setDeviceNames(devices);
+  //   }
     
-  }
+  // }
   
   const handleDeviceSelect = (device) => {
     const selectedDeviceObject = deviceNames.find(item => item.name === device);
@@ -69,7 +88,7 @@ const Navbar = ({onChangeDevice}) => {
           {openDevicesName && (
             <div className='drop1'>
               <ul>
-                {deviceNames.map((device, index) => (
+                {deviceNames?.map((device, index) => (
                   <li key={index} onClick={() => handleDeviceSelect(device.name)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>{device.name}</li>
                 ))}
               </ul>

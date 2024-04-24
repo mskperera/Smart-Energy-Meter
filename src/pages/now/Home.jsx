@@ -20,6 +20,7 @@ import LineChart from './LineChart'
 
 import DeviceName from './DeviceName'
 import AreaChart from './AreaChart'
+import { useSelector } from 'react-redux'
 
 // import home from '../../assent/home.jpg'
 
@@ -33,11 +34,15 @@ const Home = () => {
     setDevice(device);
   }
 
+   const deviceNames=useSelector(state=>state.device.dropDeviceList);
+   const defautSeelctedDevie=deviceNames[0]
+
+
   return (
     <div className='home'>
         <Navbar className='navnav' onChangeDevice={onChangeDeviceHandler}/>
         <Menu className='navnav1'/>
-    <div className='body'>
+  {deviceNames && <div className='body'>
         <div className='device-active'>
           <div className='curcle'></div>
           <div className='device-name'><DeviceName selectedDevice={device}/></div>
@@ -47,10 +52,12 @@ const Home = () => {
             {/* <Link to={'/service'}><CostChartData/></Link> */}
             <CostChartData/>
             <KwChartData/>
+            {JSON.stringify(device)}
+            {/* {JSON.stringify(defautSeelctedDevie)} */}
           </div>
           
           <div className='chart-now-kw'>
-            <HomeChart data=''selectedDevice={device}/>
+            <HomeChart data='' selectedDevice={device}/>
           </div>
           <div className='chart-now-cost'>
             <HomeCostChart data=''selectedDevice={device}/>
@@ -60,6 +67,7 @@ const Home = () => {
           <div className='chart-area d-flex align-items-center justify-content-center'>
             {/* <AreaChart/> */}
             <LineChart selectedDevice={device}/>
+           
           </div>
         <div className='page-bottom'>
           <div className='vol'><Voltage selectedDevice={device}/></div>
@@ -68,7 +76,7 @@ const Home = () => {
           <div className='pow'><Powerfact selectedDevice={device}/></div>
           <div className='pow'><Hertz selectedDevice={device}/></div>
         </div>
-    </div>
+    </div>}
 
         <BottomNav className='bottombar1'/>
       </div>

@@ -33,6 +33,7 @@ const HomeChart = ({selectedDevice}) => {
   },[objKw]);
 
   useEffect(()=>{
+    if(selectedDevice)
     loadChartData();
   },[selectedDevice]);
 
