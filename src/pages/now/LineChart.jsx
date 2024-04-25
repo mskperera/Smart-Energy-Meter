@@ -16,9 +16,9 @@ function LineChart({ selectedDevice}) {
   }, [selectedDevice]);
 
   const loadEngergyUsageKwhByDateRangePrediction = async () => {
-    const currentYear = moment().utc();
-    const startOfYear = currentYear.startOf('year').format('YYYY-MM-DD HH:mm:ss');
-    const endOfYear = currentYear.endOf('year').format('YYYY-MM-DD HH:mm:ss');
+    // const currentYear = moment().utc();
+    // const startOfYear = currentYear.startOf('year').format('YYYY-MM-DD');
+    // const endOfYear = currentYear.endOf('year').format('YYYY-MM-DD');
 
 const sesstionDetailsRes= await getbillingSessionByDeviceId(selectedDevice.id);
 const sesstionDetailsArr = sesstionDetailsRes.data;
@@ -26,13 +26,16 @@ console.log('sesstionDetailsArr',sesstionDetailsArr);
 const currentSession=sesstionDetailsArr[sesstionDetailsArr.length-1];
 console.log('currentSession',currentSession);
 
+const startDate = moment(currentSession.startDate).format('YYYY-MM-DD');
+const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
+
 
     const payload = {
       deviceId:selectedDevice.id,// "4",
       frequencyId:3,
       // measurementUnitId: 0,
-      startDate:currentSession.startDate,//currentSession"2024-04-01 18:30",// startOfYear,
-      endDate:currentSession.endDate,//"2024-04-30 18:30",// endOfYear,
+      startDate:startDate,//currentSession"2024-04-01 18:30",// startOfYear,
+      endDate:endDate,//"2024-04-30 18:30",// endOfYear,
     }
 
     const resultMonth = await getEngergyUsageKwhByDateRangePrediction(payload);
@@ -44,9 +47,9 @@ console.log('currentSession',currentSession);
     const predictArr = [];
 
     for (let i = 0; i < charData.length; i++) {
-      months.push(charData[i].day);
+      months.push(charData[i].date);
       monthKwArr.push(charData[i].kwhPerDay);
-      predictArr.push(charData[i].predictedKwhPerDay);
+      predictArr.push(charData[i].kwhPerDayPredicted);
       // predictArr.push(charData[i].predictedKwhPerMonth);
     }
 
@@ -110,7 +113,7 @@ console.log('currentSession',currentSession);
         title: {
           position: 'top',
           display: true,
-          text: "Month",
+          text: "Date",
           // text: "Trending To:",
           // font: {
           //   size: 20

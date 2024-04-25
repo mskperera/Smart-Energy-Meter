@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Week.css'
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/navbar/Navbar'
 import BottomNav from '../../components/bottommenu/BottomNav'
 import WeekKw from './WeekKw'
 import WeekCost from './WeekCost'
+import { useSelector } from 'react-redux'
 
 
 function Week() {
@@ -20,6 +21,12 @@ function Week() {
   const onChangeDeviceHandler=(device)=>{
     setDevice(device);
   }
+
+  const deviceNames=useSelector(state=>state.device.dropDeviceList);
+  const defaultSelctedDevie=deviceNames[0]
+  useEffect(()=>{
+setDevice(defaultSelctedDevie);
+  },[deviceNames])
 
   return (
     <div className='home'>  
@@ -39,10 +46,10 @@ function Week() {
     </nav>
     <div className='page-2 body'>
       <div className='chart-week-kw'>
-       <WeekKw selectedDevice={device}/>
+       <WeekKw selectedDevice={device || defaultSelctedDevie}/>
       </div>
       <div className='chart-week-cost'>
-        <WeekCost selectedDevice={device}/>
+        <WeekCost selectedDevice={device || defaultSelctedDevie}/>
       </div>
     </div>
       <BottomNav/>
