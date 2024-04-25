@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MdDevices, MdClose } from "react-icons/md";
 import { BiSolidBellRing } from "react-icons/bi";
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -22,6 +22,8 @@ const Navbar = ({onChangeDevice}) => {
 
 const dispatch=useDispatch();
 
+const dropdownRef = useRef(null);
+
 
  const loadDevicesByUserId = async () => {
   const userData=JSON.parse(localStorage.getItem('userData'));  
@@ -41,6 +43,21 @@ const dispatch=useDispatch();
   useEffect(() => {
     loadDevicesByUserId();
   }, []); 
+
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpenDevicesName(false);
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   
   
@@ -80,7 +97,7 @@ const dispatch=useDispatch();
 
       <div className='app__navbar-login'>
         <a href='/userlist'>User Management</a>
-        <div className='menu-trigger relative'>
+        <div className='menu-trigger relative' ref={dropdownRef}>
           <label>
             <MdDevices onClick={() => setOpenDevicesName(!openDevicesName)} color='#191970' size={25} />
             {selectedDevice && <span className="selected-device-label">{" "+selectedDevice.name}</span>}
@@ -96,7 +113,7 @@ const dispatch=useDispatch();
           )}
         </div>
         <a href='/management'>Device Management</a>
-        <div className='menu-trigger relative'>
+        <div className='menu-trigger relative' ref={dropdownRef}>
           <CgProfile onClick={() => setOpen(!open)} color='#191970' size={25} />
           {open && (
             <div className='drop'>
@@ -120,7 +137,7 @@ const dispatch=useDispatch();
           <a href='/notify'><BiSolidBellRing color='#191970' size={25} className='overlay__close'/></a>
           <span className="badge">2</span>
         </div>
-        <div className='menu-trigger relative devicess'>
+        <div className='menu-trigger relative devicess' ref={dropdownRef}>
           <MdDevices onClick={() => setOpenDevicesName(!openDevicesName)} color='#191970' size={25} className='overlay__close'  />
           {openDevicesName && (
             <div className='drop1'>

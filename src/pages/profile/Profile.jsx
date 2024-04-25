@@ -31,7 +31,8 @@ const Profile = () => {
             <>
               <div className="card-header">
                 <img
-                  src={profileData[0].profilePic}
+                  // src={profileData[0].profilePic}
+                  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRleAjFBTEVaNLtzm33Xg_ZWF6q0Gk14Vz3YerM4QfAfBAmzTmlOXXRowWgyBVrxAPbmhI&usqp=CAU'
                   alt="Profile"
                   className="rounded-circle"
                   style={{ width: '150px', height: '150px', objectFit: 'cover' }}

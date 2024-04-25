@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import BottomNav from '../../components/bottommenu/BottomNav'
+import React, { useState } from 'react'
+import BottomNav from '../../../components/bottommenu/BottomNav'
 import { Link } from 'react-router-dom'
-import Navbar from '../../components/navbar/Navbar'
-import './Custom.css'
-import CustomKw from './CustomKw'
-import CustomCost from './CustomCost'
-import './Date.css'
+import Navbar from '../../../components/navbar/Navbar'
+import '../Custom.css'
+import './CustomNew.css'
+import './Admin.css'
+import CustomKw from './CustomKwAdmin'
+import CustomCost from './CustomCostAdmin'
+import './DateAdmin.css'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useSelector } from 'react-redux'
 
 
-function Custom() {
+function Admin() {
 
   const [activeTab, setActiveTab] = useState('Now');
 
@@ -44,12 +45,6 @@ function Custom() {
     setDevice(device);
   }
 
-  const deviceNames=useSelector(state=>state.device.dropDeviceList);
-const defaultSelctedDevie=deviceNames[0]
-useEffect(()=>{
-setDevice(defaultSelctedDevie);
-},[deviceNames])
-
     
     return (
       
@@ -63,14 +58,13 @@ setDevice(defaultSelctedDevie);
                     <Link to={"/week"}><li className='btn btn-sm btn-light'>Week</li></Link>
                     <Link to={"/month"}><li className='btn btn-sm btn-light'>Month</li></Link>
                     <Link to={"/year"}><li className='btn btn-sm btn-light'>Year</li></Link>
-                    <Link to={"/custom"}><li className={`btn btn-sm btn-primary ${activeTab === 'Now' ? 'active' : ''}`}
-                onClick={() => handleTabClick('Now')}>Custom</li></Link>
+                    <Link to={"/custom"}><li className='btn btn-sm btn-light'>Custom</li></Link>
                 </ul>
               </div>
         </div>
-        <div className='page-5 body icon'>
-          <div className='date'>
-          <div className='picker'>
+        <div className='page-admin body-admin '>
+          <div className='dateadmin'>
+          <div className='picker-admin icon '>
         <div>
             <DatePicker
                 selected={startDate}
@@ -93,16 +87,20 @@ setDevice(defaultSelctedDevie);
                 placeholderText="End Date"
             />
          </div>
-         
+         &nbsp;
          <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button>
     </div>
           </div>
           
-          <div className='chart-pick-kw'>
-            <CustomKw selectedDevice={device || defaultSelctedDevie}   startDate={startDate } endDate={endDate} isSearchLoading={isSearchLoading}/>
-          </div>
-          <div className='chart-pick-cost'>
-            <CustomCost selectedDevice={device || defaultSelctedDevie} startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
+          <div className='custom-admin-chart'>
+
+            <div className='chart-admin-kw'>
+                <CustomKw selectedDevice={device}   startDate={startDate } endDate={endDate} isSearchLoading={isSearchLoading}/>
+            </div>
+            
+            <div className='chart-admin-cost'>
+                <CustomCost selectedDevice={device} startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
+            </div>
           </div>
 
         </div>
@@ -111,4 +109,4 @@ setDevice(defaultSelctedDevie);
       )
 }
 
-export default Custom
+export default Admin

@@ -46,7 +46,7 @@ const WeekKw = ({selectedDevice}) => {
       // setEngergyUsagekwhByDateRangeWeeks(resultweeks.data.recordsets);
     
        
-        //  console.log('6666666',resultweeks.data)
+         console.log('6666666',resultweeks.data)
        
          const charData=resultweeks.data.recordset;      
       
