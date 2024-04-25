@@ -21,6 +21,7 @@ function Today() {
 const onChangeDeviceHandler=(device)=>{
   setDevice(device);
 }
+
   return (
     <div className='home'>
         <Navbar onChangeDevice={onChangeDeviceHandler}/>

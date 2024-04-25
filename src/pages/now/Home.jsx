@@ -35,9 +35,9 @@ const Home = () => {
   }
 
    const deviceNames=useSelector(state=>state.device.dropDeviceList);
-   const defautSeelctedDevie=deviceNames[0]
+   const defaultSelctedDevie=deviceNames[0]
    useEffect(()=>{
-setDevice(defautSeelctedDevie);
+setDevice(defaultSelctedDevie);
    },[deviceNames])
 
 
@@ -48,36 +48,36 @@ setDevice(defautSeelctedDevie);
   {device && <div className='body'>
         <div className='device-active'>
           <div className='curcle'></div>
-          <div className='device-name'><DeviceName selectedDevice={device}/></div>
+          <div className='device-name'><DeviceName selectedDevice={device || defaultSelctedDevie}/></div>
         </div>
         <div className='page'>
           <div className='chart-kw'>
             {/* <Link to={'/service'}><CostChartData/></Link> */}
             <CostChartData/>
             <KwChartData/>
-            {JSON.stringify(device)}
+            {/* {JSON.stringify(device)} */}
             {/* {JSON.stringify(defautSeelctedDevie)} */}
           </div>
           
           <div className='chart-now-kw'>
-            <HomeChart data='' selectedDevice={device || defautSeelctedDevie}/>
+            <HomeChart data='' selectedDevice={device || defaultSelctedDevie}/>
           </div>
           <div className='chart-now-cost'>
-            <HomeCostChart data=''selectedDevice={device  || defautSeelctedDevie}/>
+            <HomeCostChart data=''selectedDevice={device  || defaultSelctedDevie}/>
           </div>
 
         </div>
           <div className='chart-area d-flex align-items-center justify-content-center'>
             {/* <AreaChart/> */}
-            <LineChart selectedDevice={device  || defautSeelctedDevie}/>
+            <LineChart selectedDevice={device  || defaultSelctedDevie}/>
            
           </div>
         <div className='page-bottom'>
-          <div className='vol'><Voltage selectedDevice={device  || defautSeelctedDevie}/></div>
-          <div className='vol'><Current selectedDevice={device  || defautSeelctedDevie}/></div>
-          <div className='vol'><Power selectedDevice={device  || defautSeelctedDevie}/></div>
-          <div className='pow'><Powerfact selectedDevice={device  || defautSeelctedDevie}/></div>
-          <div className='pow'><Hertz selectedDevice={device  || defautSeelctedDevie}/></div>
+          <div className='vol'><Voltage selectedDevice={device  || defaultSelctedDevie}/></div>
+          <div className='vol'><Current selectedDevice={device  || defaultSelctedDevie}/></div>
+          <div className='vol'><Power selectedDevice={device  || defaultSelctedDevie}/></div>
+          <div className='pow'><Powerfact selectedDevice={device  || defaultSelctedDevie}/></div>
+          <div className='pow'><Hertz selectedDevice={device  || defaultSelctedDevie}/></div>
         </div>
     </div>}
 
