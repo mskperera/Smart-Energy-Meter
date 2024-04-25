@@ -1,0 +1,259 @@
+.page-admin{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    /* background-color:#05052a; */
+    height: 81vh;
+    margin: 0%;
+    display: flex;
+}
+
+.custom-admin-chart{
+    margin-top: 0px;
+    flex-direction: column;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0%;
+    padding: 1rem;
+
+}
+
+.chart-admin-kw{
+    flex: 1;
+    width: 100%;
+    display: flex;
+    /* position: absolute; */
+    justify-content: center;
+    align-items: center;
+    margin: 0%;
+    /* flex-direction: column; */
+    padding: 1rem;
+}
+
+.chart-admin-cost{
+    flex: 1;
+    width: 100%;
+    display: flex;
+    /* position: absolute; */
+    justify-content: center;
+    align-items: center;
+    margin: 0%;
+    /* flex-direction: column; */
+    padding: 1rem;
+}
+
+.dateadmin{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    z-index: 1000;
+    margin-top: -360px;
+    position: absolute;
+   
+}
+
+
+@media screen and (max-width:2000px) {
+    .page-admin{
+        width: 100%;
+        margin-top: 0;
+        justify-content:center;
+        align-items: center;
+        display: flex;
+        margin-bottom: 0;
+        padding: 1rem;
+        /* margin-left: -150px; */
+    }
+
+    .chart-admin-kw{
+        margin-top: 1100px;
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .chart-admin-cost{
+        margin-top: 0px;
+        width: 100%;
+        padding: 1rem;
+    }
+
+
+}
+
+@media screen and (max-width:1150px) {
+    .page-admin{
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        /* padding-left: 80px; */
+        height: 79vh;
+        margin-top: 0px;
+        margin-bottom: 0px;
+
+    }
+
+    .chart-admin-kw{
+        flex: 1;
+        width: 100%;
+        display: flex;
+        /* position: absolute; */
+        justify-content: center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .chart-admin-cost{
+        flex: 1;
+        width: 100%;
+        display: flex;
+        /* position: absolute; */
+        justify-content: center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
+    }
+}
+
+@media screen and (max-width:850px) {
+    .page-admin{
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+        margin: 1rem;
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+        flex-direction: column;
+    }
+
+    .chart-admin-kw{
+        flex: 1;
+        width: 450px;
+        display: flex;
+        margin-top: 30px;
+        justify-content: center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
+}
+
+    .chart-admin-cost{
+        flex: 1;
+        width: 450px;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .dateadmin{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        width: 80%;
+        margin-top: 80px;
+        position: static;
+        transform: none;
+    }
+}
+
+@media screen and (max-width:650px) {
+    .page-admin{
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 79.1vh;
+        margin: 0rem;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+    .chart-admin-kw{
+        flex: 1;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0%;
+        padding: 0rem;
+}
+
+    .chart-admin-cost{
+        flex: 1;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0%;
+        padding: 0rem;
+}
+
+    .dateadmin{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        width: 100%;
+        margin-top: 30px;
+        position: static;
+        transform: none;
+        /* position: absolute; */
+    }
+    
+}
+
+@media screen and (max-width:450px) {
+    .page-admin{
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        height: 86vh;
+        margin: 1rem;
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+        flex-direction: column;
+    }
+
+    .chart-admin-kw{
+        flex: 1;
+        width: 380px;
+        display: flex;
+        margin-top: 30px;
+        justify-content: center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
+}
+
+    .chart-admin-cost{
+        flex: 1;
+        width: 380px;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .dateadmin{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        width: 80%;
+        margin-top: -100px;
+        position: static;
+        transform: none;
+    }
+}

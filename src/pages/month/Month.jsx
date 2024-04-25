@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Month.css'
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/navbar/Navbar'
 import BottomNav from '../../components/bottommenu/BottomNav'
 import MonthKw from './MonthKw'
 import MonthCost from './MonthCost'
+import { useSelector } from 'react-redux'
 
 function Month() {
 
@@ -20,6 +21,12 @@ function Month() {
   const onChangeDeviceHandler=(device)=>{
     setDevice(device);
   }
+
+  const deviceNames=useSelector(state=>state.device.dropDeviceList);
+  const defaultSelctedDevie=deviceNames[0]
+  useEffect(()=>{
+setDevice(defaultSelctedDevie);
+  },[deviceNames])
 
   return (
     <div className='home'>
@@ -40,10 +47,10 @@ function Month() {
 
     <div className='page-3 body'>
       <div className='chart-month-kw'>
-        <MonthKw  selectedDevice={device}/>
+        <MonthKw  selectedDevice={device || defaultSelctedDevie}/>
       </div>
       <div className='chart-month-cost'>
-        <MonthCost selectedDevice={device}/>
+        <MonthCost selectedDevice={device || defaultSelctedDevie}/>
       </div>
     </div>
            <BottomNav/>

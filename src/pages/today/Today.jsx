@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Today.css'
 import Navbar from '../../components/navbar/Navbar'
 //import Menu from '../../components/menu/Menu'
@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import BottomNav from '../../components/bottommenu/BottomNav'
 import TodayKw from './TodayKw'
 import TodayCost from './TodayCost'
+import { useSelector } from 'react-redux'
 
 
 function Today() {
@@ -21,6 +22,12 @@ function Today() {
 const onChangeDeviceHandler=(device)=>{
   setDevice(device);
 }
+
+const deviceNames=useSelector(state=>state.device.dropDeviceList);
+const defaultSelctedDevie=deviceNames[0]
+useEffect(()=>{
+setDevice(defaultSelctedDevie);
+},[deviceNames])
 
   return (
     <div className='home'>
@@ -42,10 +49,10 @@ const onChangeDeviceHandler=(device)=>{
       </div>
         <div className='page-1 body'>
           <div className='chart-today-kw'>
-            <TodayKw selectedDevice={device} />
+            <TodayKw selectedDevice={device || defaultSelctedDevie} />
           </div>
           <div className='chart-today-cost'>
-            <TodayCost selectedDevice={device}/>
+            <TodayCost selectedDevice={device || defaultSelctedDevie}/>
           </div>
         </div>
             <BottomNav/>

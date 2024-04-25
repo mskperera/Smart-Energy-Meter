@@ -107,7 +107,7 @@ const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
       x: {
         grid: {
           display: false,
-          color: 'white', //  color-x-axis grid lines
+          color: 'gray', //  color-x-axis grid lines
         },
         beginAtZero: true,
         title: {

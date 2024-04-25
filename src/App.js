@@ -22,6 +22,8 @@ import UserRegister from './pages/register/UserRegister';
 import DeviceRegister from './pages/register/DeviceRegister';
 import Notify from './pages/alert/Notify';
 import BillingSession from './pages/session/BillingSession';
+import Admin from './pages/custom/customadmin/Admin';
+import Group from './pages/managegroup/Group';
 // import Navbar from './components/navbar/Navbar';
 
 // import { GlobalContext } from './context/GlobalContext';
@@ -59,6 +61,8 @@ function App() {
         <Route path='/apiData/deviceSettings' element={<DeviceSettings/>}/>
         <Route path='/apiData' element={<APIData/>}/>
         <Route path='/device' element={<DeviceMan/>}/>
+        <Route path='/admin' element={<Admin/>}/>
+        <Route path='/group' element={<Group/>}/>
       </Routes>
     </BrowserRouter>
     </>
