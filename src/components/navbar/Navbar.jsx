@@ -22,7 +22,7 @@ const Navbar = ({onChangeDevice}) => {
 
 const dispatch=useDispatch();
 
-const dropdownRef = useRef(null);
+// const dropdownRef = useRef(null);
 
 
  const loadDevicesByUserId = async () => {
@@ -45,19 +45,19 @@ const dropdownRef = useRef(null);
   }, []); 
 
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setOpenDevicesName(false);
-        setOpen(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  //       setOpenDevicesName(false);
+  //       setOpen(false);
+  //     }
+  //   };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
 
   
   
@@ -97,7 +97,7 @@ const dropdownRef = useRef(null);
 
       <div className='app__navbar-login'>
         <a href='/userlist'>User Management</a>
-        <div className='menu-trigger relative' ref={dropdownRef}>
+        <div className='menu-trigger relative'>
           <label>
             <MdDevices onClick={() => setOpenDevicesName(!openDevicesName)} color='#191970' size={25} />
             {selectedDevice && <span className="selected-device-label">{" "+selectedDevice.name}</span>}
@@ -113,7 +113,7 @@ const dropdownRef = useRef(null);
           )}
         </div>
         <a href='/management'>Device Management</a>
-        <div className='menu-trigger relative' ref={dropdownRef}>
+        <div className='menu-trigger relative'>
           <CgProfile onClick={() => setOpen(!open)} color='#191970' size={25} />
           {open && (
             <div className='drop'>
@@ -137,7 +137,7 @@ const dropdownRef = useRef(null);
           <a href='/notify'><BiSolidBellRing color='#191970' size={25} className='overlay__close'/></a>
           <span className="badge">2</span>
         </div>
-        <div className='menu-trigger relative devicess' ref={dropdownRef}>
+        <div className='menu-trigger relative devicess'>
           <MdDevices onClick={() => setOpenDevicesName(!openDevicesName)} color='#191970' size={25} className='overlay__close'  />
           {openDevicesName && (
             <div className='drop1'>

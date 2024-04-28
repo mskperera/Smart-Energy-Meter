@@ -43,7 +43,7 @@ function Login() {
           console.log('response',response);
          // loadDevicesByUserId();
           // if (response.status === 200) {
-             navigate('/home');
+            navigate('/home');
           //   console.log('Login successful! Navigate to home page.');
           // } else {
    

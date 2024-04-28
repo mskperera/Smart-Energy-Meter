@@ -56,7 +56,7 @@ setDevice(defaultSelctedDevie);
             <CostChartData/>
             <KwChartData/>
             {/* {JSON.stringify(device)} */}
-            {/* {JSON.stringify(defautSeelctedDevie)} */}
+            {/* {JSON.stringify(defaultSelctedDevie)} */}
           </div>
           
           <div className='chart-now-kw'>
