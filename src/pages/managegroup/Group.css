@@ -65,15 +65,16 @@
    list-style: none;
    align-items: center;
    justify-content: center;
-   margin-left: 60px;
+   margin-left: 20px;
    cursor: pointer;
    width: fit-content;
    padding: 5px;
   }
 
   .device-list li:hover{
-    background-color: #74b5f1;
-    border-radius: 10px;
+    border-radius: 0px;
+    border-bottom: 2px solid yellow;
+    border-color: yellow;
    }
 
   .group-list li{
@@ -82,13 +83,21 @@
     justify-content: center;
     width: fit-content;
     cursor: pointer;
-    margin-left: 60px;
+    margin-left: 5px;
     padding: 5px;
   }
 
+  .button-delete{
+    margin-top: -55px;
+    margin-left: 200px;
+  }
+
   .group-list li:hover{
-    background-color: #74b5f1;
-    border-radius: 10px;
+    /* background-color: #5f8af690; */
+    border-radius: 0px;
+    border-bottom: 2px solid yellow;
+    border-color: yellow;
+    
    }
 
   input[type="text"].group-name {
@@ -133,6 +142,34 @@
   margin-left: 20px;
   height: 35px;
  }
+
+
+.form-control.group-device-select {
+  width: 200px;
+  height: 35px; 
+}
+
+
+.form-control.group-device-select::-ms-expand {
+  display: none;
+}
+
+.form-control.group-device-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-size: 12px;
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+
+.form-control.group-device-select:focus {
+  outline: none;
+  border-color: #80bdff; 
+
+}
+
  
   @media (max-width: 768px) {
     .group-section{
@@ -175,7 +212,7 @@
       }
 
       .group-list{
-        width: 250px;
+        width: 325px;
         background-color: #1515157f;
         padding-top: 15px;
         border-radius: 10px;
@@ -185,14 +222,20 @@
     
       .device-list{
         flex: 1;
-        width:250px;
+        width:325px;
         background-color: #1515157f;
         padding-top: 15px;
         border-radius: 10px;
         justify-content: flex-start;
       }
 
-      input[type="text"].form-control {
+      .button-delete{
+        margin-top: -55px;
+        margin-left: 120px;
+        position: relative;
+      }
+
+      input[type="text"].group-name {
         width: 150px; 
         height: 40px;
       }
@@ -215,4 +258,37 @@
       overflow-y: auto; 
       height: calc(102.55vh - 80px - 59.5px); 
     }
+
+    .group-device-select {
+      width: 100px;
+      height: 35px; 
+      margin-left:15px;
+    }
+
+    .add-device-btn{
+      justify-content: flex-end;
+      display: flex;
+      width: 84px;
+      margin-left: 220px;
+      /* position: ; */
+      margin-top: -32.5px;
+    }
+
+    .save-group-btn{
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      margin-left: 120px;
+      width: 100px;
+      text-align: center;
+    }
+
+    .button-delete{
+      margin-top: -55px;
+      margin-left: 190px;
+      position: relative;
+    }
+
+  
+    
   }

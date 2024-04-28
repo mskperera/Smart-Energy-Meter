@@ -11,7 +11,7 @@ ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler, 
 function LineChart({ selectedDevice}) {
 
   useEffect(() => {
-    if(selectedDevice)
+    // if(selectedDevice)
     loadEngergyUsageKwhByDateRangePrediction();
   }, [selectedDevice]);
 
@@ -23,8 +23,15 @@ function LineChart({ selectedDevice}) {
 const sesstionDetailsRes= await getbillingSessionByDeviceId(selectedDevice.id);
 const sesstionDetailsArr = sesstionDetailsRes.data;
 console.log('sesstionDetailsArr',sesstionDetailsArr);
+if(sesstionDetailsArr.length===0) return;
+
 const currentSession=sesstionDetailsArr[sesstionDetailsArr.length-1];
 console.log('currentSession',currentSession);
+
+
+// const startDate = moment(currentSession.startDate).utc().startOf('month').subtract('minutes').format('YYYY-MM-DD'); 
+// const endDate = moment(currentSession.endDate).utc().endOf('month').subtract('minutes').format('YYYY-MM-DD');
+
 
 const startDate = moment(currentSession.startDate).format('YYYY-MM-DD');
 const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
