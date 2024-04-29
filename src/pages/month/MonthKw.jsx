@@ -87,6 +87,11 @@ const MonthKw = ({selectedDevice}) => {
                 display:false,
                 color: 'gray', // color of x-axis labels
               },
+              title: {
+                display: true,
+                text: 'Date No',
+                color: 'white',
+              },
               ticks: {
                 color: 'white', // color of x-axis labels
               },
@@ -96,6 +101,11 @@ const MonthKw = ({selectedDevice}) => {
                 color: 'gray', // color of x-axis labels
               },
               beginAtZero: true,
+              title: {
+                display: true,
+                text: 'kWh',
+                color: 'white',
+              },
               ticks: {
                 color: 'white', //color of y-axis labels
               },
@@ -104,7 +114,7 @@ const MonthKw = ({selectedDevice}) => {
 
         plugins: {
             legend: {
-              display:false,
+              display:true,
               labels: {
                 color: 'white', // color for the chart labels
               },

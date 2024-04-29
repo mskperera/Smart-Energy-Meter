@@ -95,6 +95,11 @@ const loadEngergyUsageKwhByDateRange=async()=>{
                 display:false,
                 color: 'gray', // color of x-axis labels
               },
+              title:{
+                display:true,
+                text:'Months',
+                color: 'white', // color of x-axis labels
+              },
               ticks: {
                 color: 'white', // color of x-axis labels
               },
@@ -104,6 +109,11 @@ const loadEngergyUsageKwhByDateRange=async()=>{
                 color: 'gray', // color of x-axis labels
               },
               beginAtZero: true,
+              title:{
+                display:true,
+                text:'Rs',
+                color: 'white', // color of x-axis labels
+              },
               ticks: {
                 color: 'white', //color of y-axis labels
               },
@@ -112,7 +122,7 @@ const loadEngergyUsageKwhByDateRange=async()=>{
           
         plugins: {
             legend: {
-              display:false,
+              display:true,
               labels: {
                 color: 'white', // color for the chart labels
               },

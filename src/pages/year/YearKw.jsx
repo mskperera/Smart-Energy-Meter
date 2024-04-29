@@ -100,6 +100,11 @@ const YearKw = ({selectedDevice}) => {
                 display:false,
                 color: 'gray', // color of x-axis labels
               },
+              title: {
+                display: true,
+                text: 'Months',
+                color: 'white', 
+              },
               ticks: {
                 color: 'white', // color of x-axis labels
               },
@@ -109,6 +114,11 @@ const YearKw = ({selectedDevice}) => {
                 color: 'gray', // color of x-axis labels
               },
               beginAtZero: true,
+              title:{
+                display:true,
+                text:'kWh',
+                color:'white',
+              },
               ticks: {
                 color: 'white', //color of y-axis labels
               },
@@ -117,7 +127,7 @@ const YearKw = ({selectedDevice}) => {
           
         plugins: {
             legend: {
-              display:false,
+              display:true,
               labels: {
                 color: 'white',//color for the chart labels
               },
