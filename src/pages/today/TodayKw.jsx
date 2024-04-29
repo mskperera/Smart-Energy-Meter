@@ -79,17 +79,20 @@ console.log('payload',payload);
   
      
       //  console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
+       
+      const offset = moment().utcOffset() * 60 * 1000; // Convert offset to milliseconds
+
+      const charData = result.data.recordset.map(i => {
+          return {...i,date:moment(i.date).format('YYYY-MM-DD HH:mm:ss')}
+      });
      
-       const charData=result.data.recordset;
-       console.log(' chartdata ',charData);
-     
-    
+      console.log(' chartdata ',charData);
        const hours=[];
        const dataKwArr=[];
     //    const ruppyArr=[];
 
        for(let i=0;i<charData.length;i++){
-        hours.push(charData[i].hour);
+        hours.push(moment(charData[i].date).format("HH A"));
         dataKwArr.push(charData[i].kwhPerHour)
         // console.log('kwhPerHour',charData[i].kwhPerHour)
        // ruppyArr.push(charData[i].usageBill)

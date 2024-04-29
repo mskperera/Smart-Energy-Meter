@@ -48,10 +48,11 @@ const TodayCost = ({selectedDevice}) => {
        console.log('engergyUsagekwhByDateRange',result.data)
     //    setEngergyUsagekwhByDateRange(result.data.recordsets);
       
-         
+    const charData = result.data.recordset.map(i => {
+      return {...i,date:moment(i.date).format('YYYY-MM-DD HH:mm:ss')}
+  });
           //  console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
-         
-           const charData=result.data.recordset;
+    
          
         
            const ruppys=[];
@@ -59,7 +60,8 @@ const TodayCost = ({selectedDevice}) => {
            const ruppyArr=[];
     
            for(let i=0;i<charData.length;i++){
-            ruppys.push(charData[i].hour);
+           // ruppys.push(charData[i].hour);
+            ruppys.push(moment(charData[i].date).format("HH A"));
             // dataKwArr.push(charData[i].maxKwh)
             ruppyArr.push(charData[i].usageBillPerHour)
            }
