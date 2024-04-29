@@ -79,7 +79,9 @@ const dispatch=useDispatch();
     const selectedDeviceObject = deviceNames.find(item => item.name === device);
     if (selectedDeviceObject) {
       onChangeDevice(selectedDeviceObject); 
+      localStorage.setItem('selectedDevice',selectedDeviceObject)
       setOpen(false);
+
     }
   };
 

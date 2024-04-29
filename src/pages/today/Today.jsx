@@ -23,8 +23,10 @@ const onChangeDeviceHandler=(device)=>{
   setDevice(device);
 }
 
+const defSelecedDevice=localStorage.getItem('selectedDevice');
+console.log('defSelecedDevice',defSelecedDevice)
 const deviceNames=useSelector(state=>state.device.dropDeviceList);
-const defaultSelctedDevie=deviceNames[0]
+const defaultSelctedDevie= defSelecedDevice || deviceNames[0]
 useEffect(()=>{
 setDevice(defaultSelctedDevie);
 },[deviceNames])
