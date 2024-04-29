@@ -221,3 +221,22 @@ export const getDevicesByUserId= async (userId) => {
     return err;
   }
 }
+
+export const getDeviceStatus= async (userId) => {
+  try {
+    return await customAxios
+      .get(`/device/getDeviceStatus/${userId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
