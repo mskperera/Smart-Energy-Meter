@@ -117,11 +117,11 @@ const TodayCost = ({selectedDevice}) => {
                     color: 'Gray', //  color of x-axis grid lines
                   },
                   beginAtZero: true,
-                  // title:{
-                  //   display:true,
-                  //   text:"h",
-                  //   color:'white'
-                  // },
+                  title:{
+                    display:true,
+                    text:"12:00am - 11:59pm hours",
+                    color:'white'
+                  },
                   ticks: {
                     color: 'white', // color of x-axis labels
                   },
@@ -133,11 +133,11 @@ const TodayCost = ({selectedDevice}) => {
                   },
 
                   beginAtZero: true,
-                  // title:{
-                  //   display:true,
-                  //   text:"Rs",
-                  //   color:'white'
-                  // },
+                  title:{
+                    display:true,
+                    text:"Rs",
+                    color:'white'
+                  },
                   ticks: {
                     color: 'white', //color of y-axis labels
                   },
@@ -146,7 +146,7 @@ const TodayCost = ({selectedDevice}) => {
               
             plugins: {
                 legend: {
-                  display:false,
+                  display:true,
                   labels: {
                     color: 'white', 
                   },

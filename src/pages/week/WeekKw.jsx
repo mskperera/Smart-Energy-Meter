@@ -15,17 +15,21 @@ const WeekKw = ({selectedDevice}) => {
     },[selectedDevice]);
 
     const loadEngergyUsageKwhByDateRange=async()=>{
-      const todayUtc = moment(); 
-    const startOfDay = todayUtc.startOf('week').format('YYYY-MM-DD HH:mm:ss');
+    //   const todayUtc = moment(); 
+    // const startOfDay = todayUtc.startOf('week').format('YYYY-MM-DD HH:mm:ss');
 
-    const endOfDay = todayUtc.endOf('week').format('YYYY-MM-DD HH:mm:ss');
+    // const endOfDay = todayUtc.endOf('week').format('YYYY-MM-DD HH:mm:ss');
 
-    const utcOffSet= moment().utcOffset();
+    // const utcOffSet= moment().utcOffset();
 
-    const startOfDayUtc = moment(startOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
-    const endOfDayUtc = moment(endOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+    // const startOfDayUtc = moment(startOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+    // const endOfDayUtc = moment(endOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+
+    const currentDate = moment.utc();
+      const startDate = currentDate.startOf('week').format('YYYY-MM-DD');
+      const endDate = currentDate.endOf('week').format('YYYY-MM-DD');
       
-      console.log('78787878',startOfDayUtc,endOfDayUtc);
+      console.log('78787878',startDate,endDate);
       const payload={
         
           deviceId:selectedDevice.id,//"4",
@@ -33,8 +37,8 @@ const WeekKw = ({selectedDevice}) => {
           frequencyId:3,
           // startDate:'2024-04-01 00:00:00',
           // endDate:'2024-04-05 23:59:59',
-          startDate:startOfDayUtc,
-          endDate:endOfDayUtc,
+          startDate:startDate,
+          endDate:endDate,
           // startDate:startDate.toDateString(),
           // endDate:endDate.toDateString(),
       }

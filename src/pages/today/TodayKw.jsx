@@ -149,11 +149,11 @@ console.log('payload',payload);
             color: 'Gray', //  color of x-axis grid lines
           },
           beginAtZero: true,
-          // title:{
-          //   display:true,
-          //   text:"h",
-          //   color:'white'
-          // },
+          title:{
+            display:true,
+            text:"12:00am - 11:59pm horus",
+            color:'white'
+          },
           ticks: {
             color: 'white', // color of x-axis labels
           },
@@ -163,11 +163,11 @@ console.log('payload',payload);
             color: 'Gray', //  color of x-axis grid lines
           },
           beginAtZero: true,
-          // title:{
-          //   display:true,
-          //   text:"kWh",
-          //   color:'white'
-          // },
+          title:{
+            display:true,
+            text:"kWh",
+            color:'white'
+          },
           ticks: {
             color: 'white', //color of y-axis labels
           },
@@ -176,11 +176,11 @@ console.log('payload',payload);
       
       plugins: {
         legend: {
-          display:false,
-          // labels: {
-          //   color: 'white', 
-          //   display:false
-          // },
+          display:true,
+          labels: {
+            color: 'white', 
+            display:false
+          },
         },
         
       },

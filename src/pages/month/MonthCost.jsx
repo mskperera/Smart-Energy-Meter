@@ -84,6 +84,11 @@ const MonthCost = ({selectedDevice}) => {
                 display:false,
                 color: 'Gray', // color of x-axis labels
               },
+              title:{
+                display:true,
+                text:'Date No',
+                color:'white',
+              },
               ticks: {
                 color: 'white', // color of x-axis labels
               },
@@ -94,6 +99,11 @@ const MonthCost = ({selectedDevice}) => {
                 color: 'Gray', // color of x-axis labels
               },
               beginAtZero: true,
+              title:{
+                display:true,
+                text:'Rs',
+                color:'white',
+              },
               ticks: {
                 color: 'white', //color of y-axis labels
               },
@@ -102,7 +112,7 @@ const MonthCost = ({selectedDevice}) => {
           
         plugins: {
             legend: {
-              display:false,
+              display:true,
               labels: {
                 color: 'white', // color for the chart labels
               },
