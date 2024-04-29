@@ -3,6 +3,7 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
 import moment from 'moment';
+import { color } from 'chart.js/helpers';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 const CustomCost = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
@@ -151,6 +152,11 @@ const CustomCost = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
                 display:false,
                 color: 'gray', // color of x-axis labels
               },
+              title:{
+                display:true,
+                text:'Date No',
+                color: 'white', // color of x-axis labels
+              },
               ticks: {
                 color: 'white', // color of x-axis labels
               },
@@ -160,6 +166,11 @@ const CustomCost = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
                 color: 'gray', // color of x-axis labels
               },
               beginAtZero: true,
+              title:{
+                display:true,
+                text:'Rs',
+                color:'white'
+              },
               ticks: {
                 color: 'white', //color of y-axis labels
               },
@@ -168,7 +179,7 @@ const CustomCost = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
           
         plugins: {
             legend: {
-              display:false,
+              display:true,
               labels: {
                 color: 'white',//color for the chart labels
               },

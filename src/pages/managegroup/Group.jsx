@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 import './AddDeviceModal.jsx';
 import AddDeviceModal from './AddDeviceModal.jsx';
-import { addDeviceGroup, getDeviceGroupsByUserId } from '../../action/group.js';
+import { addDeviceGroup, getDeviceGroupsByUserId, saveDeviceAssigntoGroup } from '../../action/group.js';
 
 import { getDevicesByUserId } from '../../action/device.js';
 import { setDropDevices } from '../../state/device/deviceReducer.js';
@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from 'react-redux';
 function Group() {
 
   // const [buttonPopup, setButtonPopup] = useState(false);
+
+  const [load,setLoad]=useState(false);
 
   const [groupName, setGroupName] = useState('');
 
@@ -26,6 +28,8 @@ function Group() {
   const [dropDeviceNamesList, setDropDeviceNamesList] = useState([]);
 
   const [groupListName, setGroupListName] = useState([]);
+
+  const [selectedGroupName, setSelectedGroupName] = useState('');
 
   // const dispatch=useDispatch();
 
@@ -105,74 +109,124 @@ function Group() {
     setGroupName('');
   };
 
+
+  const [message,setMessage]=useState('');
+  const [errormessage,setErrorMessage]=useState('');
+
+  const onSubmitHandler = async (e)=>{
+    e.preventDefault();
+
+    try{
+      setErrorMessage('');
+        setMessage('');
+
+        const payload = {};
+
+        console.log("payload",payload);
+        const res = await saveDeviceAssigntoGroup(payload);
+        console.log('limit result', res);
+        const { responseStatus, outputMessage } = res.data;
+          if (responseStatus === "failed") {
+          setErrorMessage(outputMessage)
+          return;
+      }
+
+        if(res.status===400){
+          setMessage('Error Occure');
+          swal({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!"
+          }).then(() => {
+              setLoad(!load);
+          });
+          return
+      }
+
+      setMessage(outputMessage)
+      swal("Updated Successfully", "", "success").then(() => {
+          setLoad(!load);
+      });
+          
+    }
+    catch(error){
+      console.log("error",error);
+    }
+  }
+
   const onDelete = (index) => {
     const newGroupList = [...groupListName];
-    newGroupList.splice(index, 1);
+    newGroupList.splice(index,1);
     setGroupListName(newGroupList);
   } 
 
-  
+  const onGroupClick = (groupName) => {
+    setSelectedGroupName(groupName); 
+  };
 
   return (
     <div className='home'>
       <Navbar className='navnav' onChangeDevice={onChangeDeviceHandler}/>
       <div className="body">
-        <div className= "rounded p-2 ">
-          <h2 className='d-flex justify-content-center align-items-center'>Manage Group</h2>
-          <form className='popup-group d-flex justify-content-center align-items-center ' onSubmit={onHandleCreateGroup}>
-            <div className='form-group mb-2 d-flex'>
-              <label htmlFor="group" className='form-label mr-2 p-2'>Group Name</label>
-              <input
-                type="text"
-                className='form-control mr-2 group-name'
-                id="group"
-                value={groupName}
-                onChange={(e) => setGroupName(e.target.value)}/>
-                &nbsp;
-              <button className='btn btn-primary btn-sm' style={{ height: '35px', marginTop:'3px' }} onClick={handleCreateGroup}>Create</button>
-            </div>
-          </form>
-          {/* {JSON.stringify(groupListName)} */}
-          <br/>
+        <form onSubmit={onSubmitHandler}>
+          <div className= "rounded p-2 ">
+            <h2 className='d-flex justify-content-center align-items-center'>Manage Group</h2>
+            <form className='popup-group d-flex justify-content-center align-items-center ' onSubmit={onHandleCreateGroup}>
+              <div className='form-group mb-2 d-flex'>
+                <label htmlFor="group" className='form-label mr-2 p-2'>Group Name</label>
+                <input
+                  type="text"
+                  className='form-control mr-2 group-name'
+                  id="group"
+                  value={groupName}
+                  onChange={(e) => setGroupName(e.target.value)}/>
+                  &nbsp;
+                <button className='btn btn-primary btn-sm' style={{ height: '35px', marginTop:'3px' }} onClick={handleCreateGroup}>Create</button>
+              </div>
+            </form>
+            {/* {JSON.stringify(groupListName)} */}
+            <br/>
 
-          <div className='d-flex justify-content-center align-items-center'>
-            <div className='group-section'>
-              <div className='group-list'>
-                <h6 className='d-flex justify-content-center align-items-center' style={{paddingBottom:'32px' }}><u>Group List</u></h6>
-                <ul>
-    
-                {groupListName && groupListName.map((group) => (
-                    <div key={group.groupId}>
-                      <li>{group.groupName}</li>
-                      
-                      <button className="btn btn-sm btn-danger button-delete" onClick={()=> onDelete(group.id)}>Delete</button>
-                    </div>
-                  ))}
-                </ul>
-              </div>
-              <div className='device-list'>
-                <h5 className='d-flex justify-content-center align-items-center'>Group 1</h5>
-                <select 
-                 className='form-control group-device-select'
-                    onChange={(e) => setDropDeviceNamesList(e.target.value)}
-                    value={deviceNames}>
-                    {dropDeviceNamesList.map(d => (
-                      <option key={d.id} value={d.id}>{d.name}</option>
-                    ))}  
-                </select>
-                <button className='btn btn-primary btn-sm add-device-btn'>Add Device</button><br/>
-                <h6 className='d-flex justify-content-center align-items-center'><u>Device List</u></h6>
-                <ul>
-                  {/* <li>Device 1</li>
-                  <li>Device 2</li>
-                  <li>Device 3</li>
-                  <li>Device 4</li> */}
-                </ul>
+            <div className='d-flex justify-content-center align-items-center'>
+              <div className='group-section'>
+                <div className='group-list'>
+                  <h6 className='d-flex justify-content-center align-items-center' style={{paddingBottom:'32px' }}><u>Group List</u></h6>
+                  <ul>
+      
+                  {groupListName && groupListName.map((group) => (
+                      <div key={group.groupId} onClick={() => onGroupClick(group.groupName)}>
+                        <li>{group.groupName}</li>
+                        
+                        <button className="btn btn-sm btn-danger button-delete" onClick={()=> onDelete(group.id)}>Delete</button>
+                      </div>
+                    ))}
+                  </ul>
+                </div>
+                <div className='device-list'>
+                  <h5 className='d-flex justify-content-center align-items-center'>{selectedGroupName}</h5>
+                  <select 
+                  className='form-control group-device-select'
+                      onChange={(e) => setDropDeviceNamesList(e.target.value)}
+                      value={deviceNames}>
+                      {dropDeviceNamesList.map(d => (
+                        <option key={d.id} value={d.id}>{d.name}</option>
+                      ))}  
+                  </select>
+                  <button className='btn btn-primary btn-sm add-device-btn'>Add Device</button><br/>
+                  <h6 className='d-flex justify-content-center align-items-center'><u>Device List</u></h6>
+                  <ul>
+                    {/* <li>Device 1</li>
+                    <li>Device 2</li>
+                    <li>Device 3</li>
+                    <li>Device 4</li> */}
+                  </ul>
+                </div>
               </div>
             </div>
+            <button className='btn btn-primary save-group-btn'>Save</button>
+            {errormessage && <p>{errormessage}</p>}  
           </div>
-          <button className='btn btn-primary save-group-btn'>Save</button>
-        </div>
+        </form>
       </div>
       <BottomNav className="bottombar"/>
     </div>
