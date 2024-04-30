@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Today.css'
 import Navbar from '../../components/navbar/Navbar'
 //import Menu from '../../components/menu/Menu'
@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import BottomNav from '../../components/bottommenu/BottomNav'
 import TodayKw from './TodayKw'
 import TodayCost from './TodayCost'
+import { useSelector } from 'react-redux'
 
 
 function Today() {
@@ -16,9 +17,31 @@ function Today() {
     setActiveTab(tab);
   };
 
+  const [device, setDevice] = useState('');
+
+const onChangeDeviceHandler=(device)=>{
+  setDevice(device);
+}
+
+
+const deviceNames=useSelector(state=>state.device.dropDeviceList);
+const defaultSelctedDevie=deviceNames[0]
+useEffect(()=>{
+setDevice(defaultSelctedDevie);
+},[deviceNames])
+
+// const defSelecedDevice=localStorage.getItem('selectedDevice');
+// console.log('defSelecedDevice',defSelecedDevice)
+// const deviceNames=useSelector(state=>state.device.dropDeviceList);
+// const defaultSelctedDevie= defSelecedDevice || deviceNames[0]
+// useEffect(()=>{
+// setDevice(defaultSelctedDevie);
+// },[deviceNames])
+
   return (
     <div className='home'>
-        <Navbar/>
+        <Navbar onChangeDevice={onChangeDeviceHandler}/>
+      
         <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
           <div className='back'>
 
@@ -33,12 +56,12 @@ function Today() {
               </ul>
           </div>
       </div>
-        <div className='page-1'>
+        <div className='page-1 body'>
           <div className='chart-today-kw'>
-            <TodayKw/>
+            <TodayKw selectedDevice={device || defaultSelctedDevie} />
           </div>
           <div className='chart-today-cost'>
-            <TodayCost/>
+            <TodayCost selectedDevice={device || defaultSelctedDevie}/>
           </div>
         </div>
             <BottomNav/>

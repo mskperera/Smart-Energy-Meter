@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# FIDA Smart Energy Meter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to FIDA Smart Energy Meter, your go-to solution for monitoring and managing energy consumption in real-time. With FIDA Smart Energy Meter, you can effortlessly track your energy usage, view insightful charts, and stay within your budget.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Real-time Monitoring**: Keep track of your energy consumption in real-time.
+- **Multiple Parameters**: Monitor various parameters including kWh, Currency Amount, Voltage, Power Factor (PF), Frequency, Watt, and Current.
+- **Interactive Charts**: Visualize your energy data with interactive charts.
+- **Budget Management**: Set and monitor your energy budget to stay within your limits.
+- **Flexible Viewing**: View charts for today, this week, or this month.
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To start using FIDA Smart Energy Meter, follow these simple steps:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Installation**: Install the FIDA Smart Energy Meter app on your device.
+2. **Registration**: Create an account or log in to your existing account.
+3. **Device Setup**: Connect your energy meter device to the app.
+4. **Monitor**: Start monitoring your energy consumption in real-time.
+5. **Explore Features**: Explore various features including charts and budget management.
 
-### `npm test`
+## Usage
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+FIDA Smart Energy Meter offers a user-friendly interface with intuitive navigation. Here's how you can use the app:
 
-### `npm run build`
+- **Dashboard**: View real-time energy consumption data on the dashboard.
+- **Charts**: Navigate to the charts section to visualize energy usage trends.
+- **Budget**: Set and monitor your energy budget to manage your expenses effectively.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Feedback
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+We value your feedback! If you have any suggestions, questions, or concerns, please don't hesitate to contact us at [support@fidaenergymeter.com](mailto:support@fidaenergymeter.com).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## About Us
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+FIDA Smart Energy Meter is developed by FIDA Technologies, a leading provider of energy management solutions. Our mission is to empower individuals and businesses to make informed decisions about energy usage and contribute to a sustainable future.

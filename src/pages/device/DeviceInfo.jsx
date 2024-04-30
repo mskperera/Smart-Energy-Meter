@@ -29,7 +29,8 @@ const DeviceInfo = () => {
 
 
   return (
-    <>
+    
+    <div className='home'>
     <Navbar/>
     {/* <div className='nav-bar'>
             <ul className='nav-bar-links'>
@@ -38,30 +39,32 @@ const DeviceInfo = () => {
                 <Link to={"/connection"}><li className='btn btn-sm btn-primary'>Connection</li></Link>
             </ul>
     </div> */}
-    <div className='wrapper2 d-flex align-items-center justify-content-center w-100'>
-        <div className='deviceinfo'>
-           <h2 className='d-flex align-items-center justify-content-center mb-3'>Device Info</h2>
-           <div className='form-group mb-2'>
-            <label htmlFor='product' className='form-label'>Product</label>
-            <input type='text' className='form-control' value={deviceDetails.product} readOnly />
-           </div>
-           <div className='form-group mb-2'>
-            <label htmlFor='version' className='form-label'>Firmware Version</label>
-            <input type='text' className='form-control' value={deviceDetails.firmwareVersion} readOnly/>
-           </div>
-           <div className='form-group mb-2'>
-            <label htmlFor='hversion' className='form-label'>Hardware Version</label>
-            <input type='text' className='form-control' value={deviceDetails.hardwareVersion} readOnly />
-           </div>
-           <div className='form-group mb-2'>
-            <label htmlFor='serial' className='form-label'>Serial number</label>
-            <input type='text' className='form-control' value={deviceDetails.serialNo} readOnly/>
-           </div>
-           
-        </div>
-    </div>
+
+      <div className=' body d-flex align-items-center justify-content-center w-100'>
+          <div className='form-group mb-2 deviceinfo'>
+              <h2 className='d-flex align-items-center justify-content-center mb-3'>Device Info</h2>
+            <div className='form-group mb-2'>
+              <label htmlFor='product' className='form-label'>Product</label>
+              <input type='text' className='form-control' value={deviceDetails.product} readOnly />
+            </div>
+            <div className='form-group mb-2'>
+              <label htmlFor='version' className='form-label'>Firmware Version</label>
+              <input type='text' className='form-control' value={deviceDetails.firmwareVersion} readOnly/>
+            </div>
+            <div className='form-group mb-2'>
+              <label htmlFor='hversion' className='form-label'>Hardware Version</label>
+              <input type='text' className='form-control' value={deviceDetails.hardwareVersion} readOnly />
+            </div>
+            <div className='form-group mb-2'>
+              <label htmlFor='serial' className='form-label'>Serial number</label>
+              <input type='text' className='form-control' value={deviceDetails.serialNo} readOnly/>
+            </div>
+            
+          </div>
+      </div>
     <BottomNav/>
-    </>
+    </div>
+    
   )
 }
 

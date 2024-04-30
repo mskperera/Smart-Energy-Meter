@@ -1,47 +1,98 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
-import { getEngergyUsageKwhByDateRange } from '../../action/device';
+import { getDeviceDetailsByDeviceId, getDevicesByUserId, getEngergyUsageKwhByDateRange } from '../../action/device';
+// import { GlobalContext } from '../../context/GlobalContext';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 
-const TodayKw = () => {
+const TodayKw = ({selectedDevice}) => {
+
+  // const [deviceIdDetails, setDeviceIdDetails] = useState('');
+  
+//  const {device,setDevice}=useContext(GlobalContext);
     
   useEffect(()=>{
-    loadEngergyUsageKwhByDateRange();
-  },);
 
-  const getCurrentDateWithoutTime = () => {
-    const currentDate = new Date();
-    currentDate.setHours(24, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
-    return currentDate;
-  };
+    loadEngergyUsageKwhByDateRange();
+    console.log('device context',selectedDevice);
+
+  },[selectedDevice]);
+
+useEffect(()=>{
+  // loadDevicesByUserId();
+},[]);
+
+  // const getCurrentDateWithoutTime = () => {
+    // return moment().startOf('day').add(24, 'hours').toDate();
+  // };
+
+/////
+// const loadDevicesByUserId = async (userId) => {
+//   const userData=JSON.parse(localStorage.getItem('userData'));  
+  
+//   console.log('userData',userData.userId);
+//     const result = await getDevicesByUserId(userData.userId);
+//     console.log('deviceDetails', result);
+    
+// }
+ ////  
+
 
   const loadEngergyUsageKwhByDateRange=async()=>{
+    const todayUtc = moment(); 
+    const startOfDay = todayUtc.startOf('day').format('YYYY-MM-DD HH:mm:ss');
+
+    const endOfDay = todayUtc.endOf('day').format('YYYY-MM-DD HH:mm:ss');
+
+    const utcOffSet= moment().utcOffset();
+
+    const startOfDayUtc = moment(startOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+    const endOfDayUtc = moment(endOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+
+
+
+    console.log('selectedDevice.deviceId',selectedDevice);
+
+    
+    console.log("66666666",startOfDay,endOfDay);
+    // date.utcOffset(moment().utcOffset());
+console.log('startOfDayUtc',moment().utcOffset());
+    // console.log('loadEngergyUsageKwhByDateRange')
     const payload={
-        deviceId:"4",
+        deviceId:selectedDevice.id,//"4",
         mesurementUnitId:1,//1-kwh,7-usage bill
         frequencyId:1,
-        startDate:getCurrentDateWithoutTime(),
-        endDate:getCurrentDateWithoutTime(),
+        // startDate:getCurrentDateWithoutTime(),
+        // endDate:getCurrentDateWithoutTime(),
+        // startDate:"2024-04-06 12:00",
+        // endDate:"2024-04-06 11:59:59",
+        startDate: startOfDayUtc,
+        endDate: endOfDayUtc,
     }
+console.log('payload',payload);
+    
    const result=await getEngergyUsageKwhByDateRange(payload);
-   console.log('engergyUsagekwhByDateRange',result.data)
+   console.log(' hour ',result.data);
 //    setEngergyUsagekwhByDateRange(result.data.recordsets);
   
      
-       console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
+      //  console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
+       
+      const charData = result.data.recordset.map(i => {
+          return {...i,date:moment(i.date).format('YYYY-MM-DD HH:mm:ss')}
+      });
      
-       const charData=result.data.recordsets[0];
-     
-    
+      console.log(' chartdata ',charData);
        const hours=[];
        const dataKwArr=[];
     //    const ruppyArr=[];
 
        for(let i=0;i<charData.length;i++){
-        hours.push(charData[i].hour);
+        hours.push(moment(charData[i].date).format("HH A"));
         dataKwArr.push(charData[i].kwhPerHour)
+        // console.log('kwhPerHour',charData[i].kwhPerHour)
        // ruppyArr.push(charData[i].usageBill)
        }
       
@@ -87,7 +138,8 @@ const TodayKw = () => {
         //     backgroundColor:'aqua',
         //     borderWidath:1,
         // },
-    ]     
+    ]   
+
     });
     const options={
 
@@ -100,7 +152,7 @@ const TodayKw = () => {
           beginAtZero: true,
           title:{
             display:true,
-            text:"h",
+            text:"12:00am - 11:59pm horus",
             color:'white'
           },
           ticks: {
@@ -125,11 +177,11 @@ const TodayKw = () => {
       
       plugins: {
         legend: {
-          display:false,
-          // labels: {
-          //   color: 'white', 
-          //   display:false
-          // },
+          display:true,
+          labels: {
+            color: 'white', 
+            display:false
+          },
         },
         
       },

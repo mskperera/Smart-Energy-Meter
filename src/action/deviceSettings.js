@@ -78,24 +78,7 @@ export const getBugetedLimitByDeviceId= async (deviceId) => {
   }
 }
 
-export const saveBugetedLimitDetails= async (payload) => {
-  try {
-    return await customAxios
-      .post(`/deviceSettings/saveBugetedLimitDetails`,payload, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return err.response;
-      });
-  } catch (err) {
-    return err;
-  }
-}
+
 
 export const getBugetedLimitDetailsByBudgetedLimitId= async (budgetedLimitId) => {
   try {

@@ -8,6 +8,8 @@ import { getDrpConsumerCategories, getDrpConsumerSubCategoriesById, getDrpSuppli
 import { getConnectionSettingsByDeviceId, getOperationalLimitByDeviceId, get_DeviceSettingsByDeviceId, saveConnectionSettings, saveDeviceSettings, saveOperationalLimit } from '../../action/deviceSettings'
 import swal from 'sweetalert'
 import Budget from './Budget'
+import AboutDevice from './AboutDevice'
+import { useSelector } from 'react-redux'
 
 // import { Link } from 'react-router-dom'
 
@@ -45,14 +47,28 @@ function Service () {
 
     const [load,setLoad]=useState(false);
 
-  
+    const [device, setDevice] = useState('');
+
+const onChangeDeviceHandler=(device)=>{
+  setDevice(device);
+}
+
+const deviceNames=useSelector(state=>state.device.dropDeviceList);
+const defaultSelctedDevie=deviceNames[0];
+
+useEffect(()=>{
+setDevice(defaultSelctedDevie);
+},[deviceNames])
+
+
 
     useEffect(() => {
 
         loadDrpConsumerCategories();
        
-        loadDrpSupplier();
-        loadDrpSupplyType();
+        const deviceId=4;
+        loadDrpSupplier(deviceId);
+        loadDrpSupplyType(deviceId);
         // loadDeviceDetailsByDeviceId();
     }, []);
 
@@ -62,13 +78,13 @@ function Service () {
 
  
 
-  const deviceId = 4;
+
 //   const consumerCategoryId = 3;
 //   const supplierId = 2;
 
    // const [deviceSettings,setDeviceSettings] = useState(null);
 
-    const loadDeviceSettingstData=async()=>{
+    const loadDeviceSettingstData=async(deviceId)=>{
  
         const result=await get_DeviceSettingsByDeviceId(deviceId);
        // setDeviceSettings(result.data);
@@ -77,14 +93,14 @@ function Service () {
        setConsumerCategoryselectedValue(deviceSetttings.consumerCategoryId);
        setSupplierselectedValue(deviceSetttings.supplierId);
        setSupplyTypeselectedValue(deviceSetttings.supplyTypeId);
-    setConsumerSubCategoryselectedValue(deviceSetttings.consumerSubCategoryId);
+       setConsumerSubCategoryselectedValue(deviceSetttings.consumerSubCategoryId);
 
        
      // setConsumerSubCategoryselectedValue
        
     }
 
-    const loadDeviceConnectionData=async()=>{
+    const loadDeviceConnectionData=async(deviceId)=>{
  
         const result=await getConnectionSettingsByDeviceId(deviceId);
        // setDeviceSettings(result.data);
@@ -96,9 +112,13 @@ function Service () {
     }
 
     useEffect(()=>{
-        loadDeviceSettingstData();
-        loadDeviceConnectionData();
-    },[  load])
+
+        if(device){
+        const deviceId=device || defaultSelctedDevie;
+        loadDeviceSettingstData(deviceId.id);
+        loadDeviceConnectionData(deviceId.id);
+        }
+    },[load,device])
 
     const loadDrpConsumerCategories=async()=>{
         const result=await getDrpConsumerCategories();
@@ -118,7 +138,7 @@ function Service () {
         // setConsumerSubCategoryselectedValue(subCategory.ConsumerSubCategoryId);
        }
 
-    const loadDrpSupplier=async()=>{
+    const loadDrpSupplier=async(deviceId)=>{
         const result=await getDrpSupplier(deviceId);
         console.log("sup",result);
         const supplier = result.data;
@@ -126,7 +146,7 @@ function Service () {
       //  setSupplierselectedValue(supplier.supplierId)
        }
 
-    const loadDrpSupplyType=async()=>{
+    const loadDrpSupplyType=async(deviceId)=>{
         const result=await getDrpSupplyType(deviceId);
         console.log("supType",result);
         const supplierType = result.data;
@@ -148,9 +168,9 @@ const addUpdateDeviceSettings=async(e)=>{
 
 console.log("testingsave")
 
-
+const deviceId=device.id || defaultSelctedDevie.id;
     const payload = {
-      deviceId:4 ,
+      deviceId:deviceId ,
       supplierId: supplierSelectedValue,
       supplyTypeId: supplyTypeSelectedValue,
       consumerCategoryid: consumerCategoryselectedValue,
@@ -168,7 +188,7 @@ console.log("testingsave")
     }
   
     setMessage(outputMessage)
-    swal("User Updated Successfully", "", "success").then(() => {
+    swal("Updated Successfully", "", "success").then(() => {
         setLoad(!load);
       });
     
@@ -183,11 +203,12 @@ console.log("testingsave")
 }
 
 useEffect(() => {
-    loadOperationalLimitByDeviceId();
+    const deviceId=4;
+    loadOperationalLimitByDeviceId(deviceId);
 },[]);
 
 
-const loadOperationalLimitByDeviceId = async () => {
+const loadOperationalLimitByDeviceId = async (deviceId) => {
     const res = await getOperationalLimitByDeviceId(deviceId);
     // console.log("device",res.data); 
 
@@ -233,10 +254,10 @@ const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActiv
         setErrorMessage('');
         setMessage('');
 
-        
+        const deviceId=device.id || defaultSelctedDevie.id;
 
         const payload = {
-            deviceId: 4,
+            deviceId:deviceId,
             operationalMetricId: operationalMetricId,
             thresholdAmountMin: null,
             thresholdAmountMax: thresholdAmount,
@@ -253,7 +274,7 @@ const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActiv
         return;
         }
         setMessage(outputMessage)
-        swal("User Updated Successfully", "", "success").then(() => {
+        swal("Updated Successfully", "", "success").then(() => {
             setLoad(!load);
             });
         
@@ -266,10 +287,10 @@ const saveOperationVloSettings = async (thresholdAmountMin,thresholdAmountMax,op
     setErrorMessage('');
     setMessage('');
 
-    
+    const deviceId=device.id || defaultSelctedDevie.id;
 
     const payload = {
-        deviceId: 4,
+        deviceId: deviceId,
         operationalMetricId: operationalMetricId,
         thresholdAmountMin,
         thresholdAmountMax,
@@ -286,7 +307,7 @@ const saveOperationVloSettings = async (thresholdAmountMin,thresholdAmountMax,op
     return;
     }
     setMessage(outputMessage)
-    swal("User Updated Successfully", "", "success").then(() => {
+    swal("Updated Successfully", "", "success").then(() => {
         setLoad(!load);
         });
     
@@ -298,13 +319,13 @@ const saveOperationVloSettings = async (thresholdAmountMin,thresholdAmountMax,op
 const saveOperationalLimitHandler = async (e) => {
     e.preventDefault();
     try {
-        setErrorMessage('');
-        setMessage('');
+            setErrorMessage('');
+            setMessage('');
 
-        saveOperationSettings(operationalDataBill.thresholdAmount_max,7,operationalDataBill.isActive);
-        saveOperationSettings(operationalKwMax.thresholdAmount_max,1,operationalKwMax.isActive);
-        saveOperationSettings(operationalPowerMax.thresholdAmount_max,4,operationalPowerMax.isActive);
-        saveOperationVloSettings(operationalVoltage.thresholdAmount_min,operationalVoltage.thresholdAmount_max,2);
+            saveOperationSettings(operationalDataBill.thresholdAmount_max,7,operationalDataBill.isActive);
+            saveOperationSettings(operationalKwMax.thresholdAmount_max,1,operationalKwMax.isActive);
+            saveOperationSettings(operationalPowerMax.thresholdAmount_max,4,operationalPowerMax.isActive);
+            saveOperationVloSettings(operationalVoltage.thresholdAmount_min,operationalVoltage.thresholdAmount_max,2);
 
     }
         catch(err){
@@ -322,7 +343,7 @@ const saveConnectionSettingsHandler=async(e)=>{
 
 console.log("testingsave")
 const payload = {
-    deviceId: 4,
+    deviceId: device?.id || defaultSelctedDevie?.id,
     connection: editedConnection,
     deviceName: editedDeviceName,
     portNo: editedPortNo
@@ -335,9 +356,10 @@ const payload = {
       setErrorMessage(outputMessage)
       return;
     }
+    
   
     setMessage(outputMessage)
-    swal("User Updated Successfully", "", "success").then(() => {
+    swal("Updated Successfully", "", "success").then(() => {
         setLoad(!load);
       });
     
@@ -357,21 +379,33 @@ const payload = {
     setToggle(id);
   }
 
+
   return (
     <div className='home'>
-    <Navbar/> 
+    <Navbar onChangeDevice={onChangeDeviceHandler}/> 
     <div className='tab d-flex align-items-center justify-content-center'>
         <div className='back2'>
             <ul className='tab-links nav nav-pills' id='v-pills-tab' role='tablist'>
-                <li onClick={()=>updateToggle(1)} className='nav-link active' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Tarrif </li>
-                <li onClick={()=>updateToggle(2)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Device </li>
-                <li onClick={()=>updateToggle(3)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Budget</li>
+                <li onClick={()=>updateToggle(1)} className='nav-link active' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Budget</li>
+                <li onClick={()=>updateToggle(2)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Tariff </li>
+                <li onClick={()=>updateToggle(3)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Device </li>
                 <li onClick={()=>updateToggle(4)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Notification </li>
+                <li onClick={()=>updateToggle(5)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">About</li>
             </ul>
         </div>
     </div>          
 
+
+
                     <div className={toggle === 1 ? "show-content" : "content"}>
+                        <div className='body d-flex align-items-center justify-content-center w-100'>
+                            <Budget/>
+                        </div>
+                    </div>  
+
+
+
+                    <div className={toggle === 2 ? "show-content" : "content"}>
                       <div className='body d-flex align-items-center justify-content-center'>
                         <div className='service'>
                             <h3 className='d-flex align-items-center justify-content-center mb-3'>Tarrif Settings</h3>
@@ -438,7 +472,7 @@ const payload = {
                                                         </div>
                                                         
 
-                                                        <div className={toggle === 2 ? "show-content" : "content"}>
+                                                        <div className={toggle === 3 ? "show-content" : "content"}>
                                                              <div className='body d-flex align-items-center justify-content-center '>
                                                                 <div className='connection'>
                                                                     <h3 className='d-flex align-items-center justify-content-center mb-3'>Connection Settings</h3>
@@ -471,12 +505,7 @@ const payload = {
                                                                 </div>
                                                                </div>
                                                             </div>
-
-                                                            <div className={toggle === 3 ? "show-content" : "content"}>
-                                                                <div className='d-flex align-items-center justify-content-center w-100'>
-                                                                    <Budget/>
-                                                                </div>
-                                                            </div>             
+           
 
                                                             <div className={toggle === 4 ? "show-content" : "content"}>
                                                                 <div className='body d-flex align-items-center justify-content-center w-100'>
@@ -543,6 +572,12 @@ const payload = {
                                                                     </div>
                                                                 </div>
                                                             </div>
+
+                                                            <div className={toggle === 5 ? "show-content" : "content"}>
+                                                                <div className='body d-flex align-items-center justify-content-center w-100'>
+                                                                    <AboutDevice/>
+                                                                </div>
+                                                            </div> 
                                                 <BottomNav/>
                                             </div>
                                           )

@@ -4,11 +4,13 @@ import {getEngergyUsageNow} from '../../action/device';
 // import { TbHomeStats } from "react-icons/tb";
 import './Homechart.css'
 import { TbHomeStats } from "react-icons/tb";
-import { Chart as ChartJS, ArcElement, Tooltip, Colors } from "chart.js";
+import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
 
-const HomeChart = () => {
+const HomeChart = ({selectedDevice}) => {
 
+
+  
   const [objKw,setObjKw] = useState({
 
     // maxKwValue:1000,
@@ -31,17 +33,18 @@ const HomeChart = () => {
   },[objKw]);
 
   useEffect(()=>{
+    if(selectedDevice)
     loadChartData();
-  },);
+  },[selectedDevice]);
 
   const loadChartData=async()=>{
     const payload={
-      deviceId:"4",
+      deviceId:selectedDevice.id,//"4",
       mesurementUnitId:1,
       // mesurementUnitId:8
     }
    const result=await getEngergyUsageNow(payload);
-   console.log('resultwww',result.data)
+  //  console.log('resultwww',result.data)
   //  {"kwh":308.02,"deviceTimeStamp":1708324999,"kwhPerSec":0,"deviceTimeStampDate_UTC":"2024-02-19T06:43:19.000Z","kwh_MeasurementValue_max":100,"kwh_MeasurementValue_min":0,"Voltage":233.4}
  
    const {kwh,kwh_MeasurementValue_max,kwh_MeasurementValue_min}=result.data;
@@ -49,9 +52,14 @@ const HomeChart = () => {
   
    setObjKw({...objKw,currentKwValue:kwh});
   }
+  
 
   const data = {
-    labels: ['Used kWh','Remaining kWh'], 
+  
+    labels: ['Used kWh',`Remaining kWh : ${remaningkwvalue ? remaningkwvalue.toFixed(2) : 0}`
+    ],
+
+
     datasets: [
       {
         data: [objKw.currentKwValue,remaningkwvalue],
@@ -66,6 +74,7 @@ const HomeChart = () => {
     ],
   };
 
+
   const gaugeText={
     id:'gaugeText',
     beforeDatasetsDraw(chart,args, plugins){
@@ -76,7 +85,7 @@ const HomeChart = () => {
 
       ctx.save();
       ctx.fillStyle='white';
-      ctx.font ='50px Trebuchet MS ';
+      ctx.font ='45px Trebuchet MS ';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
       // ctx.strokeStyle = 'white';
@@ -103,21 +112,28 @@ const HomeChart = () => {
     // customize chart options
     plugins: {
       legend: {
-        position: 'bottom',
-        labels: {
-          color: 'white', 
-          usePointStyle: true,
-          pointStyle: 'square',
-        },
+      position: 'bottom',
+      labels: {
+        color: 'white',
+        usePointStyle: true,
+        pointStyle: 'square',
+        boxWidth: 20, // Adjust the box width to fit the label
+      },
       },
     },
+    layout: {
+      padding: {
+        top: 0, // Add padding to the top to accommodate the label
+      },
+  }
   };
 
   
 
 
   return(
-    <div>
+    <div className='text-p'>
+      {/* <p className='text d-flex justify-content-center align-items-center'>Budgeted : {objKw.maxKwValue} kWh</p> */}
       <TbHomeStats size={45} className='icon'/>
       <Doughnut data={data} options={options} plugins={[gaugeText]} id='box' className='chart'/> 
     </div>

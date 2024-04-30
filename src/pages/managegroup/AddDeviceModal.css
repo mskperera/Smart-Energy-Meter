@@ -1,0 +1,39 @@
+.popup{
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #aaaaaa;
+}
+  
+.popup-inner{
+  position: absolute;
+  padding: 32px;
+  width: 100%;
+  max-width: 500px;
+  margin-left: -700px;
+  background-color: rgb(0, 0, 0);
+}
+
+.popup-inner .close-btn{
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+@media screen and (max-width:450px){
+  .popup-inner{
+    position: absolute;
+    padding: 32px;
+    width: 90%;
+    max-width: 500px;
+    margin-left: -140px;
+  }
+}
+
+
+  

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import {getEngergyUsageNow} from '../../action/device';
 
+
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
 
-const Current = () => {
+const Current = ({selectedDevice}) => {
 
   const [objC,setObjC] = useState({
     maxCValue:15,
@@ -25,15 +26,15 @@ const Current = () => {
 
   useEffect(()=>{
     loadChartData();
-  },);
+  },[selectedDevice]);
 
   const loadChartData=async()=>{
     const payload={
-      deviceId:"4",
+      deviceId:selectedDevice.id,//"4",
       mesurementUnitId:3
     }
    const result=await getEngergyUsageNow(payload);
-   console.log('resultwww',result.data)
+  //  console.log('resultwww',result.data)
   //  {"kwh":308.02,"deviceTimeStamp":1708324999,"kwhPerSec":0,"deviceTimeStampDate_UTC":"2024-02-19T06:43:19.000Z","kwh_MeasurementValue_max":100,"kwh_MeasurementValue_min":0,"Voltage":233.4}
  
    const {current}=result.data;

@@ -1,27 +1,67 @@
 import React from 'react'
 import Chart from 'react-apexcharts';
-
+import './AreaChart.css'
+import './Home.css'
 
 
 const AreaChart = () => {
   const options = {
-      chart: {
-          type: 'area',
+    series: [
+      {
+        name: 'kWh',
+        type: 'area',
+        data: [30, 35, 40, 50, 60, 68, 79, 91, 105]
       },
-      series: [{
-          name: 'kWh',
-          data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
-      }],
-      xaxis: {
-          categories: [1, 2, 3, 4, 5, 6, 7, 9, 10]
+      {
+        name: 'Prediction',
+        type: 'line',
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 120],
+        color: 'rgba(255, 99, 71)',
       }
+    ],
+    
+    title: {
+      text: 'Trending Power Usage',
+      align: 'left',
+      style: {
+        fontSize: '15px',
+        color: 'white',
+        fontFamily: 'Trebuchet MS',
+      }
+    },
+    xaxis: {
+      categories: [1, 2, 3, 4, 5, 6, 7, 8, 9,10],
+      labels: {
+        style: {
+          colors: ['white'],
+        },
+      },
+    },
+    yaxis: {
+      labels: {
+        style: {
+          colors: ['white'],
+        },
+      },
+    },
+    dataLabels: {
+      enabled: false
+    },
+    legend: {
+      labels: {
+        colors: ['white'],
+      },
+    },
   };
+ 
+
 
   return (
-      <div>
-          <Chart options={options} series={options.series} type="area" id='box2' className="chart2" width={500} />
+      <div className="chart2">
+          <Chart options={options} series={options.series} type="area" id='box2' />
       </div>
   );
 };
 
 export default AreaChart;
+

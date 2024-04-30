@@ -2,30 +2,41 @@ import React, { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
+import moment from 'moment';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
-const MonthKw = () => {
+const MonthKw = ({selectedDevice}) => {
+  
 
     useEffect(()=>{
         loadEngergyUsageKwhByDateRange();
-    });
+    },[selectedDevice]);
 
     const loadEngergyUsageKwhByDateRange=async()=>{
+      
+      const startOfMonth = moment().utc().startOf('month').add('minutes').format('YYYY-MM-DD'); 
+       const endOfMonth = moment().utc().endOf('month').add('minutes').format('YYYY-MM-DD');
+
+       console.log('month Range',startOfMonth,endOfMonth);
         const payload={
-            deviceId:"4",
+            deviceId:selectedDevice.id,//"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:3,
-            startDate:'2024-02-01',
-            endDate:'2024-02-29',
+            // startDate:'2024-03-01',
+            // endDate:'2024-03-31',
+            startDate: startOfMonth, 
+            endDate: endOfMonth,
         }
+
+        // console.log('payload kwwwww',payload);
 
     const resultMonth=await getEngergyUsageKwhByDateRange(payload);
     console.log('engergyUsagekwhByDateRange Month',resultMonth.data)
     // setEngergyUsagekwhByDateRangeMonth(resultMonth.data.recordsets);
 
-    console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data.recordsets)
+    console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data);
          
-           const charData=resultMonth.data.recordsets[0];
+           const charData=resultMonth.data.recordset;
          
         
            const months=[];
@@ -76,6 +87,11 @@ const MonthKw = () => {
                 display:false,
                 color: 'gray', // color of x-axis labels
               },
+              title: {
+                display: true,
+                text: 'Date No',
+                color: 'white',
+              },
               ticks: {
                 color: 'white', // color of x-axis labels
               },
@@ -85,6 +101,11 @@ const MonthKw = () => {
                 color: 'gray', // color of x-axis labels
               },
               beginAtZero: true,
+              title: {
+                display: true,
+                text: 'kWh',
+                color: 'white',
+              },
               ticks: {
                 color: 'white', //color of y-axis labels
               },
@@ -93,7 +114,7 @@ const MonthKw = () => {
 
         plugins: {
             legend: {
-              display:false,
+              display:true,
               labels: {
                 color: 'white', // color for the chart labels
               },

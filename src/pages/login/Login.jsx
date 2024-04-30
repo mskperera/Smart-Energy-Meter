@@ -2,31 +2,48 @@ import React, { useState } from 'react'
 import './Login.css'
 import {login} from '../../action/userAuth'
 import {useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import { getDevicesByUserId } from '../../action/device';
+import { useDispatch } from 'react-redux';
+import deviceReducer, { setDropDevices } from '../../state/device/deviceReducer';
 
 
 
 function Login() {
+
+  const dispatch = useDispatch();
  
     const navigate=useNavigate();
     const [errorMessage,setErrorMessage]=useState('');
 
     const [formData, setFormData]=useState({
 
-            "userName":"admin",
-            "password":"1234",
-            "gmtOffset":"+5:30",
-            "publicIP":"212.121"  
+            userName:"lasitha",
+            password:"1234",
+            gmtOffset:"+5.30", //moment().utcOffset(),
+            publicIP:"212.121"  
     });
     
 
+
+   
+  
+    
+    
+ 
+
+
       const handleLogin = async (e) => {
         e.preventDefault();
+
+      
     
         try {
           const response = await login(formData);
           console.log('response',response);
+         // loadDevicesByUserId();
           // if (response.status === 200) {
-             navigate('/home');
+            navigate('/home');
           //   console.log('Login successful! Navigate to home page.');
           // } else {
    

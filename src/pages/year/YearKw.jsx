@@ -2,30 +2,55 @@ import React, { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
+import moment from 'moment';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
-const YearKw = () => {
+const YearKw = ({selectedDevice}) => {
     
+  // const getCurrentYearDates = () => {
+
+    // const currentYear = moment().utc();
+    // const startOfYear = currentYear.moment().startOf('year').toDate();
+    // const endOfYear = currentYear.moment().endOf('year').toDate();
+    // return { startDate: startOfYear, endDate: endOfYear };
+// };
+
+// const { startDate, endDate } = getCurrentYearDates();
+// const { startDate, endDate } = getCurrentYearDates();
+
+// console.log('year Range',startDate,endDate);
+
     useEffect(()=>{
         loadEngergyUsageKwhByDateRange();
-    });
+    },[selectedDevice]);
 
     const loadEngergyUsageKwhByDateRange=async()=>{
+
+      const currentYear = moment().utc();
+    const startOfYear = currentYear.startOf('year').format('YYYY-MM-DD');
+    const endOfYear = currentYear.endOf('year').format('YYYY-MM-DD');
+
+    console.log('year Range',startOfYear,endOfYear);
+
         const payload={
-            deviceId:"4",
+            deviceId:selectedDevice.id, //"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:4,
-            startDate:'2024-02-01',
-            endDate:'2024-02-29',
+            // startDate:'2024-01-01',
+            // endDate:'2024-12-31',
+            startDate: startOfYear,
+            endDate: endOfYear,
         }
 
+        console.log('payload',payload);
+
     const resultMonth=await getEngergyUsageKwhByDateRange(payload);
-    console.log('engergyUsagekwhByDateRange Month',resultMonth.data)
+   // console.log('engergyUsagekwhByDateRange Month',resultMonth.data)
     // setEngergyUsagekwhByDateRangeMonth(resultMonth.data.recordsets);
 
-    console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data.recordsets)
+    // console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data.recordsets)
          
-           const charData=resultMonth.data.recordsets[0];
+           const charData=resultMonth.data.recordset;
          
         
            const months=[];
@@ -33,8 +58,8 @@ const YearKw = () => {
         //    const ruppyArr=[];
     
            for(let i=0;i<charData.length;i++){
-            months.push(charData[i].monthName);
-            monthKwArr.push(charData[i].kwhPerMonth)
+            months.push(charData[i].month);
+            monthKwArr.push(charData[i].maxKwh)
            // ruppyArr.push(charData[i].usageBill)
            }
           
@@ -75,6 +100,11 @@ const YearKw = () => {
                 display:false,
                 color: 'gray', // color of x-axis labels
               },
+              title: {
+                display: true,
+                text: 'Months',
+                color: 'white', 
+              },
               ticks: {
                 color: 'white', // color of x-axis labels
               },
@@ -84,6 +114,11 @@ const YearKw = () => {
                 color: 'gray', // color of x-axis labels
               },
               beginAtZero: true,
+              title:{
+                display:true,
+                text:'kWh',
+                color:'white',
+              },
               ticks: {
                 color: 'white', //color of y-axis labels
               },
@@ -92,7 +127,7 @@ const YearKw = () => {
           
         plugins: {
             legend: {
-              display:false,
+              display:true,
               labels: {
                 color: 'white',//color for the chart labels
               },

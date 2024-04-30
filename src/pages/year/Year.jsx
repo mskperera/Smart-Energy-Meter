@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Year.css'
 import Navbar from '../../components/navbar/Navbar'
 import { Link } from 'react-router-dom'
 import BottomNav from '../../components/bottommenu/BottomNav'
 import YearCost from './YearCost'
 import YearKw from './YearKw'
+import { useSelector } from 'react-redux'
 
 
 function Year() {
@@ -15,9 +16,23 @@ function Year() {
     setActiveTab(tab);
   };
 
+  const [device, setDevice] = useState('');
+
+  const onChangeDeviceHandler=(device)=>{
+    setDevice(device);
+  }
+
+  const deviceNames=useSelector(state=>state.device.dropDeviceList);
+  const defaultSelctedDevie=deviceNames[0]
+  useEffect(()=>{
+  setDevice(defaultSelctedDevie);
+  },[deviceNames])
+
+
     return (
         <div className='home'>
-          <Navbar/>
+          <Navbar onChangeDevice={onChangeDeviceHandler}/>
+          
           <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
             <div className='back'>
                 <ul className='nav-bar-links'>
@@ -32,12 +47,12 @@ function Year() {
             </div>
         </div>
     
-        <div className='page-4'>
+        <div className='page-4 body'>
           <div className='chart-year-kw'>
-             <YearKw/>
+             <YearKw selectedDevice={device || defaultSelctedDevie} />
           </div>
           <div className='chart-year-cost'>
-             <YearCost/>
+             <YearCost selectedDevice={device || defaultSelctedDevie} />
           </div>
         </div>
                <BottomNav/>
