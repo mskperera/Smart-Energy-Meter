@@ -2,39 +2,57 @@ import React, { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
+import moment from 'moment';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 
 
-const TodayCost = () => {
+const TodayCost = ({selectedDevice}) => {
 
     useEffect(()=>{
         loadEngergyUsageKwhByDateRange();
-      },);
+      },[selectedDevice]);
     
 
-      const getCurrentDateWithoutTime = () => {
-        const currentDate = new Date();
-        currentDate.setHours(24, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to zero
-        return currentDate;
-      };
+      // const getCurrentDateWithoutTime = () => {
+      //   return moment().startOf('day').add(24, 'hours').toDate();
+      // };
 
       const loadEngergyUsageKwhByDateRange=async()=>{
+        // const currentDate = moment().utc(); 
+        // const startDate = currentDate.clone().subtract(24, 'hours'); 
+        // const endDate = currentDate.clone();
+        const todayUtc = moment(); 
+        const startOfDay = todayUtc.startOf('day').format('YYYY-MM-DD HH:mm:ss');
+    
+        const endOfDay = todayUtc.endOf('day').format('YYYY-MM-DD HH:mm:ss');
+    
+        const utcOffSet= moment().utcOffset();
+    
+        const startOfDayUtc = moment(startOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+        const endOfDayUtc = moment(endOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+    
+
         const payload={
-            deviceId:"4",
+            deviceId:selectedDevice.id,//"4",
             mesurementUnitId:7,//1-kwh,7-usage bill
             frequencyId:1,
-            startDate:getCurrentDateWithoutTime(),
-            endDate:getCurrentDateWithoutTime(),
+            startDate: startOfDayUtc, 
+            endDate: endOfDayUtc,
+            // startDate:getCurrentDateWithoutTime(),
+            // endDate:getCurrentDateWithoutTime(),
+            // startDate:"2024-04-06 12:00",
+            // endDate:"2024-04-06 11:59:59",
         }
        const result=await getEngergyUsageKwhByDateRange(payload);
        console.log('engergyUsagekwhByDateRange',result.data)
     //    setEngergyUsagekwhByDateRange(result.data.recordsets);
       
-         
-           console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
-         
-           const charData=result.data.recordsets[0];
+    const charData = result.data.recordset.map(i => {
+      return {...i,date:moment(i.date).format('YYYY-MM-DD HH:mm:ss')}
+  });
+          //  console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
+    
          
         
            const ruppys=[];
@@ -42,12 +60,13 @@ const TodayCost = () => {
            const ruppyArr=[];
     
            for(let i=0;i<charData.length;i++){
-            ruppys.push(charData[i].hour);
+           // ruppys.push(charData[i].hour);
+            ruppys.push(moment(charData[i].date).format("HH A"));
             // dataKwArr.push(charData[i].maxKwh)
             ruppyArr.push(charData[i].usageBillPerHour)
            }
           
-           console.log('lll',ruppys)
+          //  console.log('lll',ruppys)
           
           const datasets0=[
         //     {
@@ -102,7 +121,7 @@ const TodayCost = () => {
                   beginAtZero: true,
                   title:{
                     display:true,
-                    text:"h",
+                    text:"12:00am - 11:59pm hours",
                     color:'white'
                   },
                   ticks: {
@@ -129,7 +148,7 @@ const TodayCost = () => {
               
             plugins: {
                 legend: {
-                  display:false,
+                  display:true,
                   labels: {
                     color: 'white', 
                   },

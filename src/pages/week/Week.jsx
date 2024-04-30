@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Week.css'
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/navbar/Navbar'
 import BottomNav from '../../components/bottommenu/BottomNav'
 import WeekKw from './WeekKw'
 import WeekCost from './WeekCost'
+import { useSelector } from 'react-redux'
 
 
 function Week() {
@@ -15,10 +16,21 @@ function Week() {
     setActiveTab(tab);
   };
 
+  const [device, setDevice] = useState('');
+
+  const onChangeDeviceHandler=(device)=>{
+    setDevice(device);
+  }
+
+  const deviceNames=useSelector(state=>state.device.dropDeviceList);
+  const defaultSelctedDevie=deviceNames[0]
+  useEffect(()=>{
+setDevice(defaultSelctedDevie);
+  },[deviceNames])
 
   return (
     <div className='home'>  
-      <Navbar/>
+      <Navbar  onChangeDevice={onChangeDeviceHandler}/>
       <nav className='nav-bar d-flex align-items-center justify-content-center w-100'>
         <div className='back'>
             <ul className='nav-bar-links'>
@@ -32,12 +44,12 @@ function Week() {
             </ul>
         </div>
     </nav>
-    <div className='page-2'>
+    <div className='page-2 body'>
       <div className='chart-week-kw'>
-       <WeekKw/>
+       <WeekKw selectedDevice={device || defaultSelctedDevie}/>
       </div>
       <div className='chart-week-cost'>
-        <WeekCost/>
+        <WeekCost selectedDevice={device || defaultSelctedDevie}/>
       </div>
     </div>
       <BottomNav/>

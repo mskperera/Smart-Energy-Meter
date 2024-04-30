@@ -2,29 +2,52 @@ import React,{useEffect,useState} from 'react'
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
+import moment from 'moment';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
-const WeekCost = () => {
+const WeekCost = ({selectedDevice}) => {
+
+  // const getCurrentWeekDates = () => {
+  //   const startOfWeek = moment().utc().startOf('week');
+  //   const endOfWeek = moment().utc().endOf('week');
+
+  //   return { startDate: startOfWeek.toDate(), endDate: endOfWeek.toDate() };
+  // };
+
+  // const { startDate, endDate } = getCurrentWeekDates();
+  
     useEffect(()=>{
         loadEngergyUsageKwhByDateRange();
-      },);
+      },[selectedDevice]);
   
       const loadEngergyUsageKwhByDateRange=async()=>{
+        const currentDate = moment.utc();
+
+        const startDate = currentDate.startOf('week').format('YYYY-MM-DD');
+        const endDate = currentDate.endOf('week').format('YYYY-MM-DD');
+    
+          const utcOffset = moment().utcOffset();
+          const startDateUTC = moment.utc(moment(startDate).startOf('week').subtract(utcOffset, 'minutes').format('YYYY-MM-DDTHH:mm:ss'));
+          const endDateUTC = moment.utc(moment(endDate).endOf('week').subtract(utcOffset, 'minutes').format('YYYY-MM-DDTHH:mm:ss'));
+          
+          console.log('startDateUTC:', startDateUTC.format());
+          console.log('endDateUTC:', endDateUTC.format());
+
         const payload={
-            deviceId:"4",
+            deviceId:selectedDevice.id,//"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:3,
-            startDate:'2024-02-18',
-            endDate:'2024-02-24',
+            // startDate:'2024-04-01 12:00',
+            // endDate:'2024-04-05 11:59:59',
+            startDate:startDateUTC.format(),
+            endDate:endDateUTC.format(),
         }
-        const resultweeks=await getEngergyUsageKwhByDateRange(payload);
-        console.log('engergyUsagekwhByDateRangeWeeks',resultweeks.data)
-        // setEngergyUsagekwhByDateRangeWeeks(resultweeks.data.recordsets);
-      
+        const resultweeks=await getEngergyUsageKwhByDateRange(payload); 
          
-           console.log('getEnergyMeterDataKwhPersecsByDateRange',resultweeks.data.recordsets)
+          //  console.log('55555555555',resultweeks);
+           
          
-           const charData=resultweeks.data.recordsets[0];
+           const charData=resultweeks.data.recordset;
          
         
            const weeks=[];
@@ -32,11 +55,16 @@ const WeekCost = () => {
         //    const ruppyArr=[];
     
            for(let i=0;i<charData.length;i++){
-            weeks.push(charData[i].dayName);
+            weeks.push(moment(charData[i].date).format("ddd DD"));
+            // console.log('daysss154954851649',charData[i].day)
+            // weeks.push(moment(charData[i].day).format('D'));
             weekCostArr.push(charData[i].usageBillPerDay)
            // ruppyArr.push(charData[i].usageBill)
            }
           
+           weeks.shift();
+           weekCostArr.shift();
+           
            const datasets0=[
             {
               label:'Rs',

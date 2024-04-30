@@ -1,97 +1,134 @@
-import React, { useState } from 'react'
-import './TimeLine.css'
-import { SlCalender } from "react-icons/sl";
-import { VerticalTimeline,VerticalTimelineElement } from 'react-vertical-timeline-component'
-import 'react-vertical-timeline-component/style.min.css'
-import ReactDatePicker from 'react-datepicker'
+import React, { useEffect, useState } from 'react';
+import './TimeLine.css';
+import { VerticalTimeline } from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
+import { getbillingSessionByDeviceId, saveBillingSession } from '../../action/billingSession';
+import swal from 'sweetalert';
+import TimelineItem from './TimelineItem';
+
 
 const TimeLine = () => {
+    const [selectedDateStart, setSelectedDateStart] = useState(null);
+    const [selectedDateEnd, setSelectedDateEnd] = useState(null);
+    const [billingSession, setBillingSession] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const [selectedDateFirst, setSelectedDateFirst] = useState(null);
-    const [selectedDateSecond, setSelectedDateSecond] = useState(null);
-    const [selectedDateTherd, setSelectedDateTherd] = useState(null);
+    
+    // const [editAmountDue, setEditAmountDue] = useState("");
+    // const [editKwh, setEditKwh] = useState(""); 
+    
 
-  return (
+    useEffect(() => {
+        loadbillingSessionByDeviceId();
+    }, []);
 
-    <div>
-        <VerticalTimeline>
-            <VerticalTimelineElement
-                className="vertical-timeline-element--work"
-                contentStyle={{ background: 'rgb(33, 150, 243)', color: 'black' }}
-                contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-                // date="&nbsp;&nbsp;2024"
-                iconStyle={{ background: '#F08080', color: '',scale: '0.9'}}
-                icon={<SlCalender />}
-            >
-                <h3 className="vertical-timeline-element-title col text-center">January</h3>
-                {/* <h4 className="vertical-timeline-element-subtitle"></h4> */}
-                <div className='col-md text-center d-flex align-items-center justify-content-center'>
-                    <ReactDatePicker
-                        selected={selectedDateFirst}
-                        onChange={date => setSelectedDateFirst(date)}
-                        className='col-md-6 form-control'
-                        placeholderText='Select date'
-                        dateFormat='dd/MM/yyyy; h:mm aa'
-                        showTimeSelect
-                        timeIntervals={15}
-                        timeFormat='HH:mm'
+    const loadbillingSessionByDeviceId = async () => {
+        try {
+            const res = await getbillingSessionByDeviceId(4);
+            console.log("API response:", res.data);
+            if (res.data.length > 0) {
+                setBillingSession(res.data);
+            }
+        } catch (error) {
+            console.error("Error fetching billing session:", error);
+        }
+    }
+
+    const handleStartDateChange = (date,deviceBillingSessionId) => {
+        console.log("date:", date); 
+       // setSelectedDateStart(date);
+       const existingSession = [...billingSession];
+       existingSession.map(s=>{
+
+        if(s.deviceBillingSessionId===deviceBillingSessionId){
+          return  s.startDate=date;
+        }
+       });
+        setBillingSession(existingSession);
+       
+    };
+
+    const handleEndDateChange = (date,deviceBillingSessionId) => {
+        //setSelectedDateEnd(date);
+        const existingSession = [...billingSession];
+        existingSession.map(y=>{
+
+         if(y.deviceBillingSessionId===deviceBillingSessionId){
+           return  y.endDate=date;
+         }
+        });
+       setBillingSession(existingSession);
+    };
+
+    
+
+    const handleKwhChange = (index, value) => {
+        const updatedBillingSession = [...billingSession];
+        updatedBillingSession[index].totalConsumption_Kwh = value;
+        setBillingSession(updatedBillingSession);
+    };
+
+    const handleAmountDueChange = (index, value) => {
+        const updatedBillingSession = [...billingSession];
+        updatedBillingSession[index].totalAmountDue = value;
+        setBillingSession(updatedBillingSession);
+    };
+
+    const saveHandler = async (e,session) => {
+        e.preventDefault();
+        try {
+
+            console.log("session:", session);
+            const payload = {
+                    // deviceBillingSessionId: deviceBillingSessionId,
+                    sessionName: "2024-02-15 - 2024-03-12",
+                    totalConsumption_Kwh: session.totalConsumption_Kwh,
+                    totalAmountDue: session.totalAmountDue,
+                    startDate: session.startDate,
+                    endDate: session.endDate,
+                    isTotalConsumption_KwhSelected:session.isTotalConsumption_KwhSelected,
+                    isTotalAmountDueSelected:session.isTotalAmountDueSelected,
+                    deviceId: 4,
+            };
+            
+            const res = await saveBillingSession(payload);
+            console.log("API:", res);
+            const { responseStatus, outputMessage } = res.data;
+            if (responseStatus === "failed") {
+
+                setErrorMessage(outputMessage);
+                return;
+            }
+            loadbillingSessionByDeviceId();
+            swal("Updated Successfully", " ", "success").then(() => {
+                
+            });
+        } catch (err) {
+            console.error("Error saving billing session:", err);
+            setErrorMessage("Error saving billing session");
+        }
+    };
+
+    return (
+        <div>
+            {billingSession && billingSession.map((session, index) => (
+                <VerticalTimeline key={session.deviceBillingSessionId}>
+                  {/* {JSON.stringify(billingSession)} */}
+                    <TimelineItem
+                        session={session}
+                        selectedDateStart={selectedDateStart}
+                        selectedDateEnd={selectedDateEnd}   
+                        onDateChangeStart={(date) => handleStartDateChange(date,session.deviceBillingSessionId)}
+                        onDateChangeEnd={(date) => handleEndDateChange(date,session.deviceBillingSessionId)}
+                        onKwhChange={(e) => handleKwhChange(index, e.target.value)}
+                        onAmountDueChange={(e) => handleAmountDueChange(index, e.target.value)}
+                        saveHandler={saveHandler}
+                        errorMessage={errorMessage}
                     />
-                </div>
+                </VerticalTimeline>
+            ))}
+        </div>
+    );
+};
 
-                <p className='col text-center'>Rs : 2500</p>
-                <p className='col text-center'>kWh : 300</p>
-            </VerticalTimelineElement>
-            <VerticalTimelineElement
-                className="vertical-timeline-element--work col text-center"
-                contentStyle={{ background: 'rgb(33, 150, 243)', color: 'black' }}
-                contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-                // date="2024&nbsp;&nbsp;"
-                iconStyle={{ background: '#F08080', color: '', scale: '0.9' }}
-                icon={<SlCalender />}
-            >
-                <h3 className="vertical-timeline-element-title">February</h3>
-                {/* <h4 className="vertical-timeline-element-subtitle"></h4> */}
-                <div className='col-md text-center d-flex align-items-center justify-content-center'>
-                <ReactDatePicker
-                    selected={selectedDateSecond}
-                    onChange={date => setSelectedDateSecond(date)}
-                    className='form-control'
-                    placeholderText='Select date'
-                    dateFormat='dd/MM/yyyy; h:mm aa'
-                    showTimeSelect
-                    timeIntervals={15}
-                    timeFormat='HH:mm'
-                />
-                </div>
-                <p className='col text-center'>Rs : 2600 </p>
-            </VerticalTimelineElement>
-            <VerticalTimelineElement
-                className="vertical-timeline-element--work col text-center"
-                contentStyle={{ background: 'rgb(33, 150, 243)', color: 'black' }}
-                contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-                // date="&nbsp;&nbsp;2024"
-                iconStyle={{ background: '#F08080', color: '', scale: '0.9' }}
-                icon={<SlCalender />}
-            >
-                <h3 className="vertical-timeline-element-title">March</h3>
-                {/* <h4 className="vertical-timeline-element-subtitle"></h4> */}
-                <div className='col-md text-center d-flex align-items-center justify-content-center'>
-                <ReactDatePicker
-                    selected={selectedDateTherd}
-                    onChange={date => setSelectedDateTherd(date)}
-                    className='form-control'
-                    placeholderText='Select date'
-                    dateFormat='dd/MM/yyyy; h:mm aa'
-                    showTimeSelect
-                    timeIntervals={15}
-                    timeFormat='HH:mm'
-                />
-                </div>
-                <p className='col text-center'>Rs : 1500</p>
-            </VerticalTimelineElement>
-        </VerticalTimeline>
-    </div>
-  )
-}
-
-export default TimeLine
+export default TimeLine;

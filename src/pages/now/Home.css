@@ -41,6 +41,7 @@
 
 .page-bottom {
   flex-wrap: wrap;
+  display: flex;
 }
 
 .home{
@@ -51,9 +52,23 @@
     height: 100vh;
 }
 
-.chart-now-kw{
+.chart-kw{
     flex: 1;
-    width: 40%;
+    width: 100%;
+    display: flex;
+    /* position: absolute; */
+    justify-content:center;
+    align-items: center;
+    margin: 0%;
+    flex-direction: column;
+    padding: 1rem;
+    margin-top: -134px;
+    margin-left: 200px;
+}
+
+.chart-area{
+    flex: 1;
+    width: 100%;
     display: flex;
     /* position: absolute; */
     justify-content:center;
@@ -61,19 +76,33 @@
     margin: 0%;
     flex-direction: column;
     padding: 0rem;
+    margin-top: -20px;
+    margin-right: 0px;
+}
+
+.chart-now-kw{
+    flex: 1;
+    width: 30%;
+    display: flex;
+    /* position: absolute; */
+    justify-content:center;
+    align-items: center;
+    margin: 0%;
+    flex-direction: column;
+    padding: 1rem;
     margin-top: 0px;
 }
 
 .chart-now-cost{
     flex: 1;
-    width: 40%;
+    width: 30%;
     display: flex;
     /* position: absolute; */
     justify-content: center;
     align-items: center;
     margin: 0%;
     flex-direction: column;
-    padding: 0rem;
+    padding: 1rem;
     margin-top: 0px;
 }
 
@@ -102,9 +131,53 @@
 .page-bottom-2{
     flex: 1;
 } */
+.txt{
+    /* position: absolute; */
+    display: flex;
+    margin-left: 10px;
+    margin-top: 17px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+}
+
+.device-active{
+    display: flex;
+    /* position: absolute; */
+    width: fit-content;
+    padding: 0px 15px 0px 30px;
+    height: 40px;
+    color: #ff0066;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    background:  rgba(11, 11, 11, 0.5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+    margin-top: 25px;
+}
+
+.device-name{
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    display: flex;
+    margin-top: 0px;
+    margin-left: 0px;
+}
+
+.curcle{
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 15px;
+    height: 15px;
+    border-radius: 25px;
+    margin-left: -20px;
+    background-color: red;
+}
 
 .page-bottom div{
-    width: 200px;
+    width: 210px;
     padding: 2rem;
     /* margin-top: -50px; */
 }
@@ -164,113 +237,340 @@
 @media screen and (max-width:2000px){
     .page{
         width: 100%;
-        margin-top: 0rem;
+        margin-top: -4rem;
         justify-content:center;
         align-items: center;
         display: flex;
         margin-bottom: -4rem;
+        margin-left: 0px;
+        overflow-y: auto;
+    }
+
+    .body2{
+        padding-top: 10px;
+        padding-bottom: 60px; 
+        overflow-y: auto; 
+        height: calc(98.1vh - 80px - 60px); 
     }
 
     .chart-now-kw{
-        height: 350px;
-        padding: 2rem;
-        margin-top: 40px;
-        margin-left: 280px;
+        height: 300px;
+        padding: 1rem;
+        margin-top: 0px;
+        margin-left: 0px;
     }
 
     .chart-now-cost{
-        height: 350px;
-        padding: 2rem;
-        margin-top: 40px;
-        margin-right: 280px;
-    }
-
-    .chart-area{
         height: 300px;
-        padding: 2rem;
-        margin-top: -30px;
-        margin-right: 0px;
+        padding: 1rem;
+        margin-top: 0px;
+        margin-right: 200px;
     }
+    
     .navnav1{
         top: 93px;
     }
 
+    .chart-area{
+        flex: 1;
+        width: 100%;
+        display: flex;
+        /* position: absolute; */
+        justify-content:center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 0rem;
+        margin-top: 20px;
+        margin-right: 0px;
+    }
+
+    .page-bottom{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin-top: -10px;
+        /* background-color:#05052a; */
+        /* background-color:#020239; */
+        /* position: absolute; */
+        margin: 0%;
+        /* height: 10vh; */
+    }
+
+    .device-active{
+        display: flex;
+        /* position: absolute; */
+        width: fit-content;
+        padding: 0px 15px 0px 30px;
+        height: 40px;
+        color: #ff0066;
+        align-items: center;
+        border-radius: 10px;
+        justify-content: center;
+        background:  rgba(11, 11, 11, 0.5);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+        margin-top: 25px;
+    }
+
+    .device-name{
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        display: flex;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+    
+    .curcle{
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        width: 15px;
+        height: 15px;
+        border-radius: 25px;
+        margin-left: -20px;
+        background-color: red;
+    }
     
 }
 
 @media screen and (max-width:1150px){
     .page{
         width: 100%;
+        margin-top: 0rem;
+        justify-content:center;
         align-items: center;
-        justify-content: center;
-        margin-top: 0px;
-        margin-bottom: 0px;
-        height: 51.8vh;
+        display: flex;
+        margin-bottom: -4rem;
+        margin-left: 0px;
+        /* overflow-y: auto; */
     }
-    .chart-now-kw{
-        height: 350px;
+
+    .body2{
+        padding-top: 10px;
+        padding-bottom: 60px; 
+        overflow-y: auto; 
+        height: calc(10.1vh - 80px - 60px); 
+    }
+
+    .chart-kw{
+        flex: 1;
+        width:100%;
+        display: flex;
+        /* position: absolute; */
+        justify-content:center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
         padding: 0rem;
-        margin-top: 40px;
+        margin-top: 0px;
+        margin-left: 10px;
+    }
+    
+    .chart-area{
+        flex: 1;
+        width: 300px;
+        display: flex;
+        /* position: absolute; */
+        justify-content:center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 0rem;
+        margin-top: 30px;
+        margin-left: 380px;
+    }
+
+    .chart-now-kw{
+        height: 300px;
+        padding: 0rem;
+        margin-top: -25px;
         margin-left: 0px;
     }
 
     .chart-now-cost{
-        height: 350px;
+        height: 300px;
         padding: 0rem;
-        margin-top: 40px;
+        margin-top: -25px;
         margin-right: 0px;
     }
 
-    .bottom-3{
-        width: 20px;
-        margin: 0%;
-        justify-content: space-between;
-        align-items: center;
-        flex-direction: column;
-}
-}
-
-@media screen and (max-width:850px){
-    .page{
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-        margin-top: 0px;
-        margin-bottom: 0px;
-        height: 57.9vh;
-    }
-    .chart-now-kw{
-        width:30%; 
-        align-items: center;
-        justify-content: center;
-        padding: 0px;
-       margin-left: 0px;
-    }
-    .chart-now-cost{
-        width: 30%;
-        align-items: center;
-        justify-content: center;
-        padding: 0px;
-        margin-right: 0px;
-    }
-
-    .navnav1{
-        top: 93px;
-    }
     .page-bottom{
         display: flex;
         width: 100%;
         justify-content: center;
         align-items: center;
         margin: 0%;
-        margin-top: 0px;
+        margin-top: 30px;
+        flex-direction: column;
+        
     }
     
     .page-bottom div{
-        width: 140px;
-        padding: 0px;
-        margin-bottom: 15px;
-        padding: 5px;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 1px;
+    }
+
+    .page-bottom .vol{
+        width: 200px;
+        flex: 1;
+    }
+
+    .page-bottom .pow{
+        width: 200px;
+        flex: 1;
+    }
+
+    .body2{
+        width: 100%;
+        z-index: 1;
+        border-collapse: collapse;
+        margin-top: 10px; 
+        width: 100%;
+        overflow-x: auto;
+        padding-top: 30px;
+        padding-bottom: 60px; 
+        overflow-y: auto; 
+        height: calc(96.81vh - 80px - 60px); 
+    }
+}
+
+@media screen and (max-width:850px){
+    .page{
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0%;
+        margin-left: 0px;
+        height: 115.5vh;
+    }
+
+    .chart-kw{
+        flex: 1;
+        width:100%;
+        display: flex;
+        /* position: absolute; */
+        justify-content:center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 0rem;
+        margin-top: -80px;
+        margin-left: 0px;
+    }
+    
+    .chart-area{
+        flex: 1;
+        width: 300px;
+        display: flex;
+        /* position: absolute; */
+        justify-content:center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 0rem;
+        margin-top: 15px;
+        margin-left: 180px;
+    }
+
+    .chart-now-cost{
+        width: 400px;
+        margin-top: 0px;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0px;
+        margin-right: 0px;
+        margin-top: 15px;
+    }
+
+    .chart-now-kw{
+        margin-top: -50px;
+        width: 400px;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0px;
+    }
+
+    .page-bottom{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: 0%;
+        margin-top: 20px;
+        flex-direction: column;
+        
+    }
+    
+    .page-bottom div{
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 1px;
+    }
+
+    .page-bottom .vol{
+        width: 200px;
+        flex: 1;
+    }
+
+    .page-bottom .pow{
+        width: 200px;
+        flex: 1;
+    }
+
+    .body2{
+        width: 100%;
+        z-index: 1;
+        border-collapse: collapse;
+        margin-top: 10px; 
+        width: 100%;
+        overflow-x: auto;
+        padding-top: 30px;
+        padding-bottom: 60px; 
+        overflow-y: auto; 
+        height: calc(96.81vh - 80px - 60px); 
+    }
+
+    .device-active{
+        display: flex;
+        /* position: absolute; */
+        width: fit-content;
+        padding: 0px 15px 0px 15px;
+        height: 40px;
+        color: #ff0066;
+        align-items: center;
+        border-radius: 10px;
+        justify-content: center;
+        background:  rgba(11, 11, 11, 0.5);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+        margin-top: 25px;
+    }
+
+    .device-name{
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        display: flex;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+    
+    .curcle{
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        width: 15px;
+        height: 15px;
+        border-radius: 25px;
+        margin-left: 0px;
+        background-color: red;
     }
 
 }
@@ -285,21 +585,50 @@
         justify-content: space-between;
         margin: 0%;
         margin-left: 0px;
-        height: 100.5vh;
+        height: 118vh;
+    }
+
+    .chart-kw{
+        flex: 1;
+        width:100%;
+        display: flex;
+        /* position: absolute; */
+        justify-content:center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 0rem;
+        margin-top: -50px;
+        margin-left: 0px;
+    }
+    
+    .chart-area{
+        flex: 1;
+        width: 100%;
+        display: flex;
+        /* position: absolute; */
+        justify-content:center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 0rem;
+        margin-bottom: 10px;
+        margin-left: 0px;
     }
 
     .chart-now-cost{
-        width: 400px;
+        width: 300px;
         margin-top: 0px;
         align-items: center;
         justify-content: center;
         margin-bottom: 0px;
         margin-right: 0px;
+        margin-top: 15px;
     }
 
     .chart-now-kw{
-        margin-top: 0px;
-        width: 400px;
+        margin-top: -50px;
+        width: 300px;
         align-items: center;
         justify-content: center;
         margin-left: 0px;
@@ -313,6 +642,7 @@
         margin: 0%;
         margin-top: 0px;
         flex-direction: column;
+        margin-left: 0px;
         
     }
     
@@ -358,21 +688,49 @@
         align-items: center;
         justify-content: space-between;
         margin: 0%;
+        margin-top: -20px;
+        height: 110vh;
+    }
+
+    .chart-kw{
+        flex: 1;
+        width: 100%;
+        display: flex;
+        /* position: absolute; */
+        justify-content:center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 0rem;
+        margin-top: -110px;
         margin-left: 0px;
-        height: 84vh;
+    }
+    
+    .chart-area{
+        flex: 1;
+        width: 280px;
+        display: flex;
+        /* position: absolute; */
+        justify-content:center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 0rem;
+        margin-top: -70px;
+        margin-left: 36px;
     }
 
     .chart-now-cost{
-        width: 10px;
-        margin-top:20px;
+        width: 100px;
+        margin-top:-160px;
         align-items: center;
         justify-content: center;
-        margin-bottom: 50px;
+        margin-bottom: 0px;
         margin-right: 0px;
     }
 
     .chart-now-kw{
-        margin-top: 70px;
+        margin-top: -220px;
         width: 10px;
         align-items: center;
         justify-content: center;
@@ -387,13 +745,25 @@
         margin: 0%;
         margin-top: 10px;
         /* flex-direction: column; */
-        
+        margin-bottom: -50px;
+    }
+
+    .txt{
+        /* position: absolute; */
+        margin-left: 80px;
+        margin-top: -25px;
+        /* font-size: 10px; */
+    }
+
+    .txt1{
+        font-size: 15px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
     
     .page-bottom div{
         width: 100%;
         margin-top: 0px;
-        margin-bottom: 7px;
+        margin-bottom: 10px;
         padding: 1px;
         flex: 1;
         justify-content: space-between;
@@ -401,25 +771,21 @@
     }
 
     .page-bottom .vol{
-        width: 180px;
+        width: 170px;
         flex: 1;
         
     }
 
     .page-bottom .pow{
-        width: 180px;
+        width: 170px;
         flex: 1;
     }
-      .page-bottom {
-        margin-top: -5px;
-      }
-
 
       .body2{
         width: 100%;
         z-index: 1;
         border-collapse: collapse;
-        margin-top: 10px; 
+        margin-top: 20px; 
         width: 100%;
         overflow-x: auto;
         padding-top: 30px;
@@ -427,5 +793,57 @@
         overflow-y: auto; 
         height: calc(101.2vh - 80px - 60px); 
     }
+
+    .device-active{
+        display: flex;
+        /* position: absolute; */
+        width: fit-content;
+        padding: 0px 15px 0px 30px;
+        height: 40px;
+        color: #ff0066;
+        align-items: center;
+        border-radius: 10px;
+        justify-content: center;
+        background:  rgba(11, 11, 11, 0.5);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+        margin-top: 25px;
     }
+
+    .device-name{
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        display: flex;
+        margin-top: 42px;
+        margin-left: -75px;
+    }
+    
+    .curcle{
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        width: 15px;
+        height: 15px;
+        border-radius: 25px;
+        margin-left: -20px;
+        background-color: red;
+    }
+
+    }
+
+    /* @media screen and (max-width:414px){
+        .chart-area{
+            flex: 1;
+            width: 280px;
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            margin: 0%;
+            flex-direction: column;
+            padding: 0rem;
+            margin-top: -70px;
+            margin-left: 50px;
+        }
+    } */
 
