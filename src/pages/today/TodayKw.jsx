@@ -80,8 +80,6 @@ console.log('payload',payload);
      
       //  console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
        
-      const offset = moment().utcOffset() * 60 * 1000; // Convert offset to milliseconds
-
       const charData = result.data.recordset.map(i => {
           return {...i,date:moment(i.date).format('YYYY-MM-DD HH:mm:ss')}
       });
