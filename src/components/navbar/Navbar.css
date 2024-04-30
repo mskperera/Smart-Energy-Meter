@@ -61,11 +61,11 @@
     position: absolute;
     align-items: center;
     top: 100%;
-    width: 110px;
+    width: 120px;
     margin-top: 2px;
     left: 0;
     border-radius: 5px;
-    display: flex;
+    justify-content: flex-start;
     flex-direction: column;
     background-color: white;
     padding: 0rem;
@@ -79,13 +79,15 @@
 }
 
 .drop1 li{
+    gap: 2px;
     list-style: none;
     align-items: center;
     cursor: pointer;
     justify-content: flex-start ;
+    flex-direction: column;
     margin-left: -30px;
     font-size: 15px;
-    padding: 3px;
+    padding: 0px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -176,8 +178,8 @@
     background-color: red;
     color: white;
     border-radius: 50%;
-    padding: 5px 8px; /* Adjust as needed */
-    font-size: 12px; /* Adjust as needed */
+    padding: 5px 8px; 
+    font-size: 12px; 
   }
 
   .badge1 {
@@ -190,8 +192,27 @@
     background-color: red;
     color: white;
     border-radius: 25%;
-    padding: 5px 8px; /* Adjust as needed */
-    font-size: 12px; /* Adjust as needed */
+    padding: 5px 8px;
+    font-size: 12px; 
+  }
+
+  .selected-device-label{
+    color: black;
+    position: relative;
+    margin-top: 19px;
+    width: fit-content;
+    font-size: 13px;
+    margin-left: -10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  .device-label-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .device-label-container  {
+    margin-right: 0px;
   }
 
 .app__navbar-smallscreen_overlay .overlay__close{
@@ -238,6 +259,16 @@
     .app__navbar-smallscreen{
         display: none;
     }
+
+    .selected-device-label{
+        color: black;
+        position: absolute;
+        top: 25px;
+        width: 200px;
+        font-size: 13px;
+        margin-right: 25px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
 }
 
 @media screen and (max-width:850px) {
@@ -251,16 +282,17 @@
 
     .small{
         display: flex;
+        
     }
     
     .bell{
-        margin-left: -80px;
+        margin-left: -85px;
         margin-top: 1px;
         position: absolute;
     }
 
     .devicess{
-        margin-left: -120px;
+        margin-left: -130px;
         margin-top: 1px;
         position: absolute;
     }
@@ -274,6 +306,16 @@
         margin-left: -0px;
     }
 
+    .selected-device-label{
+        color: black;
+        position: absolute;
+        top: 2px;
+        width: 125px;
+        font-size: 13px;
+        margin-left: 0px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
+
 }
 
 @media screen and (max-width:650px) {
@@ -284,6 +326,16 @@
     .app__navbar-smallscreen .hammenu{
         margin-left: -40px;
     }
+
+    .selected-device-label{
+        color: black;
+        position: absolute;
+        top: 5px;
+        width: 120px;
+        font-size: 13px;
+        margin-left: 0px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
     
 }
 
@@ -318,6 +370,15 @@
         size: 50px;
     }
     
+    .selected-device-label{
+        color: black;
+        position: absolute;
+        top: 1px;
+        width: 130px;
+        font-size: 11px;
+        margin-left: -10px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
     
 }
 

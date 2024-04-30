@@ -9,11 +9,13 @@ import { CgProfile } from 'react-icons/cg';
 import { getDevicesByUserId } from '../../action/device';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDropDevices } from '../../state/device/deviceReducer';
+
 // import { GlobalContext } from '../../context/GlobalContext';
 
 const Navbar = ({onChangeDevice}) => {
 
-  const [selectedDevice, setSelectedDevice] = useState(""); 
+  // const [selectedDevice, setSelectedDevice] = useState(""); 
+  const [selectedDeviceName, setSelectedDeviceName] = useState("")
   const [open, setOpen] = useState(false);
   const [openDevicesName, setOpenDevicesName] = useState(false); 
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -43,6 +45,8 @@ const dispatch=useDispatch();
   useEffect(() => {
     loadDevicesByUserId();
   }, []); 
+
+  
 
 
   // useEffect(() => {
@@ -75,11 +79,13 @@ const dispatch=useDispatch();
     
   // }
   
-  const handleDeviceSelect = (device) => {
-    const selectedDeviceObject = deviceNames.find(item => item.name === device);
+  const handleDeviceSelect = (deviceName) => {
+    const selectedDeviceObject = deviceNames.find(item => item.name === deviceName);
     if (selectedDeviceObject) {
       onChangeDevice(selectedDeviceObject); 
       localStorage.setItem('selectedDevice',selectedDeviceObject)
+      setSelectedDeviceName(deviceName);
+      setOpenDevicesName(false);
       setOpen(false);
 
     }
@@ -94,16 +100,16 @@ const dispatch=useDispatch();
           </Link>
         </div>
         <p className='topic'>Smart Energy Meter</p>
-        {/* {JSON.stringify(selectedDevice)} */}
+        {/* {JSON.stringify(deviceNames)} */}
       </div>
 
       <div className='app__navbar-login'>
-        <a href='/userlist'>User Management</a>
+       
         <div className='menu-trigger relative'>
-          <label>
-            <MdDevices onClick={() => setOpenDevicesName(!openDevicesName)} color='#191970' size={25} />
-            {selectedDevice && <span className="selected-device-label">{" "+selectedDevice.name}</span>}
-          </label>
+          <div className="device-label-container">
+            <a href='#' onClick={() => setOpenDevicesName(!openDevicesName)}>Device</a>
+            {selectedDeviceName && <p className="selected-device-label">{selectedDeviceName}</p>}
+          </div>
           {openDevicesName && (
             <div className='drop1'>
               <ul>
@@ -114,6 +120,7 @@ const dispatch=useDispatch();
             </div>
           )}
         </div>
+        <a href='/userlist'>User Management</a>
         <a href='/management'>Device Management</a>
         <div className='menu-trigger relative'>
           <CgProfile onClick={() => setOpen(!open)} color='#191970' size={25} />
@@ -135,12 +142,11 @@ const dispatch=useDispatch();
       </div>
 
       <div className='small'>
-        <div className='bell'>
-          <a href='/notify'><BiSolidBellRing color='#191970' size={25} className='overlay__close'/></a>
-          <span className="badge">2</span>
-        </div>
         <div className='menu-trigger relative devicess'>
-          <MdDevices onClick={() => setOpenDevicesName(!openDevicesName)} color='#191970' size={25} className='overlay__close'  />
+          <div className="device-label-container">    
+          <a href='#'><MdDevices onClick={() => setOpenDevicesName(!openDevicesName)} color='#191970' size={25} className='overlay__close'  /></a>
+          {selectedDeviceName && <p className="selected-device-label">{selectedDeviceName}</p>}
+          </div>
           {openDevicesName && (
             <div className='drop1'>
               <ul>
@@ -151,15 +157,19 @@ const dispatch=useDispatch();
             </div>
           )}
         </div>
+        <div className='bell'>
+          <a href='/notify'><BiSolidBellRing color='#191970' size={25} className='overlay__close'/></a>
+          <span className="badge">2</span>
+        </div>
         <div className='app__navbar-smallscreen'>
           <GiHamburgerMenu color='#191970' fontSize={27} className='hammenu' onClick={() => setToggleMenu(true)} />
           {toggleMenu && (
             <div className='app__navbar-smallscreen_overlay flex__center slide-bottom'>
-              <MdClose fontSize={27} className='overlay__close' onClick={() => setToggleMenu(false)} />
+              <a href='#'><MdClose fontSize={27} className='overlay__close' onClick={() => setToggleMenu(false)} /></a>
               <ul className='app__navbar-smaillscreen-links'>
                 <li><a href='/management'>Device Management</a></li>
                 <li><a href='/profile'> Profile</a></li>
-                <li><a href='/billingsession' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>Session</a></li>
+                <li><a href='/billingsession'>Session</a></li>
                 <li><a href='/'>Logout</a></li>
               </ul>
             </div>
