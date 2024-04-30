@@ -9,6 +9,7 @@ import { getConnectionSettingsByDeviceId, getOperationalLimitByDeviceId, get_Dev
 import swal from 'sweetalert'
 import Budget from './Budget'
 import AboutDevice from './AboutDevice'
+import { useSelector } from 'react-redux'
 
 // import { Link } from 'react-router-dom'
 
@@ -46,14 +47,28 @@ function Service () {
 
     const [load,setLoad]=useState(false);
 
-  
+    const [device, setDevice] = useState('');
+
+const onChangeDeviceHandler=(device)=>{
+  setDevice(device);
+}
+
+const deviceNames=useSelector(state=>state.device.dropDeviceList);
+const defaultSelctedDevie=deviceNames[0];
+
+useEffect(()=>{
+setDevice(defaultSelctedDevie);
+},[deviceNames])
+
+
 
     useEffect(() => {
 
         loadDrpConsumerCategories();
        
-        loadDrpSupplier();
-        loadDrpSupplyType();
+        const deviceId=4;
+        loadDrpSupplier(deviceId);
+        loadDrpSupplyType(deviceId);
         // loadDeviceDetailsByDeviceId();
     }, []);
 
@@ -63,13 +78,13 @@ function Service () {
 
  
 
-  const deviceId = 4;
+
 //   const consumerCategoryId = 3;
 //   const supplierId = 2;
 
    // const [deviceSettings,setDeviceSettings] = useState(null);
 
-    const loadDeviceSettingstData=async()=>{
+    const loadDeviceSettingstData=async(deviceId)=>{
  
         const result=await get_DeviceSettingsByDeviceId(deviceId);
        // setDeviceSettings(result.data);
@@ -85,7 +100,7 @@ function Service () {
        
     }
 
-    const loadDeviceConnectionData=async()=>{
+    const loadDeviceConnectionData=async(deviceId)=>{
  
         const result=await getConnectionSettingsByDeviceId(deviceId);
        // setDeviceSettings(result.data);
@@ -97,9 +112,13 @@ function Service () {
     }
 
     useEffect(()=>{
-        loadDeviceSettingstData();
-        loadDeviceConnectionData();
-    },[  load])
+
+        if(device){
+        const deviceId=device || defaultSelctedDevie;
+        loadDeviceSettingstData(deviceId.id);
+        loadDeviceConnectionData(deviceId.id);
+        }
+    },[load,device])
 
     const loadDrpConsumerCategories=async()=>{
         const result=await getDrpConsumerCategories();
@@ -119,7 +138,7 @@ function Service () {
         // setConsumerSubCategoryselectedValue(subCategory.ConsumerSubCategoryId);
        }
 
-    const loadDrpSupplier=async()=>{
+    const loadDrpSupplier=async(deviceId)=>{
         const result=await getDrpSupplier(deviceId);
         console.log("sup",result);
         const supplier = result.data;
@@ -127,7 +146,7 @@ function Service () {
       //  setSupplierselectedValue(supplier.supplierId)
        }
 
-    const loadDrpSupplyType=async()=>{
+    const loadDrpSupplyType=async(deviceId)=>{
         const result=await getDrpSupplyType(deviceId);
         console.log("supType",result);
         const supplierType = result.data;
@@ -149,9 +168,9 @@ const addUpdateDeviceSettings=async(e)=>{
 
 console.log("testingsave")
 
-
+const deviceId=device.id || defaultSelctedDevie.id;
     const payload = {
-      deviceId:4 ,
+      deviceId:deviceId ,
       supplierId: supplierSelectedValue,
       supplyTypeId: supplyTypeSelectedValue,
       consumerCategoryid: consumerCategoryselectedValue,
@@ -184,11 +203,12 @@ console.log("testingsave")
 }
 
 useEffect(() => {
-    loadOperationalLimitByDeviceId();
+    const deviceId=4;
+    loadOperationalLimitByDeviceId(deviceId);
 },[]);
 
 
-const loadOperationalLimitByDeviceId = async () => {
+const loadOperationalLimitByDeviceId = async (deviceId) => {
     const res = await getOperationalLimitByDeviceId(deviceId);
     // console.log("device",res.data); 
 
@@ -234,10 +254,10 @@ const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActiv
         setErrorMessage('');
         setMessage('');
 
-        
+        const deviceId=device.id || defaultSelctedDevie.id;
 
         const payload = {
-            deviceId: 4,
+            deviceId:deviceId,
             operationalMetricId: operationalMetricId,
             thresholdAmountMin: null,
             thresholdAmountMax: thresholdAmount,
@@ -267,10 +287,10 @@ const saveOperationVloSettings = async (thresholdAmountMin,thresholdAmountMax,op
     setErrorMessage('');
     setMessage('');
 
-    
+    const deviceId=device.id || defaultSelctedDevie.id;
 
     const payload = {
-        deviceId: 4,
+        deviceId: deviceId,
         operationalMetricId: operationalMetricId,
         thresholdAmountMin,
         thresholdAmountMax,
@@ -323,7 +343,7 @@ const saveConnectionSettingsHandler=async(e)=>{
 
 console.log("testingsave")
 const payload = {
-    deviceId: 4,
+    deviceId: device?.id || defaultSelctedDevie?.id,
     connection: editedConnection,
     deviceName: editedDeviceName,
     portNo: editedPortNo
@@ -359,9 +379,10 @@ const payload = {
     setToggle(id);
   }
 
+
   return (
     <div className='home'>
-    <Navbar/> 
+    <Navbar onChangeDevice={onChangeDeviceHandler}/> 
     <div className='tab d-flex align-items-center justify-content-center'>
         <div className='back2'>
             <ul className='tab-links nav nav-pills' id='v-pills-tab' role='tablist'>
