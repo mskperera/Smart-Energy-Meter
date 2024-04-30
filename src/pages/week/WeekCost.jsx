@@ -22,9 +22,16 @@ const WeekCost = ({selectedDevice}) => {
   
       const loadEngergyUsageKwhByDateRange=async()=>{
         const currentDate = moment.utc();
-      const startDate = currentDate.startOf('week').format('YYYY-MM-DD');
-      const endDate = currentDate.endOf('week').format('YYYY-MM-DD');
-      
+
+        const startDate = currentDate.startOf('week').format('YYYY-MM-DD');
+        const endDate = currentDate.endOf('week').format('YYYY-MM-DD');
+    
+          const utcOffset = moment().utcOffset();
+          const startDateUTC = moment.utc(moment(startDate).startOf('week').subtract(utcOffset, 'minutes').format('YYYY-MM-DDTHH:mm:ss'));
+          const endDateUTC = moment.utc(moment(endDate).endOf('week').subtract(utcOffset, 'minutes').format('YYYY-MM-DDTHH:mm:ss'));
+          
+          console.log('startDateUTC:', startDateUTC.format());
+          console.log('endDateUTC:', endDateUTC.format());
 
         const payload={
             deviceId:selectedDevice.id,//"4",
@@ -32,14 +39,10 @@ const WeekCost = ({selectedDevice}) => {
             frequencyId:3,
             // startDate:'2024-04-01 12:00',
             // endDate:'2024-04-05 11:59:59',
-            startDate:startDate,
-            endDate:endDate,
+            startDate:startDateUTC.format(),
+            endDate:endDateUTC.format(),
         }
-        const resultweeks=await getEngergyUsageKwhByDateRange(payload);
-        // console.log('daysss',resultweeks.data);
-        // console.log('engergyUsagekwhByDateRangeWeeks',resultweeks.data)
-        // setEngergyUsagekwhByDateRangeWeeks(resultweeks.data.recordsets);
-      
+        const resultweeks=await getEngergyUsageKwhByDateRange(payload); 
          
           //  console.log('55555555555',resultweeks);
            
@@ -52,13 +55,16 @@ const WeekCost = ({selectedDevice}) => {
         //    const ruppyArr=[];
     
            for(let i=0;i<charData.length;i++){
-            weeks.push(charData[i].day);
+            weeks.push(moment(charData[i].date).format("ddd DD"));
             // console.log('daysss154954851649',charData[i].day)
             // weeks.push(moment(charData[i].day).format('D'));
             weekCostArr.push(charData[i].usageBillPerDay)
            // ruppyArr.push(charData[i].usageBill)
            }
           
+           weeks.shift();
+           weekCostArr.shift();
+           
            const datasets0=[
             {
               label:'Rs',
