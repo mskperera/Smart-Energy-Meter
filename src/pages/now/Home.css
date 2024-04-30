@@ -142,23 +142,37 @@
 
 .device-active{
     display: flex;
-    width: 125px;
-    height: 50px;
+    /* position: absolute; */
+    width: fit-content;
+    padding: 0px 15px 0px 30px;
+    height: 40px;
     color: #ff0066;
     align-items: center;
     border-radius: 10px;
     justify-content: center;
     background:  rgba(11, 11, 11, 0.5);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+    margin-top: 25px;
+}
+
+.device-name{
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    display: flex;
+    margin-top: 0px;
+    margin-left: 0px;
 }
 
 .curcle{
-    /* position: absolute; */
+    position: relative;
+    justify-content: center;
+    align-items: center;
     display: flex;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     border-radius: 25px;
-    margin-left: 0px;
+    margin-left: -20px;
     background-color: red;
 }
 
@@ -282,6 +296,42 @@
         /* position: absolute; */
         margin: 0%;
         /* height: 10vh; */
+    }
+
+    .device-active{
+        display: flex;
+        /* position: absolute; */
+        width: fit-content;
+        padding: 0px 15px 0px 30px;
+        height: 40px;
+        color: #ff0066;
+        align-items: center;
+        border-radius: 10px;
+        justify-content: center;
+        background:  rgba(11, 11, 11, 0.5);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+        margin-top: 25px;
+    }
+
+    .device-name{
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        display: flex;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+    
+    .curcle{
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        width: 15px;
+        height: 15px;
+        border-radius: 25px;
+        margin-left: -20px;
+        background-color: red;
     }
     
 }
@@ -490,15 +540,37 @@
     .device-active{
         display: flex;
         /* position: absolute; */
-        width: 125px;
-        height: 50px;
+        width: fit-content;
+        padding: 0px 15px 0px 15px;
+        height: 40px;
         color: #ff0066;
         align-items: center;
         border-radius: 10px;
         justify-content: center;
         background:  rgba(11, 11, 11, 0.5);
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-        margin-top: 30px;
+        margin-top: 25px;
+    }
+
+    .device-name{
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        display: flex;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+    
+    .curcle{
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        width: 15px;
+        height: 15px;
+        border-radius: 25px;
+        margin-left: 0px;
+        background-color: red;
     }
 
 }
@@ -532,7 +604,7 @@
     
     .chart-area{
         flex: 1;
-        width: 300px;
+        width: 100%;
         display: flex;
         /* position: absolute; */
         justify-content:center;
@@ -540,8 +612,8 @@
         margin: 0%;
         flex-direction: column;
         padding: 0rem;
-        margin-top: 15px;
-        margin-left: 49px;
+        margin-bottom: 10px;
+        margin-left: 0px;
     }
 
     .chart-now-cost{
@@ -725,7 +797,8 @@
     .device-active{
         display: flex;
         /* position: absolute; */
-        width: 150px;
+        width: fit-content;
+        padding: 0px 15px 0px 30px;
         height: 40px;
         color: #ff0066;
         align-items: center;
@@ -739,21 +812,21 @@
     .device-name{
         justify-content: center;
         align-items: center;
-        /* position: absolute; */
+        position: relative;
         display: flex;
-        margin-top: 45px;
-        margin-left: -70px;
+        margin-top: 42px;
+        margin-left: -75px;
     }
     
     .curcle{
-        /* position: absolute; */
+        position: relative;
         justify-content: center;
         align-items: center;
         display: flex;
-        width: 20px;
-        height: 20px;
+        width: 15px;
+        height: 15px;
         border-radius: 25px;
-        margin-left: -2px;
+        margin-left: -20px;
         background-color: red;
     }
 
