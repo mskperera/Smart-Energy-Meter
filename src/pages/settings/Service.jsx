@@ -8,6 +8,7 @@ import { getDrpConsumerCategories, getDrpConsumerSubCategoriesById, getDrpSuppli
 import { getConnectionSettingsByDeviceId, getOperationalLimitByDeviceId, get_DeviceSettingsByDeviceId, saveConnectionSettings, saveDeviceSettings, saveOperationalLimit } from '../../action/deviceSettings'
 import swal from 'sweetalert'
 import Budget from './Budget'
+import AboutDevice from './AboutDevice'
 
 // import { Link } from 'react-router-dom'
 
@@ -368,6 +369,7 @@ const payload = {
                 <li onClick={()=>updateToggle(2)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Tariff </li>
                 <li onClick={()=>updateToggle(3)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Device </li>
                 <li onClick={()=>updateToggle(4)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Notification </li>
+                <li onClick={()=>updateToggle(5)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">About</li>
             </ul>
         </div>
     </div>          
@@ -549,6 +551,12 @@ const payload = {
                                                                     </div>
                                                                 </div>
                                                             </div>
+
+                                                            <div className={toggle === 5 ? "show-content" : "content"}>
+                                                                <div className='body d-flex align-items-center justify-content-center w-100'>
+                                                                    <AboutDevice/>
+                                                                </div>
+                                                            </div> 
                                                 <BottomNav/>
                                             </div>
                                           )
