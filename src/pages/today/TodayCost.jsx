@@ -10,7 +10,10 @@ ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 const TodayCost = ({selectedDevice}) => {
 
     useEffect(()=>{
-        loadEngergyUsageKwhByDateRange();
+      if(selectedDevice){
+        loadEngergyUsageKwhByDateRange(selectedDevice.id);
+      }
+      
       },[selectedDevice]);
     
 
@@ -18,7 +21,7 @@ const TodayCost = ({selectedDevice}) => {
       //   return moment().startOf('day').add(24, 'hours').toDate();
       // };
 
-      const loadEngergyUsageKwhByDateRange=async()=>{
+      const loadEngergyUsageKwhByDateRange=async(deviceId)=>{
         // const currentDate = moment().utc(); 
         // const startDate = currentDate.clone().subtract(24, 'hours'); 
         // const endDate = currentDate.clone();
@@ -34,7 +37,7 @@ const TodayCost = ({selectedDevice}) => {
     
 
         const payload={
-            deviceId:selectedDevice.id,//"4",
+            deviceId:deviceId,//"4",
             mesurementUnitId:7,//1-kwh,7-usage bill
             frequencyId:1,
             startDate: startOfDayUtc, 

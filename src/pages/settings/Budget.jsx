@@ -171,7 +171,7 @@ const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
 
   return (
 <div className='d-flex align-items-center justify-content-center w-100'>
-    <div className='notification'>
+    <div className='body-budget'>
         <div className='rounded'>
             <h4 className='d-flex align-items-center justify-content-center'>Device Preferences and Settings</h4>
             <form className='need-validation' onSubmit={onSubmitHandler}>

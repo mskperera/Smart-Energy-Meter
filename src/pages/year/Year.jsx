@@ -41,7 +41,7 @@ function Year() {
                     <Link to={"/week"}><li className='btn btn-sm btn-light'>Week</li></Link>
                     <Link to={"/month"}><li className='btn btn-sm btn-light'>Month</li></Link>
                     <Link to={"/year"}><li className={`btn btn-sm btn-primary ${activeTab === 'Now' ? 'active' : ''}`}
-                onClick={() => handleTabClick('Now')}>Year</li></Link>
+                    onClick={() => handleTabClick('Now')}>Year</li></Link>
                     <Link to={"/custom"}><li className='btn btn-sm btn-light'>Custom</li></Link>
                 </ul>
             </div>

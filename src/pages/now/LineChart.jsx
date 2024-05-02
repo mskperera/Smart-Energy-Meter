@@ -54,7 +54,7 @@ const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
     const predictArr = [];
 
     for (let i = 0; i < charData.length; i++) {
-      months.push(charData[i].date);
+      months.push(charData[i].day);
       monthKwArr.push(charData[i].kwhPerDay);
       predictArr.push(charData[i].kwhPerDayPredicted);
       // predictArr.push(charData[i].predictedKwhPerMonth);

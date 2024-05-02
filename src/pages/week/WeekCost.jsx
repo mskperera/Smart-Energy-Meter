@@ -17,10 +17,12 @@ const WeekCost = ({selectedDevice}) => {
   // const { startDate, endDate } = getCurrentWeekDates();
   
     useEffect(()=>{
-        loadEngergyUsageKwhByDateRange();
+        if(selectedDevice){
+          loadEngergyUsageKwhByDateRange(selectedDevice.id);
+        }
       },[selectedDevice]);
   
-      const loadEngergyUsageKwhByDateRange=async()=>{
+      const loadEngergyUsageKwhByDateRange=async(deviceId)=>{
         const currentDate = moment.utc();
 
         const startDate = currentDate.startOf('week').format('YYYY-MM-DD');
@@ -34,7 +36,7 @@ const WeekCost = ({selectedDevice}) => {
           console.log('endDateUTC:', endDateUTC.format());
 
         const payload={
-            deviceId:selectedDevice.id,//"4",
+            deviceId:deviceId,//"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:3,
             // startDate:'2024-04-01 12:00',
@@ -103,6 +105,11 @@ const WeekCost = ({selectedDevice}) => {
               display:false,
               color: 'Gray', //  color of x-axis grid lines
             },
+            title:{
+              display:true,
+              text:'Week Days',
+              color:'white',
+            },
             ticks: {
               color: 'white', // color of x-axis labels
             },
@@ -112,6 +119,11 @@ const WeekCost = ({selectedDevice}) => {
               color: 'Gray', //  color of x-axis grid lines
             },
             beginAtZero: true,
+            title:{
+              display:true,
+              text:'Rs',
+              color:'white',
+            },
             ticks: {
               color: 'white', //color of y-axis labels
             },
@@ -120,7 +132,7 @@ const WeekCost = ({selectedDevice}) => {
         
         plugins: {
           legend: {
-            display:false,
+            display:true,
             labels: {
               color: 'white', 
             },
