@@ -9,17 +9,19 @@ const MonthKw = ({selectedDevice}) => {
   
 
     useEffect(()=>{
-        loadEngergyUsageKwhByDateRange();
+       if(selectedDevice){
+        loadEngergyUsageKwhByDateRange(selectedDevice.id);
+       }
     },[selectedDevice]);
 
-    const loadEngergyUsageKwhByDateRange=async()=>{
+    const loadEngergyUsageKwhByDateRange=async(deviceId)=>{
       
       const startOfMonth = moment().utc().startOf('month').add('minutes').format('YYYY-MM-DD'); 
        const endOfMonth = moment().utc().endOf('month').add('minutes').format('YYYY-MM-DD');
 
        console.log('month Range',startOfMonth,endOfMonth);
         const payload={
-            deviceId:selectedDevice.id,//"4",
+            deviceId:deviceId,//"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:3,
             // startDate:'2024-03-01',
