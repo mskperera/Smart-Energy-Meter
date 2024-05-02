@@ -14,15 +14,15 @@ const TodayKw = ({selectedDevice}) => {
 //  const {device,setDevice}=useContext(GlobalContext);
     
   useEffect(()=>{
+    if(selectedDevice){
 
-    loadEngergyUsageKwhByDateRange();
+      loadEngergyUsageKwhByDateRange(selectedDevice.id);
+    }
     console.log('device context',selectedDevice);
 
   },[selectedDevice]);
 
-useEffect(()=>{
-  // loadDevicesByUserId();
-},[]);
+
 
   // const getCurrentDateWithoutTime = () => {
     // return moment().startOf('day').add(24, 'hours').toDate();
@@ -40,7 +40,7 @@ useEffect(()=>{
  ////  
 
 
-  const loadEngergyUsageKwhByDateRange=async()=>{
+  const loadEngergyUsageKwhByDateRange=async(deviceId)=>{
     const todayUtc = moment(); 
     const startOfDay = todayUtc.startOf('day').format('YYYY-MM-DD HH:mm:ss');
 
@@ -61,7 +61,7 @@ useEffect(()=>{
 console.log('startOfDayUtc',moment().utcOffset());
     // console.log('loadEngergyUsageKwhByDateRange')
     const payload={
-        deviceId:selectedDevice.id,//"4",
+        deviceId:deviceId,//"4",
         mesurementUnitId:1,//1-kwh,7-usage bill
         frequencyId:1,
         // startDate:getCurrentDateWithoutTime(),

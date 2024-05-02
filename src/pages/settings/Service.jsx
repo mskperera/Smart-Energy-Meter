@@ -66,11 +66,15 @@ setDevice(defaultSelctedDevie);
 
         loadDrpConsumerCategories();
        
-        const deviceId=4;
-        loadDrpSupplier(deviceId);
-        loadDrpSupplyType(deviceId);
+        if(device){
+            const deviceId=device.id || defaultSelctedDevie.id;
+
+        // const deviceId=4;
+        loadDrpSupplier(deviceId.id);
+        loadDrpSupplyType(deviceId.id);
         // loadDeviceDetailsByDeviceId();
-    }, []);
+        }
+    }, [device,load]);
 
     useEffect(()=>{
         loadDrpConsumerSubCategoriesById();

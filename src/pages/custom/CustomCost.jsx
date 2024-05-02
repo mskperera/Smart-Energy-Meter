@@ -9,20 +9,24 @@ ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 const CustomCost = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
 
     useEffect(()=>{
-        loadEngergyUsageKwhByDateRange1();
-    },[isSearchLoading]);
+        if(selectedDevice){
+          loadEngergyUsageKwhByDateRange1(selectedDevice.id);
+        }
+    },[isSearchLoading,selectedDevice]);
 
     useEffect(()=>{
-      loadEngergyUsageKwhByDateRange();
+        if(selectedDevice){
+          loadEngergyUsageKwhByDateRange(selectedDevice.id);
+        }
   },[selectedDevice]);
 
-    const loadEngergyUsageKwhByDateRange1=async()=>{
+    const loadEngergyUsageKwhByDateRange1=async(deviceId)=>{
 
       const utcStartDate = moment.utc(startDate).add(1, 'day').utc().format();
       const utcEndDate = moment.utc(endDate).add(1, 'day').utc().format();
        
          const payload={
-             deviceId:selectedDevice.id,//"4",
+             deviceId:deviceId,//"4",
              // mesurementUnitId:1,//1-kwh,7-usage bill
              frequencyId:3,
              startDate:utcStartDate,
@@ -81,13 +85,13 @@ const CustomCost = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
 
     
 
-  const loadEngergyUsageKwhByDateRange=async()=>{
+  const loadEngergyUsageKwhByDateRange=async(deviceId)=>{
 
     const startOfMonth = moment().utc().startOf('month').add('minutes').format('YYYY-MM-DD'); 
     const endOfMonth = moment().utc().endOf('month').add('minutes').format('YYYY-MM-DD');
 
       const payload={
-          deviceId:selectedDevice.id,//"4",
+          deviceId:deviceId,//"4",
           // mesurementUnitId:1,//1-kwh,7-usage bill
           frequencyId:3,
           // startDate:'2024-03-01',

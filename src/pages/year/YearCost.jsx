@@ -18,10 +18,12 @@ const YearCost = ({selectedDevice}) => {
 // const { startDate, endDate } = getCurrentYearDates();
 
 useEffect(()=>{
-  loadEngergyUsageKwhByDateRange();
+    if(selectedDevice){
+      loadEngergyUsageKwhByDateRange(selectedDevice.id);
+    }
 },[selectedDevice]);
 
-const loadEngergyUsageKwhByDateRange=async()=>{
+const loadEngergyUsageKwhByDateRange=async(deviceId)=>{
 
   const currentYear = moment().utc();
   const startOfYear = currentYear.startOf('year').format('YYYY-MM-DD');
@@ -30,7 +32,7 @@ const loadEngergyUsageKwhByDateRange=async()=>{
   console.log('year Range',startOfYear,endOfYear);
       
         const payload={
-            deviceId:selectedDevice.id, //"4",
+            deviceId:deviceId, //"4",
             // mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:4,
             // startDate:'2024-01-01',
