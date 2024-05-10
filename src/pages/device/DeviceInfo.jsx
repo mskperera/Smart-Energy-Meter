@@ -3,6 +3,7 @@ import BottomNav from '../../components/bottommenu/BottomNav'
 import './DeviceInfo.css'
 import Navbar from '../../components/navbar/Navbar'
 import { getDeviceDetailsByDeviceId } from '../../action/device'
+import { useSelector } from 'react-redux'
 // import { Link } from 'react-router-dom'
 
 const DeviceInfo = () => {
@@ -10,18 +11,30 @@ const DeviceInfo = () => {
 
   const [deviceDetails,setDeviceDetails]=useState('');
 
+  const [device, setDevice] = useState('');
+
+  const onChangeDeviceHandler=(device)=>{
+    setDevice(device);
+  }
+  
+  const deviceNames=useSelector(state=>state.device.dropDeviceList);
+  const defaultSelctedDevie=deviceNames[0];
+  
+  useEffect(()=>{
+  setDevice(defaultSelctedDevie);
+  },[deviceNames])
+
   useEffect(() => {
 
-    // loadDeviceSettingstData();
-    // loadDrpConsumerCategories();
-    // loadDrpConsumerSubCategoriesById();
-    // loadDrpSupplier();
-    // loadDrpSupplyType();
-    loadDeviceDetailsByDeviceId();
-}, []);
+    if(device){
+      const deviceId=device || defaultSelctedDevie;
+      loadDeviceDetailsByDeviceId(deviceId.id);
+    }
+    // loadDeviceDetailsByDeviceId();
+}, [device]);
 
-  const loadDeviceDetailsByDeviceId=async()=>{
-    const result=await getDeviceDetailsByDeviceId(4);
+  const loadDeviceDetailsByDeviceId=async(deviceId)=>{
+    const result=await getDeviceDetailsByDeviceId(deviceId);
     setDeviceDetails(result.data);
     console.log('Details',result)
    }
@@ -31,7 +44,7 @@ const DeviceInfo = () => {
   return (
     
     <div className='home'>
-    <Navbar/>
+    <Navbar onChangeDevice={onChangeDeviceHandler}/>
     {/* <div className='nav-bar'>
             <ul className='nav-bar-links'>
                 <Link to={"/deviceinfo"}><li className='btn btn-sm btn-primary'>Device Info</li></Link> 

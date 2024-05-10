@@ -4,9 +4,25 @@ import './Profile.css';
 import BottomNav from '../../components/bottommenu/BottomNav';
 import { getUsers } from '../../action/user';
 import Navbar from '../../components/navbar/Navbar';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
+
+
+  const [device, setDevice] = useState('');
+
+  const onChangeDeviceHandler=(device)=>{
+    setDevice(device);
+  }
+  
+  const deviceNames=useSelector(state=>state.device.dropDeviceList);
+  const defaultSelctedDevie=deviceNames[0];
+  
+  useEffect(()=>{
+  setDevice(defaultSelctedDevie);
+  },[deviceNames])
+
 
   useEffect(() => {
     loadUserProfile();
@@ -23,7 +39,7 @@ const Profile = () => {
 
   return (
     <div className='home'>
-    <Navbar className='navnav'/>
+    <Navbar className='navnav' onChangeDevice={onChangeDeviceHandler}/>
     <div className='wrap '>
       <div className="body">
         <div className="card text-center ">
