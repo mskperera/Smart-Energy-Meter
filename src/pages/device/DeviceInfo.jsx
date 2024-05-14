@@ -3,6 +3,8 @@ import BottomNav from '../../components/bottommenu/BottomNav'
 import './DeviceInfo.css'
 import Navbar from '../../components/navbar/Navbar'
 import { getDeviceDetailsByDeviceId } from '../../action/device'
+import { useSelector } from 'react-redux'
+import { de } from 'date-fns/locale'
 // import { Link } from 'react-router-dom'
 
 const DeviceInfo = () => {
@@ -10,18 +12,29 @@ const DeviceInfo = () => {
 
   const [deviceDetails,setDeviceDetails]=useState('');
 
+  const [device, setDevice] = useState('');
+
+  const onChangeDeviceHandler=(device)=>{
+    setDevice(device);
+  }
+
+  const deviceNames=useSelector(state=>state.device.dropDeviceList);
+  const defaultSelctedDevie=deviceNames[0];
+
+  useEffect(()=>{
+  setDevice(defaultSelctedDevie);
+  },[deviceNames])
+
   useEffect(() => {
 
-    // loadDeviceSettingstData();
-    // loadDrpConsumerCategories();
-    // loadDrpConsumerSubCategoriesById();
-    // loadDrpSupplier();
-    // loadDrpSupplyType();
-    loadDeviceDetailsByDeviceId();
-}, []);
+    if(device){
+      const deviceId=device || defaultSelctedDevie;
+      loadDeviceDetailsByDeviceId(deviceId.id);
+    }
+}, [device]);
 
-  const loadDeviceDetailsByDeviceId=async()=>{
-    const result=await getDeviceDetailsByDeviceId(4);
+  const loadDeviceDetailsByDeviceId=async(deviceId)=>{
+    const result=await getDeviceDetailsByDeviceId(deviceId);
     setDeviceDetails(result.data);
     console.log('Details',result)
    }
@@ -31,7 +44,7 @@ const DeviceInfo = () => {
   return (
     
     <div className='home'>
-    <Navbar/>
+    <Navbar onChangeDevice={onChangeDeviceHandler}/>
     {/* <div className='nav-bar'>
             <ul className='nav-bar-links'>
                 <Link to={"/deviceinfo"}><li className='btn btn-sm btn-primary'>Device Info</li></Link> 
@@ -42,24 +55,27 @@ const DeviceInfo = () => {
 
       <div className=' body d-flex align-items-center justify-content-center w-100'>
           <div className='form-group mb-2 deviceinfo'>
-              <h2 className='d-flex align-items-center justify-content-center mb-3'>Device Info</h2>
-            <div className='form-group mb-2'>
+              <h2 className='d-flex align-items-center justify-content-center mb-2'>Device Info</h2>
+            <div className='form-group mb-1'>
               <label htmlFor='product' className='form-label'>Product</label>
               <input type='text' className='form-control' value={deviceDetails.product} readOnly />
             </div>
-            <div className='form-group mb-2'>
+            <div className='form-group mb-1'>
               <label htmlFor='version' className='form-label'>Firmware Version</label>
               <input type='text' className='form-control' value={deviceDetails.firmwareVersion} readOnly/>
             </div>
-            <div className='form-group mb-2'>
+            <div className='form-group mb-1'>
               <label htmlFor='hversion' className='form-label'>Hardware Version</label>
               <input type='text' className='form-control' value={deviceDetails.hardwareVersion} readOnly />
             </div>
-            <div className='form-group mb-2'>
+            <div className='form-group mb-1'>
               <label htmlFor='serial' className='form-label'>Serial number</label>
               <input type='text' className='form-control' value={deviceDetails.serialNo} readOnly/>
             </div>
-            
+            <div className='form-group mb-1'>
+              <label htmlFor='serial' className='form-label'>Meter Type</label>
+              <input type='text' className='form-control' value={deviceDetails.serialNo} readOnly/>
+            </div>
           </div>
       </div>
     <BottomNav/>

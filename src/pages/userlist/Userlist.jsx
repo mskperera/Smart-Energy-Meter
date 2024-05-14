@@ -5,11 +5,26 @@ import Navbar from '../../components/navbar/Navbar'
 import { deleteUser, getUsers } from '../../action/user';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import { useSelector } from 'react-redux';
 
 function Userlist() {
 
 
   const [userData,setUserData]=useState(null);
+
+  const [device, setDevice] = useState('');
+
+  const onChangeDeviceHandler=(device)=>{
+    setDevice(device);
+  }
+
+  const deviceNames=useSelector(state=>state.device.dropDeviceList);
+  const defaultSelctedDevie=deviceNames[0];
+
+  useEffect(()=>{
+  setDevice(defaultSelctedDevie);
+  },[deviceNames])
+
 
   useEffect(() => {
 
@@ -61,7 +76,7 @@ function Userlist() {
   // }
   return (
     <div className='home'>
-    <Navbar className='navnav'/>
+    <Navbar onChangeDevice={onChangeDeviceHandler} className='navnav'/>
     <div className="body">
       <div className= "rounded p-2 ">
         <h2 className='d-flex justify-content-center align-items-center'>User List</h2>

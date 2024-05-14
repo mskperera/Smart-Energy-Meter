@@ -152,7 +152,7 @@ console.log('payload',payload);
           beginAtZero: true,
           title:{
             display:true,
-            text:"12:00am - 11:59pm horus",
+            text:"12:00:00am - 11:59:59pm horus",
             color:'white'
           },
           ticks: {
