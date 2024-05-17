@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
-import { getDeviceDetailsByDeviceId, getDevicesByUserId, getEngergyUsageKwhByDateRange } from '../../action/device';
+import { getDevicesByUserId, getEngergyUsageKwhByDateRange } from '../../action/device';
 // import { GlobalContext } from '../../context/GlobalContext';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
