@@ -80,11 +80,32 @@ export const getEnergyMeterDataKwhPersecsByDateRange= async (payload) => {
 
 
 
-
+// getDeviceInfoByUserId
 export const getDeviceDetailsByDeviceId= async (deviceId) => {
   try {
     return await customAxios
       .get(`/device/energymeter/getDeviceDetailsByDeviceId/${deviceId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+
+// 
+export const getDeviceInfoByUserId= async (userId) => {
+  try {
+    return await customAxios
+      .get(`/device/getDeviceInfoByUserId/${userId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -222,10 +243,10 @@ export const getDevicesByUserId= async (userId) => {
   }
 }
 
-export const getDeviceStatus= async (userId) => {
+export const getDeviceStatus= async (userId,deviceId=null) => {
   try {
     return await customAxios
-      .get(`/device/getDeviceStatus/${userId}`, {
+      .get(`/device/getDeviceStatus?userId=${userId}&deviceId=${deviceId}`, {
         headers: {
           'Content-Type': 'application/json',
         },

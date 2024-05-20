@@ -6,12 +6,27 @@ import Navbar from '../../components/navbar/Navbar'
 import { Link } from 'react-router-dom';
 import { deleteDevice, getDevices } from '../../action/device';
 import swal from 'sweetalert';
+import { useSelector } from 'react-redux';
 
 function Management() {
 
 
   const [deviceDetails,setDeviceDetails]=useState(null);
   
+
+  const [device, setDevice] = useState('');
+
+  const onChangeDeviceHandler=(device)=>{
+    setDevice(device);
+  }
+
+  const deviceNames=useSelector(state=>state.device.dropDeviceList);
+  const defaultSelctedDevie=deviceNames[0];
+
+  useEffect(()=>{
+  setDevice(defaultSelctedDevie);
+  },[deviceNames])
+
 
 
   useEffect(() => {
@@ -58,7 +73,7 @@ function Management() {
 
   return (
     <div className='home'>
-    <Navbar className='navnav'/>
+    <Navbar onChangeDevice={onChangeDeviceHandler} className='navnav'/>
     <div className="body">
       <div className= "rounded p-2 ">
         <h2 className='d-flex justify-content-center align-items-center'>Device Management</h2>

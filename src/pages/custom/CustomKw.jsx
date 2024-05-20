@@ -151,7 +151,7 @@ const CustomKw = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
               },
               title:{
                 display:true,
-                text:'Days',
+                text:'Date No',
                 color:'white',
               },
               ticks: {
