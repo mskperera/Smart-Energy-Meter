@@ -202,6 +202,18 @@ export const addDevice= async (payload) => {
     return err;
   }
 }
+// addDevice()
+//payload= {
+//   "deviceNo":"Dev 444445",
+// "hardwareVersion": "h/wdfjl",
+// "serialNo": "2447122R",
+// "chipId":"999327",
+//  "deviceTypeId":1,
+// "firmwareVersion": "fw0.1",
+// "product": "test@gmail.com"
+// }
+
+
 
 
 export const updateDevice= async (payload,deviceId) => {
@@ -222,6 +234,16 @@ export const updateDevice= async (payload,deviceId) => {
     return err;
   }
 }
+// updateDevice()
+//payload= {
+//   "deviceNo":"Dev 444445",
+// "hardwareVersion": "h/wdfjl",
+// "serialNo": "2447122R",
+// "chipId":"999327",
+//  "deviceTypeId":1,
+// "firmwareVersion": "fw0.1",
+// "product": "test@gmail.com"
+// }
 
 
 export const getDevicesByUserId= async (userId) => {

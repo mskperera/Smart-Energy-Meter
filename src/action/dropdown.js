@@ -1,12 +1,11 @@
 import customAxios from "../utils/axios";
 
-
-export const  getDrpConsumerCategories= async () => {
+export const getDrpConsumerCategories = async () => {
   try {
     return await customAxios
       .get(`/drpdowns/getDrpConsumerCategories`, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {
@@ -18,14 +17,14 @@ export const  getDrpConsumerCategories= async () => {
   } catch (err) {
     return err;
   }
-}
+};
 
-export const getDrpConsumerSubCategoriesById= async (id) => {
+export const getDrpConsumerSubCategoriesById = async (id) => {
   try {
     return await customAxios
       .get(`/drpdowns/getDrpConsumerSubCategoriesById/${id}`, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {
@@ -37,14 +36,14 @@ export const getDrpConsumerSubCategoriesById= async (id) => {
   } catch (err) {
     return err;
   }
-}
+};
 
-export const getDrpSupplier= async () => {
+export const getDrpSupplier = async () => {
   try {
     return await customAxios
       .get(`/drpdowns/getDrpSupplier`, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {
@@ -56,15 +55,14 @@ export const getDrpSupplier= async () => {
   } catch (err) {
     return err;
   }
-}
+};
 
-
-export const getDrpSupplyType= async () => {
+export const getDrpSupplyType = async () => {
   try {
     return await customAxios
       .get(`/drpdowns/getDrpSupplyType`, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {
@@ -76,15 +74,14 @@ export const getDrpSupplyType= async () => {
   } catch (err) {
     return err;
   }
-}
+};
 
-
-export const getDrpUserRole= async () => {
+export const getDrpUserRole = async () => {
   try {
     return await customAxios
       .get(`/drpdowns/getDrpUserRole`, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {
@@ -96,16 +93,14 @@ export const getDrpUserRole= async () => {
   } catch (err) {
     return err;
   }
-}
+};
 
-
-//device Type
 export const getDrpDeviceType= async () => {
   try {
     return await customAxios
       .get(`/drpdowns/getDrpDeviceType`, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {
@@ -117,4 +112,42 @@ export const getDrpDeviceType= async () => {
   } catch (err) {
     return err;
   }
-}
+};
+
+export const getDrpMeasuringModeLine = async () => {
+  try {
+    return await customAxios
+      .get(`/drpdowns/getDrpMeasuringModeLine`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+};
+
+export const getDrpMeasuringMode = async () => {
+  try {
+    return await customAxios
+      .get(`/drpdowns/getDrpMeasuringMode`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+};
