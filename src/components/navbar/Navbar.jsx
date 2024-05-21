@@ -129,6 +129,7 @@ const dispatch=useDispatch();
               <ul>
                 <li><a href='/profile' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>Profile</a></li>
                 <br/>
+                <li><a href='/status' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>Device Status</a></li>
                 <li><a href='/billingsession' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>Session</a></li>
                 <li><a href='/' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>Logout</a></li>
               </ul>
@@ -168,8 +169,9 @@ const dispatch=useDispatch();
               <a href='#'><MdClose fontSize={27} className='overlay__close' onClick={() => setToggleMenu(false)} /></a>
               <ul className='app__navbar-smaillscreen-links'>
                 <li><a href='/management'>Device Management</a></li>
-                <li><a href='/profile'> Profile</a></li>
+                <li><a href='/status'>Device Status</a></li>
                 <li><a href='/billingsession'>Session</a></li>
+                <li><a href='/profile'> Profile</a></li>
                 <li><a href='/'>Logout</a></li>
               </ul>
             </div>

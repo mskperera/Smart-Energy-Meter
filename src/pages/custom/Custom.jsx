@@ -55,6 +55,8 @@ setDevice(defaultSelctedDevie);
       
         <div className='home'>
           <Navbar  onChangeDevice={onChangeDeviceHandler}/>
+        
+        
           <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
             <div className='back'>
                 <ul className='nav-bar-links'>
@@ -79,6 +81,7 @@ setDevice(defaultSelctedDevie);
                 startDate={startDate}
                 endDate={endDate}
                 placeholderText="Start Date"
+                dateFormat='dd MMM yyyy'
             />
         </div>
         
@@ -91,18 +94,21 @@ setDevice(defaultSelctedDevie);
                 endDate={endDate}
                 minDate={startDate}
                 placeholderText="End Date"
+                dateFormat='dd MMM yyyy'
             />
          </div>
          
          <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button>
-    </div>
+         </div>
           </div>
           
+          <div className='chart-custom'>
           <div className='chart-pick-kw'>
             <CustomKw selectedDevice={device || defaultSelctedDevie}   startDate={startDate } endDate={endDate} isSearchLoading={isSearchLoading}/>
           </div>
           <div className='chart-pick-cost'>
             <CustomCost selectedDevice={device || defaultSelctedDevie} startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
+          </div>
           </div>
 
         </div>

@@ -99,6 +99,7 @@ export const getDrpUserRole= async () => {
 }
 
 
+//device Type
 export const getDrpDeviceType= async () => {
   try {
     return await customAxios

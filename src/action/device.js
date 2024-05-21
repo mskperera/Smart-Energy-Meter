@@ -245,6 +245,7 @@ export const getDevicesByUserId= async (userId) => {
 
 export const getDeviceStatus= async (userId) => {
   try {
+    console.log('getDeviceStatus',userId);
     return await customAxios
       .get(`/device/getDeviceStatus/${userId}`, {
         headers: {
