@@ -198,11 +198,11 @@ export const getConnectionSettingsByDeviceId= async (deviceId) => {
 }
 
 
-export const getBudgetedInfo= async (deviceId,operationalMetricId) => {
+export const getBudgetedProfile= async (deviceId,operationalMetricId) => {
   try {
     return await customAxios
       .get(
-        `/deviceSettings/getBudgetedInfo?deviceId=${deviceId}&operationalMetricId=${operationalMetricId}`,
+        `/deviceSettings/getBudgetedProfile?deviceId=${deviceId}&operationalMetricId=${operationalMetricId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -220,3 +220,35 @@ export const getBudgetedInfo= async (deviceId,operationalMetricId) => {
   }
 }
 
+// operationalMetricId
+// kwh=1 , billAmount=7
+
+
+export const addBugetedProfile= async (payload) => {
+  try {
+    return await customAxios
+      .post(`/deviceSettings/addBugetedProfile`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+// sample :
+//  const payload={
+//   "deviceId":4,
+//   "operationalMetricId":7,
+//   "value":5000
+//  }
+
+//  addBugetedProfile(payload)
+ 
