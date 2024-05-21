@@ -196,3 +196,59 @@ export const getConnectionSettingsByDeviceId= async (deviceId) => {
     return err;
   }
 }
+
+
+export const getBudgetedProfile= async (deviceId,operationalMetricId) => {
+  try {
+    return await customAxios
+      .get(
+        `/deviceSettings/getBudgetedProfile?deviceId=${deviceId}&operationalMetricId=${operationalMetricId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+// operationalMetricId
+// kwh=1 , billAmount=7
+
+
+export const addBugetedProfile= async (payload) => {
+  try {
+    return await customAxios
+      .post(`/deviceSettings/addBugetedProfile`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+// sample :
+//  const payload={
+//   "deviceId":4,
+//   "operationalMetricId":7,
+//   "value":5000
+//  }
+
+//  addBugetedProfile(payload)
+ 
