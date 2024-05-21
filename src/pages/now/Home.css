@@ -46,6 +46,7 @@
 
 .home{
     background: url('../../assent/home1.png');
+    /* background: url('../../assent/back.jpg'); */
     background-size: cover;
     /* background-color: rgba(255,255,255,0.1); */
     background-blend-mode: darken;

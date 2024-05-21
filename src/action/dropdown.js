@@ -95,7 +95,7 @@ export const getDrpUserRole = async () => {
   }
 };
 
-export const getDrpDeviceType = async () => {
+export const getDrpDeviceType= async () => {
   try {
     return await customAxios
       .get(`/drpdowns/getDrpDeviceType`, {

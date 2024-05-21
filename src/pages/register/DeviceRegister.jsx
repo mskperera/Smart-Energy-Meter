@@ -16,6 +16,8 @@ function DeviceRegister() {
   const [serialNo,setSerialNo]=useState('');
   const [firmwareVersion,setFirmwareVersion]=useState('');
   const [product,setProduct]=useState('');
+  const [chipId,setChipId]=useState('');
+  const [deviceType,setDeviceType]=useState('');
 
   useEffect(() => {
     if(saveType==="U"){
@@ -39,6 +41,8 @@ function DeviceRegister() {
       setSerialNo(device.serialNo || ''); 
       setFirmwareVersion(device.firmwareVersion || '');
       setProduct(device.product || '');
+      setChipId(device.chipId || '');
+      setDeviceType(device.deviceTypeName || '');
   } catch(err){
     console.log(err);
   }
@@ -60,6 +64,8 @@ function DeviceRegister() {
         serialNo: serialNo,
         firmwareVersion: firmwareVersion,
         product: product,
+        chipId: chipId,
+        deviceTypeName: deviceType,
       };
 
       if (saveType === 'I') {
@@ -130,6 +136,21 @@ return (
               </label>
               <input type='text' className='form-control' value={serialNo} onChange={(e)=>setSerialNo(e.target.value)} required />
             </div>
+
+            <div className='form-group was-validated'>
+              <label htmlFor='chipid' className='form-label'>
+              Chip Id
+              </label>
+              <input type='text' className='form-control' value={chipId} onChange={(e)=>setChipId(e.target.value)} required />
+            </div>
+
+            <div className='form-group was-validated'>
+              <label htmlFor='devicetype' className='form-label'>
+              Device Type
+              </label>
+              <input type='text' className='form-control' value={deviceType} onChange={(e)=>setDeviceType(e.target.value)} required />
+            </div>
+
           </div>
         </div>
 

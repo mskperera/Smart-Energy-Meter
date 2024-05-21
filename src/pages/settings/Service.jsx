@@ -10,6 +10,7 @@ import swal from 'sweetalert'
 import Budget from './Budget'
 import AboutDevice from './AboutDevice'
 import { useSelector } from 'react-redux'
+import DeviceTab from './DeviceTab'
 
 // import { Link } from 'react-router-dom'
 
@@ -392,9 +393,10 @@ const payload = {
             <ul className='tab-links nav nav-pills' id='v-pills-tab' role='tablist'>
                 <li onClick={()=>updateToggle(1)} className='nav-link active' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Budget</li>
                 <li onClick={()=>updateToggle(2)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Tariff </li>
-                <li onClick={()=>updateToggle(3)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Device </li>
+                <li onClick={()=>updateToggle(3)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Connection</li>
                 <li onClick={()=>updateToggle(4)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Notification </li>
                 <li onClick={()=>updateToggle(5)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">About</li>
+                <li onClick={()=>updateToggle(6)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Device</li>
             </ul>
         </div>
     </div>          
@@ -580,6 +582,12 @@ const payload = {
                                                             <div className={toggle === 5 ? "show-content" : "content"}>
                                                                 <div className='body d-flex align-items-center justify-content-center w-100'>
                                                                     <AboutDevice/>
+                                                                </div>
+                                                            </div> 
+
+                                                            <div className={toggle === 6 ? "show-content" : "content"}>
+                                                                <div className='body d-flex align-items-center justify-content-center w-100'>
+                                                                    <DeviceTab/>
                                                                 </div>
                                                             </div> 
                                                 <BottomNav/>

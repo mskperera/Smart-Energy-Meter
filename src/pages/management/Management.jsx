@@ -37,6 +37,7 @@ function Management() {
 
   const loadDevices=async()=>{
     const result=await getDevices();
+    console.log('Result 222222222',result);
     setDeviceDetails(result.data);
    }
 
@@ -89,6 +90,8 @@ function Management() {
               <th>Hardware version</th>
               <th>Product</th>
               <th>Serial No</th>
+              <th>Chip Id</th>
+              <th>Device Type</th>
               <th>Edit|Delete</th>
             </tr>
           </thead>
@@ -104,6 +107,8 @@ function Management() {
                   <td>{device.hardwareVersion}</td>
                   <td>{device.product}</td>
                   <td>{device.serialNo}</td>
+                  <td>{device.chipId}</td>
+                  <td>{device.deviceTypeName}</td>
                   <td>
                     <Link to={`/deviceregister/${device.deviceId}/U`} className="btn btn-sm btn-primary"> Edit</Link>&nbsp;
                     <button className="btn btn-sm btn-danger" onClick={()=>onDeleteDeviceHandler(device.deviceId)}>Delete</button>

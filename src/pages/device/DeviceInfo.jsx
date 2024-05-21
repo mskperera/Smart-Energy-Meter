@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import BottomNav from '../../components/bottommenu/BottomNav'
 import './DeviceInfo.css'
+import '../management/Management.css'
 import Navbar from '../../components/navbar/Navbar'
-import { getDeviceDetailsByDeviceId } from '../../action/device'
+import { getDeviceDetailsByDeviceId, getDeviceInfoByUserId } from '../../action/device'
 import { useSelector } from 'react-redux'
-import { de } from 'date-fns/locale'
+
 // import { Link } from 'react-router-dom'
 
 const DeviceInfo = () => {
@@ -27,20 +28,20 @@ const DeviceInfo = () => {
 
   useEffect(() => {
 
-    if(device){
-      const deviceId=device || defaultSelctedDevie;
-      loadDeviceDetailsByDeviceId(deviceId.id);
-    }
+    // if(device){
+      const userId=1;
+      loadDeviceInfoByUserId(userId);
+    // }
 }, [device]);
 
-  const loadDeviceDetailsByDeviceId=async(deviceId)=>{
-    const result=await getDeviceDetailsByDeviceId(deviceId);
+  const loadDeviceInfoByUserId=async(userId)=>{
+    const result=await getDeviceInfoByUserId(userId);
+    console.log('Result 11111111',result);
     setDeviceDetails(result.data);
-    console.log('Details',result)
-   }
+    // console.log('Details',result)
+  }
 
-
-
+  
   return (
     
     <div className='home'>
@@ -53,7 +54,7 @@ const DeviceInfo = () => {
             </ul>
     </div> */}
 
-      <div className=' body d-flex align-items-center justify-content-center w-100'>
+      {/* <div className=' body d-flex align-items-center justify-content-center w-100'>
           <div className='form-group mb-2 deviceinfo'>
               <h2 className='d-flex align-items-center justify-content-center mb-2'>Device Info</h2>
             <div className='form-group mb-1'>
@@ -74,10 +75,45 @@ const DeviceInfo = () => {
             </div>
             <div className='form-group mb-1'>
               <label htmlFor='serial' className='form-label'>Meter Type</label>
-              <input type='text' className='form-control' value={deviceDetails.serialNo} readOnly/>
+              <input type='text' className='form-control' value={deviceDetails} readOnly/>
             </div>
           </div>
+      </div> */}
+      <div className="body">
+      <div className= "rounded p-2 ">
+        <h2 className='d-flex justify-content-center align-items-center'>Device Info</h2>
+        
+        <table className="table1 table table-hover rounded">
+          <thead className='table-dark'>
+            <tr>
+              {/* <th>Device ID</th> */}
+              <th>Device No</th>
+              <th>Firmware Version</th>
+              <th>Hardware version</th>
+              <th>Product</th>
+              <th>Serial No</th>
+              <th>Meter Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+              {/* {drpData2.map(u=>( */}
+              {deviceDetails && deviceDetails.map((device) => (
+                <tr key={device.userId}>
+                  {/* {JSON.stringify(deviceDetails)}  */}
+                  <td>{device.deviceNo}</td>
+                  <td>{device.firmwareVersion}</td>
+                  <td>{device.hardwareVersion}</td>
+                  <td>{device.product}</td>
+                  <td>{device.serialNo}</td>
+                  <td>{device.deviceTypeName}</td>
+                </tr>
+                 ))} 
+
+          </tbody>
+        </table>
       </div>
+  </div>
     <BottomNav/>
     </div>
     

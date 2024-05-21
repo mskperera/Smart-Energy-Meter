@@ -24,6 +24,7 @@ import Notify from './pages/alert/Notify';
 import BillingSession from './pages/session/BillingSession';
 import Admin from './pages/custom/customadmin/Admin';
 import Group from './pages/managegroup/Group';
+import Status from './pages/status/Status';
 // import Navbar from './components/navbar/Navbar';
 
 // import { GlobalContext } from './context/GlobalContext';
@@ -46,6 +47,7 @@ function App() {
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/billingsession' element={<BillingSession/>}/>
         <Route path='/Notify' element={<Notify/>}/>
+        <Route path='/status' element={<Status/>}/>
         <Route path='/userlist' element={<Userlist/>}/>
         <Route path='/home' element={<Home/>}/>
         <Route path='/today' element={<Today/>}/>
