@@ -196,3 +196,27 @@ export const getConnectionSettingsByDeviceId= async (deviceId) => {
     return err;
   }
 }
+
+
+export const getBudgetedInfo= async (deviceId,operationalMetricId) => {
+  try {
+    return await customAxios
+      .get(
+        `/deviceSettings/getBudgetedInfo?deviceId=${deviceId}&operationalMetricId=${operationalMetricId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
