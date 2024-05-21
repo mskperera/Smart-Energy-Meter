@@ -51,13 +51,12 @@ setDevice(defaultSelctedDevie);
           <div className='device-name'><DeviceName selectedDevice={device || defaultSelctedDevie}/></div>
         </div>
         <div className='page'>
-          <div className='chart-kw'>
-            {/* <Link to={'/service'}><CostChartData/></Link> */}
+          {/* <div className='chart-kw'>
+            
             <CostChartData/>
             <KwChartData/>
-            {/* {JSON.stringify(device)} */}
-            {/* {JSON.stringify(defaultSelctedDevie)} */}
-          </div>
+            
+          </div> */}
           
           <div className='chart-now-kw'>
             <HomeChart data='' selectedDevice={device || defaultSelctedDevie}/>

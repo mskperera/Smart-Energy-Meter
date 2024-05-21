@@ -1,13 +1,9 @@
 .page{
-    width: 100%;
-    /* margin-top: 50px; */
-    justify-content:center;
-    align-items: center;
     display: flex;
-    /* background-color:#05052a; */
-
-    /* position: absolute; */
-    height: 61vh;
+    justify-content: space-between;
+    align-items: center;
+  
+    min-height: 68vh;
 }
 
 .navnav1{
@@ -70,6 +66,7 @@
 .chart-area{
     flex: 1;
     width: 100%;
+    
     display: flex;
     /* position: absolute; */
     justify-content:center;
@@ -83,28 +80,21 @@
 
 .chart-now-kw{
     flex: 1;
-    width: 30%;
-    display: flex;
-    /* position: absolute; */
-    justify-content:center;
-    align-items: center;
-    margin: 0%;
-    flex-direction: column;
-    padding: 1rem;
-    margin-top: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
 }
 
 .chart-now-cost{
-    flex: 1;
-    width: 30%;
-    display: flex;
-    /* position: absolute; */
-    justify-content: center;
-    align-items: center;
-    margin: 0%;
-    flex-direction: column;
-    padding: 1rem;
-    margin-top: 0px;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  margin-left: 8rem;
 }
 
 /* .bottom{
@@ -618,14 +608,15 @@
     }
 
     .chart-now-cost{
+        flex: 1;
+  
+        display: flex;
         width: 300px;
-        margin-top: 0px;
         align-items: center;
         justify-content: center;
-        margin-bottom: 0px;
-        margin-right: 0px;
-        margin-top: 15px;
-    }
+      
+        margin-left: 0rem;
+      }
 
     .chart-now-kw{
         margin-top: -50px;
