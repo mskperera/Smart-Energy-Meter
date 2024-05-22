@@ -85,7 +85,7 @@ const HomeChart = ({selectedDevice}) => {
 
       ctx.save();
       ctx.fillStyle='white';
-      ctx.font ='45px Trebuchet MS ';
+      ctx.font ='40px Trebuchet MS ';
       ctx.textAlign= 'center';
       ctx.textBaseline = 'baseline';
       // ctx.strokeStyle = 'white';
@@ -103,6 +103,15 @@ const HomeChart = ({selectedDevice}) => {
 
       ctx.font = '20px Trebuchet MS ';
       ctx.fillText("Energy Usage", centerX, centerY + 80);
+
+
+      ctx.font = '15px Trebuchet MS';
+      ctx.fillStyle = 'white';
+      ctx.fillText("Budget", centerX, centerY -90);
+
+      ctx.font = '25px Trebuchet MS';
+      ctx.fillStyle = 'white';
+      ctx.fillText(`${objKw.maxKwValue} kWh`, centerX, centerY - 60);
     
     }
   }
@@ -134,8 +143,8 @@ const HomeChart = ({selectedDevice}) => {
   return(
     <div className='text-p'>
       {/* <p className='text d-flex justify-content-center align-items-center'>Budgeted : {objKw.maxKwValue} kWh</p> */}
-      <TbHomeStats size={45} className='icon'/>
-      <Doughnut data={data} options={options} plugins={[gaugeText]} id='box' className='chart'/> 
+      {/* <TbHomeStats size={45} className='icon'/> */}
+      <Doughnut data={data} options={options} plugins={[gaugeText]} id='box3' className='chart'/> 
     </div>
   );
   

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { addDevice, getDeviceByDeviceId, getDevices, updateDevice } from '../../action/device';
 import { useParams } from 'react-router-dom';
 import swal from 'sweetalert';
+import { useSelector } from 'react-redux';
 
 
 function DeviceRegister() {
@@ -18,6 +19,21 @@ function DeviceRegister() {
   const [product,setProduct]=useState('');
   const [chipId,setChipId]=useState('');
   const [deviceType,setDeviceType]=useState('');
+
+
+  const [device, setDevice] = useState('');
+
+  // const onChangeDeviceHandler=(device)=>{
+  //   setDevice(device);
+  // }
+
+  const deviceNames=useSelector(state=>state.device.dropDeviceList);
+  const defaultSelctedDevie=deviceNames[0];
+
+  useEffect(()=>{
+  setDevice(defaultSelctedDevie);
+  },[deviceNames])
+
 
   useEffect(() => {
     if(saveType==="U"){
@@ -58,7 +74,7 @@ function DeviceRegister() {
       setMessage('');
 
       const payload = {
-        deviceId: 2,
+        deviceId: device?.id || defaultSelctedDevie?.id,
         deviceNo: deviceNo,
         hardwareVersion: hardwareVersion,
         serialNo: serialNo,

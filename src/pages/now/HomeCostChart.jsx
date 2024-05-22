@@ -78,17 +78,17 @@ function HomeCostChart  ({selectedDevice})  {
 
       ctx.save();
       // ctx.fillStyle='black';
-      ctx.font ='45px Trebuchet MS ';
+      ctx.font ='40px Trebuchet MS ';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'baseline';
       // ctx.fillText(data.datasets[0].data[0] ? data.datasets[0].data[0].toFixed(2) : '', xCenter, yCenter);
-      ctx.fillText(data.datasets[0].data[0] ? data.datasets[0].data[0].toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '', xCenter, yCenter);
       // ctx.strokeStyle = 'white';
       // ctx.lineWidth = 1;
       // ctx.strokeText(data.datasets[0].data[0], xCenter, yCenter);
       // ctx.strokeStyle = 'black';
       // ctx.stroke();
       ctx.fillStyle = 'white';
+      ctx.fillText(data.datasets[0].data[0] ? data.datasets[0].data[0].toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '', xCenter, yCenter );
       // ctx.fillText(data.datasets[0].data[0], xCenter, yCenter);
 
       ctx.font = '30px Trebuchet MS ';
@@ -96,6 +96,15 @@ function HomeCostChart  ({selectedDevice})  {
 
       ctx.font = '20px Trebuchet MS ';
       ctx.fillText("Usage Amount", xCenter, yCenter + 80);
+
+
+      ctx.font = '15px Trebuchet MS';
+      ctx.fillStyle = 'white';
+      ctx.fillText("Budget", xCenter, yCenter -90);
+
+      ctx.font = '25px Trebuchet MS';
+      ctx.fillStyle = 'white';
+      ctx.fillText(`Rs ${obj.maxValue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} `, xCenter, yCenter - 60);
 
       // const xCoor = chart.getDatasetMeta(0).data[0].x;
       // const yCoor = chart.getDatasetMeta(0).data[0].y;
@@ -127,11 +136,11 @@ function HomeCostChart  ({selectedDevice})  {
   return(
     <div className='text-p'> 
       {/* <p className=' text d-flex justify-content-center align-items-center'>Budgeted : {obj.maxValue.toFixed(2)} Rs</p> */}
-      <FaCoins size={45} className='icon'/>
+      {/* <FaCoins size={45} className='icon'/> */}
       {/* <div>
        <img src='../../../public/image/coins.png' alt="money" className='image'/>
       </div> */}
-      <Doughnut data={data} options={options} plugins={[gaugeText]} className='chart' id='box' />
+      <Doughnut data={data} options={options} plugins={[gaugeText]} className='chart3' id='box3' />
     </div>
    ) 
 };
