@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import './Budget.css'
+
 import { getBudgetedProfile, getBugetedLimitByDeviceId, getBugetedLimitDetailsByBudgetedLimitId, saveBudgetedLimit, saveBugetedLimitDetails } from '../../action/deviceSettings';
+
 import swal from 'sweetalert';
 import { useSelector } from 'react-redux';
 import { he } from 'date-fns/locale';
@@ -35,15 +37,18 @@ setDevice(defaultSelctedDevie);
     const [threshouldList,setThreshouldList] = useState([]);
 
     useEffect(() => {
+
         if(device){
             const deviceId = device?.id || defaultSelctedDevie?.id;
             loadBudgetedProfile(deviceId);
         }
     }, [load,device]);
 
+
     useEffect(() => {
         loadBugetedLimitDetailsByDeviceId();
     }, [load]);
+
 
 
 const loadBudgetedProfile= async (deviceId) => {
@@ -58,6 +63,7 @@ const loadBudgetedProfile= async (deviceId) => {
     // const budgetedlimitId=billingBuget[0].budgetedLimitId;
     // setLoadedBudgetedLimitId(budgetedlimitId);
     // loadBugetedLimitDetailsByDeviceId(budgetedlimitId);
+
 
 }
 
