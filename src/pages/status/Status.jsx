@@ -33,6 +33,7 @@ function Status() {
   useEffect(() => {
 
     const userId = 1;
+    // const deviceId = 4;
     loadDeviceStatus(userId);
   
   }, [device]);
@@ -42,7 +43,7 @@ function Status() {
     console.log('Result tttttttttttttttt',result);
     const arr = result.data;
     console.log('Result 222222222',arr);
-    setDeviceDetails(arr[0]);
+    // setDeviceDetails(arr[0]);
    }
 
 

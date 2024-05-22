@@ -208,9 +208,11 @@ const deviceId=device.id || defaultSelctedDevie.id;
 }
 
 useEffect(() => {
-    const deviceId=4;
+    if(device){
+        const deviceId=device.id || defaultSelctedDevie.id;
     loadOperationalLimitByDeviceId(deviceId);
-},[]);
+    }
+}, [load,device]);
 
 
 const loadOperationalLimitByDeviceId = async (deviceId) => {

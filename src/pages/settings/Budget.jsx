@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Budget.css'
 import { getBugetedLimitByDeviceId, getBugetedLimitDetailsByBudgetedLimitId, saveBudgetedLimit, saveBugetedLimitDetails } from '../../action/deviceSettings';
 import swal from 'sweetalert';
+import { useSelector } from 'react-redux';
 
 
 
@@ -13,6 +14,19 @@ function Budget() {
     // const [maxValue, setMaxValue] = useState('');
     const [selectedValues, setSelectedValues] = useState([]);
 
+    const [device, setDevice] = useState('');
+
+// const onChangeDeviceHandler=(device)=>{
+//   setDevice(device);
+// }
+
+const deviceNames=useSelector(state=>state.device.dropDeviceList);
+const defaultSelctedDevie=deviceNames[0];
+
+useEffect(()=>{
+setDevice(defaultSelctedDevie);
+},[deviceNames])
+
 
     const [load,setLoad]=useState(false);
 
@@ -20,18 +34,20 @@ function Budget() {
     const [threshouldList,setThreshouldList] = useState([]);
 
     useEffect(() => {
-        loadBugetedLimitByDeviceId();
-        
-    }, []);
+        if(device){
+            const deviceId = device?.id || defaultSelctedDevie?.id;
+        loadBugetedLimitByDeviceId(deviceId);
+        }
+    }, [load,device]);
 
     useEffect(() => {
         // loadBugetedLimitDetailsByDeviceId();
     }, [load]);
 
 
-const loadBugetedLimitByDeviceId = async () => {
+const loadBugetedLimitByDeviceId = async (deviceId) => {
 
-    const result = await getBugetedLimitByDeviceId(4);
+    const result = await getBugetedLimitByDeviceId(deviceId);
     // console.log('tttttttttttt', result);
     const budgetSettings = result.data;
     // console.log('budgetSettings', budgetSettings);
@@ -70,7 +86,7 @@ const onSubmitHandler = async (e) => {
         
       
         const payload = {
-            deviceId: 4,
+            deviceId: device?.id || defaultSelctedDevie?.id,
             budgetedAmount: myBudget,
             budgetingMetricId: 2,
             budgetedLimitId: loadedBudgetedLimitId,
