@@ -59,10 +59,10 @@ export const saveBudgetedLimit= async (payload) => {
   }
 }
 
-export const getBugetedLimitByDeviceId= async (deviceId) => {
+export const getBugetedLimitByDeviceIdAndOperationalMetricId= async (deviceId,operationalMetricId) => {
   try {
     return await customAxios
-      .get(`/deviceSettings/getBugetedLimitByDeviceId/${deviceId}`, {
+      .get(`/deviceSettings/getBugetedLimitByDeviceIdAndOperationalMetricId?deviceId=${deviceId}&operationalMetricId=${operationalMetricId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -252,3 +252,51 @@ export const addBugetedProfile= async (payload) => {
 
 //  addBugetedProfile(payload)
  
+
+
+
+export const calculateInterdependentValue= async (deviceId,operationalMetricId) => {
+  try {
+    return await customAxios
+      .get(
+        `/deviceSettings/calculateInterdependentValue?deviceId=${deviceId}&operationalMetricId=${operationalMetricId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+
+export const getBudgetedValues= async (deviceId) => {
+  try {
+    return await customAxios
+      .get(
+        `/deviceSettings/getBudgetedValues?deviceId=${deviceId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Budget.css'
-import { getBugetedLimitByDeviceId, getBugetedLimitDetailsByBudgetedLimitId, saveBudgetedLimit, saveBugetedLimitDetails } from '../../action/deviceSettings';
+import { getBugetedLimitByDeviceIdAndOperationalMetricId, getBugetedLimitDetailsByBudgetedLimitId, saveBudgetedLimit, saveBugetedLimitDetails } from '../../action/deviceSettings';
 import swal from 'sweetalert';
 
 
@@ -20,7 +20,7 @@ function Budget() {
     const [threshouldList,setThreshouldList] = useState([]);
 
     useEffect(() => {
-        loadBugetedLimitByDeviceId();
+        loadBugetedLimitByDeviceIdAndOperationalMetricId();
         
     }, []);
 
@@ -29,9 +29,9 @@ function Budget() {
     }, [load]);
 
 
-const loadBugetedLimitByDeviceId = async () => {
+const loadBugetedLimitByDeviceIdAndOperationalMetricId = async () => {
 
-    const result = await getBugetedLimitByDeviceId(4);
+    const result = await getBugetedLimitByDeviceIdAndOperationalMetricId(4,1);
     // console.log('tttttttttttt', result);
     const budgetSettings = result.data;
     // console.log('budgetSettings', budgetSettings);
