@@ -197,7 +197,7 @@ export const getConnectionSettingsByDeviceId= async (deviceId) => {
   }
 }
 
-
+//home page gauge charts data
 export const getBudgetedProfile= async (deviceId,operationalMetricId) => {
   try {
     return await customAxios

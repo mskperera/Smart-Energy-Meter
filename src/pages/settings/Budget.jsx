@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './Budget.css'
-import { getBugetedLimitByDeviceIdAndOperationalMetricId, getBugetedLimitDetailsByBudgetedLimitId, saveBudgetedLimit, saveBugetedLimitDetails } from '../../action/deviceSettings';
+
+import { getBudgetedProfile, getBugetedLimitByDeviceId, getBugetedLimitDetailsByBudgetedLimitId, saveBudgetedLimit, saveBugetedLimitDetails } from '../../action/deviceSettings';
+
 import swal from 'sweetalert';
+import { useSelector } from 'react-redux';
+import { he } from 'date-fns/locale';
 
 
 
@@ -13,6 +17,19 @@ function Budget() {
     // const [maxValue, setMaxValue] = useState('');
     const [selectedValues, setSelectedValues] = useState([]);
 
+    const [device, setDevice] = useState('');
+
+// const onChangeDeviceHandler=(device)=>{
+//   setDevice(device);
+// }
+
+const deviceNames=useSelector(state=>state.device.dropDeviceList);
+const defaultSelctedDevie=deviceNames[0];
+
+useEffect(()=>{
+setDevice(defaultSelctedDevie);
+},[deviceNames])
+
 
     const [load,setLoad]=useState(false);
 
@@ -20,29 +37,33 @@ function Budget() {
     const [threshouldList,setThreshouldList] = useState([]);
 
     useEffect(() => {
-        loadBugetedLimitByDeviceIdAndOperationalMetricId();
-        
-    }, []);
+
+        if(device){
+            const deviceId = device?.id || defaultSelctedDevie?.id;
+            loadBudgetedProfile(deviceId);
+        }
+    }, [load,device]);
+
 
     useEffect(() => {
-        // loadBugetedLimitDetailsByDeviceId();
+        loadBugetedLimitDetailsByDeviceId();
     }, [load]);
 
 
-const loadBugetedLimitByDeviceIdAndOperationalMetricId = async () => {
 
-    const result = await getBugetedLimitByDeviceIdAndOperationalMetricId(4,1);
-    // console.log('tttttttttttt', result);
-    const budgetSettings = result.data;
-    // console.log('budgetSettings', budgetSettings);
-   // setMyBudget(budgetSettings.BudgetedAmount);
-    const billingBuget=budgetSettings.filter(b=>b.budgetingMetricId===2);
-// const billingBuget=myBudget.filter(b=>b.budgettingMetricId===2);
-    // console.log('billing Budget',billingBuget);
-    setMyBudget(billingBuget[0].budgetedAmount);
-    const budgetedlimitId=billingBuget[0].budgetedLimitId;
-    setLoadedBudgetedLimitId(budgetedlimitId);
-    loadBugetedLimitDetailsByDeviceId(budgetedlimitId);
+const loadBudgetedProfile= async (deviceId) => {
+
+    const result = await getBudgetedProfile(deviceId); //deviceId operationalMetricId
+    console.log('tttttttttttt', result);
+    // const budgetSettings = result.data;
+   
+    // const billingBuget=budgetSettings.filter(b=>b.budgetingMetricId===2); //1kW 7Amount operational metricId
+
+    // setMyBudget(billingBuget[0].value);
+    // const budgetedlimitId=billingBuget[0].budgetedLimitId;
+    // setLoadedBudgetedLimitId(budgetedlimitId);
+    // loadBugetedLimitDetailsByDeviceId(budgetedlimitId);
+
 
 }
 
@@ -70,8 +91,8 @@ const onSubmitHandler = async (e) => {
         
       
         const payload = {
-            deviceId: 4,
-            budgetedAmount: myBudget,
+            deviceId: device?.id || defaultSelctedDevie?.id,
+            value: myBudget,
             budgetingMetricId: 2,
             budgetedLimitId: loadedBudgetedLimitId,
             thresholdAmountsArr: selectedValues.map(a=>a.thresholdAmount)
@@ -129,43 +150,43 @@ const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
 }
     
 
-    const handleChange = (e) => {
-        setValue(e.target.value);
-      };
+    // const handleChange = (e) => {
+    //     setValue(e.target.value);
+    //   };
 
 
-      const handleAdd = async (e) => {
-        e.preventDefault();        
-        setSelectedValues([...selectedValues,{thresholdAmount:value}]);
-      };
+    //   const handleAdd = async (e) => {
+    //     e.preventDefault();        
+    //     setSelectedValues([...selectedValues,{thresholdAmount:value}]);
+    //   };
     
 
 
-    const onDelete = (index) => {
-        const newValues = [...selectedValues];
-        newValues.splice(index, 1);
-        setSelectedValues(newValues);
-        swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this item!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                onDelete(index);
-                swal("Item has been deleted!", {
-                    icon: "success",
-                });
-                setLoad(!load);
-            }
-             else {
-                swal("Item deletion has been cancelled!");
-            }
-            setLoad(!load);
-        });
-    };
+    // const onDelete = (index) => {
+    //     const newValues = [...selectedValues];
+    //     newValues.splice(index, 1);
+    //     setSelectedValues(newValues);
+    //     swal({
+    //         title: "Are you sure?",
+    //         text: "Once deleted, you will not be able to recover this item!",
+    //         icon: "warning",
+    //         buttons: true,
+    //         dangerMode: true,
+    //     })
+    //     .then((willDelete) => {
+    //         if (willDelete) {
+    //             onDelete(index);
+    //             swal("Item has been deleted!", {
+    //                 icon: "success",
+    //             });
+    //             setLoad(!load);
+    //         }
+    //          else {
+    //             swal("Item deletion has been cancelled!");
+    //         }
+    //         setLoad(!load);
+    //     });
+    // };
 
 
 
@@ -176,10 +197,36 @@ const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
             <h4 className='d-flex align-items-center justify-content-center'>Device Preferences and Settings</h4>
             <form className='need-validation' onSubmit={onSubmitHandler}>
             <h6 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h6>
-                <div className='form-group mb-1'>
-                    <label htmlFor='setbudget' className='form-label'>Set my Budget</label>
-                    <input type='text' className='form-control' placeholder='Rs' value={myBudget} onChange={(e)=>setMyBudget(e.target.value)}/>
-                </div>
+
+            <div className='form-group mb-1'>
+            <div className='form-group d-flex align-items-center me-3'>
+                <input type='radio' name='device' value='1' className='form-radio me-2'/>
+                <label htmlFor='budgetKw' className='form-label mb-0 me-2'>Set Budget kW</label>
+                <input
+                    id='budgetKw'
+                    type='text'
+                    className='form-control'
+                    placeholder='kW'
+                    value={myBudget}
+                    onChange={(e) => setMyBudget(e.target.value)}
+                    style={{ width: '200px', height: '30px'}} 
+                />
+            </div>
+            <br/>
+            <div className='form-group d-flex align-items-center'>
+                <input type='radio' name='device' value='2' className='form-radio me-2'/>
+                <label htmlFor='budgetRs' className='form-label mb-0 me-2'>Set Budget Rs &nbsp;</label>
+                <input
+                    id='budgetRs'
+                    type='text'
+                    className='form-control'
+                    placeholder='Rs'
+                    value={myBudget}
+                    onChange={(e) => setMyBudget(e.target.value)}
+                    style={{ width: '200px', height: '30px'}} 
+                />
+            </div>
+        </div>
 
                 <div className='form-group mb-1'>
                     <label htmlFor='setmybudget' className='form-label'>Notify me when Budget reaches</label>
@@ -191,26 +238,26 @@ const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
                             style={{ width: '100%', color: 'blue' }}
                             min="0"   
                             max={myBudget}  
-                            step="20"
+                            step="10"
                             value={value}  
                             onChange={(e)=>setValue(e.target.value)} />
                     </div>
                     <div className='form-group mb-1 d-flex justify-content-center'>
-                        <button type='submit' className='btn btn-sm btn-primary w-25 mt-1'onClick={handleAdd}>Add</button>
+                        {/* <button type='submit' className='btn btn-sm btn-primary w-25 mt-1'onClick={handleAdd}>Add</button> */}
                     </div>
                 </div>
 
                 <div>
-    <div className="table-responsive-sm">
+    {/* <div className="table-responsive-sm">
         <table className="table tableb rounded">
         <thead>
             <tr>
-            {/* <th>Notify when reach</th> */}
-            {/* <th>Actions</th> */}
+            <th>Notify when reach</th>
+            <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            {/* {JSON.stringify(thresholdList)} */}
+            
             {selectedValues && selectedValues.map((selectedValue, index) => (
             <tr key={index}>
                 <td className=''>Notify when reach {selectedValue.thresholdAmount}</td>
@@ -218,7 +265,7 @@ const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
                     <div className='d-flex justify-content-start'>
                         <button type='button' className='btn btn-sm btn-danger' onClick={() => onDelete(index)}>Delete</button>
                     </div>
-                {/* <button className='btn' onClick={() => handleDelete(index)}><CgCloseO color='red' size={20}/></button> */}
+                
 
                 </td>
             </tr>
@@ -226,7 +273,7 @@ const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
         </tbody>
         </table>
 
-    </div>
+    </div> */}
 </div>
 
                 <button type='submit' className='btn btn-primary w-100 mt-1'>Save</button>
