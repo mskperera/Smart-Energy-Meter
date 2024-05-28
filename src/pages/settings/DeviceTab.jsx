@@ -13,7 +13,7 @@ function DeviceTab() {
         const result = await getDrpMeasuringMode();
         console.log("result - 555555", result.data);
         setDropMeasuringMode(result.data);
-        setSelectedMeasuringMode(result.data[0].MeasuringModeId);
+        setSelectedMeasuringMode(result.data[0].deviceMeasuringModeId);
     }
 
     return (
@@ -32,8 +32,8 @@ function DeviceTab() {
                                     className='form-control'
                                 >
                                     {dropMeasuringMode.map((mode) => (
-                                        <option key={mode.MeasuringModeId} value={mode.MeasuringModeId}>
-                                            {mode.MeasuringModeName}
+                                        <option key={mode.deviceMeasuringModeId} value={mode.deviceMeasuringModeId}>
+                                            {mode.deviceMeasuringModeName}
                                         </option>
                                     ))}
                                 </select>
@@ -41,7 +41,7 @@ function DeviceTab() {
                         </div>
                     </div>
 
-                    {selectedMeasuringMode === '2' && (
+                    {selectedMeasuringMode === '1' && (
                         <div className="form-group mb-1">
                             <div className="form-group col-md-6">
                                 <div className="form-check">
