@@ -226,11 +226,11 @@ export const getBudgetedProfile= async (deviceId,operationalMetricId) => {
 
 
 
-export const calculateInterdependentValue= async (deviceId,operationalMetricId) => {
+export const calculateInterdependentValue= async (deviceId,operationalMetricId,value) => {
   try {
     return await customAxios
       .get(
-        `/deviceSettings/calculateInterdependentValue?deviceId=${deviceId}&operationalMetricId=${operationalMetricId}`,
+        `/deviceSettings/calculateInterdependentValue?deviceId=${deviceId}&operationalMetricId=${operationalMetricId}&value=${value}`,
         {
           headers: {
             "Content-Type": "application/json",
