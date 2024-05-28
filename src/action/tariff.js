@@ -19,7 +19,14 @@ export const  calculateBillAmountByUnits= async (payload) => {
     return err;
   }
 }
+// calculateBillAmountByUnits
+// {
+//   "deviceId":4,
+//   "units":50,
+//   "noOfDays":20
+//  }
 
+ 
 
 export const calculateUnitsForBudgetByBillAmount= async (payload) => {
     try {
@@ -39,3 +46,10 @@ export const calculateUnitsForBudgetByBillAmount= async (payload) => {
       return err;
     }
   }
+  // calculateUnitsForBudgetByBillAmount
+  // {
+  //   "deviceId":4,
+  //   "billAmount":50,
+  //   "noOfDays":20
+  //  }
+   
