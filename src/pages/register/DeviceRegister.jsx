@@ -47,7 +47,7 @@ function DeviceRegister() {
     const result = await getDeviceByDeviceId(deviceRegId);
     // // setDeviceDetails(result.data);
       const device = result.data;
-      // console.log("result data:",result);
+      console.log("result data:",result);
     
 
     //   console.log("result data:",device);
