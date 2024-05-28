@@ -276,6 +276,10 @@ export const calculateInterdependentValue= async (deviceId,operationalMetricId) 
     return err;
   }
 }
+// calculateInterdependentValue
+//  operationalMetricId
+//  kwh=1;
+//  billAmount=7
 
 
 export const getBudgetedValues= async (deviceId) => {
@@ -299,4 +303,4 @@ export const getBudgetedValues= async (deviceId) => {
     return err;
   }
 }
-
+// {{url}}/api/deviceSettings/getBudgetedValues?deviceId=4
