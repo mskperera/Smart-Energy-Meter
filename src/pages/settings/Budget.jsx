@@ -5,284 +5,237 @@ import { getBudgetedProfile, getBugetedLimitByDeviceId, getBugetedLimitDetailsBy
 
 import swal from 'sweetalert';
 import { useSelector } from 'react-redux';
-import { he } from 'date-fns/locale';
-
-
 
 function Budget() {
 
     const [myBudget, setMyBudget] = useState('');
 
     const [value, setValue] = useState(0); 
-    // const [maxValue, setMaxValue] = useState('');
     const [selectedValues, setSelectedValues] = useState([]);
 
     const [device, setDevice] = useState('');
 
-// const onChangeDeviceHandler=(device)=>{
-//   setDevice(device);
-// }
-
-const deviceNames=useSelector(state=>state.device.dropDeviceList);
-const defaultSelctedDevie=deviceNames[0];
-
-useEffect(()=>{
-setDevice(defaultSelctedDevie);
-},[deviceNames])
-
-
-    const [load,setLoad]=useState(false);
-
-    const [loadedBudgetedLimitId, setLoadedBudgetedLimitId] = useState('');
-    const [threshouldList,setThreshouldList] = useState([]);
+    const deviceNames = useSelector(state => state.device.dropDeviceList);
+    const defaultSelctedDevie = deviceNames[0];
 
     useEffect(() => {
+        setDevice(defaultSelctedDevie);
+    }, [deviceNames]);
 
-        if(device){
+    const [load, setLoad] = useState(false);
+
+    const [loadedBudgetedLimitId, setLoadedBudgetedLimitId] = useState('');
+    const [threshouldList, setThreshouldList] = useState([]);
+
+    useEffect(() => {
+        if (device) {
             const deviceId = device?.id || defaultSelctedDevie?.id;
             loadBudgetedProfile(deviceId);
         }
-    }, [load,device]);
-
+    }, [load, device]);
 
     useEffect(() => {
         loadBugetedLimitDetailsByDeviceId();
     }, [load]);
 
-
-
-const loadBudgetedProfile= async (deviceId) => {
-
-    const result = await getBudgetedProfile(deviceId); //deviceId operationalMetricId
-    console.log('tttttttttttt', result);
-    // const budgetSettings = result.data;
-   
-    // const billingBuget=budgetSettings.filter(b=>b.budgetingMetricId===2); //1kW 7Amount operational metricId
-
-    // setMyBudget(billingBuget[0].value);
-    // const budgetedlimitId=billingBuget[0].budgetedLimitId;
-    // setLoadedBudgetedLimitId(budgetedlimitId);
-    // loadBugetedLimitDetailsByDeviceId(budgetedlimitId);
-
-
-}
-
-const [message,setMessage]=useState('');
-const [errormessage,setErrorMessage]=useState('');
-
-
-// const _saveBugetedLimit=()=>{
-//     const payload={
-//         deviceId:4,
-//         budgetedAmount:myBudget,
-//         budgetingMetricId:2
-        
-//     }
-// saveBudgetedLimit(payload);
-// }
-
-const onSubmitHandler = async (e) => {
-    e.preventDefault();
-
-    try {
-
-        setErrorMessage('');
-        setMessage('');
-        
-      
-        const payload = {
-            deviceId: device?.id || defaultSelctedDevie?.id,
-            value: myBudget,
-            budgetingMetricId: 2,
-            budgetedLimitId: loadedBudgetedLimitId,
-            thresholdAmountsArr: selectedValues.map(a=>a.thresholdAmount)
-        };
-
-        console.log("payload",payload);
-                const res = await saveBudgetedLimit(payload);
-                console.log('limit result', res);
-                const { responseStatus, outputMessage } = res.data;
-                  if (responseStatus === "failed") {
-                  setErrorMessage(outputMessage)
-                  return;
-        }
-
-        if(res.status===400){
-            setMessage('Error Occure');
-            swal({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!"
-            }).then(() => {
-                setLoad(!load);
-            });
-            return
-        }
-
-        setMessage(outputMessage)
-        swal("Updated Successfully", "", "success").then(() => {
-            setLoad(!load);
-        });
+    const loadBudgetedProfile = async (deviceId) => {
+        const result = await getBudgetedProfile(deviceId);
+        console.log('tttttttttttt', result);
     }
 
-    catch (err) {   
-        console.log('error', err);
-  }
-}
+    const [message, setMessage] = useState('');
+    const [errormessage, setErrorMessage] = useState('');
 
+    const [selectedRadio, setSelectedRadio] = useState('');
 
+    const onRadioChange = (e) => {
+        setSelectedRadio(e.target.value);
+    };
 
+    const onSubmitHandler = async (e) => {
+        e.preventDefault();
 
-const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
-    console.log('getBugetedLimitDetailsByBudgetedLimitId');
-    const result = await getBugetedLimitDetailsByBudgetedLimitId(budgetedlimitId);
-    const thresholdList = result.data;
-    console.log('thresholdList', thresholdList);
-
-    // const thresholdListArr = [];
-    // thresholdList.map((threshold) => {
-    //     thresholdListArr.push({ thresholdAmount: threshold.thresholdAmount });
-    //     return null; 
-    // });
-    // console.log('thresholdListArr', thresholdListArr);
-  
-    setSelectedValues(thresholdList)
-}
-    
-
-    // const handleChange = (e) => {
-    //     setValue(e.target.value);
-    //   };
-
-
-    //   const handleAdd = async (e) => {
-    //     e.preventDefault();        
-    //     setSelectedValues([...selectedValues,{thresholdAmount:value}]);
-    //   };
-    
-
-
-    // const onDelete = (index) => {
-    //     const newValues = [...selectedValues];
-    //     newValues.splice(index, 1);
-    //     setSelectedValues(newValues);
-    //     swal({
-    //         title: "Are you sure?",
-    //         text: "Once deleted, you will not be able to recover this item!",
-    //         icon: "warning",
-    //         buttons: true,
-    //         dangerMode: true,
-    //     })
-    //     .then((willDelete) => {
-    //         if (willDelete) {
-    //             onDelete(index);
-    //             swal("Item has been deleted!", {
-    //                 icon: "success",
-    //             });
-    //             setLoad(!load);
-    //         }
-    //          else {
-    //             swal("Item deletion has been cancelled!");
-    //         }
-    //         setLoad(!load);
-    //     });
-    // };
-
-
-
-  return (
-<div className='d-flex align-items-center justify-content-center w-100'>
-    <div className='body-budget'>
-        <div className='rounded'>
-            <h4 className='d-flex align-items-center justify-content-center'>Device Preferences and Settings</h4>
-            <form className='need-validation' onSubmit={onSubmitHandler}>
-            <h6 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h6>
-
-            <div className='form-group mb-1'>
-            <div className='form-group d-flex align-items-center me-3'>
-                <input type='radio' name='device' value='1' className='form-radio me-2'/>
-                <label htmlFor='budgetKw' className='form-label mb-0 me-2'>Set Budget kW</label>
-                <input
-                    id='budgetKw'
-                    type='text'
-                    className='form-control'
-                    placeholder='kW'
-                    value={myBudget}
-                    onChange={(e) => setMyBudget(e.target.value)}
-                    style={{ width: '200px', height: '30px'}} 
-                />
-            </div>
-            <br/>
-            <div className='form-group d-flex align-items-center'>
-                <input type='radio' name='device' value='2' className='form-radio me-2'/>
-                <label htmlFor='budgetRs' className='form-label mb-0 me-2'>Set Budget Rs &nbsp;</label>
-                <input
-                    id='budgetRs'
-                    type='text'
-                    className='form-control'
-                    placeholder='Rs'
-                    value={myBudget}
-                    onChange={(e) => setMyBudget(e.target.value)}
-                    style={{ width: '200px', height: '30px'}} 
-                />
-            </div>
-        </div>
-
-                <div className='form-group mb-1'>
-                    <label htmlFor='setmybudget' className='form-label'>Notify me when Budget reaches</label>
-                    <div className='form-group'>
-                    <div style={{ textAlign: 'center', marginBottom: '10px' }}>{value}</div>
-                        <input
-                            type="range"
-                            className='form-control-range'
-                            style={{ width: '100%', color: 'blue' }}
-                            min="0"   
-                            max={myBudget}  
-                            step="10"
-                            value={value}  
-                            onChange={(e)=>setValue(e.target.value)} />
-                    </div>
-                    <div className='form-group mb-1 d-flex justify-content-center'>
-                        {/* <button type='submit' className='btn btn-sm btn-primary w-25 mt-1'onClick={handleAdd}>Add</button> */}
-                    </div>
-                </div>
-
-                <div>
-    {/* <div className="table-responsive-sm">
-        <table className="table tableb rounded">
-        <thead>
-            <tr>
-            <th>Notify when reach</th>
-            <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+        try {
+            setErrorMessage('');
+            setMessage('');
             
-            {selectedValues && selectedValues.map((selectedValue, index) => (
-            <tr key={index}>
-                <td className=''>Notify when reach {selectedValue.thresholdAmount}</td>
-                <td>
-                    <div className='d-flex justify-content-start'>
-                        <button type='button' className='btn btn-sm btn-danger' onClick={() => onDelete(index)}>Delete</button>
-                    </div>
-                
+            const payload = {
+                deviceId: device?.id || defaultSelctedDevie?.id,
+                value: myBudget,
+                budgetingMetricId: 2,
+                budgetedLimitId: loadedBudgetedLimitId,
+                thresholdAmountsArr: selectedValues.map(a => a.thresholdAmount)
+            };
 
-                </td>
-            </tr>
-            ))}
-        </tbody>
-        </table>
+            console.log("payload", payload);
+            const res = await saveBudgetedLimit(payload);
+            console.log('limit result', res);
+            const { responseStatus, outputMessage } = res.data;
+            if (responseStatus === "failed") {
+                setErrorMessage(outputMessage);
+                return;
+            }
 
-    </div> */}
-</div>
+            if (res.status === 400) {
+                setMessage('Error Occure');
+                swal({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!"
+                }).then(() => {
+                    setLoad(!load);
+                });
+                return;
+            }
 
-                <button type='submit' className='btn btn-primary w-100 mt-1'>Save</button>
-                {errormessage && <p>{errormessage}</p>}                    
-            </form>
+            setMessage(outputMessage);
+            swal("Updated Successfully", "", "success").then(() => {
+                setLoad(!load);
+            });
+        } catch (err) {   
+            console.log('error', err);
+        }
+    }
+
+    const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
+        console.log('getBugetedLimitDetailsByBudgetedLimitId');
+        const result = await getBugetedLimitDetailsByBudgetedLimitId(budgetedlimitId);
+        const thresholdList = result.data;
+        console.log('thresholdList', thresholdList);
+        setSelectedValues(thresholdList);
+    }
+
+    return (
+        <div className='body d-flex align-items-center justify-content-center w-100'>
+            <div className='notification'>
+                <div className='rounded'>
+                    <h4 className='d-flex align-items-center justify-content-center'>Device Preferences and Settings</h4>
+                    <form className='need-validation' onSubmit={onSubmitHandler}>
+                        <h6 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h6>
+
+                        <div className='form-group mb-1'>
+                            <div className='form-group d-flex align-items-center me-3'>
+                                <input 
+                                    type='radio' 
+                                    name='device' 
+                                    value='1' 
+                                    className='form-radio me-2' 
+                                    checked={selectedRadio === '1'} 
+                                    onChange={onRadioChange}
+                                />
+                                <label htmlFor='budgetKw' className='form-label mb-0 me-2'>Set Budget kW</label>
+                                {selectedRadio === '1' ? (
+                                    <input
+                                        id='budgetKw'
+                                        type='text'
+                                        className='form-control'
+                                        placeholder='kW'
+                                        value={myBudget}
+                                        onChange={(e) => setMyBudget(e.target.value)}
+                                        style={{ width: '200px', height: '30px' }}
+                                    />
+                                ) : (
+                                    <input
+                                        id='budgetKw'
+                                        type='text'
+                                        className='form-control'
+                                        placeholder='kW'
+                                        value=""
+                                        disabled
+                                        style={{ width: '200px', height: '30px' }}
+                                    />
+                                )}
+                            </div>
+                            <br />
+                            <div className='form-group d-flex align-items-center'>
+                                <input 
+                                    type='radio' 
+                                    name='device' 
+                                    value='2' 
+                                    className='form-radio me-2' 
+                                    checked={selectedRadio === '2'} 
+                                    onChange={onRadioChange}
+                                />
+                                <label htmlFor='budgetRs' className='form-label mb-0 me-2'>Set Budget Rs &nbsp;</label>
+                                {selectedRadio === '2' ? (
+                                    <input
+                                        id='budgetRs'
+                                        type='text'
+                                        className='form-control'
+                                        placeholder='Rs'
+                                        value={myBudget}
+                                        onChange={(e) => setMyBudget(e.target.value)}
+                                        style={{ width: '200px', height: '30px' }}
+                                    />
+                                ) : (
+                                    <input
+                                        id='budgetRs'
+                                        type='text'
+                                        className='form-control'
+                                        placeholder='Rs'
+                                        value=""
+                                        disabled
+                                        style={{ width: '200px', height: '30px' }}
+                                    />
+                                )}
+                            </div>
+                        </div>
+
+                        <button type='button' className="btn btn-sm custom-button w-50 btn-cal mb-1">
+                            Calculate
+                        </button>
+
+                        {/* <div className='form-group mb-1'>
+                            <label htmlFor='setmybudget' className='form-label'>Notify me when Budget reaches</label>
+                            <div className='form-group'>
+                                <div style={{ textAlign: 'center', marginBottom: '10px' }}>{value}</div>
+                                <input
+                                    type="range"
+                                    className='form-control-range'
+                                    style={{ width: '100%', color: 'blue' }}
+                                    min="0"
+                                    max={myBudget}
+                                    step="10"
+                                    value={value}
+                                    onChange={(e) => setValue(e.target.value)}
+                                />
+                            </div>
+                            <div className='form-group mb-1 d-flex justify-content-center'>
+                            </div>
+                        </div> */}
+
+                        {/* <div>
+                            <div className="table-responsive-sm">
+                                <table className="table tableb rounded">
+                                    <thead>
+                                        <tr>
+                                            <th>Notify when reach</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {selectedValues && selectedValues.map((selectedValue, index) => (
+                                            <tr key={index}>
+                                                <td className=''>Notify when reach {selectedValue.thresholdAmount}</td>
+                                                <td>
+                                                    <div className='d-flex justify-content-start'>
+                                                        <button type='button' className='btn btn-sm btn-danger' onClick={() => onDelete(index)}>Delete</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> */}
+
+                        <button type='submit' className='btn btn-primary w-100 mt-1'>Save</button>
+                        {errormessage && <p>{errormessage}</p>}
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-      </div>                                                  
-  )
+    )
 }
 
-export default Budget
+export default Budget;

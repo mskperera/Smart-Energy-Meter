@@ -21,6 +21,8 @@ import LineChart from './LineChart'
 import DeviceName from './DeviceName'
 import AreaChart from './AreaChart'
 import { useSelector } from 'react-redux'
+import { MdClose } from 'react-icons/md'
+import { GiHamburgerMenu } from 'react-icons/gi'
 
 // import home from '../../assent/home.jpg'
 
@@ -29,6 +31,7 @@ import { useSelector } from 'react-redux'
 const Home = () => {
 
   const [device, setDevice] = useState('');
+  const [toggleMenu, setToggleMenu] = useState(false);
 
   const onChangeDeviceHandler=(device)=>{
     setDevice(device);
@@ -50,6 +53,18 @@ setDevice(defaultSelctedDevie);
           <div className='curcle'></div>
           <div className='device-name'><DeviceName selectedDevice={device || defaultSelctedDevie}/></div>
         </div>
+          
+        <div className='device-active-2'>
+          <div className="dropdown" style={{ marginLeft: '10px' }} >
+            <select className="dropdown-line">
+              <option value="L1">Line-1</option>
+              <option value="L2">Line-2</option>
+              <option value="L3">Line-3</option>
+              
+            </select>
+          </div>
+          </div>
+          
         <div className='page'>
           {/* <div className='chart-kw'>
             
