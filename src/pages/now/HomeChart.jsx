@@ -48,8 +48,8 @@ const HomeChart = ({ selectedDevice }) => {
   const loadBudgetedValues = async (deviceId) => {
     const result = await getBudgetedValues(deviceId);
     const budgetedValue = result.data;
-    setBudgetedValues(budgetedValue.budgetedKwh);
-    budgetedValuesRef.current = budgetedValue.budgetedKwh;
+    setBudgetedValues(budgetedValue.kwhAmount);
+    budgetedValuesRef.current = budgetedValue.kwhAmount;
   };
 
   const loadChartData = async () => {
