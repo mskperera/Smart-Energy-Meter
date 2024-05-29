@@ -267,8 +267,6 @@ export const getDevicesByUserId= async (userId) => {
 
 export const getDeviceStatus = async (userId, deviceId = null) => {
   try {
-    console.log('getDeviceStatus', userId);
-
     const queryParams = new URLSearchParams({ userId });
     if (deviceId !== null) {
       queryParams.append('deviceId', deviceId);
@@ -293,3 +291,5 @@ export const getDeviceStatus = async (userId, deviceId = null) => {
   }
 };
 
+// All device 
+//deviceId=0

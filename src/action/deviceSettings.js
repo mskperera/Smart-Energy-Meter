@@ -224,42 +224,13 @@ export const getBudgetedProfile= async (deviceId,operationalMetricId) => {
 // kwh=1 , billAmount=7
 
 
-export const addBugetedProfile= async (payload) => {
-  try {
-    return await customAxios
-      .post(`/deviceSettings/addBugetedProfile`,payload, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((res) => {
-        return res;
-      })
-      .catch((err) => {
-        return err.response;
-      });
-  } catch (err) {
-    return err;
-  }
-}
-
-// sample :
-//  const payload={
-//   "deviceId":4,
-//   "operationalMetricId":7,
-//   "value":5000
-//  }
-
-//  addBugetedProfile(payload)
- 
 
 
-
-export const calculateInterdependentValue= async (deviceId,operationalMetricId) => {
+export const calculateInterdependentValue= async (deviceId,operationalMetricId,value) => {
   try {
     return await customAxios
       .get(
-        `/deviceSettings/calculateInterdependentValue?deviceId=${deviceId}&operationalMetricId=${operationalMetricId}`,
+        `/deviceSettings/calculateInterdependentValue?deviceId=${deviceId}&operationalMetricId=${operationalMetricId}&value=${value}`,
         {
           headers: {
             "Content-Type": "application/json",
