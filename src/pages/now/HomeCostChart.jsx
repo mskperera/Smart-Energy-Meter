@@ -12,10 +12,10 @@ import { getBudgetedValues } from '../../action/deviceSettings';
 // import { FaCoins } from "react-icons/fa";
 ChartJS.register(ArcElement, Tooltip);
 
-function HomeCostChart  ({selectedDevice})  {
+const HomeCostChart = ({selectedDevice, budgetedValueAmount}) => {
 
-const [budgetedValues,setBudgetedValues]=useState('');
-const budgetedValuesRef=useRef(budgetedValues);
+// const [budgetedValues,setBudgetedValues]=useState('');
+// const budgetedValuesRef=useRef(budgetedValues);
 
 
 const [device, setDevice] = useState('');
@@ -46,20 +46,20 @@ useEffect(() => {
     loadChartData();
   },[selectedDevice]);
 
-  useEffect(() => {
-    if (device) {
-      const deviceId = device.id || defaultSelctedDevie.id;
-      loadBudgetedValues(deviceId);
-    }
-  }, [device]);
+  // useEffect(() => {
+  //   if (device) {
+  //     const deviceId = device.id || defaultSelctedDevie.id;
+  //     loadBudgetedValues(deviceId);
+  //   }
+  // }, [device]);
 
-  const loadBudgetedValues = async (deviceId) => {
-    const result = await getBudgetedValues(deviceId);
-    const budgetedValue = result.data;
-    console.log('budgetedValue',budgetedValue)
-    setBudgetedValues(budgetedValue.billAmount);
-    budgetedValuesRef.current = budgetedValue.billAmount;
-  };
+  // const loadBudgetedValues = async (deviceId) => {
+  //   const result = await getBudgetedValues(deviceId);
+  //   const budgetedValue = result.data;
+  //   console.log('budgetedValue',budgetedValue)
+  //   setBudgetedValues(budgetedValue.billAmount);
+  //   budgetedValuesRef.current = budgetedValue.billAmount;
+  // };
 
   const loadChartData=async()=>{
     const payload={
@@ -95,6 +95,7 @@ useEffect(() => {
         cutout:'80%',
         borderWidth: 0,
         borderRadius: 0, 
+        budgetedValueAmount,
       },
     ],
   };
@@ -135,7 +136,7 @@ useEffect(() => {
 
       ctx.font = '25px Trebuchet MS';
       ctx.fillStyle = 'white';
-      ctx.fillText(`Rs ${budgetedValuesRef.current}`, xCenter, yCenter - 60);
+      ctx.fillText(`Rs ${data.datasets[0].budgetedValueAmount}`, xCenter, yCenter - 60);
 
       // const xCoor = chart.getDatasetMeta(0).data[0].x;
       // const yCoor = chart.getDatasetMeta(0).data[0].y;
