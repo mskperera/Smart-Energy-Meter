@@ -274,7 +274,7 @@ const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActiv
           };
        
       const res = await saveOperationalLimit(payload);
-      console.log(res);
+    //   console.log(res);
       const { responseStatus, outputMessage } = res.data;
       if (responseStatus === "failed") {
         setErrorMessage(outputMessage)

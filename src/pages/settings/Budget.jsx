@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import './Budget.css'
 
-import { getBudgetedProfile, getBugetedLimitByDeviceId, getBugetedLimitDetailsByBudgetedLimitId, saveBudgetedLimit, saveBugetedLimitDetails } from '../../action/deviceSettings';
+import { calculateInterdependentValue, getBudgetedProfile, getBugetedLimitByDeviceId, getBugetedLimitDetailsByBudgetedLimitId, saveBudgetedLimit, saveBugetedLimitDetails } from '../../action/deviceSettings';
 
 import swal from 'sweetalert';
 import { useSelector } from 'react-redux';
+import { calculateBillAmountByUnits, calculateUnitsForBudgetByBillAmount } from '../../action/tariff';
+
 
 function Budget() {
 
-    const [myBudget, setMyBudget] = useState('');
-
-    const [value, setValue] = useState(0); 
+    const [myBudgetKw, setMyBudgetKw] = useState('');
+    const [myBudgetRs, setMyBudgetRs] = useState('');
     const [selectedValues, setSelectedValues] = useState([]);
-
     const [device, setDevice] = useState('');
+    const [load, setLoad] = useState(false);
+    const [message, setMessage] = useState('');
+    const [errormessage, setErrorMessage] = useState('');
+    const [selectedRadio, setSelectedRadio] = useState('');
+
+    const [selectedValue,setSelectedValue] = useState('kw');
 
     const deviceNames = useSelector(state => state.device.dropDeviceList);
     const defaultSelctedDevie = deviceNames[0];
@@ -22,35 +28,46 @@ function Budget() {
         setDevice(defaultSelctedDevie);
     }, [deviceNames]);
 
-    const [load, setLoad] = useState(false);
-
-    const [loadedBudgetedLimitId, setLoadedBudgetedLimitId] = useState('');
-    const [threshouldList, setThreshouldList] = useState([]);
-
-    useEffect(() => {
-        if (device) {
-            const deviceId = device?.id || defaultSelctedDevie?.id;
-            loadBudgetedProfile(deviceId);
-        }
-    }, [load, device]);
+    // useEffect(() => {
+    //     if (device) {
+    //         const deviceId = device?.id || defaultSelctedDevie?.id;
+    //         loadBudgetedProfile(deviceId);
+    //     }
+    // }, [load, device]);
 
     useEffect(() => {
-        loadBugetedLimitDetailsByDeviceId();
+        // loadBugetedLimitDetailsByDeviceId();
     }, [load]);
 
-    const loadBudgetedProfile = async (deviceId) => {
-        const result = await getBudgetedProfile(deviceId);
-        console.log('tttttttttttt', result);
-    }
+    // const loadBudgetedProfile = async (deviceId) => {
+    //     const result = await getBudgetedProfile(deviceId);
+    //     console.log('tttttttttttt', result);
+    // }
 
-    const [message, setMessage] = useState('');
-    const [errormessage, setErrorMessage] = useState('');
-
-    const [selectedRadio, setSelectedRadio] = useState('');
-
+    
     const onRadioChange = (e) => {
         setSelectedRadio(e.target.value);
     };
+    
+    // useEffect(() => {
+    //     if (device) {
+    //         const deviceId = device || defaultSelctedDevie;
+    //         loadCalculateInterdependentValue(deviceId.id);
+    // }
+    // }, [device]);
+
+    
+    const loadCalculateInterdependentValue = async (deviceId) => {
+        const result = await calculateInterdependentValue(deviceId, 7);
+        console.log('result111111', result);
+        const calculate = result.data;
+        console.log('calculate', calculate.value);
+        // setMyBudgetRs(calculate.value);
+        // setMyBudgetKw(calculate.value); 
+    }
+
+
+
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
@@ -61,10 +78,12 @@ function Budget() {
             
             const payload = {
                 deviceId: device?.id || defaultSelctedDevie?.id,
-                value: myBudget,
-                budgetingMetricId: 2,
-                budgetedLimitId: loadedBudgetedLimitId,
-                thresholdAmountsArr: selectedValues.map(a => a.thresholdAmount)
+                value: selectedRadio === '1' ? myBudgetKw : myBudgetRs,
+                budgetingMetricId: selectedRadio === '1' ? 1 : 2,
+                units:50,
+                noOfDays:20,
+                // budgetedLimitId: loadedBudgetedLimitId,
+                // thresholdAmountsArr: selectedValues.map(a => a.thresholdAmount)
             };
 
             console.log("payload", payload);
@@ -77,7 +96,7 @@ function Budget() {
             }
 
             if (res.status === 400) {
-                setMessage('Error Occure');
+                setMessage('Error Occurred');
                 swal({
                     icon: "error",
                     title: "Oops...",
@@ -97,22 +116,14 @@ function Budget() {
         }
     }
 
-    const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
-        console.log('getBugetedLimitDetailsByBudgetedLimitId');
-        const result = await getBugetedLimitDetailsByBudgetedLimitId(budgetedlimitId);
-        const thresholdList = result.data;
-        console.log('thresholdList', thresholdList);
-        setSelectedValues(thresholdList);
-    }
-
     return (
         <div className='body d-flex align-items-center justify-content-center w-100'>
             <div className='notification'>
-                <div className='rounded'>
-                    <h4 className='d-flex align-items-center justify-content-center'>Device Preferences and Settings</h4>
+                {/* <div className='rounded'> */}
+                    <h4 className='d-flex align-items-center justify-content-center mb-1'>Device Preferences and Settings</h4>
                     <form className='need-validation' onSubmit={onSubmitHandler}>
                         <h6 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h6>
-
+                
                         <div className='form-group mb-1'>
                             <div className='form-group d-flex align-items-center me-3'>
                                 <input 
@@ -130,8 +141,12 @@ function Budget() {
                                         type='text'
                                         className='form-control'
                                         placeholder='kW'
-                                        value={myBudget}
-                                        onChange={(e) => setMyBudget(e.target.value)}
+                                        value={myBudgetKw}
+                                        onChange={(e) => {
+                                            setMyBudgetKw(e.target.value);
+                                            setSelectedValue("kw");
+                                        
+                                        }}
                                         style={{ width: '200px', height: '30px' }}
                                     />
                                 ) : (
@@ -163,8 +178,8 @@ function Budget() {
                                         type='text'
                                         className='form-control'
                                         placeholder='Rs'
-                                        value={myBudget}
-                                        onChange={(e) => setMyBudget(e.target.value)}
+                                        value={myBudgetRs}
+                                        onChange={(e) => {setMyBudgetRs(e.target.value); setSelectedValue("bill");}}
                                         style={{ width: '200px', height: '30px' }}
                                     />
                                 ) : (
@@ -181,58 +196,26 @@ function Budget() {
                             </div>
                         </div>
 
-                        <button type='button' className="btn btn-sm custom-button w-50 btn-cal mb-1">
+                        <button type='button' className="btn btn-sm custom-button w-50 btn-cal mb-1" onClick={() => {
+                            const deviceId = device?.id || defaultSelctedDevie?.id;
+                            loadCalculateInterdependentValue(deviceId,7);
+
+                            if(selectedValue === "kw"){
+                                const units = loadCalculateInterdependentValue(deviceId,1);
+                                setMyBudgetKw(units);}
+
+                            if(selectedValue === "bill"){
+                                const billAmount = loadCalculateInterdependentValue(deviceId,7);
+                                setMyBudgetRs(billAmount);
+                            }
+                        }}>
                             Calculate
                         </button>
-
-                        {/* <div className='form-group mb-1'>
-                            <label htmlFor='setmybudget' className='form-label'>Notify me when Budget reaches</label>
-                            <div className='form-group'>
-                                <div style={{ textAlign: 'center', marginBottom: '10px' }}>{value}</div>
-                                <input
-                                    type="range"
-                                    className='form-control-range'
-                                    style={{ width: '100%', color: 'blue' }}
-                                    min="0"
-                                    max={myBudget}
-                                    step="10"
-                                    value={value}
-                                    onChange={(e) => setValue(e.target.value)}
-                                />
-                            </div>
-                            <div className='form-group mb-1 d-flex justify-content-center'>
-                            </div>
-                        </div> */}
-
-                        {/* <div>
-                            <div className="table-responsive-sm">
-                                <table className="table tableb rounded">
-                                    <thead>
-                                        <tr>
-                                            <th>Notify when reach</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {selectedValues && selectedValues.map((selectedValue, index) => (
-                                            <tr key={index}>
-                                                <td className=''>Notify when reach {selectedValue.thresholdAmount}</td>
-                                                <td>
-                                                    <div className='d-flex justify-content-start'>
-                                                        <button type='button' className='btn btn-sm btn-danger' onClick={() => onDelete(index)}>Delete</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div> */}
 
                         <button type='submit' className='btn btn-primary w-100 mt-1'>Save</button>
                         {errormessage && <p>{errormessage}</p>}
                     </form>
-                </div>
+                {/* </div> */}
             </div>
         </div>
     )
