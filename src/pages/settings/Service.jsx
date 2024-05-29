@@ -835,7 +835,7 @@ const payload = {
       <BottomNav />
     </div>
   );
-                                        }
+}
 
 export default Service
 

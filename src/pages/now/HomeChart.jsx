@@ -7,9 +7,9 @@ import { getBudgetedValues } from '../../action/deviceSettings';
 import { useSelector } from 'react-redux';
 ChartJS.register(ArcElement, Tooltip);
 
-const HomeChart = ({ selectedDevice }) => {
-  const [budgetedValues, setBudgetedValues] = useState('');
-  const budgetedValuesRef = useRef(budgetedValues);
+const HomeChart = ({ selectedDevice, budgetedValues }) => {
+  // const [budgetedValues, setBudgetedValues] = useState('');
+
 
   const [device, setDevice] = useState('');
 
@@ -38,19 +38,7 @@ const HomeChart = ({ selectedDevice }) => {
     loadChartData();
   }, [selectedDevice]);
 
-  useEffect(() => {
-    if (device) {
-      const deviceId = device.id || defaultSelctedDevie.id;
-      loadBudgetedValues(deviceId);
-    }
-  }, [device]);
-
-  const loadBudgetedValues = async (deviceId) => {
-    const result = await getBudgetedValues(deviceId);
-    const budgetedValue = result.data;
-    setBudgetedValues(budgetedValue.kwhAmount);
-    budgetedValuesRef.current = budgetedValue.kwhAmount;
-  };
+ 
 
   const loadChartData = async () => {
     const payload = {
@@ -74,6 +62,7 @@ const HomeChart = ({ selectedDevice }) => {
         cutout: '80%',
         borderWidth: 0,
         borderRadius: 0,
+        budgetedValues,
       },
     ],
   };
@@ -102,7 +91,7 @@ const HomeChart = ({ selectedDevice }) => {
       ctx.fillText('Budget', centerX, centerY - 90);
 
       ctx.font = '25px Trebuchet MS';
-      ctx.fillText(`${budgetedValuesRef.current} kWh`, centerX, centerY - 60);
+      ctx.fillText(`${data.datasets[0].budgetedValues} kWh`, centerX, centerY - 60);
     },
   };
 
@@ -127,6 +116,7 @@ const HomeChart = ({ selectedDevice }) => {
 
   return (
     <div className='text-p'>
+      {/* {JSON.stringify(budgetedValues)} */}
       <Doughnut data={data} options={options} plugins={[gaugeText]} id='box3' className='chart' />
     </div>
   );

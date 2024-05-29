@@ -184,9 +184,45 @@
     width: 15px;
     height: 15px;
     border-radius: 25px;
-    margin-left: -20px;
-    background-color: red;
+    margin-left: -10px;
+    margin-top: -10px;
+    /* background-color: red; */
 }
+
+.curcle-name{
+    /* position: relative; */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 15px;
+    height: 15px;
+    border-radius: 25px;
+    margin-left: 10px;
+    margin-top: -15px;
+    /* background-color: red; */
+
+}
+
+.both{
+margin-top: 10px;
+padding-right: 10px;
+}
+
+.curcle-online {
+    background-color: rgb(2, 223, 2);
+  }
+  
+  .curcle-offline {
+    background-color: red;
+  }
+
+  .device-status.online {
+    color: rgb(2, 223, 2);
+  }
+  
+  .device-status.offline {
+    color: red;
+  }
 
 .page-bottom div{
     width: 210px;
@@ -343,7 +379,7 @@
         height: 15px;
         border-radius: 25px;
         margin-left: -20px;
-        background-color: red;
+        /* background-color: red; */
     }
     
 }
@@ -582,8 +618,10 @@
         height: 15px;
         border-radius: 25px;
         margin-left: 0px;
-        background-color: red;
+        /* background-color: red; */
     }
+
+   
 
 }
 
@@ -842,7 +880,7 @@
         height: 15px;
         border-radius: 25px;
         margin-left: -20px;
-        background-color: red;
+        /* background-color: red; */
     }
 
     }
@@ -1020,7 +1058,7 @@
             height: 15px;
             border-radius: 50%;
             margin-left: 0px;
-            background-color: red;
+            /* background-color: red; */
         }
     }
     
