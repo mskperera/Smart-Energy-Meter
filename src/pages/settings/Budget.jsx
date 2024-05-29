@@ -62,8 +62,8 @@ function Budget() {
         console.log('result111111', result);
         const calculate = result.data;
         console.log('calculate', calculate.value);
-        // setMyBudgetRs(calculate.value);
-        // setMyBudgetKw(calculate.value); 
+        setMyBudgetRs(calculate.value);
+        setMyBudgetKw(calculate.value); 
     }
 
 
@@ -117,7 +117,7 @@ function Budget() {
     }
 
     return (
-        <div className='body d-flex align-items-center justify-content-center w-100'>
+        // <div className='body d-flex align-items-center justify-content-center w-100'>
             <div className='notification'>
                 {/* <div className='rounded'> */}
                     <h4 className='d-flex align-items-center justify-content-center mb-1'>Device Preferences and Settings</h4>
@@ -217,7 +217,7 @@ function Budget() {
                     </form>
                 {/* </div> */}
             </div>
-        </div>
+        // </div>
     )
 }
 
