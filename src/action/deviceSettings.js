@@ -275,3 +275,29 @@ export const getBudgetedValues= async (deviceId) => {
   }
 }
 // {{url}}/api/deviceSettings/getBudgetedValues?deviceId=4
+
+
+export const deviceMeasuringModeSave= async (payload) => {
+  try {
+    return await customAxios
+      .post(`/deviceSettings/deviceMeasuringModeSave`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+// deviceMeasuringModeSave
+// {
+//   "deviceId":37,
+//   "measuringModeId":2
+//  }
+ 
