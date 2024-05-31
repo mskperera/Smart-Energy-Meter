@@ -121,6 +121,7 @@ function DeviceTab() {
                                 </select>
                             </div>
                         </div>
+                        
                     </div>
 
                     {selectedMeasuringMode === '1' && (
