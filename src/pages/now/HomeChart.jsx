@@ -5,6 +5,7 @@ import './Homechart.css';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { getBudgetedValues } from '../../action/deviceSettings';
 import { useSelector } from 'react-redux';
+
 ChartJS.register(ArcElement, Tooltip);
 
 const HomeChart = ({ selectedDevice, budgetedValues }) => {
@@ -19,24 +20,46 @@ const HomeChart = ({ selectedDevice, budgetedValues }) => {
   useEffect(() => {
     setDevice(defaultSelctedDevie);
   }, [deviceNames]);
+  
 
   const [objKw, setObjKw] = useState({
-    maxKwValue: 1000,
+    maxKwValue: budgetedValues,
     minKwValue: 0,
     currentKwValue: 0,
     mesurementUnitKw: 'kWh',
     kwhPerSeconds: 0,
   });
 
-  const [remaningkwvalue, setRemainingKwValue] = useState(null);
+  const [remaningkwvalue, setRemainingKwValue] = useState(budgetedValues);
+
+  useEffect(() => {
+    setObjKw((prevObj) => ({
+      ...prevObj,
+      maxKwValue: budgetedValues,
+    }));  
+  }, [budgetedValues]);
 
   useEffect(() => {
     setRemainingKwValue(objKw.maxKwValue - objKw.currentKwValue);
-  }, [objKw]);
+  }, [objKw.currentKwValue, objKw.maxKwValue]);
+
+  // useEffect(() => {
+  //   loadChartData();
+  // }, [selectedDevice]);
+
 
   useEffect(() => {
-    loadChartData();
-  }, [selectedDevice]);
+    // const userData = localStorage.getItem('userData');
+    // const userId = JSON.parse(userData).userId;
+
+    const intervalId = setInterval(() => {
+      // if (device)
+        loadChartData();
+      // loadBudgetedValues(device?.id || defaultSelectedDevice?.id);
+    }, 5000);
+
+    return () => clearInterval(intervalId); 
+  }, [device,defaultSelctedDevie]);
 
  
 
@@ -47,8 +70,14 @@ const HomeChart = ({ selectedDevice, budgetedValues }) => {
     };
     const result = await getEngergyUsageNow(payload);
     const { kwh } = result.data;
+    console.log('kwh', result);
+    setObjKw((prevObj) => ({
+      ...prevObj,
+      currentKwValue: kwh,
+    }));
 
-    setObjKw({ ...objKw, currentKwValue: kwh });
+
+    // setObjKw({ ...objKw, currentKwValue: kwh });
   };
 
   const data = {
@@ -56,7 +85,8 @@ const HomeChart = ({ selectedDevice, budgetedValues }) => {
     datasets: [
       {
         data: [objKw.currentKwValue, remaningkwvalue],
-        backgroundColor: ['#00ff99', '#F5F5DC'],
+        // backgroundColor: ['#00ff99', '#F5F5DC'],
+        backgroundColor: [objKw.currentKwValue > objKw.maxKwValue ? '#ff0000' : '#00ff99', '#F5F5DC'],
         circumference: 270,
         rotation: 225,
         cutout: '80%',

@@ -14,7 +14,7 @@ import LineChart from './LineChart';
 import DeviceName from './DeviceName';
 import { useSelector } from 'react-redux';
 import { getDeviceStatus } from '../../action/device';
-import { getBudgetedValues } from '../../action/deviceSettings';
+import { getBudgetedValues, get_DeviceSettingsByDeviceId } from '../../action/deviceSettings';
 
 const Home = () => {
   const [device, setDevice] = useState(null);
@@ -22,6 +22,9 @@ const Home = () => {
   const [deviceDetails, setDeviceDetails] = useState([]);
   const [budgetedValues, setBudgetedValues] = useState('');
   const [budgetedValueAmount,setBudgetedValueAmount]=useState('');
+  const [lineOne, setLineOne] = useState('');
+  const [lineTwo, setLineTwo] = useState('');
+  const [lineThree, setLineThree] = useState('');
 
   const onChangeDeviceHandler = (selectedDevice) => {
     setDevice(selectedDevice);
@@ -32,7 +35,7 @@ const Home = () => {
 
   useEffect(() => {
     setDevice(defaultSelectedDevice);
-  }, [deviceNames]);
+  }, [deviceNames, defaultSelectedDevice]);
 
   // useEffect(() => {
   //   const userData = localStorage.getItem('userData');
@@ -50,24 +53,39 @@ const Home = () => {
       loadBudgetedValues(device?.id || defaultSelectedDevice?.id);
     }, 5000);
 
-    return () => clearInterval(intervalId); // Clean up the interval on component unmount
-  }, [device]);
+    return () => clearInterval(intervalId); 
+  }, [device,defaultSelectedDevice]);
 
 
 
   useEffect(() => {
-    loadBudgetedValues(device?.id || defaultSelectedDevice?.id); // Clean up the interval on component unmount
+    loadBudgetedValues(device?.id || defaultSelectedDevice?.id);
+    loadDeviceSettingstData(device?.id || defaultSelectedDevice?.id);
   }, [device,defaultSelectedDevice]);
 
 
 
   const loadDeviceStatus = async (userId,deviceId) => {
     const result = await getDeviceStatus(userId,deviceId);
-    console.log('Result 12121212', result);
+    // console.log('Result 12121212', result);
     if (result.status === 200) {
       setDeviceDetails(result.data[0]);
     }
   };
+
+  
+
+
+  const loadDeviceSettingstData = async (deviceId) => {
+    const result = await get_DeviceSettingsByDeviceId(deviceId);
+    console.log("deviceSetting", result);
+    const deviceSetting = result.data;
+    console.log("--deviceSetting--", deviceSetting);
+    setLineOne(deviceSetting.l1);
+    setLineTwo(deviceSetting.l2);
+    setLineThree(deviceSetting.l3);
+
+  }
 
   // useEffect(() => {
   //   if (device) {
@@ -118,9 +136,9 @@ const Home = () => {
       <div className='device-active-2'>
         <div className="dropdown" style={{ marginLeft: '10px' }}>
           <select className="dropdown-line">
-            <option value="L1">Line-1</option>
-            <option value="L2">Line-2</option>
-            <option value="L3">Line-3</option>
+            <option value="L1">{lineOne}</option>
+            <option value="L2">{lineTwo}</option>
+            <option value="L3">{lineThree}</option>
           </select>
         </div>
       </div>

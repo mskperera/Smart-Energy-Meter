@@ -93,7 +93,7 @@ setDevice(defaultSelctedDevie);
  
         const result=await get_DeviceSettingsByDeviceId(deviceId);
        // setDeviceSettings(result.data);
-       console.log("test",result);
+       console.log("test - test",result);
        const deviceSetttings=result.data;
        setConsumerCategoryselectedValue(deviceSetttings.consumerCategoryId);
        setSupplierselectedValue(deviceSetttings.supplierId);
@@ -109,7 +109,7 @@ setDevice(defaultSelctedDevie);
  
         const result=await getConnectionSettingsByDeviceId(deviceId);
        // setDeviceSettings(result.data);
-       console.log("test",result);
+       console.log("test111111111",result);
        const deviceSetttings=result.data;
        setEditedDeviceName(deviceSetttings.deviceName);
        setEditedConnection(deviceSetttings.connection);
