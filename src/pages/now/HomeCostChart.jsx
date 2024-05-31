@@ -7,11 +7,15 @@ import { useSelector } from 'react-redux';
 
 ChartJS.register(ArcElement, Tooltip);
 
-const HomeCostChart = ({ selectedDevice, budgetedValueAmount }) => {
+const HomeCostChart = ({ selectedDevice, budgetedValueAmount, selectedLine }) => {
+  const [device, setDevice] = useState('');
   const deviceNames = useSelector((state) => state.device.dropDeviceList);
   const defaultSelectedDevice = deviceNames[0];
 
-  const [device, setDevice] = useState(defaultSelectedDevice);
+  useEffect(() => {
+    setDevice(defaultSelectedDevice);
+  }, [deviceNames]);
+
   const [obj, setObj] = useState({
     maxValue: budgetedValueAmount,
     minValue: 0,
@@ -20,10 +24,6 @@ const HomeCostChart = ({ selectedDevice, budgetedValueAmount }) => {
   });
 
   const [remainingValue, setRemainingValue] = useState(budgetedValueAmount);
-
-  useEffect(() => {
-    setDevice(defaultSelectedDevice);
-  }, [deviceNames]);
 
   useEffect(() => {
     setObj((prevObj) => ({
@@ -36,24 +36,13 @@ const HomeCostChart = ({ selectedDevice, budgetedValueAmount }) => {
     setRemainingValue(obj.maxValue - obj.currentValue);
   }, [obj.currentValue, obj.maxValue]);
 
-  // useEffect(() => {
-  //   loadChartData();
-  // }, [selectedDevice]);
-
-
   useEffect(() => {
-    // const userData = localStorage.getItem('userData');
-    // const userId = JSON.parse(userData).userId;
-
     const intervalId = setInterval(() => {
-      // if (device)
-        loadChartData();
-      // loadBudgetedValues(device?.id || defaultSelectedDevice?.id);
+      loadChartData();
     }, 5000);
 
     return () => clearInterval(intervalId);
-  }, [device,defaultSelectedDevice]);
-
+  }, [device, defaultSelectedDevice, selectedLine]);
 
   const loadChartData = async () => {
     const payload = {
@@ -62,12 +51,30 @@ const HomeCostChart = ({ selectedDevice, budgetedValueAmount }) => {
     };
     const result = await getEngergyUsageNow(payload);
     console.log('result222222', result);
-    const { usageBill } = result.data;
-    setObj((prevObj) => ({
-      ...prevObj,
-      currentValue: usageBill
-    }));
-  }
+
+    if (device.deviceTypeId === 1) {
+      const { usageBill, usageBill2, usageBill3 } = result.data;
+      const totalUsageBill = (usageBill || 0) + (usageBill2 || 0) + (usageBill3 || 0);
+      setObj((prevObj) => ({
+        ...prevObj,
+        currentValue: totalUsageBill,
+      }));
+    } else if (device.deviceTypeId === 2) {
+      const { usageBill, usageBill2, usageBill3 } = result.data;
+      let selectedUsageBill = usageBill;
+      if (selectedLine === 'L1') {
+        selectedUsageBill = usageBill;
+      }else if (selectedLine === 'L2') {
+        selectedUsageBill = usageBill2;
+      } else if (selectedLine === 'L3') {
+        selectedUsageBill = usageBill3;
+      }
+      setObj((prevObj) => ({
+        ...prevObj,
+        currentValue: selectedUsageBill,
+      }));
+    }
+  };
 
   const data = {
     labels: ['Used Amount', `Remaining Rs: ${remainingValue ? remainingValue.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0}`],
@@ -75,7 +82,7 @@ const HomeCostChart = ({ selectedDevice, budgetedValueAmount }) => {
       {
         data: [obj.currentValue, remainingValue],
         backgroundColor: [
-          obj.currentValue > obj.maxValue ? '#ff0000' : '#ff0066', 
+          obj.currentValue > obj.maxValue ? '#ff0000' : '#ff0066',
           '#F5F5DC'
         ],
         circumference: 270,
@@ -108,11 +115,10 @@ const HomeCostChart = ({ selectedDevice, budgetedValueAmount }) => {
       ctx.font = '15px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.fillText("Budget", xCenter, yCenter - 90);
-      
       ctx.font = '25px Trebuchet MS';
       ctx.fillText(`Rs ${data.datasets[0].budgetedValueAmount}`, xCenter, yCenter - 60);
     }
-  }
+  };
 
   const options = {
     plugins: {

@@ -35,7 +35,7 @@ const dispatch=useDispatch();
   console.log('deviceDetails', result);
   
   if (result.status === 200) {
-    const devices = result.data.map(device => ({ id: device.deviceId, name: device.deviceName }));
+    const devices = result.data.map(device => ({ id: device.deviceId, deviceTypeId: device.deviceTypeId, name: device.deviceName }));
     console.log('devices12123313',devices);
      setDeviceNames(devices);
    dispatch(setDropDevices({dropDeviceList:devices}));

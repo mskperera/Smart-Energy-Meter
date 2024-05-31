@@ -1,26 +1,22 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { getEngergyUsageNow } from '../../action/device';
 import './Homechart.css';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
-import { getBudgetedValues } from '../../action/deviceSettings';
 import { useSelector } from 'react-redux';
 
 ChartJS.register(ArcElement, Tooltip);
 
 const HomeChart = ({ selectedDevice, budgetedValues }) => {
-  // const [budgetedValues, setBudgetedValues] = useState('');
-
+  // const deviceType = 1;  
 
   const [device, setDevice] = useState('');
-
   const deviceNames = useSelector((state) => state.device.dropDeviceList);
   const defaultSelctedDevie = deviceNames[0];
 
   useEffect(() => {
     setDevice(defaultSelctedDevie);
   }, [deviceNames]);
-  
 
   const [objKw, setObjKw] = useState({
     maxKwValue: budgetedValues,
@@ -36,32 +32,20 @@ const HomeChart = ({ selectedDevice, budgetedValues }) => {
     setObjKw((prevObj) => ({
       ...prevObj,
       maxKwValue: budgetedValues,
-    }));  
+    }));
   }, [budgetedValues]);
 
   useEffect(() => {
     setRemainingKwValue(objKw.maxKwValue - objKw.currentKwValue);
   }, [objKw.currentKwValue, objKw.maxKwValue]);
 
-  // useEffect(() => {
-  //   loadChartData();
-  // }, [selectedDevice]);
-
-
   useEffect(() => {
-    // const userData = localStorage.getItem('userData');
-    // const userId = JSON.parse(userData).userId;
-
     const intervalId = setInterval(() => {
-      // if (device)
-        loadChartData();
-      // loadBudgetedValues(device?.id || defaultSelectedDevice?.id);
+      loadChartData();
     }, 5000);
 
-    return () => clearInterval(intervalId); 
-  }, [device,defaultSelctedDevie]);
-
- 
+    return () => clearInterval(intervalId);
+  }, [device, defaultSelctedDevie]);
 
   const loadChartData = async () => {
     const payload = {
@@ -69,15 +53,22 @@ const HomeChart = ({ selectedDevice, budgetedValues }) => {
       mesurementUnitId: 1,
     };
     const result = await getEngergyUsageNow(payload);
-    const { kwh } = result.data;
-    console.log('kwh', result);
-    setObjKw((prevObj) => ({
-      ...prevObj,
-      currentKwValue: kwh,
-    }));
+    console.log('result11111', result.data);
 
-
-    // setObjKw({ ...objKw, currentKwValue: kwh });
+    if (device.deviceTypeId === 1) {
+      const { kwh } = result.data;
+      setObjKw((prevObj) => ({
+        ...prevObj,
+        currentKwValue: kwh,
+      }));
+    } else if (device.deviceTypeId === 2) {
+      const { kwh, kwh2, kwh3 } = result.data;
+      const totalKwh = (kwh || 0) + (kwh2 || 0) + (kwh3 || 0);
+      setObjKw((prevObj) => ({
+        ...prevObj,
+        currentKwValue: totalKwh,
+      }));
+    }
   };
 
   const data = {
@@ -85,7 +76,6 @@ const HomeChart = ({ selectedDevice, budgetedValues }) => {
     datasets: [
       {
         data: [objKw.currentKwValue, remaningkwvalue],
-        // backgroundColor: ['#00ff99', '#F5F5DC'],
         backgroundColor: [objKw.currentKwValue > objKw.maxKwValue ? '#ff0000' : '#00ff99', '#F5F5DC'],
         circumference: 270,
         rotation: 225,
@@ -146,7 +136,6 @@ const HomeChart = ({ selectedDevice, budgetedValues }) => {
 
   return (
     <div className='text-p'>
-      {/* {JSON.stringify(budgetedValues)} */}
       <Doughnut data={data} options={options} plugins={[gaugeText]} id='box3' className='chart' />
     </div>
   );
