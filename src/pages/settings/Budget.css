@@ -12,6 +12,12 @@
     background-color:rgb(186, 153, 217);
 }
 
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 
   /* .bodyb {
     margin-top: 20px;

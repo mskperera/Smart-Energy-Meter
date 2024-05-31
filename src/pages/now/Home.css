@@ -1,13 +1,9 @@
 .page{
-    width: 100%;
-    /* margin-top: 50px; */
-    justify-content:center;
-    align-items: center;
     display: flex;
-    /* background-color:#05052a; */
-
-    /* position: absolute; */
-    height: 61vh;
+    justify-content: space-between;
+    align-items: center;
+  
+    min-height: 68vh;
 }
 
 .navnav1{
@@ -70,6 +66,7 @@
 .chart-area{
     flex: 1;
     width: 100%;
+    
     display: flex;
     /* position: absolute; */
     justify-content:center;
@@ -82,29 +79,22 @@
 }
 
 .chart-now-kw{
-    flex: 1;
-    width: 30%;
-    display: flex;
-    /* position: absolute; */
-    justify-content:center;
-    align-items: center;
-    margin: 0%;
-    flex-direction: column;
-    padding: 1rem;
-    margin-top: 0px;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
 }
 
 .chart-now-cost{
-    flex: 1;
-    width: 30%;
-    display: flex;
-    /* position: absolute; */
-    justify-content: center;
-    align-items: center;
-    margin: 0%;
-    flex-direction: column;
-    padding: 1rem;
-    margin-top: 0px;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  margin-left: 8rem;
 }
 
 /* .bottom{
@@ -156,6 +146,27 @@
     margin-top: 25px;
 }
 
+.device-active-2{
+    display: flex;
+    /* position: absolute; */
+    width: fit-content;
+    padding: 2px 15px 0px 5px;
+    height: 30px;
+    color: #ff0066;
+    align-items: center;
+    margin-left: 20px;
+    border-radius: 10px;
+    justify-content: center;
+    background:  rgba(11, 11, 11, 0.5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+    margin-top: 10px;
+}
+
+.dropdown-line{
+    background: rgba(255, 255, 255, 0.845);
+    
+}
+
 .device-name{
     justify-content: center;
     align-items: center;
@@ -173,9 +184,45 @@
     width: 15px;
     height: 15px;
     border-radius: 25px;
-    margin-left: -20px;
-    background-color: red;
+    margin-left: -10px;
+    margin-top: -10px;
+    /* background-color: red; */
 }
+
+.curcle-name{
+    /* position: relative; */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 15px;
+    height: 15px;
+    border-radius: 25px;
+    margin-left: 10px;
+    margin-top: -15px;
+    /* background-color: red; */
+
+}
+
+.both{
+margin-top: 10px;
+padding-right: 10px;
+}
+
+.curcle-online {
+    background-color: rgb(2, 223, 2);
+  }
+  
+  .curcle-offline {
+    background-color: red;
+  }
+
+  .device-status.online {
+    color: rgb(2, 223, 2);
+  }
+  
+  .device-status.offline {
+    color: red;
+  }
 
 .page-bottom div{
     width: 210px;
@@ -332,7 +379,7 @@
         height: 15px;
         border-radius: 25px;
         margin-left: -20px;
-        background-color: red;
+        /* background-color: red; */
     }
     
 }
@@ -571,8 +618,10 @@
         height: 15px;
         border-radius: 25px;
         margin-left: 0px;
-        background-color: red;
+        /* background-color: red; */
     }
+
+   
 
 }
 
@@ -618,14 +667,15 @@
     }
 
     .chart-now-cost{
+        flex: 1;
+  
+        display: flex;
         width: 300px;
-        margin-top: 0px;
         align-items: center;
         justify-content: center;
-        margin-bottom: 0px;
-        margin-right: 0px;
-        margin-top: 15px;
-    }
+      
+        margin-left: 0rem;
+      }
 
     .chart-now-kw{
         margin-top: -50px;
@@ -689,8 +739,8 @@
         align-items: center;
         justify-content: space-between;
         margin: 0%;
-        margin-top: -20px;
-        height: 115vh;
+        margin-top: 0px;
+        height: 80vh;
     }
 
     .chart-kw{
@@ -717,7 +767,7 @@
         margin: 0%;
         flex-direction: column;
         padding: 0rem;
-        margin-top: 10px;
+        margin-top: 0px;
         margin-left: 0px;
     }
 
@@ -830,7 +880,7 @@
         height: 15px;
         border-radius: 25px;
         margin-left: -20px;
-        background-color: red;
+        /* background-color: red; */
     }
 
     }
@@ -847,14 +897,14 @@
             margin: 0%;
             flex-direction: column;
             padding: 0rem;
-            margin-top: 10px;
+            margin-top: 0px;
             margin-left: 0px;
         }
 
         .page-bottom div{
             width: 100%;
-            margin-top: 0px;
-            margin-bottom: 10px;
+            margin-top: 10px;
+            margin-bottom: 0px;
             padding: 1px;
             flex: 1;
             justify-content: space-between;
@@ -878,7 +928,7 @@
 
         .chart-now-cost{
             width: 100%;
-            margin-top:10px;
+            margin-top:-10px;
             align-items: center;
             justify-content: center;
             margin-bottom: 0px;
@@ -907,4 +957,111 @@
             margin-left: 0px;
         }
     }
+
+    @media screen and (max-width: 375px) {
+        .page {
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0%;
+            margin-top: 0px;
+            height:90vh; 
+        }
+    
+         .chart-area, .chart-now-cost, .chart-now-kw {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0%;
+            flex-direction: column;
+            padding: 0;
+            margin-top: 10px;
+            margin-left: 0px;
+        }
+    
+        .page-bottom {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            margin: 0%;
+            margin-top: 10px;
+            flex-direction: column;
+            margin-bottom: 0px;
+        }
+    
+        .txt {
+            margin-left: 0;
+            margin-top: -25px;
+            font-size: 12px;
+            text-align: center; /* Center the text */
+        }
+    
+        .txt1 {
+            font-size: 14px;
+            text-align: center; /* Center the text */
+        }
+    
+        .page-bottom div {
+            width: 100%;
+            margin-top: 0px;
+            margin-bottom: 10px;
+            padding: 1px;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .page-bottom .vol, .page-bottom .pow {
+            width: 150px;
+            flex: 1;
+            align-items: center;
+        }
+    
+        .body2 {
+            width: 100%;
+            z-index: 1;
+            border-collapse: collapse;
+            margin-top: 20px;
+            padding-top: 30px;
+            padding-bottom: 60px;
+            overflow-y: auto;
+            height: calc(100vh - 80px - 60px);
+        }
+    
+        .device-active {
+            width: fit-content;
+            padding: 0px 15px;
+            height: 40px;
+            color: #ff0066;
+            align-items: center;
+            border-radius: 10px;
+            justify-content: center;
+            background: rgba(11, 11, 11, 0.5);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+            margin-top: 25px;
+        }
+    
+        .device-name {
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            display: flex;
+            margin-top: 42px;
+            margin-left: 5px;
+        }
+        .curcle {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-left: 0px;
+            /* background-color: red; */
+        }
+    }
+    
+
+    
 

@@ -351,9 +351,9 @@ function BillingSession() {
   return (
     <div className='home'>
       <Navbar className='navnav' onChangeDevice={onChangeDeviceHandler}/>
-      <div className='body d-flex align-items-center justify-content-center w-100'>
-        <div className='notification2'>
-          <div className='rounded p-2'>
+      <div className='body w-100'>
+        <div className='notification2 '>
+          <div className=''>
             <h3 className='d-flex align-items-center justify-content-center mb-3'>Billing Session</h3>
             {billingSession && billingSession.map((session) => (
               <div key={session.id}>
@@ -393,6 +393,8 @@ function BillingSession() {
                           }
                         </div>
                       </div>
+                      
+                          
                       <div className='form-group row mb-1'>
                         <label htmlFor='units' className='col-sm-4 col-form-label'>Units kW</label>
                         <div className='col-sm-8'>

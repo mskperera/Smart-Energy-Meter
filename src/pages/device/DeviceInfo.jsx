@@ -29,7 +29,8 @@ const DeviceInfo = () => {
   useEffect(() => {
 
     // if(device){
-      const userId=1;
+      const userData = localStorage.getItem('userData');
+      const userId = JSON.parse(userData).userId;
       loadDeviceInfoByUserId(userId);
     // }
 }, [device]);

@@ -265,11 +265,17 @@ export const getDevicesByUserId= async (userId) => {
   }
 }
 
-export const getDeviceStatus= async (userId,deviceId=null) => {
+export const getDeviceStatus = async (userId, deviceId = null) => {
   try {
-    console.log('getDeviceStatus',userId);
+    const queryParams = new URLSearchParams({ userId });
+    if (deviceId !== null) {
+      queryParams.append('deviceId', deviceId);
+    }
+
+    const queryString = queryParams.toString();
+    
     return await customAxios
-      .get(`/device/getDeviceStatus?userId=${userId}&deviceId=${deviceId}`, {
+      .get(`/device/getDeviceStatus?${queryString}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -283,4 +289,7 @@ export const getDeviceStatus= async (userId,deviceId=null) => {
   } catch (err) {
     return err;
   }
-}
+};
+
+// All device 
+//deviceId=0

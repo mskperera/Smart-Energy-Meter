@@ -32,7 +32,10 @@ function Status() {
 
   useEffect(() => {
 
-    const userId = 1;
+    // const userId = 1;
+    const userData = localStorage.getItem('userData');
+    const userId = JSON.parse(userData).userId;
+    // const deviceId = 4;
     loadDeviceStatus(userId);
   
   }, [device]);

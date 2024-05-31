@@ -93,7 +93,7 @@ setDevice(defaultSelctedDevie);
  
         const result=await get_DeviceSettingsByDeviceId(deviceId);
        // setDeviceSettings(result.data);
-       console.log("test",result);
+       console.log("test - test",result);
        const deviceSetttings=result.data;
        setConsumerCategoryselectedValue(deviceSetttings.consumerCategoryId);
        setSupplierselectedValue(deviceSetttings.supplierId);
@@ -109,7 +109,7 @@ setDevice(defaultSelctedDevie);
  
         const result=await getConnectionSettingsByDeviceId(deviceId);
        // setDeviceSettings(result.data);
-       console.log("test",result);
+       console.log("test111111111",result);
        const deviceSetttings=result.data;
        setEditedDeviceName(deviceSetttings.deviceName);
        setEditedConnection(deviceSetttings.connection);
@@ -208,9 +208,11 @@ const deviceId=device.id || defaultSelctedDevie.id;
 }
 
 useEffect(() => {
-    const deviceId=4;
+    if(device){
+        const deviceId=device.id || defaultSelctedDevie.id;
     loadOperationalLimitByDeviceId(deviceId);
-},[]);
+    }
+}, [load,device]);
 
 
 const loadOperationalLimitByDeviceId = async (deviceId) => {
@@ -272,7 +274,7 @@ const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActiv
           };
        
       const res = await saveOperationalLimit(payload);
-      console.log(res);
+    //   console.log(res);
       const { responseStatus, outputMessage } = res.data;
       if (responseStatus === "failed") {
         setErrorMessage(outputMessage)
@@ -386,214 +388,454 @@ const payload = {
 
 
   return (
-    <div className='home'>
-    <Navbar onChangeDevice={onChangeDeviceHandler}/> 
-    <div className='tab d-flex align-items-center justify-content-center'>
-        <div className='back2'>
-            <ul className='tab-links nav nav-pills' id='v-pills-tab' role='tablist'>
-                <li onClick={()=>updateToggle(1)} className='nav-link active' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Budget</li>
-                <li onClick={()=>updateToggle(2)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/service">Tariff </li>
-                <li onClick={()=>updateToggle(3)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Connection</li>
-                <li onClick={()=>updateToggle(4)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Notification </li>
-                <li onClick={()=>updateToggle(5)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">About</li>
-                <li onClick={()=>updateToggle(6)} className='nav-link' id='v-pills-service-tab' data-bs-toggle='pill' data-bs-targrt="/connection">Device</li>
-            </ul>
+    <div className="home">
+      <Navbar onChangeDevice={onChangeDeviceHandler} />
+      <div className="tab d-flex align-items-center justify-content-center">
+        <div className="back2">
+          <ul
+            className="tab-links nav nav-pills"
+            id="v-pills-tab"
+            role="tablist"
+          >
+            <li
+              onClick={() => updateToggle(1)}
+              className="nav-link active"
+              id="v-pills-service-tab"
+              data-bs-toggle="pill"
+              data-bs-targrt="/service"
+            >
+              Budget
+            </li>
+            <li
+              onClick={() => updateToggle(2)}
+              className="nav-link"
+              id="v-pills-service-tab"
+              data-bs-toggle="pill"
+              data-bs-targrt="/service"
+            >
+              Tariff{" "}
+            </li>
+            <li
+              onClick={() => updateToggle(3)}
+              className="nav-link"
+              id="v-pills-service-tab"
+              data-bs-toggle="pill"
+              data-bs-targrt="/connection"
+            >
+              Connection
+            </li>
+            <li
+              onClick={() => updateToggle(4)}
+              className="nav-link"
+              id="v-pills-service-tab"
+              data-bs-toggle="pill"
+              data-bs-targrt="/connection"
+            >
+              Notification{" "}
+            </li>
+            <li
+              onClick={() => updateToggle(5)}
+              className="nav-link"
+              id="v-pills-service-tab"
+              data-bs-toggle="pill"
+              data-bs-targrt="/connection"
+            >
+              About
+            </li>
+            <li
+              onClick={() => updateToggle(6)}
+              className="nav-link"
+              id="v-pills-service-tab"
+              data-bs-toggle="pill"
+              data-bs-targrt="/connection"
+            >
+              Device
+            </li>
+          </ul>
         </div>
-    </div>          
+      </div>
 
+      <div className={toggle === 1 ? "show-content" : "content"}>
+        <div className="body d-flex align-items-center justify-content-center w-100">
+          <Budget />
+        </div>
+      </div>
 
+      <div className={toggle === 2 ? "show-content" : "content"}>
+        <div className="body d-flex align-items-center justify-content-center">
+          <div className="service">
+            <h3 className="d-flex align-items-center justify-content-center mb-3">
+              Tarrif Settings
+            </h3>
 
-                    <div className={toggle === 1 ? "show-content" : "content"}>
-                        <div className='body d-flex align-items-center justify-content-center w-100'>
-                            <Budget/>
-                        </div>
-                    </div>  
+            <form className="needs-valid</div>ation">
+              <div className="form-group mb-2">
+                {/* {JSON.stringify(dropoptionsConsumerSubCatogery)} */}
+                <label htmlFor="consumerCategoryId" className="form-label">
+                  Consumer Category
+                </label>
+                <select
+                  onChange={(e) =>
+                    // console.log("consumer category",e.target.value)
+                    setConsumerCategoryselectedValue(e.target.value)
+                  }
+                  value={consumerCategoryselectedValue}
+                  name="consumerCategoryId"
+                  className="form-control"
+                >
+                  {dropoptionsConsumerCatogery.map((d) => (
+                    <option
+                      key={d.consumerCategoryId}
+                      value={d.consumerCategoryId}
+                    >
+                      {d.consumerCategoryName}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
+              {/* {JSON.stringify(consumerCategoryselectedValue)} */}
+              {dropoptionsConsumerSubCatogery.length > 0 && (
+                <div className="form-group mb-2">
+                  <label htmlFor="ConsumerSubCategoryId" className="form-label">
+                    Consumer SubCategory
+                  </label>
+                  <select
+                    onChange={(e) =>
+                      setConsumerSubCategoryselectedValue(e.target.value)
+                    }
+                    value={consumerSubCategoryselectedValue}
+                    name="ConsumerSubCategoryId"
+                    className="form-control"
+                  >
+                    {dropoptionsConsumerSubCatogery.length > 0 &&
+                      dropoptionsConsumerSubCatogery.map((s) => (
+                        <option
+                          key={s.ConsumerSubCategoryId}
+                          value={s.ConsumerSubCategoryId}
+                        >
+                          {s.ConsumerSubCategoryName}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+              )}
 
+              <div className="form-group mb-2">
+                <label htmlFor="supplierId" className="form-label">
+                  Supplier
+                </label>
+                <select
+                  onChange={(e) => setSupplierselectedValue(e.target.value)}
+                  value={supplierSelectedValue}
+                  name="supplierId"
+                  className="form-control "
+                >
+                  {dropoptionsSupplier.map((r) => (
+                    <option key={r.supplierId} value={r.supplierId}>
+                      {r.supplierName}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-                    <div className={toggle === 2 ? "show-content" : "content"}>
-                      <div className='body d-flex align-items-center justify-content-center'>
-                        <div className='service'>
-                            <h3 className='d-flex align-items-center justify-content-center mb-3'>Tarrif Settings</h3>
-                         
-                            <form className='needs-valid</div>ation' >
-                                <div className='form-group mb-2'>
-                                    {/* {JSON.stringify(dropoptionsConsumerSubCatogery)} */}
-                                    <label htmlFor='consumerCategoryId' className='form-label'>Consumer Category</label>
-                                        <select onChange={(e)=>
-                                            // console.log("consumer category",e.target.value)
-                                            setConsumerCategoryselectedValue(e.target.value) 
-                                        } value={consumerCategoryselectedValue} name="consumerCategoryId" className='form-control'>
-                                        {dropoptionsConsumerCatogery.map(d=>(
-                                            <option key={d.consumerCategoryId} value={d.consumerCategoryId}>{d.consumerCategoryName}</option>
-                                        ))}            
-                                        </select>   
-                                </div>
+              <div className="form-group mb-2">
+                <label htmlFor="supplytype" className="form-label">
+                  Supply Type
+                </label>
+                <select
+                  onChange={(e) => setSupplyTypeselectedValue(e.target.value)}
+                  value={supplyTypeSelectedValue}
+                  name="supplyTypeId"
+                  className="form-control"
+                >
+                  {dropoptionsSupplyType.map((t) => (
+                    <option key={t.supplyTypeId} value={t.supplyTypeId}>
+                      {t.supplyTypeName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {/* {JSON.stringify(supplyTypeSelectedValue)} */}
 
+              <button
+                type="button"
+                className="btn btn-primary w-100 mt-2"
+                onClick={addUpdateDeviceSettings}
+              >
+                Save
+              </button>
 
-                {/* {JSON.stringify(consumerCategoryselectedValue)} */}
-                               {dropoptionsConsumerSubCatogery.length>0 &&  <div className='form-group mb-2'>
-                                    <label htmlFor='ConsumerSubCategoryId' className='form-label'>Consumer SubCategory</label>
-                                        <select onChange={(e)=>
-                                            setConsumerSubCategoryselectedValue(e.target.value)
-                                        }value={consumerSubCategoryselectedValue} name="ConsumerSubCategoryId" className='form-control'>
-                                            {dropoptionsConsumerSubCatogery.length>0 && dropoptionsConsumerSubCatogery.map(s=>(
-                                            <option key={s.ConsumerSubCategoryId} value={s.ConsumerSubCategoryId}>{s.ConsumerSubCategoryName}</option>
-                                        ))}
-                                        </select>
-                                </div>}
-                
+              {/* {message && <p>{message}</p>} */}
+              {errormessage && <p>{errormessage}</p>}
+            </form>
+          </div>
+        </div>
+      </div>
 
-                                <div className='form-group mb-2'>
-                                    <label htmlFor='supplierId' className='form-label'>Supplier</label>
-                                        <select onChange={(e)=>
-                                            setSupplierselectedValue(e.target.value)
-                                        }value={supplierSelectedValue} name="supplierId" className='form-control '>
-                                            {dropoptionsSupplier.map(r=>(
-                                            <option key={r.supplierId} value={r.supplierId}>{r.supplierName}</option>
-                                                                                ))}
-                                                                                </select>
-                                                                        </div>
-                                                      
+      <div className={toggle === 3 ? "show-content" : "content"}>
+        <div className="body d-flex align-items-center justify-content-center ">
+          <div className="connection">
+            <h3 className="d-flex align-items-center justify-content-center mb-3">
+              Connection Settings
+            </h3>
+            <form className="needs-validation">
+              <div className="form-group mb-2">
+                <div className="form-group mb-2"></div>
+                {/* {JSON.stringify(editedDeviceName)} */}
+                <label htmlFor="devicename" className="form-label">
+                  Device Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={editedDeviceName}
+                  onChange={(e) => setEditedDeviceName(e.target.value)}
+                />
+              </div>
 
-                                                                        <div className='form-group mb-2'>
-                                                                            <label htmlFor='supplytype' className='form-label'>Supply Type</label>
-                                                                            <select onChange={(e)=>
-                                                                                    setSupplyTypeselectedValue(e.target.value)
-                                                                                }value={supplyTypeSelectedValue} name="supplyTypeId" className='form-control'>
-                                                                                    {dropoptionsSupplyType.map(t=>(
-                                                                                    <option key={t.supplyTypeId} value={t.supplyTypeId}>{t.supplyTypeName}</option>
-                                                                                ))}
-                                                                                </select>
-                                                                        </div>
-                                                        {/* {JSON.stringify(supplyTypeSelectedValue)} */}
-                                                                        
-                                                                        <button type='button' className='btn btn-primary w-100 mt-2' onClick={addUpdateDeviceSettings}>Save</button>
+              <div className="form-group mb-2">
+                <label htmlFor="connection" className="form-label">
+                  Connection
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={editedConnection}
+                  onChange={(e) => setEditedConnection(e.target.value)}
+                />
+              </div>
 
-                                                                        {/* {message && <p>{message}</p>} */}
-                                                                        {errormessage && <p>{errormessage}</p>}
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        
+              <div className="form-group mb-2">
+                <label htmlFor="port" className="form-label">
+                  Port
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={editedPortNo}
+                  onChange={(e) => setEditedPortNo(e.target.value)}
+                />
+              </div>
 
-                                                        <div className={toggle === 3 ? "show-content" : "content"}>
-                                                             <div className='body d-flex align-items-center justify-content-center '>
-                                                                <div className='connection'>
-                                                                    <h3 className='d-flex align-items-center justify-content-center mb-3'>Connection Settings</h3>
-                                                                    <form className='needs-validation' >
-                                                                        <div className='form-group mb-2'>
-                                                                            <div className='form-group mb-2'></div>
-                                                                            {/* {JSON.stringify(editedDeviceName)} */}
-                                                                            <label htmlFor='devicename' className='form-label'>Device Name</label>
-                                                                            <input type='text' className='form-control' value={editedDeviceName}
-                                                                             onChange={(e) => setEditedDeviceName(e.target.value)} />
-                                                                        </div>
+              <button
+                type="button"
+                className="btn btn-primary w-100 mt-2"
+                onClick={saveConnectionSettingsHandler}
+              >
+                Save
+              </button>
 
-                                                                        <div className='form-group mb-2'>
-                                                                            <label htmlFor='connection' className='form-label'>Connection</label>
-                                                                            <input type='text' className='form-control'value={editedConnection}
-                                                                             onChange={(e) => setEditedConnection(e.target.value)}/>
-                                                                        </div>
+              {/* {message && <p>{message}</p>} */}
+              {errormessage && <p>{errormessage}</p>}
+            </form>
+          </div>
+        </div>
+      </div>
 
-                                                                        <div className='form-group mb-2'>
-                                                                            <label htmlFor='port' className='form-label'>Port</label>
-                                                                            <input type='text' className='form-control'value={editedPortNo}
-                                                                             onChange={(e) => setEditedPortNo(e.target.value)}/>
-                                                                        </div>
-                                                                        
-                                                                        <button type='button' className='btn btn-primary w-100 mt-2' onClick={ saveConnectionSettingsHandler}>Save</button>
+      <div className={toggle === 4 ? "show-content" : "content"}>
+        <div className="body d-flex align-items-center justify-content-center w-100">
+          <div className="notification">
+            <h3 className="d-flex align-items-center justify-content-center mb-1">
+              Device Preferences and Settings
+            </h3>
+            <form className="need-validation">
+              <h5 className="d-flex align-items-center justify-content-center mb-1">
+                Operational Preferences
+              </h5>
+              <div className="form-group mb-1">
+                <div className="form-group">
+                  <div className="form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      checked={operationalDataBill.isActive}
+                      onChange={(e) => {
+                        setOperationalDataBill({
+                          ...operationalDataBill,
+                          isActive: !operationalDataBill.isActive,
+                        });
+                      }}
+                      id="check5"
+                    />
 
-                                                                        {/* {message && <p>{message}</p>} */}
-                                                                        {errormessage && <p>{errormessage}</p>}
-                                                                    </form>
-                                                                </div>
-                                                               </div>
-                                                            </div>
-           
+                    <label className="form-check-label" htmlFor="check5">
+                      Notify me when Bill reaches
+                    </label>
 
-                                                            <div className={toggle === 4 ? "show-content" : "content"}>
-                                                                <div className='body d-flex align-items-center justify-content-center w-100'>
-                                                                    <div className='notification'>
-                                                                        <h3 className='d-flex align-items-center justify-content-center mb-1'>Device Preferences and Settings</h3>
-                                                                        <form className='need-validation'>
-                                                                        <h5 className='d-flex align-items-center justify-content-center mb-1'>Operational Preferences</h5>
-                                                                        <div className="form-group mb-1">
-                                                                                <div className="form-group">
-                                                                                    <div className="form-check">
-                                                                                         <input type="checkbox"  className="form-check-input" checked={operationalDataBill.isActive} onChange={(e)=>{
-                                                                                         
-                                                                                            setOperationalDataBill({...operationalDataBill,isActive:!operationalDataBill.isActive})}} id="check5"/>
+                    <input
+                      disabled={!operationalDataBill.isActive}
+                      type="text"
+                      className="form-control"
+                      placeholder="Rs"
+                      value={operationalDataBill.thresholdAmount_max}
+                      onChange={(e) =>
+                        setOperationalDataBill({
+                          ...operationalDataBill,
+                          thresholdAmount_max: e.target.value,
+                        })
+                      }
+                    />
+                    {/* {JSON.stringify(operationalDataBill.isActive)} */}
+                  </div>
+                </div>
+              </div>
 
-                                                                                         <label className="form-check-label" htmlFor="check5">Notify me when Bill reaches</label>
-                                                                                   
-                                                                                         <input disabled={!operationalDataBill.isActive} type='text' className='form-control' placeholder='Rs' value={operationalDataBill.thresholdAmount_max} onChange={(e) => setOperationalDataBill({...operationalDataBill,thresholdAmount_max:e.target.value})}/>
-                                                                                         {/* {JSON.stringify(operationalDataBill.isActive)} */}
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+              <div className="form-group mb-1">
+                <div className="form-group">
+                  <div className="form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      checked={operationalKwMax.isActive}
+                      onChange={(e) => {
+                        setOperationalKwMax({
+                          ...operationalKwMax,
+                          isActive: !operationalKwMax.isActive,
+                        });
+                      }}
+                      id="check7"
+                    />
+                    <label className="form-check-label" htmlFor="check7">
+                      Notify me when Kwh reaches
+                    </label>
+                    <input
+                      disabled={!operationalKwMax.isActive}
+                      type="text"
+                      className="form-control"
+                      placeholder="kWh"
+                      value={operationalKwMax.thresholdAmount_max}
+                      onChange={(e) =>
+                        setOperationalKwMax({
+                          ...operationalKwMax,
+                          thresholdAmount_max: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
 
-                                                                            <div className="form-group mb-1">
-                                                                                <div className="form-group">
-                                                                                    <div className="form-check">
-                                                                                    <input type="checkbox" className="form-check-input" checked={operationalKwMax.isActive} onChange={(e)=>{setOperationalKwMax({...operationalKwMax,isActive:!operationalKwMax.isActive})}} id="check7"/>
-                                                                                    <label className="form-check-label" htmlFor="check7">Notify me when Kwh reaches</label>
-                                                                                    <input disabled={!operationalKwMax.isActive} type='text' className='form-control' placeholder='kWh' value={operationalKwMax.thresholdAmount_max} onChange={(e) => setOperationalKwMax({...operationalKwMax,thresholdAmount_max:e.target.value})}/>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+              <div className="form-group mb-1">
+                <div className="form-group">
+                  <div className="form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      checked={operationalPowerMax.isActive}
+                      onChange={(e) => {
+                        setOperationalPowerMax({
+                          ...operationalPowerMax,
+                          isActive: !operationalPowerMax.isActive,
+                        });
+                      }}
+                      id="check8"
+                    />
+                    <label className="form-check-label" htmlFor="check8">
+                      Notify me when Power reaches
+                    </label>
+                    <input
+                      disabled={!operationalPowerMax.isActive}
+                      type="text"
+                      className="form-control"
+                      placeholder="W"
+                      value={operationalPowerMax.thresholdAmount_max}
+                      onChange={(e) =>
+                        setOperationalPowerMax({
+                          ...operationalPowerMax,
+                          thresholdAmount_max: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
 
-                                                                            <div className="form-group mb-1">
-                                                                                <div className="form-group">
-                                                                                    <div className="form-check">
-                                                                                    <input type="checkbox" className="form-check-input" checked={operationalPowerMax.isActive} onChange={(e)=> {setOperationalPowerMax({...operationalPowerMax,isActive:!operationalPowerMax.isActive})}} id="check8"/>
-                                                                                    <label className="form-check-label" htmlFor="check8">Notify me when Power reaches</label>
-                                                                                    <input disabled={!operationalPowerMax.isActive} type='text' className='form-control' placeholder='W' value={operationalPowerMax.thresholdAmount_max} onChange={(e) => setOperationalPowerMax({...operationalPowerMax,thresholdAmount_max:e.target.value})}/>
-                                                                                </div>
-                                                                                </div>
-                                                                            </div>
+              <div className="form-group mb-1">
+                <div className="form-group">
+                  <div className="form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      checked={operationalVoltage.isActive}
+                      onChange={(e) => {
+                        setOperationalVoltage({
+                          ...operationalVoltage,
+                          isActive: !operationalVoltage.isActive,
+                        });
+                      }}
+                      id="check6"
+                    />
+                    <label className="form-check-label" htmlFor="check6">
+                      Notify me when Voltage reaches
+                    </label>
+                    <div className="form-row">
+                      <div className="form-group col-md-5.5">
+                        <label htmlFor="max">Max</label>
+                        <input
+                          disabled={!operationalVoltage.isActive}
+                          type="text"
+                          className="form-control"
+                          id="max"
+                          placeholder="Max Value"
+                          value={operationalVoltage.thresholdAmount_max}
+                          onChange={(e) =>
+                            setOperationalVoltage({
+                              ...operationalVoltage,
+                              thresholdAmount_max: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                      <div className="form-group col-md-5.5">
+                        <label htmlFor="min">Min</label>
+                        <input
+                          disabled={!operationalVoltage.isActive}
+                          type="text"
+                          className="form-control"
+                          id="min"
+                          placeholder="Min Value"
+                          value={operationalVoltage.thresholdAmount_min}
+                          onChange={(e) =>
+                            setOperationalVoltage({
+                              ...operationalVoltage,
+                              thresholdAmount_min: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-                                                                            <div className="form-group mb-1">
-                                                                                <div className="form-group">
-                                                                                    <div className="form-check">
-                                                                                        <input type="checkbox" className="form-check-input" checked={operationalVoltage.isActive} onChange={(e)=>{setOperationalVoltage({...operationalVoltage,isActive:!operationalVoltage.isActive})}} id="check6"/>
-                                                                                        <label className="form-check-label" htmlFor="check6">Notify me when Voltage reaches</label>
-                                                                                        <div className="form-row">
-                                                                                            <div className="form-group col-md-5.5">
-                                                                                                <label htmlFor="max">Max</label>
-                                                                                                <input disabled={!operationalVoltage.isActive} type="text" className="form-control" id="max" placeholder="Max Value" value={operationalVoltage.thresholdAmount_max} onChange={(e) => setOperationalVoltage({...operationalVoltage,thresholdAmount_max:e.target.value})}/>
-                                                                                            </div>
-                                                                                            <div className="form-group col-md-5.5">
-                                                                                                <label htmlFor="min">Min</label>
-                                                                                                <input disabled={!operationalVoltage.isActive} type="text" className="form-control" id="min" placeholder="Min Value" value={operationalVoltage.thresholdAmount_min} onChange={(e) => setOperationalVoltage({...operationalVoltage,thresholdAmount_min:e.target.value})}/>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+              <button
+                type="submit"
+                className="btn btn-primary w-100 mt-1"
+                onClick={saveOperationalLimitHandler}
+              >
+                Save
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
 
-                                                                            <button type='submit' className='btn btn-primary w-100 mt-1' onClick={saveOperationalLimitHandler}>Save</button>                    
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+      <div className={toggle === 5 ? "show-content" : "content"}>
+        <div className="body d-flex align-items-center justify-content-center w-100">
+          <AboutDevice />
+        </div>
+      </div>
 
-                                                            <div className={toggle === 5 ? "show-content" : "content"}>
-                                                                <div className='body d-flex align-items-center justify-content-center w-100'>
-                                                                    <AboutDevice/>
-                                                                </div>
-                                                            </div> 
-
-                                                            <div className={toggle === 6 ? "show-content" : "content"}>
-                                                                <div className='body d-flex align-items-center justify-content-center w-100'>
-                                                                    <DeviceTab/>
-                                                                </div>
-                                                            </div> 
-                                                <BottomNav/>
-                                            </div>
-                                          )
-                                        }
+      <div className={toggle === 6 ? "show-content" : "content"}>
+        <div className="body d-flex align-items-center justify-content-center w-100">
+          <DeviceTab />
+        </div>
+      </div>
+      <BottomNav />
+    </div>
+  );
+}
 
 export default Service
 
