@@ -21,85 +21,65 @@ const Home = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [deviceDetails, setDeviceDetails] = useState([]);
   const [budgetedValues, setBudgetedValues] = useState('');
-  const [budgetedValueAmount,setBudgetedValueAmount]=useState('');
+  const [budgetedValueAmount, setBudgetedValueAmount] = useState('');
   const [lineOne, setLineOne] = useState('');
   const [lineTwo, setLineTwo] = useState('');
   const [lineThree, setLineThree] = useState('');
+  const [selectedLine, setSelectedLine] = useState('L1');
 
   const onChangeDeviceHandler = (selectedDevice) => {
     setDevice(selectedDevice);
   };
 
   const deviceNames = useSelector((state) => state.device.dropDeviceList);
+  console.log('device - list - name', deviceNames);
   const defaultSelectedDevice = deviceNames[0];
 
   useEffect(() => {
     setDevice(defaultSelectedDevice);
   }, [deviceNames, defaultSelectedDevice]);
 
-  // useEffect(() => {
-  //   const userData = localStorage.getItem('userData');
-  //   const userId = JSON.parse(userData).userId;
-  //   loadDeviceStatus(userId);
-  // }, [device]);
-
   useEffect(() => {
     const userData = localStorage.getItem('userData');
     const userId = JSON.parse(userData).userId;
 
     const intervalId = setInterval(() => {
-      // if (device)
       loadDeviceStatus(userId);
       loadBudgetedValues(device?.id || defaultSelectedDevice?.id);
     }, 5000);
 
     return () => clearInterval(intervalId); 
-  }, [device,defaultSelectedDevice]);
-
-
+  }, [device, defaultSelectedDevice]);
 
   useEffect(() => {
     loadBudgetedValues(device?.id || defaultSelectedDevice?.id);
     loadDeviceSettingstData(device?.id || defaultSelectedDevice?.id);
-  }, [device,defaultSelectedDevice]);
+  }, [device, defaultSelectedDevice]);
 
-
-
-  const loadDeviceStatus = async (userId,deviceId) => {
-    const result = await getDeviceStatus(userId,deviceId);
-    // console.log('Result 12121212', result);
+  const loadDeviceStatus = async (userId, deviceId) => {
+    const result = await getDeviceStatus(userId, deviceId);
     if (result.status === 200) {
       setDeviceDetails(result.data[0]);
     }
   };
 
-  
-
-
   const loadDeviceSettingstData = async (deviceId) => {
     const result = await get_DeviceSettingsByDeviceId(deviceId);
-    console.log("deviceSetting", result);
     const deviceSetting = result.data;
-    console.log("--deviceSetting--", deviceSetting);
     setLineOne(deviceSetting.l1);
     setLineTwo(deviceSetting.l2);
     setLineThree(deviceSetting.l3);
-
-  }
-
-  // useEffect(() => {
-  //   if (device) {
-  //     const deviceId = device.id || defaultSelctedDevie.id;
-  //     loadBudgetedValues(deviceId);
-  //   }
-  // }, [device]);
+  };
 
   const loadBudgetedValues = async (deviceId) => {
     const result = await getBudgetedValues(deviceId);
     const budgetedValue = result.data;
     setBudgetedValues(budgetedValue.kwhAmount);
     setBudgetedValueAmount(budgetedValue.billAmount);
-    // budgetedValuesRef.current = budgetedValue.kwhAmount;
+  };
+
+  const handleLineChange = (e) => {
+    setSelectedLine(e.target.value);
   };
 
   const selectedDeviceDetails = deviceDetails.find(
@@ -108,64 +88,62 @@ const Home = () => {
 
   return (
     <div className='home'>
-  <Navbar className='navnav' onChangeDevice={onChangeDeviceHandler} />
-  <Menu className='navnav1' />
-  {device && (
-    <div className='body'>
-      
-      <div className='device-active'>
-        {selectedDeviceDetails && (
-          <div className='both' key={selectedDeviceDetails.deviceId}>
-            {/* <div>Device ID: {selectedDeviceDetails.deviceId}</div> */}
-            <div
-              className={`curcle ${selectedDeviceDetails?.deviceStatus === 'online' ? 'curcle-online' : 'curcle-offline'}`}
-            ></div>
-            <div className='curcle-name'>
-            <div className={`device-status ${selectedDeviceDetails.deviceStatus === 'online' ? 'online' : 'offline'}`}>
-                  {selectedDeviceDetails.deviceStatus}
+      <Navbar className='navnav' onChangeDevice={onChangeDeviceHandler} />
+      <Menu className='navnav1' />
+      {device && (
+        <div className='body'>
+          <div className='device-active'>
+            {selectedDeviceDetails && (
+              <div className='both' key={selectedDeviceDetails.deviceId}>
+                <div
+                  className={`curcle ${selectedDeviceDetails?.deviceStatus === 'online' ? 'curcle-online' : 'curcle-offline'}`}
+                ></div>
+                <div className='curcle-name'>
+                  <div className={`device-status ${selectedDeviceDetails.deviceStatus === 'online' ? 'online' : 'offline'}`}>
+                    {selectedDeviceDetails.deviceStatus}
+                  </div>
                 </div>
+              </div>
+            )}
+            <div className='device-name'>
+              <DeviceName selectedDevice={device || defaultSelectedDevice} />
             </div>
-            {/* <div>Last Responded Date: {selectedDeviceDetails.lastRepondedDate}</div> */}
           </div>
-        )}
-        <div className='device-name'>
-          <DeviceName selectedDevice={device || defaultSelectedDevice} />
-        </div>
-      </div>
 
-      <div className='device-active-2'>
-        <div className="dropdown" style={{ marginLeft: '10px' }}>
-          <select className="dropdown-line">
-            <option value="L1">{lineOne}</option>
-            <option value="L2">{lineTwo}</option>
-            <option value="L3">{lineThree}</option>
-          </select>
-        </div>
-      </div>
+          {device.deviceTypeId === 2 && (
+            <div className='device-active-2'>
+              <div className="dropdown" style={{ marginLeft: '10px' }}>
+                <select className="dropdown-line" onChange={handleLineChange}>
+                  <option value="L1">{lineOne}</option>
+                  <option value="L2">{lineTwo}</option>
+                  <option value="L3">{lineThree}</option>
+                </select>
+              </div>
+            </div>
+          )}
 
-      <div className='page'>
-        <div className='chart-now-kw'>
-          <HomeChart data='' selectedDevice={device || defaultSelectedDevice} budgetedValues={budgetedValues}/>
+          <div className='page'>
+            <div className='chart-now-kw'>
+              <HomeChart data='' selectedDevice={device || defaultSelectedDevice} budgetedValues={budgetedValues}/>
+            </div>
+            <div className='chart-now-cost'>
+              <HomeCostChart data='' selectedDevice={device || defaultSelectedDevice} budgetedValueAmount={budgetedValueAmount} selectedLine={selectedLine} />
+            </div>
+          </div>
+          <div className='chart-area d-flex align-items-center justify-content-center'>
+            <LineChart selectedDevice={device || defaultSelectedDevice} />
+          </div>
+          <div className='page-bottom'>
+            <div className='vol'><Voltage selectedDevice={device || defaultSelectedDevice} /></div>
+            <div className='vol'><Current selectedDevice={device || defaultSelectedDevice} /></div>
+            <div className='vol'><Power selectedDevice={device || defaultSelectedDevice} /></div>
+            <div className='pow'><Powerfact selectedDevice={device || defaultSelectedDevice} /></div>
+            <div className='pow'><Hertz selectedDevice={device || defaultSelectedDevice} /></div>
+          </div>
         </div>
-        <div className='chart-now-cost'>
-          <HomeCostChart data='' selectedDevice={device || defaultSelectedDevice} budgetedValueAmount={budgetedValueAmount}/>
-        </div>
-      </div>
-      <div className='chart-area d-flex align-items-center justify-content-center'>
-        <LineChart selectedDevice={device || defaultSelectedDevice} />
-      </div>
-      <div className='page-bottom'>
-        <div className='vol'><Voltage selectedDevice={device || defaultSelectedDevice} /></div>
-        <div className='vol'><Current selectedDevice={device || defaultSelectedDevice} /></div>
-        <div className='vol'><Power selectedDevice={device || defaultSelectedDevice} /></div>
-        <div className='pow'><Powerfact selectedDevice={device || defaultSelectedDevice} /></div>
-        <div className='pow'><Hertz selectedDevice={device || defaultSelectedDevice} /></div>
-      </div>
+      )}
+      <BottomNav className='bottombar1' />
     </div>
-  )}
-  <BottomNav className='bottombar1' />
-</div>
-
   );
 };
 
