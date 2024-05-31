@@ -5,6 +5,7 @@ import './Homechart.css';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { getBudgetedValues } from '../../action/deviceSettings';
 import { useSelector } from 'react-redux';
+import { set } from 'date-fns';
 ChartJS.register(ArcElement, Tooltip);
 
 const HomeChart = ({ selectedDevice, budgetedValues }) => {
@@ -21,18 +22,25 @@ const HomeChart = ({ selectedDevice, budgetedValues }) => {
   }, [deviceNames]);
 
   const [objKw, setObjKw] = useState({
-    maxKwValue: 1000,
+    maxKwValue: budgetedValues,
     minKwValue: 0,
     currentKwValue: 0,
     mesurementUnitKw: 'kWh',
     kwhPerSeconds: 0,
   });
 
-  const [remaningkwvalue, setRemainingKwValue] = useState(null);
+  const [remaningkwvalue, setRemainingKwValue] = useState(budgetedValues);
+
+  useEffect(() => {
+    setObjKw((prevObj) => ({
+      ...prevObj,
+      maxKwValue: budgetedValues,
+    }));  
+  }, [budgetedValues]);
 
   useEffect(() => {
     setRemainingKwValue(objKw.maxKwValue - objKw.currentKwValue);
-  }, [objKw]);
+  }, [objKw.currentKwValue, objKw.maxKwValue]);
 
   useEffect(() => {
     loadChartData();
@@ -47,8 +55,14 @@ const HomeChart = ({ selectedDevice, budgetedValues }) => {
     };
     const result = await getEngergyUsageNow(payload);
     const { kwh } = result.data;
+    console.log('kwh', result);
+    setObjKw((prevObj) => ({
+      ...prevObj,
+      currentKwValue: kwh,
+    }));
 
-    setObjKw({ ...objKw, currentKwValue: kwh });
+
+    // setObjKw({ ...objKw, currentKwValue: kwh });
   };
 
   const data = {
@@ -56,7 +70,8 @@ const HomeChart = ({ selectedDevice, budgetedValues }) => {
     datasets: [
       {
         data: [objKw.currentKwValue, remaningkwvalue],
-        backgroundColor: ['#00ff99', '#F5F5DC'],
+        // backgroundColor: ['#00ff99', '#F5F5DC'],
+        backgroundColor: [objKw.currentKwValue > objKw.maxKwValue ? '#ff0000' : '#00ff99', '#F5F5DC'],
         circumference: 270,
         rotation: 225,
         cutout: '80%',

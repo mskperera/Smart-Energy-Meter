@@ -32,7 +32,7 @@ const Home = () => {
 
   useEffect(() => {
     setDevice(defaultSelectedDevice);
-  }, [deviceNames]);
+  }, [deviceNames, defaultSelectedDevice]);
 
   // useEffect(() => {
   //   const userData = localStorage.getItem('userData');
@@ -51,7 +51,7 @@ const Home = () => {
     }, 5000);
 
     return () => clearInterval(intervalId); // Clean up the interval on component unmount
-  }, [device]);
+  }, [device,defaultSelectedDevice]);
 
 
 
@@ -63,7 +63,7 @@ const Home = () => {
 
   const loadDeviceStatus = async (userId,deviceId) => {
     const result = await getDeviceStatus(userId,deviceId);
-    console.log('Result 12121212', result);
+    // console.log('Result 12121212', result);
     if (result.status === 200) {
       setDeviceDetails(result.data[0]);
     }

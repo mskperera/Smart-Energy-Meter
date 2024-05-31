@@ -41,6 +41,9 @@ function DeviceRegister() {
     }
   }, []);
 
+
+  // const loadDrpDeviceType = async () => {
+
   const loadDevices = async () => {
     try{
     // console.log("loadDevices",deviceRegId);

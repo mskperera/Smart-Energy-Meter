@@ -1,73 +1,67 @@
-import React, { useEffect, useState } from 'react'
-import './Budget.css'
-
-import { calculateInterdependentValue, getBudgetedProfile, getBugetedLimitByDeviceId, getBugetedLimitDetailsByBudgetedLimitId, saveBudgetedLimit, saveBugetedLimitDetails } from '../../action/deviceSettings';
-
+import React, { useEffect, useState } from 'react';
+import './Budget.css';
+import { calculateInterdependentValue, getBudgetedValues, saveBudgetedLimit } from '../../action/deviceSettings';
 import swal from 'sweetalert';
 import { useSelector } from 'react-redux';
-import { calculateBillAmountByUnits, calculateUnitsForBudgetByBillAmount } from '../../action/tariff';
-
 
 function Budget() {
-
     const [myBudgetKw, setMyBudgetKw] = useState('');
     const [myBudgetRs, setMyBudgetRs] = useState('');
-    const [selectedValues, setSelectedValues] = useState([]);
     const [device, setDevice] = useState('');
     const [load, setLoad] = useState(false);
     const [message, setMessage] = useState('');
     const [errormessage, setErrorMessage] = useState('');
     const [selectedRadio, setSelectedRadio] = useState('');
-
-    const [selectedValue,setSelectedValue] = useState('kw');
+    const [budgetedValues, setBudgetedValues] = useState('');
+    const [budgetedValueAmount, setBudgetedValueAmount] = useState('');
 
     const deviceNames = useSelector(state => state.device.dropDeviceList);
-    const defaultSelctedDevie = deviceNames[0];
+    const defaultSelectedDevice = deviceNames[0];
 
     useEffect(() => {
-        setDevice(defaultSelctedDevie);
+        setDevice(defaultSelectedDevice);
     }, [deviceNames]);
 
-    // useEffect(() => {
-    //     if (device) {
-    //         const deviceId = device?.id || defaultSelctedDevie?.id;
-    //         loadBudgetedProfile(deviceId);
-    //     }
-    // }, [load, device]);
-
     useEffect(() => {
-        // loadBugetedLimitDetailsByDeviceId();
-    }, [load]);
+        if (device) {
+            const deviceId = device || defaultSelectedDevice;
+            // loadCalculateInterdependentValue(deviceId.id);
+            loadBudgetedValues(deviceId.id);
+        }
+    }, [device]);
 
-    // const loadBudgetedProfile = async (deviceId) => {
-    //     const result = await getBudgetedProfile(deviceId);
-    //     console.log('tttttttttttt', result);
-    // }
-
-    
     const onRadioChange = (e) => {
         setSelectedRadio(e.target.value);
     };
-    
-    // useEffect(() => {
+
+
+    const loadBudgetedValues = async (deviceId) => {
+        const result = await getBudgetedValues(deviceId);
+        const budgetedValue = result.data;
+        
+        setBudgetedValues(budgetedValue.kwhAmount);
+        setBudgetedValueAmount(budgetedValue.billAmount);
+ 
+      };
+
+    //   useEffect(() => {
     //     if (device) {
-    //         const deviceId = device || defaultSelctedDevie;
+    //         const deviceId = device || defaultSelectedDevice;
     //         loadCalculateInterdependentValue(deviceId.id);
-    // }
+    //         // loadBudgetedValues(deviceId.id);
+    //     }
     // }, [device]);
-
     
-    const loadCalculateInterdependentValue = async (deviceId) => {
-        const result = await calculateInterdependentValue(deviceId, 7);
-        console.log('result111111', result);
-        const calculate = result.data;
-        console.log('calculate', calculate.value);
-        setMyBudgetRs(calculate.value);
-        setMyBudgetKw(calculate.value); 
+
+    const handleCalculateInterdependentValue = async (deviceId,operationId,value) => {
+        const result = await calculateInterdependentValue(deviceId,operationId,value);
+        console.log('result cal',result);
+        const calculate = result.data.value;
+        console.log('calculate',calculate);
+        return calculate;
+        // setMyBudgetRs(calculate.billAmount);
+        // setMyBudgetKw(calculate.kwhAmount);
     }
-
-
-
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
@@ -75,24 +69,26 @@ function Budget() {
         try {
             setErrorMessage('');
             setMessage('');
-            
+
             const payload = {
-                deviceId: device?.id || defaultSelctedDevie?.id,
-                value: selectedRadio === '1' ? myBudgetKw : myBudgetRs,
-                budgetingMetricId: selectedRadio === '1' ? 1 : 2,
-                units:50,
-                noOfDays:20,
-                // budgetedLimitId: loadedBudgetedLimitId,
-                // thresholdAmountsArr: selectedValues.map(a => a.thresholdAmount)
+                deviceId: device?.id || defaultSelectedDevice?.id,
+                budgetedValue: selectedRadio === '1' ? budgetedValues : budgetedValueAmount,
+                opertationalMetricId: selectedRadio === '1' ? 1 : 2,
+                
+                units: 50,
+                noOfDays: 30,
             };
 
-            console.log("payload", payload);
+            console.log('payload1111111', payload);
+
             const res = await saveBudgetedLimit(payload);
-            console.log('limit result', res);
+            console.log('res', res);
             const { responseStatus, outputMessage } = res.data;
+            
             if (responseStatus === "failed") {
                 setErrorMessage(outputMessage);
                 return;
+                
             }
 
             if (res.status === 400) {
@@ -111,113 +107,85 @@ function Budget() {
             swal("Updated Successfully", "", "success").then(() => {
                 setLoad(!load);
             });
-        } catch (err) {   
+        } catch (err) {
             console.log('error', err);
         }
     }
 
     return (
-        // <div className='body d-flex align-items-center justify-content-center w-100'>
-            <div className='notification'>
-                {/* <div className='rounded'> */}
-                    <h4 className='d-flex align-items-center justify-content-center mb-1'>Device Preferences and Settings</h4>
-                    <form className='need-validation' onSubmit={onSubmitHandler}>
-                        <h6 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h6>
+        <div className='notification'>
+            <h4 className='d-flex align-items-center justify-content-center mb-1'>Device Preferences and Settings</h4>
+            <form className='need-validation' onSubmit={onSubmitHandler}>
+                <h6 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h6>
                 
-                        <div className='form-group mb-1'>
-                            <div className='form-group d-flex align-items-center me-3'>
-                                <input 
-                                    type='radio' 
-                                    name='device' 
-                                    value='1' 
-                                    className='form-radio me-2' 
-                                    checked={selectedRadio === '1'} 
-                                    onChange={onRadioChange}
-                                />
-                                <label htmlFor='budgetKw' className='form-label mb-0 me-2'>Set Budget kW</label>
-                                {selectedRadio === '1' ? (
-                                    <input
-                                        id='budgetKw'
-                                        type='text'
-                                        className='form-control'
-                                        placeholder='kW'
-                                        value={myBudgetKw}
-                                        onChange={(e) => {
-                                            setMyBudgetKw(e.target.value);
-                                            setSelectedValue("kw");
-                                        
-                                        }}
-                                        style={{ width: '200px', height: '30px' }}
-                                    />
-                                ) : (
-                                    <input
-                                        id='budgetKw'
-                                        type='text'
-                                        className='form-control'
-                                        placeholder='kW'
-                                        value=""
-                                        disabled
-                                        style={{ width: '200px', height: '30px' }}
-                                    />
-                                )}
-                            </div>
-                            <br />
-                            <div className='form-group d-flex align-items-center'>
-                                <input 
-                                    type='radio' 
-                                    name='device' 
-                                    value='2' 
-                                    className='form-radio me-2' 
-                                    checked={selectedRadio === '2'} 
-                                    onChange={onRadioChange}
-                                />
-                                <label htmlFor='budgetRs' className='form-label mb-0 me-2'>Set Budget Rs &nbsp;</label>
-                                {selectedRadio === '2' ? (
-                                    <input
-                                        id='budgetRs'
-                                        type='text'
-                                        className='form-control'
-                                        placeholder='Rs'
-                                        value={myBudgetRs}
-                                        onChange={(e) => {setMyBudgetRs(e.target.value); setSelectedValue("bill");}}
-                                        style={{ width: '200px', height: '30px' }}
-                                    />
-                                ) : (
-                                    <input
-                                        id='budgetRs'
-                                        type='text'
-                                        className='form-control'
-                                        placeholder='Rs'
-                                        value=""
-                                        disabled
-                                        style={{ width: '200px', height: '30px' }}
-                                    />
-                                )}
-                            </div>
-                        </div>
+                <div className='form-group mb-1'>
+                    <div className='form-group d-flex align-items-center me-3'>
+                        <input 
+                            type='radio' 
+                            name='device' 
+                            value='1' 
+                            className='form-radio me-2' 
+                            checked={selectedRadio === '1'} 
+                            onChange={onRadioChange}
+                        />
+                        <label htmlFor='budgetKw' className='form-label mb-0 me-2'>Set Budget kW</label>
+                        <input
+                            id='budgetKw'
+                            type='text'
+                            className='form-control'
+                            placeholder='kW'
+                            value={budgetedValues}
+                            onChange={(e) => setBudgetedValues(e.target.value)}
+                            style={{ width: '200px', height: '30px' }}
+                            disabled={selectedRadio !== '1'}
+                        />
+                    </div>
+                    <br />
+                    <div className='form-group d-flex align-items-center'>
+                        <input 
+                            type='radio' 
+                            name='device' 
+                            value='2' 
+                            className='form-radio me-2' 
+                            checked={selectedRadio === '2'} 
+                            onChange={onRadioChange}
+                        />
+                        <label htmlFor='budgetRs' className='form-label mb-0 me-2'>Set Budget Rs &nbsp;</label>
+                        <input
+                            id='budgetRs'
+                            type='text'
+                            className='form-control'
+                            placeholder='Rs'
+                            value={budgetedValueAmount}
+                            onChange={(e) => setBudgetedValueAmount(e.target.value)}
+                            style={{ width: '200px', height: '30px' }}
+                            disabled={selectedRadio !== '2'}
+                        />
+                    </div>
+                </div>
 
-                        <button type='button' className="btn btn-sm custom-button w-50 btn-cal mb-1" onClick={() => {
-                            const deviceId = device?.id || defaultSelctedDevie?.id;
-                            loadCalculateInterdependentValue(deviceId,7);
+                <button type='button' className="btn btn-sm custom-button w-50 btn-cal mb-1" onClick={async() => {
+                    const deviceId = device?.id || defaultSelectedDevice?.id;
+                    // handleCalculateInterdependentValue(deviceId, 1, budgetedValues);
+                    // handleCalculateInterdependentValue(deviceId, 7, budgetedValueAmount);
 
-                            if(selectedValue === "kw"){
-                                const units = loadCalculateInterdependentValue(deviceId,1);
-                                setMyBudgetKw(units);}
+                    if (selectedRadio === '1') {
+                       const result = await handleCalculateInterdependentValue(deviceId, 1, budgetedValues)
+                        setBudgetedValueAmount(result);
+                    }
 
-                            if(selectedValue === "bill"){
-                                const billAmount = loadCalculateInterdependentValue(deviceId,7);
-                                setMyBudgetRs(billAmount);
-                            }
-                        }}>
-                            Calculate
-                        </button>
+                    if (selectedRadio === '2') {
+                        const result = await handleCalculateInterdependentValue(deviceId, 7, budgetedValueAmount)
+                        setBudgetedValues(result);
+                    }
+                }}>
+                    Calculate
+                </button>
 
-                        <button type='submit' className='btn btn-primary w-100 mt-1'>Save</button>
-                        {errormessage && <p>{errormessage}</p>}
-                    </form>
-                {/* </div> */}
-            </div>
-        // </div>
+                <button type='submit' className='btn btn-primary w-100 mt-1'>Save</button>
+                {errormessage && <p>{errormessage}</p>}
+            </form>
+        </div>
     )
 }
 

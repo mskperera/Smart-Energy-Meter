@@ -1,19 +1,88 @@
 import React, { useEffect, useState } from 'react';
 import { getDrpMeasuringMode } from '../../action/dropdown';
+import { deviceMeasuringModeSave } from '../../action/deviceSettings';
+import { useSelector } from 'react-redux';
+import { de } from 'date-fns/locale';
+import swal from 'sweetalert';
+import { set } from 'date-fns';
 
 function DeviceTab() {
     const [dropMeasuringMode, setDropMeasuringMode] = useState([]);
     const [selectedMeasuringMode, setSelectedMeasuringMode] = useState('');
+    const [device, setDevice] = useState('');
+
+    const[editLineOne,setEditLineOne]=useState('');
+    const[editLineTwo,setEditLineTwo]=useState('');
+    const[editLineThree,setEditLineThree]=useState('');
+
+    
+    const [load,setLoad]=useState(false);
+
+    const [message,setMessage]=useState('');
+       const [errormessage,setErrorMessage]=useState('');
+
+
+    // const onChangeDeviceHandler=(device)=>{
+    //     setDevice(device);
+    //   }
+      
+      const deviceNames=useSelector(state=>state.device.dropDeviceList);
+      const defaultSelctedDevie=deviceNames[0];
+      
+      useEffect(()=>{
+      setDevice(defaultSelctedDevie);
+      },[deviceNames])
+
 
     useEffect(() => {
-        loadDrpMeasuringMode();
-    }, []);
+        if (device) {
+            const deviceId = device.id || defaultSelctedDevie.id;
+            loadDrpMeasuringMode(deviceId.id);
+        }
+        // loadDrpMeasuringMode();
+    }, [device]);
+
 
     const loadDrpMeasuringMode = async () => {
         const result = await getDrpMeasuringMode();
         console.log("result - 555555", result.data);
         setDropMeasuringMode(result.data);
         setSelectedMeasuringMode(result.data[0].deviceMeasuringModeId);
+        
+    }
+
+
+    const saveDeviceMeasuringModeSave = async (e) => {
+        e.preventDefault();
+
+        setErrorMessage('');
+        setMessage('');
+       
+        try {
+            const deviceId = device.id || defaultSelctedDevie.id;
+            const payload = {
+                measuringModeId: selectedMeasuringMode,
+                deviceId: deviceId,
+            };
+            console.log("payload", payload);
+
+            const result = await deviceMeasuringModeSave(payload);
+            const {status,message}=result.data;
+            if(status==="failed"){
+                setErrorMessage(message);
+                return;
+            }
+
+            setMessage(message);
+            swal("Updated Successfully", "", "success").then(() => {
+                setLoad(!load);
+              });
+
+        }
+        catch (error) {
+            console.log("error", error);
+        }
+
     }
 
     return (
@@ -60,7 +129,7 @@ function DeviceTab() {
                         </div>
                     )}
 
-                    <button type='submit' className='btn btn-primary w-100 mt-1'>Save</button>
+                    <button type='submit' className='btn btn-primary w-100 mt-1' onClick={saveDeviceMeasuringModeSave}>Save</button>
                 </form>
             </div>
         </div>
