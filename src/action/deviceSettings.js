@@ -58,6 +58,14 @@ export const saveBudgetedLimit= async (payload) => {
     return err;
   }
 }
+//ex: saveBudgetedLimit
+// {
+//   "deviceId":4,
+//   "budgetedValue":90000,
+//  "opertationalMetricId":7,
+//  "thresholdAmountsArr":[500,300,700,1000],
+//  "isKeepNull":false
+//  }
 
 export const getBugetedLimitByDeviceIdAndOperationalMetricId= async (deviceId,operationalMetricId) => {
   try {
