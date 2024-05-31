@@ -36,9 +36,24 @@ const HomeCostChart = ({ selectedDevice, budgetedValueAmount }) => {
     setRemainingValue(obj.maxValue - obj.currentValue);
   }, [obj.currentValue, obj.maxValue]);
 
+  // useEffect(() => {
+  //   loadChartData();
+  // }, [selectedDevice]);
+
+
   useEffect(() => {
-    loadChartData();
-  }, [selectedDevice]);
+    // const userData = localStorage.getItem('userData');
+    // const userId = JSON.parse(userData).userId;
+
+    const intervalId = setInterval(() => {
+      // if (device)
+        loadChartData();
+      // loadBudgetedValues(device?.id || defaultSelectedDevice?.id);
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+  }, [device,defaultSelectedDevice]);
+
 
   const loadChartData = async () => {
     const payload = {

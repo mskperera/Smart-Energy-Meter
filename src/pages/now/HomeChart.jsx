@@ -5,7 +5,7 @@ import './Homechart.css';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
 import { getBudgetedValues } from '../../action/deviceSettings';
 import { useSelector } from 'react-redux';
-import { set } from 'date-fns';
+
 ChartJS.register(ArcElement, Tooltip);
 
 const HomeChart = ({ selectedDevice, budgetedValues }) => {
@@ -20,6 +20,7 @@ const HomeChart = ({ selectedDevice, budgetedValues }) => {
   useEffect(() => {
     setDevice(defaultSelctedDevie);
   }, [deviceNames]);
+  
 
   const [objKw, setObjKw] = useState({
     maxKwValue: budgetedValues,
@@ -42,9 +43,23 @@ const HomeChart = ({ selectedDevice, budgetedValues }) => {
     setRemainingKwValue(objKw.maxKwValue - objKw.currentKwValue);
   }, [objKw.currentKwValue, objKw.maxKwValue]);
 
+  // useEffect(() => {
+  //   loadChartData();
+  // }, [selectedDevice]);
+
+
   useEffect(() => {
-    loadChartData();
-  }, [selectedDevice]);
+    // const userData = localStorage.getItem('userData');
+    // const userId = JSON.parse(userData).userId;
+
+    const intervalId = setInterval(() => {
+      // if (device)
+        loadChartData();
+      // loadBudgetedValues(device?.id || defaultSelectedDevice?.id);
+    }, 5000);
+
+    return () => clearInterval(intervalId); 
+  }, [device,defaultSelctedDevie]);
 
  
 
