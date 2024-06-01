@@ -279,9 +279,9 @@ const [loading,setLoading]=useState(false)
             ) : (
               <>
                 {objOther.length > 1 ? (
-             <div className='data-table ' style={{marginTop:"10px"}}>
-             <table className="data-table table table-hover rounded ">
-               <thead>
+             <div className='data-table ' >
+             <table className="data-table table table-hover rounded "style={{marginTop:"10px"}}>
+               <thead className='table-dark'>
                  <tr>
                    <th>Line</th>
                    <th>Voltage (V)</th>
