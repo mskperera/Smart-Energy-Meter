@@ -202,7 +202,7 @@ const [loading,setLoading]=useState(false)
       <br />
       {JSON.stringify(objKw)} */}
 
-      {JSON.stringify(objOther.length)}
+      {/* {JSON.stringify(objOther.length)} */}
 
       <Navbar className="navnav" onChangeDevice={onChangeDeviceHandler} />
       <Menu className="navnav1" />
@@ -252,14 +252,14 @@ const [loading,setLoading]=useState(false)
           <div className="page">
             <div className="chart-now-kw">
               {loading ? (
-                <p>Loading please wait...</p>
+                <p className="loading-message">Loading please wait...</p>
               ) : (
                 <HomeChart objKw={objKw} selectedLine={selectedLine} />
               )}
             </div>
             <div className="chart-now-cost">
               {loading ? (
-                <p>Loading please wait...</p>
+                <p className="loading-message">Loading please wait...</p>
               ) : (
                 <HomeCostChart objBill={objBill} selectedLine={selectedLine} />
               )}
@@ -267,7 +267,7 @@ const [loading,setLoading]=useState(false)
           </div>
           <div className="chart-area d-flex align-items-center justify-content-center">
             {loading ? (
-              <p>Loading please wait...</p>
+              <p className="loading-message">Loading please wait...</p>
             ) : (
               <LineChart selectedDevice={device || defaultSelectedDevice} />
             )}
@@ -275,12 +275,12 @@ const [loading,setLoading]=useState(false)
 
           <div className="page-bottom">
             {loading ? (
-              <p>Loading please wait...</p>
+              <p className="loading-message">Loading please wait...</p>
             ) : (
               <>
                 {objOther.length > 1 ? (
-             <div>
-             <table className="data-table">
+             <div className='data-table ' style={{marginTop:"10px"}}>
+             <table className="data-table table table-hover rounded ">
                <thead>
                  <tr>
                    <th>Line</th>
