@@ -5,48 +5,14 @@ import {getEngergyUsageNow} from '../../action/device';
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
 
-const Powerfact = ({selectedDevice}) => {
+const Powerfact = ({budgetedValue,currentValue}) => {
 
-  const [objHz,setObjHz] = useState({
-    maxHzValue:60,
-    // minKwValue:0,
-    currentHzValue:0,
-    mesurementUnitHz:"Hz",
-    // kwhPerSeconds:0,
-  });
-
-  // const [engergyUsageNow ,setEngergyUsageNow ] = useState(null);
-
-  const [remaninghzvalue,setRemainingHzValue]= useState(null);
-
-  useEffect(()=>{
-    setRemainingHzValue(objHz.maxHzValue-objHz.currentHzValue);
-  },[objHz]);
-
-  useEffect(()=>{
-    loadChartData();
-  },[selectedDevice]);
-
-  const loadChartData=async()=>{
-    const payload={
-      deviceId:selectedDevice.id,//"4",
-      mesurementUnitId:7
-    }
-   const result=await getEngergyUsageNow(payload);
-  //  console.log('resultwww',result.data)
-  //  {"kwh":308.02,"deviceTimeStamp":1708324999,"kwhPerSec":0,"deviceTimeStampDate_UTC":"2024-02-19T06:43:19.000Z","kwh_MeasurementValue_max":100,"kwh_MeasurementValue_min":0,"Voltage":233.4}
  
-   const {hertz}=result.data;
-  
-  
-   setObjHz({...objHz,currentHzValue:hertz});
-  }
-
   const data = {
     // labels: ['V'],
     datasets: [
       {
-        data: [objHz.currentHzValue,remaninghzvalue],
+        data: [currentValue,budgetedValue-currentValue],
         backgroundColor: [ '#36A2EB','#F5F5DC'],
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
