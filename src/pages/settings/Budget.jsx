@@ -1,241 +1,192 @@
-import React, { useEffect, useState } from 'react'
-import './Budget.css'
-import { getBugetedLimitByDeviceId, getBugetedLimitDetailsByBudgetedLimitId, saveBudgetedLimit, saveBugetedLimitDetails } from '../../action/deviceSettings';
+import React, { useEffect, useState } from 'react';
+import './Budget.css';
+import { calculateInterdependentValue, getBudgetedValues, saveBudgetedLimit } from '../../action/deviceSettings';
 import swal from 'sweetalert';
-
-
+import { useSelector } from 'react-redux';
 
 function Budget() {
-
-    const [myBudget, setMyBudget] = useState('');
-
-    const [value, setValue] = useState(0); 
-    // const [maxValue, setMaxValue] = useState('');
-    const [selectedValues, setSelectedValues] = useState([]);
-
-
-    const [load,setLoad]=useState(false);
-
-    const [loadedBudgetedLimitId, setLoadedBudgetedLimitId] = useState('');
-    const [threshouldList,setThreshouldList] = useState([]);
-
-    useEffect(() => {
-        loadBugetedLimitByDeviceId();
-        
-    }, []);
-
-    useEffect(() => {
-        // loadBugetedLimitDetailsByDeviceId();
-    }, [load]);
-
-
-const loadBugetedLimitByDeviceId = async () => {
-
-    const result = await getBugetedLimitByDeviceId(4);
-    // console.log('tttttttttttt', result);
-    const budgetSettings = result.data;
-    // console.log('budgetSettings', budgetSettings);
-   // setMyBudget(budgetSettings.BudgetedAmount);
-    const billingBuget=budgetSettings.filter(b=>b.budgetingMetricId===2);
-// const billingBuget=myBudget.filter(b=>b.budgettingMetricId===2);
-    // console.log('billing Budget',billingBuget);
-    setMyBudget(billingBuget[0].budgetedAmount);
-    const budgetedlimitId=billingBuget[0].budgetedLimitId;
-    setLoadedBudgetedLimitId(budgetedlimitId);
-    loadBugetedLimitDetailsByDeviceId(budgetedlimitId);
-
-}
-
-const [message,setMessage]=useState('');
-const [errormessage,setErrorMessage]=useState('');
-
-
-// const _saveBugetedLimit=()=>{
-//     const payload={
-//         deviceId:4,
-//         budgetedAmount:myBudget,
-//         budgetingMetricId:2
-        
-//     }
-// saveBudgetedLimit(payload);
-// }
-
-const onSubmitHandler = async (e) => {
-    e.preventDefault();
-
-    try {
-
-        setErrorMessage('');
-        setMessage('');
-        
-      
-        const payload = {
-            deviceId: 4,
-            budgetedAmount: myBudget,
-            budgetingMetricId: 2,
-            budgetedLimitId: loadedBudgetedLimitId,
-            thresholdAmountsArr: selectedValues.map(a=>a.thresholdAmount)
-        };
-
-        console.log("payload",payload);
-                const res = await saveBudgetedLimit(payload);
-                console.log('limit result', res);
-                const { responseStatus, outputMessage } = res.data;
-                  if (responseStatus === "failed") {
-                  setErrorMessage(outputMessage)
-                  return;
-        }
-
-        if(res.status===400){
-            setMessage('Error Occure');
-            swal({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!"
-            }).then(() => {
-                setLoad(!load);
-            });
-            return
-        }
-
-        setMessage(outputMessage)
-        swal("Updated Successfully", "", "success").then(() => {
-            setLoad(!load);
-        });
-    }
-
-    catch (err) {   
-        console.log('error', err);
-  }
-}
-
-
-
-
-const loadBugetedLimitDetailsByDeviceId = async (budgetedlimitId) => {
-    console.log('getBugetedLimitDetailsByBudgetedLimitId');
-    const result = await getBugetedLimitDetailsByBudgetedLimitId(budgetedlimitId);
-    const thresholdList = result.data;
-    console.log('thresholdList', thresholdList);
-
-    // const thresholdListArr = [];
-    // thresholdList.map((threshold) => {
-    //     thresholdListArr.push({ thresholdAmount: threshold.thresholdAmount });
-    //     return null; 
-    // });
-    // console.log('thresholdListArr', thresholdListArr);
-  
-    setSelectedValues(thresholdList)
-}
+    const [myBudgetKw, setMyBudgetKw] = useState('');
+    const [myBudgetRs, setMyBudgetRs] = useState('');
+    const [device, setDevice] = useState('');
+    const [load, setLoad] = useState(false);
+    const [message, setMessage] = useState('');
+    const [errormessage, setErrorMessage] = useState('');
+    const [selectedRadio, setSelectedRadio] = useState('');
+    const [budgetedValues, setBudgetedValues] = useState('');
     
 
-    const handleChange = (e) => {
-        setValue(e.target.value);
-      };
+    const deviceNames = useSelector(state => state.device.dropDeviceList);
+    const defaultSelectedDevice = deviceNames[0];
 
+    useEffect(() => {
+        setDevice(defaultSelectedDevice);
+    }, [deviceNames]);
 
-      const handleAdd = async (e) => {
-        e.preventDefault();        
-        setSelectedValues([...selectedValues,{thresholdAmount:value}]);
-      };
-    
+    useEffect(() => {
+        if (device) {
+            const deviceId = device || defaultSelectedDevice;
+            loadBudgetedValues(deviceId.id);
+        }
+    }, [device]);
 
-
-    const onDelete = (index) => {
-        const newValues = [...selectedValues];
-        newValues.splice(index, 1);
-        setSelectedValues(newValues);
-        swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this item!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                onDelete(index);
-                swal("Item has been deleted!", {
-                    icon: "success",
-                });
-                setLoad(!load);
-            }
-             else {
-                swal("Item deletion has been cancelled!");
-            }
-            setLoad(!load);
-        });
+    const onRadioChange = (e) => {
+        setSelectedRadio(e.target.value);
     };
 
+    const loadBudgetedValues = async (deviceId) => {
+        const result = await getBudgetedValues(deviceId);
+        const budgetedValue = result.data;
+        
+        setBudgetedValues(budgetedValue);
+        
+        let selectedRadio = 0;
+        if (budgetedValue.isKwhAmountEntered) {
+            selectedRadio = '1';
+        }
+        else if (budgetedValue.isBillAmountEntered) {
+            selectedRadio = '2';
+        }
+        
+        setSelectedRadio(selectedRadio);
+      };
 
+    const handleCalculateInterdependentValue = async (deviceId, operationId, value) => {
+        const result = await calculateInterdependentValue(deviceId, operationId, value);
+        console.log('result cal', result);
+        const calculate = result.data.value;
+        console.log('calculate', calculate);
+        return calculate;
+    }
 
-  return (
-<div className='d-flex align-items-center justify-content-center w-100'>
-    <div className='body-budget'>
-        <div className='rounded'>
-            <h4 className='d-flex align-items-center justify-content-center'>Device Preferences and Settings</h4>
+    const onSubmitHandler = async (e) => {
+        e.preventDefault();
+
+        try {
+            setErrorMessage('');
+            setMessage('');
+
+            const payload = {
+                deviceId: device?.id || defaultSelectedDevice?.id,
+                budgetedValue: selectedRadio === '1' ? budgetedValues.kwhAmount : budgetedValues.billAmount,
+                opertationalMetricId: selectedRadio === '1' ? 1 : 7,
+                thresholdAmountsArr: [],
+                isKeepNull: false,
+                units: 50,
+                noOfDays: 30,
+            };
+
+            console.log('payload1111111', payload);
+
+            const res = await saveBudgetedLimit(payload);
+            console.log('res', res);
+            const { responseStatus, outputMessage } = res.data.output;
+            
+            if (responseStatus === "failed") {
+                setErrorMessage(outputMessage);
+                return;
+            }
+
+            if (res.status === 400) {
+                setMessage('Error Occurred');
+                swal({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!"
+                }).then(() => {
+                    setLoad(!load);
+                });
+                return;
+            }
+
+            setMessage(outputMessage);
+            swal("Updated Successfully", "", "success").then(() => {
+                setLoad(!load);
+            });
+        } catch (err) {
+            console.log('error', err);
+        }
+    }
+
+    return (
+        <div className='notification'>
+            <h4 className='d-flex align-items-center justify-content-center mb-1'>Device Preferences and Settings</h4>
             <form className='need-validation' onSubmit={onSubmitHandler}>
-            <h6 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h6>
+                <h6 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h6>
+                
                 <div className='form-group mb-1'>
-                    <label htmlFor='setbudget' className='form-label'>Set my Budget</label>
-                    <input type='text' className='form-control' placeholder='Rs' value={myBudget} onChange={(e)=>setMyBudget(e.target.value)}/>
-                </div>
-
-                <div className='form-group mb-1'>
-                    <label htmlFor='setmybudget' className='form-label'>Notify me when Budget reaches</label>
-                    <div className='form-group'>
-                    <div style={{ textAlign: 'center', marginBottom: '10px' }}>{value}</div>
+                    <div className='form-group d-flex align-items-center me-3'>
+                        <input 
+                            type='radio' 
+                            name='device' 
+                            value='1' 
+                            className='form-radio me-2' 
+                            checked={selectedRadio === '1'} 
+                            onChange={onRadioChange}
+                            
+                        />
+                        <label htmlFor='budgetKw' className='form-label mb-0 me-2'>Set Budget kW</label>
                         <input
-                            type="range"
-                            className='form-control-range'
-                            style={{ width: '100%', color: 'blue' }}
-                            min="0"   
-                            max={myBudget}  
-                            step="20"
-                            value={value}  
-                            onChange={(e)=>setValue(e.target.value)} />
+                            id='budgetKw'
+                            type='text'
+                            className='form-control'
+                            placeholder='kW'
+                            value={budgetedValues.kwhAmount}
+                            onChange={(e) => {
+                                setBudgetedValues({...budgetedValues, kwhAmount: e.target.value})
+                            }}
+                            style={{ width: '200px', height: '30px' }}
+                            disabled={selectedRadio !== '1'}
+                        />
                     </div>
-                    <div className='form-group mb-1 d-flex justify-content-center'>
-                        <button type='submit' className='btn btn-sm btn-primary w-25 mt-1'onClick={handleAdd}>Add</button>
+                    <br />
+                    <div className='form-group d-flex align-items-center'>
+                        <input 
+                            type='radio' 
+                            name='device' 
+                            value='2' 
+                            className='form-radio me-2' 
+                            checked={selectedRadio === '2'} 
+                            onChange={onRadioChange}
+                        />
+                        <label htmlFor='budgetRs' className='form-label mb-0 me-2'>Set Budget Rs &nbsp;</label>
+                        <input
+                            id='budgetRs'
+                            type='text'
+                            className='form-control'
+                            placeholder='Rs'
+                            value={budgetedValues.billAmount}
+                            onChange={(e) => setBudgetedValues({...budgetedValues, billAmount: e.target.value})}
+                            style={{ width: '200px', height: '30px' }}
+                            disabled={selectedRadio !== '2'}
+                        />
                     </div>
                 </div>
 
-                <div>
-    <div className="table-responsive-sm">
-        <table className="table tableb rounded">
-        <thead>
-            <tr>
-            {/* <th>Notify when reach</th> */}
-            {/* <th>Actions</th> */}
-            </tr>
-        </thead>
-        <tbody>
-            {/* {JSON.stringify(thresholdList)} */}
-            {selectedValues && selectedValues.map((selectedValue, index) => (
-            <tr key={index}>
-                <td className=''>Notify when reach {selectedValue.thresholdAmount}</td>
-                <td>
-                    <div className='d-flex justify-content-start'>
-                        <button type='button' className='btn btn-sm btn-danger' onClick={() => onDelete(index)}>Delete</button>
-                    </div>
-                {/* <button className='btn' onClick={() => handleDelete(index)}><CgCloseO color='red' size={20}/></button> */}
+                <button type='button' className="btn btn-sm custom-button w-50 btn-cal mb-1" 
+                onClick={async(e) => {
+                    e.preventDefault();
+                    const deviceId = device?.id || defaultSelectedDevice?.id;
 
-                </td>
-            </tr>
-            ))}
-        </tbody>
-        </table>
+                    if (selectedRadio === '1') {
+                        const value = await handleCalculateInterdependentValue(deviceId, 1, budgetedValues.kwhAmount);
+                        console.log('resultAAAA', value);
+                        setBudgetedValues({...budgetedValues, billAmount: value});
+                    }
 
-    </div>
-</div>
+                    if (selectedRadio === '2') {
+                        const value = await handleCalculateInterdependentValue(deviceId, 7, budgetedValues.billAmount);
+                        console.log('resultBBB', value);
+                        setBudgetedValues({...budgetedValues, kwhAmount: value});
+                    }
+                }}>
+                    Calculate
+                </button>
 
                 <button type='submit' className='btn btn-primary w-100 mt-1'>Save</button>
-                {errormessage && <p>{errormessage}</p>}                    
+                {errormessage && <p className='error-message'>{errormessage}</p>}
             </form>
         </div>
-    </div>
-      </div>                                                  
-  )
+    )
 }
 
-export default Budget
+export default Budget;

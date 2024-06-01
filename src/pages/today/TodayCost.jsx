@@ -124,7 +124,7 @@ const TodayCost = ({selectedDevice}) => {
                   beginAtZero: true,
                   title:{
                     display:true,
-                    text:"12:00am - 11:59pm hours",
+                    text:"12:00:00am - 11:59:59pm hours",
                     color:'white'
                   },
                   ticks: {

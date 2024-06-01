@@ -18,8 +18,8 @@ function Login() {
 
     const [formData, setFormData]=useState({
 
-            userName:"lasitha",
-            password:"1234",
+            userName:'',//"lasitha",
+            password:'',//"1234",
             gmtOffset:"+5.30", //moment().utcOffset(),
             publicIP:"212.121"  
     });

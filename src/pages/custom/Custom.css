@@ -6,6 +6,23 @@
     height: 79.3vh;
     margin: 0%;
     display: flex;
+    
+}
+.date{
+    flex: 1;
+    
+}
+
+.chart-custom{
+    flex: 1;
+    width: 100%;
+ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    padding: 0%;
+   
 }
 
 .chart-pick-kw{
@@ -17,7 +34,7 @@
     align-items: center;
     margin: 0%;
     /* flex-direction: column; */
-    padding: 5rem;
+    gap: 2rem;
 }
 
 .chart-pick-cost{
@@ -29,7 +46,7 @@
     align-items: center;
     margin: 0%;
     /* flex-direction: column; */
-    padding: 5rem;
+    gap: 2rem;
 }
 
 .date{
@@ -37,7 +54,7 @@
     justify-content: center;
     display: flex;
     width: 100%;
-    margin-top: -400px;
+    margin-top: -320px;
     position: absolute;
    
 }
@@ -120,6 +137,18 @@
         flex-direction: column;
     }
 
+    .chart-custom{
+        flex: 1;
+        width: 100%;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0px;
+        padding: 0%;
+       flex-direction: column;
+    }
+
     .chart-pick-kw{
         flex: 1;
         width: 450px;
@@ -165,6 +194,18 @@
         margin-top: 0px;
         margin-left: 0px;
     }
+
+    .chart-custom{
+        flex: 1;
+        width: 100%;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0px;
+        padding: 0%;
+       flex-direction: column;
+    }
     .chart-pick-kw{
         flex: 1;
         width: 100%;
@@ -172,7 +213,7 @@
         justify-content: flex-end;
         align-items: center;
         margin: 0%;
-        padding: 0rem;
+        gap: 0rem;
 }
 
     .chart-pick-cost{
@@ -209,6 +250,18 @@
         margin-left: 0px;
         margin-bottom: 0px;
         flex-direction: column;
+    }
+
+    .chart-custom{
+        flex: 1;
+        width: 100%;
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -500px;
+        padding: 0%;
+       flex-direction: column;
     }
 
     .chart-pick-kw{

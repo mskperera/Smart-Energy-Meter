@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
-import { getDeviceDetailsByDeviceId, getDevicesByUserId, getEngergyUsageKwhByDateRange } from '../../action/device';
+import { getDevicesByUserId, getEngergyUsageKwhByDateRange } from '../../action/device';
 // import { GlobalContext } from '../../context/GlobalContext';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
@@ -152,7 +152,7 @@ console.log('payload',payload);
           beginAtZero: true,
           title:{
             display:true,
-            text:"12:00am - 11:59pm horus",
+            text:"12:00:00am - 11:59:59pm horus",
             color:'white'
           },
           ticks: {

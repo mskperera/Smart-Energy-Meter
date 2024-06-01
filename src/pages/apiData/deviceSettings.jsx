@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { get_DeviceSettingsByDeviceId, saveDeviceSettings } from '../../action/deviceSettings';
 import { getDrpConsumerCategories, getDrpConsumerSubCategoriesById, getDrpSupplier, getDrpSupplyType } from '../../action/dropdown';
-import { getDeviceDetailsByDeviceId } from '../../action/device';
 
 const DeviceSettings=()=> {
 
   const [deviceSettings,setDeviceSettings]=useState(null);
-  const [deviceDetails,setDeviceDetails]=useState(null);
   const [drpConsumerCategories,setDrpConsumerCategories]=useState(null);
   const [drpData2,setDrpData2]=useState(null);
   const [drpData3,setDrpData3]=useState(null);
@@ -19,7 +17,7 @@ const DeviceSettings=()=> {
       loadDrpConsumerSubCategoriesById();
       loadDrpSupplier();
       loadDrpSupplyType();
-      loadDeviceDetailsByDeviceId();
+    
   }, []);
 
 
@@ -49,10 +47,6 @@ const DeviceSettings=()=> {
     setDrpData4(result.data);
    }
 
-   const loadDeviceDetailsByDeviceId=async()=>{
-    const result=await getDeviceDetailsByDeviceId(4);
-    setDeviceDetails(result.data);
-   }
 
    
 
@@ -85,10 +79,7 @@ const addUpdateDeviceSettings=async()=>{
    {JSON.stringify(deviceSettings)}
     <hr/>
     <br/>
-    <h4>get Device details</h4>
-   {JSON.stringify(deviceDetails)}
-    <hr/>
-    <br/>
+
 
     <h4>drp Consumer Categories</h4>
     {JSON.stringify(drpConsumerCategories)}

@@ -79,7 +79,7 @@ const WeekCost = ({selectedDevice}) => {
           }
   
       const [data,setData] = useState({
-          labels:[],
+        labels:['Mon','Tue','Wen','Thu','Fri','Sat','Sun'],
       
           datasets:[
         //       {

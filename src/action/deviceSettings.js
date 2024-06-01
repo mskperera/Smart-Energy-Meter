@@ -58,11 +58,19 @@ export const saveBudgetedLimit= async (payload) => {
     return err;
   }
 }
+//ex: saveBudgetedLimit
+// {
+//   "deviceId":4,
+//   "budgetedValue":90000,
+//  "opertationalMetricId":7,
+//  "thresholdAmountsArr":[500,300,700,1000],
+//  "isKeepNull":false
+//  }
 
-export const getBugetedLimitByDeviceId= async (deviceId) => {
+export const getBugetedLimitByDeviceIdAndOperationalMetricId= async (deviceId,operationalMetricId) => {
   try {
     return await customAxios
-      .get(`/deviceSettings/getBugetedLimitByDeviceId/${deviceId}`, {
+      .get(`/deviceSettings/getBugetedLimitByDeviceIdAndOperationalMetricId?deviceId=${deviceId}&operationalMetricId=${operationalMetricId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -196,3 +204,108 @@ export const getConnectionSettingsByDeviceId= async (deviceId) => {
     return err;
   }
 }
+
+//
+export const getBudgetedProfile= async (deviceId,operationalMetricId) => {
+  try {
+    return await customAxios
+      .get(
+        `/deviceSettings/getBudgetedProfile?deviceId=${deviceId}&operationalMetricId=${operationalMetricId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+// operationalMetricId
+// kwh=1 , billAmount=7
+
+
+
+
+export const calculateInterdependentValue= async (deviceId,operationalMetricId,value) => {
+  try {
+    return await customAxios
+      .get(
+        `/deviceSettings/calculateInterdependentValue?deviceId=${deviceId}&operationalMetricId=${operationalMetricId}&value=${value}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+// calculateInterdependentValue
+//  operationalMetricId
+//  kwh=1;
+//  billAmount=7
+
+
+export const getBudgetedValues= async (deviceId) => {
+  try {
+    return await customAxios
+      .get(
+        `/deviceSettings/getBudgetedValues?deviceId=${deviceId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+// {{url}}/api/deviceSettings/getBudgetedValues?deviceId=4
+
+
+export const deviceMeasuringModeSave= async (payload) => {
+  try {
+    return await customAxios
+      .post(`/deviceSettings/deviceMeasuringModeSave`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+// deviceMeasuringModeSave
+// {
+//   "deviceId":37,
+//   "measuringModeId":2
+//  }
+ 

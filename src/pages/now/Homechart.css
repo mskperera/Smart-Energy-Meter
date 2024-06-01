@@ -54,15 +54,38 @@
 }
 
 
-.icon{
-    position: absolute;
-    margin-top: 85px;
-    margin-left: 127px;
+.text-p .icon{
+    position: relative;
+    
+    margin-top: 100px;
     align-items: center;
     justify-content: center;
-    display: flex;
     color: rgb(0, 0, 0);
 }
+
+.icon{
+    position: static;
+    display: flex;
+    margin-top: 0px;
+    margin-left: 150px;
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+
+}
+
+.chart3 {
+  position: relative;
+  border-radius: 3%;
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+  /* padding: 10px; */
+  /* background-color: rgb(38, 37, 37); */
+  /* opacity: 50%; */
+  /* z-index: 1; */
+}
+
+
 
 /* .cc{
   background-color: yellow;
@@ -78,17 +101,33 @@
 #box {
     /* border: solid rgb(180, 246, 72) 1px; */
     margin: 0px;
-    width: 300px;
-    height: 100px;
+    width: 100%;
+    
+    /* height: 100px; */
     background:  rgba(11, 11, 11, 0.5);
     /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
 }
 
+#box3 {
+  /* border: solid rgb(180, 246, 72) 1px; */
+  margin: 0px;
+  width: 100%;
+  padding: 20px 10px 0px 10px;
+  
+  /* height: 100px; */
+  background:  rgba(11, 11, 11, 0.5);
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
 #box2 {
   /* border: solid rgb(180, 246, 72) 1px; */
   margin: 0px;
-  padding: 2px;
+  padding: 0px 10px 10px 10px;
+  width: 100%;
+  /* position: absolute; */
+  display: flex;
   border-radius: 3%;
   background:  rgba(11, 11, 11, 0.5);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
@@ -136,7 +175,7 @@
   .icon {
     position: static;
     transform: none;
-    margin-bottom: -130px; /* Adjust the bottom margin based on your design */
+    margin-bottom: -130px;
   }
 
   .text1{
@@ -370,4 +409,30 @@
     margin-top: 0;
     width: 100px;
   }
+}
+
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.data-table th, .data-table td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.data-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.data-table tbody tr {
+  background-color: #f2f2f2;
+}
+
+.data-table tbody tr:hover {
+  background-color: #ddd;
 }

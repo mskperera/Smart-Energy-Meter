@@ -77,7 +77,9 @@ const YearKw = ({selectedDevice}) => {
           }
           
     const [data,setData]=useState({
-        labels:[],
+      // labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      labels:[],
+
     
         datasets:[
             {

@@ -80,11 +80,32 @@ export const getEnergyMeterDataKwhPersecsByDateRange= async (payload) => {
 
 
 
-
+// getDeviceInfoByUserId
 export const getDeviceDetailsByDeviceId= async (deviceId) => {
   try {
     return await customAxios
       .get(`/device/energymeter/getDeviceDetailsByDeviceId/${deviceId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+
+
+// 
+export const getDeviceInfoByUserId= async (userId) => {
+  try {
+    return await customAxios
+      .get(`/device/getDeviceInfoByUserId/${userId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -181,6 +202,18 @@ export const addDevice= async (payload) => {
     return err;
   }
 }
+// addDevice()
+//payload= {
+//   "deviceNo":"Dev 444445",
+// "hardwareVersion": "h/wdfjl",
+// "serialNo": "2447122R",
+// "chipId":"999327",
+//  "deviceTypeId":1,
+// "firmwareVersion": "fw0.1",
+// "product": "test@gmail.com"
+// }
+
+
 
 
 export const updateDevice= async (payload,deviceId) => {
@@ -201,6 +234,16 @@ export const updateDevice= async (payload,deviceId) => {
     return err;
   }
 }
+// updateDevice()
+//payload= {
+//   "deviceNo":"Dev 444445",
+// "hardwareVersion": "h/wdfjl",
+// "serialNo": "2447122R",
+// "chipId":"999327",
+//  "deviceTypeId":1,
+// "firmwareVersion": "fw0.1",
+// "product": "test@gmail.com"
+// }
 
 
 export const getDevicesByUserId= async (userId) => {
@@ -222,10 +265,17 @@ export const getDevicesByUserId= async (userId) => {
   }
 }
 
-export const getDeviceStatus= async (userId) => {
+export const getDeviceStatus = async (userId, deviceId = null) => {
   try {
+    const queryParams = new URLSearchParams({ userId });
+    if (deviceId !== null) {
+      queryParams.append('deviceId', deviceId);
+    }
+
+    const queryString = queryParams.toString();
+    
     return await customAxios
-      .get(`/device/getDeviceStatus/${userId}`, {
+      .get(`/device/getDeviceStatus?${queryString}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -239,4 +289,7 @@ export const getDeviceStatus= async (userId) => {
   } catch (err) {
     return err;
   }
-}
+};
+
+// All device 
+//deviceId=0

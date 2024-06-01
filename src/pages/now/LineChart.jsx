@@ -109,6 +109,28 @@ const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
     ],
   });
 
+
+  const customTextPlugin = {
+    id: 'customTextPlugin',
+    beforeDraw: (chart) => {
+      const { ctx, chartArea: { top, right, bottom, left, width, height } } = chart;
+      ctx.save();
+
+    
+      ctx.font = '20px Trebuchet MS';
+      ctx.fillStyle = 'white';
+      ctx.textAlign = 'center';
+      // ctx.fillText('Trending Power Usage', width / 2, top + 30);
+
+     
+      ctx.font = '14px Trebuchet MS';
+      ctx.fillText('Trending Power Usage', left +30, top +310);
+
+      ctx.restore();
+    }
+  };
+
+
   const options = {
     scales: {
       x: {
@@ -167,7 +189,7 @@ const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
 
   return (
     <div className='chart2'>
-      <Line data={data} options={options} id='box2' />
+      <Line data={data} options={options} plugins={[customTextPlugin]} id='box2' />
     </div>
   );
 }
