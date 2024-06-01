@@ -16,7 +16,7 @@ const HomeCostChart = ({objBill,selectedLine }) => {
     datasets: [
       {
         data: [objBill.currentBillValue, objBill.budgetedBillValue],
-        backgroundColor: [objBill.currentBillValue > objBill.budgetedBillValue ? '#ff0000' : '#00ff99', '#F5F5DC'],
+        backgroundColor: [objBill.currentBillValue > objBill.budgetedBillValue ? '#ff0000' : '#ff0066', '#F5F5DC'],
         circumference: 270,
         rotation: 225,
         cutout: '80%',
