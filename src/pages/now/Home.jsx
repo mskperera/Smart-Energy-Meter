@@ -168,7 +168,7 @@ const [loading,setLoading]=useState(false)
   const loadDeviceStatus = async (userId, deviceId) => {
     const result = await getDeviceStatus(userId, deviceId);
     if (result.status === 200) {
-      setDeviceDetails(result.data[0]);
+      setDeviceDetails(result?.data[0]);
     }
   };
 
