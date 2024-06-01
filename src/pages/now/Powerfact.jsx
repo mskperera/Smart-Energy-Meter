@@ -5,48 +5,15 @@ import {getEngergyUsageNow} from '../../action/device';
 import { Chart as ChartJS, ArcElement, Tooltip } from "chart.js";
 ChartJS.register(ArcElement, Tooltip);
 
-const Powerfact = ({selectedDevice}) => {
+const Powerfact = ({budgetedValue,currentValue}) => {
 
-  const [objPf,setObjPf] = useState({
-    maxPfValue:1,
-    // minKwValue:0,
-    currentPfValue:0,
-    mesurementUnitPw:"pf",
-    // kwhPerSeconds:0,
-  });
 
-  // const [engergyUsageNow ,setEngergyUsageNow ] = useState(null);
-
-  const [remaningpfvalue,setRemainingPfValue]= useState(null);
-
-  useEffect(()=>{
-    setRemainingPfValue(objPf.maxPfValue-objPf.currentPfValue);
-  },[objPf]);
-
-  useEffect(()=>{
-    loadChartData();
-  },[selectedDevice]);
-
-  const loadChartData=async()=>{
-    const payload={
-      deviceId:selectedDevice.id,//"4",
-      mesurementUnitId:6
-    }
-   const result=await getEngergyUsageNow(payload);
-  //  console.log('resultwww',result.data)
-  //  {"kwh":308.02,"deviceTimeStamp":1708324999,"kwhPerSec":0,"deviceTimeStampDate_UTC":"2024-02-19T06:43:19.000Z","kwh_MeasurementValue_max":100,"kwh_MeasurementValue_min":0,"Voltage":233.4}
- 
-   const {pf}=result.data;
-  
-  
-   setObjPf({...objPf,currentPfValue:pf});
-  }
 
   const data = {
     // labels: ['V'],
     datasets: [
       {
-        data: [objPf.currentPfValue,remaningpfvalue],
+        data: [currentValue,budgetedValue-currentValue],
         backgroundColor: [ '#36A2EB','#F5F5DC'],
         // hoverBackgroundColor: ['#FFCE56'],
         circumference:270,
