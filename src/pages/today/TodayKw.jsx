@@ -7,7 +7,7 @@ import { getDevicesByUserId, getEngergyUsageKwhByDateRange } from '../../action/
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 
-const TodayKw = ({selectedDevice}) => {
+const TodayKw = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
 
   // const [deviceIdDetails, setDeviceIdDetails] = useState('');
   
@@ -16,13 +16,20 @@ const TodayKw = ({selectedDevice}) => {
   useEffect(()=>{
     if(selectedDevice){
 
+      loadEngergyUsageKwhByDateRange1(selectedDevice.id);
+    }
+    console.log('device context',selectedDevice);
+
+  },[isSearchLoading,selectedDevice]);
+
+  useEffect(()=>{
+    if(selectedDevice){
+
       loadEngergyUsageKwhByDateRange(selectedDevice.id);
     }
     console.log('device context',selectedDevice);
 
   },[selectedDevice]);
-
-
 
   // const getCurrentDateWithoutTime = () => {
     // return moment().startOf('day').add(24, 'hours').toDate();
@@ -38,6 +45,87 @@ const TodayKw = ({selectedDevice}) => {
     
 // }
  ////  
+
+ const loadEngergyUsageKwhByDateRange1=async(deviceId)=>{
+  // const todayUtc = moment(); 
+  // const startDate = todayUtc.startOf('day').format('YYYY-MM-DD HH:mm:ss');
+
+  // const endDate = todayUtc.endOf('day').format('YYYY-MM-DD HH:mm:ss');
+
+  // const utcOffSet= moment().utcOffset();
+
+  const startOfDayUtc = moment.utc(startDate).add('minutes').format('YYYY-MM-DD HH:mm:ss');
+  const endOfDayUtc = moment.utc(endDate).add('minutes').format('YYYY-MM-DD HH:mm:ss');
+
+
+
+  console.log('selectedDevice.deviceId',selectedDevice);
+
+  
+  console.log("search date",startDate,endDate);
+  // date.utcOffset(moment().utcOffset());
+  // console.log('startOfDayUtc',moment().utcOffset());
+  // console.log('loadEngergyUsageKwhByDateRange')
+  const payload={
+      deviceId:deviceId,//"4",
+      mesurementUnitId:1,//1-kwh,7-usage bill
+      frequencyId:1,
+      startDate: startOfDayUtc,
+      endDate: endOfDayUtc,
+  }
+// console.log('payload',payload);
+  
+ const result=await getEngergyUsageKwhByDateRange(payload);
+ console.log(' hour --',result.data);
+//    setEngergyUsagekwhByDateRange(result.data.recordsets);
+
+   
+    //  console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
+     
+    // const charData = result.data.recordset.map(i => {
+    //     return {...i,date:moment(i.date).format('YYYY-MM-DD HH:mm:ss')}
+    // });
+    if (result.data.recordset) { 
+      const charData=result.data.recordset;
+
+   
+    console.log(' chartdata ',charData);
+     const hours=[];
+     const dataKwArr=[];
+  //    const ruppyArr=[];
+
+     for(let i=0;i<charData.length;i++){
+      hours.push(moment(charData[i].date).format("HH A"));
+      dataKwArr.push(charData[i].kwhPerHour)
+      // console.log('kwhPerHour',charData[i].kwhPerHour)
+     // ruppyArr.push(charData[i].usageBill)
+     }
+    
+     console.log('lll',hours)
+    
+    const datasets0=[
+      {
+      label:'kWh',
+      data:dataKwArr,
+      backgroundColor:'#00ff99',
+      borderWidath:1,
+  }
+  // {
+  //     label:'Rs',
+  //     data:[],
+  //     backgroundColor:'aqua',
+  //     borderWidath:1,
+  // }
+];
+
+ // const dataSetKw=datasets[0];
+  //dataSetKw.data=
+    
+     setData({...data,labels:hours,datasets:datasets0});
+    }
+  }
+
+
 
 
   const loadEngergyUsageKwhByDateRange=async(deviceId)=>{
@@ -56,9 +144,9 @@ const TodayKw = ({selectedDevice}) => {
     console.log('selectedDevice.deviceId',selectedDevice);
 
     
-    console.log("66666666",startOfDay,endOfDay);
+    console.log("load date",startOfDay,endOfDay);
     // date.utcOffset(moment().utcOffset());
-console.log('startOfDayUtc',moment().utcOffset());
+    console.log('startOfDayUtc',moment().utcOffset());
     // console.log('loadEngergyUsageKwhByDateRange')
     const payload={
         deviceId:deviceId,//"4",
@@ -71,10 +159,10 @@ console.log('startOfDayUtc',moment().utcOffset());
         startDate: startOfDayUtc,
         endDate: endOfDayUtc,
     }
-console.log('payload',payload);
+console.log('payload ---- 1',payload);
     
    const result=await getEngergyUsageKwhByDateRange(payload);
-   console.log(' hour ',result.data);
+   console.log(' hour ',result);
 //    setEngergyUsagekwhByDateRange(result.data.recordsets);
   
      

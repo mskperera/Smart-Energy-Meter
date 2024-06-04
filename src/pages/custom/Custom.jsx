@@ -61,7 +61,7 @@ setDevice(defaultSelctedDevie);
             <div className='back'>
                 <ul className='nav-bar-links'>
                     <Link to={"/home"}><li className='btn btn-sm btn-light'>Now</li></Link> 
-                    <Link to={"/today"}><li className='btn btn-sm btn-light'>Today</li></Link>  
+                    <Link to={"/today"}><li className='btn btn-sm btn-light'>Day</li></Link>  
                     <Link to={"/week"}><li className='btn btn-sm btn-light'>Week</li></Link>
                     <Link to={"/month"}><li className='btn btn-sm btn-light'>Month</li></Link>
                     <Link to={"/year"}><li className='btn btn-sm btn-light'>Year</li></Link>

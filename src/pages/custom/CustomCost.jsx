@@ -3,7 +3,7 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
 import moment from 'moment';
-import { color } from 'chart.js/helpers';
+// import { color } from 'chart.js/helpers';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 const CustomCost = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
@@ -27,7 +27,7 @@ const CustomCost = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
        
          const payload={
              deviceId:deviceId,//"4",
-             // mesurementUnitId:1,//1-kwh,7-usage bill
+             mesurementUnitId:7,//1-kwh,7-usage bill
              frequencyId:3,
              startDate:utcStartDate,
              endDate:utcEndDate,

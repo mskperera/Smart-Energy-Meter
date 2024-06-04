@@ -7,6 +7,8 @@ import BottomNav from '../../components/bottommenu/BottomNav'
 import TodayKw from './TodayKw'
 import TodayCost from './TodayCost'
 import { useSelector } from 'react-redux'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 function Today() {
@@ -17,11 +19,30 @@ function Today() {
     setActiveTab(tab);
   };
 
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+ 
+  const [isSearchLoading, setIsSearchLoading] = useState(false);
+
+
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
+  };
+
+  const handleEndDateChange = (date) => {
+    setEndDate(date);
+  };
+
+  const handleSearch = () => {
+   setIsSearchLoading(!isSearchLoading);
+  };
+
   const [device, setDevice] = useState('');
 
 const onChangeDeviceHandler=(device)=>{
   setDevice(device);
 }
+
 
 
 const deviceNames=useSelector(state=>state.device.dropDeviceList);
@@ -48,7 +69,7 @@ setDevice(defaultSelctedDevie);
               <ul className='nav-bar-links'>
                   <Link to={"/home"}><li className='btn btn-sm btn-light'>Now</li></Link> 
                   <Link to={"/today"}><li className={`btn btn-sm btn-primary ${activeTab === 'Now' ? 'active' : ''}`}
-                  onClick={() => handleTabClick('Now')}>Today</li></Link>  
+                  onClick={() => handleTabClick('Now')}>Day</li></Link>  
                   <Link to={"/week"}><li className='btn btn-sm btn-light'>Week</li></Link>
                   <Link to={"/month"}><li className='btn btn-sm btn-light'>Month</li></Link>
                   <Link to={"/year"}><li className='btn btn-sm btn-light'>Year</li></Link>
@@ -56,13 +77,51 @@ setDevice(defaultSelctedDevie);
               </ul>
           </div>
       </div>
-        <div className='page-1 body'>
-          <div className='chart-today-kw'>
-            <TodayKw selectedDevice={device || defaultSelctedDevie} />
+        <div className='page-5 body icon'>
+
+        <div className='date'>
+          <div className='picker'>
+        <div>
+            <DatePicker
+                selected={startDate}
+                onChange={handleStartDateChange}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                placeholderText="Start Date"
+                dateFormat='dd MMM yyyy'
+            />
+        </div>
+        
+         <div>
+            <DatePicker
+                selected={endDate}
+                onChange={handleEndDateChange}
+                selectsEnd
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+                placeholderText="End Date"
+                dateFormat='dd MMM yyyy'
+            />
+         </div>
+         
+         <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button>
+         </div>
           </div>
-          <div className='chart-today-cost'>
-            <TodayCost selectedDevice={device || defaultSelctedDevie}/>
-          </div>
+
+          <div className='chart-custom'>
+            {/* <div className='chart-today-kw'> */}
+            <div className='chart-pick-kw'>
+              <TodayKw selectedDevice={device || defaultSelctedDevie} startDate={startDate } endDate={endDate} isSearchLoading={isSearchLoading}/>
+            </div>
+            {/* <div className='chart-today-cost'> */}
+            <div className='chart-pick-cost'>
+              <TodayCost selectedDevice={device || defaultSelctedDevie} startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
+            </div>
+         </div>
+
+
         </div>
             <BottomNav/>
     

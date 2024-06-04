@@ -25,6 +25,8 @@ import BillingSession from './pages/session/BillingSession';
 import Admin from './pages/custom/customadmin/Admin';
 import Group from './pages/managegroup/Group';
 import Status from './pages/status/Status';
+import Inventory from './pages/deviceInventory/Inventory';
+import AccountReg from './pages/serviceAccount/AccountReg';
 // import Navbar from './components/navbar/Navbar';
 
 // import { GlobalContext } from './context/GlobalContext';
@@ -41,7 +43,7 @@ function App() {
     {/* <Navbar className='navnav'/> */}
     <BrowserRouter>
    
-         <Routes>
+        <Routes>
         <Route path='/' element={<Login/>}/>
         <Route path='/userregister/:userRegId/:saveType' element={<UserRegister/>}/>
         <Route path='/profile' element={<Profile/>}/>
@@ -50,6 +52,7 @@ function App() {
         <Route path='/status' element={<Status/>}/>
         <Route path='/userlist' element={<Userlist/>}/>
         <Route path='/home' element={<Home/>}/>
+        <Route path='/homecopy' element={<Home/>}/>
         <Route path='/today' element={<Today/>}/>
         <Route path='/week' element={<Week/>}/>
         <Route path='/month' element={<Month/>}/>
@@ -59,6 +62,8 @@ function App() {
         <Route path='/deviceinfo' element={<DeviceInfo/>}/>
         <Route path='/service' element={<Service/>}/>
         <Route path='/management' element={<Management/>}/>
+        <Route path='/inventory' element={<Inventory/>} />
+        <Route path='/accountreg' element={<AccountReg/>}/>
         <Route path='/deviceregister/:deviceRegId/:saveType' element={<DeviceRegister/>}/>
         <Route path='/apiData/deviceSettings' element={<DeviceSettings/>}/>
         <Route path='/apiData' element={<APIData/>}/>

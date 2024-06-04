@@ -33,7 +33,7 @@ const loadEngergyUsageKwhByDateRange=async(deviceId)=>{
       
         const payload={
             deviceId:deviceId, //"4",
-            // mesurementUnitId:1,//1-kwh,7-usage bill
+            mesurementUnitId:7,//1-kwh,7-usage bill
             frequencyId:4,
             // startDate:'2024-01-01',
             // endDate:'2024-12-31',
@@ -56,7 +56,7 @@ const loadEngergyUsageKwhByDateRange=async(deviceId)=>{
     
            for(let i=0;i<charData.length;i++){
             months.push(charData[i].month);
-            monthCostArr.push(charData[i].maxKwh)
+            monthCostArr.push(charData[i].usageBill)
            // ruppyArr.push(charData[i].usageBill)
            }
           
