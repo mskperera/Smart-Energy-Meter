@@ -32,7 +32,7 @@ const CustomKw = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
       
         const payload={
             deviceId:deviceId,//"4",
-            // mesurementUnitId:1,//1-kwh,7-usage bill
+            mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:3,
             startDate:utcStartDate,
             endDate:utcEndDate,

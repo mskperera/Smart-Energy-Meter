@@ -7,34 +7,44 @@ ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 
 
-const TodayCost = ({selectedDevice}) => {
+const TodayCost = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
 
     useEffect(()=>{
       if(selectedDevice){
-        loadEngergyUsageKwhByDateRange(selectedDevice.id);
+        loadEngergyUsageKwhByDateRange1(selectedDevice.id);
       }
       
-      },[selectedDevice]);
+      },[isSearchLoading,selectedDevice]);
+
+
+      useEffect(()=>{
+        if(selectedDevice){
+          loadEngergyUsageKwhByDateRange(selectedDevice.id);
+        }
+        
+        },[selectedDevice]);
     
 
       // const getCurrentDateWithoutTime = () => {
       //   return moment().startOf('day').add(24, 'hours').toDate();
       // };
 
-      const loadEngergyUsageKwhByDateRange=async(deviceId)=>{
+      const loadEngergyUsageKwhByDateRange1=async(deviceId)=>{
         // const currentDate = moment().utc(); 
         // const startDate = currentDate.clone().subtract(24, 'hours'); 
         // const endDate = currentDate.clone();
-        const todayUtc = moment(); 
-        const startOfDay = todayUtc.startOf('day').format('YYYY-MM-DD HH:mm:ss');
+        // const todayUtc = moment(); 
+        // const startOfDay = todayUtc.startOf('day').format('YYYY-MM-DD HH:mm:ss');
     
-        const endOfDay = todayUtc.endOf('day').format('YYYY-MM-DD HH:mm:ss');
+        // const endOfDay = todayUtc.endOf('day').format('YYYY-MM-DD HH:mm:ss');
     
-        const utcOffSet= moment().utcOffset();
+        // const utcOffSet= moment().utcOffset();
     
-        const startOfDayUtc = moment(startOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
-        const endOfDayUtc = moment(endOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+        // const startOfDayUtc = moment(startOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+        // const endOfDayUtc = moment(endOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
     
+        const startOfDayUtc = moment.utc(startDate).subtract('minutes').format('YYYY-MM-DD HH:mm:ss');
+        const endOfDayUtc = moment.utc(endDate).subtract('minutes').format('YYYY-MM-DD HH:mm:ss');
 
         const payload={
             deviceId:deviceId,//"4",
@@ -51,12 +61,13 @@ const TodayCost = ({selectedDevice}) => {
        console.log('engergyUsagekwhByDateRange',result.data)
     //    setEngergyUsagekwhByDateRange(result.data.recordsets);
       
-    const charData = result.data.recordset.map(i => {
-      return {...i,date:moment(i.date).format('YYYY-MM-DD HH:mm:ss')}
-  });
+  //   const charData = result.data.recordset.map(i => {
+  //     return {...i,date:moment(i.date).format('YYYY-MM-DD HH:mm:ss')}
+  // });
           //  console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
     
-         
+         if(result.data.recordset){
+          const charData = result.data.recordset;
         
            const ruppys=[];
         //    const dataKwArr=[];
@@ -90,6 +101,80 @@ const TodayCost = ({selectedDevice}) => {
           
            setData({...data,labels:ruppys,datasets:datasets0});
           }
+        }
+
+
+          const loadEngergyUsageKwhByDateRange=async(deviceId)=>{
+            // const currentDate = moment().utc(); 
+            // const startDate = currentDate.clone().subtract(24, 'hours'); 
+            // const endDate = currentDate.clone();
+            const todayUtc = moment(); 
+            const startOfDay = todayUtc.startOf('day').format('YYYY-MM-DD HH:mm:ss');
+        
+            const endOfDay = todayUtc.endOf('day').format('YYYY-MM-DD HH:mm:ss');
+        
+            const utcOffSet= moment().utcOffset();
+        
+            const startOfDayUtc = moment(startOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+            const endOfDayUtc = moment(endOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+        
+    
+            const payload={
+                deviceId:deviceId,//"4",
+                mesurementUnitId:7,//1-kwh,7-usage bill
+                frequencyId:1,
+                startDate: startOfDayUtc, 
+                endDate: endOfDayUtc,
+                // startDate:getCurrentDateWithoutTime(),
+                // endDate:getCurrentDateWithoutTime(),
+                // startDate:"2024-04-06 12:00",
+                // endDate:"2024-04-06 11:59:59",
+            }
+
+            console.log('payload --- 2',payload)
+           const result=await getEngergyUsageKwhByDateRange(payload);
+           console.log('engergyUsagekwhByDateRange',result.data)
+        //    setEngergyUsagekwhByDateRange(result.data.recordsets);
+          
+        const charData = result.data.recordset.map(i => {
+          return {...i,date:moment(i.date).format('YYYY-MM-DD HH:mm:ss')}
+      });
+              //  console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
+        
+             
+            
+               const ruppys=[];
+            //    const dataKwArr=[];
+               const ruppyArr=[];
+        
+               for(let i=0;i<charData.length;i++){
+               // ruppys.push(charData[i].hour);
+                ruppys.push(moment(charData[i].date).format("HH A"));
+                // dataKwArr.push(charData[i].maxKwh)
+                ruppyArr.push(charData[i].usageBillPerHour)
+               }
+              
+              //  console.log('lll',ruppys)
+              
+              const datasets0=[
+            //     {
+            //     label:'kW',
+            //     data:dataKwArr,
+            //     backgroundColor:'#36A2EB',
+            //     borderWidath:1,
+            // },
+            {
+                label:'Rs',
+                data:ruppyArr,
+                backgroundColor:'#ff0066',
+                borderWidath:1,
+            }];
+        
+           // const dataSetKw=datasets[0];
+            //dataSetKw.data=
+              
+               setData({...data,labels:ruppys,datasets:datasets0});
+              }
     
     
         const [data,setData]=useState({

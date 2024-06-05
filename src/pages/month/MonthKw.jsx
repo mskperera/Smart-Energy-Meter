@@ -5,39 +5,49 @@ import { getEngergyUsageKwhByDateRange } from '../../action/device';
 import moment from 'moment';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
-const MonthKw = ({selectedDevice}) => {
-  
+const CustomKw = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
 
     useEffect(()=>{
-       if(selectedDevice){
+      // console.log('startDate',startDate);
+      // console.log('endDate',endDate);       
+        if(selectedDevice){
+          loadEngergyUsageKwhByDateRange1(selectedDevice.id);
+        }
+    },[isSearchLoading,selectedDevice]);
+
+    useEffect(()=>{
+      if(selectedDevice){
         loadEngergyUsageKwhByDateRange(selectedDevice.id);
-       }
-    },[selectedDevice]);
+      }
+  },[selectedDevice]);
+    
 
-    const loadEngergyUsageKwhByDateRange=async(deviceId)=>{
+    const loadEngergyUsageKwhByDateRange1=async(deviceId)=>{
+
+      const utcStartDate = moment.utc(startDate).add(1, 'day').utc().format();
+    const utcEndDate = moment.utc(endDate).add(1, 'day').utc().format();
+
+     console.log('utcStartDate',utcStartDate); 
+     console.log('utcEndDate',utcEndDate);     
       
-      const startOfMonth = moment().utc().startOf('month').add('minutes').format('YYYY-MM-DD'); 
-       const endOfMonth = moment().utc().endOf('month').add('minutes').format('YYYY-MM-DD');
-
-       console.log('month Range',startOfMonth,endOfMonth);
         const payload={
             deviceId:deviceId,//"4",
-            // mesurementUnitId:1,//1-kwh,7-usage bill
+            mesurementUnitId:1,//1-kwh,7-usage bill
             frequencyId:3,
-            // startDate:'2024-03-01',
-            // endDate:'2024-03-31',
-            startDate: startOfMonth, 
-            endDate: endOfMonth,
+            startDate:utcStartDate,
+            endDate:utcEndDate,
         }
 
-        // console.log('payload kwwwww',payload);
+        console.log('payload',payload);
 
     const resultMonth=await getEngergyUsageKwhByDateRange(payload);
     console.log('engergyUsagekwhByDateRange Month',resultMonth.data)
     // setEngergyUsagekwhByDateRangeMonth(resultMonth.data.recordsets);
 
-    console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data);
+    
+    console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data)
          
+    if (resultMonth.data.recordset) { 
            const charData=resultMonth.data.recordset;
          
         
@@ -61,38 +71,88 @@ const MonthKw = ({selectedDevice}) => {
           ]
             setData({...data,labels:months,datasets:datasets0})
           }
+        }
           
-    const [data,setData]=useState({
-        labels:[],
+
+  const loadEngergyUsageKwhByDateRange=async(deviceId)=>{
     
-        datasets:[
-            {
+    const startOfMonth = moment().utc().startOf('month').add('minutes').format('YYYY-MM-DD'); 
+     const endOfMonth = moment().utc().endOf('month').add('minutes').format('YYYY-MM-DD');
+
+     console.log('month Range',startOfMonth,endOfMonth);
+      const payload={
+          deviceId:deviceId,//"4",
+          // mesurementUnitId:1,//1-kwh,7-usage bill
+          frequencyId:3,
+          // startDate:'2024-03-01',
+          // endDate:'2024-03-31',
+          startDate: startOfMonth, 
+          endDate: endOfMonth,
+      }
+
+      console.log('payload',payload);
+
+  const resultMonth=await getEngergyUsageKwhByDateRange(payload);
+  console.log('engergyUsagekwhByDateRange Month',resultMonth.data)
+  // setEngergyUsagekwhByDateRangeMonth(resultMonth.data.recordsets);
+
+  console.log('getEnergyMeterDataKwhPersecsByDateRange',resultMonth.data);
+       
+         const charData=resultMonth.data.recordset;
+       
+      
+         const months=[];
+         const monthKwArr=[];
+      //    const ruppyArr=[];
+  
+         for(let i=0;i<charData.length;i++){
+          months.push(charData[i].day);
+          monthKwArr.push(charData[i].kwhPerDay)
+         // ruppyArr.push(charData[i].usageBill)
+         }
+        
+         const datasets0=[
+          {
             label:'kWh',
-            data:[],
-            backgroundColor:'#36A2EB',
+            data:monthKwArr,
+            backgroundColor:'#00ff99',
             borderWidath:1,
-        },
-        // {
-        //     label:'Rs',
-        //     data:[60,89,98,10,90,70,20,54,75,88,40,10],
-        //     backgroundColor:'aqua',
-        //     borderWidath:1,
-        // },
-    ]     
-    });
+          }
+        ]
+          setData({...data,labels:months,datasets:datasets0})
+        }
+        
+  const [data,setData]=useState({
+      labels:[],
+  
+      datasets:[
+          {
+          label:'kWh',
+          data:[],
+          backgroundColor:'#36A2EB',
+          borderWidath:1,
+      },
+      // {
+      //     label:'Rs',
+      //     data:[60,89,98,10,90,70,20,54,75,88,40,10],
+      //     backgroundColor:'aqua',
+      //     borderWidath:1,
+      // },
+  ]     
+  });
+
     
     const options={
-
         scales: {
             x: {
               grid: {
                 display:false,
                 color: 'gray', // color of x-axis labels
               },
-              title: {
-                display: true,
-                text: 'Date No',
-                color: 'white',
+              title:{
+                display:true,
+                text:'Date No',
+                color:'white',
               },
               ticks: {
                 color: 'white', // color of x-axis labels
@@ -103,27 +163,27 @@ const MonthKw = ({selectedDevice}) => {
                 color: 'gray', // color of x-axis labels
               },
               beginAtZero: true,
-              title: {
-                display: true,
-                text: 'kWh',
-                color: 'white',
+              title:{
+                display:true,
+                text:'kWh',
+                color:'white',
               },
               ticks: {
                 color: 'white', //color of y-axis labels
               },
             },
           },
-
+          
         plugins: {
             legend: {
               display:true,
               labels: {
-                color: 'white', // color for the chart labels
+                color: 'white',//color for the chart labels
               },
             },
-
-          },  
+          },
     }
- return <Bar data={data} options={options}className='chart' id='box'/>
+ return <Bar data={data} options={options} className='chart' id='box'/>
+ 
 }
-export default MonthKw
+export default CustomKw

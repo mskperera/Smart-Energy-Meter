@@ -46,7 +46,7 @@ const WeekKw = ({selectedDevice}) => {
       const payload={
         
           deviceId:deviceId,//"4",
-          // mesurementUnitId:1,//1-kwh,7-usage bill
+          mesurementUnitId:1,//1-kwh,7-usage bill
           frequencyId:3,
           startDate:startDateUTC.format(),
           endDate:endDateUTC.format(),

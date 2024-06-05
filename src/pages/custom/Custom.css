@@ -297,3 +297,121 @@
         transform: none;
     }
 }
+
+@media screen and (max-width:400px) {
+    .page-5{
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        height: 86vh;
+        margin: 1rem;
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+        flex-direction: column;
+    }
+
+    .chart-custom{
+        flex: 1;
+        width: 100%;
+        margin-top: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -400px;
+        padding: 0%;
+       flex-direction: column;
+    }
+
+    .chart-pick-kw{
+        flex: 1;
+        width: 355px;
+        display: flex;
+        margin-top: 0px;
+        justify-content: center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
+}
+
+    .chart-pick-cost{
+        flex: 1;
+        width: 355px;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .date{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        width: 80%;
+        margin-top: 50px;
+        position: static;
+        transform: none;
+    }
+
+}
+
+@media screen and (max-width: 375px) {
+    .page-5{
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        height: 86vh;
+        margin: 1rem;
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+        flex-direction: column;
+    }
+
+    .chart-custom{
+        flex: 1;
+        width: 100%;       
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0px;
+        padding: 0%;
+       flex-direction: column;
+    }
+
+    .chart-pick-kw{
+        flex: 1;
+        width: 300px;
+        display: flex;
+        margin-top: 100px;
+        justify-content: center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
+}
+
+    .chart-pick-cost{
+        flex: 1;
+        width: 300px;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        margin: 0%;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .date{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        width: 80%;
+        margin-top: 50px;
+        position: static;
+        transform: none;
+    }
+}
