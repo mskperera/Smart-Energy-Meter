@@ -2,10 +2,9 @@ import React from 'react'
 import HomeChart from './HomeChart'
 import HomeCostChart from './HomeCostChart'
 
-function KwhBillChart({lineNo,voltage,current,pf,hertz,power,kwh,bill,budgetedKwh,budgetedBill}) {
+function KwhBillChart({lineNo,voltage,current,pf,hertz,power,kwh,usageBill,budgetedKwh,budgetedBill}) {
 
-    const objKw={budgetedKwhValue:budgetedKwh , currentKwValue:kwh};
-    const objBill={budgetedBillValue:budgetedBill , currentBillValue:bill};
+
 
   return (
     <>
@@ -19,8 +18,7 @@ function KwhBillChart({lineNo,voltage,current,pf,hertz,power,kwh,bill,budgetedKw
          <div className="page">
             {/* {JSON.stringify(kwh)} */}
             <div className="chart-now-kw">
-             
-                <HomeChart objKw={objKw} />
+                <HomeChart currentKwValue={kwh} budgetedKwhValue={budgetedKwh} />
               
             </div>
             <div className='page-top'>
@@ -30,36 +28,13 @@ function KwhBillChart({lineNo,voltage,current,pf,hertz,power,kwh,bill,budgetedKw
             </div>
             <div className="chart-now-cost">
              
-                <HomeCostChart objBill={objBill}  />
+                <HomeCostChart budgetedBill={budgetedBill} currentValue={usageBill} />
               
             </div>
 
           </div>
 
-          <div className='page-bottom'>
-            
-                    <div className="vol">
-                      <h5>Voltage</h5>  
-                      <span>{voltage}</span>
-                    </div>
-                    <div className="vol">
-                      <h5>Current</h5> 
-                      <span>{current}</span>
-                    </div>
-                    <div className="vol">
-                      <h5>Power Fact</h5> 
-                      <span>{pf}</span>
-                    </div>
-                    <div className="pow">
-                      <h5>Power</h5> 
-                      <span>{power}</span>
-                    </div>
-                    <div className="pow">
-                     <h5>Hertz</h5> 
-                      <span>{hertz}</span>
-                    </div>
 
-          </div>
     </>
   )
 }

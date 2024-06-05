@@ -7,16 +7,16 @@ import { useSelector } from 'react-redux';
 
 ChartJS.register(ArcElement, Tooltip);
 
-const HomeChart = ({objKw,selectedLine }) => {
+const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
 
  
   const data = {
     
-    labels: ['Used kWh', `Remaining kWh : ${ ((objKw.budgetedKwhValue - objKw.currentKwValue) ||0 )?.toFixed(2)}`],
+    labels: ['Used kWh', `Remaining kWh : ${ ((budgetedKwhValue - currentKwValue) ||0 )?.toFixed(2)}`],
     datasets: [
       {
-        data: [objKw.currentKwValue, objKw.budgetedKwhValue],
-        backgroundColor: [objKw.currentKwValue > objKw.budgetedKwhValue ? '#ff0000' : '#00ff99', '#F5F5DC'],
+        data: [currentKwValue, budgetedKwhValue],
+        backgroundColor: [currentKwValue > budgetedKwhValue ? '#ff0000' : '#00ff99', '#F5F5DC'],
         circumference: 270,
         rotation: 225,
         cutout: '80%',
@@ -32,25 +32,29 @@ const HomeChart = ({objKw,selectedLine }) => {
       const { ctx, data } = chart;
       const centerX = chart.getDatasetMeta(0).data[0].x;
       const centerY = chart.getDatasetMeta(0).data[0].y;
-
+  
       ctx.save();
       ctx.fillStyle = 'white';
       ctx.font = '40px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(data.datasets[0].data[0], centerX, centerY);
-
+  
       ctx.font = '30px Trebuchet MS';
       ctx.fillText('kWh', centerX, centerY + 40);
-
+  
       ctx.font = '20px Trebuchet MS';
       ctx.fillText('Energy Usage', centerX, centerY + 80);
-
-      ctx.font = '15px Trebuchet MS';
-      ctx.fillText('Budget', centerX, centerY - 90);
-
-      ctx.font = '25px Trebuchet MS';
-      ctx.fillText(`${data.datasets[0].data[1]} kWh`, centerX, centerY - 60);
+  
+      if (data.datasets[0].data[1] !== undefined) {
+        ctx.font = '15px Trebuchet MS';
+        ctx.fillText('Budget', centerX, centerY - 90);
+  
+        ctx.font = '25px Trebuchet MS';
+        ctx.fillText(`${data.datasets[0].data[1]} kWh`, centerX, centerY - 60);
+      }
+  
+      ctx.restore();
     },
   };
 
@@ -75,7 +79,7 @@ const HomeChart = ({objKw,selectedLine }) => {
 
   return (
     <>
-      {/* {JSON.stringify(selectedLine)} */}
+
 
       <div className='text-p'>
         <Doughnut data={data} options={options} plugins={[gaugeText]} id='box3' className='chart' />
