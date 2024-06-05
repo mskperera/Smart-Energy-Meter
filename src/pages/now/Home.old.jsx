@@ -15,7 +15,6 @@ import DeviceName from './DeviceName';
 import { useSelector } from 'react-redux';
 import { getDeviceStatus, getEngergyUsageNow } from '../../action/device';
 import { getBudgetedValues, get_DeviceSettingsByDeviceId } from '../../action/deviceSettings';
-import DeviceChart from './DeviceChart';
 
 const Home = () => {
   const [device, setDevice] = useState(null);
@@ -76,22 +75,22 @@ const [loading,setLoading]=useState(false)
 
 
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   const intervalId = setInterval(() => {
-  //     loadChartData();
-  //   }, 5000);
+  useEffect(() => {
+    setLoading(true);
+    const intervalId = setInterval(() => {
+      loadChartData();
+    }, 5000);
 
-  //   return () => clearInterval(intervalId);
-  // }, [device,selectedLine,budgetedKwhValue]);
+    return () => clearInterval(intervalId);
+  }, [device,selectedLine,budgetedKwhValue]);
 
   const loadChartData = async () => {
     const payload = {
-      deviceId: device?.id,
+      deviceId: device.id,
       measurementUnitId: 1,
     };
     const result = await getEngergyUsageNow(payload);
-    console.log('result---11111', result.data);
+    console.log('result11111', result.data);
 
     setLoading(false);
 
@@ -197,32 +196,6 @@ const [loading,setLoading]=useState(false)
     (deviceDetail) => deviceDetail.deviceId === (device?.id || defaultSelectedDevice?.id)
   );
 
-
-
-
-const devices=[{
-
-  budCurrent: 1, budHertz: 100, budPf: 1, budPower : 1000, budVoltage : 250, deviceId : 4, deviceMeasuringModeId : 2, deviceName : "FIDA Device", deviceNo:"D-0003", deviceTimeStamp : 1717480475, deviceTimeStampDate_UTC: "2024-06-04T05:54:35.000Z", deviceTypeId: 1, budgetedKwh: 100,
-  budgetedBill: 3997.5,
-
-  lines:[
-  {lineNo:"l1",bill:"1200.30",budgetedBill:1000,budgetedKwh:1000, current: 6.97, hertz:"50.10", kwh: 3133.98, kwhPerSec: 0, line:"L1", pf: 0.97, power: 1608.7, voltage: 237.7},
-  {lineNo:"l2", voltage:"230V", current: "10A", pf:"0.99", hertz:"50 Hz" ,power:"50 W",  kwh:"120.50" ,bill:"1200.30 ",budgetedBill:1000,budgetedKwh:1000},
-  {lineNo:"l3", voltage:"230V", current: "10A", pf:"0.99", hertz:"50 Hz" ,power:"50 W",  kwh:"120.50" ,bill:"1200.30 ",budgetedBill:1000,budgetedKwh:1000} 
-  ]
-},
-{
-  deviceName:"d2 - single phase",
-  deviceTypeId:1,
-  lines:[{lineNo:"l1", voltage:"230V", current: "10A", pf:"0.99", hertz:"50 Hz" ,power:"50 W",  kwh:"120.50 " ,bill:"1200.30 ",budgetedBill:1000,budgetedKwh:1000},
-  {lineNo:"l2", voltage:"230V", current: "10A", pf:"0.99", hertz:"50 Hz" ,power:"50 W",  kwh:"120.50 " ,bill:"1200.30 ",budgetedBill:1000,budgetedKwh:1000},
-  {lineNo:"l3", voltage:"230V", current: "10A", pf:"0.99", hertz:"50 Hz" ,power:"50 W",  kwh:"120.50 " ,bill:"1200.30 ",budgetedBill:1000,budgetedKwh:1000} 
-  ]
-}
-];
-  
-
-
   return (
     <div className="home">
       {/* {JSON.stringify(objBill)}
@@ -264,18 +237,78 @@ const devices=[{
             </div>
           </div>
 
-      
+          {showDeviceMeasuringModeDropdown && (
+            <div className="device-active-2">
+              <div className="dropdown" style={{ marginLeft: "10px" }}>
+                <select className="dropdown-line" onChange={handleLineChange}>
+                  <option value="L1">{lineOne}</option>
+                  <option value="L2">{lineTwo}</option>
+                  <option value="L3">{lineThree}</option>
+                </select>
+              </div>
+            </div>
+          )}
 
 
           <div className='container'>
 
+          <div className="page">
+            <div className="chart-now-kw">
+              {loading ? (
+                <p className="loading-message">Loading please wait...</p>
+              ) : (
+                <HomeChart objKw={objKw} selectedLine={selectedLine} />
+              )}
+            </div>
+            <div className="chart-now-cost">
+              {loading ? (
+                <p className="loading-message">Loading please wait...</p>
+              ) : (
+                <HomeCostChart objBill={objBill} selectedLine={selectedLine} />
+              )}
+            </div>
+          </div>
 
-{devices.map((device,index)=>(
-     <DeviceChart deviceName={device.deviceName} lines={device.lines} />
-))}
- 
-      
 
+          <div className='page-bottom'>
+            {loading ? (
+              <p className="loading-message">Loading please wait...</p>
+            ) : (
+              <>
+                    <div className="vol">
+                      {/* <Voltage
+                        budgetedValue={budgetedValues.budVoltage}
+                        currentValue={objOther[0]?.voltage}
+                      /> */}
+                    </div>
+                    <div className="vol">
+                      {/* <Current
+                        budgetedValue={budgetedValues.budCurrent}
+                        currentValue={objOther[0]?.current}
+                      /> */}
+                    </div>
+                    <div className="vol">
+                      {/* <Power
+                        budgetedValue={budgetedValues.budPower}
+                        currentValue={objOther[0]?.power}
+                      /> */}
+                    </div>
+                    <div className="pow">
+                      {/* <Powerfact
+                        budgetedValue={budgetedValues.budPf}
+                        currentValue={objOther[0]?.pf}
+                      /> */}
+                    </div>
+                    <div className="pow">
+                      {/* <Hertz
+                        budgetedValue={budgetedValues.budHertz}
+                        currentValue={objOther[0]?.hertz}
+                      /> */}
+                    </div>
+              </>
+            )}
+          </div>
+          
           </div>
 
 
