@@ -433,15 +433,7 @@ const payload = {
             >
               Notification{" "}
             </li>
-            <li
-              onClick={() => updateToggle(5)}
-              className="nav-link"
-              id="v-pills-service-tab"
-              data-bs-toggle="pill"
-              data-bs-targrt="/connection"
-            >
-              About
-            </li>
+      
             <li
               onClick={() => updateToggle(6)}
               className="nav-link"
@@ -450,6 +442,15 @@ const payload = {
               data-bs-targrt="/connection"
             >
               Device
+            </li>
+            <li
+              onClick={() => updateToggle(5)}
+              className="nav-link"
+              id="v-pills-service-tab"
+              data-bs-toggle="pill"
+              data-bs-targrt="/connection"
+            >
+              About
             </li>
           </ul>
         </div>
@@ -821,17 +822,19 @@ const payload = {
         </div>
       </div>
 
-      <div className={toggle === 5 ? "show-content" : "content"}>
-        <div className="body d-flex align-items-center justify-content-center w-100">
-          <AboutDevice />
-        </div>
-      </div>
 
       <div className={toggle === 6 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center w-100">
           <DeviceTab />
         </div>
       </div>
+
+      <div className={toggle === 5 ? "show-content" : "content"}>
+        <div className="body d-flex align-items-center justify-content-center w-100">
+          <AboutDevice />
+        </div>
+      </div>
+
       <BottomNav />
     </div>
   );

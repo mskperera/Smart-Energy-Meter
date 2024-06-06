@@ -15,7 +15,7 @@ import DeviceName from './DeviceName';
 import { useSelector } from 'react-redux';
 import { getDeviceStatus, getEngergyUsageNow } from '../../action/device';
 import { getBudgetedValues, get_DeviceSettingsByDeviceId } from '../../action/deviceSettings';
-import DeviceChart from './DeviceChart';
+import DeviceChart3p from './DeviceChart';
 
 const Home = () => {
   const [device, setDevice] = useState(null);
@@ -51,6 +51,7 @@ const Home = () => {
 
     return () => clearInterval(intervalId); 
   }, [device, defaultSelectedDevice]);
+  
 
 
 
@@ -72,20 +73,22 @@ const Home = () => {
 
   const [budgetedValues,setBudgetedValues]=useState(false);
 
-const [loading,setLoading]=useState(false)
+const [loading,setLoading]=useState(null)
 
 
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   const intervalId = setInterval(() => {
-  //     loadChartData();
-  //   }, 5000);
+  useEffect(() => {
 
-  //   return () => clearInterval(intervalId);
-  // }, [device,selectedLine,budgetedKwhValue]);
+    setLoading(true);
+    const intervalId = setInterval(() => {
+      loadChartData();
+    }, 4000);
+
+    return () => clearInterval(intervalId);
+  }, [device,selectedLine,budgetedKwhValue]);
 
   const loadChartData = async () => {
+   
     const payload = {
       deviceId: device?.id,
       measurementUnitId: 1,
@@ -93,70 +96,9 @@ const [loading,setLoading]=useState(false)
     const result = await getEngergyUsageNow(payload);
     console.log('result---11111', result.data);
 
+
+    setDevices(result.data);
     setLoading(false);
-
- const {budVoltage,budCurrent,budPower,budPf,budHertz } = result.data;
-    setBudgetedValues({budVoltage,budCurrent,budPower,budPf,budHertz })
-
-    if (device.deviceTypeId === 1) {
-      setShowDeviceMeasuringModeDropdown(false);
-        const { kwh,usageBill } = result.data;
-
-      console.log('deviceTypeId 1 kwh', kwh);
-      setObjKw({ ...objKw, currentKwValue: (kwh)?.toFixed(2),budgetedKwhValue});
-      setObjBill({ ...objBill, currentBillValue:(usageBill)?.toFixed(2),budgetedBillValue});
-
-
-      const { kwhPerSec,voltage,current,power,pf,hertz } = result.data;
-
-      const other=[{ kwhPerSec,voltage,current,power,pf,hertz}];
-      setObjOther(other);
-
-    } else if (device.deviceTypeId === 2) {
-
-    const { kwh, kwh2, kwh3,usageBill,usageBill2,usageBill3,deviceMeasuringModeId } = result.data;
-    console.log('deviceMeasuringModeId', deviceMeasuringModeId);
-    let  totalKwh =0;
-    let  totalBill =0;
-    if(deviceMeasuringModeId===1)//Individual line measurement
-    { 
-      setShowDeviceMeasuringModeDropdown(true);
-      console.log('selectedLine', selectedLine);
-      if (selectedLine === "L1") {
-        totalKwh = kwh;
-        totalBill=usageBill;
-      } else if (selectedLine === "L2") {
-        totalKwh = kwh2;
-        totalBill=usageBill2;
-      } else if (selectedLine === "L3") {
-        totalKwh = kwh3;
-        totalBill=usageBill3;
-      }
-    }
-    else if (deviceMeasuringModeId===2)//Consolidated three-phase measurement
-    {
-      setShowDeviceMeasuringModeDropdown(false);
- totalKwh = (kwh || 0) + (kwh2 || 0) + (kwh3 || 0);
- totalBill = (usageBill || 0) + (usageBill2 || 0) + (usageBill2 || 0);
-    }
-
-      console.log("deviceTypeId 2 kwh", totalKwh);
-      setObjKw({ ...objKw, currentKwValue:totalKwh?.toFixed(2),budgetedKwhValue });
-      setObjBill({ ...objBill, currentBillValue:totalBill?.toFixed(2),budgetedBillValue});
-
-
-    const { kwhPerSec,voltage,current,power,pf,hertz,
-      kwhPerSec2,voltage2,current2,power2,pf2,hertz2,
-      kwhPerSec3,voltage3,current3,power3,pf3,hertz3,
-     } = result.data;
-
-    const other=[];
-    other.push({kwhPerSec,voltage,current,power,pf,hertz,line:'L1'});
-    other.push({kwhPerSec:kwhPerSec2,voltage:voltage2,current:current2,power:power2,pf:pf2,hertz:hertz2,line:'L2'});
-    other.push({kwhPerSec:kwhPerSec3,voltage:voltage3,current:current3,power:power3,pf:pf3,hertz:hertz3,line:'L3'});
-    setObjOther(other);
-
-    }
   };
 
 
@@ -169,7 +111,7 @@ const [loading,setLoading]=useState(false)
   const loadDeviceStatus = async (userId, deviceId) => {
     const result = await getDeviceStatus(userId, deviceId);
     if (result.status === 200) {
-      setDeviceDetails(result.data[0]);
+      setDeviceDetails(result?.data[0]);
     }
   };
 
@@ -200,10 +142,11 @@ const [loading,setLoading]=useState(false)
 
 
 
-const devices=[{
+const [devices,setDevices]=useState([{
 
-  budCurrent: 1, budHertz: 100, budPf: 1, budPower : 1000, budVoltage : 250, deviceId : 4, deviceMeasuringModeId : 2, deviceName : "FIDA Device", deviceNo:"D-0003", deviceTimeStamp : 1717480475, deviceTimeStampDate_UTC: "2024-06-04T05:54:35.000Z", deviceTypeId: 1, budgetedKwh: 100,
-  budgetedBill: 3997.5,
+  budCurrent: 1, budHertz: 100, budPf: 1, budPower : 1000, budVoltage : 250, deviceId : 4,
+   deviceMeasuringModeId : 2, deviceName : "FIDA Device", deviceNo:"D-0003", deviceTimeStamp : 1717480475, 
+   deviceTimeStampDate_UTC: "2024-06-04T05:54:35.000Z", deviceTypeId: 2, budgetedKwh: 100, budgetedBill: 3997.5,
 
   lines:[
   {lineNo:"l1",bill:"1200.30",budgetedBill:1000,budgetedKwh:1000, current: 6.97, hertz:"50.10", kwh: 3133.98, kwhPerSec: 0, line:"L1", pf: 0.97, power: 1608.7, voltage: 237.7},
@@ -212,24 +155,22 @@ const devices=[{
   ]
 },
 {
-  deviceName:"d2 - single phase",
-  deviceTypeId:1,
-  lines:[{lineNo:"l1", voltage:"230V", current: "10A", pf:"0.99", hertz:"50 Hz" ,power:"50 W",  kwh:"120.50 " ,bill:"1200.30 ",budgetedBill:1000,budgetedKwh:1000},
-  {lineNo:"l2", voltage:"230V", current: "10A", pf:"0.99", hertz:"50 Hz" ,power:"50 W",  kwh:"120.50 " ,bill:"1200.30 ",budgetedBill:1000,budgetedKwh:1000},
-  {lineNo:"l3", voltage:"230V", current: "10A", pf:"0.99", hertz:"50 Hz" ,power:"50 W",  kwh:"120.50 " ,bill:"1200.30 ",budgetedBill:1000,budgetedKwh:1000} 
-  ]
-}
-];
-  
 
+  budCurrent: 1, budHertz: 100, budPf: 1, budPower : 1000, budVoltage : 250, deviceId : 4,
+   deviceMeasuringModeId : 2,  deviceName:"d2 - single phase", deviceNo:"D-0003", deviceTimeStamp : 1717480475, 
+   deviceTimeStampDate_UTC: "2024-06-04T05:54:35.000Z", deviceTypeId: 1, budgetedKwh: 100, budgetedBill: 3997.5,
+
+
+  lines:[
+    {lineNo:"l1", voltage:"230V", current: "10A", pf:"0.99", hertz:"50 Hz" ,power:"50 W",  kwh:"120.50 " ,bill:"1200.30 ",budgetedBill:1000,budgetedKwh:1000} ]
+}
+]);
+  
+const totalUsageBill = devices.reduce((total, line) => total + line.usageBill, 0);
+const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
 
   return (
     <div className="home">
-      {/* {JSON.stringify(objBill)}
-      <br />
-      {JSON.stringify(objKw)} */}
-
-      {/* {JSON.stringify(objOther.length)} */}
 
       <Navbar className="navnav" onChangeDevice={onChangeDeviceHandler} />
       <Menu className="navnav1" />
@@ -264,28 +205,42 @@ const devices=[{
             </div>
           </div>
 
-      
-
-
+          {JSON.stringify(devices)}
           <div className='container'>
 
+{loading ?    <p className="loading-message">Loading please wait...</p>
+:
+<>
+       {devices.length>1 && <div style={{display:'flex',justifyContent:'space-between'}}>  
+    
+      
+        <h2>Total kwh:{totalUsageKwh}</h2>
+        <h2>Total Bill:{totalUsageBill}</h2>
+        </div> }
 
-{devices.map((device,index)=>(
-     <DeviceChart deviceName={device.deviceName} lines={device.lines} />
-))}
+{        devices?.map((device,index)=>(
+<div key={index}>
+<DeviceChart3p deviceName={device.deviceName} device={device} />
+</div>  
+)
+)}
+
+</>
+
+}
  
       
 
           </div>
 
 
-          <div className="chart-area d-flex align-items-center justify-content-center">
+          {/* <div className="chart-area d-flex align-items-center justify-content-center">
             {loading ? (
               <p className="loading-message">Loading please wait...</p>
             ) : (
               <LineChart selectedDevice={device || defaultSelectedDevice} />
             )}
-          </div>
+          </div> */}
 
 
           {/* <div className="page-bottom">

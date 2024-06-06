@@ -7,16 +7,16 @@ import { useSelector } from 'react-redux';
 
 ChartJS.register(ArcElement, Tooltip);
 
-const HomeCostChart = ({objBill,selectedLine }) => {
+const HomeCostChart = ({budgetedBill,currentValue,selectedLine }) => {
 
  
   const data = {
     
-    labels: ['Used Rs', `Remaining Rs : ${ ((objBill.budgetedBillValue - objBill.currentBillValue) ||0 )?.toFixed(2)}`],
+    labels: ['Used Rs', `Remaining Rs : ${ ((budgetedBill - currentValue) ||0 )?.toFixed(2)}`],
     datasets: [
       {
-        data: [objBill.currentBillValue, objBill.budgetedBillValue],
-        backgroundColor: [objBill.currentBillValue > objBill.budgetedBillValue ? '#ff0000' : '#ff0066', '#F5F5DC'],
+        data: [currentValue, budgetedBill],
+        backgroundColor: [currentValue > budgetedBill ? '#ff0000' : '#ff0066', '#F5F5DC'],
         circumference: 270,
         rotation: 225,
         cutout: '80%',
@@ -46,11 +46,14 @@ const HomeCostChart = ({objBill,selectedLine }) => {
       ctx.font = '20px Trebuchet MS';
       ctx.fillText('Energy Usage', centerX, centerY + 80);
 
-      ctx.font = '15px Trebuchet MS';
-      ctx.fillText('Budget', centerX, centerY - 90);
-
-      ctx.font = '25px Trebuchet MS';
-      ctx.fillText(`${data.datasets[0].data[1]} Rs`, centerX, centerY - 60);
+      if (data.datasets[0].data[1] !== undefined) {
+        ctx.font = '15px Trebuchet MS';
+        ctx.fillText('Budget', centerX, centerY - 90);
+  
+        ctx.font = '25px Trebuchet MS';
+        ctx.fillText(`${data.datasets[0].data[1]} kWh`, centerX, centerY - 60);
+      }
+  
     },
   };
 
