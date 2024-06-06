@@ -3,31 +3,19 @@ import './Home.css';
 import Navbar from '../../components/navbar/Navbar';
 import Menu from '../../components/menu/Menu';
 import BottomNav from '../../components/bottommenu/BottomNav';
-import HomeChart from './HomeChart';
-import HomeCostChart from './HomeCostChart';
-import Voltage from './Voltage';
-import Current from './Current';
-import Power from './Power';
-import Hertz from './Hertz';
-import Powerfact from './Powerfact';
-import LineChart from './LineChart';
-import DeviceName from './DeviceName';
 import { useSelector } from 'react-redux';
-import { getDeviceStatus, getEngergyUsageNow } from '../../action/device';
-import { getBudgetedValues, get_DeviceSettingsByDeviceId } from '../../action/deviceSettings';
+import {getEngergyUsageNow } from '../../action/device';
 import DeviceChart3p from './DeviceChart';
 
 const Home = () => {
   const [device, setDevice] = useState(null);
-  const [toggleMenu, setToggleMenu] = useState(false);
-  const [deviceDetails, setDeviceDetails] = useState([]);
-  const [budgetedKwhValue, setBudgetedKwhAmount] = useState('');
-  const [budgetedBillValue, setBudgetedBillAmount] = useState('');
-  const [lineOne, setLineOne] = useState('');
-  const [lineTwo, setLineTwo] = useState('');
-  const [lineThree, setLineThree] = useState('');
-  const [selectedLine, setSelectedLine] = useState('L1');
-  const [showDeviceMeasuringModeDropdown,setShowDeviceMeasuringModeDropdown]=useState(false);
+  // const [deviceDetails, setDeviceDetails] = useState([]);
+  // const [budgetedKwhValue, setBudgetedKwhAmount] = useState('');
+  // const [budgetedBillValue, setBudgetedBillAmount] = useState('');
+  // const [lineOne, setLineOne] = useState('');
+  // const [lineTwo, setLineTwo] = useState('');
+  // const [lineThree, setLineThree] = useState('');
+  // const [selectedLine, setSelectedLine] = useState('L1');
 
   const onChangeDeviceHandler = (selectedDevice) => {
     setDevice(selectedDevice);
@@ -41,51 +29,17 @@ const Home = () => {
     setDevice(defaultSelectedDevice);
   }, [deviceNames, defaultSelectedDevice]);
 
-  useEffect(() => {
-    const userData = localStorage.getItem('userData');
-    const userId = JSON.parse(userData).userId;
-
-    const intervalId = setInterval(() => {
-      loadDeviceStatus(userId);
-    }, 5000);
-
-    return () => clearInterval(intervalId); 
-  }, [device, defaultSelectedDevice]);
-  
-
-
-
-  const [objKw, setObjKw] = useState({
-    budgetedKwhValue:null,
-    minKwValue: 0,
-    currentKwValue: 0,
-    kwhPerSeconds: 0,
-  });
-
-  const [objBill, setObjBill] = useState({
-    budgetedBillValue:null,
-    minBillValue: 0,
-    currentBillValue: 0,
-    kwhPerSeconds: 0,
-  });
-
-  const [objOther, setObjOther] = useState({});
-
-  const [budgetedValues,setBudgetedValues]=useState(false);
-
 const [loading,setLoading]=useState(null)
 
-
-
   useEffect(() => {
-
+    loadChartData();
     setLoading(true);
     const intervalId = setInterval(() => {
       loadChartData();
     }, 4000);
 
     return () => clearInterval(intervalId);
-  }, [device,selectedLine,budgetedKwhValue]);
+  }, [device]);
 
   const loadChartData = async () => {
    
@@ -94,6 +48,7 @@ const [loading,setLoading]=useState(null)
       measurementUnitId: 1,
     };
     const result = await getEngergyUsageNow(payload);
+
     console.log('result---11111', result.data);
 
 
@@ -103,41 +58,35 @@ const [loading,setLoading]=useState(null)
 
 
 
-  useEffect(() => {
-    loadBudgetedValues(device?.id || defaultSelectedDevice?.id);
-    loadDeviceSettingstData(device?.id || defaultSelectedDevice?.id);
-  }, [device, defaultSelectedDevice]);
+  // useEffect(() => {
+  //   loadBudgetedValues(device?.id || defaultSelectedDevice?.id);
+  //   loadDeviceSettingstData(device?.id || defaultSelectedDevice?.id);
+  // }, [device, defaultSelectedDevice]);
 
-  const loadDeviceStatus = async (userId, deviceId) => {
-    const result = await getDeviceStatus(userId, deviceId);
-    if (result.status === 200) {
-      setDeviceDetails(result?.data[0]);
-    }
-  };
 
-  const loadDeviceSettingstData = async (deviceId) => {
-    const result = await get_DeviceSettingsByDeviceId(deviceId);
-    const deviceSetting = result.data;
-    setLineOne(deviceSetting.l1);
-    setLineTwo(deviceSetting.l2);
-    setLineThree(deviceSetting.l3);
-  };
+  // const loadDeviceSettingstData = async (deviceId) => {
+  //   const result = await get_DeviceSettingsByDeviceId(deviceId);
+  //   const deviceSetting = result.data;
+  //   setLineOne(deviceSetting.l1);
+  //   setLineTwo(deviceSetting.l2);
+  //   setLineThree(deviceSetting.l3);
+  // };
 
-  const loadBudgetedValues = async (deviceId) => {
-    const result = await getBudgetedValues(deviceId);
-    console.log('loadBudgetedValues',result)
-    const budgetedValue = result.data;
-    setBudgetedKwhAmount(budgetedValue.kwhAmount);
-    setBudgetedBillAmount(budgetedValue.billAmount);
-  };
+  // const loadBudgetedValues = async (deviceId) => {
+  //   const result = await getBudgetedValues(deviceId);
+  //   console.log('loadBudgetedValues',result)
+  //   const budgetedValue = result.data;
+  //   setBudgetedKwhAmount(budgetedValue.kwhAmount);
+  //   setBudgetedBillAmount(budgetedValue.billAmount);
+  // };
 
-  const handleLineChange = (e) => {
-    setSelectedLine(e.target.value);
-  };
+  // const handleLineChange = (e) => {
+  //   setSelectedLine(e.target.value);
+  // };
 
-  const selectedDeviceDetails = deviceDetails.find(
-    (deviceDetail) => deviceDetail.deviceId === (device?.id || defaultSelectedDevice?.id)
-  );
+  // const selectedDeviceDetails = deviceDetails.find(
+  //   (deviceDetail) => deviceDetail.deviceId === (device?.id || defaultSelectedDevice?.id)
+  // );
 
 
 
@@ -171,100 +120,44 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
 
   return (
     <div className="home">
-
       <Navbar className="navnav" onChangeDevice={onChangeDeviceHandler} />
       <Menu className="navnav1" />
 
       {device && (
         <div className="body">
-          {/* <div className="device-active">
-            {selectedDeviceDetails && (
-              <div className="both" key={selectedDeviceDetails.deviceId}>
-                <div
-                  className={`curcle ${
-                    selectedDeviceDetails?.deviceStatus === "online"
-                      ? "curcle-online"
-                      : "curcle-offline"
-                  }`}
-                ></div>
-                <div className="curcle-name">
-                  <div
-                    className={`device-status ${
-                      selectedDeviceDetails.deviceStatus === "online"
-                        ? "online"
-                        : "offline"
-                    }`}
-                  >
-                    {selectedDeviceDetails.deviceStatus}
-                  </div>
-                </div>
-              </div>
-            )}
-            <div className="device-name">
-              <DeviceName selectedDevice={device || defaultSelectedDevice} />
-            </div>
-          </div> */}
 
           {/* {JSON.stringify(devices)} */}
-          <div className='container'>
+          <div className="container">
+            {/* {JSON.stringify(deviceDetails)} */}
 
-{loading ?    <p className="loading-message">Loading please wait...</p>
-:
-<>
-       {devices.length>1 && <div style={{display:'flex',justifyContent:'space-between'}}>  
-    
-      
-        <h2>Total kwh:{totalUsageKwh}</h2>
-        <h2>Total Bill:{totalUsageBill}</h2>
-        </div> }
-
-        
-
-{        devices?.map((device,index)=>(
-<div key={index}>
-<div className="device-active">
-            {selectedDeviceDetails && (
-              <div className="both" key={selectedDeviceDetails.deviceId}>
-                <div
-                  className={`curcle ${
-                    selectedDeviceDetails?.deviceStatus === "online"
-                      ? "curcle-online"
-                      : "curcle-offline"
-                  }`}
-                ></div>
-                <div className="curcle-name">
+            {loading ? (
+              <p className="loading-message">Loading please wait...</p>
+            ) : (
+              <>
+                {devices.length > 1 && (
                   <div
-                    className={`device-status ${
-                      selectedDeviceDetails.deviceStatus === "online"
-                        ? "online"
-                        : "offline"
-                    }`}
+                    style={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    {selectedDeviceDetails.deviceStatus}
+                    <h2>Total kwh:{totalUsageKwh}</h2>
+                    <h2>Total Bill:{totalUsageBill}</h2>
                   </div>
-                </div>
-              </div>
+                )}
+
+                {devices?.map((device, index) => (
+                  <div key={index}>
+                 
+                    <div>
+                      <DeviceChart3p
+                        deviceName={device.deviceName}
+                        device={device}
+                        className="device-name-state"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </>
             )}
-            {/* <div className="device-name">
-              <DeviceName selectedDevice={device || defaultSelectedDevice} />
-            </div> */}
           </div>
-          <div>
-
-                <DeviceChart3p deviceName={device.deviceName} device={device} className="device-name-state"/>
-          </div>
-</div>  
-)
-)}
-
-</>
-
-}
- 
-      
-
-          </div>
-
 
           {/* <div className="chart-area d-flex align-items-center justify-content-center">
             {loading ? (
@@ -273,7 +166,6 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
               <LineChart selectedDevice={device || defaultSelectedDevice} />
             )}
           </div> */}
-
 
           {/* <div className="page-bottom">
             {loading ? (

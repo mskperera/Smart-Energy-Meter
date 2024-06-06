@@ -9,7 +9,37 @@ function DeviceChart({ deviceName, device }) {
   return (
    <>
       <div className="section" style={{ marginTop: "50px" }}>
-        <h3>{deviceName}</h3>
+      
+      <div style={{display:'flex',justifyContent:'flex-start'}}>
+     
+      <div className="device-active" >
+                      {device.status && (
+                        <div className="both">
+                          <div
+                            className={`curcle ${
+                              device.status.deviceStatus === "online"
+                                ? "curcle-online"
+                                : "curcle-offline"
+                            }`}
+                          ></div>
+                          <div className="curcle-name">
+                            <div
+                              className={`device-status ${
+                                device.status.deviceStatus === "online"
+                                  ? "online"
+                                  : "offline"
+                              }`}
+                            >
+                              {device.status.deviceStatus}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+          
+                    </div>
+                      <h6>{deviceName}</h6>
+                         
+      </div>
         {device.deviceTypeId===2 && <div style={{display:'flex',justifyContent:'space-between'}}>  
     
       <div className="">{device.deviceMeasuringModeId===1 ? "Individual Line Measurement Mode" : "Consolidated Mode"}</div>
