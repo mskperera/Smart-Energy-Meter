@@ -13,7 +13,7 @@ function DeviceChart({ deviceName, device }) {
         {device.deviceTypeId===2 && <div style={{display:'flex',justifyContent:'space-between'}}>  
     
       <div className="">{device.deviceMeasuringModeId===1 ? "Individual Line Measurement Mode" : "Consolidated Mode"}</div>
-        <div>Total kwh:{device.kwh}</div>
+        <div>Total kwh:{device.kwh}</div> 
         <div>Total Bill:{device.usageBill}</div>
         {device.deviceMeasuringModeId===2  &&
         <>

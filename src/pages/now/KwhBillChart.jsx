@@ -18,6 +18,7 @@ function KwhBillChart({lineNo,voltage,current,pf,hertz,power,kwh,usageBill,budge
          <div className="page">
             {/* {JSON.stringify(kwh)} */}
             <div className="chart-now-kw">
+                
                 <HomeChart currentKwValue={kwh} budgetedKwhValue={budgetedKwh} />
               
             </div>
@@ -28,7 +29,7 @@ function KwhBillChart({lineNo,voltage,current,pf,hertz,power,kwh,usageBill,budge
             </div> */}
             <div className="chart-now-cost">
              
-                <HomeCostChart budgetedBill={budgetedBill} currentValue={usageBill} />
+                <HomeCostChart currentValue={usageBill} budgetedBill={budgetedBill} />
               
             </div>
 
