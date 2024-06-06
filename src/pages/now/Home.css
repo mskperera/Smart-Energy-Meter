@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
    width: 100%;
-    min-height: 60vh;
+    min-height: 62vh;
 }
 
 .container{
@@ -12,7 +12,7 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-    margin-top: 0px;
+    margin-top: 60px;
     margin-left: 0px;
  
 }
@@ -290,7 +290,7 @@ padding-right: 10px;
 
 
 .page-bottom .vol{
-    width: 180px;
+    width: 170px;
     height: 60px;
     /* flex: 1; */
     margin: 4px;
@@ -304,7 +304,7 @@ padding-right: 10px;
 }
 
 .page-bottom .pow{
-    width: 180px;
+    width: 170px;
     height: 60px;
     /* flex: 1; */
     margin: 4px;
@@ -426,11 +426,11 @@ padding-right: 10px;
 @media screen and (max-width:2000px){
     .page{
         width: 100%;
-        margin-top: -4rem;
+        margin-top: -4.5rem;
         justify-content:center;
         align-items: center;
         display: flex;
-        margin-bottom: -4rem;
+        margin-bottom: -3.5rem;
         margin-left: 0px;
         overflow-y: auto;
     }
@@ -455,6 +455,10 @@ padding-right: 10px;
         margin-top: 0px;
         margin-right: 200px;
     } */
+
+    .device-name-state{
+        margin-top: -40px;
+    }
     
     .navnav1{
         top: 93px;
@@ -489,7 +493,7 @@ padding-right: 10px;
 
     .device-active{
         display: flex;
-        /* position: absolute; */
+        position: relative;
         width: fit-content;
         padding: 0px 15px 0px 30px;
         height: 40px;
@@ -499,7 +503,7 @@ padding-right: 10px;
         justify-content: center;
         background:  rgba(11, 11, 11, 0.5);
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-        margin-top: 25px;
+        margin-top: 20px;
     }
 
     .device-name{
