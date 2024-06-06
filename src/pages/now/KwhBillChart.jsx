@@ -21,11 +21,11 @@ function KwhBillChart({lineNo,voltage,current,pf,hertz,power,kwh,usageBill,budge
                 <HomeChart currentKwValue={kwh} budgetedKwhValue={budgetedKwh} />
               
             </div>
-            <div className='page-top'>
+            {/* <div className='page-top'>
                 <div className="line">
                     <span>{lineNo}</span>
                 </div>
-            </div>
+            </div> */}
             <div className="chart-now-cost">
              
                 <HomeCostChart budgetedBill={budgetedBill} currentValue={usageBill} />

@@ -35,12 +35,12 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
   
       ctx.save();
       ctx.fillStyle = 'white';
-      ctx.font = '40px Trebuchet MS';
+      ctx.font = '35px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(data.datasets[0].data[0], centerX, centerY);
   
-      ctx.font = '30px Trebuchet MS';
+      ctx.font = '25px Trebuchet MS';
       ctx.fillText('kWh', centerX, centerY + 40);
   
       ctx.font = '20px Trebuchet MS';
@@ -79,8 +79,6 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
 
   return (
     <>
-
-
       <div className='text-p'>
         <Doughnut data={data} options={options} plugins={[gaugeText]} id='box3' className='chart' />
       </div>

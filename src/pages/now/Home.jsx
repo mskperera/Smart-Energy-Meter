@@ -177,7 +177,7 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
 
       {device && (
         <div className="body">
-          <div className="device-active">
+          {/* <div className="device-active">
             {selectedDeviceDetails && (
               <div className="both" key={selectedDeviceDetails.deviceId}>
                 <div
@@ -203,9 +203,9 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
             <div className="device-name">
               <DeviceName selectedDevice={device || defaultSelectedDevice} />
             </div>
-          </div>
+          </div> */}
 
-          {JSON.stringify(devices)}
+          {/* {JSON.stringify(devices)} */}
           <div className='container'>
 
 {loading ?    <p className="loading-message">Loading please wait...</p>
@@ -218,9 +218,41 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
         <h2>Total Bill:{totalUsageBill}</h2>
         </div> }
 
+        
+
 {        devices?.map((device,index)=>(
 <div key={index}>
-<DeviceChart3p deviceName={device.deviceName} device={device} />
+<div className="device-active">
+            {selectedDeviceDetails && (
+              <div className="both" key={selectedDeviceDetails.deviceId}>
+                <div
+                  className={`curcle ${
+                    selectedDeviceDetails?.deviceStatus === "online"
+                      ? "curcle-online"
+                      : "curcle-offline"
+                  }`}
+                ></div>
+                <div className="curcle-name">
+                  <div
+                    className={`device-status ${
+                      selectedDeviceDetails.deviceStatus === "online"
+                        ? "online"
+                        : "offline"
+                    }`}
+                  >
+                    {selectedDeviceDetails.deviceStatus}
+                  </div>
+                </div>
+              </div>
+            )}
+            {/* <div className="device-name">
+              <DeviceName selectedDevice={device || defaultSelectedDevice} />
+            </div> */}
+          </div>
+          <div>
+
+                <DeviceChart3p deviceName={device.deviceName} device={device} className="device-name-state"/>
+          </div>
 </div>  
 )
 )}

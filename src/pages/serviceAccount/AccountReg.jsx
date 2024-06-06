@@ -87,7 +87,7 @@ function AccountReg() {
                 <div>
                     <div className='form-group mb-1'>
                         <label className="form-label">Client ID :</label>
-                        <input type="text" className="form-control" value=""  />
+                        <input type="text" className="form-control"  />
                     </div>
                 </div>
 
@@ -102,28 +102,28 @@ function AccountReg() {
                                 <label htmlFor='username' className='form-label'>
                                 Username
                                 </label>
-                                <input type='text' className='form-control' value={''} required />
+                                <input type='text' className='form-control'  required />
                             </div>
 
                             <div className='form-group was-validated'>
                                 <label htmlFor='password' className='form-label'>
                                 Password
                                 </label>
-                                <input type='password' className='form-control' value={''}  required />
+                                <input type='password' className='form-control'   required />
                             </div>
 
                             <div className='form-group was-validated'>
                                 <label htmlFor='email' className='form-label'>
                                 Email
                                 </label>
-                                <input type='email' className='form-control' value={''}  required />
+                                <input type='email' className='form-control'   required />
                             </div>
 
                             <div className='form-group was-validated'>
                                 <label htmlFor='displayname' className='form-label'>
                                 Display Name
                                 </label>
-                                <input type='text' className='form-control' value={''}  required />
+                                <input type='text' className='form-control'   required />
                             </div>
                             </div>
 
@@ -133,28 +133,28 @@ function AccountReg() {
                                 <label htmlFor='address' className='form-label'>
                                 Address
                                 </label>
-                            <input type='text' className='form-control' value={''} required />
+                            <input type='text' className='form-control'  required />
                             </div>
 
                             <div className='form-group was-validated'>
                                 <label htmlFor='billingaddress' className='form-label'>
                                 Billing Address
                                 </label>
-                                <input type='text' className='form-control' value={''}  required />
+                                <input type='text' className='form-control'  required />
                             </div>
 
                             <div className='form-group was-validated'>
                                 <label htmlFor='mobile' className='form-label'>
                                 Mobile
                                 </label>
-                                <input type='text' className='form-control' value={''} required />
+                                <input type='text' className='form-control' required />
                             </div>
 
                             <div className='form-group was-validated'>
                                 <label htmlFor='tel' className='form-label'>
                                 Tel
                                 </label>
-                                <input type='text' className='form-control' value={''} required />
+                                <input type='text' className='form-control'  required />
                             </div>
                             </div>
                         </div>
@@ -169,7 +169,7 @@ function AccountReg() {
                     <div>
                         <h5 className='d-flex align-items-center justify-content-center mb-1'>Device details</h5>
                         <div className='form-group d-flex align-items-center'>
-                        <input type="text" className="form-control mb-1 mr-2 " value="" style={{width:'400px'}}/>
+                        <input type="text" className="form-control mb-1 mr-2 " style={{width:'400px'}}/>
                         <Link to="#" className="btn btn-info bbttnn" style={{marginLeft:'10px', height:'37px', marginTop:'-3px'}}>Add</Link>
                         </div>
                         

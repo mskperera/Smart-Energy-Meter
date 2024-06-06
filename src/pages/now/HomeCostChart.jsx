@@ -35,12 +35,12 @@ const HomeCostChart = ({budgetedBill,currentValue,selectedLine }) => {
 
       ctx.save();
       ctx.fillStyle = 'white';
-      ctx.font = '40px Trebuchet MS';
+      ctx.font = '35px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(data.datasets[0].data[0], centerX, centerY);
 
-      ctx.font = '30px Trebuchet MS';
+      ctx.font = '25px Trebuchet MS';
       ctx.fillText('Rs', centerX, centerY + 40);
 
       ctx.font = '20px Trebuchet MS';
