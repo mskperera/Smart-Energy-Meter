@@ -3,9 +3,16 @@
     align-items: center;
     justify-content: center;
     /* background-color:#05052a; */
+    flex-direction: row;
     height: 79.3vh;
     margin: 0%;
     display: flex;
+}
+
+.page-week{
+    /* margin-top: 200px; */
+    display: flex;
+    flex-direction: column;
 }
 
 .chart-week-kw{
@@ -13,11 +20,12 @@
     width: 80%;
     display: flex;
     /* position: absolute; */
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
+    /* flex-direction: column; */
     margin: 0%;
     /* flex-direction: column; */
-    padding: 5rem;
+    padding: 1rem;
 }
 
 .chart-week-cost{
@@ -25,15 +33,16 @@
     width: 80%;
     display: flex;
     /* position: absolute; */
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
+    /* flex-direction: column; */
     margin: 0%;
     /* flex-direction: column; */
-    padding: 5rem;
+    padding: 1rem;
 }
 
 @media screen and (max-width:2000px){
-    .page-2{
+    /* .page-2{
         width: 100%;
         margin-top: 0rem;
         justify-content:center;
@@ -41,8 +50,8 @@
         display: flex;
         margin-bottom: 0rem;
         padding: 1rem;
-        /* margin-left: -150px; */
-    }
+        
+    } */
 
     .chart-week-kw{
         width: 100%;

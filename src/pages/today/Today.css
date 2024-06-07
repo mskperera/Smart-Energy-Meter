@@ -6,6 +6,11 @@
     height: 79.3vh;
     margin: 0%;
     display: flex;
+    
+}
+
+.page-now{
+    margin-top: 560px;
 }
 
 .chart-today-kw{
@@ -197,5 +202,8 @@
         margin: 0%;
         flex-direction: column;
         padding: 1rem;
+}
+.page-now{
+    margin-top: 00px;
 }
 }

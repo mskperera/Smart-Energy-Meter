@@ -4,11 +4,16 @@ import Navbar from '../../components/navbar/Navbar'
 //import Menu from '../../components/menu/Menu'
 import { Link } from 'react-router-dom'
 import BottomNav from '../../components/bottommenu/BottomNav'
-import TodayKw from './TodayKw'
-import TodayCost from './TodayCost'
+// import TodayKw from './TodayKw'
+// import TodayCost from './TodayCost'
 import { useSelector } from 'react-redux'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import DeviceChart from './DeviceChart'
+import { getEngergyUsageKwhByDateRange } from '../../action/device'
+import TodayCost from './TodayCost'
+import TodayKw from './TodayKw'
+import moment from 'moment'
 
 
 function Today() {
@@ -49,7 +54,27 @@ const deviceNames=useSelector(state=>state.device.dropDeviceList);
 const defaultSelctedDevie=deviceNames[0]
 useEffect(()=>{
 setDevice(defaultSelctedDevie);
+
 },[deviceNames])
+
+
+// useEffect(() => {
+//   if (device) {
+//     const deviceId = device || defaultSelctedDevie;
+//     loadChartData(deviceId.id);
+//   }
+  
+// }, [device]);
+
+
+// useEffect(() => {
+//     loadChartData();
+//     const intervalId = setInterval(() => {
+//     loadChartData();
+// }, 4000);
+
+//   return () => clearInterval(intervalId);
+// }, [device]);
 
 // const defSelecedDevice=localStorage.getItem('selectedDevice');
 // console.log('defSelecedDevice',defSelecedDevice)
@@ -58,6 +83,68 @@ setDevice(defaultSelctedDevie);
 // useEffect(()=>{
 // setDevice(defaultSelctedDevie);
 // },[deviceNames])
+
+const loadChartData = async (deviceId) => {
+
+  const todayUtc = moment(); 
+  const startOfDay = todayUtc.startOf('day').format('YYYY-MM-DD HH:mm:ss');
+
+  const endOfDay = todayUtc.endOf('day').format('YYYY-MM-DD HH:mm:ss');
+
+  const utcOffSet= moment().utcOffset();
+
+  const startOfDayUtc = moment(startOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+  const endOfDayUtc = moment(endOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
+
+  const payload = {
+        deviceId:deviceId,
+        mesurementUnitId:1,
+        frequencyId:1,
+        startDate: startOfDayUtc,
+        endDate: endOfDayUtc,
+  };
+  const result = await getEngergyUsageKwhByDateRange(payload);
+
+  console.log('result---2222', result.data);
+  setDevices(result.data);
+}
+
+const [devices, setDevices] = useState(
+  
+ [{deviceName:'nnnn1',
+ lines:[
+  {lineNo:"l1",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+  // {lineNo:"l2",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+  // {lineNo:"l3",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+],
+ days:[{
+   
+  date:"2024-06-06T18:30:00Z", day:"06", hour:"18", 
+  year:"24",
+  month : "06",
+
+  lines:[
+    {lineNo:"l1",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+    // {lineNo:"l2",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+    // {lineNo:"l3",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+  ]
+
+},{
+date:"2024-06-06T18:30:00Z", day:"06", hour:"18", 
+  year:"24",
+  month : "06",
+
+ 
+
+}]
+
+}
+ ]
+
+
+
+
+);
 
   return (
     <div className='home'>
@@ -110,16 +197,35 @@ setDevice(defaultSelctedDevie);
          </div>
           </div>
 
-          <div className='chart-custom'>
-            {/* <div className='chart-today-kw'> */}
-            <div className='chart-pick-kw'>
-              <TodayKw selectedDevice={device || defaultSelctedDevie} startDate={startDate } endDate={endDate} isSearchLoading={isSearchLoading}/>
-            </div>
-            {/* <div className='chart-today-cost'> */}
-            <div className='chart-pick-cost'>
-              <TodayCost selectedDevice={device || defaultSelctedDevie} startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
-            </div>
-         </div>
+
+          {device && (<div className='w-100 page-now'>
+
+            {/* <div className='chart-custom'> */}
+              {/* <div className='chart-today-kw'> */}
+              {/* <div className='chart-pick-kw'>
+                <TodayKw selectedDevice={device || defaultSelctedDevie} startDate={startDate } endDate={endDate} isSearchLoading={isSearchLoading}/>
+              </div> */}
+              {/* <div className='chart-today-cost'> */}
+              {/* <div className='chart-pick-cost'>
+                <TodayCost selectedDevice={device || defaultSelctedDevie} startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
+              </div>
+            </div> */}
+
+            {devices?.map((device, index) => (
+              <div key={index}>
+
+                <div>
+                  <h3>{device.deviceName}</h3>
+                  {/* {JSON.stringify(device)} */}
+                  <DeviceChart  
+                  device={device}
+                  className="device-name-state"
+                  />
+                </div>
+              </div>
+            ))}
+
+          </div>)}
 
 
         </div>

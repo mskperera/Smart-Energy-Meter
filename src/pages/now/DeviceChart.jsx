@@ -8,9 +8,9 @@ function DeviceChart({ deviceName, device }) {
   const {lines}=device;
   return (
    <>
-      <div className="section" style={{ marginTop: "50px" }}>
+      <div className="section">
       
-      <div style={{display:'flex',justifyContent:'flex-start'}}>
+      <div className="section-status">
      
       <div className="device-active" >
                       {device.status && (
@@ -43,11 +43,14 @@ function DeviceChart({ deviceName, device }) {
         {device.deviceTypeId===2 && <div style={{display:'flex',justifyContent:'space-between'}}>  
     
       <div className="">{device.deviceMeasuringModeId===1 ? "Individual Line Measurement Mode" : "Consolidated Mode"}</div>
-        <div>Total kwh:{device.kwh}</div>
-        <div>Total Bill:{device.usageBill}</div>
+        
+        <div >Total kwh:{device.kwh.toFixed(2)}</div> 
+        <div >Total Bill:{device.usageBill.toFixed(2)}</div>
+      
+
         {device.deviceMeasuringModeId===2  &&
         <>
-        <div>bugeted kwh: {device.budgetedKwh}</div>
+        <div >bugeted kwh: {device.budgetedKwh}</div>
         <div>bugeted Bill: {device.budgetedBill}</div>
         </>
         }

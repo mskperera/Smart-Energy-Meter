@@ -8,6 +8,7 @@ import MonthCost from './MonthCost'
 import { useSelector } from 'react-redux'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import DeviceChartMonth from './DeviceChartMonth'
 
 function Month() {
 
@@ -47,6 +48,33 @@ function Month() {
   useEffect(()=>{
 setDevice(defaultSelctedDevie);
   },[deviceNames])
+
+
+  const [devices, setDevices] = useState([{
+   
+    date:"2024-06-06T18:30:00Z", day:"06", hour:"18", 
+    year:"24",
+    month : "06",
+  
+    lines:[
+      {lineNo:"l1",kwhPerDay:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerDay: 13,voltage: 242.5,},
+      // {lineNo:"l2",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+      // {lineNo:"l3",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+    ]
+  
+  },{
+  date:"2024-06-06T18:30:00Z", day:"06", hour:"18", 
+    year:"24",
+    month : "06",
+  
+    lines:[
+      {lineNo:"l1",kwhPerDay:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerDay: 13,voltage: 242.5,},
+      // {lineNo:"l2",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+      // {lineNo:"l3",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+    ]
+  
+  },
+  ]);
 
   return (
     <div className='home'>
@@ -101,14 +129,26 @@ setDevice(defaultSelctedDevie);
           </div>
 
 
-          <div className='chart-custom'>
+          <div className='w-100 page-now'>
 
-              <div className='chart-pick-kw'>
+              {/* <div className='chart-pick-kw'>
                 <MonthKw  selectedDevice={device || defaultSelctedDevie} startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
               </div>
               <div className='chart-pick-cost'>
                 <MonthCost selectedDevice={device || defaultSelctedDevie} startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
+              </div> */}
+              {devices?.map((device, index) => (
+              <div key={index}>
+
+                <div>
+                  <DeviceChartMonth 
+                  device={device}
+                  className="device-name-state"
+                  />
+                </div>
               </div>
+            ))}
+
           </div>
       
     </div>
