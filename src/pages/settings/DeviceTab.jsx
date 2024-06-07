@@ -13,56 +13,49 @@ function DeviceTab() {
     const [editLineTwo, setEditLineTwo] = useState('');
     const [editLineThree, setEditLineThree] = useState('');
 
+
     const [load, setLoad] = useState(false);
 
     const [message, setMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-    const [device, setDevice] = useState('');
-
-    // const onChangeDeviceHandler=(device)=>{
-    //   setDevice(device);
-    // }
-    
-    const deviceNames = useSelector((state) => state.device.dropDeviceList);
-    const defaultSelectedDevice = deviceNames[0];
+    // const [deviceDetails, setDeviceDetails] = useState([]);
+    // const [budgetedKwhValue, setBudgetedKwhAmount] = useState('');
+    // const [budgetedBillValue, setBudgetedBillAmount] = useState('');
+    // const [lineOne, setLineOne] = useState('');
+    // const [lineTwo, setLineTwo] = useState('');
+    // const [lineThree, setLineThree] = useState('');
+    // const [selectedLine, setSelectedLine] = useState('L1');
+  
+    const selectedDevice = useSelector((state) => state.device.selectedDevice);
   
     useEffect(() => {
-      setDevice(defaultSelectedDevice);
-    }, [deviceNames, defaultSelectedDevice]);
-
+        if (selectedDevice) {
+            const deviceId = selectedDevice.id;
+  
+          loadDeviceSettingstData(deviceId);
+        }
+    }, [load,selectedDevice]);
+  
     useEffect(() => {
-        if (device) {
-            const deviceId = device || defaultSelectedDevice;
-            loadDrpMeasuringMode(deviceId.id);
-            loadDeviceSettingstData(deviceId.id);
-        }
-    }, [load,device]);
-
-    useEffect(()=>{
-
-        if(device){
-        const deviceId=device || defaultSelectedDevice;
-        loadDeviceSettingstData(deviceId.id);
-       
-        }
-    },[load,device])
+            loadDrpMeasuringModeDrp();
+    }, []);
 
 
-    const loadDrpMeasuringMode = async () => {
+    const loadDrpMeasuringModeDrp = async () => {
         const result = await getDrpMeasuringMode();
         setDropMeasuringMode(result.data);
-        setSelectedMeasuringMode(result.data[0].deviceMeasuringModeId);
     };
 
     const loadDeviceSettingstData = async (deviceId) => {
         const result = await get_DeviceSettingsByDeviceId(deviceId);
-        console.log("result - drop", result.data);
         const deviceSetting = result.data;
         console.log("deviceSetting---------", deviceSetting);
         setEditLineOne(deviceSetting.l1);
         setEditLineTwo(deviceSetting.l2);
         setEditLineThree(deviceSetting.l3);
+        setSelectedMeasuringMode(deviceSetting.deviceMeasuringModeId);
+
     };
 
     const onsubmitHandler = async (e) => {
@@ -75,14 +68,15 @@ function DeviceTab() {
             // const deviceId = device.id || defaultSelctedDevie.id;
             const payload = {
                 measuringModeId: selectedMeasuringMode,
-                deviceId: device?.id || defaultSelectedDevice?.id,
+                deviceId: selectedDevice?.id,
                 l1: editLineOne,
                 l2: editLineTwo,
                 l3: editLineThree,
             };
 
             const res = await deviceMeasuringModeSave(payload);
-            const { responseStatus, outputMessage } = res.data;
+            console.log("deviceMeasuringModeSave", res);
+            const { responseStatus, outputMessage } = res.data.output;
             if (responseStatus === "failed") {
               setErrorMessage(outputMessage)
               return;
@@ -100,6 +94,7 @@ function DeviceTab() {
 
     return (
         <div className='body d-flex align-items-center justify-content-center w-100'>
+
             <div className='notification'>
                 <h3 className='d-flex align-items-center justify-content-center mb-1'>Device Settings</h3>
                 <form className='need-validation' onSubmit={onsubmitHandler}>
@@ -126,7 +121,7 @@ function DeviceTab() {
 
                     {selectedMeasuringMode === '1' && (
                         <div className="form-group mb-1">
-                            {JSON.stringify(device)}
+                    
                             <div className="form-group col-md-6">
                                 <div className="form-check">
                                     <label className="form-label" htmlFor="l1">L1</label>

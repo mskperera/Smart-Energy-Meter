@@ -257,7 +257,7 @@ const loadOperationalLimitByDeviceId = async (deviceId) => {
 }
 
 const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActive)=>{
-
+  console.log('saveOperationalLimit');
         setErrorMessage('');
         setMessage('');
 
@@ -274,7 +274,7 @@ const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActiv
           };
        
       const res = await saveOperationalLimit(payload);
-    //   console.log(res);
+      console.log('saveOperationalLimit',res);
       const { responseStatus, outputMessage } = res.data;
       if (responseStatus === "failed") {
         setErrorMessage(outputMessage)

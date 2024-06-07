@@ -8,7 +8,7 @@ import './Navbar.css';
 import { CgProfile } from 'react-icons/cg';
 import { getDevicesByUserId } from '../../action/device';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDropDevices } from '../../state/device/deviceReducer';
+import { setDropDevices,setSelectedDevie } from '../../state/device/deviceReducer';
 
 // import { GlobalContext } from '../../context/GlobalContext';
 
@@ -24,7 +24,8 @@ const Navbar = ({onChangeDevice}) => {
 
 const dispatch=useDispatch();
 
-// const dropdownRef = useRef(null);
+
+
 
 
  const loadDevicesByUserId = async () => {
@@ -39,6 +40,8 @@ const dispatch=useDispatch();
     console.log('devices12123313',devices);
      setDeviceNames(devices);
    dispatch(setDropDevices({dropDeviceList:devices}));
+   dispatch(setSelectedDevie({device:devices[0]}));
+   
   }
   
 }
@@ -80,7 +83,10 @@ const dispatch=useDispatch();
   // }
   
   const handleDeviceSelect = (deviceName) => {
+    
     const selectedDeviceObject = deviceNames.find(item => item.name === deviceName);
+    console.log('handleDeviceSelect',selectedDeviceObject)
+    dispatch(setSelectedDevie({device:selectedDeviceObject}));
     if (selectedDeviceObject) {
       onChangeDevice(selectedDeviceObject); 
       localStorage.setItem('selectedDevice',selectedDeviceObject)

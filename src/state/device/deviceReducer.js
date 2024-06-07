@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState={
     
     dropDeviceList:[],
+    selectedDevice:null,
 }
 
 const popupSlice=createSlice({
@@ -13,10 +14,13 @@ const popupSlice=createSlice({
         setDropDevices:(state,action)=>{
             state.dropDeviceList=action.payload.dropDeviceList 
         },
+        setSelectedDevie:(state,action)=>{
+            state.selectedDevice=action.payload.device;
+        }
         
     }
 })
 
-export const {setDropDevices}=popupSlice.actions;
+export const {setDropDevices,setSelectedDevie}=popupSlice.actions;
 
 export default popupSlice.reducer;
