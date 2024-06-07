@@ -6,6 +6,7 @@ import BottomNav from '../../components/bottommenu/BottomNav'
 import YearCost from './YearCost'
 import YearKw from './YearKw'
 import { useSelector } from 'react-redux'
+import DeviceChartYear from './DeviceChartYear'
 
 
 function Year() {
@@ -29,6 +30,31 @@ function Year() {
   },[deviceNames])
 
 
+  const [devices, setDevices] = useState([
+    {
+      date:"2024-06-06T18:30:00Z", day:"06", hour:"18", 
+  year:"24",
+  month : "06",
+
+  lines:[
+    {lineNo:"l1",kwhPerDay:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerDay: 13,voltage: 242.5,},
+    // {lineNo:"l2",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+    // {lineNo:"l3",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+  ]
+    },{
+      date:"2024-06-06T18:30:00Z", day:"06", hour:"18", 
+  year:"24",
+  month : "06",
+
+  lines:[
+    {lineNo:"l1",kwhPerDay:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerDay: 13,voltage: 242.5,},
+    // {lineNo:"l2",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+    // {lineNo:"l3",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+  ]
+    },
+  ]);
+
+
     return (
         <div className='home'>
           <Navbar onChangeDevice={onChangeDeviceHandler}/>
@@ -48,12 +74,17 @@ function Year() {
         </div>
     
         <div className='page-4 body'>
-          <div className='chart-year-kw'>
+          {/* <div className='chart-year-kw'>
              <YearKw selectedDevice={device || defaultSelctedDevie} />
           </div>
           <div className='chart-year-cost'>
              <YearCost selectedDevice={device || defaultSelctedDevie} />
-          </div>
+          </div> */}
+          {devices?.map((device,index)=>(
+            <div key={index}>
+              <DeviceChartYear device={device}/>
+            </div>
+          ))}
         </div>
                <BottomNav/>
         </div>

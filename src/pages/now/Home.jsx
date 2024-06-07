@@ -120,8 +120,8 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
 
   return (
     <div className="home">
-      <Navbar className="navnav" onChangeDevice={onChangeDeviceHandler} />
-      <Menu className="navnav1" />
+      <Navbar className="navnav" onChangeDevice={onChangeDeviceHandler}/>
+      <Menu className="navnav1"/>
 
       {device && (
         <div className="body">

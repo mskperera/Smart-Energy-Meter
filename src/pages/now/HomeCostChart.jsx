@@ -51,7 +51,7 @@ const HomeCostChart = ({budgetedBill,currentValue,selectedLine }) => {
         ctx.fillText('Budget', centerX, centerY - 90);
   
         ctx.font = '25px Trebuchet MS';
-        ctx.fillText(`${data.datasets[0].data[1]} kWh`, centerX, centerY - 60);
+        ctx.fillText(`${data.datasets[0].data[1]} Rs`, centerX, centerY - 60);
       }
   
     },
