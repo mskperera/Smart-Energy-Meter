@@ -135,11 +135,11 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
             ) : (
               <>
                 {devices.length > 1 && (
-                  <div
-                    style={{ display: "flex", justifyContent: "space-between" }}
+                  <div className='budget-values'
+                    style={{ display: "flex", justifyContent: "space-between"}}
                   >
-                    <h2>Total kwh:{totalUsageKwh}</h2>
-                    <h2>Total Bill:{totalUsageBill}</h2>
+                    <h2>Total kWh:{totalUsageKwh.toFixed(2)}</h2>
+                    <h2>Total Bill:{totalUsageBill.toFixed(2)}</h2>
                   </div>
                 )}
 

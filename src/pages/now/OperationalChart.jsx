@@ -1,4 +1,9 @@
 import React from 'react'
+import Power from './Power'
+import Powerfact from './Powerfact'
+import Current from './Current'
+import Voltage from './Voltage'
+import Hertz from './Hertz'
 
 function OperationalChart({lineNo,voltage,current,pf,hertz,power,kwh,bill,budgetedKwh,budgetedBill}) {
   return (
@@ -24,6 +29,23 @@ function OperationalChart({lineNo,voltage,current,pf,hertz,power,kwh,bill,budget
              <h5>Hertz</h5> 
               <span>{hertz}</span>
             </div>
+                  {/* <>
+                    <div className="vol">
+                      <Voltage/>
+                    </div>
+                    <div className="vol">
+                      <Current/>
+                    </div>
+                    <div className="vol">
+                      <Power/>
+                    </div>
+                    <div className="pow">
+                      <Powerfact/>
+                    </div>
+                    <div className="pow">
+                      <Hertz/>
+                    </div>
+                  </> */}
 
   </div>
   )
