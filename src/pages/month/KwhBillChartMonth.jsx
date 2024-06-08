@@ -5,7 +5,7 @@ import MonthCost from './MonthCost'
 function KwhBillChartMonth({kwhPerDay,usageBillPerDay}) {
   return (
     <>
-    <div className='page-5'>
+    <div className='page-4 body'>
         <div className='chart-custom'>
 
              <div className='chart-pick-kw'>

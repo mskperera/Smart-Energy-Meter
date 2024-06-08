@@ -95,9 +95,44 @@ setDevice(defaultSelctedDevie);
 
     
 
-    <div className='page-5 body icon'>
+    {/* <div className='page-5 body icon'> */}
 
-    <div className='date'>
+    {/* <div className='date'>
+          <div className='picker'>
+        <div>
+            <DatePicker
+                selected={startDate}
+                onChange={handleStartDateChange}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                placeholderText="Start Date"
+                dateFormat='dd MMM yyyy'
+            />
+        </div>
+        
+         <div>
+            <DatePicker
+                selected={endDate}
+                onChange={handleEndDateChange}
+                selectsEnd
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate}
+                placeholderText="End Date"
+                dateFormat='dd MMM yyyy'
+            />
+         </div>
+         
+         <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button>
+         </div>
+          </div> */}
+
+
+          <div className='body'>
+
+
+          <div className='date'>
           <div className='picker'>
         <div>
             <DatePicker
@@ -127,10 +162,6 @@ setDevice(defaultSelctedDevie);
          <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button>
          </div>
           </div>
-
-
-          <div className='w-100 page-now'>
-
               {/* <div className='chart-pick-kw'>
                 <MonthKw  selectedDevice={device || defaultSelctedDevie} startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
               </div>
@@ -139,19 +170,17 @@ setDevice(defaultSelctedDevie);
               </div> */}
               {devices?.map((device, index) => (
               <div key={index}>
-
-                <div>
                   <DeviceChartMonth 
                   device={device}
                   className="device-name-state"
                   />
-                </div>
+                
               </div>
             ))}
 
           </div>
       
-    </div>
+    {/* </div> */}
            <BottomNav/>
     </div>
   )

@@ -71,7 +71,7 @@ setDevice(defaultSelctedDevie);
               </div>
         </div>
         <div className='page-5 body icon'>
-          <div className='date'>
+          <div className='date-custom'>
           <div className='picker'>
         <div>
             <DatePicker

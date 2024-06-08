@@ -111,38 +111,183 @@ const loadChartData = async (deviceId) => {
 
 const [devices, setDevices] = useState(
   
- [{deviceName:'nnnn1',
- lines:[
-  {lineNo:"l1",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
-  // {lineNo:"l2",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
-  // {lineNo:"l3",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
-],
- days:[{
-   
-  date:"2024-06-06T18:30:00Z", day:"06", hour:"18", 
-  year:"24",
-  month : "06",
-
-  lines:[
-    {lineNo:"l1",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
-    // {lineNo:"l2",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
-    // {lineNo:"l3",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+  [
+    {
+  
+      deviceTypeId: 2,
+      deviceMeasuringModeId: 1,
+      deviceNo: "D-0007",
+      deviceName: "-3 Phase Device",
+      deviceId: 38,
+  
+      lines: [
+        {
+          lineNo: "L1",
+  
+          days: [
+            {
+              date: "2024-06-06T18:30:00Z",
+              day: "06",
+              hour: "18",
+              year: "24",
+              month: "06",
+  
+              lines: [
+                {
+                  lineNo: "l1",
+                  kwhPerHour: 0.12,
+                  maxKwh: 1934.61,
+                  pf: 0.64,
+                  current: 0.91,
+                  power: 139.6,
+                  usageBill: 92339,
+                  usageBillPerHour: 13,
+                  voltage: 242.5,
+                },
+              ],
+            },
+  
+            {
+              date: "2024-06-06T18:30:00Z",
+              day: "06",
+              hour: "18",
+              year: "24",
+              month: "06",
+  
+              lines: [
+                {
+                  lineNo: "l1",
+                  kwhPerHour: 0.12,
+                  maxKwh: 1934.61,
+                  pf: 0.64,
+                  current: 0.91,
+                  power: 139.6,
+                  usageBill: 92339,
+                  usageBillPerHour: 13,
+                  voltage: 242.5,
+                },
+              ],
+            },
+  
+          ],
+        },
+  
+        {
+          lineNo: "L2",
+  
+          days: [
+            {
+              date: "2024-06-06T18:30:00Z",
+              day: "06",
+              hour: "18",
+              year: "24",
+              month: "06",
+  
+              lines: [
+                {
+                  lineNo: "L1",
+                  kwhPerHour: 0.12,
+                  maxKwh: 1934.61,
+                  pf: 0.64,
+                  current: 0.91,
+                  power: 139.6,
+                  usageBill: 92339,
+                  usageBillPerHour: 13,
+                  voltage: 242.5,
+                },
+              ],
+            },
+  
+            {
+              date: "2024-06-06T18:30:00Z",
+              day: "06",
+              hour: "18",
+              year: "24",
+              month: "06",
+  
+              lines: [
+                {
+                  lineNo: "L2",
+                  kwhPerHour: 0.12,
+                  maxKwh: 1934.61,
+                  pf: 0.64,
+                  current: 0.91,
+                  power: 139.6,
+                  usageBill: 92339,
+                  usageBillPerHour: 13,
+                  voltage: 242.5,
+                },
+              ],
+            },
+  
+          ],
+  
+        },
+  
+      ],
+    },
+    {
+  
+      deviceTypeId: 1,
+      deviceNo: "D-0002",
+      deviceName: "-3 Phase Device",
+      deviceId: 4,
+  
+      lines: [
+        {
+          lineNo: "L1",
+  
+          days: [
+            {
+              date: "2024-06-06T18:30:00Z",
+              day: "06",
+              hour: "18",
+              year: "24",
+              month: "06",
+  
+              lines: [
+                {
+                  lineNo: "l1",
+                  kwhPerHour: 0.12,
+                  maxKwh: 1934.61,
+                  pf: 0.64,
+                  current: 0.91,
+                  power: 139.6,
+                  usageBill: 92339,
+                  usageBillPerHour: 13,
+                  voltage: 242.5,
+                },
+              ],
+            },
+  
+            {
+              date: "2024-06-06T18:30:00Z",
+              day: "06",
+              hour: "18",
+              year: "24",
+              month: "06",
+  
+              lines: [
+                {
+                  lineNo: "l1",
+                  kwhPerHour: 0.12,
+                  maxKwh: 1934.61,
+                  pf: 0.64,
+                  current: 0.91,
+                  power: 139.6,
+                  usageBill: 92339,
+                  usageBillPerHour: 13,
+                  voltage: 242.5,
+                },
+              ],
+            },
+  
+          ],
+        },
+  
+      ],
+    },
   ]
-
-},{
-date:"2024-06-06T18:30:00Z", day:"06", hour:"18", 
-  year:"24",
-  month : "06",
-
- 
-
-}]
-
-}
- ]
-
-
-
 
 );
 
@@ -164,9 +309,14 @@ date:"2024-06-06T18:30:00Z", day:"06", hour:"18",
               </ul>
           </div>
       </div>
-        <div className='page-5 body icon'>
+        {/* <div className='page-5 body icon'> */}
 
-        <div className='date'>
+        
+
+
+          <div className='body'>
+
+          <div className='date'>
           <div className='picker'>
         <div>
             <DatePicker
@@ -196,10 +346,6 @@ date:"2024-06-06T18:30:00Z", day:"06", hour:"18",
          <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button>
          </div>
           </div>
-
-
-          {device && (<div className='w-100 page-now'>
-
             {/* <div className='chart-custom'> */}
               {/* <div className='chart-today-kw'> */}
               {/* <div className='chart-pick-kw'>
@@ -214,21 +360,21 @@ date:"2024-06-06T18:30:00Z", day:"06", hour:"18",
             {devices?.map((device, index) => (
               <div key={index}>
 
-                <div>
+                {/* <div> */}
                   <h3>{device.deviceName}</h3>
                   {/* {JSON.stringify(device)} */}
                   <DeviceChart  
                   device={device}
                   className="device-name-state"
                   />
-                </div>
+                {/* </div> */}
               </div>
             ))}
 
-          </div>)}
+          </div>
 
 
-        </div>
+        {/* </div> */}
             <BottomNav/>
     
     </div>
