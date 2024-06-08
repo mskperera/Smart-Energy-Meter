@@ -70,7 +70,7 @@ setDevice(defaultSelctedDevie);
             </ul>
         </div>
     </nav>
-    <div className='page-4 body'>
+    <div className='body'>
       {/* <div className='chart-week-kw'>
        <WeekKw selectedDevice={device || defaultSelctedDevie}/>
       </div>

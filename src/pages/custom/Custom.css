@@ -53,6 +53,17 @@
     justify-content: center;
     display: flex;
     width: 100%;
+    margin-top: 50px;
+    position: absolute;
+    z-index: 10000;
+   
+}
+
+.date-custom{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 100%;
     margin-top: -320px;
     position: absolute;
     z-index: 10000;
@@ -181,6 +192,16 @@
         position: static;
         transform: none;
     }
+
+    .date-custom{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        width: 80%;
+        margin-top: 80px;
+        position: static;
+        transform: none;
+    }
 }
 
 @media screen and (max-width:650px) {
@@ -227,6 +248,17 @@
 }
 
     .date{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        width: 100%;
+        margin-top: 30px;
+        position: static;
+        transform: none;
+        /* position: absolute; */
+    }
+
+    .date-custom{
         align-items: center;
         justify-content: center;
         display: flex;

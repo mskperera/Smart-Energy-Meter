@@ -73,7 +73,7 @@ function Year() {
             </div>
         </div>
     
-        <div className='page-4 body'>
+        <div className='body'>
           {/* <div className='chart-year-kw'>
              <YearKw selectedDevice={device || defaultSelctedDevie} />
           </div>

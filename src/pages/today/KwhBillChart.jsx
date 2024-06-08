@@ -2,7 +2,7 @@ import React from 'react'
 import TodayKw from './TodayKw'
 import TodayCost from './TodayCost'
 
-function KwhBillChart({line,kwhPerHour,usageBillPerHour}) {
+function KwhBillChart({kwhPerHour,usageBillPerHour}) {
   return (
     <>
             <div className='page-5'>
