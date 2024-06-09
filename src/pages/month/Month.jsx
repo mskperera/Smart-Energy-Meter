@@ -1,372 +1,136 @@
 import React, { useEffect, useState } from 'react'
 import './Month.css'
-import { Link } from 'react-router-dom'
 import Navbar from '../../components/navbar/Navbar'
+//import Menu from '../../components/menu/Menu'
+import { Link } from 'react-router-dom'
 import BottomNav from '../../components/bottommenu/BottomNav'
-import MonthKw from './MonthKw'
-import MonthCost from './MonthCost'
+// import TodayKw from './TodayKw'
+// import TodayCost from './TodayCost'
 import { useSelector } from 'react-redux'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import DeviceChartMonth from './DeviceChartMonth'
+import { getEngergyUsageKwhByDateRange } from '../../action/device'
+
+import moment from 'moment'
+import DeviceCharts from '../today/DeviceChart'
+
 
 function Month() {
 
   const [activeTab, setActiveTab] = useState('Now');
+  const selectedDevice=useSelector(state=>state.device.selectedDevice);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
- 
+
   const [isSearchLoading, setIsSearchLoading] = useState(false);
 
-  // const [search, setSearch] = useState(null);
 
-  const handleStartDateChange = (date) => {
-    setStartDate(date);
+  const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with the current date
+
+  const handleMonthChange = (date) => {
+      setSelectedDate(date); // Update state with the new date
+      console.log('Selected Month:', moment(date).format('MMMM YYYY')); 
   };
 
-  const handleEndDateChange = (date) => {
-    setEndDate(date);
+
+useEffect(()=>{
+  setSelectedDate(moment());
+},[])
+
+useEffect(()=>{
+  if(selectedDate && selectedDevice )
+  loadChartData(selectedDevice.id,selectedDate);
+},[selectedDate,selectedDevice])
+
+
+const loadChartData = async (deviceId,selecedDate) => {
+
+  const utcOffSet= moment().utcOffset();
+
+  const year=moment(selecedDate).year();
+  const month=moment(selecedDate).month()+1;
+
+    const startOfMonth = moment(`${year}-${month}`, 'YYYY-M').startOf('month');
+    
+    const endOfMonth = moment(`${year}-${month}`, 'YYYY-M').endOf('month');
+    
+    const startOfMonthUtc = startOfMonth.subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
+    const endOfMonthUtc = endOfMonth.subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
+  
+    console.log('startOfMonthUtc',startOfMonthUtc);
+    
+    console.log('endOfMonthUtc',endOfMonthUtc);
+
+  const payload = {
+        deviceId:deviceId,
+        mesurementUnitId:1,
+        frequencyId:3,
+        startDate: startOfMonthUtc,
+        endDate: endOfMonthUtc,
   };
+  const result = await getEngergyUsageKwhByDateRange(payload);
 
-  const handleSearch = () => {
-   setIsSearchLoading(!isSearchLoading);
-  };
+  console.log('result---2222', result.data);
+  setDevices(result.data);
 
-  const [device, setDevice] = useState('');
+  setIsSearchLoading(!isSearchLoading);
+}
 
-  const onChangeDeviceHandler=(device)=>{
-    setDevice(device);
-  }
-
-  const deviceNames=useSelector(state=>state.device.dropDeviceList);
-  const defaultSelctedDevie=deviceNames[0]
-  useEffect(()=>{
-setDevice(defaultSelctedDevie);
-  },[deviceNames])
-
-
-  // const [devices, setDevices] = useState([{
-   
-  //   date:"2024-06-06T18:30:00Z", day:"06", hour:"18", 
-  //   year:"24",
-  //   month : "06",
-  
-  //   lines:[
-  //     {lineNo:"l1",kwhPerDay:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerDay: 13,voltage: 242.5,},
-  //     // {lineNo:"l2",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
-  //     // {lineNo:"l3",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
-  //   ]
-  
-  // },{
-  // date:"2024-06-06T18:30:00Z", day:"06", hour:"18", 
-  //   year:"24",
-  //   month : "06",
-  
-  //   lines:[
-  //     {lineNo:"l1",kwhPerDay:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerDay: 13,voltage: 242.5,},
-  //     // {lineNo:"l2",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
-  //     // {lineNo:"l3",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
-  //   ]
-  
-  // },
-  // ]);
-
-
-  const [devices, setDevices] = useState(
-  
-    [
-      {
-    
-        deviceTypeId: 2,
-        deviceMeasuringModeId: 1,
-        deviceNo: "D-0007",
-        deviceName: "-3 Phase Device",
-        deviceId: 38,
-    
-        lines: [
-          {
-            lineNo: "L1",
-    
-            days: [
-              {
-                date: "2024-06-06T18:30:00Z",
-                day: "06",
-                hour: "18",
-                year: "24",
-                month: "06",
-    
-                lines: [
-                  {
-                    lineNo: "l1",
-                    kwhPerHour: 0.12,
-                    maxKwh: 1934.61,
-                    pf: 0.64,
-                    current: 0.91,
-                    power: 139.6,
-                    usageBill: 92339,
-                    usageBillPerHour: 13,
-                    voltage: 242.5,
-                  },
-                ],
-              },
-    
-              {
-                date: "2024-06-06T18:30:00Z",
-                day: "06",
-                hour: "18",
-                year: "24",
-                month: "06",
-    
-                lines: [
-                  {
-                    lineNo: "l1",
-                    kwhPerHour: 0.12,
-                    maxKwh: 1934.61,
-                    pf: 0.64,
-                    current: 0.91,
-                    power: 139.6,
-                    usageBill: 92339,
-                    usageBillPerHour: 13,
-                    voltage: 242.5,
-                  },
-                ],
-              },
-    
-            ],
-          },
-    
-          {
-            lineNo: "L2",
-    
-            days: [
-              {
-                date: "2024-06-06T18:30:00Z",
-                day: "06",
-                hour: "18",
-                year: "24",
-                month: "06",
-    
-                lines: [
-                  {
-                    lineNo: "L1",
-                    kwhPerHour: 0.12,
-                    maxKwh: 1934.61,
-                    pf: 0.64,
-                    current: 0.91,
-                    power: 139.6,
-                    usageBill: 92339,
-                    usageBillPerHour: 13,
-                    voltage: 242.5,
-                  },
-                ],
-              },
-    
-              {
-                date: "2024-06-06T18:30:00Z",
-                day: "06",
-                hour: "18",
-                year: "24",
-                month: "06",
-    
-                lines: [
-                  {
-                    lineNo: "L2",
-                    kwhPerHour: 0.12,
-                    maxKwh: 1934.61,
-                    pf: 0.64,
-                    current: 0.91,
-                    power: 139.6,
-                    usageBill: 92339,
-                    usageBillPerHour: 13,
-                    voltage: 242.5,
-                  },
-                ],
-              },
-    
-            ],
-    
-          },
-    
-        ],
-      },
-      {
-    
-        deviceTypeId: 1,
-        deviceNo: "D-0002",
-        deviceName: "-3 Phase Device",
-        deviceId: 4,
-    
-        lines: [
-          {
-            lineNo: "L1",
-    
-            days: [
-              {
-                date: "2024-06-06T18:30:00Z",
-                day: "06",
-                hour: "18",
-                year: "24",
-                month: "06",
-    
-                lines: [
-                  {
-                    lineNo: "l1",
-                    kwhPerHour: 0.12,
-                    maxKwh: 1934.61,
-                    pf: 0.64,
-                    current: 0.91,
-                    power: 139.6,
-                    usageBill: 92339,
-                    usageBillPerHour: 13,
-                    voltage: 242.5,
-                  },
-                ],
-              },
-    
-              {
-                date: "2024-06-06T18:30:00Z",
-                day: "06",
-                hour: "18",
-                year: "24",
-                month: "06",
-    
-                lines: [
-                  {
-                    lineNo: "l1",
-                    kwhPerHour: 0.12,
-                    maxKwh: 1934.61,
-                    pf: 0.64,
-                    current: 0.91,
-                    power: 139.6,
-                    usageBill: 92339,
-                    usageBillPerHour: 13,
-                    voltage: 242.5,
-                  },
-                ],
-              },
-    
-            ],
-          },
-    
-        ],
-      },
-    ]
-  
-  );
+const [devices, setDevices] = useState([]);
 
   return (
     <div className='home'>
-      <Navbar onChangeDevice={onChangeDeviceHandler}/>
-      <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
+        <Navbar />
+      
+        <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
         <div className='back'>
             <ul className='nav-bar-links'>
                 <Link to={"/home"}><li className='btn btn-sm btn-light'>Now</li></Link> 
                 <Link to={"/today"}><li className='btn btn-sm btn-light'>Day</li></Link>  
-                <Link to={"/week"}><li className='btn btn-sm btn-light'>Week</li></Link>
+                <Link to={"/week"}><li className='btn btn-sm btn-light'>Week</li></Link>  
                 <Link to={"/month"}><li className={`btn btn-sm btn-primary ${activeTab === 'Now' ? 'active' : ''}`}
                 onClick={() => handleTabClick('Now')}>Month</li></Link>
                 <Link to={"/year"}><li className='btn btn-sm btn-light'>Year</li></Link>
                 <Link to={"/custom"}><li className='btn btn-sm btn-light'>Custom</li></Link>
             </ul>
-          </div>
-    </div>
-
-    
-
-    {/* <div className='page-5 body icon'> */}
-
-    {/* <div className='date'>
-          <div className='picker'>
-        <div>
-            <DatePicker
-                selected={startDate}
-                onChange={handleStartDateChange}
-                selectsStart
-                startDate={startDate}
-                endDate={endDate}
-                placeholderText="Start Date"
-                dateFormat='dd MMM yyyy'
-            />
         </div>
-        
-         <div>
-            <DatePicker
-                selected={endDate}
-                onChange={handleEndDateChange}
-                selectsEnd
-                startDate={startDate}
-                endDate={endDate}
-                minDate={startDate}
-                placeholderText="End Date"
-                dateFormat='dd MMM yyyy'
-            />
-         </div>
-         
-         <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button>
-         </div>
-          </div> */}
-
-
+      </div>
           <div className='body'>
-
 
           <div className='date'>
           <div className='picker'>
-        <div>
+          <div>
             <DatePicker
-                selected={startDate}
-                onChange={handleStartDateChange}
-                selectsStart
-                startDate={startDate}
-                endDate={endDate}
-                placeholderText="Start Date"
-                dateFormat='dd MMM yyyy'
+        selected={moment(selectedDate).format("yyyy-MM")} 
+                onChange={handleMonthChange}
+                dateFormat="MMMM yyyy"
+                showMonthYearPicker
+                placeholderText="Select Month"
             />
-        </div>
-        
-         <div>
-            <DatePicker
-                selected={endDate}
-                onChange={handleEndDateChange}
-                selectsEnd
-                startDate={startDate}
-                endDate={endDate}
-                minDate={startDate}
-                placeholderText="End Date"
-                dateFormat='dd MMM yyyy'
-            />
-         </div>
-         
-         <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button>
+        </div>   
+         {/* <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button> */}
          </div>
           </div>
-              {/* <div className='chart-pick-kw'>
-                <MonthKw  selectedDevice={device || defaultSelctedDevie} startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
-              </div>
-              <div className='chart-pick-cost'>
-                <MonthCost selectedDevice={device || defaultSelctedDevie} startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
-              </div> */}
-              {devices?.map((device, index) => (
+            {devices.length >0 && devices?.map((device, index) => (
               <div key={index}>
-                  <DeviceChartMonth 
+                  <h3>{device.deviceName}</h3>
+                  <DeviceCharts 
                   device={device}
                   className="device-name-state"
+                  isSearchLoading={isSearchLoading}
+                  chartFrequencty="days"
                   />
-                
+          
               </div>
             ))}
-
           </div>
-      
-    {/* </div> */}
-           <BottomNav/>
+            <BottomNav/>
+    
     </div>
   )
 }
 
-export default Month
+export default Month;

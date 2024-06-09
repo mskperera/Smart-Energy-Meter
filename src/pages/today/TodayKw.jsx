@@ -1,284 +1,117 @@
-import React, { useContext, useEffect, useState } from 'react'
-import moment from 'moment';
+import React, { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
-import { getDevicesByUserId, getEngergyUsageKwhByDateRange } from '../../action/device';
-// import { GlobalContext } from '../../context/GlobalContext';
+
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 
-const TodayKw = ({selectedDevice,startDate,endDate,isSearchLoading}) => {
 
-  // const [deviceIdDetails, setDeviceIdDetails] = useState('');
+const TodayKw = ({days,isSearchLoading,chartFrequencty}) => {
+
   
-//  const {device,setDevice}=useContext(GlobalContext);
-    
   useEffect(()=>{
-    if(selectedDevice){
-
-      loadEngergyUsageKwhByDateRange1(selectedDevice.id);
-    }
-    console.log('device context',selectedDevice);
-
-  },[isSearchLoading,selectedDevice]);
-
-  useEffect(()=>{
-    if(selectedDevice){
-
-      loadEngergyUsageKwhByDateRange(selectedDevice.id);
-    }
-    console.log('device context',selectedDevice);
-
-  },[selectedDevice]);
-
-  // const getCurrentDateWithoutTime = () => {
-    // return moment().startOf('day').add(24, 'hours').toDate();
-  // };
-
-/////
-// const loadDevicesByUserId = async (userId) => {
-//   const userData=JSON.parse(localStorage.getItem('userData'));  
+    loadChartData();
+  },[isSearchLoading]);
   
-//   console.log('userData',userData.userId);
-//     const result = await getDevicesByUserId(userData.userId);
-//     console.log('deviceDetails', result);
-    
-// }
- ////  
-
- const loadEngergyUsageKwhByDateRange1=async(deviceId)=>{
-  // const todayUtc = moment(); 
-  // const startDate = todayUtc.startOf('day').format('YYYY-MM-DD HH:mm:ss');
-
-  // const endDate = todayUtc.endOf('day').format('YYYY-MM-DD HH:mm:ss');
-
-  // const utcOffSet= moment().utcOffset();
-
-  const startOfDayUtc = moment.utc(startDate).add('minutes').format('YYYY-MM-DD HH:mm:ss');
-  const endOfDayUtc = moment.utc(endDate).add('minutes').format('YYYY-MM-DD HH:mm:ss');
-
-
-
-  console.log('selectedDevice.deviceId',selectedDevice);
-
   
-  console.log("search date",startDate,endDate);
-  // date.utcOffset(moment().utcOffset());
-  // console.log('startOfDayUtc',moment().utcOffset());
-  // console.log('loadEngergyUsageKwhByDateRange')
-  const payload={
-      deviceId:deviceId,//"4",
-      mesurementUnitId:1,//1-kwh,7-usage bill
-      frequencyId:1,
-      startDate: startOfDayUtc,
-      endDate: endOfDayUtc,
-  }
-// console.log('payload',payload);
+    const loadChartData = async (deviceId) => {
+      const labels = [];
+      const data = [];
   
- const result=await getEngergyUsageKwhByDateRange(payload);
- console.log(' hour --',result.data);
-//    setEngergyUsagekwhByDateRange(result.data.recordsets);
-
-   
-    //  console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
-     
-    // const charData = result.data.recordset.map(i => {
-    //     return {...i,date:moment(i.date).format('YYYY-MM-DD HH:mm:ss')}
-    // });
-    if (result.data.recordset) { 
-      const charData=result.data.recordset;
-
-   
-    console.log(' chartdata ',charData);
-     const hours=[];
-     const dataKwArr=[];
-  //    const ruppyArr=[];
-
-     for(let i=0;i<charData.length;i++){
-      hours.push(moment(charData[i].date).format("HH A"));
-      dataKwArr.push(charData[i].kwhPerHour)
-      // console.log('kwhPerHour',charData[i].kwhPerHour)
-     // ruppyArr.push(charData[i].usageBill)
-     }
-    
-     console.log('lll',hours)
-    
-    const datasets0=[
-      {
-      label:'kWh',
-      data:dataKwArr,
-      backgroundColor:'#00ff99',
-      borderWidath:1,
-  }
-  // {
-  //     label:'Rs',
-  //     data:[],
-  //     backgroundColor:'aqua',
-  //     borderWidath:1,
-  // }
-];
-
- // const dataSetKw=datasets[0];
-  //dataSetKw.data=
-    
-     setData({...data,labels:hours,datasets:datasets0});
-    }
-  }
-
-
-
-
-  const loadEngergyUsageKwhByDateRange=async(deviceId)=>{
-    const todayUtc = moment(); 
-    const startOfDay = todayUtc.startOf('day').format('YYYY-MM-DD HH:mm:ss');
-
-    const endOfDay = todayUtc.endOf('day').format('YYYY-MM-DD HH:mm:ss');
-
-    const utcOffSet= moment().utcOffset();
-
-    const startOfDayUtc = moment(startOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
-    const endOfDayUtc = moment(endOfDay).subtract(utcOffSet,'minutes').format('YYYY-MM-DD HH:mm:ss');
-
-
-
-    console.log('selectedDevice.deviceId',selectedDevice);
-
-    
-    console.log("load date",startOfDay,endOfDay);
-    // date.utcOffset(moment().utcOffset());
-    console.log('startOfDayUtc',moment().utcOffset());
-    // console.log('loadEngergyUsageKwhByDateRange')
-    const payload={
-        deviceId:deviceId,//"4",
-        mesurementUnitId:1,//1-kwh,7-usage bill
-        frequencyId:1,
-        // startDate:getCurrentDateWithoutTime(),
-        // endDate:getCurrentDateWithoutTime(),
-        // startDate:"2024-04-06 12:00",
-        // endDate:"2024-04-06 11:59:59",
-        startDate: startOfDayUtc,
-        endDate: endOfDayUtc,
-    }
-console.log('payload ---- 1',payload);
-    
-   const result=await getEngergyUsageKwhByDateRange(payload);
-   console.log(' hour ',result);
-//    setEngergyUsagekwhByDateRange(result.data.recordsets);
-  
-     
-      //  console.log('getEnergyMeterDataKwhPersecsByDateRange',result.data.recordsets)
-       
-      const charData = result.data.recordset.map(i => {
-          return {...i,date:moment(i.date).format('YYYY-MM-DD HH:mm:ss')}
-      });
-     
-      console.log(' chartdata ',charData);
-       const hours=[];
-       const dataKwArr=[];
-    //    const ruppyArr=[];
-
-       for(let i=0;i<charData.length;i++){
-        hours.push(moment(charData[i].date).format("HH A"));
-        dataKwArr.push(charData[i].kwhPerHour)
-        // console.log('kwhPerHour',charData[i].kwhPerHour)
-       // ruppyArr.push(charData[i].usageBill)
+      for (const e of days) {
+        if(chartFrequencty==="hours"){
+          data.push(e.kwhPerHour);
+          labels.push(e.hour);
+        }
+        else    
+         if(chartFrequencty==="days"){
+          data.push(e.kwhPerDay);
+          labels.push(e.day);
+        }
+        else    
+        if(chartFrequencty==="months"){
+         data.push(e.kwhPerMonth);
+         labels.push(e.month);
        }
-      
-       console.log('lll',hours)
-      
-      const datasets0=[
-        {
-        label:'kWh',
-        data:dataKwArr,
-        backgroundColor:'#00ff99',
-        borderWidath:1,
-    }
-    // {
-    //     label:'Rs',
-    //     data:[],
-    //     backgroundColor:'aqua',
-    //     borderWidath:1,
-    // }
-];
-
-   // const dataSetKw=datasets[0];
-    //dataSetKw.data=
-      
-       setData({...data,labels:hours,datasets:datasets0});
       }
-
-
-    const [data,setData]=useState({
-        labels:['1h','2h','3h','4h','5h','6h','7h','8h','9h','10h','11h','12h','13h','14h','15h','16h','17h','18h',
-    '19h','20h','21h','22h','23h','24h'
-    ],
-    
-        datasets:[
-            {
-            label:'kWh',
-            data:[],
-            backgroundColor:'#36A2EB',
-            borderWidath:1,
-        },
-        // {
-        //     label:'Rs',
-        //     data:[80,50,15,25,35,60,89,98,10,90,70,20,54,75,88,40,77,22,51,33,66,32,47,40],
-        //     backgroundColor:'aqua',
-        //     borderWidath:1,
-        // },
-    ]   
-
-    });
-    const options={
-
-      scales: {
-        x: {
-          grid: {
-            display:false,
-            color: 'Gray', //  color of x-axis grid lines
-          },
-          beginAtZero: true,
-          title:{
-            display:true,
-            text:"12:00:00am - 11:59:59pm horus",
-            color:'white'
-          },
-          ticks: {
-            color: 'white', // color of x-axis labels
-          },
-        },
-        y: {
-          grid: {
-            color: 'Gray', //  color of x-axis grid lines
-          },
-          beginAtZero: true,
-          title:{
-            display:true,
-            text:"kWh",
-            color:'white'
-          },
-          ticks: {
-            color: 'white', //color of y-axis labels
-          },
-        },
-      },
+  
+      const datasets0 = [{
+          label: "kWh",
+          data: data,
+          backgroundColor: "#00ff99",
+          borderWidath: 1,
+        }];
+  
+        setChartData({ ...data, labels:labels,  datasets: datasets0 });
+    };
+  
+  
+      const [chartData,setChartData]=useState({
+          labels:[
+      //       '1h','2h','3h','4h','5h','6h','7h','8h','9h','10h','11h','12h','13h','14h','15h','16h','17h','18h',
+      // '19h','20h','21h','22h','23h','24h'
+      ],
       
-      plugins: {
-        legend: {
-          display:true,
-          labels: {
-            color: 'white', 
-            display:false
-          },
-        },
-        
-      },
-    }
- return(
-     <Bar data={data} options={options} className='chart' id='box'/>
-     )
-     
-    
+          datasets: [{
+              label:'kWh',
+              data:[],
+              backgroundColor:'#36A2EB',
+              borderWidath:1,
+          }],
+  
+      });
+
+
+
+        const options={
+
+            scales: {
+              
+                x: {
+                  grid: {
+                    display:false,
+                    color: 'Gray', //  color of x-axis grid lines
+                  },
+                  beginAtZero: true,
+                  title:{
+                    display:true,
+                    text:"12:00:00am - 11:59:59pm hours",
+                    color:'white'
+                  },
+                  ticks: {
+                    color: 'white', // color of x-axis labels
+                  },
+                },
+                y: {
+
+                  grid: {
+                    color: 'Gray', //  color of x-axis grid lines
+                  },
+
+                  beginAtZero: true,
+                  title:{
+                    display:true,
+                    text:"Rs",
+                    color:'white'
+                  },
+                  ticks: {
+                    color: 'white', //color of y-axis labels
+                  },
+                },
+              },
+              
+            plugins: {
+                legend: {
+                  display:true,
+                  labels: {
+                    color: 'white', 
+                  },
+                },
+              },
+        }
+     return(
+         <Bar data={chartData} options={options} id='box' className='chart'/>
+  )
 }
 
 export default TodayKw

@@ -1,5 +1,6 @@
 import { getDevicesByUserId } from "../action/device";
 
+
 export const loadDevicesByUserId = async () => {
     const userData=JSON.parse(localStorage.getItem('userData'));  
     
@@ -9,3 +10,4 @@ export const loadDevicesByUserId = async () => {
       return result.data.deviceId
       
   }
+

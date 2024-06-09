@@ -12,7 +12,7 @@ import { setDropDevices,setSelectedDevie } from '../../state/device/deviceReduce
 
 // import { GlobalContext } from '../../context/GlobalContext';
 
-const Navbar = ({onChangeDevice}) => {
+const Navbar = ({}) => {
 
   // const [selectedDevice, setSelectedDevice] = useState(""); 
   const [selectedDeviceName, setSelectedDeviceName] = useState("")
@@ -30,8 +30,7 @@ const dispatch=useDispatch();
 
  const loadDevicesByUserId = async () => {
   const userData=JSON.parse(localStorage.getItem('userData'));  
-  
-  console.log('userData',userData.userId);
+
   const result = await getDevicesByUserId(userData.userId);
   console.log('deviceDetails', result);
   
@@ -40,8 +39,8 @@ const dispatch=useDispatch();
     console.log('devices12123313',devices);
      setDeviceNames(devices);
    dispatch(setDropDevices({dropDeviceList:devices}));
-   dispatch(setSelectedDevie({device:devices[0]}));
-   
+   dispatch(setSelectedDevie({ device: devices[0]}));
+   setSelectedDeviceName(devices[0].name)
   }
   
 }
@@ -50,47 +49,16 @@ const dispatch=useDispatch();
   }, []); 
 
   
-
-
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-  //       setOpenDevicesName(false);
-  //       setOpen(false);
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []);
-
-  
-  
-  // const loadDevicesByUserId = async (userId) => {
-  //   const userData=JSON.parse(localStorage.getItem('userData'));  
-    
-  //   console.log('userData',userData.userId);
-  //   const result = await getDevicesByUserId(userData.userId);
-  //   console.log('deviceDetails', result);
-    
-  //   if (result.status === 200) {
-  //     const devices = result.data.map(device => ({ id: device.deviceId, name: device.deviceName }));
-  //     setDeviceNames(devices);
-  //   }
-    
-  // }
-  
   const handleDeviceSelect = (deviceName) => {
     
     const selectedDeviceObject = deviceNames.find(item => item.name === deviceName);
     console.log('handleDeviceSelect',selectedDeviceObject)
     dispatch(setSelectedDevie({device:selectedDeviceObject}));
     if (selectedDeviceObject) {
-      onChangeDevice(selectedDeviceObject); 
+     // onChangeDevice(selectedDeviceObject); 
       localStorage.setItem('selectedDevice',selectedDeviceObject)
       setSelectedDeviceName(deviceName);
+      dispatch(setSelectedDevie({device:selectedDeviceObject}));
       setOpenDevicesName(false);
       setOpen(false);
 

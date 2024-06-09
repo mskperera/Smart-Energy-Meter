@@ -8,10 +8,9 @@ function DeviceChart({ deviceName, device }) {
   const {lines}=device;
   return (
    <>
+  
       <div className="section">
-      
       <div className="section-status">
-     
       <div className="device-active" >
                       {device.status && (
                         <div className="both">
@@ -63,6 +62,7 @@ function DeviceChart({ deviceName, device }) {
 
         </div> }
         {/* {JSON.stringify(line.budgetedBill)} */}
+      
         <KwhBillChart
           lineNo={line.lineNo}
           voltage={line.voltage}
