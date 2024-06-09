@@ -50,31 +50,214 @@ setDevice(defaultSelctedDevie);
   },[deviceNames])
 
 
-  const [devices, setDevices] = useState([{
+  // const [devices, setDevices] = useState([{
    
-    date:"2024-06-06T18:30:00Z", day:"06", hour:"18", 
-    year:"24",
-    month : "06",
+  //   date:"2024-06-06T18:30:00Z", day:"06", hour:"18", 
+  //   year:"24",
+  //   month : "06",
   
-    lines:[
-      {lineNo:"l1",kwhPerDay:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerDay: 13,voltage: 242.5,},
-      // {lineNo:"l2",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
-      // {lineNo:"l3",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+  //   lines:[
+  //     {lineNo:"l1",kwhPerDay:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerDay: 13,voltage: 242.5,},
+  //     // {lineNo:"l2",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+  //     // {lineNo:"l3",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+  //   ]
+  
+  // },{
+  // date:"2024-06-06T18:30:00Z", day:"06", hour:"18", 
+  //   year:"24",
+  //   month : "06",
+  
+  //   lines:[
+  //     {lineNo:"l1",kwhPerDay:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerDay: 13,voltage: 242.5,},
+  //     // {lineNo:"l2",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+  //     // {lineNo:"l3",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
+  //   ]
+  
+  // },
+  // ]);
+
+
+  const [devices, setDevices] = useState(
+  
+    [
+      {
+    
+        deviceTypeId: 2,
+        deviceMeasuringModeId: 1,
+        deviceNo: "D-0007",
+        deviceName: "-3 Phase Device",
+        deviceId: 38,
+    
+        lines: [
+          {
+            lineNo: "L1",
+    
+            days: [
+              {
+                date: "2024-06-06T18:30:00Z",
+                day: "06",
+                hour: "18",
+                year: "24",
+                month: "06",
+    
+                lines: [
+                  {
+                    lineNo: "l1",
+                    kwhPerHour: 0.12,
+                    maxKwh: 1934.61,
+                    pf: 0.64,
+                    current: 0.91,
+                    power: 139.6,
+                    usageBill: 92339,
+                    usageBillPerHour: 13,
+                    voltage: 242.5,
+                  },
+                ],
+              },
+    
+              {
+                date: "2024-06-06T18:30:00Z",
+                day: "06",
+                hour: "18",
+                year: "24",
+                month: "06",
+    
+                lines: [
+                  {
+                    lineNo: "l1",
+                    kwhPerHour: 0.12,
+                    maxKwh: 1934.61,
+                    pf: 0.64,
+                    current: 0.91,
+                    power: 139.6,
+                    usageBill: 92339,
+                    usageBillPerHour: 13,
+                    voltage: 242.5,
+                  },
+                ],
+              },
+    
+            ],
+          },
+    
+          {
+            lineNo: "L2",
+    
+            days: [
+              {
+                date: "2024-06-06T18:30:00Z",
+                day: "06",
+                hour: "18",
+                year: "24",
+                month: "06",
+    
+                lines: [
+                  {
+                    lineNo: "L1",
+                    kwhPerHour: 0.12,
+                    maxKwh: 1934.61,
+                    pf: 0.64,
+                    current: 0.91,
+                    power: 139.6,
+                    usageBill: 92339,
+                    usageBillPerHour: 13,
+                    voltage: 242.5,
+                  },
+                ],
+              },
+    
+              {
+                date: "2024-06-06T18:30:00Z",
+                day: "06",
+                hour: "18",
+                year: "24",
+                month: "06",
+    
+                lines: [
+                  {
+                    lineNo: "L2",
+                    kwhPerHour: 0.12,
+                    maxKwh: 1934.61,
+                    pf: 0.64,
+                    current: 0.91,
+                    power: 139.6,
+                    usageBill: 92339,
+                    usageBillPerHour: 13,
+                    voltage: 242.5,
+                  },
+                ],
+              },
+    
+            ],
+    
+          },
+    
+        ],
+      },
+      {
+    
+        deviceTypeId: 1,
+        deviceNo: "D-0002",
+        deviceName: "-3 Phase Device",
+        deviceId: 4,
+    
+        lines: [
+          {
+            lineNo: "L1",
+    
+            days: [
+              {
+                date: "2024-06-06T18:30:00Z",
+                day: "06",
+                hour: "18",
+                year: "24",
+                month: "06",
+    
+                lines: [
+                  {
+                    lineNo: "l1",
+                    kwhPerHour: 0.12,
+                    maxKwh: 1934.61,
+                    pf: 0.64,
+                    current: 0.91,
+                    power: 139.6,
+                    usageBill: 92339,
+                    usageBillPerHour: 13,
+                    voltage: 242.5,
+                  },
+                ],
+              },
+    
+              {
+                date: "2024-06-06T18:30:00Z",
+                day: "06",
+                hour: "18",
+                year: "24",
+                month: "06",
+    
+                lines: [
+                  {
+                    lineNo: "l1",
+                    kwhPerHour: 0.12,
+                    maxKwh: 1934.61,
+                    pf: 0.64,
+                    current: 0.91,
+                    power: 139.6,
+                    usageBill: 92339,
+                    usageBillPerHour: 13,
+                    voltage: 242.5,
+                  },
+                ],
+              },
+    
+            ],
+          },
+    
+        ],
+      },
     ]
   
-  },{
-  date:"2024-06-06T18:30:00Z", day:"06", hour:"18", 
-    year:"24",
-    month : "06",
-  
-    lines:[
-      {lineNo:"l1",kwhPerDay:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerDay: 13,voltage: 242.5,},
-      // {lineNo:"l2",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
-      // {lineNo:"l3",kwhPerHour:0.12,maxKwh:1934.61, pf: 0.64,current: 0.91, power: 139.6,usageBill: 92339, usageBillPerHour: 13,voltage: 242.5,},
-    ]
-  
-  },
-  ]);
+  );
 
   return (
     <div className='home'>
