@@ -50,16 +50,11 @@ function Service () {
 
     const [device, setDevice] = useState('');
 
-const onChangeDeviceHandler=(device)=>{
-  setDevice(device);
-}
+
 
 const deviceNames=useSelector(state=>state.device.dropDeviceList);
 const defaultSelctedDevie=deviceNames[0];
-
-useEffect(()=>{
-setDevice(defaultSelctedDevie);
-},[deviceNames])
+const selectedDevice=useSelector(state=>state.device.selectedDevice);
 
 
 
@@ -67,19 +62,17 @@ setDevice(defaultSelctedDevie);
 
         loadDrpConsumerCategories();
        
-        if(device){
-            const deviceId=device.id || defaultSelctedDevie.id;
-
-        // const deviceId=4;
-        loadDrpSupplier(deviceId.id);
-        loadDrpSupplyType(deviceId.id);
+        if(selectedDevice){
+            const deviceId=selectedDevice.id
+        loadDrpSupplier(deviceId);
+        loadDrpSupplyType(deviceId);
         // loadDeviceDetailsByDeviceId();
         }
-    }, [device,load]);
+    }, [selectedDevice,load]);
 
     useEffect(()=>{
         loadDrpConsumerSubCategoriesById();
-    },[consumerCategoryselectedValue]);
+    },[]);
 
  
 
@@ -117,13 +110,11 @@ setDevice(defaultSelctedDevie);
     }
 
     useEffect(()=>{
-
-        if(device){
-        const deviceId=device || defaultSelctedDevie;
-        loadDeviceSettingstData(deviceId.id);
-        loadDeviceConnectionData(deviceId.id);
-        }
-    },[load,device])
+          const deviceId=selectedDevice.id
+        loadDeviceSettingstData(deviceId);
+        loadDeviceConnectionData(deviceId);
+        
+    },[load,selectedDevice])
 
     const loadDrpConsumerCategories=async()=>{
         const result=await getDrpConsumerCategories();
@@ -208,11 +199,10 @@ const deviceId=device.id || defaultSelctedDevie.id;
 }
 
 useEffect(() => {
-    if(device){
-        const deviceId=device.id || defaultSelctedDevie.id;
-    loadOperationalLimitByDeviceId(deviceId);
-    }
-}, [load,device]);
+  
+    loadOperationalLimitByDeviceId(selectedDevice.id);
+
+}, [load,selectedDevice]);
 
 
 const loadOperationalLimitByDeviceId = async (deviceId) => {
@@ -389,7 +379,7 @@ const payload = {
 
   return (
     <div className="home">
-      <Navbar onChangeDevice={onChangeDeviceHandler} />
+      {/* <Navbar onChangeDevice={onChangeDeviceHandler} /> */}
       <div className="tab d-flex align-items-center justify-content-center">
         <div className="back2">
           <ul
