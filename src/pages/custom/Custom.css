@@ -3,14 +3,12 @@
     align-items: center;
     justify-content: center;
     /* background-color:#05052a; */
-    height: 79.3vh;
+    height: 70vh;
     margin: 0%;
     display: flex;
+    margin-top: -100px;
 }
-.date{
-    flex: 1;
-    
-}
+
 
 .chart-custom{
     flex: 1;
@@ -54,10 +52,24 @@
     display: flex;
     width: 100%;
     margin-top: 50px;
-    position: absolute;
+    /* position: ; */
     z-index: 10000;
    
 }
+
+.picker {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .picker > div {
+    margin-right: 10px; 
+  }
+  
+  .btn-search {
+    margin-left: 10px;
+  }
 
 .date-custom{
     align-items: center;
@@ -386,6 +398,7 @@
         margin-top: 50px;
         position: static;
         transform: none;
+        margin-left: 40px;
     }
 
 }
