@@ -7,7 +7,7 @@ function KwhBillChart({line,isSearchLoading,chartFrequencty}) {
   return (
     <>
       <div className="page-5">
-        <h2>{line.lineNo}</h2>
+        <h5>{line.lineNo}</h5>
         <div className="chart-custom">
           {/* {JSON.stringify(days)} */}
           <div className="chart-pick-kw">

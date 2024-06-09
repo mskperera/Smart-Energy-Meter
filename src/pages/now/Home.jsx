@@ -92,8 +92,8 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
 
       {device && (
         <div className="body">
-            <div>
-              <h5 className="">Session Date : 2024/06/08</h5>
+            <div className="session-name">
+              <h5 >Session Date : 2024/06/08</h5>
             </div>
           {/* {JSON.stringify(devices)} */}
           <div className="container">
