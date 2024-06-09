@@ -29,7 +29,7 @@ const Home = () => {
     setDevice(defaultSelectedDevice);
   }, [deviceNames, defaultSelectedDevice]);
 
-const [loading,setLoading]=useState(null)
+const [loading,setLoading]=useState(null);
 
   useEffect(() => {
     loadChartData();
@@ -55,39 +55,6 @@ const [loading,setLoading]=useState(null)
     setDevices(result.data);
     setLoading(false);
   };
-
-
-
-  // useEffect(() => {
-  //   loadBudgetedValues(device?.id || defaultSelectedDevice?.id);
-  //   loadDeviceSettingstData(device?.id || defaultSelectedDevice?.id);
-  // }, [device, defaultSelectedDevice]);
-
-
-  // const loadDeviceSettingstData = async (deviceId) => {
-  //   const result = await get_DeviceSettingsByDeviceId(deviceId);
-  //   const deviceSetting = result.data;
-  //   setLineOne(deviceSetting.l1);
-  //   setLineTwo(deviceSetting.l2);
-  //   setLineThree(deviceSetting.l3);
-  // };
-
-  // const loadBudgetedValues = async (deviceId) => {
-  //   const result = await getBudgetedValues(deviceId);
-  //   console.log('loadBudgetedValues',result)
-  //   const budgetedValue = result.data;
-  //   setBudgetedKwhAmount(budgetedValue.kwhAmount);
-  //   setBudgetedBillAmount(budgetedValue.billAmount);
-  // };
-
-  // const handleLineChange = (e) => {
-  //   setSelectedLine(e.target.value);
-  // };
-
-  // const selectedDeviceDetails = deviceDetails.find(
-  //   (deviceDetail) => deviceDetail.deviceId === (device?.id || defaultSelectedDevice?.id)
-  // );
-
 
 
 

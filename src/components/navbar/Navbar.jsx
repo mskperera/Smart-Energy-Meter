@@ -12,7 +12,7 @@ import { setDropDevices,setSelectedDevie } from '../../state/device/deviceReduce
 
 // import { GlobalContext } from '../../context/GlobalContext';
 
-const Navbar = ({onChangeDevice}) => {
+const Navbar = ({}) => {
 
   // const [selectedDevice, setSelectedDevice] = useState(""); 
   const [selectedDeviceName, setSelectedDeviceName] = useState("")
@@ -88,9 +88,10 @@ const dispatch=useDispatch();
     console.log('handleDeviceSelect',selectedDeviceObject)
     dispatch(setSelectedDevie({device:selectedDeviceObject}));
     if (selectedDeviceObject) {
-      onChangeDevice(selectedDeviceObject); 
+     // onChangeDevice(selectedDeviceObject); 
       localStorage.setItem('selectedDevice',selectedDeviceObject)
       setSelectedDeviceName(deviceName);
+      dispatch(setSelectedDevie({device:selectedDeviceObject}));
       setOpenDevicesName(false);
       setOpen(false);
 

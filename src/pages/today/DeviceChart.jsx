@@ -2,24 +2,19 @@ import React from 'react'
 import KwhBillChart from './KwhBillChart'
 
 
-function DeviceCharts({device}) {
-    const {lines}=device;
+function DeviceCharts({device,isSearchLoading}) {
+    const {deviceId,deviceName,lines}=device;
   return (
     <>
-    {/* {JSON.stringify(device)} */}
-    {/* {JSON.stringify(line)} */}
+    <h2>Device {deviceId}</h2>
      {lines.map((line,index) => (
         
-        line.days.map((day,dayIndex)=>(
             <KwhBillChart 
-            key={`${index}-${dayIndex}`}
-            kwhPerHour={day.lines[0].kwhPerHour}
-            usageBillPerHour={day.lines[0].usageBillPerHour}
-        //    kwhPerHour={lines.kwhPerHour}
-        //    usageBillPerHour={lines.usageBillPerHour}
+            line={line}
+            key={index}
+            isSearchLoading={isSearchLoading}
         />
-        ))
-        
+       
       ))} 
         
     </>
