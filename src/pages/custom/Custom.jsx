@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import BottomNav from '../../components/bottommenu/BottomNav'
-import { Link } from 'react-router-dom'
-import Navbar from '../../components/navbar/Navbar'
 import './Custom.css'
-import CustomKw from './CustomKw'
-import CustomCost from './CustomCost'
-import './Date.css'
+import Navbar from '../../components/navbar/Navbar'
+//import Menu from '../../components/menu/Menu'
+import { Link } from 'react-router-dom'
+import BottomNav from '../../components/bottommenu/BottomNav'
+// import TodayKw from './TodayKw'
+// import TodayCost from './TodayCost'
+import { useSelector } from 'react-redux'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useSelector } from 'react-redux'
+
+import { getEngergyUsageKwhByDateRange } from '../../action/device'
+import moment from 'moment'
+import DeviceCharts from '../today/DeviceChart'
 
 
-function Custom() {
+function Today() {
 
   const [activeTab, setActiveTab] = useState('Now');
+  const selectedDevice=useSelector(state=>state.device.selectedDevice);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -21,10 +26,8 @@ function Custom() {
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
- 
   const [isSearchLoading, setIsSearchLoading] = useState(false);
 
-  // const [search, setSearch] = useState(null);
 
   const handleStartDateChange = (date) => {
     setStartDate(date);
@@ -34,32 +37,53 @@ function Custom() {
     setEndDate(date);
   };
 
+
   const handleSearch = () => {
-   setIsSearchLoading(!isSearchLoading);
+    if(startDate && selectedDevice )
+      loadChartData(selectedDevice.id,startDate);
+
   };
 
-  const [device, setDevice] = useState('');
 
-  const onChangeDeviceHandler=(device)=>{
-    setDevice(device);
-  }
 
-  const deviceNames=useSelector(state=>state.device.dropDeviceList);
-const defaultSelctedDevie=deviceNames[0]
-useEffect(()=>{
-setDevice(defaultSelctedDevie);
-},[deviceNames])
+const loadChartData = async (deviceId,startDate,endDate) => {
 
-    
-    return (
+
+  const utcOffSet= moment().utcOffset();
+
+
+ // const startOfDay = startDate;//"2024-06-06"; 
+
+const startOfDayUtc = moment(startDate).startOf('day').subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
+const endOfDayUtc = moment(endDate).endOf('day').subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
+
+
+  console.log('startOfDayUtc---2222', startOfDayUtc);
+  console.log('endOfDayUtc---2222', endOfDayUtc);
+  const payload = {
+        deviceId:deviceId,
+        mesurementUnitId:1,
+        frequencyId:3,
+        startDate: startOfDayUtc,
+        endDate: endOfDayUtc,
+  };
+  const result = await getEngergyUsageKwhByDateRange(payload);
+
+  console.log('result---2222', result.data);
+  setDevices(result.data);
+
+  setIsSearchLoading(!isSearchLoading);
+}
+
+const [devices, setDevices] = useState([]);
+
+  return (
+    <div className='home'>
+        <Navbar />
       
-        <div className='home'>
-          <Navbar  onChangeDevice={onChangeDeviceHandler}/>
-        
-        
-          <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
-            <div className='back'>
-                <ul className='nav-bar-links'>
+        <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
+          <div className='back'>
+          <ul className='nav-bar-links'>
                     <Link to={"/home"}><li className='btn btn-sm btn-light'>Now</li></Link> 
                     <Link to={"/today"}><li className='btn btn-sm btn-light'>Day</li></Link>  
                     <Link to={"/week"}><li className='btn btn-sm btn-light'>Week</li></Link>
@@ -68,10 +92,11 @@ setDevice(defaultSelctedDevie);
                     <Link to={"/custom"}><li className={`btn btn-sm btn-primary ${activeTab === 'Now' ? 'active' : ''}`}
                 onClick={() => handleTabClick('Now')}>Custom</li></Link>
                 </ul>
-              </div>
-        </div>
-        <div className='page-5 body icon'>
-          <div className='date-custom'>
+          </div>
+      </div>
+          <div className='body'>
+
+          <div className='date'>
           <div className='picker'>
         <div>
             <DatePicker
@@ -101,20 +126,23 @@ setDevice(defaultSelctedDevie);
          <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button>
          </div>
           </div>
+            {devices.length >0 && devices?.map((device, index) => (
+              <div key={index}>
+                  <h3>{device.deviceName}</h3>
+                  <DeviceCharts 
+                  device={device}
+                  className="device-name-state"
+                  isSearchLoading={isSearchLoading}
+                  chartFrequencty="days"
+                  />
           
-          <div className='chart-custom'>
-          <div className='chart-pick-kw'>
-            <CustomKw selectedDevice={device || defaultSelctedDevie}   startDate={startDate } endDate={endDate} isSearchLoading={isSearchLoading}/>
+              </div>
+            ))}
           </div>
-          <div className='chart-pick-cost'>
-            <CustomCost selectedDevice={device || defaultSelctedDevie} startDate={startDate} endDate={endDate} isSearchLoading={isSearchLoading}/>
-          </div>
-          </div>
-
-        </div>
             <BottomNav/>
-        </div>
-      )
+    
+    </div>
+  )
 }
 
-export default Custom
+export default Today

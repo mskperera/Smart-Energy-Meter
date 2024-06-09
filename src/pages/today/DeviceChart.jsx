@@ -2,7 +2,7 @@ import React from 'react'
 import KwhBillChart from './KwhBillChart'
 
 
-function DeviceCharts({device,isSearchLoading}) {
+function DeviceCharts({device,isSearchLoading,chartFrequencty}) {
     const {deviceId,deviceName,lines}=device;
   return (
     <>
@@ -13,6 +13,7 @@ function DeviceCharts({device,isSearchLoading}) {
             line={line}
             key={index}
             isSearchLoading={isSearchLoading}
+            chartFrequencty={chartFrequencty}
         />
        
       ))} 

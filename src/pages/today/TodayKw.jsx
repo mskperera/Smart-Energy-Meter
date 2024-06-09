@@ -6,7 +6,7 @@ ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 
 
-const TodayKw = ({days,isSearchLoading}) => {
+const TodayKw = ({days,isSearchLoading,chartFrequencty}) => {
 
   
   useEffect(()=>{
@@ -19,8 +19,20 @@ const TodayKw = ({days,isSearchLoading}) => {
       const data = [];
   
       for (const e of days) {
-        data.push(e.kwhPerHour);
-        labels.push(e.hour);
+        if(chartFrequencty==="hours"){
+          data.push(e.kwhPerHour);
+          labels.push(e.hour);
+        }
+        else    
+         if(chartFrequencty==="days"){
+          data.push(e.kwhPerDay);
+          labels.push(e.day);
+        }
+        else    
+        if(chartFrequencty==="months"){
+         data.push(e.kwhPerMonth);
+         labels.push(e.month);
+       }
       }
   
       const datasets0 = [{

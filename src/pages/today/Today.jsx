@@ -35,12 +35,9 @@ function Today() {
 
 
   const handleSearch = () => {
-    loadChartData(selectedDevice.id);
+    loadChartData(selectedDevice.id,startDate);
 
   };
-
-
-
 
 
 useEffect(()=>{
@@ -49,19 +46,23 @@ useEffect(()=>{
   setStartDate(todayUtc.format('yyyy-MM-DD'));
 },[])
 
+useEffect(()=>{
+  if(startDate && selectedDevice )
+  loadChartData(selectedDevice.id,startDate);
+},[startDate,selectedDevice])
 
 
-const loadChartData = async (deviceId) => {
+const loadChartData = async (deviceId,startDay) => {
 
 
 
   const utcOffSet= moment().utcOffset();
 
 
-  const startOfDay = startDate;//"2024-06-06"; 
+ // const startOfDay = startDate;//"2024-06-06"; 
 
-const startOfDayUtc = moment(startOfDay).startOf('day').subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
-const endOfDayUtc = moment(startOfDay).endOf('day').subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
+const startOfDayUtc = moment(startDay).startOf('day').subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
+const endOfDayUtc = moment(startDay).endOf('day').subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
 
 
   console.log('startOfDayUtc---2222', startOfDayUtc);
@@ -81,300 +82,7 @@ const endOfDayUtc = moment(startOfDay).endOf('day').subtract(utcOffSet, 'minutes
   setIsSearchLoading(!isSearchLoading);
 }
 
-const [devices, setDevices] = useState(
-  
-//   [
-//     {
-//         deviceId: 4,
-//         lines: [
-//             {
-//                 lineNo: "L1",
-//                 days: [
-//                     {
-//                         year: 2024,
-//                         month: 3,
-//                         day: "22",
-//                         date: "2024-05-22T01:00:00Z",
-//                         hour: "01",
-//                         maxKwh: 973.31,
-//                         usageBill: 44032.54,
-//                         voltage: 244.8,
-//                         current: 17.75,
-//                         power: 4075.6,
-//                         pf: 1
-//                     },
-//                     {
-//                           year: 2024,
-//                         month: 3,
-//                         day: "22",
-//                         date: "2024-05-22T01:00:00Z",
-//                         hour: "02",
-//                         maxKwh: 1428.17,
-//                         usageBill: 64196.24,
-//                         voltage: 245.4,
-//                         current: 20.08,
-//                         power: 4607,
-//                         pf: 1
-//                     },
-//                     {
-//                       year: 2024,
-//                       month: 3,
-//                       day: "22",
-//                       date: "2024-05-22T01:00:00Z",
-//                       hour: "03",
-//                         maxKwh: 1794.49,
-//                         usageBill: 80518.77,
-//                         voltage: 247.3,
-//                         current: 20.14,
-//                         power: 4586.2,
-//                         pf: 1
-//                     }
-//                 ]
-//             },
-//             {
-//                 lineNo: "L2",
-//                 days: [
-//                     {
-//                       year: 2024,
-//                       month: 3,
-//                       day: "22",
-//                       date: "2024-05-22T01:00:00Z",
-//                       hour: "04",
-//                         maxKwh: null,
-//                         usageBill: null,
-//                         voltage: null,
-//                         current: null,
-//                         power: null,
-//                         pf: null
-//                     },
-//                     {
-//                       year: 2024,
-//                       month: 3,
-//                       day: "22",
-//                       date: "2024-05-22T01:00:00Z",
-//                       hour: "05",
-//                       maxKwh: null,
-//                       usageBill: null,
-//                       voltage: null,
-//                       current: null,
-//                       power: null,
-//                       pf: null
-//                     },
-//                     {
-//                       year: 2024,
-//                       month: 3,
-//                       day: "22",
-//                       date: "2024-05-22T01:00:00Z",
-//                       hour: "06",
-//                       maxKwh: null,
-//                       usageBill: null,
-//                       voltage: null,
-//                       current: null,
-//                       power: null,
-//                       pf: null
-//                     }
-//                 ]
-//             },
-//             {
-//                 "lineNo": "L3",
-//                 days: [
-//                   {
-//                     year: 2024,
-//                     month: 3,
-//                     day: "22",
-//                     date: "2024-05-22T01:00:00Z",
-//                     hour: "07",
-//                       maxKwh: null,
-//                       usageBill: null,
-//                       voltage: null,
-//                       current: null,
-//                       power: null,
-//                       pf: null
-//                   },
-//                   {
-//                     year: 2024,
-//                     month: 3,
-//                     day: "22",
-//                     date: "2024-05-22T01:00:00Z",
-//                     hour: "08",
-//                     maxKwh: null,
-//                     usageBill: null,
-//                     voltage: null,
-//                     current: null,
-//                     power: null,
-//                     pf: null
-//                   },
-//                   {
-//                     year: 2024,
-//                     month: 3,
-//                     day: "22",
-//                     date: "2024-05-22T01:00:00Z",
-//                     hour: "09",
-//                     maxKwh: null,
-//                     usageBill: null,
-//                     voltage: null,
-//                     current: null,
-//                     power: null,
-//                     pf: null
-//                   }
-//               ]
-//             }
-//         ]
-//     },
-//     {
-//         deviceId: 38,
-//         lines: [
-//           {
-//               lineNo: "L1",
-//               days: [
-//                   {
-//                       year: 2024,
-//                       month: 3,
-//                       day: "22",
-//                       date: "2024-05-22T01:00:00Z",
-//                       hour: "01",
-//                       maxKwh: 973.31,
-//                       kwhPerHour: 0.07,
-//                       usageBillPerHour: 9,
-
-//                       usageBill: 44032.54,
-//                       voltage: 244.8,
-//                       current: 17.75,
-//                       power: 4075.6,
-//                       pf: 1
-//                   },
-//                   {
-//                         year: 2024,
-//                       month: 3,
-//                       day: "22",
-//                       date: "2024-05-22T01:00:00Z",
-//                       hour: "02",
-//                       maxKwh: 1428.17,
-//                       kwhPerHour: 0.07,
-//                       usageBillPerHour: 9,
-
-//                       usageBill: 64196.24,
-//                       voltage: 245.4,
-//                       current: 20.08,
-//                       power: 4607,
-//                       pf: 1
-//                   },
-//                   {
-//                     year: 2024,
-//                     month: 3,
-//                     day: "22",
-//                     date: "2024-05-22T01:00:00Z",
-//                     hour: "03",
-//                       maxKwh: 1794.49,
-//                       kwhPerHour: 0.07,
-//                       usageBillPerHour: 9,
-//                       usageBill: 80518.77,
-//                       voltage: 247.3,
-//                       current: 20.14,
-//                       power: 4586.2,
-//                       pf: 1
-//                   }
-//               ]
-//           },
-//           {
-//               lineNo: "L2",
-//               days: [
-//                   {
-//                     year: 2024,
-//                     month: 3,
-//                     day: "22",
-//                     date: "2024-05-22T01:00:00Z",
-//                     hour: "04",
-//                       maxKwh: null,
-//                       kwhPerHour: 0.07,
-//                       usageBillPerHour: 9,
-//                       usageBill: null,
-//                       voltage: null,
-//                       current: null,
-//                       power: null,
-//                       pf: null
-//                   },
-//                   {
-//                     year: 2024,
-//                     month: 3,
-//                     day: "22",
-//                     date: "2024-05-22T01:00:00Z",
-//                     hour: "05",
-//                     maxKwh: null,
-//                     kwhPerHour: 0.07,
-//                     usageBillPerHour: 9,
-//                     usageBill: null,
-//                     voltage: null,
-//                     current: null,
-//                     power: null,
-//                     pf: null
-//                   },
-//                   {
-//                     year: 2024,
-//                     month: 3,
-//                     day: "22",
-//                     date: "2024-05-22T01:00:00Z",
-//                     hour: "06",
-//                     maxKwh: null,
-//                     kwhPerHour: 0.07,
-//                     usageBillPerHour: 9,
-//                     usageBill: null,
-//                     voltage: null,
-//                     current: null,
-//                     power: null,
-//                     pf: null
-//                   }
-//               ]
-//           },
-//           {
-//               "lineNo": "L3",
-//               days: [
-//                 {
-//                   year: 2024,
-//                   month: 3,
-//                   day: "22",
-//                   date: "2024-05-22T01:00:00Z",
-//                   hour: "07",
-//                     maxKwh: null,
-//                     usageBill: null,
-//                     voltage: null,
-//                     current: null,
-//                     power: null,
-//                     pf: null
-//                 },
-//                 {
-//                   year: 2024,
-//                   month: 3,
-//                   day: "22",
-//                   date: "2024-05-22T01:00:00Z",
-//                   hour: "08",
-//                   maxKwh: null,
-//                   usageBill: null,
-//                   voltage: null,
-//                   current: null,
-//                   power: null,
-//                   pf: null
-//                 },
-//                 {
-//                   year: 2024,
-//                   month: 3,
-//                   day: "22",
-//                   date: "2024-05-22T01:00:00Z",
-//                   hour: "09",
-//                   maxKwh: null,
-//                   usageBill: null,
-//                   voltage: null,
-//                   current: null,
-//                   power: null,
-//                   pf: null
-//                 }
-//             ]
-//           }
-//       ]
-//     }
-// ]
-
-);
+const [devices, setDevices] = useState([]);
 
   return (
     <div className='home'>
@@ -406,16 +114,17 @@ const [devices, setDevices] = useState(
                 dateFormat='dd MMM yyyy'
             />
         </div>    
-         <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button>
+         {/* <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button> */}
          </div>
           </div>
-            {devices?.map((device, index) => (
+            {devices.length >0 && devices?.map((device, index) => (
               <div key={index}>
                   <h3>{device.deviceName}</h3>
                   <DeviceChart  
                   device={device}
                   className="device-name-state"
                   isSearchLoading={isSearchLoading}
+                  chartFrequencty="hours"
                   />
           
               </div>

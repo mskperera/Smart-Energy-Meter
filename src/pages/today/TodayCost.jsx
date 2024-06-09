@@ -6,7 +6,7 @@ ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 
 
-const TodayCost = ({days,isSearchLoading}) => {
+const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
 
   
   useEffect(()=>{
@@ -14,13 +14,25 @@ const TodayCost = ({days,isSearchLoading}) => {
   },[isSearchLoading]);
   
   
-    const loadChartData = async (deviceId) => {
+    const loadChartData = async () => {
       const labels = [];
       const data = [];
   
       for (const e of days) {
-        data.push(e.usageBillPerHour);
-        labels.push(e.hour);
+        if(chartFrequencty==="hours"){
+          data.push(e.usageBillPerHour);
+          labels.push(e.hour);
+        }
+        else    
+         if(chartFrequencty==="days"){
+          data.push(e.usageBillPerDay);
+          labels.push(e.day);
+        }
+        else    
+        if(chartFrequencty==="months"){
+         data.push(e.usageBillPerMonth);
+         labels.push(e.month);
+       }
       }
   
       const datasets0 = [{

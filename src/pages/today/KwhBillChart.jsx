@@ -2,18 +2,19 @@ import React from 'react'
 import TodayKw from './TodayKw'
 import TodayCost from './TodayCost'
 
-function KwhBillChart({line,isSearchLoading}) {
+function KwhBillChart({line,isSearchLoading,chartFrequencty}) {
   const {days}=line;
   return (
     <>
       <div className="page-5">
         <h2>{line.lineNo}</h2>
         <div className="chart-custom">
+          {/* {JSON.stringify(days)} */}
           <div className="chart-pick-kw">
-            <TodayKw days={days} isSearchLoading={isSearchLoading} />
+            <TodayKw days={days} isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} />
           </div>
           <div className="chart-pick-cost">
-            <TodayCost  days={days} isSearchLoading={isSearchLoading} />
+            <TodayCost  days={days} isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} />
             
             </div>
         </div>
