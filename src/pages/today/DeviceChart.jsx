@@ -6,7 +6,7 @@ function DeviceCharts({device,isSearchLoading}) {
     const {deviceId,deviceName,lines}=device;
   return (
     <>
-    <h2>Device {deviceId}</h2>
+    <h4>Device {deviceName}</h4>
      {lines.map((line,index) => (
         
             <KwhBillChart 
