@@ -50,11 +50,21 @@ function Service () {
 
     const [device, setDevice] = useState('');
 
+// const onChangeDeviceHandler=(device)=>{
+//   setDevice(device);
+// }
 
+// const deviceNames=useSelector(state=>state.device.dropDeviceList);
+// const defaultSelctedDevie=deviceNames[0];
 
-const deviceNames=useSelector(state=>state.device.dropDeviceList);
-const defaultSelctedDevie=deviceNames[0];
-const selectedDevice=useSelector(state=>state.device.selectedDevice);
+const selectedDevice = useSelector((state) => state.device.selectedDevice);
+
+useEffect(()=>{
+  if(selectedDevice){
+    setDevice(selectedDevice);
+  }
+// setDevice(defaultSelctedDevie);
+},[selectedDevice])
 
 
 
@@ -62,8 +72,9 @@ const selectedDevice=useSelector(state=>state.device.selectedDevice);
 
         loadDrpConsumerCategories();
        
-        if(selectedDevice){
-            const deviceId=selectedDevice.id
+      if(selectedDevice){
+        const deviceId=selectedDevice.id;
+        // const deviceId=4;
         loadDrpSupplier(deviceId);
         loadDrpSupplyType(deviceId);
         // loadDeviceDetailsByDeviceId();
@@ -72,7 +83,7 @@ const selectedDevice=useSelector(state=>state.device.selectedDevice);
 
     useEffect(()=>{
         loadDrpConsumerSubCategoriesById();
-    },[]);
+    },[consumerCategoryselectedValue]);
 
  
 
@@ -110,11 +121,13 @@ const selectedDevice=useSelector(state=>state.device.selectedDevice);
     }
 
     useEffect(()=>{
-          const deviceId=selectedDevice.id
+
+        if(selectedDevice){
+        const deviceId=selectedDevice.id;
         loadDeviceSettingstData(deviceId);
         loadDeviceConnectionData(deviceId);
-        
-    },[load,selectedDevice])
+        }
+    },[load,device])
 
     const loadDrpConsumerCategories=async()=>{
         const result=await getDrpConsumerCategories();
@@ -164,9 +177,9 @@ const addUpdateDeviceSettings=async(e)=>{
 
 console.log("testingsave")
 
-const deviceId=device.id || defaultSelctedDevie.id;
+// const deviceId=device.id || defaultSelctedDevie.id;
     const payload = {
-      deviceId:deviceId ,
+      deviceId:selectedDevice ,
       supplierId: supplierSelectedValue,
       supplyTypeId: supplyTypeSelectedValue,
       consumerCategoryid: consumerCategoryselectedValue,
@@ -199,9 +212,10 @@ const deviceId=device.id || defaultSelctedDevie.id;
 }
 
 useEffect(() => {
-  
-    loadOperationalLimitByDeviceId(selectedDevice.id);
-
+    if(selectedDevice){
+        const deviceId=selectedDevice.id;
+    loadOperationalLimitByDeviceId(deviceId);
+    }
 }, [load,selectedDevice]);
 
 
@@ -247,14 +261,14 @@ const loadOperationalLimitByDeviceId = async (deviceId) => {
 }
 
 const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActive)=>{
-  console.log('saveOperationalLimit');
+
         setErrorMessage('');
         setMessage('');
 
-        const deviceId=device.id || defaultSelctedDevie.id;
+        // const deviceId=device.id || defaultSelctedDevie.id;
 
         const payload = {
-            deviceId:deviceId,
+            deviceId:selectedDevice.id,
             operationalMetricId: operationalMetricId,
             thresholdAmountMin: null,
             thresholdAmountMax: thresholdAmount,
@@ -264,7 +278,7 @@ const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActiv
           };
        
       const res = await saveOperationalLimit(payload);
-      console.log('saveOperationalLimit',res);
+    //   console.log(res);
       const { responseStatus, outputMessage } = res.data;
       if (responseStatus === "failed") {
         setErrorMessage(outputMessage)
@@ -284,10 +298,10 @@ const saveOperationVloSettings = async (thresholdAmountMin,thresholdAmountMax,op
     setErrorMessage('');
     setMessage('');
 
-    const deviceId=device.id || defaultSelctedDevie.id;
+    // const deviceId=device.id || defaultSelctedDevie.id;
 
     const payload = {
-        deviceId: deviceId,
+        deviceId: selectedDevice.id,
         operationalMetricId: operationalMetricId,
         thresholdAmountMin,
         thresholdAmountMax,
@@ -340,7 +354,8 @@ const saveConnectionSettingsHandler=async(e)=>{
 
 console.log("testingsave")
 const payload = {
-    deviceId: device?.id || defaultSelctedDevie?.id,
+    // deviceId: device?.id || defaultSelctedDevie?.id,
+    deviceId: selectedDevice.id,
     connection: editedConnection,
     deviceName: editedDeviceName,
     portNo: editedPortNo
@@ -454,7 +469,7 @@ const payload = {
 
       <div className={toggle === 2 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center">
-          <div className="service">
+          <div className="service" style={{marginTop:"60px"}}>
             <h3 className="d-flex align-items-center justify-content-center mb-3">
               Tarrif Settings
             </h3>

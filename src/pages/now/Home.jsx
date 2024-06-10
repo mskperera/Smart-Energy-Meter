@@ -48,6 +48,7 @@ const totalUsageBill = devices.reduce((total, line) => total + line.usageBill, 0
 const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
 
   return (
+    // <div className='main-home'>
     <div className="home">
       {/* <Navbar className="navnav" onChangeDevice={onChangeDeviceHandler}/> */}
       <Menu className="navnav1"/>
@@ -77,11 +78,12 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
                 {devices?.map((device, index) => (
                   <div key={index}>
                  
-                    <div>
+                    <div className="device-name-state">
+                      {/* <h6>{device.deviceName}</h6> */}
                       <DeviceChart3p
-                        deviceName={device.deviceName}
+                        deviceName={device.deviceName} 
                         device={device}
-                        className="device-name-state"
+                        
                       />
                     </div>
                   </div>
@@ -172,6 +174,7 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
       
       <BottomNav className="bottombar1" />
     </div>
+    // {/* </div> */}
   );
 };
 

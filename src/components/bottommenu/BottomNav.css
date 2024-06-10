@@ -86,5 +86,6 @@
     .bottom-bar{
         height: 45px;
         margin-top: 73px;
+        z-index:0;
     }
 }
