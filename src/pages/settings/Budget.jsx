@@ -15,19 +15,21 @@ function Budget() {
     const [budgetedValues, setBudgetedValues] = useState('');
     
 
-    const deviceNames = useSelector(state => state.device.dropDeviceList);
-    const defaultSelectedDevice = deviceNames[0];
+    // const deviceNames = useSelector(state => state.device.dropDeviceList);
+    // const defaultSelectedDevice = deviceNames[0];
+
+    // useEffect(() => {
+    //     setDevice(defaultSelectedDevice);
+    // }, [deviceNames]);
+
+    const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
     useEffect(() => {
-        setDevice(defaultSelectedDevice);
-    }, [deviceNames]);
-
-    useEffect(() => {
-        if (device) {
-            const deviceId = device || defaultSelectedDevice;
-            loadBudgetedValues(deviceId.id);
+        if (selectedDevice) {
+            const deviceId = selectedDevice.id;
+            loadBudgetedValues(deviceId);
         }
-    }, [device]);
+    }, [selectedDevice]);
 
     const onRadioChange = (e) => {
         setSelectedRadio(e.target.value);
@@ -66,7 +68,7 @@ function Budget() {
             setMessage('');
 
             const payload = {
-                deviceId: device?.id || defaultSelectedDevice?.id,
+                deviceId: selectedDevice?.id,
                 budgetedValue: selectedRadio === '1' ? budgetedValues.kwhAmount : budgetedValues.billAmount,
                 opertationalMetricId: selectedRadio === '1' ? 1 : 7,
                 thresholdAmountsArr: [],
@@ -165,7 +167,7 @@ function Budget() {
                 <button type='button' className="btn btn-sm custom-button w-50 btn-cal mb-1" 
                 onClick={async(e) => {
                     e.preventDefault();
-                    const deviceId = device?.id || defaultSelectedDevice?.id;
+                    const deviceId = device?.id || selectedDevice?.id;
 
                     if (selectedRadio === '1') {
                         const value = await handleCalculateInterdependentValue(deviceId, 1, budgetedValues.kwhAmount);

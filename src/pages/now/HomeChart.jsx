@@ -12,7 +12,7 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
  
   const data = {
     
-    labels: ['Used kWh', `Remaining kWh : ${ ((budgetedKwhValue - currentKwValue) ||0 )?.toFixed(2)}`],
+    labels: ['Used kWh', `Remaining kWh : ${ ((budgetedKwhValue - currentKwValue) ||0 )?.toLocaleString(undefined,{minimumFractionDigits: 2, maximumFractionDigits: 2})}`],
     datasets: [
       {
         data: [currentKwValue, budgetedKwhValue],
@@ -38,7 +38,7 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
       ctx.font = '35px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(data.datasets[0].data[0], centerX, centerY);
+      ctx.fillText(data.datasets[0].data[0].toLocaleString(undefined,{minimumFractionDigits: 2, maximumFractionDigits: 2}), centerX, centerY);
   
       ctx.font = '25px Trebuchet MS';
       ctx.fillText('kWh', centerX, centerY + 40);
@@ -51,7 +51,7 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
         ctx.fillText('Budget', centerX, centerY - 90);
   
         ctx.font = '25px Trebuchet MS';
-        ctx.fillText(`${data.datasets[0].data[1]} kWh`, centerX, centerY - 60);
+        ctx.fillText(`${data.datasets[0].data[1].toLocaleString()} kWh`, centerX, centerY - 60);
       }
   
       ctx.restore();

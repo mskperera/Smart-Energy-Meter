@@ -12,6 +12,20 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
   useEffect(()=>{
     loadChartData();
   },[isSearchLoading]);
+
+
+  const getXAxisTitle = (frequency) => {
+    switch (frequency) {
+      case "hours":
+        return "Hours";
+      case "days":
+        return "Days";
+      case "months":
+        return "Months";
+      default:
+        return "Time";
+    }
+  };
   
   
     const loadChartData = async () => {
@@ -43,6 +57,50 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
         }];
   
         setChartData({ ...data, labels:labels,  datasets: datasets0 });
+
+        const newOptions = {
+          scales: {
+            x: {
+              grid: {
+                display: false,
+                color: 'Gray',
+              },
+              beginAtZero: true,
+              title:{
+                display:true,
+                text:getXAxisTitle(chartFrequencty),
+                color:'white'
+              },
+              ticks: {
+                color: 'white',
+              },
+            },
+            y: {
+              grid: {
+                color: 'Gray',
+              },
+              beginAtZero: true,
+              title:{
+                display:true,
+                text:"Rs",
+                color:'white'
+              },
+              ticks: {
+                color: 'white',
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              display:true,
+              labels: {
+                color: 'white', 
+              },
+            },
+          },
+        };
+
+        setOptions(newOptions);
     };
   
   
@@ -62,53 +120,97 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
       });
 
 
+      const [options,setOptions]=useState({
+        scales: {
+          x: {
+            grid: {
+              display: false,
+              color: 'Gray',
+            },
+            beginAtZero: true,
+            title:{
+              display:true,
+              text:getXAxisTitle(chartFrequencty),
+              color:'white'
+            },
+            ticks: {
+              color: 'white',
+            },
+          },
+          y: {
+            grid: {
+              color: 'Gray',
+            },
+            beginAtZero: true,
+            title:{
+              display:true,
+              text:"Rs",
+              color:'white'
+            },
+            ticks: {
+              color: 'white',
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            display:true,
+            labels: {
+              color: 'white', 
+            },
+          },
+        },
+      });
 
-        const options={
 
-            scales: {
+        // const options={
+
+        //     scales: {
               
-                x: {
-                  grid: {
-                    display:false,
-                    color: 'Gray', //  color of x-axis grid lines
-                  },
-                  beginAtZero: true,
-                  title:{
-                    display:true,
-                    text:"12:00:00am - 11:59:59pm hours",
-                    color:'white'
-                  },
-                  ticks: {
-                    color: 'white', // color of x-axis labels
-                  },
-                },
-                y: {
+        //         x: {
+        //           grid: {
+        //             display:false,
+        //             color: 'Gray', //  color of x-axis grid lines
+        //           },
+        //           beginAtZero: true,
+        //           title:{
+        //             display:true,
+        //             text:"Hours",
+        //             color:'white'
+        //           },
+        //           ticks: {
+        //             color: 'white', // color of x-axis labels
+        //           },
+        //         },
+        //         y: {
 
-                  grid: {
-                    color: 'Gray', //  color of x-axis grid lines
-                  },
+        //           grid: {
+        //             color: 'Gray', //  color of x-axis grid lines
+        //           },
 
-                  beginAtZero: true,
-                  title:{
-                    display:true,
-                    text:"Rs",
-                    color:'white'
-                  },
-                  ticks: {
-                    color: 'white', //color of y-axis labels
-                  },
-                },
-              },
+        //           beginAtZero: true,
+        //           title:{
+        //             display:true,
+        //             text:"Rs",
+        //             color:'white'
+        //           },
+        //           ticks: {
+        //             color: 'white', //color of y-axis labels
+        //           },
+        //         },
+        //       },
               
-            plugins: {
-                legend: {
-                  display:true,
-                  labels: {
-                    color: 'white', 
-                  },
-                },
-              },
-        }
+        //     plugins: {
+        //         legend: {
+        //           display:true,
+        //           labels: {
+        //             color: 'white', 
+        //           },
+        //         },
+        //       },
+        // }
+
+
      return(
          <Bar data={chartData} options={options} id='box' className='chart'/>
   )

@@ -85,7 +85,7 @@ const [devices, setDevices] = useState([]);
         <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
         <div className='back'>
             <ul className='nav-bar-links'>
-                <Link to={"/home"}><li className='btn btn-sm btn-light'>Now</li></Link> 
+                <Link to={"/home"}><li className='btn btn-sm btn-light'>Live</li></Link> 
                 <Link to={"/today"}><li className='btn btn-sm btn-light'>Day</li></Link>  
                 <Link to={"/week"}><li className='btn btn-sm btn-light'>Week</li></Link>  
                 <Link to={"/month"}><li className='btn btn-sm btn-light'>Month</li></Link>

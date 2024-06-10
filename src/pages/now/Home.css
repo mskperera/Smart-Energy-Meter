@@ -17,6 +17,10 @@
  
 }
 
+/* .device-name-state{
+    margin-top: -20px;
+} */
+
 .navnav1{
     position: fixed;
     top: 73px; 
@@ -133,6 +137,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 0px;
+    padding-top: 15px;
     /* background-color:#05052a; */
     /* background-color:#020239; */
     /* position: absolute; */
@@ -241,6 +246,11 @@
 .dropdown-line{
     background: rgba(255, 255, 255, 0.845);
     
+}
+
+.section-status h6{
+    margin-top: -49px;
+    padding-bottom: 20px;
 }
 
 /* .device-name{

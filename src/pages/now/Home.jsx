@@ -78,11 +78,12 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
                 {devices?.map((device, index) => (
                   <div key={index}>
                  
-                    <div>
+                    <div className="device-name-state">
+                      {/* <h6>{device.deviceName}</h6> */}
                       <DeviceChart3p
-                        deviceName={device.deviceName}
+                        deviceName={device.deviceName} 
                         device={device}
-                        className="device-name-state"
+                        
                       />
                     </div>
                   </div>
