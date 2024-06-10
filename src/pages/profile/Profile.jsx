@@ -40,7 +40,7 @@ const Profile = () => {
 
   return (
     <div className='home'>
-    <Navbar onChangeDevice={onChangeDeviceHandler} className='navnav'/>
+    {/* <Navbar onChangeDevice={onChangeDeviceHandler} className='navnav'/> */}
     <div className='wrap '>
       <div className="body">
         <div className="card text-center ">
