@@ -350,7 +350,7 @@ function BillingSession() {
 
   return (
     <div className='home'>
-      <Navbar className='navnav' onChangeDevice={onChangeDeviceHandler}/>
+      {/* <Navbar className='navnav' onChangeDevice={onChangeDeviceHandler}/> */}
       <div className='body w-100'>
         <div className='notification2 '>
           <div className=''>

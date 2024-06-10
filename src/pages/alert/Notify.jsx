@@ -33,7 +33,7 @@ function Notify() {
 
   return (
     <div className="home">
-      <Navbar className="navnav" />
+      {/* <Navbar className="navnav" /> */}
       <div className="body">
     <div className="rounded ">
     <h2 className="d-flex justify-content-center align-items-center" style={{ color: '' }}>
