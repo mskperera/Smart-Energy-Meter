@@ -48,6 +48,7 @@ const totalUsageBill = devices.reduce((total, line) => total + line.usageBill, 0
 const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
 
   return (
+    // <div className='main-home'>
     <div className="home">
       {/* <Navbar className="navnav" onChangeDevice={onChangeDeviceHandler}/> */}
       <Menu className="navnav1"/>
@@ -172,6 +173,7 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
       
       <BottomNav className="bottombar1" />
     </div>
+    // {/* </div> */}
   );
 };
 

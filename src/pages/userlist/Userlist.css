@@ -89,6 +89,7 @@
       padding-top: 30px;
       padding-bottom: 60px; 
       overflow-y: auto; 
-      height: calc(102.55vh - 80px - 59.5px); 
+      height: calc(102.55vh - 80px - 59.5px);
+      /* height: 100vh;  */
     }
   }
