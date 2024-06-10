@@ -9,25 +9,8 @@ import DeviceChart3p from './DeviceChart';
 
 const Home = () => {
   const [device, setDevice] = useState(null);
-  // const [deviceDetails, setDeviceDetails] = useState([]);
-  // const [budgetedKwhValue, setBudgetedKwhAmount] = useState('');
-  // const [budgetedBillValue, setBudgetedBillAmount] = useState('');
-  // const [lineOne, setLineOne] = useState('');
-  // const [lineTwo, setLineTwo] = useState('');
-  // const [lineThree, setLineThree] = useState('');
-  // const [selectedLine, setSelectedLine] = useState('L1');
+  const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
-  const onChangeDeviceHandler = (selectedDevice) => {
-    setDevice(selectedDevice);
-  };
-
-  const deviceNames = useSelector((state) => state.device.dropDeviceList);
-
-  const defaultSelectedDevice = deviceNames[0];
-
-  useEffect(() => {
-    setDevice(defaultSelectedDevice);
-  }, [deviceNames, defaultSelectedDevice]);
 
 const [loading,setLoading]=useState(null);
 
@@ -39,12 +22,12 @@ const [loading,setLoading]=useState(null);
     }, 4000);
 
     return () => clearInterval(intervalId);
-  }, [device]);
+  }, [selectedDevice]);
 
   const loadChartData = async () => {
    
     const payload = {
-      deviceId: device?.id,
+      deviceId: selectedDevice?.id,
       measurementUnitId: 1,
     };
     const result = await getEngergyUsageNow(payload);
@@ -58,28 +41,7 @@ const [loading,setLoading]=useState(null);
 
 
 
-const [devices,setDevices]=useState([{
-
-  budCurrent: 1, budHertz: 100, budPf: 1, budPower : 1000, budVoltage : 250, deviceId : 4,
-   deviceMeasuringModeId : 2, deviceName : "FIDA Device", deviceNo:"D-0003", deviceTimeStamp : 1717480475, 
-   deviceTimeStampDate_UTC: "2024-06-04T05:54:35.000Z", deviceTypeId: 2, budgetedKwh: 100, budgetedBill: 3997.5,
-
-  lines:[
-  {lineNo:"l1",bill:"1200.30",budgetedBill:1000,budgetedKwh:1000, current: 6.97, hertz:"50.10", kwh: 3133.98, kwhPerSec: 0, line:"L1", pf: 0.97, power: 1608.7, voltage: 237.7},
-  {lineNo:"l2", voltage:"230V", current: "10A", pf:"0.99", hertz:"50 Hz" ,power:"50 W",  kwh:"120.50" ,bill:"1200.30 ",budgetedBill:1000,budgetedKwh:1000},
-  {lineNo:"l3", voltage:"230V", current: "10A", pf:"0.99", hertz:"50 Hz" ,power:"50 W",  kwh:"120.50" ,bill:"1200.30 ",budgetedBill:1000,budgetedKwh:1000} 
-  ]
-},
-{
-
-  budCurrent: 1, budHertz: 100, budPf: 1, budPower : 1000, budVoltage : 250, deviceId : 4,
-   deviceMeasuringModeId : 2,  deviceName:"d2 - single phase", deviceNo:"D-0003", deviceTimeStamp : 1717480475, 
-   deviceTimeStampDate_UTC: "2024-06-04T05:54:35.000Z", deviceTypeId: 1, budgetedKwh: 100, budgetedBill: 3997.5,
-
-
-  lines:[
-    {lineNo:"l1", voltage:"230V", current: "10A", pf:"0.99", hertz:"50 Hz" ,power:"50 W",  kwh:"120.50 " ,bill:"1200.30 ",budgetedBill:1000,budgetedKwh:1000} ]
-}
+const [devices,setDevices]=useState([
 ]);
   
 const totalUsageBill = devices.reduce((total, line) => total + line.usageBill, 0);
@@ -87,10 +49,10 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
 
   return (
     <div className="home">
-      <Navbar className="navnav" onChangeDevice={onChangeDeviceHandler}/>
+      {/* <Navbar className="navnav" onChangeDevice={onChangeDeviceHandler}/> */}
       <Menu className="navnav1"/>
 
-      {device && (
+    
         <div className="body">
             <div className="session-name">
               <h5 >Session Date : 2024/06/08</h5>
@@ -107,8 +69,8 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
                   <div className='budget-values'
                     style={{ display: "flex", justifyContent: "space-between"}}
                   >
-                    <h2>Total kWh:{totalUsageKwh.toFixed(2)}</h2>
-                    <h2>Total Bill:{totalUsageBill.toFixed(2)}</h2>
+                    <h2>Total kWh:{totalUsageKwh?.toFixed(2)}</h2>
+                    <h2>Total Bill:{totalUsageBill?.toFixed(2)}</h2>
                   </div>
                 )}
 
@@ -207,7 +169,7 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
             )}
           </div> */}
         </div>
-      )}
+      
       <BottomNav className="bottombar1" />
     </div>
   );

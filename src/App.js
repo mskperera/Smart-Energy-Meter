@@ -27,6 +27,7 @@ import Group from './pages/managegroup/Group';
 import Status from './pages/status/Status';
 import Inventory from './pages/deviceInventory/Inventory';
 import AccountReg from './pages/serviceAccount/AccountReg';
+import Navbar from './components/navbar/Navbar';
 // import Navbar from './components/navbar/Navbar';
 
 // import { GlobalContext } from './context/GlobalContext';
@@ -40,9 +41,10 @@ function App() {
   return (
     // <GlobalContext>
     <>
+  
     {/* <Navbar className='navnav'/> */}
     <BrowserRouter>
-   
+    <Navbar />
         <Routes>
         <Route path='/' element={<Login/>}/>
         <Route path='/userregister/:userRegId/:saveType' element={<UserRegister/>}/>

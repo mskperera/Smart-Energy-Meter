@@ -88,7 +88,7 @@ const [devices, setDevices] = useState([]);
 
   return (
     <div className='home'>
-        <Navbar />
+        {/* <Navbar /> */}
       
         <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
         <div className='back'>

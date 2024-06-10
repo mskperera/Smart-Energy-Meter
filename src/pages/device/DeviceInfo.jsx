@@ -46,7 +46,7 @@ const DeviceInfo = () => {
   return (
     
     <div className='home'>
-    <Navbar onChangeDevice={onChangeDeviceHandler}/>
+    {/* <Navbar onChangeDevice={onChangeDeviceHandler}/> */}
     {/* <div className='nav-bar'>
             <ul className='nav-bar-links'>
                 <Link to={"/deviceinfo"}><li className='btn btn-sm btn-primary'>Device Info</li></Link> 
