@@ -166,7 +166,7 @@ function Group() {
 
   return (
     <div className='home'>
-      <Navbar className='navnav' onChangeDevice={onChangeDeviceHandler}/>
+      {/* <Navbar className='navnav' onChangeDevice={onChangeDeviceHandler}/> */}
       <div className="body">
         <form onSubmit={onSubmitHandler}>
           <div className= "rounded p-2 ">
