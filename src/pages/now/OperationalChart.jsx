@@ -11,24 +11,24 @@ function OperationalChart({lineNo,voltage,current,pf,hertz,power,kwh,bill,budget
             
             <div className="vol">
               <h6 style={{color:'#00ff99',marginTop:'5px'}}>Voltage</h6>  
-              <span>{voltage}V</span>
+              <span style={{marginTop:'-5px'}}>{voltage}V</span>
             </div>
             <div className="vol">
               <h6 style={{color:'#00ff99',marginTop:'5px'}}>Current</h6> 
-              <span>{current}A</span>
+              <span style={{marginTop:'-5px'}}>{current}A</span>
             </div>
             <div className="vol">
               <h6 style={{color:'#00ff99',marginTop:'5px'}}>Power Fact</h6> 
-              <span>{pf}pf</span>
+              <span style={{marginTop:'-5px'}}>{pf}pf</span>
               {/* style={{color:'#62bbfe'}} */}
             </div>
             <div className="pow">
               <h6 style={{color:'#00ff99',marginTop:'5px'}}>Power</h6> 
-              <span>{power}W</span>
+              <span style={{marginTop:'-5px'}}>{power}W</span>
             </div>
             <div className="pow">
              <h6 style={{color:'#00ff99',marginTop:'5px'}}>Hertz</h6> 
-              <span >{hertz}Hz</span>
+              <span style={{marginTop:'-5px'}}>{hertz}Hz</span>
             </div>
                   {/* <>
                     <div className="vol">

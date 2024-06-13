@@ -32,7 +32,7 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
       const centerY = chart.getDatasetMeta(0).data[0].y;
 
       ctx.save();
-      ctx.fillStyle = '#ff0066';
+      ctx.fillStyle = [currentValue > budgetedBill ? '#ff0000' : '#ff0066'];
       ctx.font = '35px Trebuchet MS';
       ctx.textAlign = 'center';
 
@@ -42,7 +42,7 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
       ctx.font = '25px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillStyle = '#ff0066';
+      ctx.fillStyle = [currentValue > budgetedBill ? '#ff0000' : '#ff0066'];
       ctx.fillText('Rs', centerX, centerY);
 
       ctx.font = '20px Trebuchet MS';

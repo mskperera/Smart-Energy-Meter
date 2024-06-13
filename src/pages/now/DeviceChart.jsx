@@ -1,6 +1,8 @@
 import React from "react";
 import KwhBillChart from "./KwhBillChart";
 import OperationalChart from "./OperationalChart";
+import { FaHeartbeat } from "react-icons/fa";
+import { FaHeartBroken } from "react-icons/fa";
 
 function DeviceChart({ deviceName, device }) {
   const { lines } = device;
@@ -12,13 +14,16 @@ function DeviceChart({ deviceName, device }) {
           <div className="device-active">
             {device.status && (
               <div className="both">
-                <div
+                 <div 
                   className={`curcle ${
                     device.status.deviceStatus === "online"
                       ? "curcle-online"
                       : "curcle-offline"
                   }`}
-                ></div>
+                >
+                  {device.status.deviceStatus === "online" && <FaHeartbeat />}
+                  {device.status.deviceStatus === "offline" && <FaHeartBroken />}
+                </div>
                 <div className="curcle-name">
                   <div
                     className={`device-status ${
@@ -34,16 +39,34 @@ function DeviceChart({ deviceName, device }) {
           <h6>{deviceName}</h6>
         </div>
         {device.deviceTypeId === 2 && (
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div className="">
-              {device.deviceMeasuringModeId === 1 ? "Individual Line Measurement Mode" : "Consolidated Mode"}
+          <div className="line-values" style={{ display: 'flex'}}>
+            <div className="line-type" title="Individual Line Measurement Mode" style={{cursor:'pointer'}}>
+              {device.deviceMeasuringModeId === 1 ? "Mode : ILMM" : "Consolidated Mode"}
             </div>
-            <div>Total kwh: {device.kwh.toFixed(2)}</div>
-            <div>Total Bill: {device.usageBill.toFixed(2)}</div>
+            <div className="line-total">
+            <div className="line-total-kw">
+              <div>
+                Total kwh: {device.kwh.toFixed(2)}
+              </div>
+            </div>
+            <div className="line-total-kw">
+              <div>
+                 Total Bill: {device.usageBill.toFixed(2)}
+              </div>
+            </div>
+            </div>
             {device.deviceMeasuringModeId === 2 && (
               <>
-                <div>Budgeted kwh: {device.budgetedKwh}</div>
-                <div>Budgeted Bill: {device.budgetedBill}</div>
+              <div className="line-values">
+                <div className="line-total">
+                  <div className="line-total-kw">
+                    <div>Budgeted kwh: {device.budgetedKwh}</div>
+                  </div>
+                  <div className="line-total-kw">
+                    <div>Budgeted Bill: {device.budgetedBill}</div>
+                  </div>
+                </div>
+              </div>
               </>
             )}
           </div>
@@ -75,7 +98,7 @@ function DeviceChart({ deviceName, device }) {
         <React.Fragment key={`operational-chart-${line.lineNo}`}>
           {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>Line: {line.line}</div>
+              <div className="line-number">Line: {line.line}</div>
             </div>
           )}
         <OperationalChart

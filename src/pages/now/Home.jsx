@@ -41,8 +41,7 @@ const [loading,setLoading]=useState(null);
 
 
 
-const [devices,setDevices]=useState([
-]);
+  const [devices, setDevices] = useState([]);
   
 const totalUsageBill = devices.reduce((total, line) => total + line.usageBill, 0);
 const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
@@ -66,14 +65,14 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
               <p className="loading-message">Loading please wait...</p>
             ) : (
               <>
-                {devices.length > 1 && (
+                {/* {devices.length > 1 && (
                   <div className='budget-values'
                     style={{ display: "flex", justifyContent: "space-between"}}
                   >
                     <h2>Total kWh:{totalUsageKwh?.toFixed(2)}</h2>
                     <h2>Total Bill:{totalUsageBill?.toFixed(2)}</h2>
                   </div>
-                )}
+                )} */}
 
                 {devices?.map((device, index) => (
                   <div key={index}>

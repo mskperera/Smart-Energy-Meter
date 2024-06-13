@@ -12,8 +12,8 @@ const BottomNav = () => {
   return (
     <div className='bottom-bar'>
     <ul className='bottom-bar-links'>
-        <Link to={"/home"}><li><LuGauge size={25} color='#191970' title='Home'/></li></Link>
-        <Link to={"/today"}><li><VscGraph size={25} color='#191970' title='Today'/></li></Link>
+        <Link to={"/home"}><li><LuGauge size={25} color='#191970' title='Live'/></li></Link>
+        <Link to={"/today"}><li><VscGraph size={25} color='#191970' title='Day'/></li></Link>
         <Link to={"/deviceinfo"}><li ><HiMenuAlt2 size={25} color='#191970' title='Device Info'/></li></Link>
         <Link to={"/service"}><li ><IoSettingsOutline className='tool' size={25} color='#191970' title='Settings'/></li></Link>
         {/* <span className='tooltip'>Settings</span> */}
