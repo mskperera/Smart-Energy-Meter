@@ -72,6 +72,12 @@ function DeviceChart({ deviceName, device }) {
         </React.Fragment>
       ))}
       {lines.map((line) => (
+        <React.Fragment key={`operational-chart-${line.lineNo}`}>
+          {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div>Line: {line.line}</div>
+            </div>
+          )}
         <OperationalChart
           key={`operational-chart-${line.lineNo}`}
           lineNo={line.lineNo}
@@ -85,6 +91,7 @@ function DeviceChart({ deviceName, device }) {
           budgetedKwh={line.budgetedKwh}
           budgetedBill={line.budgetedBill}
         />
+        </React.Fragment>
       ))}
     </>
   );
