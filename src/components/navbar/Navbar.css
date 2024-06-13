@@ -103,7 +103,8 @@
 }
 
 .title .logo img{
-    width: 70px;
+    width: 69px;
+    /* display: flex; */
     margin-left: 20px;
     /* padding-bottom: 5px; */
 }

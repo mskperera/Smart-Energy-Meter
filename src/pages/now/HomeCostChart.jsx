@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import { getEngergyUsageNow } from '../../action/device';
-import './Homechart.css';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
-import { useSelector } from 'react-redux';
+import './Homechart.css';
 
 ChartJS.register(ArcElement, Tooltip);
 
-const HomeCostChart = ({budgetedBill,currentValue,selectedLine }) => {
-
- 
+const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
   const data = {
-    
-    labels: ['Used Rs', `Remaining Rs : ${ ((budgetedBill - currentValue) ||0 )?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2})}`],
+    labels: [
+      'Used Rs', 
+      `Remaining Rs : ${(budgetedBill - currentValue || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+    ],
     datasets: [
       {
-        data: [currentValue, budgetedBill],
+        data: [currentValue || 0, budgetedBill || 0],
         backgroundColor: [currentValue > budgetedBill ? '#ff0000' : '#ff0066', '#F5F5DC'],
         circumference: 270,
         rotation: 225,
@@ -34,26 +32,33 @@ const HomeCostChart = ({budgetedBill,currentValue,selectedLine }) => {
       const centerY = chart.getDatasetMeta(0).data[0].y;
 
       ctx.save();
-      ctx.fillStyle = 'white';
+      ctx.fillStyle = '#ff0066';
       ctx.font = '35px Trebuchet MS';
       ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(data.datasets[0].data[0].toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), centerX, centerY);
+
+      const currentValueFormatted = (data.datasets[0].data[0] || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      ctx.fillText(currentValueFormatted, centerX, centerY + 40);
 
       ctx.font = '25px Trebuchet MS';
-      ctx.fillText('Rs', centerX, centerY + 40);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#ff0066';
+      ctx.fillText('Rs', centerX, centerY);
 
       ctx.font = '20px Trebuchet MS';
-      ctx.fillText('Energy Usage', centerX, centerY + 80);
+      ctx.fillStyle = 'white';
+      ctx.fillText('Energy Usage(Value)', centerX, centerY + 80);
 
       if (data.datasets[0].data[1] !== undefined) {
         ctx.font = '15px Trebuchet MS';
+        ctx.fillStyle = 'white';
         ctx.fillText('Budget', centerX, centerY - 90);
-  
+
+        const budgetedBillFormatted = (data.datasets[0].data[1] || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         ctx.font = '25px Trebuchet MS';
-        ctx.fillText(`${data.datasets[0].data[1].toLocaleString()} Rs`, centerX, centerY - 60);
+        ctx.fillStyle = 'white';
+        ctx.fillText(`${budgetedBillFormatted} Rs`, centerX, centerY - 60);
       }
-  
     },
   };
 
@@ -78,8 +83,6 @@ const HomeCostChart = ({budgetedBill,currentValue,selectedLine }) => {
 
   return (
     <>
-      {/* {JSON.stringify(selectedLine)} */}
-
       <div className='text-p'>
         <Doughnut data={data} options={options} plugins={[gaugeText]} id='box3' className='chart' />
       </div>

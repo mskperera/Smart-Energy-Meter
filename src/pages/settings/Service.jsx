@@ -99,6 +99,7 @@ useEffect(()=>{
        // setDeviceSettings(result.data);
        console.log("test - test",result);
        const deviceSetttings=result.data;
+       
        setConsumerCategoryselectedValue(deviceSetttings.consumerCategoryId);
        setSupplierselectedValue(deviceSetttings.supplierId);
        setSupplyTypeselectedValue(deviceSetttings.supplyTypeId);
@@ -179,9 +180,10 @@ console.log("testingsave")
 
 // const deviceId=device.id || defaultSelctedDevie.id;
     const payload = {
-      deviceId:selectedDevice ,
+      deviceId:selectedDevice.id ,
       supplierId: supplierSelectedValue,
-      supplyTypeId: supplyTypeSelectedValue,
+      // supplyTypeId: supplyTypeSelectedValue,
+      supplyTypeId: 1,
       consumerCategoryid: consumerCategoryselectedValue,
       consumerSubCategoryId:consumerSubCategoryselectedValue,
 
@@ -545,7 +547,7 @@ const payload = {
                 </select>
               </div>
 
-              <div className="form-group mb-2">
+              {/* <div className="form-group mb-2">
                 <label htmlFor="supplytype" className="form-label">
                   Supply Type
                 </label>
@@ -561,7 +563,7 @@ const payload = {
                     </option>
                   ))}
                 </select>
-              </div>
+              </div> */}
               {/* {JSON.stringify(supplyTypeSelectedValue)} */}
 
               <button

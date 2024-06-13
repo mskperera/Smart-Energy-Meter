@@ -12,7 +12,7 @@ import { setDropDevices,setSelectedDevie } from '../../state/device/deviceReduce
 
 // import { GlobalContext } from '../../context/GlobalContext';
 
-const Navbar = ({}) => {
+const Navbar = () => {
 
   // const [selectedDevice, setSelectedDevice] = useState(""); 
   const [selectedDeviceName, setSelectedDeviceName] = useState("")

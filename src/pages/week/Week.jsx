@@ -59,9 +59,9 @@ const loadChartData = async (deviceId,startDay) => {
   //const utcOffset = 330; // Example: UTC offset in minutes (for IST, it is 330 minutes or +5:30 hours)
   const utcOffSet= moment().utcOffset();
 
-  const startOfWeekUtc = moment(startDay).startOf('week').subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
+  const startOfWeekUtc = moment(startDay).startOf('week').add(0, 'days',utcOffSet).format('YYYY-MM-DDTHH:mm:ss[Z]');
 
-  const endOfWeekUtc = moment(startDay).endOf('week').subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
+  const endOfWeekUtc = moment(startDay).endOf('week').subtract(0, 'days',utcOffSet).format('YYYY-MM-DDTHH:mm:ss[Z]');
   
   console.log('startOfWeekUtc', startOfWeekUtc);
   console.log('endOfWeekUtc', endOfWeekUtc);
@@ -121,7 +121,7 @@ const [devices, setDevices] = useState([]);
           </div>
             {devices.length >0 && devices?.map((device, index) => (
               <div key={index}>
-                  <h3>{device.deviceName}</h3>
+                  {/* <h4>{device.deviceName}</h4> */}
                   <DeviceCharts 
                   device={device}
                   className="device-name-state"

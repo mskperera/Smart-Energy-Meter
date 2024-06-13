@@ -261,6 +261,18 @@
     margin-top: 0px;
     margin-left: 0px;
 } */
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
 
 .device-active .curcle{
     width: 15px;
@@ -269,6 +281,7 @@
     justify-content: center;
     /* background-color: rgb(2, 223, 2); */
     border-radius: 10px;
+    margin-left: -10px;
 }
 
 .budget-values h2{
@@ -283,13 +296,15 @@
     width: 15px;
     height: 15px;
     border-radius: 25px;
-    margin-left: 17px;
+    margin-left: 8px;
     margin-top: -15px;
+    font-size: 18px;
 }
 
 
 .curcle-online {
-    background-color: rgb(2, 223, 2);
+    background-color: rgb(252, 57, 122);
+    animation: pulse 1s infinite;
   }
   
   .curcle-offline {
@@ -563,8 +578,9 @@
         justify-content:center;
         align-items: center;
         display: flex;
-        margin-bottom: -4rem;
-        margin-left: 0px;
+        margin-bottom: 0rem;
+        gap: 30px;
+        margin: 0px;
         /* overflow-y: auto; */
     }
 
@@ -604,14 +620,14 @@
     }
 
     .chart-now-kw{
-        height: 300px;
+        width: 300px;
         padding: 0rem;
         margin-top: -25px;
         margin-left: 0px;
     }
 
     .chart-now-cost{
-        height: 300px;
+        width: 300px;
         padding: 0rem;
         margin-top: -25px;
         margin-right: 0px;
@@ -726,6 +742,10 @@
         flex-direction: column;
         
     }
+
+    .curcle-name{
+        margin-left: 12px;
+    }
     
     .page-bottom div{
         width: 100%;
@@ -755,6 +775,10 @@
         padding-bottom: 60px; 
         overflow-y: auto; 
         height: calc(96.81vh - 80px - 60px); 
+    }
+
+    .both{
+        margin-top: -40px;
     }
 
     .device-active{
@@ -792,7 +816,9 @@
         margin-left: 0px;
         /* background-color: red; */
     }
-
+    .session-name{
+        margin-top: 30px;
+    }
    
 
 }
@@ -840,21 +866,25 @@
 
     .chart-now-cost{
         flex: 1;
-  
+        margin-top: -50px;
         display: flex;
-        width: 300px;
+        width: 100%;
         align-items: center;
         justify-content: center;
-      
+        /* padding: 2rem; */
         margin-left: 0rem;
       }
 
     .chart-now-kw{
         margin-top: -50px;
-        width: 300px;
+        width: 100%;
         align-items: center;
         justify-content: center;
         margin-left: 0px;
+    }
+
+    .both{
+        margin-top: -40px;
     }
 
     .device-active-2{
@@ -879,7 +909,7 @@
         justify-content: center;
         align-items: center;
         margin: 0%;
-        margin-top: 0px;
+        margin-top: -10px;
         flex-direction: column;
         margin-left: 0px;
         
@@ -928,7 +958,7 @@
         justify-content: space-between;
         margin: 0%;
         margin-top: 0px;
-        height: 60vh;
+        height: 75vh;
     }
 
     .container{
@@ -1055,7 +1085,7 @@
         display: flex;
         /* position: absolute; */
         width: fit-content;
-        padding: 0px 15px 0px 30px;
+        padding: 0px 15px 0px 25px;
         height: 40px;
         color: #ff0066;
         align-items: center;
@@ -1063,7 +1093,7 @@
         justify-content: center;
         /* background:  rgba(11, 11, 11, 0.5); */
         /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); */
-        margin-top: 80px;
+        margin-top: 60px;
     }
 
     .device-name{
@@ -1074,6 +1104,10 @@
         margin-top: 42px;
         margin-left: -75px;
     }
+
+    .both{
+        margin-top: 0px;
+    }
     
     .curcle{
         position: relative;
@@ -1083,7 +1117,7 @@
         width: 15px;
         height: 15px;
         border-radius: 25px;
-        margin-left: -20px;
+        margin-left: -5px;
         /* background-color: red; */
     }
 

@@ -38,7 +38,22 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
       }
       else if (chartFrequencty === "months") {
         data.push(e.kwhPerMonth);
-        labels.push(e.month);
+        // labels.push(e.month);
+        const monthNames = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+        labels.push(monthNames[e.month - 1]);
       }
     }
 

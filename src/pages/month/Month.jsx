@@ -116,7 +116,7 @@ const [devices, setDevices] = useState([]);
           </div>
             {devices.length >0 && devices?.map((device, index) => (
               <div key={index}>
-                  <h3>{device.deviceName}</h3>
+                  {/* <h4>{device.deviceName}</h4> */}
                   <DeviceCharts 
                   device={device}
                   className="device-name-state"

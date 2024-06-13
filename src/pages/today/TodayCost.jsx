@@ -33,26 +33,41 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
       const data = [];
   
       for (const e of days) {
-        if(chartFrequencty==="hours"){
+        if(chartFrequencty === "hours"){
           data.push(e.usageBillPerHour);
           labels.push(e.hour);
         }
         else    
-         if(chartFrequencty==="days"){
+         if(chartFrequencty === "days"){
           data.push(e.usageBillPerDay);
           labels.push(e.day);
         }
         else    
-        if(chartFrequencty==="months"){
+        if(chartFrequencty === "months"){
          data.push(e.usageBillPerMonth);
-         labels.push(e.month);
+        //  labels.push(e.month);
+        const monthNames = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec"
+        ];
+        labels.push(monthNames[e.month - 1]);
        }
       }
   
       const datasets0 = [{
           label: "Cost",
           data: data,
-          backgroundColor: "#00ff99",
+          backgroundColor: "#ff0066",
           borderWidath: 1,
         }];
   
@@ -105,11 +120,7 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
   
   
       const [chartData,setChartData]=useState({
-          labels:[
-      //       '1h','2h','3h','4h','5h','6h','7h','8h','9h','10h','11h','12h','13h','14h','15h','16h','17h','18h',
-      // '19h','20h','21h','22h','23h','24h'
-      ],
-      
+          labels:[],
           datasets: [{
               label:'Cost',
               data:[],
@@ -130,7 +141,7 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
             beginAtZero: true,
             title:{
               display:true,
-              text:getXAxisTitle(chartFrequencty),
+              text:"Time",
               color:'white'
             },
             ticks: {

@@ -1,33 +1,34 @@
 import React from 'react'
-import Power from './Power'
-import Powerfact from './Powerfact'
-import Current from './Current'
-import Voltage from './Voltage'
-import Hertz from './Hertz'
+// import Power from './Power'
+// import Powerfact from './Powerfact'
+// import Current from './Current'
+// import Voltage from './Voltage'
+// import Hertz from './Hertz'
 
 function OperationalChart({lineNo,voltage,current,pf,hertz,power,kwh,bill,budgetedKwh,budgetedBill}) {
   return (
 <div className='page-bottom'>
             
             <div className="vol">
-              <h5>Voltage</h5>  
-              <span>{voltage}</span>
+              <h6 style={{color:'#00ff99',marginTop:'5px'}}>Voltage</h6>  
+              <span>{voltage}V</span>
             </div>
             <div className="vol">
-              <h5>Current</h5> 
-              <span>{current}</span>
+              <h6 style={{color:'#00ff99',marginTop:'5px'}}>Current</h6> 
+              <span>{current}A</span>
             </div>
             <div className="vol">
-              <h5>Power Fact</h5> 
-              <span>{pf}</span>
+              <h6 style={{color:'#00ff99',marginTop:'5px'}}>Power Fact</h6> 
+              <span>{pf}pf</span>
+              {/* style={{color:'#62bbfe'}} */}
             </div>
             <div className="pow">
-              <h5>Power</h5> 
-              <span>{power}</span>
+              <h6 style={{color:'#00ff99',marginTop:'5px'}}>Power</h6> 
+              <span>{power}W</span>
             </div>
             <div className="pow">
-             <h5>Hertz</h5> 
-              <span>{hertz}</span>
+             <h6 style={{color:'#00ff99',marginTop:'5px'}}>Hertz</h6> 
+              <span >{hertz}Hz</span>
             </div>
                   {/* <>
                     <div className="vol">

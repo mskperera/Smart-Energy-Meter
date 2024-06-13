@@ -13,7 +13,7 @@ function Userlist() {
   const [userData,setUserData]=useState(null);
 
 
-  const selectedDevice = useSelector((state) => state.device.selectedDevice);
+  // const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
   useEffect(() => {
 

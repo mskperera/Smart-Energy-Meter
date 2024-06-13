@@ -76,7 +76,7 @@ function AccountReg() {
   // }
   return (
         <div className='home'>
-            <Navbar onChangeDevice={onChangeDeviceHandler} className='navnav'/>
+            {/* <Navbar onChangeDevice={onChangeDeviceHandler} className='navnav'/> */}
             <div className='body '>
             <div className=" d-flex align-items-center justify-content-center">
             <div className= "rounded notification-acc">
