@@ -14,12 +14,15 @@ import { getEngergyUsageKwhByDateRange } from '../../action/device'
 import TodayCost from './TodayCost'
 import TodayKw from './TodayKw'
 import moment from 'moment'
+import { useSessionDate } from '../../context/SessionDateContext'
 
 
 function Today() {
 
   const [activeTab, setActiveTab] = useState('Now');
   const selectedDevice=useSelector(state=>state.device.selectedDevice);
+
+  const { sessionDate } = useSessionDate();
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -102,7 +105,9 @@ const [devices, setDevices] = useState([]);
           </div>
       </div>
           <div className='body'>
-
+            {/* <div className="session-name">
+              <h5>Session Date : {sessionDate}</h5>
+            </div> */}
           <div className='date'>
           <div className='picker'>
         <div>
@@ -119,7 +124,7 @@ const [devices, setDevices] = useState([]);
           </div>
             {devices.length >0 && devices?.map((device, index) => (
               <div key={index}>
-                  <h3>{device.deviceName}</h3>
+                  {/* <h4>{device.deviceName}</h4> */}
                   <DeviceChart  
                   device={device}
                   className="device-name-state"

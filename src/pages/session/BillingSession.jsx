@@ -283,35 +283,32 @@ function BillingSession() {
   const [load, setLoad] = useState(false);
   const [device, setDevice] = useState('');
 
-  const onChangeDeviceHandler = (device) => {
-    setDevice(device);
-  }
-    
-  const deviceNames = useSelector(state => state.device.dropDeviceList);
-  const defaultSelectedDevice = deviceNames[0];
+  const selectedDevice = useSelector((state) => state.device.selectedDevice);
     
   useEffect(() => {
-    setDevice(defaultSelectedDevice);
-  }, [deviceNames]);
+    if (selectedDevice) {
+      setDevice(selectedDevice);
+    }
+  }, [selectedDevice]);
 
   useEffect(() => {
-    if (device) {
-      const deviceId = device || defaultSelectedDevice;
-      loadBillingSessionByDeviceId(deviceId.id);
+    if (selectedDevice) {
+      const deviceId = selectedDevice.id;
+      loadBillingSessionByDeviceId(deviceId);
     }
-  }, [device]);
+  }, [selectedDevice]);
 
   const loadBillingSessionByDeviceId = async (deviceId) => {
     try {
-        const res = await getbillingSessionByDeviceId(deviceId);
-        console.log("API response:", res.data);
-        if (res.data.length > 0) {
-            setBillingSession(res.data);
-            setSelectedDate1(new Date(res.data[0].startDate).toISOString()); 
-            setSelectedDate2(new Date(res.data[0].endDate).toISOString());   
-        }
+      const res = await getbillingSessionByDeviceId(deviceId);
+      console.log("API response:", res.data);
+      if (res.data.length > 0) {
+        setBillingSession(res.data);
+        setSelectedDate1(new Date(res.data[0].startDate).toISOString()); 
+        setSelectedDate2(new Date(res.data[0].endDate).toISOString());   
+      }
     } catch (error) {
-        console.error("Error fetching billing session:", error);
+      console.error("Error fetching billing session:", error);
     }
     setLoad(!load);
   }
@@ -323,7 +320,7 @@ function BillingSession() {
         sessionName: "2024-02-15 - 2024-03-12",
         startDate: new Date(selectedDate1).toISOString(), 
         endDate: new Date(selectedDate2).toISOString(), 
-        deviceId: device?.id || defaultSelectedDevice?.id,
+        deviceId: selectedDevice.id,
       };
       const res = await saveBillingSession(payload);
       console.log("API:", res);
@@ -332,11 +329,9 @@ function BillingSession() {
         setErrorMessage(outputMessage);
         return;
       }
-      // loadBillingSessionByDeviceId(device?.id || defaultSelectedDevice?.id);
-      // swal("Updated Successfully", " ", "success").then(() => { });
       swal("Updated Successfully", " ", "success").then(() => {
         setLoad(!load);
-       });
+      });
     } catch (err) {
       console.error("Error saving billing session:", err);
       setErrorMessage("Error saving billing session");
@@ -350,14 +345,14 @@ function BillingSession() {
 
   return (
     <div className='home'>
-      {/* <Navbar className='navnav' onChangeDevice={onChangeDeviceHandler}/> */}
       <div className='body w-100'>
         <div className='notification2 '>
           <div className=''>
             <h3 className='d-flex align-items-center justify-content-center mb-3'>Billing Session</h3>
-            {billingSession && billingSession.map((session) => (
-              <div key={session.id}>
+            {billingSession && billingSession.map((session, index) => (
+              <div key={`${session.id}-${index}`}>
                 <div className='bill-background'>
+                  {/* {JSON.stringify(session)} */}
                   <div className='bill-ground text-left'>
                     <div className='col'>
                       <h4>{session.sessionName}</h4>
@@ -394,7 +389,6 @@ function BillingSession() {
                         </div>
                       </div>
                       
-                          
                       <div className='form-group row mb-1'>
                         <label htmlFor='units' className='col-sm-4 col-form-label'>Units kW</label>
                         <div className='col-sm-8'>
@@ -407,9 +401,11 @@ function BillingSession() {
                           <input type='text' className={`form-control text-center ${isEditable ? 'editable' : 'disabled'}`} id='amount' placeholder='Enter units' disabled={!isEditable} value={session.totalAmountDue}/>                          
                         </div>
                       </div>
-                      <button type='button' className={`btn btn-sm custom-button btn-${isEditable ? 'success' : 'primary'} w-50 btn-edit`} onClick={isEditable ? saveEditHandler : handleEditChange}>
-                        {isEditable ? 'Save' : 'Edit'}
-                      </button>
+                      {session.isEditable ? (
+                        <button type='button' className={`btn btn-sm custom-button btn-${isEditable ? 'success' : 'primary'} w-50 btn-edit`} onClick={isEditable ? saveEditHandler : handleEditChange}>
+                          {isEditable ? 'Save' : 'Edit'}
+                        </button>
+                      ): ''}
                     </div>
                   </div>
                 </div>
@@ -424,4 +420,5 @@ function BillingSession() {
 }
 
 export default BillingSession;
+
 

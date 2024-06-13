@@ -21,12 +21,13 @@ function DeviceRegister() {
   const [dropDeviceType, setDropDeviceType] = useState([]);
   const [device, setDevice] = useState('');
 
-  const deviceNames = useSelector(state => state.device.dropDeviceList);
-  const defaultSelectedDevice = deviceNames[0];
+  // const deviceNames = useSelector(state => state.device.dropDeviceList);
+  // const defaultSelectedDevice = deviceNames[0];
+  const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
   useEffect(() => {
-    setDevice(defaultSelectedDevice);
-  }, [deviceNames]);
+    setDevice(selectedDevice);
+  }, [selectedDevice]);
 
   useEffect(() => {
     if (saveType === "U") {
@@ -69,7 +70,7 @@ function DeviceRegister() {
       setMessage('');
 
       const payload = {
-        deviceId: device?.id || defaultSelectedDevice?.id,
+        deviceId: selectedDevice.id,
         deviceNo: deviceNo,
         hardwareVersion: hardwareVersion,
         serialNo: serialNo,

@@ -11,3 +11,4 @@ export const GlobalContextProvider = ({ children }) => {
     </GlobalContext.Provider>
   );
 }
+

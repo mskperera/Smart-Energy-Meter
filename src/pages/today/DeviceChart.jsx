@@ -6,7 +6,7 @@ function DeviceCharts({device,isSearchLoading,chartFrequencty}) {
     const {deviceId,deviceName,lines}=device;
   return (
     <>
-    <h4>Device {deviceName}</h4>
+    <h6 className='name-device'>Device: {deviceName}</h6>
      {lines.map((line,index) => (
         
             <KwhBillChart 

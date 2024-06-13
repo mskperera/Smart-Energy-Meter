@@ -62,7 +62,7 @@ function Login() {
             <form className='needs-validation' onSubmit={handleLogin}>
                 <div className='form-group was-validated mb-2'>
                     <label htmlFor='username' className='form-label'>Username</label>
-                    <input type='text' className='form-control' required placeholder='test@gmail.com' value={formData.userName} 
+                    <input type='text' className='form-control' required placeholder='username' value={formData.userName} 
               onChange={(e) => setFormData({ ...formData, userName: e.target.value })}></input>
                     {/* <div className='invalid-feedback'>Please enter your Email</div> */}
                 </div>

@@ -54,9 +54,11 @@ const loadChartData = async (deviceId,startDate,endDate) => {
 
  // const startOfDay = startDate;//"2024-06-06"; 
 
-const startOfDayUtc = moment(startDate).startOf('day').subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
-const endOfDayUtc = moment(endDate).endOf('day').subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
+// const startOfDayUtc = moment(startDate).startOf('day').add(utcOffSet, '1','days').format('YYYY-MM-DDTHH:mm:ss[Z]');
+// const endOfDayUtc = moment(endDate).endOf('day').add(utcOffSet, '1', 'days').format('YYYY-MM-DDTHH:mm:ss[Z]');
 
+const startOfDayUtc = moment(startDate).startOf('day').add(0,'days',utcOffSet).format('YYYY-MM-DDTHH:mm:ss[Z]');
+const endOfDayUtc = moment(endDate).endOf('day').subtract(0,'days',utcOffSet).format('YYYY-MM-DDTHH:mm:ss[Z]');
 
   console.log('startOfDayUtc---2222', startOfDayUtc);
   console.log('endOfDayUtc---2222', endOfDayUtc);
@@ -128,7 +130,7 @@ const [devices, setDevices] = useState([]);
           </div>
             {devices.length >0 && devices?.map((device, index) => (
               <div key={index}>
-                  <h3>{device.deviceName}</h3>
+                  {/* <h4>{device.deviceName}</h4> */}
                   <DeviceCharts 
                   device={device}
                   className="device-name-state"

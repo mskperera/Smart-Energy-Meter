@@ -68,7 +68,7 @@ function Budget() {
             setMessage('');
 
             const payload = {
-                deviceId: selectedDevice?.id,
+                deviceId: selectedDevice.id,
                 budgetedValue: selectedRadio === '1' ? budgetedValues.kwhAmount : budgetedValues.billAmount,
                 opertationalMetricId: selectedRadio === '1' ? 1 : 7,
                 thresholdAmountsArr: [],
@@ -167,7 +167,7 @@ function Budget() {
                 <button type='button' className="btn btn-sm custom-button w-50 btn-cal mb-1" 
                 onClick={async(e) => {
                     e.preventDefault();
-                    const deviceId = device?.id || selectedDevice?.id;
+                    const deviceId = selectedDevice.id;
 
                     if (selectedRadio === '1') {
                         const value = await handleCalculateInterdependentValue(deviceId, 1, budgetedValues.kwhAmount);
