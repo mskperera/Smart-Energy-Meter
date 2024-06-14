@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-   width: 100%;
+    width: 100%;
     min-height: 65vh;
 }
 
@@ -113,16 +113,9 @@
 
 }
 
-/* .bottom{
-    width: 100%;
-    display: flex;     
-} */
 
-/* .page-top{
-  
-} */
 .section{
-    margin-top: -20px;
+    margin-top: -40px;
 }
 
 .section div{
@@ -190,12 +183,7 @@
   }
   
 
-/* .page-bottom-1{
-    flex: 1;
-}
-.page-bottom-2{
-    flex: 1;
-} */
+
 .txt{
     /* position: absolute; */
     display: flex;
@@ -253,23 +241,16 @@
     padding-bottom: 20px;
 }
 
-/* .device-name{
-    justify-content: center;
-    align-items: center;
-  
-    display: flex;
-    margin-top: 0px;
-    margin-left: 0px;
-} */
+
 @keyframes pulse {
     0% {
-      transform: scale(1);
+      transform: scale(1.1);
     }
     50% {
-      transform: scale(1.2);
+      transform: scale(1.3);
     }
     100% {
-      transform: scale(1);
+      transform: scale(1.1);
     }
   }
   
@@ -289,7 +270,6 @@
 }
 
 .curcle-name{
-
     justify-content: center;
     align-items: center;
     display: flex;
@@ -303,16 +283,18 @@
 
 
 .curcle-online {
-    background-color: rgb(252, 57, 122);
+    /* background-color: rgb(3, 167, 3); */
     animation: pulse 1s infinite;
+    color: rgb(3, 167, 3);
   }
   
   .curcle-offline {
-    background-color: red;
+    color: red;
+    animation: pulse 1s infinite;
   }
 
   .device-status.online {
-    color: rgb(2, 223, 2);
+    color: rgb(3, 167, 3);
   }
   
   .device-status.offline {
@@ -325,7 +307,7 @@
     height: 60px;
     /* flex: 1; */
     margin: 4px;
-    background:  rgba(11, 11, 11, 0.5);
+    background:  rgba(11, 11, 11, 0.7);
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
     border-radius: 10px;
     display: flex;
@@ -339,7 +321,7 @@
     height: 60px;
     /* flex: 1; */
     margin: 4px;
-    background:  rgba(11, 11, 11, 0.5);
+    background:  rgba(11, 11, 11, 0.7);
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
     border-radius: 10px;
     display: flex;
@@ -401,63 +383,69 @@
     }
   }
   
+  .line-values{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: -20px;
+  }
 
-
-/* body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    overflow-x: hidden; 
-  }
- 
-  .mainnav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background-color: #333;
-    color: #fff; 
-    padding: 10px 20px;
-    z-index: 1000;
-  }
-  
-  
-  .mainmenu {
-    position: fixed;
-    top: 60px; 
-    left: 0;
-    bottom: 60px;
-    width: 250px; 
-    background-color: #eee; 
-    overflow-y: auto; 
-    z-index: 999;
-  }
-  
-
-  .bottommain {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 60px; 
-    background-color: #333;
-    color: #fff; 
-    padding: 10px 20px;
-    z-index: 1000;
-  }
-  
-  .body2 {
+.line-type{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     margin-top: 0px;
+    margin-left: 0px;
     padding: 0px;
-    overflow-y: auto; 
-  } */
-  
+    width: 100%;
+}
+
+.line-total{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding: 0px;
+    width: 100%;
+
+}
+
+.line-total-kw {
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 0px;
+    /* background-color:#59585883; */
+}
+
+.line-total-kw div{
+    background-color: #ffffff;
+    width: fit-content;
+    padding: 2px 10px 2px 10px;
+    border-radius: 5px;
+    /* margin: 5px; */
+}
+ .line-number{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding: 0px; 
+ } 
 
 
 @media screen and (max-width:2000px){
     .page{
         width: 100%;
-        margin-top: -4.5rem;
+        margin-top: -6rem;
         justify-content:center;
         align-items: center;
         display: flex;
@@ -484,23 +472,7 @@
      
     }
 
-    /* .chart-now-kw{
-        height: 300px;
-        padding: 1rem;
-        margin-top: 0px;
-        margin-left: 0px;
-    }
-
-    .chart-now-cost{
-        height: 300px;
-        padding: 1rem;
-        margin-top: 0px;
-        margin-right: 200px;
-    } */
-
-    /* .device-name-state{
-        margin-top: -40px;
-    } */
+ 
     
     .navnav1{
         top: 93px;
@@ -530,45 +502,9 @@
         /* background-color:#020239; */
         /* position: absolute; */
         margin: 0%;
-        /* height: 10vh; */
     }
 
-    /* .device-active{
-        display: flex;
-        position: relative;
-        width: fit-content;
-        padding: 0px 15px 0px 30px;
-        height: 40px;
-        color: #ff0066;
-        align-items: center;
-        border-radius: 10px;
-        justify-content: center;
-        background:  rgba(11, 11, 11, 0.5);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-        margin-top: 20px;
-    }
-
-    .device-name{
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        display: flex;
-        margin-top: 0px;
-        margin-left: 0px;
-    }
-    
-    .curcle{
-        position: relative;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        width: 15px;
-        height: 15px;
-        border-radius: 25px;
-        margin-left: -20px;
-        
-    }
-     */
+  
 }
 
 @media screen and (max-width:1150px){
@@ -791,8 +727,6 @@
         align-items: center;
         border-radius: 10px;
         justify-content: center;
-        /* background:  rgba(11, 11, 11, 0.5); */
-        /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); */
         margin-top: 25px;
     }
 
@@ -819,8 +753,6 @@
     .session-name{
         margin-top: 30px;
     }
-   
-
 }
 
 
@@ -945,9 +877,6 @@
         height: calc(96.85vh - 80px - 60px); 
     }
 
-    /* .page-bottom .bottom-3{
-        margin-top: 16px;
-    } */
 }
 
 @media screen and (max-width:450px){
@@ -1224,6 +1153,14 @@
             margin-top: 0px;
             margin-left: 0px;
         }
+
+        .line-number{
+            margin-top: 20px;
+            position: static;
+            display: flex;
+            margin-left: 0px;
+            padding: 0px; 
+         } 
     }
 
     @media screen and (max-width: 375px) {

@@ -57,6 +57,11 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+.drop a:hover{
+    background-color:  rgb(50, 51, 43);
+    color: white;
+}
+
 .drop1 {
     position: absolute;
     align-items: center;
@@ -85,16 +90,23 @@
     cursor: pointer;
     justify-content: flex-start ;
     flex-direction: column;
-    margin-left: -30px;
-    font-size: 14px;
+    margin-left: -32px;
+    font-size: 12px;
     padding: 0px;
+    margin-bottom: 1px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* border: 1px solid rgb(0, 0, 0); */
+}
+
+.drop1 li:hover{
+    background-color: rgb(50, 51, 43);
+    color: white;
+    transition: 0.5s ease;
 }
 
 /* .menu-trigger:hover .drop {
     display: flex;
 } */
-
 
 .title .logo{
     display: flex;
@@ -140,8 +152,15 @@
 }
 
 .app__navbar-login a:hover{
-    border-bottom: 1px solid rgb(211, 225, 3);
+    /* border-bottom: 1px solid rgb(211, 225, 3); */
 }
+
+
+/* .device-list-drop:hover{
+    background-color: rgb(50, 51, 43);
+    color: white;
+   
+} */
 
 /* .app__navbar-login div{
     width: 1px;
@@ -203,13 +222,17 @@
     margin-top: 19px;
     width: fit-content;
     font-size: 13px;
-    margin-left: -10px;
+    padding: 0 2px 0 2px;
+    margin-left: -15px;
+    border-bottom: 1px solid black;
+    /* border-radius: 5px; */
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 
   .device-label-container {
     display: flex;
     align-items: center;
+    /* border: 1px solid black; */
   }
   
   .device-label-container  {
@@ -243,13 +266,18 @@
     font-size: 2rem;
     text-align: left;
     font-family:'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     list-style: none;
     
 }
 
 .app__navbar-smaillscreen-links li:hover{
     color: white;
+    border-bottom:1px solid rgb(255, 242, 0);
+    width: fit-content;
+    /* margin-left: 5px; */
+    transition: 0.5s ease;
+    border-radius: 0px;
 }
 
 @media screen and (max-width:1150px) {
@@ -376,7 +404,7 @@
         position: absolute;
         top: 1px;
         width: 130px;
-        font-size: 11px;
+        font-size: 10px;
         margin-left: -10px;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
       }

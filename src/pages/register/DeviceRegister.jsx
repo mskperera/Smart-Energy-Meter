@@ -21,6 +21,8 @@ function DeviceRegister() {
   const [dropDeviceType, setDropDeviceType] = useState([]);
   const [device, setDevice] = useState('');
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   // const deviceNames = useSelector(state => state.device.dropDeviceList);
   // const defaultSelectedDevice = deviceNames[0];
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
@@ -61,7 +63,7 @@ function DeviceRegister() {
   };
 
   const [message, setMessage] = useState('');
-  const [errormessage, setErrorMessage] = useState('');
+  // const [errormessage, setErrorMessage] = useState('');
 
   const onsubmitHandler = async (e) => {
     e.preventDefault();
@@ -86,6 +88,7 @@ function DeviceRegister() {
         handleResponse(res);
       } else if (saveType === 'U') {
         const res = await updateDevice(payload, deviceRegId);
+        console.log('update res', res);
         handleResponse(res);
       }
     } catch (err) {
@@ -94,9 +97,10 @@ function DeviceRegister() {
   };
 
   const handleResponse = (res) => {
-    const { responseStatus, outputMessage } = res.data.output;
-    if (responseStatus === 'failed') {
+    const { responseStatus, outputMessage } = res.data;
+    if (responseStatus === 'error') {
       setErrorMessage(outputMessage);
+      return;
     } else {
       setMessage(outputMessage);
       swal('Added Successful', '', 'success').then(() => {
@@ -181,6 +185,8 @@ function DeviceRegister() {
             Save
           </button>
         </form>
+        {message && <div className="alert alert-success mt-2">{message}</div>}
+        {errorMessage && <div className="alert alert-danger mt-2">{errorMessage}</div>}
       </div>
     </div>
   );
