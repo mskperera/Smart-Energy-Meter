@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-   width: 100%;
+    width: 100%;
     min-height: 65vh;
 }
 
@@ -115,7 +115,7 @@
 
 
 .section{
-    margin-top: -20px;
+    margin-top: -40px;
 }
 
 .section div{
@@ -286,11 +286,9 @@
     /* background-color: rgb(3, 167, 3); */
     animation: pulse 1s infinite;
     color: rgb(3, 167, 3);
-    /* size: 30px; */
   }
   
   .curcle-offline {
-    /* background-color: red; */
     color: red;
     animation: pulse 1s infinite;
   }
@@ -309,7 +307,7 @@
     height: 60px;
     /* flex: 1; */
     margin: 4px;
-    background:  rgba(11, 11, 11, 0.5);
+    background:  rgba(11, 11, 11, 0.7);
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
     border-radius: 10px;
     display: flex;
@@ -323,7 +321,7 @@
     height: 60px;
     /* flex: 1; */
     margin: 4px;
-    background:  rgba(11, 11, 11, 0.5);
+    background:  rgba(11, 11, 11, 0.7);
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
     border-radius: 10px;
     display: flex;
@@ -389,6 +387,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-top: -20px;
   }
 
 .line-type{
@@ -446,7 +445,7 @@
 @media screen and (max-width:2000px){
     .page{
         width: 100%;
-        margin-top: -4.5rem;
+        margin-top: -6rem;
         justify-content:center;
         align-items: center;
         display: flex;

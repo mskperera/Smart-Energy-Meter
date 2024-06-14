@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
-import Navbar from '../../components/navbar/Navbar';
+// import Navbar from '../../components/navbar/Navbar';
 import Menu from '../../components/menu/Menu';
 import BottomNav from '../../components/bottommenu/BottomNav';
 import { useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import {getEngergyUsageNow } from '../../action/device';
 import DeviceChart3p from './DeviceChart';
 
 const Home = () => {
-  const [device, setDevice] = useState(null);
+  // const [device, setDevice] = useState(null);
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
 
@@ -53,9 +53,9 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
       <Menu className="navnav1"/>
 
     
-        <div className="body">
+        <div className="body" style={{overflow:'auto'}}>
             <div className="session-name">
-              <h5 >Session Date : 08/06/2024</h5>
+              <h6>Session Date : 08/06/2024</h6>
             </div>
           {/* {JSON.stringify(devices)} */}
           <div className="container">
@@ -65,14 +65,14 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
               <p className="loading-message">Loading please wait...</p>
             ) : (
               <>
-                {/* {devices.length > 1 && (
+                {devices.length > 1 && (
                   <div className='budget-values'
                     style={{ display: "flex", justifyContent: "space-between"}}
                   >
                     <h2>Total kWh:{totalUsageKwh?.toFixed(2)}</h2>
                     <h2>Total Bill:{totalUsageBill?.toFixed(2)}</h2>
                   </div>
-                )} */}
+                )}
 
                 {devices?.map((device, index) => (
                   <div key={index}>

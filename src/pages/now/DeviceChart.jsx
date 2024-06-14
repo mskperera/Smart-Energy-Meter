@@ -46,12 +46,14 @@ function DeviceChart({ deviceName, device }) {
             <div className="line-total">
             <div className="line-total-kw">
               <div>
-                Total kwh: {device.kwh.toFixed(2)}
+                {/* Total kwh: {device.kwh.toFixed(2)} */}
+                Total kWh: {device.kwh.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}kWh
               </div>
             </div>
             <div className="line-total-kw">
               <div>
-                 Total Bill: {device.usageBill.toFixed(2)}
+                 {/* Total Bill: {device.usageBill.toFixed(2)} */}
+                 Total Bill: Rs.{device.usageBill.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </div>
             </div>
             </div>

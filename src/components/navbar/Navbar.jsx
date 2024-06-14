@@ -9,6 +9,8 @@ import { CgProfile } from 'react-icons/cg';
 import { getDevicesByUserId } from '../../action/device';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDropDevices,setSelectedDevie } from '../../state/device/deviceReducer';
+// import { IoMdArrowDropdownCircle } from "react-icons/io";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 
 // import { GlobalContext } from '../../context/GlobalContext';
 
@@ -81,7 +83,9 @@ const dispatch=useDispatch();
        
         <div className='menu-trigger relative'>
           <div className="device-label-container">
-            <a href='#' onClick={() => setOpenDevicesName(!openDevicesName)}>Device</a>
+            <a style={{marginLeft:'5px'}}>Device<a href='#' onClick={() => setOpenDevicesName(!openDevicesName)} className='device-list-drop'>
+                {openDevicesName ? <IoMdArrowDropup size={25} style={{ marginLeft: '-15px' }} /> : <IoMdArrowDropdown size={25} style={{ marginLeft: '-15px' }} />}
+              </a></a>
             {selectedDeviceName && <p className="selected-device-label">{selectedDeviceName}</p>}
           </div>
           {openDevicesName && (
@@ -101,11 +105,11 @@ const dispatch=useDispatch();
           {open && (
             <div className='drop'>
               <ul>
-                <li><a href='/profile' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>Profile</a></li>
-                <br/>
-                <li><a href='/status' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>Device Status</a></li>
-                <li><a href='/billingsession' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>Session</a></li>
-                <li><a href='/' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>Logout</a></li>
+                <li><a href='/profile' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded '>Profile</a></li>
+                {/* <br/> */}
+                <li><a href='/status' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded'>Device Status</a></li>
+                <li><a href='/billingsession' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded '>Session</a></li>
+                <li><a href='/' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded '>Logout</a></li>
               </ul>
             </div>
           )}
@@ -126,7 +130,7 @@ const dispatch=useDispatch();
             <div className='drop1'>
               <ul>
                 {deviceNames.map((device, index) => (
-                  <li key={index} onClick={() => handleDeviceSelect(device.name)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>{device.name}</li>
+                  <li key={index} onClick={() => handleDeviceSelect(device.name)} className='p-2 cursor-pointer rounded hover:bg-blue-100 drop-device-name'>{device.name}</li>
                 ))}
               </ul>
             </div>
