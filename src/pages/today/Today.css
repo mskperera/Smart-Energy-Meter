@@ -207,13 +207,16 @@
         padding: 1rem;
 }
 .page-now{
-    margin-top: 00px;
+    margin-top: 0px;
 }
 
 
 .page-5 h5{
-    margin-top: 100px;
+    margin-top: 250px;
     display: flex;
     
+}
+.bar-charts{
+    margin-top: -230px;
 }
 }

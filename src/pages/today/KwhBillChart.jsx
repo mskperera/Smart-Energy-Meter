@@ -6,7 +6,7 @@ function KwhBillChart({line,isSearchLoading,chartFrequencty}) {
   const {days}=line;
   return (
     <>
-      <div className="page-5">
+    <div className='bar-charts'>      <div className="page-5">
         <h5 className='page-5-h5'>{line.lineNo}</h5>
         <div className="chart-custom">
           {/* {JSON.stringify(days)} */}
@@ -18,6 +18,7 @@ function KwhBillChart({line,isSearchLoading,chartFrequencty}) {
             </div>
         </div>
       </div>
+    </div>
     </>
   );
 }
