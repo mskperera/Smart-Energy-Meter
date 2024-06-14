@@ -45,7 +45,7 @@ function Budget() {
         if (budgetedValue.isKwhAmountEntered) {
             selectedRadio = '1';
         }
-        else if (budgetedValue.isBillAmountEntered) {
+        else if (budgetedValue.isCostAmountEntered) {
             selectedRadio = '2';
         }
         
@@ -69,7 +69,7 @@ function Budget() {
 
             const payload = {
                 deviceId: selectedDevice.id,
-                budgetedValue: selectedRadio === '1' ? budgetedValues.kwhAmount : budgetedValues.billAmount,
+                budgetedValue: selectedRadio === '1' ? budgetedValues.budgetedKwh : budgetedValues.budgetedCost,
                 opertationalMetricId: selectedRadio === '1' ? 1 : 7,
                 thresholdAmountsArr: [],
                 isKeepNull: false,
@@ -132,9 +132,9 @@ function Budget() {
                             type='text'
                             className='form-control'
                             placeholder='kW'
-                            value={budgetedValues.kwhAmount}
+                            value={budgetedValues.budgetedKwh}
                             onChange={(e) => {
-                                setBudgetedValues({...budgetedValues, kwhAmount: e.target.value})
+                                setBudgetedValues({...budgetedValues, budgetedKwh: e.target.value})
                             }}
                             style={{ width: '200px', height: '30px' }}
                             disabled={selectedRadio !== '1'}
@@ -156,8 +156,8 @@ function Budget() {
                             type='text'
                             className='form-control'
                             placeholder='Rs'
-                            value={budgetedValues.billAmount}
-                            onChange={(e) => setBudgetedValues({...budgetedValues, billAmount: e.target.value})}
+                            value={budgetedValues.budgetedCost}
+                            onChange={(e) => setBudgetedValues({...budgetedValues, budgetedCost: e.target.value})}
                             style={{ width: '200px', height: '30px' }}
                             disabled={selectedRadio !== '2'}
                         />
@@ -170,15 +170,15 @@ function Budget() {
                     const deviceId = selectedDevice.id;
 
                     if (selectedRadio === '1') {
-                        const value = await handleCalculateInterdependentValue(deviceId, 1, budgetedValues.kwhAmount);
+                        const value = await handleCalculateInterdependentValue(deviceId, 1, budgetedValues.budgetedKwh);
                         console.log('resultAAAA', value);
-                        setBudgetedValues({...budgetedValues, billAmount: value});
+                        setBudgetedValues({...budgetedValues, budgetedCost: value});
                     }
 
                     if (selectedRadio === '2') {
-                        const value = await handleCalculateInterdependentValue(deviceId, 7, budgetedValues.billAmount);
+                        const value = await handleCalculateInterdependentValue(deviceId, 7, budgetedValues.budgetedCost);
                         console.log('resultBBB', value);
-                        setBudgetedValues({...budgetedValues, kwhAmount: value});
+                        setBudgetedValues({...budgetedValues, budgetedKwh: value});
                     }
                 }}>
                     Calculate
