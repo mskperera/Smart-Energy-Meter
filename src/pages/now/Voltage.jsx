@@ -20,7 +20,7 @@ const Voltage = ({budgetedValue,currentValue}) => {
         rotation:225,
         cutout:'80%',
         borderWidth: 0,
-        borderRadius: 25,      
+        borderRadius: 10,      
       },
     ],
   };

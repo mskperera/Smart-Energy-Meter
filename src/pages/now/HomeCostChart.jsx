@@ -14,7 +14,7 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
     datasets: [
       {
         data: [currentValue || 0, budgetedBill || 0],
-        backgroundColor: [currentValue > budgetedBill ? '#ff0000' : '#ff0066', '#F5F5DC'],
+        backgroundColor: [currentValue > budgetedBill ? '#ff0000' : '#4484ff', '#F5F5DC'],
         circumference: 270,
         rotation: 225,
         cutout: '80%',
@@ -32,7 +32,7 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
       const centerY = chart.getDatasetMeta(0).data[0].y;
 
       ctx.save();
-      ctx.fillStyle = [currentValue > budgetedBill ? '#ff0000' : '#ff0066'];
+      ctx.fillStyle = [currentValue > budgetedBill ? '#ff0000' : '#4484ff'];//#ff0066
       ctx.font = '35px Trebuchet MS';
       ctx.textAlign = 'center';
 
@@ -42,7 +42,7 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
       ctx.font = '25px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillStyle = [currentValue > budgetedBill ? '#ff0000' : '#ff0066'];
+      ctx.fillStyle = [currentValue > budgetedBill ? '#ff0000' : '#4484ff'];
       ctx.fillText('Rs', centerX, centerY);
 
       ctx.font = '20px Trebuchet MS';

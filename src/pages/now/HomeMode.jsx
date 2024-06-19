@@ -5,7 +5,8 @@ import Menu from '../../components/menu/Menu';
 import BottomNav from '../../components/bottommenu/BottomNav';
 import { useSelector } from 'react-redux';
 import {getEngergyUsageNow } from '../../action/device';
-import DeviceChart3p from './DeviceChart';
+// import DeviceChart3p from './DeviceChart';
+import DeviceChartMode from './DeviceChartMode';
 
 const Home = () => {
   // const [device, setDevice] = useState(null);
@@ -69,18 +70,18 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
                   <div className='budget-values'
                     style={{ display: "flex", justifyContent: "space-between"}}
                   >
-                    <h2 style={{color:'white'}}>Total kWh: {totalUsageKwh?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
-                    <h2 style={{color:'white'}}>Total Bill: {totalUsageBill?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
-      
+                    <h2 style={{color:'white'}}><i>Total kWh: </i>{totalUsageKwh?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
+                    <h2 style={{color:'white'}}><i>Total Bill:</i> {totalUsageBill?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
+       
                   </div>
                 )}
 
                 {devices?.map((device, index) => (
                   <div key={index}>
                  
-                    <div className="device-name-state">
-                   
-                      <DeviceChart3p
+                    <div className="device-name-state-mode">
+                     
+                      <DeviceChartMode
                         deviceName={device.deviceName} 
                         device={device}
                         

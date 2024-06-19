@@ -115,9 +115,9 @@
 }
 
 .title .logo img{
-    width: 69px;
+    width: 50px;
     /* display: flex; */
-    margin-left: 20px;
+    margin-left: 30px;
     /* padding-bottom: 5px; */
 }
 
@@ -125,8 +125,8 @@
 .topic{
     position: absolute;
     font-size: 25px;
-    margin-left: 100px;
-    margin-top: -60px;
+    margin-left: 90px;
+    margin-top: -44px;
     justify-content: center;
     padding-bottom: 5px;
     color: #191970;
@@ -233,6 +233,15 @@
     display: flex;
     align-items: center;
     /* border: 1px solid black; */
+  }
+
+  .device-label-container button{
+    background-color: transparent;
+    border: none;
+    color: black;
+    /* font-size: 13px; */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    cursor: pointer;
   }
   
   .device-label-container  {

@@ -105,9 +105,9 @@ const [devices, setDevices] = useState([]);
           </div>
       </div>
           <div className='body'>
-            {/* <div className="session-name">
-              <h5>Session Date : {sessionDate}</h5>
-            </div> */}
+            <div className="session-name">
+              <h6>Session Date : {sessionDate}</h6>
+            </div>
           <div className='date'>
           <div className='picker'>
         <div>

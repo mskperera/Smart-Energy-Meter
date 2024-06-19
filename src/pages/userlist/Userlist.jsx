@@ -68,7 +68,7 @@ function Userlist() {
     {/* <Navbar onChangeDevice={onChangeDeviceHandler} className='navnav'/> */}
     <div className="body">
       <div className= "rounded p-2 ">
-        <h2 className='d-flex justify-content-center align-items-center'>User List</h2>
+        <h2 className='d-flex justify-content-center align-items-center'>User Management</h2>
         <div className="d-flex justify-content-end">
           <Link to="/userregister/0/I" className="btn btn-info bbttnn">Add User</Link>
         </div>

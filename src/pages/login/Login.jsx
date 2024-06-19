@@ -72,10 +72,10 @@ function Login() {
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}></input>
                     {/* <div className='invalid-feedback'>Please enter your Password</div> */}
                 </div>
-                <div className='form-group mb-2'>
+                {/* <div className='form-group mb-2'>
                     <input type='checkbox' className='form-check-input'></input>
                     <label htmlFor='check' className='form-check-label'>Remember Me</label>
-                </div>
+                </div> */}
                 <button type='submit' className='btn btn-primary w-100 mt-2'>Login</button>
                 {errorMessage &&   <p>{errorMessage}</p>}
                 {/* <Link to={'/register'}><p>Register Here</p></Link> */}

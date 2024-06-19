@@ -9,14 +9,14 @@ ChartJS.register(ArcElement, Tooltip);
 
 const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
 
- 
+ //#00ff99
   const data = {
     
     labels: ['Used kWh', `Remaining kWh : ${ ((budgetedKwhValue - currentKwValue) ||0 )?.toLocaleString(undefined,{minimumFractionDigits: 2, maximumFractionDigits: 2})}`],
     datasets: [
       {
         data: [currentKwValue, budgetedKwhValue],
-        backgroundColor: [currentKwValue > budgetedKwhValue ? '#ff0000' : '#00ff99', '#F5F5DC'],
+        backgroundColor: [currentKwValue > budgetedKwhValue ? '#ff0000' : '#fff346', '#F5F5DC'],
         circumference: 270,
         rotation: 225,
         cutout: '80%',
@@ -34,7 +34,7 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
       const centerY = chart.getDatasetMeta(0).data[0].y;
   
       ctx.save();
-      ctx.fillStyle = [currentKwValue > budgetedKwhValue ? '#ff0000' : '#00ff99'];
+      ctx.fillStyle = [currentKwValue > budgetedKwhValue ? '#ff0000' : '#fff346'];
       ctx.font = '35px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -44,7 +44,7 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
       // ctx.fillText(data.datasets[0].data[0].toLocaleString(undefined,{minimumFractionDigits: 2, maximumFractionDigits: 2}), centerX, centerY);
   
       ctx.font = '25px Trebuchet MS';
-      ctx.fillStyle = [currentKwValue > budgetedKwhValue ? '#ff0000' : '#00ff99'];
+      ctx.fillStyle = [currentKwValue > budgetedKwhValue ? '#ff0000' : '#fff346'];
       ctx.fillText('kWh', centerX, centerY + 40);
   
       ctx.font = '20px Trebuchet MS';

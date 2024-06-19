@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../src/pages/now/Home';
+import HomeMode from '../src/pages/now/HomeMode';
 import Today from '../src/pages/today/Today';
 import Week from '../src/pages/week/Week';
 import Month from './pages/month/Month';
@@ -42,6 +43,7 @@ function App() {
           <Route path='/status' element={<Status />} />
           <Route path='/userlist' element={<Userlist />} />
           <Route path='/home' element={<Home />} />
+          <Route path='/homemode' element={<HomeMode />} />
           <Route path='/homecopy' element={<Home />} />
           <Route path='/today' element={<Today />} />
           <Route path='/week' element={<Week />} />

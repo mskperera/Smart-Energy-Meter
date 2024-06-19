@@ -5,7 +5,7 @@ const SessionDateContext = createContext();
 export const useSessionDate = () => useContext(SessionDateContext);
 
 export const SessionDateProvider = ({ children }) => {
-  const [sessionDate, setSessionDate] = useState('08/06/2024'); 
+  const [sessionDate, setSessionDate] = useState('08/Jun/2024'); 
 
   return (
     <SessionDateContext.Provider value={{ sessionDate, setSessionDate }}>
