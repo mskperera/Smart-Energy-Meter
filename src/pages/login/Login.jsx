@@ -42,13 +42,12 @@ function Login() {
           const response = await login(formData);
           console.log('response',response);
          // loadDevicesByUserId();
-          // if (response.status === 200) {
+           if (response.status === 200) {
             navigate('/home');
-          //   console.log('Login successful! Navigate to home page.');
-          // } else {
+           } else {
    
-          //   console.log('Login failed. Handle error.');
-          // }
+           console.log('Login failed. Handle error.');
+          }
         } catch (error) {
           console.error('Error during login:', error);
           setErrorMessage(error.response.data.error)
