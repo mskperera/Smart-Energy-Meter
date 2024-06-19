@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement,CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
-
+import moment from 'moment';
 ChartJS.register(BarElement,CategoryScale,LinearScale,Tooltip,Legend);
 
 
@@ -35,16 +35,17 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
       for (const e of days) {
         if(chartFrequencty === "hours"){
           data.push(e.usageBillPerHour);
-          labels.push(e.hour);
+          labels.push(moment(e.date).format('HH'));
         }
         else    
          if(chartFrequencty === "days"){
           data.push(e.usageBillPerDay);
-          labels.push(e.day);
+          labels.push(moment(e.date).format('DD / MMM'));
         }
         else    
         if(chartFrequencty === "months"){
          data.push(e.usageBillPerMonth);
+         moment(e.date).format('MM')
         //  labels.push(e.month);
         const monthNames = [
           "Jan",
