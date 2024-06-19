@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
+import moment from 'moment';
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -30,31 +31,33 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
     for (const e of days) {
       if (chartFrequencty === "hours") {
         data.push(e.kwhPerHour);
-        labels.push(e.hour);
+        labels.push(moment(e.date).format('HH'));
       }
       else if (chartFrequencty === "days") {
         data.push(e.kwhPerDay);
-        labels.push(e.day);
+        labels.push(moment(e.date).format('DD / MMM'));
       }
       else if (chartFrequencty === "months") {
-        data.push(e.kwhPerMonth);
+        data.push(moment(e.date).format('MM'));
+       
         // labels.push(e.month);
-        const monthNames = [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ];
-        labels.push(monthNames[e.month - 1]);
+        // const monthNames = [
+        //   "Jan",
+        //   "Feb",
+        //   "Mar",
+        //   "Apr",
+        //   "May",
+        //   "Jun",
+        //   "Jul",
+        //   "Aug",
+        //   "Sep",
+        //   "Oct",
+        //   "Nov",
+        //   "Dec",
+        // ];
+        // labels.push(monthNames[e.month - 1]);
       }
+      console.log('datammmmm ',data)
     }
 
     const datasets0 = [{
