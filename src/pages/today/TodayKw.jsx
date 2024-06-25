@@ -63,8 +63,12 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
     const datasets0 = [{
       label: "kWh",
       data: data,
-      backgroundColor: "#00ff99",
-      borderWidth: 1,
+      backgroundColor: "#fff346",
+      // borderColor: "#ff6347",
+      // borderWidth: 2,
+      borderRadius: 5, 
+      // barPercentage: 1, 
+      // barThickness: 15, 
     }];
 
     setChartData({ ...data, labels: labels, datasets: datasets0 });
@@ -88,6 +92,7 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
         },
         y: {
           grid: {
+            display: false,
             color: 'Gray',
           },
           beginAtZero: true,
@@ -106,7 +111,16 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
           display: true,
           labels: {
             color: 'white',
+            font: {
+              // size: 14, 
+              // family: 'Arial', 
+            },
+            // padding: 20, 
+            // boxWidth: 20, 
+            usePointStyle: true, 
+            pointStyle: 'rectRounded', // Change to desired shape: 'circle', 'rect', 'triangle', 'star', 'line', 'dash', 'cross', 'rectRounded', 'rectRot', 'crossRot'
           },
+          onClick: () =>{},
         },
       },
     };

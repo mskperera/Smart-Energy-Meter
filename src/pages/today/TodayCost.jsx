@@ -44,32 +44,35 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
         }
         else    
         if(chartFrequencty === "months"){
-         data.push(e.usageBillPerMonth);
-         moment(e.date).format('MM')
+          data.push(moment(e.date).format('MM'));
+        //  data.push(e.usageBillPerMonth);
+        //  moment(e.date).format('MM')
         //  labels.push(e.month);
-        const monthNames = [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec"
-        ];
-        labels.push(monthNames[e.month - 1]);
+        // const monthNames = [
+        //   "Jan",
+        //   "Feb",
+        //   "Mar",
+        //   "Apr",
+        //   "May",
+        //   "Jun",
+        //   "Jul",
+        //   "Aug",
+        //   "Sep",
+        //   "Oct",
+        //   "Nov",
+        //   "Dec"
+        // ];
+        // labels.push(monthNames[e.month - 1]);
        }
+       console.log('datammmmm ',data)
       }
   
       const datasets0 = [{
           label: "Cost",
           data: data,
-          backgroundColor: "#ff0066",
-          borderWidath: 1,
+          backgroundColor: "#4484ff",
+          // borderWidth: 1,
+          borderRadius: 5,
         }];
   
         setChartData({ ...data, labels:labels,  datasets: datasets0 });
@@ -93,6 +96,7 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
             },
             y: {
               grid: {
+                display: false,
                 color: 'Gray',
               },
               beginAtZero: true,
@@ -111,7 +115,10 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
               display:true,
               labels: {
                 color: 'white', 
+                usePointStyle: true, 
+                pointStyle: 'rectRounded',
               },
+              onClick: () =>{},
             },
           },
         };

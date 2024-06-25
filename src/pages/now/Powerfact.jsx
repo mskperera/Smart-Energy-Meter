@@ -46,7 +46,7 @@ const Powerfact = ({budgetedValue,currentValue}) => {
       ctx.font ='15px Trebuchet MS';
       ctx.fillText("pf",xCenter,yCenter +10)
 
-      ctx.font = '15px Trebuchet MS ';
+      ctx.font = '12px Trebuchet MS ';
       ctx.fillText("PowerFactor", xCenter, yCenter + 28);
     }
   }

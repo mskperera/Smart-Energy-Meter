@@ -5,7 +5,8 @@ import Menu from '../../components/menu/Menu';
 import BottomNav from '../../components/bottommenu/BottomNav';
 import { useSelector } from 'react-redux';
 import {getEngergyUsageNow } from '../../action/device';
-import DeviceChart3p from './DeviceChart';
+// import DeviceChart3p from './DeviceChart';
+import DeviceChartMode from './DeviceChartMode';
 import { ThreeDots } from 'react-loader-spinner';
 
 const Home = () => {
@@ -48,8 +49,8 @@ const totalUsageBill = devices.reduce((total, line) => total + line.usageBill, 0
 const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
 
   return (
-    // <div className='main-home'>
-    <div className="home">
+    // <div className='home-industry'>
+    <div className="home-industry">
       {/* <Navbar className="navnav" onChangeDevice={onChangeDeviceHandler}/> */}
       <Menu className="navnav1"/>
 
@@ -64,9 +65,8 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
 
             {loading ? (
               // <p className="loading-message">Loading please wait...</p>
-              <div>
+              <div  className="d-flex align-items-center justify-content-center">
                 <ThreeDots
-                    className="d-flex align-items-center justify-content-center"
                     height={80}
                     width={80}
                     color="#36A2EB"
@@ -84,16 +84,16 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
                   >
                     <h2 style={{color:'black'}}>Total kWh: <span style={{color:'#fff346'}}>{totalUsageKwh?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></h2>
                     <h2 style={{color:'black'}}>Total Bill: <span style={{color:'#4484ff'}}>{totalUsageBill?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span></h2>
-      
+       
                   </div>
                 )}
 
                 {devices?.map((device, index) => (
                   <div key={index}>
                  
-                    <div className="device-name-state">
-                   
-                      <DeviceChart3p
+                    <div className="device-name-state-mode">
+                     
+                      <DeviceChartMode
                         deviceName={device.deviceName} 
                         device={device}
                         

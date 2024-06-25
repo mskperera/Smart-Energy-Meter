@@ -3,6 +3,8 @@ import './UserRegister.css';
 import { useParams } from 'react-router-dom';
 import { addUser, getUserbyUserId, updateUser } from '../../action/user';
 import swal from 'sweetalert';
+import { set } from 'date-fns';
+import { ThreeDots } from 'react-loader-spinner';
 
 function UserRegister() {
   
@@ -17,20 +19,25 @@ function UserRegister() {
   const [userBillAddress, setUserBillAddress] = useState('');
   const [userTel, setUserTel] = useState('');
 
+  const [loading,setLoading]=useState(null);
+
   // const [load,setLoad]=useState(false);
 
   useEffect(() => {
 
     if(saveType==="U"){
       loaduser();
+      setLoading(true);
     }
 
    
   }, []);
 
   const loaduser=async()=>{
+    
     console.log("loaduser");
     const result=await getUserbyUserId(userRegId);
+    setLoading(true);
     //setUserData(result.data);
     const user =result.data;
     console.log("result data:",user);
@@ -42,6 +49,7 @@ function UserRegister() {
     setUserAddress(user.siteAddress);
     setUserBillAddress(user.billingAddress);
     setUserTel(user.tel);
+    setLoading(false);
    }
 
 
@@ -74,6 +82,7 @@ function UserRegister() {
 
     if(saveType==="I"){
       const res = await addUser(payload);
+      setLoading(true);
       console.log(res);
 
       const { responseStatus, outputMessage } = res.data;
@@ -92,6 +101,7 @@ function UserRegister() {
 
    else if(saveType==="U"){
       const res = await updateUser(payload,userRegId);
+      setLoading(true);
       console.log(res);
 
       const { responseStatus, outputMessage } = res.data;
@@ -113,9 +123,38 @@ function UserRegister() {
     }
     }
 
+    // const handleResponse = (res) => {
+    //   const { responseStatus, outputMessage } = res.data;
+    //   if (responseStatus === 'error') {
+    //     setErrorMessage(outputMessage);
+    //     return;
+    //   } else {
+    //     setMessage(outputMessage);
+    //     swal('Added Successful', '', 'success').then(() => {
+    //       window.location = '/userlist';
+    //     });
+    //   }
+    // };
+
  
   return (
     <div className='wrapper-register d-flex align-items-center justify-content-center w-100'>
+
+    {loading ? (
+      // <p className="loading-message">Loading please wait...</p>
+      <div  className="d-flex align-items-center justify-content-center">
+          <ThreeDots
+              height={80}
+              width={80}
+              color="#36A2EB"
+              ariaLabel="loading"
+              secondaryColor="#36A2EB"
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+          </div>
+    ) : (
+
       <div className='register'>
      {saveType==="I" ?  <h2 className='d-flex align-items-center justify-content-center mb-2'>User Registration</h2> : <h2 className='d-flex align-items-center justify-content-center mb-2'>Update User Details</h2>}
       
@@ -192,6 +231,7 @@ function UserRegister() {
             {errormessage && <p>{errormessage}</p>}
         </form>
       </div>
+    )}
     </div>
   );
 }

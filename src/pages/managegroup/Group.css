@@ -8,7 +8,7 @@
     padding-top: 30px;
     padding-bottom: 60px; 
     overflow-y: auto; 
-    height: calc(100vh - 80px - 74.41px);
+    height: calc(99.7vh - 79.71px - 43.99px);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
   }
 
@@ -170,6 +170,24 @@
 
 }
 
+@media only screen and (max-width: 1150px) {
+  .body {
+    padding-top: 30px;
+    padding-bottom: 60px; 
+    overflow-y: auto; 
+    height: calc(102.55vh - 80px - 60px); 
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .body {
+    padding-top: 30px;
+    padding-bottom: 60px; 
+    overflow-y: auto; 
+    height: calc(102.55vh - 80px - 60px); 
+  }
+}
+
  
   @media (max-width: 768px) {
     .group-section{
@@ -180,6 +198,13 @@
         padding-top: 15px;
         width: 500px;
         
+      }
+
+      .body {
+        padding-top: 30px;
+        padding-bottom: 60px; 
+        overflow-y: auto; 
+        height: calc(102.55vh - 80px - 58px); 
       }
 
       .save-group-btn{
@@ -209,6 +234,13 @@
         margin-top: 0px;
         width: 500px;
         margin-left:0px;
+      }
+
+      .body {
+        padding-top: 30px;
+        padding-bottom: 60px; 
+        overflow-y: auto; 
+        height: calc(102.55vh - 80px - 58px); 
       }
 
       .group-list{
@@ -256,7 +288,7 @@
       padding-top: 30px;
       padding-bottom: 60px; 
       overflow-y: auto; 
-      height: calc(102.55vh - 80px - 59.5px); 
+      height: calc(102.7vh - 80px - 57.5px); 
     }
 
     .group-device-select {
@@ -288,7 +320,13 @@
       margin-left: 190px;
       position: relative;
     }
+  }
 
-  
-    
+  @media screen and (max-width: 375px) {
+    .body {
+      padding-top: 30px;
+      padding-bottom: 60px; 
+      overflow-y: auto; 
+      height: calc(103.5vh - 80px - 60px); 
+    }
   }

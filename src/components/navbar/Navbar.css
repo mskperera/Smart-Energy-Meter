@@ -10,7 +10,8 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(254, 255, 254, 0.6);
+    background: rgba(255, 255, 255, 0.6);
+    /* background-image: radial-gradient(circle, #636363f0,#fffffff3); */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -115,9 +116,9 @@
 }
 
 .title .logo img{
-    width: 69px;
+    width: 50px;
     /* display: flex; */
-    margin-left: 20px;
+    margin-left: 30px;
     /* padding-bottom: 5px; */
 }
 
@@ -125,8 +126,8 @@
 .topic{
     position: absolute;
     font-size: 25px;
-    margin-left: 100px;
-    margin-top: -60px;
+    margin-left: 90px;
+    margin-top: -44px;
     justify-content: center;
     padding-bottom: 5px;
     color: #191970;
@@ -212,7 +213,7 @@
     background-color: red;
     color: white;
     border-radius: 25%;
-    padding: 5px 8px;
+    padding: 1px 8px;
     font-size: 12px; 
   }
 
@@ -233,6 +234,15 @@
     display: flex;
     align-items: center;
     /* border: 1px solid black; */
+  }
+
+  .device-label-container button{
+    background-color: transparent;
+    border: none;
+    color: black;
+    /* font-size: 13px; */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    cursor: pointer;
   }
   
   .device-label-container  {

@@ -4,16 +4,10 @@ import React from 'react'
 // import Current from './Current'
 // import Voltage from './Voltage'
 // import Hertz from './Hertz'
-function formatValue(value, unit) {
-  if (value > 1000) {
-    return `${(value / 1000).toFixed(2)} k${unit}`;
-  }
-  return `${value} ${unit}`;
-}
-// page-bottom --> page-bottom-mode
-function OperationalChart({lineNo,voltage,current,pf,hertz,power,kwh,bill,budgetedKwh,budgetedBill}) {
+
+function OperationalChartMode({lineNo,voltage,current,pf,hertz,power,kwh,bill,budgetedKwh,budgetedBill}) {
   return (
-          <div className='page-bottom-mode'> 
+          <div className='page-bottom-mode'>
             
             <div className="vol mode1">
               <h6 style={{color:'#4484ff',marginTop:'5px'}}>Voltage</h6>  
@@ -30,33 +24,33 @@ function OperationalChart({lineNo,voltage,current,pf,hertz,power,kwh,bill,budget
             </div>
             <div className="pow mode2">
               <h6 style={{color:'#4484ff',marginTop:'5px'}}>Power</h6> 
-              <span style={{marginTop:'-5px'}}>{formatValue(power, 'W')}</span>
+              <span style={{marginTop:'-5px'}}>{power}W</span>
             </div>
             <div className="pow mode2">
              <h6 style={{color:'#4484ff',marginTop:'5px'}}>Hertz</h6> 
               <span style={{marginTop:'-5px'}}>{hertz}Hz</span>
             </div>
          </div>
-  // <div className='page-bottom'>
+  // <div className='page-bottom-mode'>
      
-  //                   <div className="">
+  //                   <div className="mode1">
   //                     <Voltage currentValue={voltage} budgetedValue={250}/>
   //                   </div>
-  //                   <div className="">
+  //                   <div className="mode1">
   //                     <Current currentValue={current} budgetedValue={15}/>
   //                   </div>
-  //                   <div className="">
-  //                     <Power/>
+  //                   <div className="mode1">
+  //                     <Power currentValue={power} budgetedValue={2000}/>
   //                   </div>
-  //                   <div className="">
-  //                     <Powerfact/>
+  //                   <div className="mode2">
+  //                     <Powerfact currentValue={pf} budgetedValue={1}/>
   //                   </div>
-  //                   <div className="">
-  //                     <Hertz/>
+  //                   <div className="mode2">
+  //                     <Hertz currentValue={hertz} budgetedValue={55}/>
   //                   </div>
                   
   // </div>
   )
 }
 
-export default OperationalChart
+export default OperationalChartMode

@@ -189,6 +189,15 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
+.company-logo p{
+    margin: 0;
+    display: flex;
+    margin-top: 55px;
+    /* margin-right: 5px; */
+    /* color: black; */
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+}
+
 @media screen and (max-width:1150px){
 
     .tab{
@@ -472,7 +481,7 @@
     }
 
     .show-content .body{
-        height: 85.7vh;
+        height: 86.4vh;
     }
 
     .tab{
@@ -546,7 +555,7 @@
     }
 
     .show-content .body{
-        height: 85.7vh;
+        height: 84.6vh;
     }
 
     .tab{

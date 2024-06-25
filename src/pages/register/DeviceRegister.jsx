@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import swal from 'sweetalert';
 import { useSelector } from 'react-redux';
 import { getDrpDeviceType } from '../../action/dropdown';
+import { set } from 'date-fns';
+import { ThreeDots } from 'react-loader-spinner';
 
 
 function DeviceRegister() {
@@ -21,6 +23,9 @@ function DeviceRegister() {
   const [dropDeviceType, setDropDeviceType] = useState([]);
   const [device, setDevice] = useState('');
 
+
+  const [loading, setLoading] = useState(null);
+
   const [errorMessage, setErrorMessage] = useState('');
 
   // const deviceNames = useSelector(state => state.device.dropDeviceList);
@@ -34,19 +39,24 @@ function DeviceRegister() {
   useEffect(() => {
     if (saveType === "U") {
       loadDevices();
+      setLoading(true);
     }
     loadDrpDeviceType();
+    setLoading(true);
   }, []);
 
   const loadDrpDeviceType = async () => {
     const result = await getDrpDeviceType();
+    setLoading(true);
     console.log("result - drop", result.data);
     setDropDeviceType(result.data);
+    setLoading(false);
   }
 
   const loadDevices = async () => {
     try {
       const result = await getDeviceByDeviceId(deviceRegId);
+      setLoading(true);
       const device = result.data;
       console.log("result data:", result);
 
@@ -57,6 +67,7 @@ function DeviceRegister() {
       setProduct(device.product || '');
       setChipId(device.chipId || '');
       setDeviceType(device.deviceType || '');
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -85,9 +96,11 @@ function DeviceRegister() {
       console.log('payload', payload);
       if (saveType === 'I') {
         const res = await addDevice(payload);
+        setLoading(true);
         handleResponse(res);
       } else if (saveType === 'U') {
         const res = await updateDevice(payload, deviceRegId);
+        setLoading(true);
         console.log('update res', res);
         handleResponse(res);
       }
@@ -111,6 +124,20 @@ function DeviceRegister() {
 
   return (
     <div className='wrapper-register d-flex align-items-center justify-content-center w-100'>
+      {loading ? (
+        // <p className='loading-message'>Loading please wait...</p>
+        <div  className="d-flex align-items-center justify-content-center">
+          <ThreeDots
+              height={80}
+              width={80}
+              color="#36A2EB"
+              ariaLabel="loading"
+              secondaryColor="#36A2EB"
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+          </div>
+      ) : (
       <div className='register'>
         {saveType === "I" ? (
           <h2 className='d-flex align-items-center justify-content-center mb-2'>Device Registration</h2>
@@ -188,6 +215,7 @@ function DeviceRegister() {
         {message && <div className="alert alert-success mt-2">{message}</div>}
         {errorMessage && <div className="alert alert-danger mt-2">{errorMessage}</div>}
       </div>
+      )}
     </div>
   );
 }

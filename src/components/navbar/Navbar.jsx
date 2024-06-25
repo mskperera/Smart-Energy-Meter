@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { MdDevices, MdClose } from "react-icons/md";
 import { BiSolidBellRing } from "react-icons/bi";
 import { GiHamburgerMenu } from 'react-icons/gi';
-import logo from '../../assent/logo-removebg-preview.png';
+import logo from '../../assent/logo-1.png';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { CgProfile } from 'react-icons/cg';
@@ -83,9 +83,9 @@ const dispatch=useDispatch();
        
         <div className='menu-trigger relative'>
           <div className="device-label-container">
-            <a style={{marginLeft:'5px'}}>Device<a href='#' onClick={() => setOpenDevicesName(!openDevicesName)} className='device-list-drop'>
+            <button style={{marginLeft:'5px'}}>Device<a href='#' onClick={() => setOpenDevicesName(!openDevicesName)} className='device-list-drop'>
                 {openDevicesName ? <IoMdArrowDropup size={25} style={{ marginLeft: '-15px' }} /> : <IoMdArrowDropdown size={25} style={{ marginLeft: '-15px' }} />}
-              </a></a>
+              </a></button>
             {selectedDeviceName && <p className="selected-device-label">{selectedDeviceName}</p>}
           </div>
           {openDevicesName && (
