@@ -3,7 +3,7 @@ import './Homechart.css';
 
 const HomeChartMode = ({ currentKwValue, budgetedKwhValue }) => {
   const progressPercentage = budgetedKwhValue > 0 ? (currentKwValue / budgetedKwhValue) * 100 : 0;
-  const progressColor = currentKwValue > budgetedKwhValue ? '#ff2f2f' : '#00ff99'; 
+  const progressColor = currentKwValue > budgetedKwhValue ? '#ff2f2f' : '#fff346'; 
   const progressBackgroundColor = '#ffffff'; 
 
 

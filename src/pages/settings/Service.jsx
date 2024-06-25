@@ -11,6 +11,8 @@ import Budget from './Budget'
 import AboutDevice from './AboutDevice'
 import { useSelector } from 'react-redux'
 import DeviceTab from './DeviceTab'
+// import { set } from 'date-fns'
+import { ThreeDots } from 'react-loader-spinner'
 
 // import { Link } from 'react-router-dom'
 
@@ -50,6 +52,8 @@ function Service () {
 
     const [device, setDevice] = useState('');
 
+    const [loading,setLoading]=useState(null);
+
 // const onChangeDeviceHandler=(device)=>{
 //   setDevice(device);
 // }
@@ -71,18 +75,21 @@ useEffect(()=>{
     useEffect(() => {
 
         loadDrpConsumerCategories();
+        setLoading(true);
        
       if(selectedDevice){
         const deviceId=selectedDevice.id;
         // const deviceId=4;
         loadDrpSupplier(deviceId);
         loadDrpSupplyType(deviceId);
+        setLoading(true);
         // loadDeviceDetailsByDeviceId();
         }
     }, [selectedDevice,load]);
 
     useEffect(()=>{
         loadDrpConsumerSubCategoriesById();
+        setLoading(true);
     },[consumerCategoryselectedValue]);
 
  
@@ -96,6 +103,7 @@ useEffect(()=>{
     const loadDeviceSettingstData=async(deviceId)=>{
  
         const result=await get_DeviceSettingsByDeviceId(deviceId);
+        setLoading(true);
        // setDeviceSettings(result.data);
        console.log("test - test",result);
        const deviceSetttings=result.data;
@@ -105,7 +113,7 @@ useEffect(()=>{
        setSupplyTypeselectedValue(deviceSetttings.supplyTypeId);
        setConsumerSubCategoryselectedValue(deviceSetttings.consumerSubCategoryId);
 
-       
+       setLoading(false);
      // setConsumerSubCategoryselectedValue
        
     }
@@ -113,12 +121,14 @@ useEffect(()=>{
     const loadDeviceConnectionData=async(deviceId)=>{
  
         const result=await getConnectionSettingsByDeviceId(deviceId);
+        setLoading(true);
        // setDeviceSettings(result.data);
        console.log("test111111111",result);
        const deviceSetttings=result.data;
        setEditedDeviceName(deviceSetttings.deviceName);
        setEditedConnection(deviceSetttings.connection);
        setEditedPortNo(deviceSetttings.portNo);
+       setLoading(false);
     }
 
     useEffect(()=>{
@@ -127,22 +137,26 @@ useEffect(()=>{
         const deviceId=selectedDevice.id;
         loadDeviceSettingstData(deviceId);
         loadDeviceConnectionData(deviceId);
+        setLoading(true);
         }
     },[load,device])
 
     const loadDrpConsumerCategories=async()=>{
         const result=await getDrpConsumerCategories();
+        setLoading(true);
         setDropoptionsConsumerCatogery(result.data);
+        setLoading(false);
        }
 
     const loadDrpConsumerSubCategoriesById=async()=>{
         const result=await getDrpConsumerSubCategoriesById(consumerCategoryselectedValue);
-        
+        setLoading(true);
         const subCategory = result.data;
         console.log("subCategory",subCategory);
 
         if (Array.isArray(subCategory)) {
             setDropoptionsConsumerSubCatogery(subCategory);
+            setLoading(false);
         }
   
         // setConsumerSubCategoryselectedValue(subCategory.ConsumerSubCategoryId);
@@ -150,18 +164,22 @@ useEffect(()=>{
 
     const loadDrpSupplier=async(deviceId)=>{
         const result=await getDrpSupplier(deviceId);
+        setLoading(true);
         console.log("sup",result);
         const supplier = result.data;
         setDropoptionsSupplier(result.data);
+        setLoading(false);
       //  setSupplierselectedValue(supplier.supplierId)
        }
 
     const loadDrpSupplyType=async(deviceId)=>{
         const result=await getDrpSupplyType(deviceId);
+        setLoading(true);
         console.log("supType",result);
         const supplierType = result.data;
         setDropoptionsSupplyType(result.data);
-        setSupplyTypeselectedValue(supplierType.supplyTypeId)
+        setSupplyTypeselectedValue(supplierType.supplyTypeId);
+        setLoading(false);
        }
 
    
@@ -191,6 +209,7 @@ console.log("testingsave")
     };
     console.log('payload',payload);
     const res = await saveDeviceSettings(payload);
+    setLoading(true);
     console.log('saveDeviceSettings',res);
     const { responseStatus, outputMessage } = res.data;
     if (responseStatus === "failed") {
@@ -201,6 +220,7 @@ console.log("testingsave")
     setMessage(outputMessage)
     swal("Updated Successfully", "", "success").then(() => {
         setLoad(!load);
+        setLoading(false);
       });
     
   }
@@ -217,12 +237,14 @@ useEffect(() => {
     if(selectedDevice){
         const deviceId=selectedDevice.id;
     loadOperationalLimitByDeviceId(deviceId);
+    setLoading(true);
     }
 }, [load,selectedDevice]);
 
 
 const loadOperationalLimitByDeviceId = async (deviceId) => {
     const res = await getOperationalLimitByDeviceId(deviceId);
+    setLoading(true);
     // console.log("device",res.data); 
 
     const operationalDataArr= res.data;
@@ -234,21 +256,25 @@ const loadOperationalLimitByDeviceId = async (deviceId) => {
         {
             console.log("operationmetricId",operationalData);
             setOperationalDataBill(operationalData);
+            setLoading(false);
         }
         if (operationalData.operationalMetricId === 2 )
         {
             // console.log("operationmetricId",operationalData.operationalMetricId);
             setOperationalVoltage(operationalData);
+            setLoading(false);
         }
         if (operationalData.operationalMetricId === 1 )
         {
             // console.log("operationmetricId",operationalData.operationalMetricId);
             setOperationalKwMax(operationalData);
+            setLoading(false);
         }
         if (operationalData.operationalMetricId === 4 )
         {
             // console.log("operationmetricId",operationalData.operationalMetricId);
             setOperationalPowerMax(operationalData);
+            setLoading(false);
         }
     }
 
@@ -280,6 +306,7 @@ const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActiv
           };
        
       const res = await saveOperationalLimit(payload);
+      setLoading(true);
     //   console.log(res);
       const { responseStatus, outputMessage } = res.data;
       if (responseStatus === "failed") {
@@ -289,6 +316,7 @@ const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActiv
         setMessage(outputMessage)
         swal("Updated Successfully", "", "success").then(() => {
             setLoad(!load);
+            setLoading(false);
             });
         
         
@@ -313,6 +341,7 @@ const saveOperationVloSettings = async (thresholdAmountMin,thresholdAmountMax,op
       };
    
   const res = await saveOperationalLimit(payload);
+  setLoading(true);
   console.log(res);
   const { responseStatus, outputMessage } = res.data;
   if (responseStatus === "failed") {
@@ -322,6 +351,7 @@ const saveOperationVloSettings = async (thresholdAmountMin,thresholdAmountMax,op
     setMessage(outputMessage)
     swal("Updated Successfully", "", "success").then(() => {
         setLoad(!load);
+        setLoading(false);
         });
     
     
@@ -364,6 +394,7 @@ const payload = {
     };
   
     const res = await saveConnectionSettings(payload);
+    setLoading(true);
     console.log(res);
     const { responseStatus, outputMessage } = res.data;
     if (responseStatus === "failed") {
@@ -375,6 +406,7 @@ const payload = {
     setMessage(outputMessage)
     swal("Updated Successfully", "", "success").then(() => {
         setLoad(!load);
+        setLoading(false);
       });
     
   }
@@ -390,7 +422,9 @@ const payload = {
   const [toggle,setToggle] = useState(1);
 
   function updateToggle(id){
+    // setLoading(true);
     setToggle(id);
+    // setLoading(false);
   }
 
 
@@ -465,12 +499,32 @@ const payload = {
 
       <div className={toggle === 1 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center w-100">
-          <Budget />
+          {loading ? (
+            // <p className="loading-message">Loading please wait...</p>
+            <div>
+            <ThreeDots
+                className="d-flex align-items-center justify-content-center"
+                height={80}
+                width={80}
+                color="#36A2EB"
+                ariaLabel="loading"
+                secondaryColor="#36A2EB"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+              />
+            </div>
+          ) : (
+            <Budget />
+          )
+          }
         </div>
       </div>
 
       <div className={toggle === 2 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center">
+          {loading ? (
+            <p className="loading-message">Loading please wait...</p>
+          ) : (
           <div className="service" style={{marginTop:"60px"}}>
             <h3 className="d-flex align-items-center justify-content-center mb-3">
               Tarrif Settings
@@ -578,6 +632,8 @@ const payload = {
               {errormessage && <p>{errormessage}</p>}
             </form>
           </div>
+          )
+          }
         </div>
       </div>
 

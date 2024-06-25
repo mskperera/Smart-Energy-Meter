@@ -60,7 +60,7 @@ function DeviceChartMode({ deviceName, device }) {
                 <div className="line-values">
                   <div className="line-total">
                     <div className="line-total-kw">
-                      <div>Budgeted kwh: {device.budgetedKwh}</div>
+                      <div>Budgeted kWh: {device.budgetedKwh}</div>
                     </div>
                     <div className="line-total-kw">
                       <div>Budgeted Bill: {device.budgetedBill}</div>

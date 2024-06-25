@@ -29,6 +29,7 @@ function Notify() {
     { id: 11, message: "Your monthly bill was ready", time: "2024-04-30T20:00:00", unseen: true }
   ]);
 
+  // const [loading,setLoading]=useState(null);
   
 
   return (

@@ -3,6 +3,7 @@ import KwhBillChart from "./KwhBillChart";
 import OperationalChart from "./OperationalChart";
 import { FaHeartbeat } from "react-icons/fa";
 import { FaHeartBroken } from "react-icons/fa";
+import { color } from "chart.js/helpers";
 
 function DeviceChartMode({ deviceName, device }) {
   const { lines } = device;
@@ -46,12 +47,12 @@ function DeviceChartMode({ deviceName, device }) {
             <div className="line-total">
             <div className="line-total-kw">
               <div>
-                Total kWh: {device.kwh.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                Total kWh: <span style={{color:'#fff346'}}>{device.kwh.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
               </div>
             </div>
             <div className="line-total-kw">
               <div>
-                Total Bill: {device.usageBill.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                Total Bill:<span style={{color:'#4484ff'}}>{device.usageBill.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> 
               </div>
             </div>
             </div>

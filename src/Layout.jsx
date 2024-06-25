@@ -7,6 +7,7 @@ const Layout = ({ children }) => {
   const location = useLocation();
   const hideNavbarRoutes = ['/'];
 
+
   return (
     <>
       {!hideNavbarRoutes.includes(location.pathname) && <Navbar />}

@@ -33,19 +33,19 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
 
       ctx.save();
       ctx.fillStyle = [currentValue > budgetedBill ? '#ff0000' : '#4484ff'];//#ff0066
-      ctx.font = '35px Trebuchet MS';
+      ctx.font = '30px Trebuchet MS';
       ctx.textAlign = 'center';
 
       const currentValueFormatted = (data.datasets[0].data[0] || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       ctx.fillText(currentValueFormatted, centerX, centerY + 40);
 
-      ctx.font = '25px Trebuchet MS';
+      ctx.font = '22px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = [currentValue > budgetedBill ? '#ff0000' : '#4484ff'];
       ctx.fillText('Rs', centerX, centerY);
 
-      ctx.font = '20px Trebuchet MS';
+      ctx.font = '17px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.fillText('Energy Usage(Value)', centerX, centerY + 80);
 
@@ -55,7 +55,7 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
         ctx.fillText('Budget', centerX, centerY - 90);
 
         const budgetedBillFormatted = (data.datasets[0].data[1] || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        ctx.font = '25px Trebuchet MS';
+        ctx.font = '22px Trebuchet MS';
         ctx.fillStyle = 'white';
         ctx.fillText(`${budgetedBillFormatted} Rs`, centerX, centerY - 60);
       }
@@ -72,6 +72,7 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
           pointStyle: 'square',
           boxWidth: 20,
         },
+        onClick: () =>{},
       },
     },
     layout: {

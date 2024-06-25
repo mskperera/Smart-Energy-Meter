@@ -13,6 +13,7 @@ import { getEngergyUsageKwhByDateRange } from '../../action/device'
 
 import moment from 'moment'
 import DeviceCharts from '../today/DeviceChart'
+import { ThreeDots } from 'react-loader-spinner'
 
 
 function Week() {
@@ -52,7 +53,7 @@ useEffect(()=>{
 
 
 const loadChartData = async (deviceId,startDay) => {
-
+  setIsSearchLoading(true);
 
   const currentDate = moment.utc();
 
@@ -81,7 +82,7 @@ const loadChartData = async (deviceId,startDay) => {
   console.log('result---2222', result.data);
   setDevices(result.data);
 
-  setIsSearchLoading(!isSearchLoading);
+  setIsSearchLoading(false);
 }
 
 const [devices, setDevices] = useState([]);
@@ -105,7 +106,7 @@ const [devices, setDevices] = useState([]);
       </div>
           <div className='body'>
             <div className="session-name">
-              <h6>Session Date : 08/Jun/2024</h6>
+              <h6>Session Date : 24 Jun 2024</h6>
             </div>
           <div className='date'>
           <div className='picker'>
@@ -121,7 +122,22 @@ const [devices, setDevices] = useState([]);
          {/* <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button> */}
          </div>
           </div>
-            {devices.length >0 && devices?.map((device, index) => (
+
+          {isSearchLoading ? (
+            // <p className="loading-message">Loading please wait...</p>
+            <div className="d-flex align-items-center justify-content-center">
+          <ThreeDots
+              height={80}
+              width={80}
+              color="#36A2EB"
+              ariaLabel="loading"
+              secondaryColor="#36A2EB"
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+          </div>
+          ) : (
+            devices.length >0 && devices?.map((device, index) => (
               <div key={index}>
                   {/* <h4>{device.deviceName}</h4> */}
                   <DeviceCharts 
@@ -132,7 +148,8 @@ const [devices, setDevices] = useState([]);
                   />
           
               </div>
-            ))}
+            ))     
+          )}
           </div>
             <BottomNav/>
     

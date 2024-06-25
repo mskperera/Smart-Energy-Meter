@@ -8,7 +8,7 @@
     padding-top: 30px;
     padding-bottom: 60px; 
     overflow-y: auto; 
-    height: calc(99.57vh - 79.71px - 43px);
+    height: calc(99.7vh - 79.71px - 43.99px);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
   }
 
@@ -288,7 +288,7 @@
       padding-top: 30px;
       padding-bottom: 60px; 
       overflow-y: auto; 
-      height: calc(102.55vh - 80px - 58px); 
+      height: calc(102.7vh - 80px - 57.5px); 
     }
 
     .group-device-select {

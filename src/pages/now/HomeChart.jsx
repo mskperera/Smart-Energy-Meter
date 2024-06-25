@@ -35,7 +35,7 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
   
       ctx.save();
       ctx.fillStyle = [currentKwValue > budgetedKwhValue ? '#ff0000' : '#fff346'];
-      ctx.font = '35px Trebuchet MS';
+      ctx.font = '30px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
@@ -43,11 +43,11 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
       ctx.fillText(currentValueFormatted, centerX, centerY);
       // ctx.fillText(data.datasets[0].data[0].toLocaleString(undefined,{minimumFractionDigits: 2, maximumFractionDigits: 2}), centerX, centerY);
   
-      ctx.font = '25px Trebuchet MS';
+      ctx.font = '22px Trebuchet MS';
       ctx.fillStyle = [currentKwValue > budgetedKwhValue ? '#ff0000' : '#fff346'];
       ctx.fillText('kWh', centerX, centerY + 40);
   
-      ctx.font = '20px Trebuchet MS';
+      ctx.font = '17px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.fillText('Energy Usage', centerX, centerY + 80);
   
@@ -56,7 +56,7 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
         ctx.fillStyle = 'white';
         ctx.fillText('Budget', centerX, centerY - 90);
   
-        ctx.font = '25px Trebuchet MS';
+        ctx.font = '22px Trebuchet MS';
         ctx.fillStyle = 'white';
         ctx.fillText(`${data.datasets[0].data[1].toLocaleString()} kWh`, centerX, centerY - 60);
       }
@@ -75,6 +75,7 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
           pointStyle: 'square',
           boxWidth: 20,
         },
+        onClick: () =>{},
       },
     },
     layout: {

@@ -7,23 +7,28 @@ import { Link } from 'react-router-dom';
 import { deleteDevice, getDevices } from '../../action/device';
 import swal from 'sweetalert';
 import { useSelector } from 'react-redux';
+import { ThreeDots } from 'react-loader-spinner';
 
 function Management() {
 
 
   const [deviceDetails,setDeviceDetails]=useState(null);
 
+  const [loading,setLoading]=useState(null);
+
 
   useEffect(() => {
 
    loadDevices();
-  
+    setLoading(true);
   }, []);
 
   const loadDevices=async()=>{
     const result=await getDevices();
+    setLoading(true);
     console.log('Result 222222222',result);
     setDeviceDetails(result.data);
+    setLoading(false);
    }
 
 
@@ -63,6 +68,22 @@ function Management() {
     <div className="body">
       <div className= "rounded p-2 ">
         <h2 className='d-flex justify-content-center align-items-center'>Device Management</h2>
+        
+        {loading ? (
+          // <p className="loading-message">Loading please wait...</p>
+          <div className="d-flex align-items-center justify-content-center dots-animate">
+          <ThreeDots
+              height={80}
+              width={80}
+              color="#36A2EB"
+              ariaLabel="loading"
+              secondaryColor="#36A2EB"
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+          </div>
+        ):(
+          <>
         <div className='d-flex justify-content-end'>
           <Link to="/deviceregister/0/I" className='btn btn-info bbttnn'>Add Device</Link>
         </div>
@@ -103,6 +124,9 @@ function Management() {
 
           </tbody>
         </table>
+          </>
+        )
+        }
       </div>
   </div>
   <BottomNav className="bottombar"/>

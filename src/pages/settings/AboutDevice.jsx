@@ -24,7 +24,7 @@ function AboutDevice() {
 
             <div className='company-logo' style={{ justifyContent:'flex-end', display:'flex', alignItems:'flex-end'}}>
               <div>
-                <p style={{marginTop:'-31px', marginLeft:'-80px',position:'absolute'}}>Powered by</p> 
+                <p style={{marginTop:'-31px', marginLeft:'-80px',position:'static'}}>Powered by</p> 
               </div>&nbsp;
               <img src={company} alt='company logo' style={{width:'70px'}}/>
             </div>     

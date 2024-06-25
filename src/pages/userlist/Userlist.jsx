@@ -6,11 +6,14 @@ import { deleteUser, getUsers } from '../../action/user';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 import { useSelector } from 'react-redux';
+import { ThreeDots } from 'react-loader-spinner';
 
 function Userlist() {
 
 
   const [userData,setUserData]=useState(null);
+
+  const [loading,setLoading]=useState(null);
 
 
   // const selectedDevice = useSelector((state) => state.device.selectedDevice);
@@ -18,12 +21,14 @@ function Userlist() {
   useEffect(() => {
 
     loadusers();
-   
+    setLoading(true);
   }, []);
 
   const loadusers=async()=>{
     const result=await getUsers();
+    setLoading(true);
     setUserData(result.data);
+    setLoading(false);
    }
 
    
@@ -69,12 +74,27 @@ function Userlist() {
     <div className="body">
       <div className= "rounded p-2 ">
         <h2 className='d-flex justify-content-center align-items-center'>User Management</h2>
-        <div className="d-flex justify-content-end">
-          <Link to="/userregister/0/I" className="btn btn-info bbttnn">Add User</Link>
-        </div>
-        <table className="table1 table table-hover rounded">
+        
+        {loading ? (
+          // <p className="loading-message">Loading please wait...</p>
+          <div  className="d-flex align-items-center justify-content-center">
+          <ThreeDots
+              height={80}
+              width={80}
+              color="#36A2EB"
+              ariaLabel="loading"
+              secondaryColor="#36A2EB"
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+          </div>
+        ) : (
+          <>
+          <div className="d-flex justify-content-end">
+            <Link to="/userregister/0/I" className="btn btn-info bbttnn">Add User</Link>
+          </div>
+          <table className="table1 table table-hover rounded">
           <thead className='table-dark'>
-        {/* change */}
             <tr>
               <th>User Name</th>
               <th>Display Name</th>
@@ -108,6 +128,10 @@ function Userlist() {
                 ))}
           </tbody>
         </table>
+          </>
+        )
+      }
+        
       </div>
   </div>
   <BottomNav className="bottombar"/>

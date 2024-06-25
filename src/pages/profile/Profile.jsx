@@ -6,6 +6,7 @@ import { getUserbyUserId, getUsers } from '../../action/user';
 import Navbar from '../../components/navbar/Navbar';
 import { useSelector } from 'react-redux';
 import { getDeviceInfoByUserId } from '../../action/device';
+import { ThreeDots } from 'react-loader-spinner';
 
 const Profile = () => {
   // const [profileData, setProfileData] = useState('');
@@ -14,6 +15,8 @@ const Profile = () => {
 
 
   const [device, setDevice] = useState('');
+
+  const [loading,setLoading]=useState(null);
 
   // const onChangeDeviceHandler=(device)=>{
   //   setDevice(device);
@@ -31,13 +34,16 @@ const Profile = () => {
     const userData = localStorage.getItem('userData');
     const userId = JSON.parse(userData).userId;
     loadUserbyUserId(userId);
+    setLoading(true);
     // }
   }, [device]);
 
   const loadUserbyUserId = async (userId) => {
     const result = await getUserbyUserId(userId);
+    setLoading(true);
     console.log('Result 11111111', result);
     setDeviceDetails(result.data);
+    setLoading(false);
     // console.log('Details',result)
   }
 
@@ -79,6 +85,20 @@ const Profile = () => {
     {/* <Navbar onChangeDevice={onChangeDeviceHandler} className='navnav'/> */}
     <div className='wrap '>
       <div className="body">
+        {loading ? (
+          // <p className="loading-message">Loading please wait...</p>
+          <div  className="d-flex align-items-center justify-content-center">
+          <ThreeDots
+              height={80}
+              width={80}
+              color="#36A2EB"
+              ariaLabel="loading"
+              secondaryColor="#36A2EB"
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+          </div>
+        ) : (
         <div className="card text-center ">
           {deviceDetails && (
             <>
@@ -111,6 +131,10 @@ const Profile = () => {
             </button>
           </div> */}
         </div>
+        )
+
+        }
+        
       </div>
     </div>
       <BottomNav className='bottombar'/>

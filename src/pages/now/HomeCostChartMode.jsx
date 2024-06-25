@@ -3,7 +3,7 @@ import './Homechart.css';
 
 const HomeCostChartMode = ({ budgetedBill, currentValue, selectedLine }) => {
   const progressPercentage = budgetedBill > 0 ? (currentValue / budgetedBill) * 100 : 0;
-  const progressColor = currentValue > budgetedBill ? '#ff2f2f' : '#fe4a92'; //#fe4a92,#ff0066
+  const progressColor = currentValue > budgetedBill ? '#ff2f2f' : '#4484ff'; //#fe4a92,#ff0066
   const progressBackgroundColor = '#ffffff'; //#ff2d2d,#ff0000
   const remainingValue = budgetedBill - currentValue;
 
