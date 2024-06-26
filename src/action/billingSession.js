@@ -61,3 +61,24 @@ export const getbillingSessionByDeviceBillingSessionId= async (deviceBillingSess
     return err;
   }
 }
+
+
+export const getCurrentBillingSessionInfoByDeviceId= async (deviceId) => {
+  try {
+    return await customAxios
+      .get(`/billingSession/getCurrentBillingSessionInfoByDeviceId?deviceId=${deviceId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
+

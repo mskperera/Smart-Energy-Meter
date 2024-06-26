@@ -60,9 +60,9 @@ const loadChartData = async (deviceId,startDay) => {
   //const utcOffset = 330; // Example: UTC offset in minutes (for IST, it is 330 minutes or +5:30 hours)
   const utcOffSet= moment().utcOffset();
 
-  const startOfWeekUtc = moment(startDay).startOf('week').add(0, 'days',utcOffSet).format('YYYY-MM-DDTHH:mm:ss[Z]');
+  const startOfWeekUtc = moment(startDay).startOf('month').add(0, 'days',utcOffSet).format('YYYY-MM-DDTHH:mm:ss[Z]');
 
-  const endOfWeekUtc = moment(startDay).endOf('week').subtract(0, 'days',utcOffSet).format('YYYY-MM-DDTHH:mm:ss[Z]');
+  const endOfWeekUtc = moment(startDay).endOf('month').subtract(0, 'days',utcOffSet).format('YYYY-MM-DDTHH:mm:ss[Z]');
   
   console.log('startOfWeekUtc', startOfWeekUtc);
   console.log('endOfWeekUtc', endOfWeekUtc);
@@ -73,7 +73,7 @@ const loadChartData = async (deviceId,startDay) => {
   const payload = {
         deviceId:deviceId,
         mesurementUnitId:1,
-        frequencyId:3,
+        frequencyId:5,
         startDate: startOfWeekUtc,
         endDate: endOfWeekUtc,
   };
@@ -144,7 +144,7 @@ const [devices, setDevices] = useState([]);
                   device={device}
                   className="device-name-state"
                   isSearchLoading={isSearchLoading}
-                  chartFrequencty="days"
+                  chartFrequencty="weeks"
                   />
           
               </div>
