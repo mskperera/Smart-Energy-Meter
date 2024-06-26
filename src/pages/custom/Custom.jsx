@@ -14,6 +14,7 @@ import { getEngergyUsageKwhByDateRange } from '../../action/device'
 import moment from 'moment'
 import DeviceCharts from '../today/DeviceChart'
 import { ThreeDots } from 'react-loader-spinner'
+import { useSessionDate } from '../../context/SessionDateContext'
 
 
 function Custom() {
@@ -21,6 +22,8 @@ function Custom() {
   const [activeTab, setActiveTab] = useState('Now');
 
   const selectedDevice=useSelector(state=>state.device.selectedDevice);
+
+  const {sessionDate, numberOfDays} = useSessionDate();
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -100,7 +103,8 @@ const [devices, setDevices] = useState([]);
       </div>
           <div className='body'>
             <div className="session-name">
-              <h6>Session Date : 24 Jun 2024</h6>
+            <h6>Session Date : {sessionDate}</h6>
+            <p>Days Elapsed : {numberOfDays}</p>
             </div>
           <div className='date'>
           <div className='picker'>

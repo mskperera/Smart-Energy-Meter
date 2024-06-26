@@ -10,11 +10,14 @@ import { getEngergyUsageKwhByDateRange } from '../../action/device';
 import moment from 'moment';
 import { useSessionDate } from '../../context/SessionDateContext';
 import { ThreeDots } from 'react-loader-spinner';
+import { getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession';
 
 function Today() {
   const [activeTab, setActiveTab] = useState('Now');
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
-  const { sessionDate } = useSessionDate();
+  
+  const { sessionDate, setSessionDate, numberOfDays, setNumberOfDays } = useSessionDate();
+
   const [startDate, setStartDate] = useState(null);
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [devices, setDevices] = useState([]);
@@ -67,6 +70,29 @@ function Today() {
     setIsSearchLoading(false);
   };
 
+  useEffect(() => {
+    if (selectedDevice) {
+      const deviceId = selectedDevice.id;
+      loadCurrentBillingSessionInfoByDeviceId(deviceId);
+    }
+  }, [selectedDevice]);
+
+  const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
+    const result = await getBillingSessionNameCurrentByDeviceId(deviceId);
+    const billingSessionInfo = result.data;
+    console.log('Current-BillingSession-Info-By-DeviceId', billingSessionInfo);
+
+    if (billingSessionInfo && billingSessionInfo.data && billingSessionInfo.data.length > 0) {
+      const session = billingSessionInfo.data[0];
+      if (session.startDate) {
+        setSessionDate(new Date(session.startDate).toLocaleString());
+      }
+      if (session.numberOfDays) {
+        setNumberOfDays(session.daysElapsed);
+      }
+    }
+  };
+
   return (
     <div className='home'>
       <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
@@ -84,6 +110,7 @@ function Today() {
       <div className='body'>
         <div className="session-name">
           <h6>Session Date : {sessionDate}</h6>
+          <p>Days Elapsed : {numberOfDays}</p>
         </div>
         <div className='date'>
           <div className='picker'>
@@ -99,9 +126,8 @@ function Today() {
           </div>
         </div>
         {isSearchLoading ? (
-          // <p className="loading-message">Loading please wait...</p>
           <div className="d-flex align-items-center justify-content-center">
-          <ThreeDots
+            <ThreeDots
               height={100}
               width={100}
               color="#36A2EB"

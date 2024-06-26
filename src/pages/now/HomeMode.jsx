@@ -8,10 +8,14 @@ import {getEngergyUsageNow } from '../../action/device';
 // import DeviceChart3p from './DeviceChart';
 import DeviceChartMode from './DeviceChartMode';
 import { ThreeDots } from 'react-loader-spinner';
+import { useSessionDate } from '../../context/SessionDateContext';
+import { getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession';
 
 const Home = () => {
   // const [device, setDevice] = useState(null);
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
+
+  const { sessionDate, setSessionDate, numberOfDays, setNumberOfDays } = useSessionDate();
 
 
 const [loading,setLoading]=useState(null);
@@ -41,6 +45,29 @@ const [loading,setLoading]=useState(null);
     setLoading(false);
   };
 
+  useEffect(() => {
+    if (selectedDevice) {
+      const deviceId = selectedDevice.id;
+      loadCurrentBillingSessionInfoByDeviceId(deviceId);
+    }
+  }, [selectedDevice]);
+
+  const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
+    const result = await getBillingSessionNameCurrentByDeviceId(deviceId);
+    const billingSessionInfo = result.data;
+    console.log('Current-BillingSession-Info-By-DeviceId', billingSessionInfo);
+
+    if (billingSessionInfo && billingSessionInfo.data && billingSessionInfo.data.length > 0) {
+      const session = billingSessionInfo.data[0];
+      if (session.startDate) {
+        setSessionDate(new Date(session.startDate).toLocaleString());
+      }
+      if (session.numberOfDays) {
+        setNumberOfDays(session.daysElapsed);
+      }
+    }
+  };
+
 
 
   const [devices, setDevices] = useState([]);
@@ -57,7 +84,8 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
     
         <div className="body" style={{overflow:'auto'}}>
             <div className="session-name">
-              <h6>Session Date : 24 Jun 2024</h6>
+            <h6>Session Date : {sessionDate}</h6>
+            <p>Days Elapsed : {numberOfDays}</p>
             </div>
           {/* {JSON.stringify(devices)} */}
           <div className="container">

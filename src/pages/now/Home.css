@@ -14,9 +14,13 @@
     /* min-height: 65vh; */
 }
 .progress-info{
-    color: white;
-    background-color: #00000041;
+    color: #131a25;
+    /* background-color: #00000041; */
+    /* background: #131a25; */
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); */
     width: fit-content;
+    /* margin-top: 2px;
+    border-radius: 5px; */
 }
 /* .page-mode-charts{
     width: 100%;
