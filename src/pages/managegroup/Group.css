@@ -322,6 +322,15 @@
     }
   }
 
+  @media screen and (max-width: 390px) {
+    .body {
+      padding-top: 30px;
+      padding-bottom: 60px; 
+      overflow-y: auto; 
+      height: calc(104vh - 80px - 60px); 
+    }
+  }
+
   @media screen and (max-width: 375px) {
     .body {
       padding-top: 30px;

@@ -58,6 +58,10 @@
         width: 100%;
         padding: 1rem;
     }
+
+    .bar-charts{
+        margin-top:0px;
+    }
 }
 
 @media screen and (max-width:1150px){
@@ -95,6 +99,32 @@
         flex-direction: column;
         padding: 1rem;
 }
+.bar-charts{
+    margin-top:0px;
+}
+}
+
+@media screen and (max-width:1050px){
+    .bar-charts{
+        margin-top:-300px;
+    }
+
+    .name-device{
+        margin-top: -50px;
+    }
+}
+
+@media screen and (max-width:950px){
+    .page-1{
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0rem;
+        margin-top: 0px;
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 @media screen and (max-width:850px){
@@ -107,6 +137,10 @@
         margin-top: 0px;
         display: flex;
         flex-direction: column;
+    }
+
+    .bar-charts{
+        margin-top:0px;
     }
 
     .chart-today-kw{
@@ -186,7 +220,7 @@
 
     .chart-today-kw{
         flex: 1;
-        width: 355px;
+        width: 100%;
         display: flex;
         margin-top: 0px;
         justify-content: center;
@@ -198,7 +232,7 @@
 
     .chart-today-cost{
         flex: 1;
-        width: 355px;
+        width: 100%;
         display: flex;
         justify-content:center;
         align-items: center;
@@ -217,6 +251,74 @@
     
 }
 .bar-charts{
-    margin-top: -230px;
+    margin-top: -200px;
 }
+}
+
+@media screen and (max-width:440px){
+    .bar-charts{
+        margin-top: -10px;
+    }
+    .name-device{
+        margin-top: 10px;
+    }
+
+}
+
+@media screen and (max-width:420px){
+    .bar-charts{
+        margin-top: -220px;
+    }
+    .name-device{
+        margin-top: 30px;
+    }
+
+}
+
+@media screen and (max-width:415px){
+    .bar-charts{
+        margin-top: 70px;
+    }
+    .name-device{
+        margin-top: 40px;
+    }
+
+}
+
+@media screen and (max-width:400px){
+    .bar-charts{
+        margin-top: 80px;
+    }
+    .name-device{
+        margin-top: 20px;
+    }
+
+}
+
+@media screen and (max-width: 390px) {
+    .bar-charts{
+        margin-top: 150px;
+    }
+    .name-device{
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width:380px){
+    .bar-charts{
+        margin-top: 80px;
+    }
+    .name-device{
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width:375px){
+    .bar-charts{
+        margin-top: -10px;
+    }
+    .name-device{
+        margin-top: 10px;
+    }
+
 }

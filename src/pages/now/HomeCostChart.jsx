@@ -6,6 +6,7 @@ import './Homechart.css';
 ChartJS.register(ArcElement, Tooltip);
 
 const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
+
   const data = {
     labels: [
       'Used Rs', 

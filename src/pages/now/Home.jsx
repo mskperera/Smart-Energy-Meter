@@ -67,8 +67,8 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
               <div>
                 <ThreeDots
                     className="d-flex align-items-center justify-content-center"
-                    height={80}
-                    width={80}
+                    height={100}
+                    width={100}
                     color="#36A2EB"
                     ariaLabel="loading"
                     secondaryColor="#36A2EB"
@@ -91,7 +91,7 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
                 {devices?.map((device, index) => (
                   <div key={index}>
                  
-                    <div className="device-name-state">
+                    <div className="device-name-state align-items-center justify-content-center w-100">
                    
                       <DeviceChart3p
                         deviceName={device.deviceName} 

@@ -6,17 +6,20 @@ function DeviceCharts({device,isSearchLoading,chartFrequencty}) {
     const {deviceId,deviceName,lines}=device;
   return (
     <>
-    <h6 className='name-device'>Device: {deviceName}</h6>
-     {lines.map((line,index) => (
+    <div className='bar-chartss'>
+      <h6 className='name-device'>Device: {deviceName}</h6>
+      {lines.map((line,index) => (
+          
+              <KwhBillChart 
+              line={line}
+              key={index}
+              isSearchLoading={isSearchLoading}
+              chartFrequencty={chartFrequencty}
+          />
         
-            <KwhBillChart 
-            line={line}
-            key={index}
-            isSearchLoading={isSearchLoading}
-            chartFrequencty={chartFrequencty}
-        />
-       
-      ))} 
+        ))} 
+
+    </div>
         
     </>
   )

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { addDevice, getDeviceByDeviceId, getDevices, updateDevice } from '../../action/device';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import swal from 'sweetalert';
 import { useSelector } from 'react-redux';
 import { getDrpDeviceType } from '../../action/dropdown';
 import { set } from 'date-fns';
 import { ThreeDots } from 'react-loader-spinner';
+import { IoClose } from 'react-icons/io5';
 
 
 function DeviceRegister() {
@@ -128,8 +129,8 @@ function DeviceRegister() {
         // <p className='loading-message'>Loading please wait...</p>
         <div  className="d-flex align-items-center justify-content-center">
           <ThreeDots
-              height={80}
-              width={80}
+              height={100}
+              width={100}
               color="#36A2EB"
               ariaLabel="loading"
               secondaryColor="#36A2EB"
@@ -139,6 +140,9 @@ function DeviceRegister() {
           </div>
       ) : (
       <div className='register'>
+          <div className="d-flex justify-content-end">
+            <Link to="/management" className="button-close"><IoClose size={25} color='black'/></Link>
+          </div>
         {saveType === "I" ? (
           <h2 className='d-flex align-items-center justify-content-center mb-2'>Device Registration</h2>
         ) : (

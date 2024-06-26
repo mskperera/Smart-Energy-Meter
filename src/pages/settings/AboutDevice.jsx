@@ -9,7 +9,7 @@ function AboutDevice() {
 
   return (
     <div className='d-flex align-items-center justify-content-center w-100'>
-      <div className='notification' style={{ backgroundColor: '#d1dde8' }}>
+      <div className='notification' style={{ backgroundColor: '#bebebe' }}>
         <div className='rounded ' style={{marginTop:'50px'}} >
           <h4 className='d-flex align-items-center justify-content-center'>About FIDA Smart Energy Meter</h4>
        
