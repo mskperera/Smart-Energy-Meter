@@ -67,8 +67,8 @@ const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
               // <p className="loading-message">Loading please wait...</p>
               <div  className="d-flex align-items-center justify-content-center">
                 <ThreeDots
-                    height={80}
-                    width={80}
+                    height={100}
+                    width={100}
                     color="#36A2EB"
                     ariaLabel="loading"
                     secondaryColor="#36A2EB"

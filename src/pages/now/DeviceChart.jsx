@@ -10,6 +10,7 @@ function DeviceChartMode({ deviceName, device }) {
 
   return (
     <>
+    <div className="main-section">
       <div className="section">
         <div className="section-status">
           <div className="device-active">
@@ -77,7 +78,7 @@ function DeviceChartMode({ deviceName, device }) {
         <React.Fragment key={`kwh-bill-${line.lineNo || index}`}>
           {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>Line: {line.line}</div>
+              <div className="line-name">Line: {line.line}</div>
             </div>
           )}
           <KwhBillChart
@@ -114,9 +115,11 @@ function DeviceChartMode({ deviceName, device }) {
             bill={line.bill}
             budgetedKwh={line.budgetedKwh}
             budgetedBill={line.budgetedBill}
+           
           />
         </React.Fragment>
       ))}
+    </div>
        {/* {lines.map((line, index) => (
         <React.Fragment key={`operational-chart-${line.lineNo || index}`}>
           {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (

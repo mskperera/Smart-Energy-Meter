@@ -1,6 +1,6 @@
 .wrapper-register{
     height: 100vh;
-    background-color:#191970;
+    background-color:#36A2EB;
 }
 .register{
 
@@ -11,6 +11,12 @@
     background-color: white;
     color: black;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.button-close:hover{
+    background-color: #36A2EB;
+    border-radius: 50px;
+    cursor: pointer;
 }
 
 @media screen and (max-width:850px) {

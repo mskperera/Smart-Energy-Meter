@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './UserRegister.css';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { addUser, getUserbyUserId, updateUser } from '../../action/user';
 import swal from 'sweetalert';
-import { set } from 'date-fns';
+
 import { ThreeDots } from 'react-loader-spinner';
+import { IoClose } from "react-icons/io5";
 
 function UserRegister() {
   
@@ -144,8 +145,8 @@ function UserRegister() {
       // <p className="loading-message">Loading please wait...</p>
       <div  className="d-flex align-items-center justify-content-center">
           <ThreeDots
-              height={80}
-              width={80}
+              height={100}
+              width={100}
               color="#36A2EB"
               ariaLabel="loading"
               secondaryColor="#36A2EB"
@@ -156,8 +157,10 @@ function UserRegister() {
     ) : (
 
       <div className='register'>
+          <div className="d-flex justify-content-end">
+            <Link to="/userlist" className="button-close"><IoClose size={25} color='black'className='button-close'/></Link>
+          </div>
      {saveType==="I" ?  <h2 className='d-flex align-items-center justify-content-center mb-2'>User Registration</h2> : <h2 className='d-flex align-items-center justify-content-center mb-2'>Update User Details</h2>}
-      
         <form className='needs-validation' onSubmit={onsubmitHandler}>
           <div className='row'>
             {/* First Column */}
