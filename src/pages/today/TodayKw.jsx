@@ -19,6 +19,8 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
         return "Days";
       case "months":
         return "Months";
+        case "weeks":
+          return "Weeks";
       default:
         return "Time";
     }
@@ -27,7 +29,7 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
   const loadChartData = async () => {
     const labels = [];
     const data = [];
-
+    console.log(' e.kwhPerWeek ',days)
     for (const e of days) {
       if (chartFrequencty === "hours") {
         data.push(e.kwhPerHour);
@@ -38,28 +40,18 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
         labels.push(moment(e.date).format('DD / MMM'));
       }
       else if (chartFrequencty === "months") {
-        data.push(moment(e.date).format('MM'));
-       
-        // labels.push(e.month);
-        // const monthNames = [
-        //   "Jan",
-        //   "Feb",
-        //   "Mar",
-        //   "Apr",
-        //   "May",
-        //   "Jun",
-        //   "Jul",
-        //   "Aug",
-        //   "Sep",
-        //   "Oct",
-        //   "Nov",
-        //   "Dec",
-        // ];
-        // labels.push(monthNames[e.month - 1]);
+        data.push(e.kwhPerMonth);
+        labels.push(moment(e.date).format('MM / YYYY'));
       }
-      console.log('datammmmm ',data)
+      else if (chartFrequencty === "weeks") {
+    
+        data.push(e.kwhPerWeek);
+        labels.push(moment(e.date).format('DD / MMM'));
+      }
+      console.log('datammmmm ',days)
     }
 
+    
     const datasets0 = [{
       label: "kWh",
       data: data,

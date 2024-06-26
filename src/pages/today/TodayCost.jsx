@@ -44,26 +44,13 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
         }
         else    
         if(chartFrequencty === "months"){
-          data.push(moment(e.date).format('MM'));
-        //  data.push(e.usageBillPerMonth);
-        //  moment(e.date).format('MM')
-        //  labels.push(e.month);
-        // const monthNames = [
-        //   "Jan",
-        //   "Feb",
-        //   "Mar",
-        //   "Apr",
-        //   "May",
-        //   "Jun",
-        //   "Jul",
-        //   "Aug",
-        //   "Sep",
-        //   "Oct",
-        //   "Nov",
-        //   "Dec"
-        // ];
-        // labels.push(monthNames[e.month - 1]);
+          data.push(e.usageBillPerMonth);
+          labels.push(moment(e.date).format('MMM / YYYY'));
        }
+      else if(chartFrequencty === "weeks"){
+        data.push(e.usageBillPerWeek);
+        labels.push(moment(e.date).format('DD / MMM'));
+     }
        console.log('datammmmm ',data)
       }
   
