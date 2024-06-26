@@ -63,10 +63,10 @@ export const getbillingSessionByDeviceBillingSessionId= async (deviceBillingSess
 }
 
 
-export const getCurrentBillingSessionInfoByDeviceId= async (deviceId) => {
+export const getBillingSessionNameCurrentByDeviceId= async (deviceId) => {
   try {
     return await customAxios
-      .get(`/billingSession/getCurrentBillingSessionInfoByDeviceId?deviceId=${deviceId}`, {
+      .get(`/billingSession/getBillingSessionNameCurrentByDeviceId?deviceId=${deviceId}`, {
         headers: {
           'Content-Type': 'application/json',
         },
