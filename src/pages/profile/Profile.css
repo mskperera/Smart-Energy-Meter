@@ -4,6 +4,10 @@
     margin: 0%;
 }
 
+.card-content{
+    padding: 1rem;
+}
+
 
 @media screen and (max-width:450px){
     .wrap{
@@ -15,4 +19,28 @@
     .wrap{
         height: 87.95vh;
     }
+
+    .card-content{
+        display: flex;
+        justify-content: left;
+        align-items: left;
+        flex-direction: column;
+        padding: 1rem;
+    }
+}
+
+@media screen and (max-width:400px){
+    .wrap{
+        height: 87.95vh;
+    }
+}
+
+@media screen and (max-width:395px){
+    .wrap{
+        height: 86.4vh;
+    }
+}
+
+@media screen and (max-width:375px){
+
 }
