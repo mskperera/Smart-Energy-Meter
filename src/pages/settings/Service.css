@@ -468,6 +468,13 @@
     }
 }
 
+@media screen and (max-width:435px){
+    .show-content .body{
+        height: 87.95vh;
+    }
+}
+
+
 @media screen and (max-width:400px){
     .notification{
         width: 100%;

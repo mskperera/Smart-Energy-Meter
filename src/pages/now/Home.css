@@ -1612,6 +1612,49 @@
  }
     }
 
+    @media screen and (max-width:435px){
+        .page {
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0%;
+            margin-top: 0px;
+            height:75vh; 
+        }
+
+        .section-status{
+            margin-top: 30px;
+    }
+
+    .container{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        margin-top: -30px;
+        margin-left: 0px;
+     
+    }
+
+    .budget-values{
+        margin-top: 30px;
+       }
+
+       .line-values{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-top: -10px;
+      }
+
+      .section{
+        margin-top: -60px;
+    }
+    
+}
+
     @media screen and (max-width:420px){
         .page {
             width: 100%;

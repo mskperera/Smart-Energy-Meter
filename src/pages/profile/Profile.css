@@ -4,8 +4,15 @@
     margin: 0%;
 }
 
+
 @media screen and (max-width:450px){
     .wrap{
         height: 86.4vh;
+    }
+}
+
+@media screen and (max-width:435px){
+    .wrap{
+        height: 87.95vh;
     }
 }
