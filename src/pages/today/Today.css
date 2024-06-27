@@ -290,7 +290,8 @@
         margin-top: 80px;
     }
     .name-device{
-        margin-top: 20px;
+        margin-top: 5px;
+        padding-bottom: 5px;
     }
 
 }

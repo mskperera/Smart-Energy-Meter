@@ -12,7 +12,7 @@ function BillingSession() {
   const [selectedDates, setSelectedDates] = useState({});
   const [billingSession, setBillingSession] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isEditable, setIsEditable] = useState(false);
+  const [editingSessionId, setEditingSessionId] = useState(null); // State to track which session is being edited
   const [loadData, setLoadData] = useState(false);
 
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
@@ -27,12 +27,12 @@ function BillingSession() {
     try {
       setLoadData(true);
       const res = await getbillingSessionByDeviceId(deviceId);
-      console.log("Billing Session:", res);
+      console.log("billing session", res);
       if (res.data.length > 0) {
         const sessions = res.data.reduce((acc, session) => {
           acc[session.deviceBillingSessionId] = {
             startDate: new Date(session.startDate),
-            endDate: new Date(session.endDate),
+            endDate: new Date(session.endDate)
           };
           return acc;
         }, {});
@@ -58,7 +58,6 @@ function BillingSession() {
         deviceBillingSessionId: sessionId,
         saveType:"U",
       };
-
       const res = await saveBillingSession(payload);
       console.log("API:", res);
       const { responseStatus, outputMessage } = res.data;
@@ -68,12 +67,12 @@ function BillingSession() {
       }
       swal("Updated Successfully", " ", "success").then(() => {
         loadBillingSessionByDeviceId(selectedDevice.id);
+        setEditingSessionId(null); 
       });
     } catch (err) {
       console.error("Error saving billing session:", err);
       setErrorMessage("Error saving billing session");
     }
-    setIsEditable(false);
   };
 
   const handleDateChange = (date, sessionId, type) => {
@@ -86,8 +85,8 @@ function BillingSession() {
     }));
   };
 
-  const handleEditChange = () => {
-    setIsEditable(true);
+  const handleEditChange = (sessionId) => {
+    setEditingSessionId(sessionId);
   };
 
   return (
@@ -120,7 +119,7 @@ function BillingSession() {
                           <div className='form-group row mb-1'>
                             <label htmlFor='startdate' className='col-sm-4 col-form-label'>Session Start</label>
                             <div className='col-sm-8 text-left'>    
-                              {isEditable ? 
+                              {editingSessionId === session.deviceBillingSessionId ? 
                                 <ReactDatePicker
                                   selected={selectedDates[session.deviceBillingSessionId]?.startDate} 
                                   onChange={(date) => handleDateChange(date, session.deviceBillingSessionId, 'startDate')} 
@@ -136,7 +135,7 @@ function BillingSession() {
                           <div className='form-group row mb-1'>
                             <label htmlFor='enddate' className='col-sm-4 col-form-label'>Session End</label>
                             <div className='col-sm-8 text-left'>
-                              {isEditable ?
+                              {editingSessionId === session.deviceBillingSessionId ?
                                 <ReactDatePicker
                                   selected={selectedDates[session.deviceBillingSessionId]?.endDate} 
                                   onChange={(date) => handleDateChange(date, session.deviceBillingSessionId, 'endDate')} 
@@ -152,18 +151,18 @@ function BillingSession() {
                           <div className='form-group row mb-1'>
                             <label htmlFor='units' className='col-sm-4 col-form-label'>Units kW</label>
                             <div className='col-sm-8'>
-                              <input type='text' className={`form-control text-center ${isEditable ? 'editable' : 'disabled'}`} id='units' placeholder='Enter units' disabled={!isEditable} value={session.totalConsumption_Kwh}/>                          
+                              <input type='text' className={`form-control text-center ${editingSessionId === session.deviceBillingSessionId ? 'editable' : 'disabled'}`} id='units' placeholder='Enter units' disabled={editingSessionId !== session.deviceBillingSessionId} value={session.totalConsumption_Kwh}/>                          
                             </div>
                           </div>
                           <div className='form-group row mb-1'>
                             <label htmlFor='amount' className='col-sm-4 col-form-label'>Bill Amount</label>
                             <div className='col-sm-8'>
-                              <input type='text' className={`form-control text-center ${isEditable ? 'editable' : 'disabled'}`} id='amount' placeholder='Enter units' disabled={!isEditable} value={session.totalAmountDue}/>                          
+                              <input type='text' className={`form-control text-center ${editingSessionId === session.deviceBillingSessionId ? 'editable' : 'disabled'}`} id='amount' placeholder='Enter amount' disabled={editingSessionId !== session.deviceBillingSessionId} value={session.totalAmountDue}/>                          
                             </div>
                           </div>
                           {session.isEditable ? (
-                            <button type='button' className={`btn btn-sm custom-button btn-${isEditable ? 'success' : 'primary'} w-50 btn-edit`} onClick={isEditable ? (e) => saveEditHandler(e, session.deviceBillingSessionId) : handleEditChange}>
-                              {isEditable ? 'Save' : 'Edit'}
+                            <button type='button' className={`btn btn-sm custom-button btn-${editingSessionId === session.deviceBillingSessionId ? 'success' : 'primary'} w-50 btn-edit`} onClick={editingSessionId === session.deviceBillingSessionId ? (e) => saveEditHandler(e, session.deviceBillingSessionId) : () => handleEditChange(session.deviceBillingSessionId)}>
+                              {editingSessionId === session.deviceBillingSessionId ? 'Save' : 'Edit'}
                             </button>
                           ) : ''}
                         </div>

@@ -1955,11 +1955,11 @@
             justify-content: space-between;
             margin: 0%;
             margin-top: 0px;
-            height:85vh; 
+            height:85.5vh; 
         }
 
         .section{
-            margin-top: -120px;
+            margin-top: -115px;
         }
 
         .container{
@@ -1968,7 +1968,7 @@
             align-items: center;
             flex-direction: column;
             width: 100%;
-            margin-top: -40px;
+            margin-top: -45px;
             margin-left: 0px;
          
         }
