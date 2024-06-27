@@ -12,7 +12,7 @@ function BillingSession() {
   const [selectedDates, setSelectedDates] = useState({});
   const [billingSession, setBillingSession] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
-  const [editingSessionId, setEditingSessionId] = useState(null); // State to track which session is being edited
+  const [editingSessionId, setEditingSessionId] = useState(null);
   const [loadData, setLoadData] = useState(false);
 
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
