@@ -113,7 +113,7 @@ const Profile = () => {
               </div>
               <div className="card-body" style={{backgroundColor:''}}>
                 <h5 className="card-title">{deviceDetails.displayName}</h5>
-                <div>
+                <div className='card-content'>
                 <p className="card-text"><b><i>Role :</i></b> {deviceDetails.roleName}</p>
                 <p className="card-text"><b><i>UserName :</i></b> {deviceDetails.userName}</p>
                 <p className="card-text"><b><i>Email :</i></b> {deviceDetails.email}</p>
