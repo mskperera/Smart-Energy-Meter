@@ -6,20 +6,20 @@ function KwhBillChart({line,isSearchLoading,chartFrequencty}) {
   const {days}=line;
   return (
     <>
-    <div className='bar-charts'>      
-      <div className="page-5">
+    {/* <div className='bar-charts'>       */}
+      {/* <div className="page-5"> */}
         <h5 className='page-5-h5'>{line.lineNo}</h5>
-        <div className="chart-custom">
+        <div className="page">
       
-          <div className="chart-pick-kw">
+          <div className="chart-now-kw" style={{padding:'5px'}}>
             <TodayKw days={days} isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} />
           </div>
-          <div className="chart-pick-cost">
+          <div className="chart-now-cost" style={{padding:'5px'}}>
             <TodayCost  days={days} isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} />
             </div>
         </div>
-      </div>
-    </div>
+      {/* </div> */}
+    {/* </div> */}
     </>
   );
 }

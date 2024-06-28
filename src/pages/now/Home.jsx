@@ -68,8 +68,8 @@ const Home = () => {
 
   return (
     <div className="home">
-      <Menu className="navnav1" />
-      <div className="body" style={{ overflow: 'auto' }}>
+      <Menu className="nav-bar" />
+      <div className="body">
         <div className="session-name">
           <h6>Session Date : {sessionDate}</h6>
           <p>Days Elapsed : {numberOfDays}</p>

@@ -181,6 +181,12 @@
     }
   }
 
+  @media screen and (max-width:950px){
+    .notification2{
+      margin-left: 120px;
+    }
+  }
+
 
 
 @media screen and (max-width:850px) {

@@ -8,7 +8,7 @@
     padding-top: 30px;
     padding-bottom: 60px; 
     overflow-y: auto; 
-    height: calc(99.7vh - 79.71px - 43.99px);
+    height: calc(99.7vh - 79.71px - 42px);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
   }
 
@@ -179,6 +179,15 @@
   }
 }
 
+@media only screen and (max-width: 1050px) {
+  .body {
+    padding-top: 30px;
+    padding-bottom: 60px; 
+    overflow-y: auto; 
+    height: calc(99.7vh - 79.71px - 42px);
+  }
+}
+
 @media only screen and (max-width: 850px) {
   .body {
     padding-top: 30px;
@@ -321,6 +330,15 @@
       position: relative;
     }
   }
+
+  @media screen and (max-width:415px){
+    .body {
+      padding-top: 30px;
+      padding-bottom: 60px; 
+      overflow-y: auto; 
+      height: calc(104vh - 80px - 60px); 
+    }
+}
 
   /* @media screen and (max-width:435px){
     .body {
