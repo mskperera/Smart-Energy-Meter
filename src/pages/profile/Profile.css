@@ -11,13 +11,13 @@
 
 @media screen and (max-width:450px){
     .wrap{
-        height: 86.4vh;
+        height: auto;
     }
 }
 
 @media screen and (max-width:435px){
     .wrap{
-        height: 87.95vh;
+        height: auto;
     }
 
     .card-content{
@@ -29,18 +29,40 @@
     }
 }
 
+@media screen and (max-width:415px){
+    .wrap{
+        height: auto;
+    }
+}
+
 @media screen and (max-width:400px){
     .wrap{
-        height: 87.95vh;
+        height: auto;
     }
 }
 
 @media screen and (max-width:395px){
     .wrap{
-        height: 86.4vh;
+        height: auto;
     }
 }
 
-@media screen and (max-width:375px){
+@media screen and (max-width:390px){
+    .wrap{
+        height: auto;
+    }
 
+}
+
+@media screen and (max-width:390px){
+    .wrap{
+        height: auto;
+    }
+
+}
+
+@media screen and (max-width:375px){
+    .wrap{
+        height: 84.6vh;
+    }
 }
