@@ -15,6 +15,7 @@ import moment from 'moment'
 import DeviceCharts from '../today/DeviceChart'
 import { ThreeDots } from 'react-loader-spinner'
 import { useSessionDate } from '../../context/SessionDateContext'
+import { getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession'
 
 
 function Custom() {
@@ -23,7 +24,9 @@ function Custom() {
 
   const selectedDevice=useSelector(state=>state.device.selectedDevice);
 
-  const {sessionDate, numberOfDays} = useSessionDate();
+  // const {sessionDate, numberOfDays} = useSessionDate();
+  const { sessionDate, setSessionDate, numberOfDays, setNumberOfDays } = useSessionDate();
+
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -83,6 +86,30 @@ const endOfDayUtc = moment(endDate).endOf('day').subtract(0,'days',utcOffSet).fo
 }
 
 const [devices, setDevices] = useState([]);
+
+
+useEffect(() => {
+  if (selectedDevice) {
+    const deviceId = selectedDevice.id;
+    loadCurrentBillingSessionInfoByDeviceId(deviceId);
+  }
+}, [selectedDevice]);
+
+const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
+  const result = await getBillingSessionNameCurrentByDeviceId(deviceId);
+  const billingSessionInfo = result.data;
+  console.log('Current-BillingSession-Info-By-DeviceId', billingSessionInfo);
+
+  if (billingSessionInfo && billingSessionInfo.data && billingSessionInfo.data.length > 0) {
+    const session = billingSessionInfo.data[0];
+    if (session.startDate) {
+      setSessionDate(new Date(session.startDate).toLocaleString());
+    }
+    if (session.numberOfDays) {
+      setNumberOfDays(session.daysElapsed);
+    }
+  }
+};
 
   return (
     <div className='home'>

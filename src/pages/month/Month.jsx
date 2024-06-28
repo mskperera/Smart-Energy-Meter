@@ -15,6 +15,7 @@ import moment from 'moment'
 import DeviceCharts from '../today/DeviceChart'
 import { ThreeDots } from 'react-loader-spinner'
 import { useSessionDate } from '../../context/SessionDateContext'
+import { getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession'
 
 
 function Month() {
@@ -22,7 +23,10 @@ function Month() {
   const [activeTab, setActiveTab] = useState('Now');
   const selectedDevice=useSelector(state=>state.device.selectedDevice);
 
-  const {sessionDate, numberOfDays} = useSessionDate();
+  const { sessionDate, setSessionDate, numberOfDays, setNumberOfDays } = useSessionDate();
+
+
+  // const {sessionDate, numberOfDays} = useSessionDate();
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -32,8 +36,7 @@ function Month() {
   const [isSearchLoading, setIsSearchLoading] = useState(false);
 
 
-  const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with the current date
-
+  const [selectedDate, setSelectedDate] = useState(new Date()); 
   const handleMonthChange = (date) => {
       setSelectedDate(date); // Update state with the new date
       console.log('Selected Month:', moment(date).format('MMMM YYYY')); 
@@ -85,6 +88,29 @@ const loadChartData = async (deviceId,selecedDate) => {
 }
 
 const [devices, setDevices] = useState([]);
+
+useEffect(() => {
+  if (selectedDevice) {
+    const deviceId = selectedDevice.id;
+    loadCurrentBillingSessionInfoByDeviceId(deviceId);
+  }
+}, [selectedDevice]);
+
+const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
+  const result = await getBillingSessionNameCurrentByDeviceId(deviceId);
+  const billingSessionInfo = result.data;
+  console.log('Current-BillingSession-Info-By-DeviceId', billingSessionInfo);
+
+  if (billingSessionInfo && billingSessionInfo.data && billingSessionInfo.data.length > 0) {
+    const session = billingSessionInfo.data[0];
+    if (session.startDate) {
+      setSessionDate(new Date(session.startDate).toLocaleString());
+    }
+    if (session.numberOfDays) {
+      setNumberOfDays(session.daysElapsed);
+    }
+  }
+};
 
   return (
     <div className='home'>
