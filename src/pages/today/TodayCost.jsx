@@ -50,21 +50,21 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
   
       for (const e of days) {
         if(chartFrequencty === "hours"){
-          data.push(e.usageBillPerHour);
+          data.push(parseFloat(e.usageBillPerHour).toFixed(1));
           labels.push(moment(e.date).format('HH'));
         }
         else    
          if(chartFrequencty === "days"){
-          data.push(e.usageBillPerDay);
+          data.push(parseFloat(e.usageBillPerDay).toFixed(1));
           labels.push(moment(e.date).format('DD / MMM'));
         }
         else if (chartFrequencty === "months") {
-          data.push(e.usageBillPerMonth);
+          data.push(parseFloat(e.usageBillPerMonth).toFixed(1));
          // console.log('months.find(m => m.number === e.date.month))',months.find(m => m.number === parseInt(e.date.month)))
           labels.push(`${months.find(m => m.number === parseInt(e.date.month)).shortName} / ${e.date.year}`);
         }
       else if(chartFrequencty === "weeks"){
-        data.push(e.usageBillPerWeek);
+        data.push(parseFloat(e.usageBillPerWeek).toFixed(1));
         labels.push(moment(e.date).format('DD / MMM'));
      }
        console.log('datammmmm ',data)
