@@ -18,7 +18,7 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
       case "days":
         return "Days";
       case "months":
-        return "Months";
+        return "Billing Session";
         case "weeks":
           return "Weeks";
       default:
@@ -41,7 +41,7 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
       }
       else if (chartFrequencty === "months") {
         data.push(e.kwhPerMonth);
-        labels.push(moment(e.date).format('MM / YYYY'));
+        labels.push(moment(e.date).format('MMM / YYYY'));
       }
       else if (chartFrequencty === "weeks") {
     

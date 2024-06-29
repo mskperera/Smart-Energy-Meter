@@ -15,7 +15,7 @@ import moment from 'moment'
 import DeviceCharts from '../today/DeviceChart'
 import { ThreeDots } from 'react-loader-spinner'
 import { useSessionDate } from '../../context/SessionDateContext'
-import { getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession'
+import { getBillingSessionDateRangeBySessionStartDate, getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession'
 
 
 function Month() {
@@ -58,16 +58,23 @@ const loadChartData = async (deviceId,selecedDate) => {
 
   const utcOffSet= moment().utcOffset();
 
-  const year=moment(selecedDate).year();
+ const year=moment(selecedDate).year();
   const month=moment(selecedDate).month()+1;
 
-    const startOfMonth = moment(`${year}-${month}`, 'YYYY-M').startOf('month');
+   // const startOfMonth = moment(`${year}-${month}`, 'YYYY-M').startOf('month');
     
-    const endOfMonth = moment(`${year}-${month}`, 'YYYY-M').endOf('month');
+   // const endOfMonth = moment(`${year}-${month}`, 'YYYY-M').endOf('month');
     
-    const startOfMonthUtc = startOfMonth.subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
-    const endOfMonthUtc = endOfMonth.subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
-  
+    // const startOfMonthUtc = startOfMonth.subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
+    // const endOfMonthUtc = endOfMonth.subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
+   
+   // console.log('startOfMonthUtc',selecedDate);
+    //const selectedStartDateUtc = moment(selecedDate).subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
+    const sessionDate=await getBillingSessionDateRangeBySessionStartDate({year,month})
+    console.log('sessionDate',sessionDate);
+    const startOfMonthUtc = sessionDate.data.startdate_o;
+    const endOfMonthUtc = sessionDate.data.enddate_o;
+
     console.log('startOfMonthUtc',startOfMonthUtc);
     
     console.log('endOfMonthUtc',endOfMonthUtc);
@@ -123,7 +130,7 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
                 <Link to={"/today"}><li className='btn btn-sm btn-light'>Day</li></Link>  
                 <Link to={"/week"}><li className='btn btn-sm btn-light'>Week</li></Link>  
                 <Link to={"/month"}><li className={`btn btn-sm btn-primary ${activeTab === 'Now' ? 'active' : ''}`}
-                onClick={() => handleTabClick('Now')}>Month</li></Link>
+                onClick={() => handleTabClick('Now')}>Session</li></Link>
                 <Link to={"/year"}><li className='btn btn-sm btn-light'>Year</li></Link>
                 <Link to={"/custom"}><li className='btn btn-sm btn-light'>Custom</li></Link>
             </ul>
@@ -142,7 +149,7 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
                 onChange={handleMonthChange}
                 dateFormat="MMMM yyyy"
                 showMonthYearPicker
-                placeholderText="Select Month"
+                placeholderText="Select Month" 
             />
         </div>   
          {/* <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button> */}
@@ -159,6 +166,7 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
               secondaryColor="#36A2EB"
               strokeWidth={2}
               strokeWidthSecondary={2}
+              
             />
           </div>
           ) : (

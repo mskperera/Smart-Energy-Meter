@@ -82,3 +82,23 @@ export const getBillingSessionNameCurrentByDeviceId= async (deviceId) => {
   }
 }
 
+
+
+export const  getBillingSessionDateRangeBySessionStartDate= async (payload) => {
+  try {
+    return await customAxios
+      .post(`/billingSession/getBillingSessionDateRangeBySessionStartDate`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
