@@ -110,7 +110,7 @@
     }
 
     .name-device{
-        margin-top: -50px;
+        margin-top: 0px;
     }
 }
 
@@ -124,6 +124,9 @@
         margin-top: 0px;
         display: flex;
         flex-direction: column;
+    }
+    .name-device{
+        margin-top: 10px;
     }
 }
 
@@ -280,7 +283,7 @@
         margin-top: 70px;
     }
     .name-device{
-        margin-top: 40px;
+        margin-top: 0px;
     }
 
 }
