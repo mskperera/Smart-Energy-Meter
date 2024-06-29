@@ -28,6 +28,22 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
   };
   
   
+  const months = [
+    { shortName: "Jan", number: 1 },
+    { shortName: "Feb", number: 2 },
+    { shortName: "Mar", number: 3 },
+    { shortName: "Apr", number: 4 },
+    { shortName: "May", number: 5 },
+    { shortName: "Jun", number: 6 },
+    { shortName: "Jul", number: 7 },
+    { shortName: "Aug", number: 8 },
+    { shortName: "Sep", number: 9 },
+    { shortName: "Oct", number: 10 },
+    { shortName: "Nov", number: 11 },
+    { shortName: "Dec", number: 12 },
+  ];
+  
+  
     const loadChartData = async () => {
       const labels = [];
       const data = [];
@@ -42,11 +58,11 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
           data.push(e.usageBillPerDay);
           labels.push(moment(e.date).format('DD / MMM'));
         }
-        else    
-        if(chartFrequencty === "months"){
+        else if (chartFrequencty === "months") {
           data.push(e.usageBillPerMonth);
-          labels.push(moment(e.date).format('MMM / YYYY'));
-       }
+         // console.log('months.find(m => m.number === e.date.month))',months.find(m => m.number === parseInt(e.date.month)))
+          labels.push(`${months.find(m => m.number === parseInt(e.date.month)).shortName} / ${e.date.year}`);
+        }
       else if(chartFrequencty === "weeks"){
         data.push(e.usageBillPerWeek);
         labels.push(moment(e.date).format('DD / MMM'));

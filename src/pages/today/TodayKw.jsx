@@ -29,7 +29,7 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
   const loadChartData = async () => {
     const labels = [];
     const data = [];
-    console.log(' e.kwhPerWeek ',days)
+    //console.log(' e.kwhPerWeek ',days)
     for (const e of days) {
       if (chartFrequencty === "hours") {
         data.push(e.kwhPerHour);
@@ -41,14 +41,15 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
       }
       else if (chartFrequencty === "months") {
         data.push(e.kwhPerMonth);
-        labels.push(moment(e.date).format('MMM / YYYY'));
+       // console.log('months.find(m => m.number === e.date.month))',months.find(m => m.number === parseInt(e.date.month)))
+        labels.push(`${months.find(m => m.number === parseInt(e.date.month)).shortName} / ${e.date.year}`);
       }
       else if (chartFrequencty === "weeks") {
     
         data.push(e.kwhPerWeek);
         labels.push(moment(e.date).format('DD / MMM'));
       }
-      console.log('datammmmm ',days)
+     // console.log('labelsllll ',labels)
     }
 
     
@@ -120,6 +121,24 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
     setOptions(newOptions);
   };
 
+
+  const months = [
+    { shortName: "Jan", number: 1 },
+    { shortName: "Feb", number: 2 },
+    { shortName: "Mar", number: 3 },
+    { shortName: "Apr", number: 4 },
+    { shortName: "May", number: 5 },
+    { shortName: "Jun", number: 6 },
+    { shortName: "Jul", number: 7 },
+    { shortName: "Aug", number: 8 },
+    { shortName: "Sep", number: 9 },
+    { shortName: "Oct", number: 10 },
+    { shortName: "Nov", number: 11 },
+    { shortName: "Dec", number: 12 },
+  ];
+  
+
+  
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [{
