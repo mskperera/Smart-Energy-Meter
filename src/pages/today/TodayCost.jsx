@@ -20,8 +20,8 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
         return "Hours";
       case "days":
         return "Days";
-      case "months":
-        return "Months";
+        case "months":
+          return "Billing Session";
       default:
         return "Time";
     }
