@@ -523,7 +523,18 @@ const payload = {
       <div className={toggle === 2 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center">
           {loading ? (
-            <p className="loading-message">Loading please wait...</p>
+            <div>
+            <ThreeDots
+                className="d-flex align-items-center justify-content-center"
+                height={100}
+                width={100}
+                color="#36A2EB"
+                ariaLabel="loading"
+                secondaryColor="#36A2EB"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+              />
+            </div>
           ) : (
           <div className="service" style={{marginTop:"60px"}}>
             <h3 className="d-flex align-items-center justify-content-center mb-3">
@@ -639,6 +650,20 @@ const payload = {
 
       <div className={toggle === 3 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center ">
+        {loading ? (
+            <div>
+            <ThreeDots
+                className="d-flex align-items-center justify-content-center"
+                height={100}
+                width={100}
+                color="#36A2EB"
+                ariaLabel="loading"
+                secondaryColor="#36A2EB"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+              />
+            </div>
+          ) : (
           <div className="connection">
             <h3 className="d-flex align-items-center justify-content-center mb-3">
               Connection Settings
@@ -694,11 +719,26 @@ const payload = {
               {errormessage && <p>{errormessage}</p>}
             </form>
           </div>
+        )}
         </div>
       </div>
 
       <div className={toggle === 4 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center w-100">
+        {loading ? (
+            <div>
+            <ThreeDots
+                className="d-flex align-items-center justify-content-center"
+                height={100}
+                width={100}
+                color="#36A2EB"
+                ariaLabel="loading"
+                secondaryColor="#36A2EB"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+              />
+            </div>
+          ) : (
           <div className="notification">
             <h3 className="d-flex align-items-center justify-content-center mb-1">
               Device Preferences and Settings
@@ -882,19 +922,50 @@ const payload = {
               </button>
             </form>
           </div>
+          )}
         </div>
       </div>
 
 
       <div className={toggle === 6 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center w-100">
+        {loading ? (
+            <div>
+            <ThreeDots
+                className="d-flex align-items-center justify-content-center"
+                height={100}
+                width={100}
+                color="#36A2EB"
+                ariaLabel="loading"
+                secondaryColor="#36A2EB"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+              />
+            </div>
+          ) : (
           <DeviceTab />
+          )}
         </div>
       </div>
 
       <div className={toggle === 5 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center w-100">
+        {loading ? (
+            <div>
+            <ThreeDots
+                className="d-flex align-items-center justify-content-center"
+                height={100}
+                width={100}
+                color="#36A2EB"
+                ariaLabel="loading"
+                secondaryColor="#36A2EB"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+              />
+            </div>
+          ) : (
           <AboutDevice />
+          )}
         </div>
       </div>
 
