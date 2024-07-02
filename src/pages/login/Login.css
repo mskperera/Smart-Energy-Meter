@@ -1,16 +1,54 @@
 .wrapper{
     height: 100vh;
-    background-color:#191970;
+    background-color:#6298fe;
+    /* background-color: #ffffff; */
 }
 .login{
     width: 330px;
     padding: 30px;
     height: min-content;
     border-radius: 5px;
-    background-color: white;
-    color: black;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    box-shadow: 1px 1px 1cqmin 1px  rgba(0, 0, 0, 0.433);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+.login {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+}
+
+.logimage,
+.login-form {
+  flex: 1;
+}
+
+.logimage img {
+  width: 100%;
+}
+
+.login-form {
+  padding: 10px; 
+}
+
+.btn-login{
+  background-color: #fff346;
+}
+
+.btn-login:hover{
+  background-color: #fef02b;
+  color: white;
+}
+
+.line-login{
+  border: 1px solid black;
+}
+/* .login-form{
+  border: 1px solid black;
+} */
+
 .wrapper {
     height: 100vh;
   }
@@ -56,6 +94,17 @@
     margin-right: 5px;
     color: black;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  @media (max-width: 850px) {
+    .login {
+      flex-direction: column;
+    }
+
+    .login {
+      display: flex;
+      width: 95%;
+    }
   }
   
   
