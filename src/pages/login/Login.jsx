@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import deviceReducer, { setDropDevices } from '../../state/device/deviceReducer';
 import logo from '../../assent/logo-1.png';
 import company from '../../assent/company-logo.png';
+import logimage from '../../assent/electrician_2.png';
 import { ThreeDots } from 'react-loader-spinner';
 // import { ThreeDots } from 'react-loader-spinner';
 // import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
@@ -66,68 +67,79 @@ function Login() {
       // window.location.reload();
       // setErrorMessage(false);
     }
+    setLoading(false);
   };
 
   return (
-    <div className='wrapper d-flex align-items-center justify-content-center w-100'>
-      <div className='login'>
-        <h2 className='d-flex align-items-center justify-content-center mb-3'>Login</h2>
-        <form className='needs-validation' onSubmit={handleLogin}>
-          <div className='form-group was-validated mb-2'>
-            <label htmlFor='username' className='form-label'>Username</label>
-            <input
-              type='text'
-              className='form-control'
-              required
-              placeholder='username'
-              value={formData.userName}
-              onChange={(e) => setFormData({ ...formData, userName: e.target.value })}
-            />
+    
+      <div className='wrapper d-flex align-items-center justify-content-center w-100'>
+        <div className='login'>
+          <div className='logimage'>
+            <img src={logimage} alt='logimage'style={{width:'100%'}}/>
           </div>
-          <div className='form-group was-validated mb-2'>
-            <label htmlFor='password' className='form-label'>Password</label>
-            <input
-              type='password'
-              className='form-control'
-              required
-              placeholder='********'
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-            />
+
+          {/* <div className='line-login'>
+          </div> */}
+
+          <div className='login-form'>
+          <h2 className='d-flex align-items-center justify-content-center mb-1'>Login</h2>
+          <form className='needs-validation' onSubmit={handleLogin}>
+            <div className='form-group was-validated mb-2'>
+              <label htmlFor='username' className='form-label'>Username</label>
+              <input
+                type='text'
+                className='form-control'
+                required
+                placeholder='username'
+                value={formData.userName}
+                onChange={(e) => setFormData({ ...formData, userName: e.target.value })}
+              />
+            </div>
+            <div className='form-group was-validated mb-2'>
+              <label htmlFor='password' className='form-label'>Password</label>
+              <input
+                type='password'
+                className='form-control'
+                required
+                placeholder='********'
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              />
+            </div>
+            <button type='submit' className='btn btn-login mt-2' disabled={loading} style={{color:"black"}}>
+              {loadLogin ? 'Loading...' : 'Login'} 
+            </button>
+            {loadLogin && (
+                <div className="loader-container">
+                  <ThreeDots
+                    height={30}
+                    width={30}
+                    color="#36A2EB"
+                    ariaLabel="loading"
+                    secondaryColor="#36A2EB"
+                    strokeWidth={2}
+                    strokeWidthSecondary={2}
+                  />
+                </div>
+              )}
+            {errorMessage && <p>{errorMessage}</p>}
+          </form>
           </div>
-          <button type='submit' className='btn btn-primary w-100 mt-2' disabled={loading}>
-            {loadLogin ? 'Loading...' : 'Login'} 
-          </button>
-          {errorMessage && <p>{errorMessage}</p>}
-        </form>
-        {loading && (
-          <div className='loading-overlay'>
-          <div className='loading-spinner d-flex justify-content-center align-items-center'>   
-            <img src={logo} alt='Loading...' />
+          {loading && (
+            <div className='loading-overlay'>
+            <div className='loading-spinner d-flex justify-content-center align-items-center'>   
+              <img src={logo} alt='Loading...' />
+              {/* <img src="../../assent/motion-blur-2.svg" alt=''/> */}
+            </div>
+            <div className='companylogo'>
+              <p className='text-center'>Powered By</p>
+              <img src={company} alt='Company Logo' />
+            </div>    
           </div>
-          <div className='companylogo'>
-            <p className='text-center'>Powered By</p>
-            <img src={company} alt='Company Logo' />
-          </div>    
+          )}
         </div>
-        )}
-        {
-          loadLogin && (
-            <div className="d-flex align-items-center justify-content-center">
-          <ThreeDots
-              height={100}
-              width={100}
-              color="#36A2EB"
-              ariaLabel="loading"
-              secondaryColor="#36A2EB"
-              strokeWidth={2}
-              strokeWidthSecondary={2}
-            />
-          </div>
-          )
-        }
       </div>
-    </div>
+   
   );
 }
 

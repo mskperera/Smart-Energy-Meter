@@ -32,9 +32,17 @@ function Status() {
     const result = await getDeviceStatus(userId, deviceId);
     setLoading(true);
     console.log('Result:', result);
-    const deviceDetail = result.data; // API response is a single object
+    const deviceDetail = result.data; 
     setDeviceDetails(deviceDetail);
     setLoading(false);
+  };
+
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString(); 
+    const formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Format the time part (HH:MM)
+    return `${formattedDate} ${formattedTime}`; 
   };
 
   return (
@@ -56,7 +64,7 @@ function Status() {
             />
           </div>
           ) : (
-          <table className="table1 table table-hover rounded">
+          <table className="table table-hover rounded">
             <thead className='table-dark'>
               <tr>
                 <th>Device</th>
@@ -69,7 +77,8 @@ function Status() {
                 <tr key={deviceDetails.deviceId}>
                   <td>{deviceDetails.deviceId}</td>
                   <td>{deviceDetails.deviceStatus}</td>
-                  <td>{deviceDetails.lastRepondedDate}</td>
+                  {/* <td>{deviceDetails.lastRepondedDate}</td> */}
+                  <td>{formatDate(deviceDetails.lastRepondedDate_utc)}</td>
                 </tr>
               ) : (
                 <tr>
