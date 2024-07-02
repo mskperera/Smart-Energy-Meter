@@ -36,20 +36,31 @@ function Month() {
   const [isSearchLoading, setIsSearchLoading] = useState(false);
 
 
-  const [selectedDate, setSelectedDate] = useState(new Date()); 
+  const [selectedDate, setSelectedDate] = useState(null); 
+
   const handleMonthChange = (date) => {
       setSelectedDate(date); // Update state with the new date
-      console.log('Selected Month:', moment(date).format('MMMM YYYY')); 
+     // console.log('Selected Month:', moment(date).format('MMMM YYYY')); 
   };
 
 
 useEffect(()=>{
-  setSelectedDate(moment());
-},[])
+ setCurrentBillingSession();
+},[sessionDate])
+
+
+
+const setCurrentBillingSession=()=>{
+setSelectedDate(sessionDate);
+
+}
+
 
 useEffect(()=>{
-  if(selectedDate && selectedDevice )
-  loadChartData(selectedDevice.id,selectedDate);
+
+  console.log('selectedDate && selectedDevice',selectedDate, selectedDevice)
+ if(selectedDate && selectedDevice )
+ loadChartData(selectedDevice.id,selectedDate);
 },[selectedDate,selectedDevice])
 
 
@@ -70,7 +81,7 @@ const loadChartData = async (deviceId,selecedDate) => {
    
    // console.log('startOfMonthUtc',selecedDate);
     //const selectedStartDateUtc = moment(selecedDate).subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
-    const sessionDate=await getBillingSessionDateRangeBySessionStartDate({year,month})
+    const sessionDate=await getBillingSessionDateRangeBySessionStartDate({deviceId,year,month})
     console.log('sessionDate',sessionDate);
     const startOfMonthUtc = sessionDate.data.startdate_o;
     const endOfMonthUtc = sessionDate.data.enddate_o;
@@ -145,7 +156,7 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
           <div className='picker'>
           <div>
             <DatePicker
-        selected={moment(selectedDate).format("yyyy-MM")} 
+        selected={selectedDate && moment(selectedDate).format("yyyy-MM")} 
                 onChange={handleMonthChange}
                 dateFormat="MMMM yyyy"
                 showMonthYearPicker

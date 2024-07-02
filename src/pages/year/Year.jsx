@@ -78,6 +78,7 @@ const loadChartData = async (deviceId,year) => {
   };
   const result = await getEngergyUsageKwhByDateRange(payload);
 
+  console.log('result---payload', payload);
   console.log('result---2222', result.data);
   setDevices(result.data);
 
