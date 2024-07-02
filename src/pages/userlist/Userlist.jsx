@@ -133,7 +133,7 @@ function Userlist() {
       }
         
       </div>
-  </div>
+      </div>
   <BottomNav className="bottombar"/>
     </div>
   )
