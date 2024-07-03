@@ -130,8 +130,8 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
       </div>
           <div className='body'>
             <div className="session-name">
-            <h6>Session Date : {sessionDate}</h6>
-            <p>Days Elapsed : {numberOfDays}</p>
+            <h6>Session Date :<b> {sessionDate}</b></h6>
+            <p>Days Elapsed : <b>{numberOfDays}</b></p>
             </div>
           <div className='date'>
           <div className='picker'>

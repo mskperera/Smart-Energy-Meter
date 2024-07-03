@@ -1,14 +1,13 @@
 .wrapper{
     height: 100vh;
     background-color:#6298fe;
-    /* background-color: #ffffff; */
 }
 .login{
     width: 330px;
-    padding: 30px;
+    padding: 5px;
     height: min-content;
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: #ffffff4e;
     color: rgb(0, 0, 0);
     box-shadow: 1px 1px 1cqmin 1px  rgba(0, 0, 0, 0.433);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -18,6 +17,7 @@
   display: flex;
   flex-direction: row;
   width: 60%;
+  padding: 50px;
 }
 
 .logimage,
@@ -35,6 +35,7 @@
 
 .btn-login{
   background-color: #fff346;
+  width: 97%;
 }
 
 .btn-login:hover{
@@ -45,21 +46,19 @@
 .line-login{
   border: 1px solid black;
 }
+
+
 /* .login-form{
   border: 1px solid black;
 } */
-
-.wrapper {
-    height: 100vh;
-  }
-  
   .loading-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgb(255, 255, 255); 
+    /* background: rgb(255, 255, 255);  */
+    background:#fbfbfb;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,7 +67,8 @@
   }
   
   .loading-spinner img {
-    width: 150px;
+    width: 40%;
+    /* height: 100vh; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,14 +96,190 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 
+  @media (max-width: 1050px) {
+    .login {
+      flex-direction: column;
+    }
+
+    .logimage img {
+      width: 90%;
+    }
+
+    .companylogo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 500px;
+      position: absolute;
+    }
+/* 
+    .login {
+      display: flex;
+      width: 50%;
+    } */
+
+    .loading-spinner img {
+      width: 100%;
+      /* height: 100vh; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 1030px) {
+    .login {
+      flex-direction: column;
+    }
+
+    .logimage img {
+      width: 50%;
+    }
+
+    .companylogo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 500px;
+      position: absolute;
+    }
+
+    /* .login {
+      display: flex;
+      width: 40%;
+    } */
+
+    .loading-spinner img {
+      width: 100%;
+      /* height: 100vh; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .login {
+      flex-direction: column;
+    }
+
+    .logimage img {
+      width: 50%;
+    }
+
+    .companylogo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 500px;
+      position: absolute;
+    }
+
+    /* .login {
+      display: flex;
+      width: 50%;
+    } */
+
+    .loading-spinner img {
+      width: 100%;
+      /* height: 100vh; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
   @media (max-width: 850px) {
+    .login {
+      flex-direction: column;
+    }
+
+    /* .login {
+      display: flex;
+      width: 80%;
+    } */
+
+    .loading-spinner img {
+      width: 100%;
+      /* height: 100vh; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logimage img {
+      width: 50%;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .login {
+      flex-direction: column;
+    }
+/* 
+    .login {
+      display: flex;
+      width: 60%;
+    } */
+
+    .loading-spinner img {
+      width: 100%;
+      /* height: 100vh; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logimage img {
+      width: 50%;
+    }
+  }
+
+  @media (max-width: 550px) {
     .login {
       flex-direction: column;
     }
 
     .login {
       display: flex;
-      width: 95%;
+      /* width: 60%; */
+      padding: 10px;
+    }
+
+    .loading-spinner img {
+      width: 100%;
+      /* height: 100vh; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logimage img {
+      width: 50%;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .login {
+      flex-direction: column;
+    }
+
+    .login {
+      display: flex;
+      width: 75%;
+      padding: 10px;
+    }
+
+    .loading-spinner img {
+      width: 100%;
+      /* height: 100vh; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logimage img {
+      width: 50%;
     }
   }
   

@@ -34,31 +34,31 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
 
       ctx.save();
       ctx.fillStyle = [currentValue > budgetedBill ? '#ff0000' : '#4484ff'];//#ff0066
-      ctx.font = '30px Trebuchet MS';
+      ctx.font = 'bold 30px Trebuchet MS';
       ctx.textAlign = 'center';
 
       const currentValueFormatted = (data.datasets[0].data[0] || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      ctx.fillText(currentValueFormatted, centerX, centerY + 40);
+      ctx.fillText(currentValueFormatted, centerX, centerY + 35);
 
       ctx.font = '22px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = [currentValue > budgetedBill ? '#ff0000' : '#4484ff'];
-      ctx.fillText('Rs', centerX, centerY);
+      ctx.fillText('Rs', centerX, centerY -10);
 
-      ctx.font = '17px Trebuchet MS';
+      ctx.font = '15px Trebuchet MS';
       ctx.fillStyle = 'white';
-      ctx.fillText('Energy Usage(Value)', centerX, centerY + 80);
+      ctx.fillText('Energy Usage(Value)', centerX, centerY + 70);
 
       if (data.datasets[0].data[1] !== undefined) {
         ctx.font = '15px Trebuchet MS';
         ctx.fillStyle = 'white';
-        ctx.fillText('Budget', centerX, centerY - 90);
+        ctx.fillText('Budget', centerX, centerY - 75);
 
         const budgetedBillFormatted = (data.datasets[0].data[1] || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        ctx.font = '22px Trebuchet MS';
+        ctx.font = 'bold 22px Trebuchet MS';
         ctx.fillStyle = 'white';
-        ctx.fillText(`${budgetedBillFormatted} Rs`, centerX, centerY - 60);
+        ctx.fillText(`${budgetedBillFormatted} Rs`, centerX, centerY - 50);
       }
     },
   };

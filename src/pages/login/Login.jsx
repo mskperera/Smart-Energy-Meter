@@ -5,10 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import deviceReducer, { setDropDevices } from '../../state/device/deviceReducer';
-import logo from '../../assent/logo-1.png';
+import logo from '../../assent/Meter Logo3.gif';
 import company from '../../assent/company-logo.png';
 import logimage from '../../assent/electrician_2.png';
 import { ThreeDots } from 'react-loader-spinner';
+// import loadingVideo from '../../assent/motion-blur-2.svg';
 // import { ThreeDots } from 'react-loader-spinner';
 // import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
@@ -35,7 +36,7 @@ function Login() {
     
     setTimeout(() => {
       setLoading(false);
-    }, 2000); 
+    }, 2500); 
   }, []);
 
   const handleLogin = async (e) => {
@@ -84,7 +85,7 @@ function Login() {
           <div className='login-form'>
           <h2 className='d-flex align-items-center justify-content-center mb-1'>Login</h2>
           <form className='needs-validation' onSubmit={handleLogin}>
-            <div className='form-group was-validated mb-2'>
+            <div className='form-group was-validated mb-3'>
               <label htmlFor='username' className='form-label'>Username</label>
               <input
                 type='text'
@@ -95,7 +96,7 @@ function Login() {
                 onChange={(e) => setFormData({ ...formData, userName: e.target.value })}
               />
             </div>
-            <div className='form-group was-validated mb-2'>
+            <div className='form-group was-validated mb-3'>
               <label htmlFor='password' className='form-label'>Password</label>
               <input
                 type='password'
@@ -106,7 +107,7 @@ function Login() {
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               />
             </div>
-            <button type='submit' className='btn btn-login mt-2' disabled={loading} style={{color:"black"}}>
+            <button type='submit' className='btn btn-login mt-1' disabled={loading} style={{color:"black"}}>
               {loadLogin ? 'Loading...' : 'Login'} 
             </button>
             {loadLogin && (
@@ -125,19 +126,19 @@ function Login() {
             {errorMessage && <p>{errorMessage}</p>}
           </form>
           </div>
+          </div>
           {loading && (
             <div className='loading-overlay'>
             <div className='loading-spinner d-flex justify-content-center align-items-center'>   
               <img src={logo} alt='Loading...' />
-              {/* <img src="../../assent/motion-blur-2.svg" alt=''/> */}
             </div>
+          
             <div className='companylogo'>
               <p className='text-center'>Powered By</p>
               <img src={company} alt='Company Logo' />
             </div>    
           </div>
           )}
-        </div>
       </div>
    
   );

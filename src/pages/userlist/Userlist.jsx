@@ -103,7 +103,7 @@ function Userlist() {
               <th>Tel</th>
               <th>Address</th>
               <th>Email</th>
-              <th>Billing Address</th>
+              {/* <th>Billing Address</th> */}
               <th>Edit|Delete</th>
             </tr>
           </thead>
@@ -119,7 +119,7 @@ function Userlist() {
                     <td>{user.tel}</td>
                     <td>{user.siteAddress}</td>
                     <td>{user.email}</td>
-                    <td>{user.billingAddress}</td>
+                    {/* <td>{user.billingAddress}</td> */}
                     <td>
                       <Link to={`/userregister/${user.userId}/U`} className="btn btn-sm btn-primary">Edit</Link>&nbsp;
                       <button className="btn btn-sm btn-danger" onClick={()=>onDeleteUser(user.userId)}>Delete</button>

@@ -5,22 +5,15 @@ import swal from 'sweetalert';
 import { useSelector } from 'react-redux';
 
 function Budget() {
-    const [myBudgetKw, setMyBudgetKw] = useState('');
-    const [myBudgetRs, setMyBudgetRs] = useState('');
-    const [device, setDevice] = useState('');
+    // const [myBudgetKw, setMyBudgetKw] = useState('');
+    // const [myBudgetRs, setMyBudgetRs] = useState('');
+    // const [device, setDevice] = useState('');
     const [load, setLoad] = useState(false);
     const [message, setMessage] = useState('');
     const [errormessage, setErrorMessage] = useState('');
     const [selectedRadio, setSelectedRadio] = useState('');
     const [budgetedValues, setBudgetedValues] = useState('');
-    
-
-    // const deviceNames = useSelector(state => state.device.dropDeviceList);
-    // const defaultSelectedDevice = deviceNames[0];
-
-    // useEffect(() => {
-    //     setDevice(defaultSelectedDevice);
-    // }, [deviceNames]);
+    // const [loading, setLoading] = useState(null);
 
     const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
@@ -38,9 +31,9 @@ function Budget() {
     const loadBudgetedValues = async (deviceId) => {
         const result = await getBudgetedValues(deviceId);
         const budgetedValue = result.data;
-        
+
         setBudgetedValues(budgetedValue);
-        
+
         let selectedRadio = 0;
         if (budgetedValue.isKwhAmountEntered) {
             selectedRadio = '1';
@@ -48,9 +41,9 @@ function Budget() {
         else if (budgetedValue.isCostAmountEntered) {
             selectedRadio = '2';
         }
-        
+
         setSelectedRadio(selectedRadio);
-      };
+    };
 
     const handleCalculateInterdependentValue = async (deviceId, operationId, value) => {
         const result = await calculateInterdependentValue(deviceId, operationId, value);
@@ -67,6 +60,20 @@ function Budget() {
             setErrorMessage('');
             setMessage('');
 
+            const deviceId = selectedDevice.id;
+
+            
+            if (selectedRadio === '1') {
+                const value = await handleCalculateInterdependentValue(deviceId, 1, budgetedValues.budgetedKwh);
+                setBudgetedValues((prevValues) => ({ ...prevValues, budgetedCost: value }));
+            }
+
+            if (selectedRadio === '2') {
+                const value = await handleCalculateInterdependentValue(deviceId, 7, budgetedValues.budgetedCost);
+                setBudgetedValues((prevValues) => ({ ...prevValues, budgetedKwh: value }));
+            }
+
+            
             const payload = {
                 deviceId: selectedDevice.id,
                 budgetedValue: selectedRadio === '1' ? budgetedValues.budgetedKwh : budgetedValues.budgetedCost,
@@ -82,7 +89,7 @@ function Budget() {
             const res = await saveBudgetedLimit(payload);
             console.log('res', res);
             const { responseStatus, outputMessage } = res.data.output;
-            
+
             if (responseStatus === "failed") {
                 setErrorMessage(outputMessage);
                 return;
@@ -114,7 +121,7 @@ function Budget() {
             <h4 className='d-flex align-items-center justify-content-center mb-1'>Device Preferences and Settings</h4>
             <form className='need-validation' onSubmit={onSubmitHandler}>
                 <h6 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h6>
-                
+
                 <div className='form-group mb-1'>
                     <div className='form-group d-flex align-items-center me-3'>
                         <input 
@@ -124,7 +131,6 @@ function Budget() {
                             className='form-radio me-2' 
                             checked={selectedRadio === '1'} 
                             onChange={onRadioChange}
-                            
                         />
                         <label htmlFor='budgetKw' className='form-label mb-0 me-2'>Set Budget kW</label>
                         <input
@@ -165,22 +171,23 @@ function Budget() {
                 </div>
 
                 <button type='button' className="btn btn-sm custom-button w-50 btn-cal mb-1" 
-                onClick={async(e) => {
-                    e.preventDefault();
-                    const deviceId = selectedDevice.id;
+                    onClick={async(e) => {
+                        e.preventDefault();
+                        const deviceId = selectedDevice.id;
 
-                    if (selectedRadio === '1') {
-                        const value = await handleCalculateInterdependentValue(deviceId, 1, budgetedValues.budgetedKwh);
-                        console.log('resultAAAA', value);
-                        setBudgetedValues({...budgetedValues, budgetedCost: value});
-                    }
+                        if (selectedRadio === '1') {
+                            const value = await handleCalculateInterdependentValue(deviceId, 1, budgetedValues.budgetedKwh);
+                            console.log('resultAAAA', value);
+                            setBudgetedValues({...budgetedValues, budgetedCost: value});
+                        }
 
-                    if (selectedRadio === '2') {
-                        const value = await handleCalculateInterdependentValue(deviceId, 7, budgetedValues.budgetedCost);
-                        console.log('resultBBB', value);
-                        setBudgetedValues({...budgetedValues, budgetedKwh: value});
-                    }
-                }}>
+                        if (selectedRadio === '2') {
+                            const value = await handleCalculateInterdependentValue(deviceId, 7, budgetedValues.budgetedCost);
+                            console.log('resultBBB', value);
+                            setBudgetedValues({...budgetedValues, budgetedKwh: value});
+                        }
+                    }}
+                >
                     Calculate
                 </button>
 
