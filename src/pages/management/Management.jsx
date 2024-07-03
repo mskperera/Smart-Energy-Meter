@@ -77,7 +77,7 @@ function Management() {
                 <Link to="/deviceregister/0/I" className='btn btn-info bbttnn'>Add Device</Link>
               </div>
               <div className='table-view'>
-                <table className="table1 table table-hover rounded">
+                <table className="table table-hover rounded">
                   <thead className='table-dark'>
                     <tr>
                       {/* <th>Device ID</th> */}
@@ -119,40 +119,40 @@ function Management() {
         <div className='form-view'>
         {deviceDetails && deviceDetails.map((device) => (
           <div className='notification3' key={device.deviceId}>
-            <div className='bill-background'>
-              <div className='bill-ground text-left device-form-main'>
+            <div className='bill-background1'>
+              <div className='bill-ground1 device-form-main'>
                   <form className='needs-validation device-form'>
                     <div className='form-containerr'>
                       <div className='form-groupp form-group1'>
                         <div className='form-groupp'>
                           <label htmlFor='deviceNo' className='form-lablel'>Device No</label>
-                          <input type='text' className='form-controll' required placeholder='deviceNo' value={device.deviceNo} disabled />
+                          <input type='text'style={{width:'90%'}} className='form-controll' required placeholder='deviceNo' value={device.deviceNo} disabled />
                         </div>
                         <div className='form-groupp'>
                           <label htmlFor='firmwareVersion' className='form-lablel'>Firmware Version</label>
-                          <input type='text' className='form-controll' required placeholder='firmwareVersion' value={device.firmwareVersion} disabled />
+                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='firmwareVersion' value={device.firmwareVersion} disabled />
                         </div>
                         <div className='form-groupp'>
                           <label htmlFor='hardwareVersion' className='form-lablel'>Hardware Version</label>
-                          <input type='text' className='form-controll' required placeholder='hardwareVersion' value={device.hardwareVersion} disabled />
+                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='hardwareVersion' value={device.hardwareVersion} disabled />
                         </div>
                         <div className='form-groupp'>
                           <label htmlFor='product' className='form-lablel'>Product</label>
-                          <input type='text' className='form-controll' required placeholder='product' value={device.product} disabled />
+                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='product' value={device.product} disabled />
                         </div>
                       </div>
                       <div className='form-groupp form-group2'>
                         <div className='form-groupp'>
                           <label htmlFor='serialNo' className='form-lablel'>Serial No</label>
-                          <input type='text' className='form-controll' required placeholder='serialNo' value={device.serialNo} disabled />
+                          <input type='text'style={{width:'90%'}} className='form-controll' required placeholder='serialNo' value={device.serialNo} disabled />
                         </div>
                         <div className='form-groupp'>
                           <label htmlFor='chipId' className='form-lablel'>Chip Id</label>
-                          <input type='text' className='form-controll' required placeholder='chipId' value={device.chipId} disabled />
+                          <input type='text'style={{width:'90%'}} className='form-controll' required placeholder='chipId' value={device.chipId} disabled />
                         </div>
                         <div className='form-groupp'>
                           <label htmlFor='deviceTypeName' className='form-lablel'>Device Type</label>
-                          <input type='text' className='form-controll' required placeholder='deviceTypeName' value={device.deviceTypeName} disabled />
+                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='deviceTypeName' value={device.deviceTypeName} disabled />
                         </div>
                       </div>
                     </div>

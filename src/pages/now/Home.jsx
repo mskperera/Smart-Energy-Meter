@@ -71,8 +71,8 @@ const Home = () => {
       <Menu className="nav-bar" />
       <div className="body">
         <div className="session-name">
-          <h6>Session Date : {sessionDate}</h6>
-          <p>Days Elapsed : {numberOfDays}</p>
+          <h6>Session Date :<b> {sessionDate}</b></h6>
+          <p>Days Elapsed : <b>{numberOfDays}</b></p>
         </div>
         <div className="container">
           {loading ? (
@@ -104,7 +104,7 @@ const Home = () => {
               {devices?.map((device, index) => (
                 <div key={index}>
                   <div className="device-name-state align-items-center justify-content-center w-100">
-                    <DeviceChart3p deviceName={device.deviceName} device={device} />
+                    <DeviceChart3p deviceName={device.deviceName} deviceLocation={device.deviceLocation} device={device} />
                   </div>
                 </div>
               ))}

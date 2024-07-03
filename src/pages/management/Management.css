@@ -20,9 +20,9 @@
 }
 
 .notification3{
-    width: 350px;
+    width: 100%;
     padding: 0px;
-    /* height: min-content; */
+    height: min-content;
     border-radius: 5px;
     /* background-color: #d1dde8; */
     /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); */
@@ -35,6 +35,28 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 
+  .bill-background1{
+    /* background-color: #d1dde8; */
+    background-color: #fff346;
+    padding: 0px 0px 0px 20px;
+    border-radius: 20px;
+    display: flex;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+    margin-bottom: 10px;
+    
+  }
+  .bill-ground1{
+    background-color: white;
+    padding-left: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    width: 100%;
+    border-radius: 0 20px 20px 0;
+    display: flex;
+    margin-top: 0px;
+  }
+
 .form-containerr {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -44,6 +66,7 @@
   .form-groupp {
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
   
   .form-lablel {
@@ -56,7 +79,7 @@
   
   .form-group1,
   .form-group2 {
-    width: 250px; 
+    width: 100%; 
   }
   
   .form-actions {
@@ -72,7 +95,7 @@
   .device-form-main{
     display: flex;
     flex-direction: column;
-    gap: 0px;
+    gap: 2px;
   }
 
   @media (max-width: 768px) {
@@ -96,9 +119,9 @@
   }
   
   .device-form-main {
-    padding: 5px;
+    padding-left: 3px;
     background-color: #f8f9fa;
-    margin: 5px 0;
+    margin: 0px 0px 0px 0px;
   }
   
   .device-form {
@@ -108,7 +131,7 @@
   
   .form-containerr {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
   }
   
   .form-groupp {
@@ -123,7 +146,8 @@
   }
   
   .form-actions {
-    margin-top: 10px;
+    margin-top: 3px;
+    margin-bottom: 5px;
   }
   
   

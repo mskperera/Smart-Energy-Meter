@@ -21,12 +21,12 @@
 } */
 
 .custom-button:hover {
-  background-color: rgba(139, 139, 139, 0.521); 
+  background-color: rgba(46, 46, 46, 0.669); 
 }
 
 .bill-background{
   /* background-color: #d1dde8; */
-  background-color: rgb(138, 191, 254);
+  background-color: #fff346;
   padding: 0px 0px 0px 20px;
   border-radius: 20px;
   display: flex;
@@ -183,7 +183,7 @@
 
   @media screen and (max-width:950px){
     .notification2{
-      margin-left: 120px;
+      margin-left: 10px;
     }
   }
 
@@ -261,7 +261,7 @@
       /* color: black; */
       margin-top: 0px;
       margin-left: 0px;
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
   }
 
   .body2{
@@ -287,11 +287,11 @@
     height: min-content;
     border-radius: 5px;
     /* background-color: rgb(186, 153, 217); */
-    color: black;
+    /* color: black; */
     margin-top: 0px;
     margin-left: 0px;
     position: static;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
 }
 .btn-edit{
   border: none;
@@ -368,9 +368,9 @@
     height: min-content;
     border-radius: 5px;
     /* background-color: rgb(186, 153, 217); */
-    color: black;
+    /* color: black; */
     margin-top:0px;
     position: static;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
 }
 }

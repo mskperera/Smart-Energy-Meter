@@ -1,6 +1,6 @@
 .wrapper-register{
     height: 100vh;
-    background-color:#36A2EB;
+    background-color:#6298fe;
 }
 .register{
 
@@ -8,13 +8,14 @@
     padding: 30px ;
     height: min-content;
     border-radius: 5px;
-    background-color: white;
+    background-color: #ffffff4e;
     color: black;
+    box-shadow: 1px 1px 1cqmin 1px  rgba(0, 0, 0, 0.433);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .button-close:hover{
-    background-color: #36A2EB;
+    background-color: #ffffff;
     border-radius: 50px;
     cursor: pointer;
 }
@@ -25,8 +26,8 @@
         padding: 20px ;
         height: min-content;
         border-radius: 5px;
-        background-color: white;
-        color: black;
+        /* background-color: white; */
+        /* color: black; */
     }
 }
 
@@ -36,7 +37,7 @@
         padding: 20px ;
         height: min-content;
         border-radius: 5px;
-        background-color: white;
-        color: black;
+        /* background-color: white; */
+        /* color: black; */
     }
 }

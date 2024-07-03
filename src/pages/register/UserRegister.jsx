@@ -72,7 +72,7 @@ function UserRegister() {
         email: userEmail,
         mobileNo: userMobile,
         siteAddress: userAddress,
-        billingAddress:userBillAddress,
+        billingAddress:"-",
         tel:userTel,
         profilePic: "https://example.com/profiles/john_doe.jpg",
         displayName: userDisplayName,
@@ -204,12 +204,12 @@ function UserRegister() {
             <input type='text' className='form-control' value={userAddress || ''} onChange={(e)=>{setUserAddress(e.target.value)}}required />
               </div>
 
-              <div className='form-group was-validated'>
+              {/* <div className='form-group was-validated'>
                 <label htmlFor='billingaddress' className='form-label'>
                   Billing Address
                 </label>
                 <input type='text' className='form-control' value={userBillAddress || ''} onChange={(e)=>{setUserBillAddress(e.target.value)}} required />
-              </div>
+              </div> */}
 
               <div className='form-group was-validated'>
                 <label htmlFor='mobile' className='form-label'>

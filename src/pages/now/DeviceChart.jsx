@@ -4,8 +4,9 @@ import OperationalChart from "./OperationalChart";
 import { FaHeartbeat } from "react-icons/fa";
 import { FaHeartBroken } from "react-icons/fa";
 import { color } from "chart.js/helpers";
+import { FaLocationDot } from "react-icons/fa6";
 
-function DeviceChartMode({ deviceName, device }) {
+function DeviceChartMode({ deviceName, device, deviceLocation }) {
   const { lines } = device;
 
   return (
@@ -36,15 +37,15 @@ function DeviceChartMode({ deviceName, device }) {
                   </div>
                 </div>
               </div>
-            )}
+            )} 
           </div>
-          <h6>{deviceName}</h6>
+          <h6>{deviceName} <span><FaLocationDot color={'red'} size={15} style={{marginTop:'-8px'}}/>{deviceLocation}</span></h6>
         </div>
         {device.deviceTypeId === 2 && (
           <div className="line-values" style={{ display: 'flex'}}>
-            <div className="line-type" title="Individual Line Measurement Mode" style={{cursor:'pointer'}}>
+            {/* <div className="line-type" title="Individual Line Measurement Mode" style={{cursor:'pointer'}}>
               {device.deviceMeasuringModeId === 1 ? "Mode : ILMM" : "Consolidated Mode"}
-            </div>
+            </div> */}
             <div className="line-total">
             <div className="line-total-kw">
               <div>

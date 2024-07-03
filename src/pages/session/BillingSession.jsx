@@ -146,7 +146,7 @@ function BillingSession() {
                       <div className='bill-ground text-left'>
                         <div className='col'>
                           <h5>{session.sessionName}</h5>
-                          <div className='form-group row mb-1'>
+                          <div className='form-group row'>
                             <label htmlFor='startdate' className='col-sm-4 col-form-label'>Session Start</label>
                             <div className='col-sm-8 text-left'>
                               {editingSessionId === session.deviceBillingSessionId ?
@@ -154,22 +154,24 @@ function BillingSession() {
                                   <ReactDatePicker
                                     selected={selectedDates[session.deviceBillingSessionId]?.startDate}
                                     onChange={(date) => handleDateChange(date, session.deviceBillingSessionId, 'startDate')}
-                                    className='form-control text-left editable'
+                                    className='form-control text-left editable mb-1'
                                     placeholderText='Select date'
                                     dateFormat='dd MMM yyyy'
+                                    style={{height:'30px'}} 
                                   />
                                   <TimePicker
                                     value={selectedTimes[session.deviceBillingSessionId]?.startTime}
                                     onChange={(time) => handleTimeChange(time, session.deviceBillingSessionId, 'startTime')}
                                     disableClock={true}
-                                    className='form-control text-left editable'
+                                    className='form-control text-left editable mb-1' 
+                                    style={{height:'30px'}} 
                                   />
                                 </> :
-                                <input type='text' className='form-control text-center disabled' disabled value={selectedDates[session.deviceBillingSessionId]?.startDate ? new Date(selectedDates[session.deviceBillingSessionId].startDate).toLocaleString() : ''}/>
+                                <input type='text' style={{height:'30px'}}  className='form-control text-center disabled' disabled value={selectedDates[session.deviceBillingSessionId]?.startDate ? new Date(selectedDates[session.deviceBillingSessionId].startDate).toLocaleString() : ''}/>
                               }
                             </div>
                           </div>
-                          <div className='form-group row mb-1'>
+                          <div className='form-group row'>
                             <label htmlFor='enddate' className='col-sm-4 col-form-label'>Session End</label>
                             <div className='col-sm-8 text-left'>
                               {editingSessionId === session.deviceBillingSessionId ?
@@ -177,31 +179,34 @@ function BillingSession() {
                                   <ReactDatePicker
                                     selected={selectedDates[session.deviceBillingSessionId]?.endDate}
                                     onChange={(date) => handleDateChange(date, session.deviceBillingSessionId, 'endDate')}
-                                    className='form-control text-left editable'
+                                    className='form-control text-left editable mb-1'
                                     placeholderText='Select date'
                                     dateFormat='dd MMM yyyy'
+                                    style={{height:'30px'}} 
                                   />
+                                  
                                   <TimePicker
                                     value={selectedTimes[session.deviceBillingSessionId]?.endTime}
                                     onChange={(time) => handleTimeChange(time, session.deviceBillingSessionId, 'endTime')}
                                     disableClock={true}
-                                    className='form-control text-left editable'
+                                    className='form-control text-left editable mb-1'
+                                    style={{height:'30px'}} 
                                   />
                                 </> :
-                                <input type='text' className='form-control text-center disabled' disabled value={selectedDates[session.deviceBillingSessionId]?.endDate ? new Date(selectedDates[session.deviceBillingSessionId].endDate).toLocaleString() : ''}/>
+                                <input type='text'style={{height:'30px'}}  className='form-control text-center disabled' disabled value={selectedDates[session.deviceBillingSessionId]?.endDate ? new Date(selectedDates[session.deviceBillingSessionId].endDate).toLocaleString() : ''}/>
                               }
                             </div>
                           </div>
-                          <div className='form-group row mb-1'>
+                          <div className='form-group row'>
                             <label htmlFor='units' className='col-sm-4 col-form-label'>Units kW</label>
                             <div className='col-sm-8'>
-                              <input type='text' className={`form-control text-center ${editingSessionId === session.deviceBillingSessionId ? 'editable' : 'disabled'}`} id='units' placeholder='Enter units' disabled={editingSessionId !== session.deviceBillingSessionId} value={session.totalConsumption_Kwh} />
+                              <input type='text' style={{height:'30px'}} className={`form-control text-center ${editingSessionId === session.deviceBillingSessionId ? 'editable' : 'disabled'}`} id='units' placeholder='Enter units' disabled={editingSessionId !== session.deviceBillingSessionId} value={session.totalConsumption_Kwh} />
                             </div>
                           </div>
                           <div className='form-group row mb-1'>
                             <label htmlFor='amount' className='col-sm-4 col-form-label'>Bill Amount</label>
                             <div className='col-sm-8'>
-                              <input type='text' className={`form-control text-center ${editingSessionId === session.deviceBillingSessionId ? 'editable' : 'disabled'}`} id='amount' placeholder='Enter amount' disabled={editingSessionId !== session.deviceBillingSessionId} value={session.totalAmountDue} />
+                              <input type='text' style={{height:'30px'}}  className={`form-control text-center ${editingSessionId === session.deviceBillingSessionId ? 'editable' : 'disabled'}`} id='amount' placeholder='Enter amount' disabled={editingSessionId !== session.deviceBillingSessionId} value={session.totalAmountDue} />
                             </div>
                           </div>
                           {session.isEditable ? (
