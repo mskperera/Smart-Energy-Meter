@@ -10,7 +10,7 @@ function AboutDevice() {
   return (
     <div className='d-flex align-items-center justify-content-center w-100'>
       <div className='notification' style={{ backgroundColor: '#bebebe' }}>
-        <div className='rounded ' style={{marginTop:'50px'}} >
+        <div className='rounded ' style={{marginTop:'0px'}} >
           <h4 className='d-flex align-items-center justify-content-center'>About FIDA Smart Energy Meter</h4>
        
             <p>Version: {version}</p>
@@ -24,7 +24,7 @@ function AboutDevice() {
 
             <div className='company-logo' style={{ justifyContent:'flex-end', display:'flex', alignItems:'flex-end'}}>
               <div>
-                <p style={{marginTop:'-31px', marginLeft:'-80px',position:'static'}}>Powered by</p> 
+                <p style={{marginTop:'-30px', marginLeft:'-80px',position:'static'}}>Powered by</p> 
               </div>&nbsp;
               <img src={company} alt='company logo' style={{width:'70px'}}/>
             </div>     
