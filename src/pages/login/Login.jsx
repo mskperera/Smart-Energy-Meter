@@ -83,9 +83,9 @@ function Login() {
           </div> */}
 
           <div className='login-form'>
-          <h2 className='d-flex align-items-center justify-content-center mb-1'>Login</h2>
+          <h2 className='d-flex align-items-center justify-content-center'>Login</h2>
           <form className='needs-validation' onSubmit={handleLogin}>
-            <div className='form-group was-validated mb-3'>
+            <div className='form-group was-validated mb-2'>
               <label htmlFor='username' className='form-label'>Username</label>
               <input
                 type='text'
@@ -96,7 +96,7 @@ function Login() {
                 onChange={(e) => setFormData({ ...formData, userName: e.target.value })}
               />
             </div>
-            <div className='form-group was-validated mb-3'>
+            <div className='form-group was-validated mb-2'>
               <label htmlFor='password' className='form-label'>Password</label>
               <input
                 type='password'
