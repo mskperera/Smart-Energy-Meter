@@ -65,7 +65,7 @@ const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
 useEffect(()=>{
   if(selectedDevice){
-    setDevice(selectedDevice);
+    setDevice(selectedDevice.id);
   }
 // setDevice(defaultSelctedDevie);
 },[selectedDevice])
@@ -75,26 +75,34 @@ useEffect(()=>{
     useEffect(() => {
 
         loadDrpConsumerCategories();
-        setLoading(true);
+        // setLoading(true);
        
       if(selectedDevice){
         const deviceId=selectedDevice.id;
         // const deviceId=4;
         loadDrpSupplier(deviceId);
         loadDrpSupplyType(deviceId);
-        setLoading(true);
+        // setLoading(true);
         // loadDeviceDetailsByDeviceId();
         }
     }, [selectedDevice,load]);
 
     useEffect(()=>{
         loadDrpConsumerSubCategoriesById();
-        setLoading(true);
+        // setLoading(true);
     },[consumerCategoryselectedValue]);
 
  
 
+    useEffect(()=>{
 
+      if(selectedDevice){
+      const deviceId=selectedDevice.id;
+      loadDeviceSettingstData(deviceId);
+      loadDeviceConnectionData(deviceId);
+      // setLoading(true);
+      }
+  },[load,selectedDevice])
 //   const consumerCategoryId = 3;
 //   const supplierId = 2;
 
@@ -103,7 +111,7 @@ useEffect(()=>{
     const loadDeviceSettingstData=async(deviceId)=>{
  
         const result=await get_DeviceSettingsByDeviceId(deviceId);
-        setLoading(true);
+        // setLoading(true);
        // setDeviceSettings(result.data);
        console.log("test - test",result);
        const deviceSetttings=result.data;
@@ -113,7 +121,7 @@ useEffect(()=>{
        setSupplyTypeselectedValue(deviceSetttings.supplyTypeId);
        setConsumerSubCategoryselectedValue(deviceSetttings.consumerSubCategoryId);
 
-       setLoading(false);
+      //  setLoading(false);
      // setConsumerSubCategoryselectedValue
        
     }
@@ -121,42 +129,34 @@ useEffect(()=>{
     const loadDeviceConnectionData=async(deviceId)=>{
  
         const result=await getConnectionSettingsByDeviceId(deviceId);
-        setLoading(true);
+        // setLoading(true);
        // setDeviceSettings(result.data);
        console.log("test111111111",result);
        const deviceSetttings=result.data;
        setEditedDeviceName(deviceSetttings.deviceName);
        setEditedConnection(deviceSetttings.connection);
        setEditedPortNo(deviceSetttings.portNo);
-       setLoading(false);
+      //  setLoading(false);
     }
 
-    useEffect(()=>{
-
-        if(selectedDevice){
-        const deviceId=selectedDevice.id;
-        loadDeviceSettingstData(deviceId);
-        loadDeviceConnectionData(deviceId);
-        setLoading(true);
-        }
-    },[load,device])
+    
 
     const loadDrpConsumerCategories=async()=>{
         const result=await getDrpConsumerCategories();
-        setLoading(true);
+        // setLoading(true);
         setDropoptionsConsumerCatogery(result.data);
-        setLoading(false);
+        // setLoading(false);
        }
 
     const loadDrpConsumerSubCategoriesById=async()=>{
         const result=await getDrpConsumerSubCategoriesById(consumerCategoryselectedValue);
-        setLoading(true);
+        // setLoading(true);
         const subCategory = result.data;
         console.log("subCategory",subCategory);
 
         if (Array.isArray(subCategory)) {
             setDropoptionsConsumerSubCatogery(subCategory);
-            setLoading(false);
+            // setLoading(false);
         }
   
         // setConsumerSubCategoryselectedValue(subCategory.ConsumerSubCategoryId);
@@ -164,22 +164,22 @@ useEffect(()=>{
 
     const loadDrpSupplier=async(deviceId)=>{
         const result=await getDrpSupplier(deviceId);
-        setLoading(true);
+        // setLoading(true);
         console.log("sup",result);
         const supplier = result.data;
         setDropoptionsSupplier(result.data);
-        setLoading(false);
+        // setLoading(false);
       //  setSupplierselectedValue(supplier.supplierId)
        }
 
     const loadDrpSupplyType=async(deviceId)=>{
         const result=await getDrpSupplyType(deviceId);
-        setLoading(true);
+        // setLoading(true);
         console.log("supType",result);
         const supplierType = result.data;
         setDropoptionsSupplyType(result.data);
         setSupplyTypeselectedValue(supplierType.supplyTypeId);
-        setLoading(false);
+        // setLoading(false);
        }
 
    
@@ -209,7 +209,7 @@ console.log("testingsave")
     };
     console.log('payload',payload);
     const res = await saveDeviceSettings(payload);
-    setLoading(true);
+    // setLoading(true);
     console.log('saveDeviceSettings',res);
     const { responseStatus, outputMessage } = res.data;
     if (responseStatus === "failed") {
@@ -220,7 +220,7 @@ console.log("testingsave")
     setMessage(outputMessage)
     swal("Updated Successfully", "", "success").then(() => {
         setLoad(!load);
-        setLoading(false);
+        // setLoading(false);
       });
     
   }
@@ -237,14 +237,14 @@ useEffect(() => {
     if(selectedDevice){
         const deviceId=selectedDevice.id;
     loadOperationalLimitByDeviceId(deviceId);
-    setLoading(true);
+    // setLoading(true);
     }
 }, [load,selectedDevice]);
 
 
 const loadOperationalLimitByDeviceId = async (deviceId) => {
     const res = await getOperationalLimitByDeviceId(deviceId);
-    setLoading(true);
+    // setLoading(true);
     // console.log("device",res.data); 
 
     const operationalDataArr= res.data;
@@ -256,25 +256,25 @@ const loadOperationalLimitByDeviceId = async (deviceId) => {
         {
             console.log("operationmetricId",operationalData);
             setOperationalDataBill(operationalData);
-            setLoading(false);
+            // setLoading(false);
         }
         if (operationalData.operationalMetricId === 2 )
         {
             // console.log("operationmetricId",operationalData.operationalMetricId);
             setOperationalVoltage(operationalData);
-            setLoading(false);
+            // setLoading(false);
         }
         if (operationalData.operationalMetricId === 1 )
         {
             // console.log("operationmetricId",operationalData.operationalMetricId);
             setOperationalKwMax(operationalData);
-            setLoading(false);
+            // setLoading(false);
         }
         if (operationalData.operationalMetricId === 4 )
         {
             // console.log("operationmetricId",operationalData.operationalMetricId);
             setOperationalPowerMax(operationalData);
-            setLoading(false);
+            // setLoading(false);
         }
     }
 
@@ -306,7 +306,7 @@ const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActiv
           };
        
       const res = await saveOperationalLimit(payload);
-      setLoading(true);
+      // setLoading(true);
     //   console.log(res);
       const { responseStatus, outputMessage } = res.data;
       if (responseStatus === "failed") {
@@ -316,7 +316,7 @@ const saveOperationSettings = async (thresholdAmount,operationalMetricId,isActiv
         setMessage(outputMessage)
         swal("Updated Successfully", "", "success").then(() => {
             setLoad(!load);
-            setLoading(false);
+            // setLoading(false);
             });
         
         
@@ -341,7 +341,7 @@ const saveOperationVloSettings = async (thresholdAmountMin,thresholdAmountMax,op
       };
    
   const res = await saveOperationalLimit(payload);
-  setLoading(true);
+  // setLoading(true);
   console.log(res);
   const { responseStatus, outputMessage } = res.data;
   if (responseStatus === "failed") {
@@ -351,7 +351,7 @@ const saveOperationVloSettings = async (thresholdAmountMin,thresholdAmountMax,op
     setMessage(outputMessage)
     swal("Updated Successfully", "", "success").then(() => {
         setLoad(!load);
-        setLoading(false);
+        // setLoading(false);
         });
     
     
@@ -394,7 +394,7 @@ const payload = {
     };
   
     const res = await saveConnectionSettings(payload);
-    setLoading(true);
+    // setLoading(true);
     console.log(res);
     const { responseStatus, outputMessage } = res.data;
     if (responseStatus === "failed") {
@@ -406,7 +406,7 @@ const payload = {
     setMessage(outputMessage)
     swal("Updated Successfully", "", "success").then(() => {
         setLoad(!load);
-        setLoading(false);
+        // setLoading(false);
       });
     
   }
@@ -499,7 +499,7 @@ const payload = {
 
       <div className={toggle === 1 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center w-100">
-          {loading ? (
+          {/* {loading ? (
             // <p className="loading-message">Loading please wait...</p>
             <div>
             <ThreeDots
@@ -514,15 +514,15 @@ const payload = {
               />
             </div>
           ) : (
-            <Budget />
           )
-          }
+        } */}
+        <Budget />
         </div>
       </div>
 
       <div className={toggle === 2 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center">
-          {loading ? (
+          {/* {loading ? (
             <div>
             <ThreeDots
                 className="d-flex align-items-center justify-content-center"
@@ -536,6 +536,8 @@ const payload = {
               />
             </div>
           ) : (
+          )
+          } */}
           <div className="service" style={{marginTop:"60px"}}>
             <h3 className="d-flex align-items-center justify-content-center mb-3">
               Tarrif Settings
@@ -643,14 +645,12 @@ const payload = {
               {errormessage && <p>{errormessage}</p>}
             </form>
           </div>
-          )
-          }
         </div>
       </div>
 
       <div className={toggle === 3 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center ">
-        {loading ? (
+        {/* {loading ? (
             <div>
             <ThreeDots
                 className="d-flex align-items-center justify-content-center"
@@ -664,6 +664,7 @@ const payload = {
               />
             </div>
           ) : (
+        )} */}
           <div className="connection">
             <h3 className="d-flex align-items-center justify-content-center mb-3">
               Connection Settings
@@ -719,13 +720,12 @@ const payload = {
               {errormessage && <p>{errormessage}</p>}
             </form>
           </div>
-        )}
         </div>
       </div>
 
       <div className={toggle === 4 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center w-100">
-        {loading ? (
+        {/* {loading ? (
             <div>
             <ThreeDots
                 className="d-flex align-items-center justify-content-center"
@@ -739,6 +739,7 @@ const payload = {
               />
             </div>
           ) : (
+          )} */}
           <div className="notification">
             <h3 className="d-flex align-items-center justify-content-center mb-1">
               Device Preferences and Settings
@@ -922,14 +923,13 @@ const payload = {
               </button>
             </form>
           </div>
-          )}
         </div>
       </div>
 
 
       <div className={toggle === 6 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center w-100">
-        {loading ? (
+        {/* {loading ? (
             <div>
             <ThreeDots
                 className="d-flex align-items-center justify-content-center"
@@ -943,14 +943,14 @@ const payload = {
               />
             </div>
           ) : (
+          )} */}
           <DeviceTab />
-          )}
         </div>
       </div>
 
       <div className={toggle === 5 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center w-100">
-        {loading ? (
+        {/* {loading ? (
             <div>
             <ThreeDots
                 className="d-flex align-items-center justify-content-center"
@@ -964,8 +964,8 @@ const payload = {
               />
             </div>
           ) : (
+          )} */}
           <AboutDevice />
-          )}
         </div>
       </div>
 

@@ -474,6 +474,12 @@
     }
 }
 
+@media screen and (max-width:420px){
+    .show-content .body{
+        height: 88.35vh;
+    }
+}
+
 
 @media screen and (max-width:400px){
     .notification{
@@ -488,7 +494,7 @@
     }
 
     .show-content .body{
-        height: 86.4vh;
+        height: 87.45vh;
     }
 
     .tab{
