@@ -120,11 +120,13 @@ function BillingSession() {
   };
 
   return (
-    <div className='home'>
-      <div className='body w-100'>
-        <div className='notification2 '>
-          <div className=''>
-            <h3 className='d-flex align-items-center justify-content-center mb-3'>Billing Session</h3>
+    <div className="home">
+      <div className="body w-100">
+        <div className="notification2 ">
+          <div className="">
+            <h3 className="d-flex align-items-center justify-content-center mb-3">
+              Billing Session
+            </h3>
 
             {loadData ? (
               <div className="d-flex align-items-center justify-content-center">
@@ -140,87 +142,352 @@ function BillingSession() {
               </div>
             ) : (
               <>
-                {billingSession && billingSession.map((session, index) => (
-                  <div key={`${session.deviceBillingSessionId}-${index}`}>
-                    <div className='bill-background'>
-                      <div className='bill-ground text-left'>
-                        <div className='col'>
-                          <h5>{session.sessionName}</h5>
-                          <div className='form-group row'>
-                            <label htmlFor='startdate' className='col-sm-4 col-form-label'>Session Start</label>
-                            <div className='col-sm-8 text-left'>
-                              {editingSessionId === session.deviceBillingSessionId ?
-                                <>
-                                  <ReactDatePicker
-                                    selected={selectedDates[session.deviceBillingSessionId]?.startDate}
-                                    onChange={(date) => handleDateChange(date, session.deviceBillingSessionId, 'startDate')}
-                                    className='form-control text-left editable mb-1'
-                                    placeholderText='Select date'
-                                    dateFormat='dd MMM yyyy'
-                                    style={{height:'30px'}} 
+                {billingSession &&
+                  billingSession.map((session, index) => (
+                    <div key={`${session.deviceBillingSessionId}-${index}`}>
+                      <div className="bill-background">
+                        <div className="bill-ground text-left">
+                          <div className="col">
+                            <h5>{session.sessionName}</h5>
+                            <div className="form-group row">
+                              <label
+                                htmlFor="startdate"
+                                className="col-sm-4 col-form-label"
+                              >
+                                Session Start
+                              </label>
+                              <div className="col-sm-8 text-left">
+                                {editingSessionId ===
+                                session.deviceBillingSessionId ? (
+                                  <>
+                                    <ReactDatePicker
+                                      selected={
+                                        selectedDates[
+                                          session.deviceBillingSessionId
+                                        ]?.startDate
+                                      }
+                                      onChange={(date) =>
+                                        handleDateChange(
+                                          date,
+                                          session.deviceBillingSessionId,
+                                          "startDate"
+                                        )
+                                      }
+                                      className="form-control text-left editable mb-1"
+                                      placeholderText="Select date"
+                                      dateFormat="dd MMM yyyy"
+                                      style={{ height: "30px" }}
+                                    />
+                                    <TimePicker
+                                      value={
+                                        selectedTimes[
+                                          session.deviceBillingSessionId
+                                        ]?.startTime
+                                      }
+                                      onChange={(time) =>
+                                        handleTimeChange(
+                                          time,
+                                          session.deviceBillingSessionId,
+                                          "startTime"
+                                        )
+                                      }
+                                      disableClock={true}
+                                      className="form-control text-left editable mb-1"
+                                      style={{ height: "30px" }}
+                                    />
+                                  </>
+                                ) : (
+                                  <input
+                                    type="text"
+                                    style={{ height: "30px" }}
+                                    className="form-control text-center disabled"
+                                    disabled
+                                    value={
+                                      selectedDates[
+                                        session.deviceBillingSessionId
+                                      ]?.startDate
+                                        ? new Date(
+                                            selectedDates[
+                                              session.deviceBillingSessionId
+                                            ].startDate
+                                          ).toLocaleString()
+                                        : ""
+                                    }
                                   />
-                                  <TimePicker
-                                    value={selectedTimes[session.deviceBillingSessionId]?.startTime}
-                                    onChange={(time) => handleTimeChange(time, session.deviceBillingSessionId, 'startTime')}
-                                    disableClock={true}
-                                    className='form-control text-left editable mb-1' 
-                                    style={{height:'30px'}} 
+                                )}
+                              </div>
+                            </div>
+                            <div className="form-group row">
+                              <label
+                                htmlFor="enddate"
+                                className="col-sm-4 col-form-label"
+                              >
+                                Session End
+                              </label>
+                              <div className="col-sm-8 text-left">
+                                {editingSessionId ===
+                                session.deviceBillingSessionId ? (
+                                  <>
+                                    <ReactDatePicker
+                                      selected={
+                                        selectedDates[
+                                          session.deviceBillingSessionId
+                                        ]?.endDate
+                                      }
+                                      onChange={(date) =>
+                                        handleDateChange(
+                                          date,
+                                          session.deviceBillingSessionId,
+                                          "endDate"
+                                        )
+                                      }
+                                      className="form-control text-left editable mb-1"
+                                      placeholderText="Select date"
+                                      dateFormat="dd MMM yyyy"
+                                      style={{ height: "30px" }}
+                                    />
+
+                                    <TimePicker
+                                      value={
+                                        selectedTimes[
+                                          session.deviceBillingSessionId
+                                        ]?.endTime
+                                      }
+                                      onChange={(time) =>
+                                        handleTimeChange(
+                                          time,
+                                          session.deviceBillingSessionId,
+                                          "endTime"
+                                        )
+                                      }
+                                      disableClock={true}
+                                      className="form-control text-left editable mb-1"
+                                      style={{ height: "30px" }}
+                                    />
+                                  </>
+                                ) : (
+                                  <input
+                                    type="text"
+                                    style={{ height: "30px" }}
+                                    className="form-control text-center disabled"
+                                    disabled
+                                    value={
+                                      selectedDates[
+                                        session.deviceBillingSessionId
+                                      ]?.endDate
+                                        ? new Date(
+                                            selectedDates[
+                                              session.deviceBillingSessionId
+                                            ].endDate
+                                          ).toLocaleString()
+                                        : ""
+                                    }
                                   />
-                                </> :
-                                <input type='text' style={{height:'30px'}}  className='form-control text-center disabled' disabled value={selectedDates[session.deviceBillingSessionId]?.startDate ? new Date(selectedDates[session.deviceBillingSessionId].startDate).toLocaleString() : ''}/>
-                              }
+                                )}
+                              </div>
                             </div>
-                          </div>
-                          <div className='form-group row'>
-                            <label htmlFor='enddate' className='col-sm-4 col-form-label'>Session End</label>
-                            <div className='col-sm-8 text-left'>
-                              {editingSessionId === session.deviceBillingSessionId ?
-                                <>
-                                  <ReactDatePicker
-                                    selected={selectedDates[session.deviceBillingSessionId]?.endDate}
-                                    onChange={(date) => handleDateChange(date, session.deviceBillingSessionId, 'endDate')}
-                                    className='form-control text-left editable mb-1'
-                                    placeholderText='Select date'
-                                    dateFormat='dd MMM yyyy'
-                                    style={{height:'30px'}} 
+
+                            <>
+                              <div className="form-group row">
+                                <label
+                                  htmlFor="units"
+                                  className="col-sm-4 col-form-label"
+                                >
+                                  Units kW
+                                </label>
+                                <div className="col-sm-8">
+                                  <input
+                                    type="text"
+                                    style={{ height: "30px" }}
+                                    className={`form-control text-center ${
+                                      editingSessionId ===
+                                      session.deviceBillingSessionId
+                                        ? "editable"
+                                        : "disabled"
+                                    }`}
+                                    id="units"
+                                    placeholder="Enter units"
+                                    disabled={
+                                      editingSessionId !==
+                                      session.deviceBillingSessionId
+                                    }
+                                    value={session.totalConsumption_Kwh}
                                   />
-                                  
-                                  <TimePicker
-                                    value={selectedTimes[session.deviceBillingSessionId]?.endTime}
-                                    onChange={(time) => handleTimeChange(time, session.deviceBillingSessionId, 'endTime')}
-                                    disableClock={true}
-                                    className='form-control text-left editable mb-1'
-                                    style={{height:'30px'}} 
+                                </div>
+                              </div>
+                              <div className="form-group row mb-1">
+                                <label
+                                  htmlFor="amount"
+                                  className="col-sm-4 col-form-label"
+                                >
+                                  Bill Amount
+                                </label>
+                                <div className="col-sm-8">
+                                  <input
+                                    type="text"
+                                    style={{ height: "30px" }}
+                                    className={`form-control text-center ${
+                                      editingSessionId ===
+                                      session.deviceBillingSessionId
+                                        ? "editable"
+                                        : "disabled"
+                                    }`}
+                                    id="amount"
+                                    placeholder="Enter amount"
+                                    disabled={
+                                      editingSessionId !==
+                                      session.deviceBillingSessionId
+                                    }
+                                    value={session.totalAmountDue}
                                   />
-                                </> :
-                                <input type='text'style={{height:'30px'}}  className='form-control text-center disabled' disabled value={selectedDates[session.deviceBillingSessionId]?.endDate ? new Date(selectedDates[session.deviceBillingSessionId].endDate).toLocaleString() : ''}/>
-                              }
-                            </div>
+                                </div>
+                              </div>
+                            </>
+                     
+                            {session.tariffChanges[0].length > 1 && (
+                              <>
+                                        <hr />
+                                {session.tariffChanges[0].map((t) => (
+                                  <div>
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "start",
+                                          gap: "10px",
+                                          alignItems: "center",
+                                        }}
+                                      >
+                                        <p>Start Date:</p>
+                                        <p>{t.StartDate}</p>
+                                      </div>
+
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "start",
+                                          gap: "10px",
+                                          alignItems: "center",
+                                        }}
+                                      >
+                                        <p>End Date:</p>
+                                        <p>{t.EndDate}</p>
+                                      </div>
+                                    </div>
+
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "start",
+                                        gap: "10px",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      <p>TariffRenewalDate:</p>
+                                      <p>{t.TariffRenewalDate}</p>
+                                    </div>
+
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "start",
+                                        gap: "10px",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      <p>NoOfDays:</p>
+                                      <p>{t.NoOfDays}</p>
+                                    </div>
+
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "start",
+                                        gap: "10px",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      <p>Kwh:</p>
+                                      <p>{t.Kwh}</p>
+                                    </div>
+
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "start",
+                                        gap: "10px",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      <p>Cost:</p>
+                                      <p>{t.Cost}</p>
+                                    </div>
+                                    
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "start",
+                                        gap: "10px",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      <p>Tax:</p>
+                                      <p>{t.Tax}</p>
+                                    </div>
+
+                                  </div>
+                                ))}
+                                       <hr />
+                              </>
+                            )}
+                  
+
+                            {session.isEditable ? (
+                              <div className="d-flex justify-content-end">
+                                <button
+                                  type="button"
+                                  style={{ width: "80px", marginRight: "20px" }}
+                                  className={`btn btn-sm custom-button btn-${
+                                    editingSessionId ===
+                                    session.deviceBillingSessionId
+                                      ? "success"
+                                      : "primary"
+                                  } btn-edit `}
+                                  onClick={
+                                    editingSessionId ===
+                                    session.deviceBillingSessionId
+                                      ? (e) =>
+                                          saveEditHandler(
+                                            e,
+                                            session.deviceBillingSessionId
+                                          )
+                                      : () =>
+                                          handleEditChange(
+                                            session.deviceBillingSessionId
+                                          )
+                                  }
+                                >
+                                  {editingSessionId ===
+                                  session.deviceBillingSessionId
+                                    ? "Save"
+                                    : "Edit"}
+                                </button>
+                              </div>
+                            ) : (
+                              ""
+                            )}
                           </div>
-                          <div className='form-group row'>
-                            <label htmlFor='units' className='col-sm-4 col-form-label'>Units kW</label>
-                            <div className='col-sm-8'>
-                              <input type='text' style={{height:'30px'}} className={`form-control text-center ${editingSessionId === session.deviceBillingSessionId ? 'editable' : 'disabled'}`} id='units' placeholder='Enter units' disabled={editingSessionId !== session.deviceBillingSessionId} value={session.totalConsumption_Kwh} />
-                            </div>
-                          </div>
-                          <div className='form-group row mb-1'>
-                            <label htmlFor='amount' className='col-sm-4 col-form-label'>Bill Amount</label>
-                            <div className='col-sm-8'>
-                              <input type='text' style={{height:'30px'}}  className={`form-control text-center ${editingSessionId === session.deviceBillingSessionId ? 'editable' : 'disabled'}`} id='amount' placeholder='Enter amount' disabled={editingSessionId !== session.deviceBillingSessionId} value={session.totalAmountDue} />
-                            </div>
-                          </div>
-                          {session.isEditable ? (
-                            <div className='d-flex justify-content-end'>
-                              <button type='button' style={{ width: '80px', marginRight: '20px' }} className={`btn btn-sm custom-button btn-${editingSessionId === session.deviceBillingSessionId ? 'success' : 'primary'} btn-edit `} onClick={editingSessionId === session.deviceBillingSessionId ? (e) => saveEditHandler(e, session.deviceBillingSessionId) : () => handleEditChange(session.deviceBillingSessionId)}>
-                                {editingSessionId === session.deviceBillingSessionId ? 'Save' : 'Edit'}
-                              </button>
-                            </div>
-                          ) : ''}
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </>
             )}
           </div>
