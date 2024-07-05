@@ -40,6 +40,8 @@ const Home = () => {
 
   useEffect(() => {
     if (selectedDevice) {
+
+
       const deviceId = selectedDevice.id;
       loadCurrentBillingSessionInfoByDeviceId(deviceId);
     }
