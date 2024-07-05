@@ -70,28 +70,28 @@ function Today() {
     setIsSearchLoading(false);
   };
 
-  useEffect(() => {
-    if (selectedDevice) {
-      const deviceId = selectedDevice.id;
-      loadCurrentBillingSessionInfoByDeviceId(deviceId);
-    }
-  }, [selectedDevice]);
+  // useEffect(() => {
+  //   if (selectedDevice) {
+  //     const deviceId = selectedDevice.id;
+  //     loadCurrentBillingSessionInfoByDeviceId(deviceId);
+  //   }
+  // }, [selectedDevice]);
 
-  const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
-    const result = await getBillingSessionNameCurrentByDeviceId(deviceId);
-    const billingSessionInfo = result.data;
-    console.log('Current-BillingSession-Info-By-DeviceId', billingSessionInfo);
+  // const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
+  //   const result = await getBillingSessionNameCurrentByDeviceId(deviceId);
+  //   const billingSessionInfo = result.data;
+  //   console.log('Current-BillingSession-Info-By-DeviceId', billingSessionInfo);
 
-    if (billingSessionInfo && billingSessionInfo.data && billingSessionInfo.data.length > 0) {
-      const session = billingSessionInfo.data[0];
-      if (session.startDate) {
-        setSessionDate(new Date(session.startDate).toLocaleString());
-      }
-      if (session.numberOfDays) {
-        setNumberOfDays(session.daysElapsed);
-      }
-    }
-  };
+  //   if (billingSessionInfo && billingSessionInfo.data && billingSessionInfo.data.length > 0) {
+  //     const session = billingSessionInfo.data[0];
+  //     if (session.startDate) {
+  //       setSessionDate(new Date(session.startDate).toLocaleString());
+  //     }
+  //     if (session.numberOfDays) {
+  //       setNumberOfDays(session.daysElapsed);
+  //     }
+  //   }
+  // };
 
   return (
     <div className='home'>
@@ -108,10 +108,10 @@ function Today() {
         </div>
       </div>
       <div className='body'>
-        <div className="session-name">
+        {/* <div className="session-name">
           <h6>Session Date :<b> {sessionDate}</b></h6>
           <p>Days Elapsed : <b>{numberOfDays}</b></p>
-        </div>
+        </div> */}
         <div className='date'>
           <div className='picker'>
             <div>
