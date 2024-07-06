@@ -6,11 +6,11 @@ import { useSelector } from 'react-redux';
 import { getEngergyUsageNow } from '../../action/device';
 import DeviceChart3p from './DeviceChart';
 import { ThreeDots } from 'react-loader-spinner';
-import { getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession';
-import { useSessionDate } from '../../context/SessionDateContext';
+// import { getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession';
+// import { useSessionDate } from '../../context/SessionDateContext';
 
 const Home = () => {
-  const { sessionDate, setSessionDate, numberOfDays, setNumberOfDays } = useSessionDate();
+  // const { sessionDate, setSessionDate, numberOfDays, setNumberOfDays } = useSessionDate();
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
   const [loading, setLoading] = useState(null);
@@ -38,30 +38,30 @@ const Home = () => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    if (selectedDevice) {
+  // useEffect(() => {
+  //   if (selectedDevice) {
 
 
-      const deviceId = selectedDevice.id;
-      loadCurrentBillingSessionInfoByDeviceId(deviceId);
-    }
-  }, [selectedDevice]);
+  //     const deviceId = selectedDevice.id;
+  //     loadCurrentBillingSessionInfoByDeviceId(deviceId);
+  //   }
+  // }, [selectedDevice]);
 
-  const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
-    const result = await getBillingSessionNameCurrentByDeviceId(deviceId);
-    const billingSessionInfo = result.data;
-    console.log('Current-BillingSession-Info-By-DeviceId', billingSessionInfo);
+  // const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
+  //   const result = await getBillingSessionNameCurrentByDeviceId(deviceId);
+  //   const billingSessionInfo = result.data;
+  //   console.log('Current-BillingSession-Info-By-DeviceId', billingSessionInfo);
 
-    if (billingSessionInfo && billingSessionInfo.data && billingSessionInfo.data.length > 0) {
-      const session = billingSessionInfo.data[0];
-      if (session.startDate) {
-        setSessionDate(new Date(session.startDate).toLocaleString());
-      }
-      if (session.numberOfDays) {
-        setNumberOfDays(session.daysElapsed);
-      }
-    }
-  };
+  //   if (billingSessionInfo && billingSessionInfo.data && billingSessionInfo.data.length > 0) {
+  //     const session = billingSessionInfo.data[0];
+  //     if (session.startDate) {
+  //       setSessionDate(new Date(session.startDate).toLocaleString());
+  //     }
+  //     if (session.numberOfDays) {
+  //       setNumberOfDays(session.daysElapsed);
+  //     }
+  //   }
+  // };
 
   const [devices, setDevices] = useState([]);
 
@@ -72,10 +72,10 @@ const Home = () => {
     <div className="home">
       <Menu className="nav-bar" />
       <div className="body">
-        <div className="session-name">
+        {/* <div className="session-name">
           <h6>Session Date :<b> {sessionDate}</b></h6>
           <p>Days Elapsed : <b>{numberOfDays}</b></p>
-        </div>
+        </div> */}
         <div className="container">
           {loading ? (
             <div>

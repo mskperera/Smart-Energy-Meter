@@ -8,15 +8,15 @@ import 'react-datepicker/dist/react-datepicker.css';
 import DeviceChart from './DeviceChart';
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
 import moment from 'moment';
-import { useSessionDate } from '../../context/SessionDateContext';
+// import { useSessionDate } from '../../context/SessionDateContext';
 import { ThreeDots } from 'react-loader-spinner';
-import { getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession';
+// import { getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession';
 
 function Today() {
   const [activeTab, setActiveTab] = useState('Now');
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
   
-  const { sessionDate, setSessionDate, numberOfDays, setNumberOfDays } = useSessionDate();
+  // const { sessionDate, setSessionDate, numberOfDays, setNumberOfDays } = useSessionDate();
 
   const [startDate, setStartDate] = useState(null);
   const [isSearchLoading, setIsSearchLoading] = useState(false);
