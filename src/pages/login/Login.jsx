@@ -36,7 +36,7 @@ function Login() {
     
     setTimeout(() => {
       setLoading(false);
-    }, 2500); 
+    }, 2600); 
   }, []);
 
   const handleLogin = async (e) => {

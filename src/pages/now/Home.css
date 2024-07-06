@@ -175,9 +175,9 @@
 }
 
 
-.section{
+/* .section{
     margin-top: -60px;
-}
+} */
 
 .section div{
     width: 100%;
@@ -314,7 +314,7 @@
 }
 
 .section-status{
-    margin-top: 30px;
+    margin-top: -20px;
     margin-bottom: 30px;
 }
 
@@ -506,7 +506,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: -20px;
+    margin-top: 0px;
   }
 
 .line-type{
@@ -896,13 +896,13 @@
      }
 
      .section-status{
-        margin-top: 40px;
+        margin-top: -40px;
         margin-left: 50px;
         width: fit-content;
     }   
 
      .budget-values{
-        margin-top: -40px;
+        margin-top: 0px;
     }
 }
 
@@ -1101,19 +1101,17 @@
         margin-left: 0px;
     
     }
-    .session-name{
+    /* .session-name{
         margin-top: 30px;
-        /* border: 2px solid #000000; */
+       
         width: fit-content;
-        /* margin-bottom: -10px; */
-        /* padding: 0px 0px 0px 5px; */
-        /* border-radius: 5px; */
-    }
+       
+    } */
 
-    .session-name h6,p{
+    /* .session-name h6,p{
         margin-top: 0px;  
         margin-left: 0px;
-    }
+    } */
 
     .progress{
         width: 100%;
@@ -1153,13 +1151,9 @@
         align-items: center;
         flex-wrap: wrap;
     }
-    .section-status{
-        margin-top: 10px;
-    }
-
 
     .section-status{
-        margin-top: 80px;
+        margin-top: 40px;
         margin-left: 50px;
         width: fit-content;
     }
@@ -1179,7 +1173,11 @@
      }    
 
      .budget-values{
-        margin-top: -40px;
+        margin-top: 0px;
+    }
+
+    .line-values{
+        margin-top: -20px;
     }
 }
 
@@ -1189,10 +1187,22 @@
         margin-left: 50px;
         width: fit-content;
     }
-
-    .budget-values{
-        margin-top: -30px;
+    .section{
+        margin-top: 0px;
     }
+    .section-status{
+        margin-top: 0px;
+        margin-bottom: 10px;
+    } 
+    
+.section-status h6{
+    margin-top: -45px;
+    margin-bottom: 15px;
+}  
+
+.budget-values{
+    margin-top: 0px;
+   }
 }
 
 
@@ -1238,17 +1248,17 @@
       
       }
 
-      .session-name{
+      /* .session-name{
         margin-top: 30px;
         margin-left: 40px;
-    }
+    } */
 
-    .session-name h6,p{
+    /* .session-name h6,p{
         margin-top: 0px;  
         margin-left: 0px;
         font-size: 15px;
         width: max-content;
-    }
+    } */
 
     .both{
         margin-top: -40px;
@@ -1315,13 +1325,13 @@
 
 @media screen and (max-width:550px){
     .section-status{
-        margin-top: 80px;
+        margin-top: 0px;
         margin-left: 50px;
         width: fit-content;
     }
 
     .budget-values{
-        margin-top: -15px;
+        margin-top: 15px;
     }
 }
 
@@ -1492,13 +1502,13 @@
         
     }
 
-    .session-name{
+    /* .session-name{
         margin-top: 30px;
     }
     .session-name{
         margin-top: 30px;
         margin-left: 0px;
-    }
+    } */
     
 .page-bottom-mode .mode1{
     width: 165px;
@@ -1587,25 +1597,18 @@
         align-items: center;
         flex-direction: column;
         width: 100%;
-        margin-top: -50px;
+        margin-top: 0px;
         margin-left: 0px;
      
     }
-
-    .budget-values{
-        margin-top: 40px;
-       }
 
        .line-values{
         width: 100%;
         display: flex;
         flex-direction: column;
-        margin-top: 0px;
+        /* margin-top: -15px; */
       } 
       
-      .section-status{
-        margin-top: 0px;
-      }
 
       .page-bottom-mode .mode1{
         width: 155px;
@@ -1635,20 +1638,27 @@
         flex-wrap: wrap;
     }
 
-    .section-status{
-        margin-top: 105px;
-        margin-bottom: 15px;
-    } 
+    /* .section-status{
+        margin-top: 90px;
+        margin-bottom: 20px;
+    }  */
 
-    .section-status h6{
-        margin-top: -46px;
-        margin-bottom: 15px;
-    } 
-
-    
-    .both{
-        margin-top: -40px;
+    .section{
+        margin-top: -45px;
     }
+    .section-status{
+        /* margin-top: -30px; */
+        margin-bottom: 30px;
+    } 
+    
+.section-status h6{
+    margin-top: -25px;
+    margin-bottom: 15px;
+}  
+
+.budget-values{
+    margin-top: 35px;
+   }
 
 }
 
@@ -1731,15 +1741,23 @@
             align-items: center;
             flex-wrap: wrap;
         }
+
+        .section{
+            margin-top: -40px;
+        }
         .section-status{
-            margin-top: 110px;
-            margin-bottom: 30px;
+            margin-top: 0px;
+            margin-bottom: 20px;
         } 
         
     .section-status h6{
-        margin-top: -47px;
+        margin-top: -26px;
         margin-bottom: 15px;
     }  
+
+    .budget-values{
+        margin-top: 35px;
+       }
     }
 
      @media screen and (max-width:400px){
@@ -1782,14 +1800,24 @@
         }
 
         .section-status{
-            margin-top: 110px;
-            margin-bottom: 30px;
+            margin-top: -35px;
+            margin-bottom: 15px;
         }  
         .section-status h6{
-            margin-top: -47px;
-            margin-bottom: 30px;
+            margin-top: -27px;
+            /* margin-bottom: 30px; */
         } 
+        .line-total{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 0px;
+            margin-left: 0px;
+            padding: 0px;
+            width: 100%;
         
+        }
         
      }
    
@@ -1831,6 +1859,11 @@
             align-items: center;
             flex-wrap: wrap;
         }
+
+        .section-status{
+            margin-top: -50px;
+            margin-bottom: 25px;
+        }
     }
 
     @media screen and (max-width: 375px) {
@@ -1871,4 +1904,9 @@
             align-items: center;
             flex-wrap: wrap;
         }
+
+        .section-status{
+            margin-top: -50px;
+            margin-bottom: 20px;
+        }  
     }
