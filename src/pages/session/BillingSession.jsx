@@ -119,6 +119,11 @@ function BillingSession() {
     setEditingSessionId(sessionId);
   };
 
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   return (
     <div className="home">
       <div className="body w-100">
@@ -344,110 +349,34 @@ function BillingSession() {
                               </div>
                             </>
                      
-                            {session.tariffChanges[0].length > 1 && (
-                              <>
-                                        <hr />
-                                {session.tariffChanges[0].map((t) => (
-                                  <div>
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        justifyContent: "space-between",
-
-                                        alignItems: "center",
-                                      }}
-                                    >
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          justifyContent: "start",
-                                          gap: "10px",
-                                          alignItems: "center",
-                                        }}
-                                      >
-                                        <p>Start Date:</p>
-                                        <p>{t.StartDate}</p>
-                                      </div>
-
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          justifyContent: "start",
-                                          gap: "10px",
-                                          alignItems: "center",
-                                        }}
-                                      >
-                                        <p>End Date:</p>
-                                        <p>{t.EndDate}</p>
-                                      </div>
-                                    </div>
-
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        justifyContent: "start",
-                                        gap: "10px",
-                                        alignItems: "center",
-                                      }}
-                                    >
-                                      <p>TariffRenewalDate:</p>
-                                      <p>{t.TariffRenewalDate}</p>
-                                    </div>
-
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        justifyContent: "start",
-                                        gap: "10px",
-                                        alignItems: "center",
-                                      }}
-                                    >
-                                      <p>NoOfDays:</p>
-                                      <p>{t.NoOfDays}</p>
-                                    </div>
-
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        justifyContent: "start",
-                                        gap: "10px",
-                                        alignItems: "center",
-                                      }}
-                                    >
-                                      <p>Kwh:</p>
-                                      <p>{t.Kwh}</p>
-                                    </div>
-
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        justifyContent: "start",
-                                        gap: "10px",
-                                        alignItems: "center",
-                                      }}
-                                    >
-                                      <p>Cost:</p>
-                                      <p>{t.Cost}</p>
-                                    </div>
-                                    
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        justifyContent: "start",
-                                        gap: "10px",
-                                        alignItems: "center",
-                                      }}
-                                    >
-                                      <p>Tax:</p>
-                                      <p>{t.Tax}</p>
-                                    </div>
-
-                                  </div>
+                            <div className="table-responsive">
+                            <table className="table table-bordered">
+                              <thead>
+                                <tr>
+                                  <th>Start Date</th>
+                                  <th>End Date</th>
+                                  <th>Tariff Renewal Date</th>
+                                  <th>No Of Days</th>
+                                  <th>Kwh</th>
+                                  <th>Cost</th>
+                                  <th>Tax</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {session.tariffChanges[0].map((t, index) => (
+                                  <tr key={index}>
+                                    <td>{formatDate(t.StartDate)}</td>
+                                    <td>{formatDate(t.EndDate)}</td>
+                                    <td>{formatDate(t.TariffRenewalDate)}</td>
+                                    <td>{t.NoOfDays}</td>
+                                    <td>{t.Kwh}</td>
+                                    <td>{t.Cost}</td>
+                                    <td>{t.Tax}</td>
+                                  </tr>
                                 ))}
-                                       <hr />
-                              </>
-                            )}
-                  
+                              </tbody>
+                            </table>
+                          </div>
 
                             {session.isEditable ? (
                               <div className="d-flex justify-content-end">
