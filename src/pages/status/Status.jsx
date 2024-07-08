@@ -23,7 +23,7 @@ function Status() {
     const userId = JSON.parse(userData).userId;
     if (selectedDevice) {
       const deviceId = selectedDevice.id;
-      loadDeviceStatus(userId, deviceId);
+      loadDeviceStatus(userId, 0);
       setLoading(true);
     }
   }, [selectedDevice]);
@@ -73,18 +73,21 @@ function Status() {
               </tr>
             </thead>
             <tbody>
-              {deviceDetails ? (
-                <tr key={deviceDetails.deviceId}>
-                  <td>{deviceDetails.deviceId}</td>
-                  <td>{deviceDetails.deviceStatus}</td>
-                  {/* <td>{deviceDetails.lastRepondedDate}</td> */}
-                  <td>{formatDate(deviceDetails.lastRepondedDate_utc)}</td>
-                </tr>
-              ) : (
-                <tr>
-                  <td colSpan="3">No data available</td>
-                </tr>
-              )}
+              {deviceDetails && deviceDetails.map(d=>(
+ <tr key={d.deviceId}>
+ <td>{d.deviceId}</td>
+ <td>{d.deviceStatus}</td>
+ {/* <td>{deviceDetails.lastRepondedDate}</td> */}
+ <td>{formatDate(d.lastRepondedDate_utc)}</td>
+</tr>
+              )) 
+               
+              // ) : (
+              //   <tr>
+              //     <td colSpan="3">No data available</td>
+              //   </tr>
+              // )
+              }
             </tbody>
           </table>
           )  
