@@ -557,6 +557,7 @@ const payload = {
                   name="consumerCategoryId"
                   className="form-control"
                 >
+                  <option value="">Select Consumer Category</option>
                   {dropoptionsConsumerCatogery.map((d) => (
                     <option
                       key={d.consumerCategoryId}
@@ -582,6 +583,7 @@ const payload = {
                     name="ConsumerSubCategoryId"
                     className="form-control"
                   >
+                    <option value="">Select Consumer SubCategory</option>
                     {dropoptionsConsumerSubCatogery.length > 0 &&
                       dropoptionsConsumerSubCatogery.map((s) => (
                         <option
@@ -605,6 +607,7 @@ const payload = {
                   name="supplierId"
                   className="form-control "
                 >
+                  <option value="">Select Supplier</option>
                   {dropoptionsSupplier.map((r) => (
                     <option key={r.supplierId} value={r.supplierId}>
                       {r.supplierName}
