@@ -139,7 +139,7 @@ function Budget() {
             <div className='notification'>
                 <h4 className='d-flex align-items-center justify-content-center mb-1'>Device Preferences and Settings</h4>
                 <form className='need-validation' onSubmit={onSubmitHandler}>
-                    <h6 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h6>
+                    <h5 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h5>
 
                     <div className='form-group mb-1'>
                         <div className='form-group d-flex align-items-center me-3'>
@@ -161,7 +161,7 @@ function Budget() {
                                 onChange={(e) => {
                                     setBudgetedValues({...budgetedValues, budgetedKwh: e.target.value})
                                 }}
-                                style={{ width: '200px', height: '30px' }}
+                                style={{ width: 'auto', height: '30px' }}
                                 disabled={selectedRadio !== '1'}
                             />
                         </div>
@@ -183,14 +183,14 @@ function Budget() {
                                 placeholder='Rs'
                                 value={budgetedValues.budgetedCost}
                                 onChange={(e) => setBudgetedValues({...budgetedValues, budgetedCost: e.target.value})}
-                                style={{ width: '200px', height: '30px' }}
+                                style={{ width: 'auto', height: '30px' }}
                                 disabled={selectedRadio !== '2'}
                             />
                         </div>
                     </div>
 
-                    <div className='d-flex justify-content-end'>
-                        <button type='button' className="btn btn-sm custom-button  btn-cal mb-1" 
+                    <div className='d-flex justify-content-end' style={{marginRight:'56px'}}>
+                        <button type='button' className="btn btn-sm  btn-cal mb-1" 
                             onClick={async(e) => {
                                 e.preventDefault();
                                 const deviceId = selectedDevice.id;
