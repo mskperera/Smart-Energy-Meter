@@ -146,6 +146,7 @@ function UserRegister() {
                 <div className='form-group was-validated'>
                   <label htmlFor='userrole' className='form-label'>User Role</label>
                   <select onChange={handleRoleChange} required name='userrole' className='form-control' value={roleName || ''}>
+                  <option value="" disabled>Select User Role</option>
                     {drpUserRole.map((role) => (
                       <option key={role.RoleId} value={role.RoleName}>
                         {role.RoleName}

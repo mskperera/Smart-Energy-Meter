@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { addDevice, getDeviceByDeviceId, getDevices, updateDevice } from '../../action/device';
+import React, { useEffect, useState } from 'react';
+import { addDevice, getDeviceByDeviceId, updateDevice } from '../../action/device';
 import { Link, useParams } from 'react-router-dom';
 import swal from 'sweetalert';
 import { useSelector } from 'react-redux';
 import { getDrpDeviceType } from '../../action/dropdown';
-// import { set } from 'date-fns';
 import { ThreeDots } from 'react-loader-spinner';
 import { IoClose } from 'react-icons/io5';
 
-
 function DeviceRegister() {
-
   const { deviceRegId, saveType } = useParams();
 
   const [deviceNo, setDeviceNo] = useState('');
@@ -22,52 +19,42 @@ function DeviceRegister() {
   const [deviceType, setDeviceType] = useState('');
 
   const [dropDeviceType, setDropDeviceType] = useState([]);
-  const [device, setDevice] = useState('');
+  const [loading, setLoading] = useState(false);
 
-
-  const [loading, setLoading] = useState(null);
-
-  const [errorMessage, setErrorMessage] = useState('');
-
-  // const deviceNames = useSelector(state => state.device.dropDeviceList);
-  // const defaultSelectedDevice = deviceNames[0];
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
-  useEffect(() => {
-    setDevice(selectedDevice);
-  }, [selectedDevice]);
+  // useEffect(() => {
+  //   setDevice(selectedDevice);
+  // }, [selectedDevice]);
 
   useEffect(() => {
-    if (saveType === "U") {
-      loadDevices();
+    if (saveType === 'U') {
+      loadDevice();
       setLoading(true);
     }
     loadDrpDeviceType();
     setLoading(true);
-  }, []);
+  }, [saveType, deviceRegId]);
 
   const loadDrpDeviceType = async () => {
     const result = await getDrpDeviceType();
     setLoading(true);
-    console.log("result - drop", result.data);
     setDropDeviceType(result.data);
     setLoading(false);
-  }
+  };
 
-  const loadDevices = async () => {
+  const loadDevice = async () => {
     try {
       const result = await getDeviceByDeviceId(deviceRegId);
       setLoading(true);
       const device = result.data;
-      console.log("result data:", result);
-
       setDeviceNo(device.deviceNo || '');
       setHardwareVersion(device.hardwareVersion || '');
       setSerialNo(device.serialNo || '');
       setFirmwareVersion(device.firmwareVersion || '');
       setProduct(device.product || '');
       setChipId(device.chipId || '');
-      setDeviceType(device.deviceType || '');
+      setDeviceType(device.deviceTypeId || ''); 
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -75,7 +62,7 @@ function DeviceRegister() {
   };
 
   const [message, setMessage] = useState('');
-  // const [errormessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const onsubmitHandler = async (e) => {
     e.preventDefault();
@@ -94,7 +81,6 @@ function DeviceRegister() {
         deviceTypeId: deviceType,
       };
 
-      console.log('payload', payload);
       if (saveType === 'I') {
         const res = await addDevice(payload);
         setLoading(true);
@@ -102,7 +88,6 @@ function DeviceRegister() {
       } else if (saveType === 'U') {
         const res = await updateDevice(payload, deviceRegId);
         setLoading(true);
-        console.log('update res', res);
         handleResponse(res);
       }
     } catch (err) {
@@ -117,7 +102,7 @@ function DeviceRegister() {
       return;
     } else {
       setMessage(outputMessage);
-      swal('Added Successful', '', 'success').then(() => {
+      swal('Success', saveType === 'I' ? 'Device Added Successfully' : 'Device Updated Successfully', 'success').then(() => {
         window.location = '/management';
       });
     }
@@ -126,99 +111,99 @@ function DeviceRegister() {
   return (
     <div className='wrapper-register d-flex align-items-center justify-content-center w-100'>
       {loading ? (
-        // <p className='loading-message'>Loading please wait...</p>
-        <div  className="d-flex align-items-center justify-content-center">
+        <div className="d-flex align-items-center justify-content-center">
           <ThreeDots
-              height={100}
-              width={100}
-              color="#36A2EB"
-              ariaLabel="loading"
-              secondaryColor="#36A2EB"
-              strokeWidth={2}
-              strokeWidthSecondary={2}
-            />
-          </div>
+            height={100}
+            width={100}
+            color="#36A2EB"
+            ariaLabel="loading"
+            secondaryColor="#36A2EB"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+        </div>
       ) : (
-      <div className='register'>
+        <div className='register'>
           <div className="d-flex justify-content-end">
             <Link to="/management" className="button-close"><IoClose size={25} color='black'/></Link>
           </div>
-        {saveType === "I" ? (
-          <h2 className='d-flex align-items-center justify-content-center mb-2'>Device Registration</h2>
-        ) : (
-          <h2 className='d-flex align-items-center justify-content-center mb-2'>Update Device Details</h2>
-        )}
+          {saveType === 'I' ? (
+            <h2 className='d-flex align-items-center justify-content-center mb-2'>Device Registration</h2>
+          ) : (
+            <h2 className='d-flex align-items-center justify-content-center mb-2'>Update Device Details</h2>
+          )}
 
-        <form className='needs-validation' onSubmit={onsubmitHandler}>
-          <div className='row'>
-            <div className='mb-1'>
-              <div className='form-group was-validated'>
-                <label htmlFor='username' className='form-label'>
-                  Device No
-                </label>
-                <input type='text' className='form-control' value={deviceNo} onChange={(e) => setDeviceNo(e.target.value)} required />
-              </div>
+          <form className='needs-validation' onSubmit={onsubmitHandler}>
+            <div className='row'>
+              <div className='mb-1'>
+                <div className='form-group was-validated'>
+                  <label htmlFor='deviceNo' className='form-label'>
+                    Device No
+                  </label>
+                  <input type='text' className='form-control' value={deviceNo} onChange={(e) => setDeviceNo(e.target.value)} required />
+                </div>
 
-              <div className='form-group was-validated'>
-                <label htmlFor='firmwareVersion' className='form-label'>
-                  Firmware Version
-                </label>
-                <input type='text' className='form-control' value={firmwareVersion} onChange={(e) => setFirmwareVersion(e.target.value)} required />
-              </div>
+                <div className='form-group was-validated'>
+                  <label htmlFor='firmwareVersion' className='form-label'>
+                    Firmware Version
+                  </label>
+                  <input type='text' className='form-control' value={firmwareVersion} onChange={(e) => setFirmwareVersion(e.target.value)} required />
+                </div>
 
-              <div className='form-group was-validated'>
-                <label htmlFor='hardwareVersion' className='form-label'>
-                  Hardware Version
-                </label>
-                <input type='text' className='form-control' value={hardwareVersion} onChange={(e) => setHardwareVersion(e.target.value)} required />
-              </div>
+                <div className='form-group was-validated'>
+                  <label htmlFor='hardwareVersion' className='form-label'>
+                    Hardware Version
+                  </label>
+                  <input type='text' className='form-control' value={hardwareVersion} onChange={(e) => setHardwareVersion(e.target.value)} required />
+                </div>
 
-              <div className='form-group was-validated'>
-                <label htmlFor='product' className='form-label'>
-                  Product
-                </label>
-                <input type='text' className='form-control' value={product} onChange={(e) => setProduct(e.target.value)} required />
-              </div>
+                <div className='form-group was-validated'>
+                  <label htmlFor='product' className='form-label'>
+                    Product
+                  </label>
+                  <input type='text' className='form-control' value={product} onChange={(e) => setProduct(e.target.value)} required />
+                </div>
 
-              <div className='form-group was-validated'>
-                <label htmlFor='address' className='form-label'>
-                  Serial No
-                </label>
-                <input type='text' className='form-control' value={serialNo} onChange={(e) => setSerialNo(e.target.value)} required />
-              </div>
+                <div className='form-group was-validated'>
+                  <label htmlFor='serialNo' className='form-label'>
+                    Serial No
+                  </label>
+                  <input type='text' className='form-control' value={serialNo} onChange={(e) => setSerialNo(e.target.value)} required />
+                </div>
 
-              <div className='form-group was-validated'>
-                <label htmlFor='chipid' className='form-label'>
-                  Chip Id
-                </label>
-                <input type='text' className='form-control' value={chipId} onChange={(e) => setChipId(e.target.value)} required />
-              </div>
+                <div className='form-group was-validated'>
+                  <label htmlFor='chipId' className='form-label'>
+                    Chip Id
+                  </label>
+                  <input type='text' className='form-control' value={chipId} onChange={(e) => setChipId(e.target.value)} required />
+                </div>
 
-              <div className='form-group was-validated'>
-                <label htmlFor='devicetype' className='form-label'>
-                  Device Type
-                </label>
-                <select onChange={(e) => setDeviceType(e.target.value)} className='form-control' required
-                  name='deviceType'
-                  value={deviceType}
-                >
-                  {dropDeviceType.map((mode) => (
-                    <option key={mode.DeviceTypeId} value={mode.DeviceTypeId}>
-                      {mode.DeviceTypeName}
-                    </option>
-                  ))}
-                </select>
+                <div className='form-group was-validated'>
+                  <label htmlFor='deviceType' className='form-label'>
+                    Device Type
+                  </label>
+                  <select onChange={(e) => setDeviceType(e.target.value)} className='form-control' required
+                    name='deviceType'
+                    value={deviceType}
+                  >
+                    <option value='' disabled>Select Device Type</option>
+                    {dropDeviceType.map((mode) => (
+                      <option key={mode.DeviceTypeId} value={mode.DeviceTypeId}>
+                        {mode.DeviceTypeName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
 
-          <button type='submit' className='btn btn-primary w-100 mt-3'>
-            Save
-          </button>
-        </form>
-        {message && <div className="alert alert-success mt-2">{message}</div>}
-        {errorMessage && <div className="alert alert-danger mt-2">{errorMessage}</div>}
-      </div>
+            <button type='submit' className='btn btn-primary w-100 mt-3'>
+              Save
+            </button>
+          </form>
+          {message && <div className="alert alert-success mt-2">{message}</div>}
+          {errorMessage && <div className="alert alert-danger mt-2">{errorMessage}</div>}
+        </div>
       )}
     </div>
   );

@@ -161,6 +161,7 @@ function DeviceTab() {
                                 value={selectedMeasuringMode}
                                 className='form-control'
                             >
+                                <option value=''>Select Measuring Mode</option>
                                 {dropMeasuringMode.map((mode) => (
                                     <option key={mode.deviceMeasuringModeId} value={mode.deviceMeasuringModeId}>
                                         {mode.deviceMeasuringModeName}
