@@ -61,14 +61,27 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
   }
   
   .picker > div {
     margin-right: 10px; 
+    box-shadow: 0px 2px 1px -2px #333;
   }
   
   .btn-search {
     margin-left: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    width: 64px;
+    margin: 0.5px 6px;
+    text-decoration: none;
+    /* color: #0000c0; */
+    border-radius: 50px;
+    box-shadow: 0px 2px 5px -2px #333;
   }
 
 .date-custom{

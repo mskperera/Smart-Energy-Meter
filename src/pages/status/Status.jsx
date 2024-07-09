@@ -7,10 +7,9 @@ import { getDeviceStatus } from '../../action/device';
 import { ThreeDots } from 'react-loader-spinner';
 
 function Status() {
-  const [deviceDetails, setDeviceDetails] = useState(null); // Initialize as null
+  const [deviceDetails, setDeviceDetails] = useState([]); 
   const [device, setDevice] = useState('');
-
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
@@ -23,6 +22,7 @@ function Status() {
     const userId = JSON.parse(userData).userId;
     if (selectedDevice) {
       const deviceId = selectedDevice.id;
+      // const deviceId = 0;
       loadDeviceStatus(userId, 0);
       setLoading(true);
     }
@@ -30,19 +30,16 @@ function Status() {
 
   const loadDeviceStatus = async (userId, deviceId) => {
     const result = await getDeviceStatus(userId, deviceId);
-    setLoading(true);
     console.log('Result:', result);
-    const deviceDetail = result.data; 
-    setDeviceDetails(deviceDetail);
+    setDeviceDetails(result.data);
     setLoading(false);
   };
 
-
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const formattedDate = date.toLocaleDateString(); 
-    const formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Format the time part (HH:MM)
-    return `${formattedDate} ${formattedTime}`; 
+    const formattedDate = date.toLocaleDateString();
+    const formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return `${formattedDate} ${formattedTime}`;
   };
 
   return (
@@ -51,47 +48,44 @@ function Status() {
         <div className="rounded p-2">
           <h2 className='d-flex justify-content-center align-items-center'>Device Status</h2>
           {loading ? (
-            // <p className='loading-message'>Loading please wait...</p>
-            <div  className="d-flex align-items-center justify-content-center">
-          <ThreeDots
-              height={100}
-              width={100}
-              color="#36A2EB"
-              ariaLabel="loading"
-              secondaryColor="#36A2EB"
-              strokeWidth={2}
-              strokeWidthSecondary={2}
-            />
-          </div>
+            <div className="d-flex align-items-center justify-content-center">
+              <ThreeDots
+                height={100}
+                width={100}
+                color="#36A2EB"
+                ariaLabel="loading"
+                secondaryColor="#36A2EB"
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+              />
+            </div>
           ) : (
-          <table className="table table-hover rounded">
-            <thead className='table-dark'>
-              <tr>
-                <th>Device</th>
-                <th>Status</th>
-                <th>Last Responded</th>
-              </tr>
-            </thead>
-            <tbody>
-              {deviceDetails && deviceDetails.map(d=>(
- <tr key={d.deviceId}>
- <td>{d.deviceId}</td>
- <td>{d.deviceStatus}</td>
- {/* <td>{deviceDetails.lastRepondedDate}</td> */}
- <td>{formatDate(d.lastRepondedDate_utc)}</td>
-</tr>
-              )) 
-               
-              // ) : (
-              //   <tr>
-              //     <td colSpan="3">No data available</td>
-              //   </tr>
-              // )
-              }
-            </tbody>
-          </table>
-          )  
-          }
+            <table className="table table-hover rounded">
+              <thead className='table-dark'>
+                <tr>
+                  <th>Device ID</th>
+                  <th>Status</th>
+                  <th>Last Responded</th>
+                </tr>
+              </thead>
+              <tbody>
+                {deviceDetails &&
+                  deviceDetails.map((device) => (
+                    <tr key={device.deviceId}>
+                      <td>{device.deviceId}</td>
+                      <td>{device.deviceStatus}</td>
+                      <td>{formatDate(device.lastRepondedDate_utc)}</td>
+                    </tr>
+                  ))
+                // ) : (
+                //   <tr>
+                //     <td colSpan="3">No data available</td>
+                //   </tr>
+                // )
+                }
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
       <BottomNav className="bottombar" />

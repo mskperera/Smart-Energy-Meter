@@ -6,44 +6,49 @@ import Navbar from '../../components/navbar/Navbar';
 import { Link } from 'react-router-dom';
 import { deleteDevice, getDevices } from '../../action/device';
 import swal from 'sweetalert';
-import { useSelector } from 'react-redux';
 import { ThreeDots } from 'react-loader-spinner';
 
 function Management() {
-  const [deviceDetails, setDeviceDetails] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const [deviceDetails, setDeviceDetails] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    loadDevices();
     setLoading(true);
+    loadDevices();
   }, []);
 
   const loadDevices = async () => {
-    const result = await getDevices();
-    setLoading(true);
-    console.log('Result 222222222', result);
-    setDeviceDetails(result.data);
-    setLoading(false);
+    try {
+      const result = await getDevices();
+      setDeviceDetails(result.data || []);
+    } catch (error) {
+      console.error("Error loading devices:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const onDeleteDeviceHandler = async (deviceId) => {
     swal({
       title: "Are you sure?",
-      text: "Once deleted, You will not be able to recover this Device Details!",
+      text: "Once deleted, you will not be able to recover this Device Details!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
     }).then(async (willDelete) => {
       if (willDelete) {
-        const res = await deleteDevice(deviceId);
-        console.log(res);
-        const { responseStatus, outputMessage } = res.data.output;
-        if (responseStatus === "failed") {
-          console.log("exception:", outputMessage);
-        } else {
-          console.log("successful:", outputMessage);
-          swal("Success!", "Your Device Details have been deleted!", "success");
-          loadDevices();
+        try {
+          const res = await deleteDevice(deviceId);
+          const { responseStatus, outputMessage } = res.data.output;
+          if (responseStatus === "failed") {
+            console.log("exception:", outputMessage);
+          } else {
+            console.log("successful:", outputMessage);
+            swal("Success!", "Your Device Details have been deleted!", "success");
+            loadDevices();
+          }
+        } catch (error) {
+          console.error("Error deleting device:", error);
         }
       } else {
         swal("Device Details deletion has been cancelled!");
@@ -59,7 +64,6 @@ function Management() {
           <h2 className='d-flex justify-content-center align-items-center'>Device Management</h2>
           
           {loading ? (
-            // <p className="loading-message">Loading please wait...</p>
             <div className="d-flex align-items-center justify-content-center dots-animate">
               <ThreeDots
                 height={100}
@@ -80,10 +84,9 @@ function Management() {
                 <table className="table table-hover rounded">
                   <thead className='table-dark'>
                     <tr>
-                      {/* <th>Device ID</th> */}
                       <th>Device No</th>
                       <th>Firmware Version</th>
-                      <th>Hardware version</th>
+                      <th>Hardware Version</th>
                       <th>Product</th>
                       <th>Serial No</th>
                       <th>Chip Id</th>
@@ -92,10 +95,8 @@ function Management() {
                     </tr>
                   </thead>
                   <tbody>
-                    {deviceDetails && deviceDetails.map((device) => (
+                    {deviceDetails.map((device) => (
                       <tr key={device.deviceId}>
-                        {/* {JSON.stringify(deviceDetails)}  */}
-                        {/* <td>{device.deviceId}</td> */}
                         <td>{device.deviceNo}</td>
                         <td>{device.firmwareVersion}</td>
                         <td>{device.hardwareVersion}</td>
@@ -117,42 +118,42 @@ function Management() {
         </div>
 
         <div className='form-view'>
-        {deviceDetails && deviceDetails.map((device) => (
-          <div className='notification3' key={device.deviceId}>
-            <div className='bill-background1'>
-              <div className='bill-ground1 device-form-main'>
+          {deviceDetails.map((device) => (
+            <div className='notification3' key={device.deviceId}>
+              <div className='bill-background1'>
+                <div className='bill-ground1 device-form-main'>
                   <form className='needs-validation device-form'>
                     <div className='form-containerr'>
                       <div className='form-groupp form-group1'>
                         <div className='form-groupp'>
                           <label htmlFor='deviceNo' className='form-lablel'>Device No</label>
-                          <input type='text'style={{width:'90%'}} className='form-controll' required placeholder='deviceNo' value={device.deviceNo} disabled />
+                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='deviceNo' value={device.deviceNo || ''} disabled />
                         </div>
                         <div className='form-groupp'>
                           <label htmlFor='firmwareVersion' className='form-lablel'>Firmware Version</label>
-                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='firmwareVersion' value={device.firmwareVersion} disabled />
+                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='firmwareVersion' value={device.firmwareVersion || ''} disabled />
                         </div>
                         <div className='form-groupp'>
                           <label htmlFor='hardwareVersion' className='form-lablel'>Hardware Version</label>
-                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='hardwareVersion' value={device.hardwareVersion} disabled />
+                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='hardwareVersion' value={device.hardwareVersion || ''} disabled />
                         </div>
                         <div className='form-groupp'>
                           <label htmlFor='product' className='form-lablel'>Product</label>
-                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='product' value={device.product} disabled />
+                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='product' value={device.product || ''} disabled />
                         </div>
                       </div>
                       <div className='form-groupp form-group2'>
                         <div className='form-groupp'>
                           <label htmlFor='serialNo' className='form-lablel'>Serial No</label>
-                          <input type='text'style={{width:'90%'}} className='form-controll' required placeholder='serialNo' value={device.serialNo} disabled />
+                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='serialNo' value={device.serialNo || ''} disabled />
                         </div>
                         <div className='form-groupp'>
                           <label htmlFor='chipId' className='form-lablel'>Chip Id</label>
-                          <input type='text'style={{width:'90%'}} className='form-controll' required placeholder='chipId' value={device.chipId} disabled />
+                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='chipId' value={device.chipId || ''} disabled />
                         </div>
                         <div className='form-groupp'>
                           <label htmlFor='deviceTypeName' className='form-lablel'>Device Type</label>
-                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='deviceTypeName' value={device.deviceTypeName} disabled />
+                          <input type='text' style={{width:'90%'}} className='form-controll' required placeholder='deviceTypeName' value={device.deviceTypeName || ''} disabled />
                         </div>
                       </div>
                     </div>
@@ -165,7 +166,7 @@ function Management() {
                 </div>
               </div>
             </div>
-        ))}
+          ))}
         </div>
       </div>
       <BottomNav className="bottombar" />

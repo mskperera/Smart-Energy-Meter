@@ -189,28 +189,32 @@ function Budget() {
                         </div>
                     </div>
 
-                    <button type='button' className="btn btn-sm custom-button w-50 btn-cal mb-1" 
-                        onClick={async(e) => {
-                            e.preventDefault();
-                            const deviceId = selectedDevice.id;
+                    <div className='d-flex justify-content-end'>
+                        <button type='button' className="btn btn-sm custom-button  btn-cal mb-1" 
+                            onClick={async(e) => {
+                                e.preventDefault();
+                                const deviceId = selectedDevice.id;
 
-                            if (selectedRadio === '1') {
-                                const value = await handleCalculateInterdependentValue(deviceId, 1, budgetedValues.budgetedKwh);
-                                console.log('resultAAAA', value);
-                                setBudgetedValues({...budgetedValues, budgetedCost: value});
-                            }
+                                if (selectedRadio === '1') {
+                                    const value = await handleCalculateInterdependentValue(deviceId, 1, budgetedValues.budgetedKwh);
+                                    console.log('resultAAAA', value);
+                                    setBudgetedValues({...budgetedValues, budgetedCost: value});
+                                }
 
-                            if (selectedRadio === '2') {
-                                const value = await handleCalculateInterdependentValue(deviceId, 7, budgetedValues.budgetedCost);
-                                console.log('resultBBB', value);
-                                setBudgetedValues({...budgetedValues, budgetedKwh: value});
-                            }
-                        }}
-                    >
-                        Calculate
-                    </button>
+                                if (selectedRadio === '2') {
+                                    const value = await handleCalculateInterdependentValue(deviceId, 7, budgetedValues.budgetedCost);
+                                    console.log('resultBBB', value);
+                                    setBudgetedValues({...budgetedValues, budgetedKwh: value});
+                                }
+                            }}
+                        >
+                            Calculate
+                        </button>
+                    </div>
 
-                    <button type='submit' className='btn btn-primary w-100 mt-1'>Save</button>
+                    <div className='d-flex justify-content-center'>
+                        <button type='submit' className='btn btn-primary w-50 mt-1'>Save</button>
+                    </div>
                     {errormessage && <p className='error-message'>{errormessage}</p>}
                 </form>
             </div>

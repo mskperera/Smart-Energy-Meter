@@ -3,45 +3,40 @@ import './UserRegister.css';
 import { Link, useParams } from 'react-router-dom';
 import { addUser, getUserbyUserId, updateUser } from '../../action/user';
 import swal from 'sweetalert';
-
 import { ThreeDots } from 'react-loader-spinner';
 import { IoClose } from "react-icons/io5";
+import { getDrpUserRole } from '../../action/dropdown';
 
 function UserRegister() {
   
   const { userRegId, saveType } = useParams();
-  // const [userData, setUserData] = useState(null);
-  const [userName,setUserName] = useState('');
+  const [userName, setUserName] = useState('');
   const [userDisplayName, setUserDisplayName] = useState('');
-  const [userPassword,setUserPassword] = useState('');
+  const [userPassword, setUserPassword] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userMobile, setUserMobile] = useState('');
   const [userAddress, setUserAddress] = useState('');
   const [userBillAddress, setUserBillAddress] = useState('');
   const [userTel, setUserTel] = useState('');
-
-  const [loading,setLoading]=useState(null);
-
-  // const [load,setLoad]=useState(false);
+  const [drpUserRole, setDrpUserRole] = useState([]);
+  const [roleName, setRoleName] = useState('');
+  const [roleId, setRoleId] = useState('');
+  const [loading, setLoading] = useState(null);
+  const [message, setMessage] = useState('');
+  const [errormessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-
-    if(saveType==="U"){
-      loaduser();
-      setLoading(true);
+    loadDrpUserRole();
+    if(saveType === "U"){
+      loadUser();
     }
+  }, [saveType, userRegId]);
 
-   
-  }, []);
-
-  const loaduser=async()=>{
-    
-    console.log("loaduser");
-    const result=await getUserbyUserId(userRegId);
+  const loadUser = async () => {
     setLoading(true);
-    //setUserData(result.data);
-    const user =result.data;
-    console.log("result data:",user);
+    const result = await getUserbyUserId(userRegId);
+    const user = result.data;
+    console.log("user-select", user);
     setUserName(user.userName);
     setUserPassword(user.password);
     setUserEmail(user.email);
@@ -50,191 +45,135 @@ function UserRegister() {
     setUserAddress(user.siteAddress);
     setUserBillAddress(user.billingAddress);
     setUserTel(user.tel);
+    setRoleName(user.roleName);
+    setRoleId(user.roleId);
     setLoading(false);
-   }
+  }
 
-
-   const [message,setMessage]=useState('');
-   const [errormessage,setErrorMessage]=useState('');
-
-   const onsubmitHandler=async(e)=>{
+  const onsubmitHandler = async (e) => {
     e.preventDefault(); 
-    try{
-
+    try {
       setErrorMessage('');
       setMessage('');
-      console.log("run");
       const payload = {
-        userRoleId:1,
-        userName: userName,
+        roleName,
+        userRoleId: roleId,
+        userName,
         password: userPassword,
         isActive: true,
         email: userEmail,
         mobileNo: userMobile,
-        siteAddress: userAddress,
-        billingAddress:"-",
-        tel:userTel,
+        siteAddress: '-',
+        billingAddress: "-",
+        tel: userTel,
         profilePic: "https://example.com/profiles/john_doe.jpg",
         displayName: userDisplayName,
         gmt_Offset: "+05:30"
-        
       };
-    console.log("payload:",payload);
 
-    if(saveType==="I"){
-      const res = await addUser(payload);
+      let res;
+      if(saveType === "I"){
+        res = await addUser(payload);
+      } else if(saveType === "U"){
+        res = await updateUser(payload, userRegId);
+      }
+
       setLoading(true);
-      console.log(res);
-
       const { responseStatus, outputMessage } = res.data;
       if (responseStatus === "failed") {
-        setErrorMessage(outputMessage)
+        setErrorMessage(outputMessage);
         return;
-        // console.log("exception:", outputMessage);
       }
-    
-      // console.log("successful:", outputMessage);
       setMessage(outputMessage);
-      swal("User Added Successfully", "", "success").then(() => {
+      swal(saveType === "I" ? "User Added Successfully" : "User Updated Successfully", "", "success").then(() => {
         window.location = "/userlist";
       });
-    }
-
-   else if(saveType==="U"){
-      const res = await updateUser(payload,userRegId);
-      setLoading(true);
-      console.log(res);
-
-      const { responseStatus, outputMessage } = res.data;
-      if (responseStatus === "failed") {
-        setErrorMessage(outputMessage)
-        return;
-        // console.log("exception:", outputMessage);
-      }
-    
-      // console.log("successful:", outputMessage);
-      setMessage(outputMessage);
-      swal("User Updated Successfully", "", "success").then(() => {
-        window.location = "/userlist";
-      });
-    }
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
     }
+  }
+
+  const loadDrpUserRole = async () => {
+    const result = await getDrpUserRole();
+    setDrpUserRole(result.data);
+  };
+
+  const handleRoleChange = (e) => {
+    const selectedRole = drpUserRole.find(role => role.RoleName === e.target.value);
+    if (selectedRole) {
+      setRoleName(selectedRole.RoleName);
+      setRoleId(selectedRole.RoleId);
     }
+  };
 
-    // const handleResponse = (res) => {
-    //   const { responseStatus, outputMessage } = res.data;
-    //   if (responseStatus === 'error') {
-    //     setErrorMessage(outputMessage);
-    //     return;
-    //   } else {
-    //     setMessage(outputMessage);
-    //     swal('Added Successful', '', 'success').then(() => {
-    //       window.location = '/userlist';
-    //     });
-    //   }
-    // };
-
- 
   return (
     <div className='wrapper-register d-flex align-items-center justify-content-center w-100'>
-
-    {loading ? (
-      // <p className="loading-message">Loading please wait...</p>
-      <div  className="d-flex align-items-center justify-content-center">
+      {loading ? (
+        <div className="d-flex align-items-center justify-content-center">
           <ThreeDots
-              height={100}
-              width={100}
-              color="#36A2EB"
-              ariaLabel="loading"
-              secondaryColor="#36A2EB"
-              strokeWidth={2}
-              strokeWidthSecondary={2}
-            />
-          </div>
-    ) : (
-
-      <div className='register'>
+            height={100}
+            width={100}
+            color="#36A2EB"
+            ariaLabel="loading"
+            secondaryColor="#36A2EB"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+        </div>
+      ) : (
+        <div className='register'>
           <div className="d-flex justify-content-end">
-            <Link to="/userlist" className="button-close"><IoClose size={25} color='black'className='button-close'/></Link>
+            <Link to="/userlist" className="button-close"><IoClose size={25} color='black' className='button-close' /></Link>
           </div>
-     {saveType==="I" ?  <h2 className='d-flex align-items-center justify-content-center mb-2'>User Registration</h2> : <h2 className='d-flex align-items-center justify-content-center mb-2'>Update User Details</h2>}
-        <form className='needs-validation' onSubmit={onsubmitHandler}>
-          <div className='row'>
-            {/* First Column */}
-            {/* {JSON.stringify(userName)} */}
-            <div className='col-md-6 mb-1'>
-              <div className='form-group was-validated'>
-                <label htmlFor='username' className='form-label'>
-                  Username
-                </label>
-                <input type='text' className='form-control' value={userName || ''} onChange={(e)=>{setUserName(e.target.value)}} required />
+          <h2 className='d-flex align-items-center justify-content-center mb-2'>
+            {saveType === "I" ? "User Registration" : "Update User Details"}
+          </h2>
+          <form className='needs-validation' onSubmit={onsubmitHandler}>
+            <div className='row'>
+              <div className='col-md-6 mb-1'>
+                <div className='form-group was-validated'>
+                  <label htmlFor='username' className='form-label'>Username</label>
+                  <input type='text' className='form-control' value={userName || ''} onChange={(e) => setUserName(e.target.value)} required />
+                </div>
+                <div className='form-group was-validated'>
+                  <label htmlFor='password' className='form-label'>Password</label>
+                  <input type='password' className='form-control' value={userPassword || ''} onChange={(e) => setUserPassword(e.target.value)} required />
+                </div>
+                <div className='form-group was-validated'>
+                  <label htmlFor='email' className='form-label'>Email</label>
+                  <input type='email' className='form-control' value={userEmail || ''} onChange={(e) => setUserEmail(e.target.value)} required />
+                </div>
+                <div className='form-group was-validated'>
+                  <label htmlFor='userrole' className='form-label'>User Role</label>
+                  <select onChange={handleRoleChange} required name='userrole' className='form-control' value={roleName || ''}>
+                    {drpUserRole.map((role) => (
+                      <option key={role.RoleId} value={role.RoleName}>
+                        {role.RoleName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
-
-              <div className='form-group was-validated'>
-                <label htmlFor='password' className='form-label'>
-                  Password
-                </label>
-                <input type='password' className='form-control' value={userPassword || ''} onChange={(e)=>{setUserPassword(e.target.value)}} required />
-              </div>
-
-              <div className='form-group was-validated'>
-                <label htmlFor='email' className='form-label'>
-                  Email
-                </label>
-                <input type='email' className='form-control' value={userEmail || ''} onChange={(e)=>{setUserEmail(e.target.value)}} required />
-              </div>
-
-              <div className='form-group was-validated'>
-                <label htmlFor='displayname' className='form-label'>
-                  Display Name
-                </label>
-                <input type='text' className='form-control' value={userDisplayName || ''} onChange={(e)=>{setUserDisplayName(e.target.value)}} required />
+              <div className='col-md-6 mb-1'>
+                <div className='form-group was-validated'>
+                  <label htmlFor='displayname' className='form-label'>Display Name</label>
+                  <input type='text' className='form-control' value={userDisplayName || ''} onChange={(e) => setUserDisplayName(e.target.value)} required />
+                </div>
+                <div className='form-group was-validated'>
+                  <label htmlFor='mobile' className='form-label'>Mobile</label>
+                  <input type='text' className='form-control' value={userMobile || ''} onChange={(e) => setUserMobile(e.target.value)} required />
+                </div>
+                <div className='form-group was-validated'>
+                  <label htmlFor='tel' className='form-label'>Tel</label>
+                  <input type='text' className='form-control' value={userTel || ''} onChange={(e) => setUserTel(e.target.value)} required />
+                </div>
               </div>
             </div>
-
-            {/* Second Column */}
-            <div className='col-md-6 mb-1'>
-              <div className='form-group was-validated'>
-                <label htmlFor='address' className='form-label'>
-                  Address
-                </label>
-            <input type='text' className='form-control' value={userAddress || ''} onChange={(e)=>{setUserAddress(e.target.value)}}required />
-              </div>
-
-              {/* <div className='form-group was-validated'>
-                <label htmlFor='billingaddress' className='form-label'>
-                  Billing Address
-                </label>
-                <input type='text' className='form-control' value={userBillAddress || ''} onChange={(e)=>{setUserBillAddress(e.target.value)}} required />
-              </div> */}
-
-              <div className='form-group was-validated'>
-                <label htmlFor='mobile' className='form-label'>
-                  Mobile
-                </label>
-                <input type='text' className='form-control' value={userMobile || ''} onChange={(e)=>{setUserMobile(e.target.value)}} required />
-              </div>
-
-              <div className='form-group was-validated'>
-                <label htmlFor='tel' className='form-label'>
-                  Tel
-                </label>
-                <input type='text' className='form-control' value={userTel || ''} onChange={(e)=>setUserTel(e.target.value)} required />
-              </div>
-            </div>
-          </div>
-
-          <button type='submit' className='btn btn-primary w-100 mt-3'>
-            Save
-          </button>
-            {/* {message && <p>{message}</p>} */}
+            <button type='submit' className='btn btn-primary w-100 mt-3'>Save</button>
             {errormessage && <p>{errormessage}</p>}
-        </form>
-      </div>
-    )}
+          </form>
+        </div>
+      )}
     </div>
   );
 }

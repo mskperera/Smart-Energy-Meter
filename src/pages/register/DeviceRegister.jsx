@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import swal from 'sweetalert';
 import { useSelector } from 'react-redux';
 import { getDrpDeviceType } from '../../action/dropdown';
-import { set } from 'date-fns';
+// import { set } from 'date-fns';
 import { ThreeDots } from 'react-loader-spinner';
 import { IoClose } from 'react-icons/io5';
 
