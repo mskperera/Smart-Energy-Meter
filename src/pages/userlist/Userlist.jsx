@@ -101,7 +101,7 @@ function Userlist() {
               <th>Password</th>
               <th>Mobile</th>
               <th>Tel</th>
-              <th>Address</th>
+              {/* <th>Address</th> */}
               <th>Email</th>
               {/* <th>Billing Address</th> */}
               <th>Edit|Delete</th>
@@ -117,7 +117,7 @@ function Userlist() {
                     <td>{user.password}</td>
                     <td>{user.mobileNo}</td>
                     <td>{user.tel}</td>
-                    <td>{user.siteAddress}</td>
+                    {/* <td>{user.siteAddress}</td> */}
                     <td>{user.email}</td>
                     {/* <td>{user.billingAddress}</td> */}
                     <td>
