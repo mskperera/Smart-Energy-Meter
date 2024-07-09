@@ -1,31 +1,24 @@
 .notification2{
   width: 650px;
-  padding: 15px;
+  padding: 5px;
   height: min-content;
   border-radius: 5px;
-  /* background-color: #d1dde8; */
-  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); */
   color: #000000;
   margin-left: 400px;
-  /* position: relative; */
   align-items: center;
   justify-content: center;
-  /* z-index: 500; */
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-/* .custom-button {
-  background-color: rgb(0, 208, 255); 
-  color: #fff; 
-  border: none; 
-} */
+.custom-button {
+ margin-right: 40px;
+}
 
 .custom-button:hover {
   background-color: rgba(46, 46, 46, 0.669); 
 }
 
 .bill-background{
-  /* background-color: #d1dde8; */
   background-color: #fff346;
   padding: 0px 0px 0px 20px;
   border-radius: 20px;
@@ -85,12 +78,12 @@
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    max-width: 400px; /* max-width */
+    max-width: 400px;
     margin: auto;
     padding: 1px;
   }
   
-  /* Style for each date picker input */
+
   .react-datepicker-wrapper {
     display: inline-block;
     width: 100%;
@@ -98,11 +91,11 @@
   }
   
   .react-datepicker__input-container {
-    width: 100%;
+    width: 90%;
   }
   
   .react-datepicker__input-container input {
-    width: 100%;
+    width: 90%;
     padding: 5px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 15px;
@@ -112,7 +105,6 @@
     text-align: center;
   }
   
-  /* for the calendar popup */
   .react-datepicker-popper {
     z-index: 1;
   }
@@ -180,8 +172,6 @@
     padding: 0px;
   }
   
- 
-  
   .table-responsiver tr {
     display: flex;
     justify-content: space-between;
@@ -191,10 +181,8 @@
   }
   
   .table-responsive tr{
-    /* display: flex; */
     align-items: center;
     gap: 1px;
-    /* flex: 1; */
   }
   
   .table-container .table-row .table-cell p {
@@ -203,10 +191,11 @@
   }
   
   .table-responsive th,td{
-    /* font-weight: bold; */
-    /* background-color: #f5f5f5; */
-    /* padding: 2px 0; */
-    font-size: 12px;
+    font-size: 14px;
+  }
+
+  .form-field{
+    width: 95%;
   }
   
 
@@ -289,7 +278,7 @@
 
   .notification2{
       width: 100%;
-      padding: 15px;
+      padding: 5px;
       height: min-content;
       border-radius: 5px;
       /* background-color: rgb(186, 153, 217); */
@@ -312,13 +301,19 @@
   .react-datepicker__navigation--previous {
     left: 1rem;
   }
+  .table-responsive th,td{
+    /* font-weight: bold; */
+    /* background-color: #f5f5f5; */
+    /* padding: 2px 0; */
+    font-size: 13px;
+  }
 }
   
 @media screen and (max-width:450px){
 
   .notification2{
     width: 100%;
-    padding: 5px;
+    padding: 0px;
     height: min-content;
     border-radius: 5px;
     /* background-color: rgb(186, 153, 217); */
@@ -379,11 +374,11 @@
       }
       
       .react-datepicker__input-container {
-        width: 100%;
+        width: 90%;
       }
       
       .react-datepicker__input-container input {
-        width: 100%;
+        width: 90%;
         padding: 5px;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         font-size: 13px;
@@ -392,20 +387,119 @@
         box-sizing: border-box;
         text-align: center;
       }
+      .table-responsive{
+        width: 92%;
+        padding: 0px;
+      }    
+
+      .form-field{
+        width: 95%;
+      }
+
+      .custom-button {
+        margin-right: 40px;
+       }
+
+}
 
 
+@media screen and (max-width:435px){
+  .notification2{
+    width: 100%;
+    padding: 5px;
+    height: min-content;
+    border-radius: 5px;
+    margin-top:0px;
+    position: static;
+  
+}
+
+.form-field{
+  width: 95%;
+}
+
+.table-responsive{
+  width: 92%;
+  padding: 0px;
+}  
+
+.custom-button {
+  margin-right: 50px;
+ }
+}
+
+
+@media screen and (max-width:415px){
+  .notification2{
+    width: 100%;
+    padding: 5px;
+    height: min-content;
+    border-radius: 5px;
+    margin-top:0px;
+    position: static;
+  
+}
+
+.form-field{
+  width: 90%;
+}
+
+.table-responsive{
+  width: 88%;
+  padding: 0px;
+}  
+
+.custom-button {
+  margin-right: 50px;
+ }
 }
 
 @media screen and (max-width:400px){
   .notification2{
     width: 100%;
-    padding: 15px;
+    padding: 5px;
     height: min-content;
     border-radius: 5px;
-    /* background-color: rgb(186, 153, 217); */
-    /* color: black; */
     margin-top:0px;
     position: static;
-    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+  
 }
+
+.form-field{
+  width: 88%;
+}
+
+.table-responsive{
+  width: 82%;
+  padding: 0px;
+}  
+
+.custom-button {
+  margin-right: 70px;
+ }
+}
+
+@media screen and (max-width:380px){
+  .notification2{
+    width: 100%;
+    padding: 0px;
+    height: min-content;
+    border-radius: 5px;
+    margin-left:5px;
+    position: static;
+  
+}
+
+.form-field{
+  width: 78%;
+}
+
+.table-responsive{
+  width: 74%;
+  padding: 0px;
+}  
+
+.custom-button {
+  margin-right: 100px;
+ }
 }

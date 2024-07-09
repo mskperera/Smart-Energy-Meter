@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { getDrpMeasuringMode } from '../../action/dropdown';
-import { deviceMeasuringModeSave, get_DeviceSettingsByDeviceId } from '../../action/deviceSettings';
+import { deviceMeasuringModeSave, getConnectionSettingsByDeviceId, get_DeviceSettingsByDeviceId, saveConnectionSettings } from '../../action/deviceSettings';
 import { useSelector } from 'react-redux';
 import swal from 'sweetalert';
 
 function DeviceTab() {
     const [dropMeasuringMode, setDropMeasuringMode] = useState([]);
-    const [selectedMeasuringMode, setSelectedMeasuringMode] = useState(''); // Initialize to an empty string
+    const [selectedMeasuringMode, setSelectedMeasuringMode] = useState(''); 
     const [editLineOne, setEditLineOne] = useState('');
     const [editLineTwo, setEditLineTwo] = useState('');
     const [editLineThree, setEditLineThree] = useState('');
     const [load, setLoad] = useState(false);
     const [message, setMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [editedDeviceName, setEditedDeviceName] = useState('');
+    const [editedConnection, setEditedConnection] = useState('');
+    // const [newConnection, setNewConnection] = useState();
+
+    const [editedPortNo, setEditedPortNo] = useState('');
 
     const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
@@ -20,6 +25,7 @@ function DeviceTab() {
         if (selectedDevice) {
             const deviceId = selectedDevice.id;
             loadDeviceSettingstData(deviceId);
+            loadDeviceConnectionData(deviceId);
         }
     }, [load, selectedDevice]);
 
@@ -39,14 +45,14 @@ function DeviceTab() {
         setEditLineOne(deviceSetting.l1);
         setEditLineTwo(deviceSetting.l2);
         setEditLineThree(deviceSetting.l3);
-        setSelectedMeasuringMode(deviceSetting.deviceMeasuringModeId || ''); // Default to an empty string if null
+        setSelectedMeasuringMode(deviceSetting.deviceMeasuringModeId || '');
     };
 
     const onsubmitHandler = async (e) => {
         e.preventDefault();
         setErrorMessage('');
         setMessage('');
-
+        await saveDeviceName();
         try {
             const payload = {
                 measuringModeId: selectedMeasuringMode,
@@ -74,10 +80,77 @@ function DeviceTab() {
         }
     };
 
+    const loadDeviceConnectionData=async(deviceId)=>{
+ 
+        const result=await getConnectionSettingsByDeviceId(deviceId);
+        // setLoading(true);
+       // setDeviceSettings(result.data);
+       console.log("test111111111",result);
+       const deviceSetttings=result.data;
+       setEditedDeviceName(deviceSetttings.deviceName);
+       setEditedConnection(deviceSetttings.connection);
+       setEditedPortNo(deviceSetttings.portNo);
+      //  setLoading(false);
+    }
+
+    const saveDeviceName=async()=>{
+        // e.preventDefault();
+        try{
+       
+    const payload = {
+        // deviceId: device?.id || defaultSelctedDevie?.id,
+        deviceId: selectedDevice.id,
+        connection: '-',
+        deviceName: editedDeviceName,
+        portNo: '-',
+        };
+      
+        const res = await saveConnectionSettings(payload);
+        // setLoading(true);
+        console.log(res);
+        const { responseStatus, outputMessage } = res.data;
+        if (responseStatus === "failed") {
+          setErrorMessage(outputMessage)
+          return;
+        }
+        
+      
+        setMessage(outputMessage)
+        swal("Updated Successfully", "", "success").then(() => {
+            setLoad(!load);
+            // setLoading(false);
+          });
+        
+      }
+    
+      catch(err){
+        //const jsonString = JSON.parse(err);
+        // setErrorMessage(jsonString);
+        console.log(err);
+      }
+      
+    }
+
     return (
         <div className='notification'>
             <h3 className='d-flex align-items-center justify-content-center mb-1'>Device Settings</h3>
             <form className='need-validation' onSubmit={onsubmitHandler}>
+            
+
+                        <div className="form-group mb-1" style={{marginLeft:'24px'}}>
+                            <div className="form-group">
+                                <label htmlFor="devicename" className="form-label">
+                                Device Name
+                                </label>
+                                <input
+                                type="text"
+                                className="form-control"
+                                value={editedDeviceName}
+                                onChange={(e) => setEditedDeviceName(e.target.value)}
+                                />
+                            </div>
+                        </div>
+
                 <div className="form-group mb-1">
                     <div className="form-group">
                         <div className="form-check">
@@ -138,7 +211,9 @@ function DeviceTab() {
                     </div>
                 )}
 
-                <button type='submit' className='btn btn-primary w-100 mt-1'>Save</button>
+                <div className='d-flex justify-content-center'>
+                    <button type='submit' className='btn btn-primary mt-1 w-50'>Save</button>
+                </div>
             </form>
             {message && <div className="alert alert-success mt-2">{message}</div>}
             {errorMessage && <div className="alert alert-danger mt-2">{errorMessage}</div>}

@@ -153,7 +153,7 @@ function BillingSession() {
                       <div className="bill-background">
                         <div className="bill-ground text-left">
                           <div className="col">
-                            <h5>{session.sessionName}</h5>
+                            <h6><b>{session.sessionName}</b></h6>
                             <div className="form-group row">
                               <label
                                 htmlFor="startdate"
@@ -165,7 +165,7 @@ function BillingSession() {
                                 {editingSessionId ===
                                 session.deviceBillingSessionId ? (
                                   <>
-                                    <ReactDatePicker
+                                    <ReactDatePicker 
                                       selected={
                                         selectedDates[
                                           session.deviceBillingSessionId
@@ -178,7 +178,7 @@ function BillingSession() {
                                           "startDate"
                                         )
                                       }
-                                      className="form-control text-left editable mb-1"
+                                      className="form-control text-left editable mb-1 form-field"
                                       placeholderText="Select date"
                                       dateFormat="dd MMM yyyy"
                                       style={{ height: "30px" }}
@@ -197,7 +197,7 @@ function BillingSession() {
                                         )
                                       }
                                       disableClock={true}
-                                      className="form-control text-left editable mb-1"
+                                      className="form-control text-left editable mb-1 form-field"
                                       style={{ height: "30px" }}
                                     />
                                   </>
@@ -205,7 +205,7 @@ function BillingSession() {
                                   <input
                                     type="text"
                                     style={{ height: "30px" }}
-                                    className="form-control text-center disabled"
+                                    className="form-control text-center disabled form-field"
                                     disabled
                                     value={
                                       selectedDates[
@@ -225,7 +225,7 @@ function BillingSession() {
                             <div className="form-group row">
                               <label
                                 htmlFor="enddate"
-                                className="col-sm-4 col-form-label"
+                                className="col-sm-4 col-form-label "
                               >
                                 Session End
                               </label>
@@ -246,7 +246,7 @@ function BillingSession() {
                                           "endDate"
                                         )
                                       }
-                                      className="form-control text-left editable mb-1"
+                                      className="form-control text-left editable mb-1 form-field"
                                       placeholderText="Select date"
                                       dateFormat="dd MMM yyyy"
                                       style={{ height: "30px" }}
@@ -266,7 +266,7 @@ function BillingSession() {
                                         )
                                       }
                                       disableClock={true}
-                                      className="form-control text-left editable mb-1"
+                                      className="form-control text-left editable mb-1 form-field"
                                       style={{ height: "30px" }}
                                     />
                                   </>
@@ -274,7 +274,7 @@ function BillingSession() {
                                   <input
                                     type="text"
                                     style={{ height: "30px" }}
-                                    className="form-control text-center disabled"
+                                    className="form-control text-center disabled form-field"
                                     disabled
                                     value={
                                       selectedDates[
@@ -304,7 +304,7 @@ function BillingSession() {
                                   <input
                                     type="text"
                                     style={{ height: "30px" }}
-                                    className={`form-control text-center ${
+                                    className={`form-control text-center form-field ${
                                       editingSessionId ===
                                       session.deviceBillingSessionId
                                         ? "editable"
@@ -331,7 +331,7 @@ function BillingSession() {
                                   <input
                                     type="text"
                                     style={{ height: "30px" }}
-                                    className={`form-control text-center ${
+                                    className={`form-control text-center form-field ${
                                       editingSessionId ===
                                       session.deviceBillingSessionId
                                         ? "editable"
@@ -382,7 +382,7 @@ function BillingSession() {
                               <div className="d-flex justify-content-end">
                                 <button
                                   type="button"
-                                  style={{ width: "80px", marginRight: "20px" }}
+                                  style={{ width: "80px", marginTop: "3px"}}
                                   className={`btn btn-sm custom-button btn-${
                                     editingSessionId ===
                                     session.deviceBillingSessionId

@@ -386,7 +386,7 @@ const saveConnectionSettingsHandler=async(e)=>{
 
 console.log("testingsave")
 const payload = {
-    // deviceId: device?.id || defaultSelctedDevie?.id,
+    
     deviceId: selectedDevice.id,
     connection: editedConnection,
     deviceName: editedDeviceName,
@@ -394,7 +394,7 @@ const payload = {
     };
   
     const res = await saveConnectionSettings(payload);
-    // setLoading(true);
+    
     console.log(res);
     const { responseStatus, outputMessage } = res.data;
     if (responseStatus === "failed") {
@@ -406,14 +406,13 @@ const payload = {
     setMessage(outputMessage)
     swal("Updated Successfully", "", "success").then(() => {
         setLoad(!load);
-        // setLoading(false);
+       
       });
     
   }
 
   catch(err){
-    //const jsonString = JSON.parse(err);
-    // setErrorMessage(jsonString);
+   
     console.log(err);
   }
   
@@ -422,9 +421,9 @@ const payload = {
   const [toggle,setToggle] = useState(1);
 
   function updateToggle(id){
-    // setLoading(true);
+   
     setToggle(id);
-    // setLoading(false);
+   
   }
 
 
@@ -456,7 +455,7 @@ const payload = {
             >
               Tariff{" "}
             </li>
-            <li
+            {/* <li
               onClick={() => updateToggle(3)}
               className="nav-link"
               id="v-pills-service-tab"
@@ -464,7 +463,7 @@ const payload = {
               data-bs-targrt="/connection"
             >
               Connection
-            </li>
+            </li> */}
             <li
               onClick={() => updateToggle(4)}
               className="nav-link"
@@ -633,13 +632,15 @@ const payload = {
               </div> */}
               {/* {JSON.stringify(supplyTypeSelectedValue)} */}
 
-              <button
-                type="button"
-                className="btn btn-primary w-100 mt-2"
-                onClick={addUpdateDeviceSettings}
-              >
-                Save
-              </button>
+              <div className='d-flex justify-content-center'>
+                <button
+                  type="button"
+                  className="btn btn-primary w-50 mt-2"
+                  onClick={addUpdateDeviceSettings}
+                >
+                  Save
+                </button>
+              </div>
 
               {/* {message && <p>{message}</p>} */}
               {errormessage && <p>{errormessage}</p>}
@@ -648,23 +649,8 @@ const payload = {
         </div>
       </div>
 
-      <div className={toggle === 3 ? "show-content" : "content"}>
+      {/* <div className={toggle === 3 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center ">
-        {/* {loading ? (
-            <div>
-            <ThreeDots
-                className="d-flex align-items-center justify-content-center"
-                height={100}
-                width={100}
-                color="#36A2EB"
-                ariaLabel="loading"
-                secondaryColor="#36A2EB"
-                strokeWidth={2}
-                strokeWidthSecondary={2}
-              />
-            </div>
-          ) : (
-        )} */}
           <div className="connection">
             <h3 className="d-flex align-items-center justify-content-center mb-3">
               Connection Settings
@@ -672,7 +658,7 @@ const payload = {
             <form className="needs-validation">
               <div className="form-group mb-2">
                 <div className="form-group mb-2"></div>
-                {/* {JSON.stringify(editedDeviceName)} */}
+                
                 <label htmlFor="devicename" className="form-label">
                   Device Name
                 </label>
@@ -716,12 +702,12 @@ const payload = {
                 Save
               </button>
 
-              {/* {message && <p>{message}</p>} */}
+              
               {errormessage && <p>{errormessage}</p>}
             </form>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className={toggle === 4 ? "show-content" : "content"}>
         <div className="body d-flex align-items-center justify-content-center w-100">
@@ -914,13 +900,15 @@ const payload = {
                 </div>
               </div>
 
-              <button
-                type="submit"
-                className="btn btn-primary w-100 mt-1"
-                onClick={saveOperationalLimitHandler}
-              >
-                Save
-              </button>
+              <div className='d-flex justify-content-center'>
+                <button
+                  type="submit"
+                  className="btn btn-primary w-50 mt-1"
+                  onClick={saveOperationalLimitHandler}
+                >
+                  Save
+                </button>
+              </div>
             </form>
           </div>
         </div>

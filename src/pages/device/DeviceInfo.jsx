@@ -54,7 +54,7 @@ const DeviceInfo = () => {
                 </div>
           ) : (
             <div className='table-view'>
-              <table className="table1 table table-hover rounded">
+              <table className="table table-hover rounded">
                 <thead className='table-dark'>
                   <tr>
                     <th>Device No</th>
