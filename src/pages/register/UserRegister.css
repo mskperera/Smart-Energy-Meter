@@ -1,6 +1,6 @@
 .wrapper-register{
     height: 100vh;
-    background-color:#6298fe;
+    background-color:#6299fedd;
 }
 .register{
 
@@ -10,7 +10,7 @@
     border-radius: 5px;
     background-color: #ffffff4e;
     color: black;
-    box-shadow: 1px 1px 1cqmin 1px  rgba(0, 0, 0, 0.433);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 

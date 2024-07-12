@@ -139,10 +139,10 @@ function Budget() {
             <div className='notification'>
                 <h4 className='d-flex align-items-center justify-content-center mb-1'>Device Preferences and Settings</h4>
                 <form className='need-validation' onSubmit={onSubmitHandler}>
-                    <h5 className='d-flex align-items-center justify-content-center mb-1'>Budgeted Preferences</h5>
+                    <h5 className='d-flex align-items-center justify-content-center mb-3'>Budgeted Preferences</h5>
 
-                    <div className='form-group mb-1'>
-                        <div className='form-group d-flex align-items-center me-3'>
+                    <div className='form-group mb-2 form-budgetKw'>
+                        <div className='form-group d-flex align-items-center'>
                             <input 
                                 type='radio' 
                                 name='device' 
@@ -155,7 +155,7 @@ function Budget() {
                             <input
                                 id='budgetKw'
                                 type='text'
-                                className='form-control'
+                                className='form-control budgetKw'
                                 placeholder='kW'
                                 value={budgetedValues.budgetedKwh}
                                 onChange={(e) => {
@@ -189,8 +189,8 @@ function Budget() {
                         </div>
                     </div>
 
-                    <div className='d-flex justify-content-end' style={{marginRight:'56px'}}>
-                        <button type='button' className="btn btn-sm  btn-cal mb-1" 
+                    {/* <div className='d-flex justify-content-end' style={{marginRight:'56px'}}> */}
+                        <button type='button' className="btn btn-sm custom-button w-50 btn-cal mb-2" 
                             onClick={async(e) => {
                                 e.preventDefault();
                                 const deviceId = selectedDevice.id;
@@ -210,10 +210,10 @@ function Budget() {
                         >
                             Calculate
                         </button>
-                    </div>
+                    {/* </div> */}
 
                     <div className='d-flex justify-content-center'>
-                        <button type='submit' className='btn btn-primary w-50 mt-1'>Save</button>
+                        <button type='submit' className='btn btn-primary w-100 mt-1'>Save</button>
                     </div>
                     {errormessage && <p className='error-message'>{errormessage}</p>}
                 </form>

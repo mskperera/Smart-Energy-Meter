@@ -3,11 +3,16 @@ import KwhBillChart from "./KwhBillChart";
 import OperationalChart from "./OperationalChart";
 import { FaHeartbeat } from "react-icons/fa";
 import { FaHeartBroken } from "react-icons/fa";
-import { color } from "chart.js/helpers";
+// import { color } from "chart.js/helpers";
 import { FaLocationDot } from "react-icons/fa6";
+import { ProgressBar } from 'react-bootstrap';
+import { MdPermDeviceInformation } from "react-icons/md";
 
 function DeviceChartMode({ deviceName, device, deviceLocation }) {
   const { lines } = device;
+
+  const daysElapsed = 24;
+  const maxDays = 30;
 
   return (
     <>
@@ -39,7 +44,23 @@ function DeviceChartMode({ deviceName, device, deviceLocation }) {
               </div>
             )} 
           </div>
-          <h6>{deviceName} <span><FaLocationDot color={'red'} size={15} style={{marginTop:'-8px'}}/>{deviceLocation}</span></h6>
+          <div className="days-bar">
+            <div className="days-bar-one">
+                <h6><MdPermDeviceInformation size={18} style={{marginTop:'-10px'}}/>{deviceName} <span><FaLocationDot color={'red'} size={15} style={{marginTop:'-8px'}}/>{deviceLocation}</span></h6>
+            </div>
+            <div className="days-bar-two">
+                  <h6 style={{marginTop:'-30px', position:'relative', marginLeft:'5px'}}>Days Elapsed : {daysElapsed}</h6>
+                <div className="progress d-flex justify-content-start">
+                   <ProgressBar 
+                    now={daysElapsed} 
+                    max={maxDays} 
+                    // label={`${daysElapsed}`} 
+                    className="progress-bar" 
+                    style={{ width: `${(daysElapsed / maxDays) * 100}%` }}
+                  />
+                </div>
+            </div>
+          </div>
         </div>
         {device.deviceTypeId === 2 && (
           <div className="line-values" style={{ display: 'flex'}}>

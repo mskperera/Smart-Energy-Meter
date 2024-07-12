@@ -29,6 +29,7 @@ import Status from './pages/status/Status';
 import Inventory from './pages/deviceInventory/Inventory';
 import AccountReg from './pages/serviceAccount/AccountReg';
 import Layout from './Layout';
+import Setup from './pages/serviceAccount/Setup';
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
           <Route path='/management' element={<Management />} />
           <Route path='/inventory' element={<Inventory />} />
           <Route path='/accountreg' element={<AccountReg />} />
+          <Route path='/setup' element={<Setup/>} />
           <Route path='/deviceregister/:deviceRegId/:saveType' element={<DeviceRegister />} />
           <Route path='/apiData/deviceSettings' element={<DeviceSettings />} />
           <Route path='/apiData' element={<APIData />} />

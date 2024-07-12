@@ -120,7 +120,8 @@ const Profile = () => {
 
                             </div>
                                 <h6 className="f-w-600">{deviceDetails.displayName}</h6>
-                                <p>Profile No : {deviceDetails.profileNo}</p>
+                                <p>Profile ID : {deviceDetails.profileNo}</p>
+                                <p>Email : {deviceDetails.email}</p>
                                 <i className=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                           </div>
                         </div>
@@ -130,13 +131,13 @@ const Profile = () => {
                             <h6 className="m-b-20 p-b-5 b-b-default f-w-600">Account Details</h6>
                                 <div className="row">
                                   <div className="col-sm-6">
-                                    <p className="m-b-10 f-w-600">Profile Id</p>
-                                    <h6 className="text-muted f-w-400">{deviceDetails.profileId}</h6>
+                                    <p className="m-b-10 f-w-600">Profile ID</p>
+                                    <h6 className="text-muted f-w-400">{deviceDetails.profileNo}</h6>
                                   </div>
-                                  <div className="col-sm-6">
+                                  {/* <div className="col-sm-6">
                                     <p className="m-b-10 f-w-600">Profile No</p>
                                     <h6 className="text-muted f-w-400">{deviceDetails.profileNo}</h6>
-                                  </div>  
+                                  </div>   */}
                                   <div className="col-sm-6">
                                     <p className="m-b-10 f-w-600">User Name</p>
                                     <h6 className="text-muted f-w-400">{deviceDetails.userName}</h6>
@@ -144,10 +145,10 @@ const Profile = () => {
                                 </div>
                                       <h6 className="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">User Details</h6>
                                     <div className="row">
-                                    <div className="col-sm-6">
+                                    {/* <div className="col-sm-6">
                                       <p className="m-b-10 f-w-600">Email</p>
                                       <h6 className="text-muted f-w-400">{deviceDetails.email}</h6>
-                                    </div>
+                                    </div> */}
                                   <div className="col-sm-6">
                                     <p className="m-b-10 f-w-600">Phone</p>
                                     <h6 className="text-muted f-w-400">{deviceDetails.mobileNo}</h6>
@@ -156,12 +157,12 @@ const Profile = () => {
                                     <p className="m-b-10 f-w-600">Tel</p>
                                     <h6 className="text-muted f-w-400">{deviceDetails.tel}</h6>
                                   </div> 
-                                  <div className="col-sm-6">
+                                  {/* <div className="col-sm-6">
                                     <p className="m-b-10 f-w-600">Billing Address</p>
                                     <h6 className="text-muted f-w-400">{deviceDetails.billingAddress}</h6>
-                                  </div> 
+                                  </div>  */}
                                   <div className="col-sm-6">
-                                    <p className="m-b-10 f-w-600">Site Address</p>
+                                    <p className="m-b-10 f-w-600">Address</p>
                                     <h6 className="text-muted f-w-400">{deviceDetails.siteAddress}</h6>
                                   </div>
                                 </div>

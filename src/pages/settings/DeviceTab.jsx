@@ -15,8 +15,6 @@ function DeviceTab() {
     const [errorMessage, setErrorMessage] = useState('');
     const [editedDeviceName, setEditedDeviceName] = useState('');
     const [editedConnection, setEditedConnection] = useState('');
-    // const [newConnection, setNewConnection] = useState();
-
     const [editedPortNo, setEditedPortNo] = useState('');
 
     const selectedDevice = useSelector((state) => state.device.selectedDevice);
@@ -80,79 +78,61 @@ function DeviceTab() {
         }
     };
 
-    const loadDeviceConnectionData=async(deviceId)=>{
- 
-        const result=await getConnectionSettingsByDeviceId(deviceId);
-        // setLoading(true);
-       // setDeviceSettings(result.data);
-       console.log("test111111111",result);
-       const deviceSetttings=result.data;
-       setEditedDeviceName(deviceSetttings.deviceName);
-       setEditedConnection(deviceSetttings.connection);
-       setEditedPortNo(deviceSetttings.portNo);
-      //  setLoading(false);
-    }
+    const loadDeviceConnectionData = async (deviceId) => {
+        const result = await getConnectionSettingsByDeviceId(deviceId);
+        console.log("test111111111", result);
+        const deviceSettings = result.data;
+        setEditedDeviceName(deviceSettings.deviceName);
+        setEditedConnection(deviceSettings.connection);
+        setEditedPortNo(deviceSettings.portNo);
+    };
 
-    const saveDeviceName=async()=>{
-        // e.preventDefault();
-        try{
-       
-    const payload = {
-        // deviceId: device?.id || defaultSelctedDevie?.id,
-        deviceId: selectedDevice.id,
-        connection: '-',
-        deviceName: editedDeviceName,
-        portNo: '-',
-        };
-      
-        const res = await saveConnectionSettings(payload);
-        // setLoading(true);
-        console.log(res);
-        const { responseStatus, outputMessage } = res.data;
-        if (responseStatus === "failed") {
-          setErrorMessage(outputMessage)
-          return;
+    const saveDeviceName = async () => {
+        try {
+            const payload = {
+                deviceId: selectedDevice.id,
+                connection: "0",
+                deviceName: editedDeviceName,
+                portNo: "0",
+            };
+
+            const res = await saveConnectionSettings(payload);
+            console.log(res);
+            const { responseStatus, outputMessage } = res.data;
+            if (responseStatus === "failed") {
+                setErrorMessage(outputMessage);
+                return;
+            }
+
+            setMessage(outputMessage);
+            swal("Updated Successfully", "", "success").then(() => {
+                setLoad(!load);
+                window.location.reload();
+            });
+
+        } catch (err) {
+            console.log(err);
         }
-        
-      
-        setMessage(outputMessage)
-        swal("Updated Successfully", "", "success").then(() => {
-            setLoad(!load);
-            // setLoading(false);
-          });
-        
-      }
-    
-      catch(err){
-        //const jsonString = JSON.parse(err);
-        // setErrorMessage(jsonString);
-        console.log(err);
-      }
-      
-    }
+    };
 
     return (
         <div className='notification'>
             <h3 className='d-flex align-items-center justify-content-center mb-1'>Device Settings</h3>
             <form className='need-validation' onSubmit={onsubmitHandler}>
-            
-
-                        <div className="form-group mb-1" style={{marginLeft:'24px'}}>
-                            <div className="form-group">
-                                <label htmlFor="devicename" className="form-label">
-                                Device Name
-                                </label>
-                                <input
-                                type="text"
-                                className="form-control"
-                                value={editedDeviceName}
-                                onChange={(e) => setEditedDeviceName(e.target.value)}
-                                />
-                            </div>
-                        </div>
-
-                <div className="form-group mb-1">
+                <div className="form-group mb-2" style={{marginLeft:'24px'}}>
                     <div className="form-group">
+                        <label htmlFor="devicename" className="form-check-label">Device Name</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={editedDeviceName}
+                            onChange={(e) => setEditedDeviceName(e.target.value)}
+                        />
+                    </div>
+                </div>
+
+                <div className="form-group">
+                    <div className="form-group mb-2">
                         <div className="form-check">
                             <label className="form-check-label" htmlFor="mode">Measuring Mode</label>
                             <select
@@ -175,7 +155,7 @@ function DeviceTab() {
                 {selectedMeasuringMode === '1' && (
                     <div className="form-group mb-1">
                         <div className="form-group col-md-6">
-                            <div className="form-check">
+                            <div className="form-check mb-2">
                                 <label className="form-label" htmlFor="l1">L1</label>
                                 <input
                                     type='text'
@@ -186,7 +166,7 @@ function DeviceTab() {
                                     style={{ height: '30px' }}
                                 />
                             </div>
-                            <div className="form-check">
+                            <div className="form-check mb-2">
                                 <label className="form-label" htmlFor="l2">L2</label>
                                 <input
                                     type='text'

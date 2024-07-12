@@ -102,7 +102,7 @@ function DeviceRegister() {
       return;
     } else {
       setMessage(outputMessage);
-      swal('Success', saveType === 'I' ? 'Device Added Successfully' : 'Device Updated Successfully', 'success').then(() => {
+      swal(saveType === 'I' ? 'Device Added Successfully' : 'Device Updated Successfully', "",'success').then(() => {
         window.location = '/management';
       });
     }
@@ -135,66 +135,70 @@ function DeviceRegister() {
 
           <form className='needs-validation' onSubmit={onsubmitHandler}>
             <div className='row'>
-              <div className='mb-1'>
-                <div className='form-group was-validated'>
-                  <label htmlFor='deviceNo' className='form-label'>
-                    Device No
-                  </label>
-                  <input type='text' className='form-control' value={deviceNo} onChange={(e) => setDeviceNo(e.target.value)} required />
+                <div className='col-md-6 mb-1'>
+                    <div className='form-group was-validated mb-2'>
+                      <label htmlFor='deviceNo' className='form-check-label'>
+                        Device No
+                      </label>
+                      <input type='text' className='form-control' value={deviceNo} onChange={(e) => setDeviceNo(e.target.value)} required />
+                    </div>
+
+                    <div className='form-group was-validated mb-2'>
+                      <label htmlFor='firmwareVersion' className='form-check-label'>
+                        Firmware Version
+                      </label>
+                      <input type='text' className='form-control' value={firmwareVersion} onChange={(e) => setFirmwareVersion(e.target.value)} required />
+                    </div>
+
+                    <div className='form-group was-validated mb-2'>
+                      <label htmlFor='hardwareVersion' className='form-check-label'>
+                        Hardware Version
+                      </label>
+                      <input type='text' className='form-control' value={hardwareVersion} onChange={(e) => setHardwareVersion(e.target.value)} required />
+                    </div>
+
+                    <div className='form-group was-validated mb-2'>
+                      <label htmlFor='product' className='form-check-label'>
+                        Product
+                      </label>
+                      <input type='text' className='form-control' value={product} onChange={(e) => setProduct(e.target.value)} required />
+                    </div>
+
                 </div>
 
-                <div className='form-group was-validated'>
-                  <label htmlFor='firmwareVersion' className='form-label'>
-                    Firmware Version
-                  </label>
-                  <input type='text' className='form-control' value={firmwareVersion} onChange={(e) => setFirmwareVersion(e.target.value)} required />
-                </div>
+                <div className='col-md-6 mb-1'>
+                  
+                  <div className='form-group was-validated mb-2'>
+                    <label htmlFor='serialNo' className='form-check-label'>
+                      Serial No
+                    </label>
+                    <input type='text' className='form-control' value={serialNo} onChange={(e) => setSerialNo(e.target.value)} required />
+                  </div>
 
-                <div className='form-group was-validated'>
-                  <label htmlFor='hardwareVersion' className='form-label'>
-                    Hardware Version
-                  </label>
-                  <input type='text' className='form-control' value={hardwareVersion} onChange={(e) => setHardwareVersion(e.target.value)} required />
-                </div>
+                  <div className='form-group was-validated mb-2'>
+                    <label htmlFor='chipId' className='form-check-label'>
+                      Chip Id
+                    </label>
+                    <input type='text' className='form-control' value={chipId} onChange={(e) => setChipId(e.target.value)} required />
+                  </div>
 
-                <div className='form-group was-validated'>
-                  <label htmlFor='product' className='form-label'>
-                    Product
-                  </label>
-                  <input type='text' className='form-control' value={product} onChange={(e) => setProduct(e.target.value)} required />
+                  <div className='form-group was-validated mb-2'>
+                    <label htmlFor='deviceType' className='form-check-label'>
+                      Device Type
+                    </label>
+                    <select onChange={(e) => setDeviceType(e.target.value)} className='form-control' required
+                      name='deviceType'
+                      value={deviceType}
+                    >
+                      <option value='' disabled>Select Device Type</option>
+                      {dropDeviceType.map((mode) => (
+                        <option key={mode.DeviceTypeId} value={mode.DeviceTypeId}>
+                          {mode.DeviceTypeName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
-
-                <div className='form-group was-validated'>
-                  <label htmlFor='serialNo' className='form-label'>
-                    Serial No
-                  </label>
-                  <input type='text' className='form-control' value={serialNo} onChange={(e) => setSerialNo(e.target.value)} required />
-                </div>
-
-                <div className='form-group was-validated'>
-                  <label htmlFor='chipId' className='form-label'>
-                    Chip Id
-                  </label>
-                  <input type='text' className='form-control' value={chipId} onChange={(e) => setChipId(e.target.value)} required />
-                </div>
-
-                <div className='form-group was-validated'>
-                  <label htmlFor='deviceType' className='form-label'>
-                    Device Type
-                  </label>
-                  <select onChange={(e) => setDeviceType(e.target.value)} className='form-control' required
-                    name='deviceType'
-                    value={deviceType}
-                  >
-                    <option value='' disabled>Select Device Type</option>
-                    {dropDeviceType.map((mode) => (
-                      <option key={mode.DeviceTypeId} value={mode.DeviceTypeId}>
-                        {mode.DeviceTypeName}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
             </div>
 
             <button type='submit' className='btn btn-primary w-100 mt-3'>
