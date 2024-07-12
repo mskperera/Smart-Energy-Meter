@@ -29,6 +29,9 @@ import Status from './pages/status/Status';
 import Inventory from './pages/deviceInventory/Inventory';
 import AccountReg from './pages/serviceAccount/AccountReg';
 import Layout from './Layout';
+
+import Unauthorized from './pages/other/unauthorized';
+
 import Setup from './pages/serviceAccount/Setup';
 
 function App() {
@@ -64,6 +67,7 @@ function App() {
           <Route path='/device' element={<DeviceMan />} />
           <Route path='/admin' element={<Admin />} />
           <Route path='/group' element={<Group />} />
+          <Route path='/unauthorized' element={<Unauthorized />} />
         </Routes>
       </Layout>
     </BrowserRouter>

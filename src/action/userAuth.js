@@ -51,6 +51,8 @@ return obj;
 
 // Logout function
 export const logout = () => {
+
+  console.log('logout logout:');
   localStorage.removeItem('token');
   localStorage.removeItem('userData');
 };

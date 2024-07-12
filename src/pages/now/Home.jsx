@@ -26,16 +26,22 @@ const Home = () => {
   }, [selectedDevice]);
 
   const loadChartData = async () => {
+    try{
     const payload = {
       deviceId: selectedDevice?.id,
       measurementUnitId: 1,
     };
     const result = await getEngergyUsageNow(payload);
 
-    console.log('result---11111', result.data);
+    console.log('result---11111', result?.data);
 
-    setDevices(result.data);
+    setDevices(result?.data);
     setLoading(false);
+  }
+  catch(err){
+    console.log('loadChartData:', err);
+
+  }
   };
 
   // useEffect(() => {
