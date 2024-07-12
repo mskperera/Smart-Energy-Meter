@@ -22,23 +22,24 @@ customAxios.interceptors.request.use(
       return response;
     },
     function (error) {
-      console.log('axios.interceptors.resl** staus', error.request.status);
-    
-    
-      if (error.request.status ===401) {
-    //    window.location.href = '/';
-       }
-      
-       if (error.response.data.name === 'JsonWebTokenError') {
-        window.location.href = '/login';
-       
-       }
-    
-       if (error.response.data.name === 'TokenExpiredError') {
-        console.log('axios.interceptors.resl**', error.response.data);
-       //// refreshAccessToken();
-        window.location.href = '/';
-       }
+      console.log("axios.interceptors.resl** staus", error.request.status);
+
+      if (error.request.status === 401) {
+        //    window.location.href = '/';
+      }
+      if (error.request.status === 403) {
+        window.location.href = "/unauthorized";
+      }
+
+      if (error.response.data.name === "JsonWebTokenError") {
+        window.location.href = "/login";
+      }
+
+      if (error.response.data.name === "TokenExpiredError") {
+        console.log("axios.interceptors.resl**", error.response.data);
+        //// refreshAccessToken();
+        window.location.href = "/";
+      }
       return Promise.reject(error);
     }
   );

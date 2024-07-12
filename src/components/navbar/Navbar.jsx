@@ -3,7 +3,7 @@ import { MdDevices, MdClose } from "react-icons/md";
 import { BiSolidBellRing } from "react-icons/bi";
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../assent/logo-1.png';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import { CgProfile } from 'react-icons/cg';
 import { getDevicesByUserId } from '../../action/device';
@@ -11,11 +11,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setDropDevices,setSelectedDevie } from '../../state/device/deviceReducer';
 // import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
+import { logout } from '../../action/userAuth';
 
 // import { GlobalContext } from '../../context/GlobalContext';
 
 const Navbar = () => {
 
+  const userData=JSON.parse(localStorage.getItem('userData'));
+
+  const navigate=useNavigate();
   // const [selectedDevice, setSelectedDevice] = useState(""); 
   const [selectedDeviceName, setSelectedDeviceName] = useState("")
   const [open, setOpen] = useState(false);
@@ -31,7 +35,6 @@ const dispatch=useDispatch();
 
 
  const loadDevicesByUserId = async () => {
-  const userData=JSON.parse(localStorage.getItem('userData'));  
 
   const result = await getDevicesByUserId(userData.userId);
   console.log('deviceDetails', result);
@@ -42,7 +45,7 @@ const dispatch=useDispatch();
      setDeviceNames(devices);
    dispatch(setDropDevices({dropDeviceList:devices}));
    dispatch(setSelectedDevie({ device: devices[0]}));
-   setSelectedDeviceName(devices[0].name)
+   setSelectedDeviceName(devices[0]?.name)
   }
   
 }
@@ -67,6 +70,12 @@ const dispatch=useDispatch();
     }
   };
 
+  const handleLogoutClick = () => {
+    logout(); // Call the logout function
+
+    navigate('/');
+};
+
   return (
     <div className='navbar'>
       <div className='title'>
@@ -76,12 +85,12 @@ const dispatch=useDispatch();
           </Link>
         </div>
         <p className='topic'>Smart Energy Meter</p>
-        {/* {JSON.stringify(deviceNames)} */}
+        {/* {JSON.stringify(userData)} */}
       </div>
 
       <div className='app__navbar-login'>
        
-        <div className='menu-trigger relative'>
+      {userData.roleId!==1 && <div className='menu-trigger relative'>
           <div className="device-label-container">
             <button style={{marginLeft:'5px'}}>Device<a href='#' onClick={() => setOpenDevicesName(!openDevicesName)} className='device-list-drop'>
                 {openDevicesName ? <IoMdArrowDropup size={25} style={{ marginLeft: '-15px' }} /> : <IoMdArrowDropdown size={25} style={{ marginLeft: '-15px' }} />}
@@ -97,9 +106,9 @@ const dispatch=useDispatch();
               </ul>
             </div>
           )}
-        </div>
-        <a href='/userlist'>User Management</a>
-        <a href='/management'>Device Management</a>
+        </div>}
+       {userData.roleId===1 && <a href='/userlist'>User Management</a>}
+       {userData.roleId===1 &&  <a href='/management'>Device Management</a>}
         <div className='menu-trigger relative'>
           <CgProfile onClick={() => setOpen(!open)} color='#191970' size={25} />
           {open && (
@@ -109,7 +118,7 @@ const dispatch=useDispatch();
                 {/* <br/> */}
                 <li><a href='/status' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded'>Device Status</a></li>
                 <li><a href='/billingsession' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded '>Session</a></li>
-                <li><a href='/' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded '>Logout</a></li>
+                <li><a href='#' onClick={handleLogoutClick} className='p-2 cursor-pointer rounded '>Logout</a></li>
               </ul>
             </div>
           )}
@@ -150,7 +159,7 @@ const dispatch=useDispatch();
                 <li><a href='/status'>Device Status</a></li>
                 <li><a href='/billingsession'>Session</a></li>
                 <li><a href='/profile'> Profile</a></li>
-                <li><a href='/'>Logout</a></li>
+                <li><a href='#' onClick={handleLogoutClick}>Logout</a></li>
               </ul>
             </div>
           )}

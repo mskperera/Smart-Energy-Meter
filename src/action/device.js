@@ -5,6 +5,7 @@ export const  getEngergyUsageNow= async (payload) => {
   try {
     return await customAxios
       .post(`/device/energymeter/getEngergyUsageNow`,payload, {
+       // withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -168,6 +169,7 @@ export const getDevices= async () => {
   try {
     return await customAxios
       .get(`/device/getDevices`, {
+       // withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -246,11 +248,14 @@ export const updateDevice= async (payload,deviceId) => {
 // }
 
 
+
 export const getDevicesByUserId= async (userId) => {
   try {
     return await customAxios
       .get(`/device/getDevicesByUserId/${userId}`, {
+       // withCredentials: true,
         headers: {
+          'Access-Control-Allow-Origin': '*', 
           'Content-Type': 'application/json',
         },
       })
@@ -293,3 +298,22 @@ export const getDeviceStatus = async (userId, deviceId = null) => {
 
 // All device 
 //deviceId=0
+
+export const verifyDeviceBySN= async (sno) => {
+  try {
+    return await customAxios
+      .get(`/device/verifyDeviceBySN?sno=${sno}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
