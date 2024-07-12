@@ -5,7 +5,7 @@ import '../management/Management.css';
 import { getDeviceInfoByUserId } from '../../action/device';
 import { useSelector } from 'react-redux';
 import { ThreeDots } from 'react-loader-spinner';
-import { de } from 'date-fns/locale';
+// import { de } from 'date-fns/locale';
 
 const DeviceInfo = () => {
   const [deviceDetails, setDeviceDetails] = useState([]);
@@ -57,6 +57,7 @@ const DeviceInfo = () => {
               <table className="table table-hover rounded">
                 <thead className='table-dark'>
                   <tr>
+                    <th>Device ID</th>
                     <th>Device No</th>
                     <th>Firmware Version</th>
                     <th>Hardware version</th>
@@ -68,6 +69,7 @@ const DeviceInfo = () => {
                 <tbody>
                   {deviceDetails.map((device) => (
                     <tr key={device.deviceNo}>
+                      <td>{device.DeviceId}</td>
                       <td>{device.deviceNo}</td>
                       <td>{device.firmwareVersion}</td>
                       <td>{device.hardwareVersion}</td>

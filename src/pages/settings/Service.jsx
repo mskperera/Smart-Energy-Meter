@@ -205,7 +205,6 @@ console.log("testingsave")
       consumerCategoryid: consumerCategoryselectedValue,
       consumerSubCategoryId:consumerSubCategoryselectedValue,
 
-
     };
     console.log('payload',payload);
     const res = await saveDeviceSettings(payload);
@@ -545,7 +544,7 @@ const payload = {
             <form className="needs-valid</div>ation">
               <div className="form-group mb-2">
                 {/* {JSON.stringify(dropoptionsConsumerSubCatogery)} */}
-                <label htmlFor="consumerCategoryId" className="form-label">
+                <label htmlFor="consumerCategoryId" className="form-check-label">
                   Consumer Category
                 </label>
                 <select
@@ -572,7 +571,7 @@ const payload = {
               {/* {JSON.stringify(consumerCategoryselectedValue)} */}
               {dropoptionsConsumerSubCatogery.length > 0 && (
                 <div className="form-group mb-2">
-                  <label htmlFor="ConsumerSubCategoryId" className="form-label">
+                  <label htmlFor="ConsumerSubCategoryId" className="form-check-label">
                     Consumer SubCategory
                   </label>
                   <select
@@ -598,7 +597,7 @@ const payload = {
               )}
 
               <div className="form-group mb-2">
-                <label htmlFor="supplierId" className="form-label">
+                <label htmlFor="supplierId" className="form-check-label">
                   Supplier
                 </label>
                 <select
@@ -734,10 +733,10 @@ const payload = {
               Device Preferences and Settings
             </h3>
             <form className="need-validation">
-              <h5 className="d-flex align-items-center justify-content-center mb-1">
+              <h5 className="d-flex align-items-center justify-content-center mb-3">
                 Operational Preferences
               </h5>
-              <div className="form-group mb-1">
+              <div className="form-group mb-2">
                 <div className="form-group">
                   <div className="form-check">
                     <input
@@ -775,7 +774,7 @@ const payload = {
                 </div>
               </div>
 
-              <div className="form-group mb-1">
+              <div className="form-group mb-2">
                 <div className="form-group">
                   <div className="form-check">
                     <input
@@ -810,7 +809,7 @@ const payload = {
                 </div>
               </div>
 
-              <div className="form-group mb-1">
+              <div className="form-group mb-2">
                 <div className="form-group">
                   <div className="form-check">
                     <input
@@ -845,7 +844,7 @@ const payload = {
                 </div>
               </div>
 
-              <div className="form-group mb-1">
+              <div className="form-group mb-2">
                 <div className="form-group">
                   <div className="form-check">
                     <input
