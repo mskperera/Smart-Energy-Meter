@@ -11,7 +11,7 @@ import { MdPermDeviceInformation } from "react-icons/md";
 function DeviceChartMode({ deviceName, device, deviceLocation }) {
   const { lines } = device;
 
-  const daysElapsed = 24;
+  const daysElapsed = 27;
   const maxDays = 30;
 
   return (

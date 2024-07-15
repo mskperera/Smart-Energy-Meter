@@ -33,6 +33,7 @@ const Profile = () => {
   useEffect(() => {
     // if(device){
     const userData = localStorage.getItem('userData');
+    console.log('userData', userData);
     const userId = JSON.parse(userData).userId;
     loadUserbyUserId(userId);
     setLoading(true);

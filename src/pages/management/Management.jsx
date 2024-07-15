@@ -20,6 +20,7 @@ function Management() {
   const loadDevices = async () => {
     try {
       const result = await getDevices();
+      console.log('deviceDetails', result);
       setDeviceDetails(result.data || []);
     } catch (error) {
       console.error("Error loading devices:", error);
