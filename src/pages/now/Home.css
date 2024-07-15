@@ -1257,6 +1257,11 @@
     margin-top: -40px;
 }
 
+.days-bar-two .progress-bar{
+    margin-top: 0px;
+    
+}
+
    /* .days-bar{
     display: flex;
     justify-content: space-around;
@@ -1443,6 +1448,11 @@
         flex-wrap: wrap;
     }
 
+
+    .days-bar-two .progress-bar{
+        margin-top: 8px;
+        
+    }
 } 
 
 @media screen and (max-width:550px){
@@ -1459,6 +1469,11 @@
     .days-bar-two .progress{
         margin-bottom: 8px;
         width: 375px;
+    }
+
+    .days-bar-two .progress-bar{
+        margin-top: 8px;
+        
     }
 }
 

@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Setup.css';
 import BottomNav from '../../components/bottommenu/BottomNav';
 import { CgProfile } from 'react-icons/cg';
+import { serviceProfileSetup } from '../../action/serviceProfile';
+import swal from 'sweetalert';
+import { verifyDeviceBySN } from '../../action/device';
 
 const Step1 = ({ nextStep, handleChange, values, errors }) => {
   return (
@@ -66,17 +69,24 @@ const Step2 = ({ nextStep, prevStep, handleChange, values, errors }) => {
   return (
     <div className="form-container">
       <h2>Account</h2>
+      <div>
+        <div className="form-group mb-2 was-validated">
+          <label htmlFor="serialno" className="form-check-label">Serial No</label>
+          <div className="d-flex">
+            <input type="text" className="form-control input-sn " required value={values.serialno} onChange={handleChange('serialno')} />
+          </div>
+          <div className='d-flex justify-content-end'>
+            <button type="submit" className="prev-btn mt-1">Verify</button>
+          </div>
+          {errors.serialno && <div className="text-danger">{errors.serialno}</div>}
+        </div>
+      </div>
       <div className='row'>
         <div className='col-md-6 mb-1 was-validated'>
           <div className="form-group mb-2">
             <label htmlFor="deviceno" className="form-check-label">Device No</label>
             <input type="text" className="form-control" required value={values.deviceno} onChange={handleChange('deviceno')} />
             {errors.deviceno && <div className="text-danger">{errors.deviceno}</div>}
-          </div>
-          <div className="form-group mb-2">
-            <label htmlFor="model" className="form-check-label">Model</label>
-            <input type="text" className="form-control" required value={values.model} onChange={handleChange('model')} />
-            {errors.model && <div className="text-danger">{errors.model}</div>}
           </div>
           <div className="form-group mb-2">
             <label htmlFor="devicename" className="form-check-label">Device Name</label>
@@ -105,7 +115,12 @@ const Step2 = ({ nextStep, prevStep, handleChange, values, errors }) => {
   );
 };
 
-const Step3 = ({ prevStep, handleChange, values, errors }) => {
+const Step3 = ({ prevStep, handleChange, values, errors, saveServiceProfileSetup }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    saveServiceProfileSetup();
+  };
+
   return (
     <div className="form-container">
       <h2>Service</h2>
@@ -142,7 +157,7 @@ const Step3 = ({ prevStep, handleChange, values, errors }) => {
       </div>
       <div className="button-group">
         <button onClick={prevStep} className="prev-btn">Back</button>
-        <button onClick={() => alert(JSON.stringify(values, null, 2))} className="next-btn">Submit</button>
+        <button onClick={handleSubmit} className="next-btn">Submit</button>
       </div>
     </div>
   );
@@ -150,18 +165,20 @@ const Step3 = ({ prevStep, handleChange, values, errors }) => {
 
 const Setup = () => {
   const [step, setStep] = useState(1);
+  const [message, setMessage] = useState('');
+  const [errormessage, setErrorMessage] = useState('');
+
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     username: '',
-    userrole: '',
+    displayname: '',
     password: '',
     email: '',
-    address: '',
-    displayname: '',
     mobile: '',
+    address: '',
     tel: '',
-    deviceno: '',
-    model: '',
     devicename: '',
+    deviceno: '',
     devicetype: '',
     serialno: '',
     supplier: '',
@@ -170,8 +187,6 @@ const Setup = () => {
     budgetkw: '',
     mode: ''
   });
-
-  const [errors, setErrors] = useState({});
 
   const nextStep = () => {
     if (validateForm()) {
@@ -189,36 +204,65 @@ const Setup = () => {
 
   const validateForm = () => {
     let newErrors = {};
-    switch (step) {
-    //   case 1:
-    //     if (!formData.username) newErrors.username = 'Username is required';
-    //     // if (!formData.userrole) newErrors.userrole = 'User role is required';
-    //     if (!formData.password) newErrors.password = 'Password is required';
-    //     if (!formData.email) newErrors.email = 'Email is required';
-    //     if (!formData.address) newErrors.address = 'Address is required';
-    //     if (!formData.displayname) newErrors.displayname = 'Display name is required';
-    //     if (!formData.mobile) newErrors.mobile = 'Mobile number is required';
-    //     if (!formData.tel) newErrors.tel = 'Telephone number is required';
-    //     break;
-    //   case 2:
-    //     if (!formData.deviceno) newErrors.deviceno = 'Device number is required';
-    //     if (!formData.model) newErrors.model = 'Model is required';
-    //     if (!formData.devicename) newErrors.devicename = 'Device name is required';
-    //     if (!formData.devicetype) newErrors.devicetype = 'Device type is required';
-    //     if (!formData.serialno) newErrors.serialno = 'Serial number is required';
-    //     break;
-    //   case 3:
-    //     if (!formData.supplier) newErrors.supplier = 'Supplier is required';
-    //     if (!formData.consumercategory) newErrors.consumercategory = 'Consumer category is required';
-    //     if (!formData.subcategory) newErrors.subcategory = 'Consumer subcategory is required';
-    //     if (!formData.budgetkw) newErrors.budgetkw = 'Budgeted kW value is required';
-    //     if (!formData.mode) newErrors.mode = 'Measuring mode is required';
-    //     break;
-    //   default:
-    //     break;
-    }
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+
+  useEffect(() => {
+      loadVerifyDeviceBySN();
+  }, []);
+
+  const loadVerifyDeviceBySN = async () => {
+    try {
+      const result = await verifyDeviceBySN();
+      console.log('verifyDeviceBySN', result);
+    } catch (error) {
+      console.error('Error verifying device:', error);
+    }
+  };
+  
+
+  const saveServiceProfileSetup = async () => {
+    try {
+      const payload = {
+        userName: formData.username,
+        displayName: formData.displayname,
+        password: formData.password,
+        isActive: true,
+        email: formData.email,
+        mobileNo: formData.mobile,
+        profilePic: "1",
+        siteAddress: formData.address,
+        tel: formData.tel,
+        deviceId: 39,
+        deviceName: formData.devicename,
+        supplierId: formData.supplier,
+        consumerCategoryid: formData.consumercategory,
+        consumerSubCategoryId: formData.subcategory,
+        budgetedValue: formData.budgetkw,
+        opertationalMetricId: formData.mode,
+      };
+
+      const result = await serviceProfileSetup(payload);
+      console.log('serviceProfileSetup', result);
+
+      const { responseStatus, outputMessage } = result.data;
+      if (responseStatus === "failed") {
+        setErrorMessage(outputMessage);
+        return;
+      }
+
+      setMessage(outputMessage);
+      swal("Updated Successfully", "", "success").then(() => {
+        // Add any additional actions after success
+      });
+
+    } catch (err) {
+      console.log(err);
+      setErrorMessage("An error occurred while saving the profile setup.");
+    }
   };
 
   return (
@@ -236,7 +280,7 @@ const Setup = () => {
             </div>
             {step === 1 && <Step1 nextStep={nextStep} handleChange={handleChange} values={formData} errors={errors} />}
             {step === 2 && <Step2 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} values={formData} errors={errors} />}
-            {step === 3 && <Step3 prevStep={prevStep} handleChange={handleChange} values={formData} errors={errors} />}
+            {step === 3 && <Step3 prevStep={prevStep} handleChange={handleChange} values={formData} errors={errors} saveServiceProfileSetup={saveServiceProfileSetup} />}
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@
     padding-top: 30px;
     padding-bottom: 60px; 
     overflow-y: auto; 
-    height: calc(99.7vh - 79.71px - 42px);
+    height: calc(100vh - 80px - 39px);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
   }
 

@@ -102,7 +102,30 @@
     background-color: #1e6391;
   }
   
+  .flex-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .flex-container .form-check-label {
+    margin-right: 10px;
+    
+  }
+  
+  .flex-container .form-control {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
 
+  .input-sn{
+    width: 300px;
+  }
+  
+  .flex-container .prev-btn {
+    white-space: nowrap;
+  }
+  
   @media screen and (max-width: 450px){
     .app-setup {
         background-color: #fff;
