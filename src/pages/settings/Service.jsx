@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import BottomNav from '../../components/bottommenu/BottomNav'
-import Navbar from '../../components/navbar/Navbar'
+// import Navbar from '../../components/navbar/Navbar'
 
 // import { Link } from 'react-router-dom'
 import './Service.css'
@@ -12,7 +12,7 @@ import AboutDevice from './AboutDevice'
 import { useSelector } from 'react-redux'
 import DeviceTab from './DeviceTab'
 // import { set } from 'date-fns'
-import { ThreeDots } from 'react-loader-spinner'
+// import { ThreeDots } from 'react-loader-spinner'
 
 // import { Link } from 'react-router-dom'
 

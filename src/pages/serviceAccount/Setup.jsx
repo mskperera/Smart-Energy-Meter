@@ -5,8 +5,32 @@ import { CgProfile } from 'react-icons/cg';
 import { serviceProfileSetup } from '../../action/serviceProfile';
 import swal from 'sweetalert';
 import { verifyDeviceBySN } from '../../action/device';
+import { getDrpSupplier, getDrpUserRole } from '../../action/dropdown';
 
 const Step1 = ({ nextStep, handleChange, values, errors }) => {
+
+  const [drpUserRole, setDrpUserRole] = useState([]);
+  const [roleName, setRoleName] = useState('');
+  const [roleId, setRoleId] = useState('');
+
+  useEffect(() => {
+    loadDrpUserRole();
+  }, []);
+
+  const loadDrpUserRole = async () => {
+    const result = await getDrpUserRole();
+    setDrpUserRole(result.data);
+  };
+
+  const handleRoleChange = (e) => {
+    const selectedRole = drpUserRole.find(role => role.RoleName === e.target.value);
+    if (selectedRole) {
+      setRoleName(selectedRole.RoleName);
+      setRoleId(selectedRole.RoleId);
+      handleChange('userrole')({ target: { value: selectedRole.RoleId } }); 
+    }
+  };
+
   return (
     <div className="form-container">
       <h2>About</h2>
@@ -17,13 +41,25 @@ const Step1 = ({ nextStep, handleChange, values, errors }) => {
             <input type='text' className='form-control' required value={values.username} onChange={handleChange('username')} />
             {errors.username && <div className="text-danger">{errors.username}</div>}
           </div>
-          <div className='form-group mb-2'>
+          <div className='form-group was-validated mb-2'>
+                  <label htmlFor='userrole' className='form-check-label'>User Role</label>
+                  <select onChange={handleRoleChange} required name='userrole' className='form-control' value={roleName || ''}>
+                  <option value="" disabled>Select User Role</option>
+                    {drpUserRole.map((role) => (
+                      <option key={role.RoleId} value={role.RoleName}>
+                        {role.RoleName}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.userrole && <div className="text-danger">{errors.userrole}</div>}
+                </div>
+          {/* <div className='form-group mb-2'>
             <label htmlFor='userrole' className='form-check-label'>User Role</label>
             <select required name='userrole' className='form-control' value={values.userrole} onChange={handleChange('userrole')} >
               <option value="" disabled>Select User Role</option>
             </select>
-            {errors.userrole && <div className="text-danger">{errors.userrole}</div>}
-          </div>
+            
+          </div> */}
           <div className='form-group mb-2'>
             <label htmlFor='password' className='form-check-label'>Password</label>
             <input type='password' className='form-control' required value={values.password} onChange={handleChange('password')} />
@@ -66,69 +102,124 @@ const Step1 = ({ nextStep, handleChange, values, errors }) => {
 };
 
 const Step2 = ({ nextStep, prevStep, handleChange, values, errors }) => {
+  const [loading, setLoading] = useState(false);
+  const [verifyMessage, setVerifyMessage] = useState('');
+  const [deviceVerified, setDeviceVerified] = useState(false);
+  const [deviceDetails, setDeviceDetails] = useState(null);
+
+  const loadVerifyDeviceBySN = async () => {
+    setLoading(true);
+    setVerifyMessage('');
+    try {
+      const result = await verifyDeviceBySN(values.serialno);
+      console.log('verifyDeviceBySN ------', result);
+      if (result.data.deviceId) {
+        setDeviceVerified(true);
+        setDeviceDetails(result.data);
+        setVerifyMessage('Device verified successfully');
+        handleChange('deviceno')({ target: { value: result.data.DeviceNo } });
+        handleChange('devicetype')({ target: { value: result.data.DeviceTypeName } });
+      } else {
+        setDeviceVerified(false);
+        setVerifyMessage(result.data.exception || 'Device not found');
+      }
+    } catch (error) {
+      setVerifyMessage('Error verifying device');
+      console.error('Error verifying device:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="form-container">
       <h2>Account</h2>
-      <div>
-        <div className="form-group mb-2 was-validated">
-          <label htmlFor="serialno" className="form-check-label">Serial No</label>
-          <div className="d-flex">
-            <input type="text" className="form-control input-sn " required value={values.serialno} onChange={handleChange('serialno')} />
-          </div>
-          <div className='d-flex justify-content-end'>
-            <button type="submit" className="prev-btn mt-1">Verify</button>
-          </div>
-          {errors.serialno && <div className="text-danger">{errors.serialno}</div>}
+      <div className="form-group mb-2 was-validated">
+        <label htmlFor="serialno" className="form-check-label">Serial No</label>
+        <div className="d-flex">
+          <input type="text" className="form-control input-sn" required value={values.serialno} onChange={handleChange('serialno')} />
         </div>
+        <div className='d-flex justify-content-end'>
+          <button type="button" className="prev-btn mt-1" onClick={loadVerifyDeviceBySN} disabled={loading}>
+            {loading ? 'Verifying...' : 'Verify'}
+          </button>
+        </div>
+        {verifyMessage && <div className={deviceVerified ? "text-info" : "text-danger"}>{verifyMessage}</div>}
+        {errors.serialno && <div className="text-danger">{errors.serialno}</div>}
       </div>
-      <div className='row'>
-        <div className='col-md-6 mb-1 was-validated'>
-          <div className="form-group mb-2">
-            <label htmlFor="deviceno" className="form-check-label">Device No</label>
-            <input type="text" className="form-control" required value={values.deviceno} onChange={handleChange('deviceno')} />
-            {errors.deviceno && <div className="text-danger">{errors.deviceno}</div>}
+
+      {deviceVerified && (
+        <div className='row'>
+          <div className='col-md-6 mb-1 was-validated'>
+            <div className="form-group mb-2">
+              <label htmlFor="deviceno" className="form-check-label">Device No</label>
+              <input type="text" className="form-control" required value={deviceDetails.DeviceNo} onChange={handleChange('deviceno')} />
+              {errors.deviceno && <div className="text-danger">{errors.deviceno}</div>}
+            </div>
+            <div className="form-group mb-2">
+              <label htmlFor="devicename" className="form-check-label">Device Name</label>
+              <input type="text" className="form-control" required value={deviceDetails.DeviceTypeName} onChange={handleChange('devicename')} />
+              {errors.devicename && <div className="text-danger">{errors.devicename}</div>}
+            </div>
           </div>
-          <div className="form-group mb-2">
-            <label htmlFor="devicename" className="form-check-label">Device Name</label>
-            <input type="text" className="form-control" required value={values.devicename} onChange={handleChange('devicename')} />
-            {errors.devicename && <div className="text-danger">{errors.devicename}</div>}
-          </div>
-        </div>
-        <div className='col-md-6 mb-1 was-validated'>
-          <div className="form-group mb-2">
-            <label htmlFor="devicetype" className="form-check-label">Device Type</label>
-            <input type="text" className="form-control" required value={values.devicetype} onChange={handleChange('devicetype')} />
-            {errors.devicetype && <div className="text-danger">{errors.devicetype}</div>}
-          </div>
-          <div className="form-group mb-2">
-            <label htmlFor="serialno" className="form-check-label">Serial No</label>
-            <input type="text" className="form-control" required value={values.serialno} onChange={handleChange('serialno')} />
-            {errors.serialno && <div className="text-danger">{errors.serialno}</div>}
+          <div className='col-md-6 mb-1 was-validated'>
+            <div className="form-group mb-2">
+              <label htmlFor="devicetype" className="form-check-label">Device Type</label>
+              <input type="text" className="form-control" required value={deviceDetails.DeviceTypeName} onChange={handleChange('devicetype')} />
+              {errors.devicetype && <div className="text-danger">{errors.devicetype}</div>}
+            </div>
           </div>
         </div>
-      </div>
+      )}
+
       <div className="button-group">
         <button onClick={prevStep} className="prev-btn">Back</button>
-        <button onClick={nextStep} className="next-btn">Next</button>
+        <button onClick={nextStep} className="next-btn" disabled={!deviceVerified}>Next</button>
       </div>
     </div>
   );
 };
 
-const Step3 = ({ prevStep, handleChange, values, errors, saveServiceProfileSetup }) => {
+
+const Step3 = ({ prevStep, handleChange, values, errors, saveServiceProfileSetup, }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     saveServiceProfileSetup();
   };
+
+  
+  const [dropoptionsSupplier, setDropoptionsSupplier] = useState([]);
+
+  useEffect(() => {
+    loadDrpSupplier();
+  }, []);
+
+  const loadDrpSupplier = async () => {
+    const result = await getDrpSupplier();
+    setDropoptionsSupplier(result.data);
+  };
+
 
   return (
     <div className="form-container">
       <h2>Service</h2>
       <div className='row'>
         <div className='col-md-6 mb-1 was-validated'>
-          <div className="form-group mb-2">
+        <div className="form-group mb-2">
             <label htmlFor="supplier" className="form-check-label">Supplier</label>
-            <input type="text" className="form-control" required value={values.supplier} onChange={handleChange('supplier')} />
+            <select
+              onChange={handleChange('supplier')}
+              value={values.supplier}
+              name="supplierId"
+              className="form-control"
+            >
+              <option value="">Select Supplier</option>
+              {dropoptionsSupplier.map((r) => (
+                <option key={r.supplierId} value={r.supplierId}>
+                  {r.supplierName}
+                </option>
+              ))}
+            </select>
             {errors.supplier && <div className="text-danger">{errors.supplier}</div>}
           </div>
           <div className="form-group mb-2">
@@ -171,6 +262,7 @@ const Setup = () => {
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     username: '',
+    userrole: '',
     displayname: '',
     password: '',
     email: '',
@@ -216,7 +308,9 @@ const Setup = () => {
 
   const loadVerifyDeviceBySN = async () => {
     try {
-      const result = await verifyDeviceBySN();
+      console.log('verifyDeviceBySN', formData);
+
+      const result = await verifyDeviceBySN(formData.serialno);   
       console.log('verifyDeviceBySN', result);
     } catch (error) {
       console.error('Error verifying device:', error);
@@ -228,6 +322,7 @@ const Setup = () => {
     try {
       const payload = {
         userName: formData.username,
+        userrole: 2,
         displayName: formData.displayname,
         password: formData.password,
         isActive: true,
@@ -236,7 +331,7 @@ const Setup = () => {
         profilePic: "1",
         siteAddress: formData.address,
         tel: formData.tel,
-        deviceId: 39,
+        deviceId: formData.deviceno,
         deviceName: formData.devicename,
         supplierId: formData.supplier,
         consumerCategoryid: formData.consumercategory,
@@ -256,7 +351,6 @@ const Setup = () => {
 
       setMessage(outputMessage);
       swal("Updated Successfully", "", "success").then(() => {
-        // Add any additional actions after success
       });
 
     } catch (err) {
@@ -272,6 +366,7 @@ const Setup = () => {
           <div className="app-setup">
             <div className="header-setup">
               <h2>Build Your Account</h2>
+              {/* {JSON.stringify(formData)} */}
             </div>
             <div className="tabs-setup">
               <div className={`tab-setup ${step === 1 ? 'active' : ''}`}>Service Profile</div>
@@ -279,7 +374,7 @@ const Setup = () => {
               <div className={`tab-setup ${step === 3 ? 'active' : ''}`}>Service Preferences</div>
             </div>
             {step === 1 && <Step1 nextStep={nextStep} handleChange={handleChange} values={formData} errors={errors} />}
-            {step === 2 && <Step2 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} values={formData} errors={errors} />}
+            {step === 2 && <Step2 nextStep={nextStep} prevStep={prevStep} handleChange={handleChange} values={formData} errors={errors} setFormData={setFormData}/>}
             {step === 3 && <Step3 prevStep={prevStep} handleChange={handleChange} values={formData} errors={errors} saveServiceProfileSetup={saveServiceProfileSetup} />}
           </div>
         </div>
