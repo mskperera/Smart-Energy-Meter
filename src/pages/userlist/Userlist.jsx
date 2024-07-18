@@ -33,7 +33,7 @@ function Userlist() {
 
    
    
-  const onDeleteUser = async (userId) => {
+   const onDeleteUser = async (userId) => {
     swal({
       title: "Are you sure?",
       text: "Once deleted, You will not be able to recover this User Details!",
@@ -45,19 +45,25 @@ function Userlist() {
       if (willDelete) {
         const res = await deleteUser(userId);
         console.log("result", res);
-        const { responseStatus, outputMessage } = res.data.output;
-        if (responseStatus === "failed") {
-          console.log("exception:", outputMessage);
+  
+        if (res.data && res.data.output) {
+          const { responseStatus, outputMessage } = res.data.output;
+          if (responseStatus === "failed") {
+            console.log("exception:", outputMessage);
+          } else {
+            console.log("successful:", outputMessage);
+            swal("Success!", "Your User Details have been deleted!", "success");
+            loadusers();
+          }
         } else {
-          console.log("successful:", outputMessage);
-          swal("Success!", "Your User Details have been deleted!", "success");
-          loadusers();
+          console.log("Invalid response structure:", res.data);
         }
       } else {
         swal("User Details deletion has been cancelled!");
       }
     });
-  }
+  };
+  
 
   //   const res = await deleteUser(userId);
   //   console.log("result",res);

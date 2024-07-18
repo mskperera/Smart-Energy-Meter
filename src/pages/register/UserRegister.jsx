@@ -51,7 +51,7 @@ function UserRegister() {
   }
 
   const onsubmitHandler = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     try {
       setErrorMessage('');
       setMessage('');
@@ -70,18 +70,19 @@ function UserRegister() {
         displayName: userDisplayName,
         gmt_Offset: "+05:30"
       };
-
+  
       let res;
-      if(saveType === "I"){
+      if (saveType === "I") {
         res = await addUser(payload);
-      } else if(saveType === "U"){
+      } else if (saveType === "U") {
         res = await updateUser(payload, userRegId);
       }
-
+  
       setLoading(true);
-      const { responseStatus, outputMessage } = res.data;
+      const { responseStatus, outputMessage } = res.data.output;
       if (responseStatus === "failed") {
         setErrorMessage(outputMessage);
+        setLoading(false);
         return;
       }
       setMessage(outputMessage);
@@ -91,8 +92,8 @@ function UserRegister() {
     } catch (err) {
       console.log(err);
     }
-  }
-
+  };
+  
   const loadDrpUserRole = async () => {
     const result = await getDrpUserRole();
     setDrpUserRole(result.data);
@@ -129,55 +130,56 @@ function UserRegister() {
             {saveType === "I" ? "User Registration" : "Update User Details"}
           </h2>
           <form className='needs-validation' onSubmit={onsubmitHandler}>
-            <div className='row'>
-              <div className='col-md-6 mb-1'>
-                <div className='form-group was-validated mb-2'>
-                  <label htmlFor='username' className='form-check-label'>Username</label>
-                  <input type='text' className='form-control' value={userName || ''} onChange={(e) => setUserName(e.target.value)} required />
+              <div className='row'>
+                <div className='col-md-6 mb-1'>
+                  <div className='form-group was-validated mb-2'>
+                    <label htmlFor='username' className='form-check-label'>Username</label>
+                    <input type='text' className='form-control' value={userName || ''} onChange={(e) => setUserName(e.target.value)} required />
+                  </div>
+                  <div className='form-group was-validated mb-2'>
+                    <label htmlFor='userrole' className='form-check-label'>User Role</label>
+                    <select onChange={handleRoleChange} required name='userrole' className='form-control' value={roleName || ''}>
+                      <option value="" disabled>Select User Role</option>
+                      {drpUserRole.map((role) => (
+                        <option key={role.RoleId} value={role.RoleName}>
+                          {role.RoleName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className='form-group was-validated mb-2'>
+                    <label htmlFor='password' className='form-check-label'>Password</label>
+                    <input type='password' className='form-control' value={userPassword || ''} onChange={(e) => setUserPassword(e.target.value)} required />
+                  </div>
+                  <div className='form-group was-validated mb-2'>
+                    <label htmlFor='email' className='form-check-label'>Email</label>
+                    <input type='email' className='form-control' value={userEmail || ''} onChange={(e) => setUserEmail(e.target.value)} required />
+                  </div>
                 </div>
-                <div className='form-group was-validated mb-2'>
-                  <label htmlFor='userrole' className='form-check-label'>User Role</label>
-                  <select onChange={handleRoleChange} required name='userrole' className='form-control' value={roleName || ''}>
-                  <option value="" disabled>Select User Role</option>
-                    {drpUserRole.map((role) => (
-                      <option key={role.RoleId} value={role.RoleName}>
-                        {role.RoleName}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className='form-group was-validated mb-2'>
-                  <label htmlFor='password' className='form-check-label'>Password</label>
-                  <input type='password' className='form-control' value={userPassword || ''} onChange={(e) => setUserPassword(e.target.value)} required />
-                </div>
-                <div className='form-group was-validated mb-2'>
-                  <label htmlFor='email' className='form-check-label'>Email</label>
-                  <input type='email' className='form-control' value={userEmail || ''} onChange={(e) => setUserEmail(e.target.value)} required />
-                </div>
-              </div>
 
-              <div className='col-md-6 mb-1'>
-                <div className='form-group was-validated mb-2'>
-                  <label htmlFor='displayname' className='form-check-label'>Address</label>
-                  <input type='text' className='form-control' value={userAddress || ''} onChange={(e) => setUserAddress(e.target.value)} required />
-                </div>
-                <div className='form-group was-validated mb-2'>
-                  <label htmlFor='displayname' className='form-check-label'>Display Name</label>
-                  <input type='text' className='form-control' value={userDisplayName || ''} onChange={(e) => setUserDisplayName(e.target.value)} required />
-                </div>
-                <div className='form-group was-validated mb-2'>
-                  <label htmlFor='mobile' className='form-check-label'>Mobile</label>
-                  <input type='text' className='form-control' value={userMobile || ''} onChange={(e) => setUserMobile(e.target.value)} required />
-                </div>
-                <div className='form-group was-validated mb-2'>
-                  <label htmlFor='tel' className='form-check-label'>Tel</label>
-                  <input type='text' className='form-control' value={userTel || ''} onChange={(e) => setUserTel(e.target.value)} required />
+                <div className='col-md-6 mb-1'>
+                  <div className='form-group was-validated mb-2'>
+                    <label htmlFor='displayname' className='form-check-label'>Address</label>
+                    <input type='text' className='form-control' value={userAddress || ''} onChange={(e) => setUserAddress(e.target.value)} required />
+                  </div>
+                  <div className='form-group was-validated mb-2'>
+                    <label htmlFor='displayname' className='form-check-label'>Display Name</label>
+                    <input type='text' className='form-control' value={userDisplayName || ''} onChange={(e) => setUserDisplayName(e.target.value)} required />
+                  </div>
+                  <div className='form-group was-validated mb-2'>
+                    <label htmlFor='mobile' className='form-check-label'>Mobile</label>
+                    <input type='text' className='form-control' value={userMobile || ''} onChange={(e) => setUserMobile(e.target.value)} required />
+                  </div>
+                  <div className='form-group was-validated mb-2'>
+                    <label htmlFor='tel' className='form-check-label'>Tel</label>
+                    <input type='text' className='form-control' value={userTel || ''} onChange={(e) => setUserTel(e.target.value)} required />
+                  </div>
                 </div>
               </div>
-            </div>
-            <button type='submit' className='btn btn-primary w-100 mt-3'>Save</button>
-            {errormessage && <p>{errormessage}</p>}
-          </form>
+              <button type='submit' className='btn btn-primary w-100 mt-3'>Save</button>
+              {errormessage && <p className='text-danger'>{errormessage}</p>}
+            </form>
+
         </div>
       )}
     </div>

@@ -36,6 +36,38 @@
     flex-direction: column;
     padding:5rem;
 }
+ 
+  .session-name-device{
+    display: flex;
+    align-items: center;
+    /* margin-bottom: 10px; */
+    width: 100%;
+  }
+  
+  .custom-progress-container {
+    width: 100px; 
+    display: flex;
+  }
+  
+  .progress-bar {
+    height: 30px; 
+  }
+  .name-session{
+    background-color: rgb(255, 255, 255);
+    /* padding: 1px 1px 1px 1px; */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    width: fit-content;
+    border-radius: 10px;
+    margin-bottom: 5px;
+  }
+  .name-device{
+    margin-top: 0px;
+    padding: 3px;
+}
+
+.name-device-date{
+    margin-top: -10px;
+}
 
 @media screen and (max-width:2000px){
     .page-1{
@@ -64,7 +96,11 @@
     }
 
     .name-device{
-        margin-top: 10px;
+        margin-top: 0px;
+        padding: 4px;
+    }
+    .name-device-date{
+        margin-top: -10px;
     }
 }
 
@@ -132,6 +168,9 @@
     .name-device{
         margin-top: 10px;
     }
+    .name-device-date{
+        margin-top: -10px;
+    }
 }
 
 @media screen and (max-width:850px){
@@ -174,6 +213,9 @@
         margin: 0%;
         flex-direction: column;
         padding: 0rem;
+}
+.name-device-date{
+    margin-top: -10px;
 }
 }
 
@@ -260,6 +302,17 @@
 .bar-charts{
     margin-top: -200px;
 }
+
+.custom-progress-container{
+    margin-top: -5px; 
+  }
+  
+  .custom-progress-container2{
+    margin-top: -5px; 
+ }
+ .name-device-date{
+    margin-top: -10px;
+}
 }
 
 @media screen and (max-width:440px){
@@ -269,7 +322,9 @@
     .name-device{
         margin-top: 10px;
     }
-
+    .name-device-date{
+        margin-top: -10px;
+    }
 }
 
 @media screen and (max-width:420px){
@@ -278,6 +333,9 @@
     }
     .name-device{
         margin-top: 30px;
+    }
+    .name-device-date{
+        margin-top: -10px;
     }
 
 }
@@ -288,6 +346,9 @@
     }
     .name-device{
         margin-top: 0px;
+    }
+    .name-device-date{
+        margin-top: -10px;
     }
 
 }
@@ -300,6 +361,9 @@
         margin-top: 5px;
         padding-bottom: 5px;
     }
+    .name-device-date{
+        margin-top: -10px;
+    }
 
 }
 
@@ -309,6 +373,9 @@
     }
     .name-device{
         margin-top: 20px;
+    }
+    .name-device-date{
+        margin-top: -10px;
     }
 }
 
@@ -328,5 +395,7 @@
     .name-device{
         margin-top: 10px;
     }
-
+    .name-device-date{
+        margin-top: -10px;
+    }
 }

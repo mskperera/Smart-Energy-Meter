@@ -7,12 +7,14 @@ import { FaHeartBroken } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { ProgressBar } from 'react-bootstrap';
 import { MdPermDeviceInformation } from "react-icons/md";
+import moment from "moment";
 
 function DeviceChartMode({ deviceName, device, deviceLocation }) {
-  const { lines } = device;
+  const { lines, daysElapsed , numberOfDays, startDate } = device;
 
-  const daysElapsed = 27;
-  const maxDays = 30;
+  const days = daysElapsed;
+  const maxDays = numberOfDays;
+  const formattedStartDate = moment(startDate).format('YYYY-MM-DD');
 
   return (
     <>
@@ -49,15 +51,19 @@ function DeviceChartMode({ deviceName, device, deviceLocation }) {
                 <h6><MdPermDeviceInformation size={18} style={{marginTop:'-10px'}}/>{deviceName} <span><FaLocationDot color={'red'} size={15} style={{marginTop:'-8px'}}/>{deviceLocation}</span></h6>
             </div>
             <div className="days-bar-two">
-                  <h6 style={{marginTop:'-30px', position:'relative', marginLeft:'5px'}}>Days Elapsed : {daysElapsed}</h6>
-                <div className="progress d-flex justify-content-start">
+                  <h6 style={{marginTop:'-30px', position:'relative', marginLeft:'5px'}}>{formattedStartDate} Days Elapsed : {daysElapsed}</h6>
+                <div className="d-flex justify-content-start">
+                  <span className="session-number">0</span>&nbsp;
+                  <div className="progress d-flex justify-content-start">
                    <ProgressBar 
-                    now={daysElapsed} 
+                    now={days} 
                     max={maxDays} 
                     // label={`${daysElapsed}`} 
                     className="progress-bar" 
-                    style={{ width: `${(daysElapsed / maxDays) * 100}%` }}
+                    style={{ width: `${(days / maxDays) * 100}%` }}
                   />
+                  </div>
+                  &nbsp;<span className="session-number">{maxDays}</span>
                 </div>
             </div>
           </div>

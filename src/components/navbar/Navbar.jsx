@@ -107,6 +107,7 @@ const dispatch=useDispatch();
             </div>
           )}
         </div>}
+      {userData.roleId===1 && <a href='/setup'>Set-Up</a>}
        {userData.roleId===1 && <a href='/userlist'>User Management</a>}
        {userData.roleId===1 &&  <a href='/management'>Device Management</a>}
         <div className='menu-trigger relative'>
