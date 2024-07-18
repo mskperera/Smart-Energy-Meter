@@ -17,7 +17,7 @@ const HomeCostChartMode = ({ budgetedBill, currentValue, selectedLine }) => {
             aria-valuenow={progressPercentage}
             aria-valuemin="0"
             aria-valuemax="100"
-            style={{ width: `${progressPercentage}%`, backgroundColor: progressColor, borderRadius: '0px' }}
+            style={{ width: `${progressPercentage}%`, backgroundColor: progressColor, borderRadius: '0px',marginTop: '0px', height: '50px'  }}
           ></div>
           <div
             className="progress-bar-text"

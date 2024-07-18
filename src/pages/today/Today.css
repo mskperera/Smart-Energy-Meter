@@ -52,14 +52,14 @@
   .progress-bar {
     height: 30px; 
   }
-  .name-session{
+
+  /* .name-session{
     background-color: rgb(255, 255, 255);
-    /* padding: 1px 1px 1px 1px; */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     width: fit-content;
     border-radius: 10px;
     margin-bottom: 5px;
-  }
+  } */
   .name-device{
     margin-top: 0px;
     padding: 3px;
@@ -67,6 +67,11 @@
 
 .name-device-date{
     margin-top: -10px;
+}
+
+.days-bar-two .progress-bar1{
+    margin-top: 0px;
+    background-color: #4484ff;
 }
 
 @media screen and (max-width:2000px){

@@ -5,46 +5,47 @@ import moment from 'moment';
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-const CombinedChart = ({ days, isSearchLoading, chartFrequency }) => {
+const CombinedChart = ({ days, isSearchLoading, chartFrequencty }) => {
+
   useEffect(() => {
     loadChartData();
   }, [isSearchLoading]);
 
   const getXAxisTitle = (frequency) => {
     switch (frequency) {
-      case 'hours':
-        return 'Hours';
-      case 'days':
-        return 'Days';
-      case 'months':
-        return 'Billing Session';
-      case 'weeks':
-        return 'Weeks';
+      case "hours":
+        return "Hours";
+      case "days":
+        return "Days";
+      case "months":
+        return "Billing Session";
+      case "weeks":
+        return "Weeks";
       default:
-        return 'Time';
+        return "Time";
     }
   };
 
   const loadChartData = async () => {
     const labels = [];
-    const kwData = [];
+    const kwhData = [];
     const costData = [];
 
     for (const e of days) {
-      if (chartFrequency === 'hours') {
-        kwData.push(e.kwhPerHour);
+      if (chartFrequencty === "hours") {
+        kwhData.push(e.kwhPerHour);
         costData.push(parseFloat(e.usageBillPerHour).toFixed(1));
         labels.push(moment(e.date).format('HH'));
-      } else if (chartFrequency === 'days') {
-        kwData.push(e.kwhPerDay);
+      } else if (chartFrequencty === "days") {
+        kwhData.push(e.kwhPerDay);
         costData.push(parseFloat(e.usageBillPerDay).toFixed(1));
         labels.push(moment(e.date).format('DD / MMM'));
-      } else if (chartFrequency === 'months') {
-        kwData.push(e.kwhPerMonth);
+      } else if (chartFrequencty === "months") {
+        kwhData.push(e.kwhPerMonth);
         costData.push(parseFloat(e.usageBillPerMonth).toFixed(1));
-        labels.push(`${months.find((m) => m.number === parseInt(e.date.month)).shortName} / ${e.date.year}`);
-      } else if (chartFrequency === 'weeks') {
-        kwData.push(e.kwhPerWeek);
+        labels.push(`${months.find(m => m.number === parseInt(e.date.month)).shortName} / ${e.date.year}`);
+      } else if (chartFrequencty === "weeks") {
+        kwhData.push(e.kwhPerWeek);
         costData.push(parseFloat(e.usageBillPerWeek).toFixed(1));
         labels.push(moment(e.date).format('DD / MMM'));
       }
@@ -52,17 +53,19 @@ const CombinedChart = ({ days, isSearchLoading, chartFrequency }) => {
 
     const datasets = [
       {
-        label: 'kWh',
-        data: kwData,
-        backgroundColor: '#fff346',
+        label: "kWh",
+        data: kwhData,
+        backgroundColor: "#fff346",
+        yAxisID: 'y1',
         borderRadius: 5,
       },
       {
-        label: 'Cost',
+        label: "Cost",
         data: costData,
-        backgroundColor: '#4484ff',
+        backgroundColor: "#4484ff",
+        yAxisID: 'y2',
         borderRadius: 5,
-      },
+      }
     ];
 
     setChartData({ labels: labels, datasets: datasets });
@@ -77,14 +80,14 @@ const CombinedChart = ({ days, isSearchLoading, chartFrequency }) => {
           beginAtZero: true,
           title: {
             display: true,
-            text: getXAxisTitle(chartFrequency),
-            color: 'white',
+            text: getXAxisTitle(chartFrequencty),
+            color: 'white'
           },
           ticks: {
             color: 'white',
           },
         },
-        y: {
+        y1: {
           grid: {
             display: false,
             color: 'Gray',
@@ -92,13 +95,30 @@ const CombinedChart = ({ days, isSearchLoading, chartFrequency }) => {
           beginAtZero: true,
           title: {
             display: true,
-            text: 'kWh / Rs',
-            color: 'white',
+            text: "kWh",
+            color: 'white'
           },
           ticks: {
             color: 'white',
           },
+          position: 'left',
         },
+        y2: {
+          grid: {
+            display: false,
+            color: 'Gray',
+          },
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: "Rs",
+            color: 'white'
+          },
+          ticks: {
+            color: 'white',
+          },
+          position: 'right',
+        }
       },
       plugins: {
         legend: {
@@ -117,36 +137,23 @@ const CombinedChart = ({ days, isSearchLoading, chartFrequency }) => {
   };
 
   const months = [
-    { shortName: 'Jan', number: 1 },
-    { shortName: 'Feb', number: 2 },
-    { shortName: 'Mar', number: 3 },
-    { shortName: 'Apr', number: 4 },
-    { shortName: 'May', number: 5 },
-    { shortName: 'Jun', number: 6 },
-    { shortName: 'Jul', number: 7 },
-    { shortName: 'Aug', number: 8 },
-    { shortName: 'Sep', number: 9 },
-    { shortName: 'Oct', number: 10 },
-    { shortName: 'Nov', number: 11 },
-    { shortName: 'Dec', number: 12 },
+    { shortName: "Jan", number: 1 },
+    { shortName: "Feb", number: 2 },
+    { shortName: "Mar", number: 3 },
+    { shortName: "Apr", number: 4 },
+    { shortName: "May", number: 5 },
+    { shortName: "Jun", number: 6 },
+    { shortName: "Jul", number: 7 },
+    { shortName: "Aug", number: 8 },
+    { shortName: "Sep", number: 9 },
+    { shortName: "Oct", number: 10 },
+    { shortName: "Nov", number: 11 },
+    { shortName: "Dec", number: 12 },
   ];
 
   const [chartData, setChartData] = useState({
     labels: [],
-    datasets: [
-      {
-        label: 'kWh',
-        data: [],
-        backgroundColor: '#36A2EB',
-        borderWidth: 1,
-      },
-      {
-        label: 'Cost',
-        data: [],
-        backgroundColor: '#FF6384',
-        borderWidth: 1,
-      },
-    ],
+    datasets: []
   });
 
   const [options, setOptions] = useState({
@@ -159,27 +166,43 @@ const CombinedChart = ({ days, isSearchLoading, chartFrequency }) => {
         beginAtZero: true,
         title: {
           display: true,
-          text: 'Time',
-          color: 'white',
+          text: "Time",
+          color: 'white'
         },
         ticks: {
           color: 'white',
         },
       },
-      y: {
+      y1: {
         grid: {
           color: 'Gray',
         },
         beginAtZero: true,
         title: {
           display: true,
-          text: 'kWh / Rs',
-          color: 'white',
+          text: "kWh",
+          color: 'white'
         },
         ticks: {
           color: 'white',
         },
+        position: 'left',
       },
+      y2: {
+        grid: {
+          color: 'Gray',
+        },
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: "Rs",
+          color: 'white'
+        },
+        ticks: {
+          color: 'white',
+        },
+        position: 'right',
+      }
     },
     plugins: {
       legend: {
@@ -191,7 +214,9 @@ const CombinedChart = ({ days, isSearchLoading, chartFrequency }) => {
     },
   });
 
-  return <Bar data={chartData} options={options} id='box' className='chart' />;
-};
+  return (
+    <Bar data={chartData} options={options} id='box' className='chart' />
+  );
+}
 
 export default CombinedChart;

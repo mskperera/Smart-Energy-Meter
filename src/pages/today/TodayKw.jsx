@@ -19,7 +19,7 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
         return "Days";
       case "months":
         return "Billing Session";
-        case "weeks":
+      case "weeks":
           return "Weeks";
       default:
         return "Time";

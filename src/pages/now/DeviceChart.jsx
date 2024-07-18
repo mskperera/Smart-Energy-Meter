@@ -10,15 +10,17 @@ import { MdPermDeviceInformation } from "react-icons/md";
 import moment from "moment";
 
 function DeviceChartMode({ deviceName, device, deviceLocation }) {
-  const { lines, daysElapsed , numberOfDays, startDate } = device;
+  const { lines, daysElapsed , numberOfDays, startDate,endDate } = device;
 
   const days = daysElapsed;
   const maxDays = numberOfDays;
   const formattedStartDate = moment(startDate).format('YYYY-MM-DD');
+  const formattedEndDate = moment(endDate).format('YYYY-MM-DD');
 
   return (
     <>
     <div className="main-section">
+      {/* <div className="back-color"></div> */}
       <div className="section">
         <div className="section-status">
           <div className="device-active">
@@ -51,17 +53,29 @@ function DeviceChartMode({ deviceName, device, deviceLocation }) {
                 <h6><MdPermDeviceInformation size={18} style={{marginTop:'-10px'}}/>{deviceName} <span><FaLocationDot color={'red'} size={15} style={{marginTop:'-8px'}}/>{deviceLocation}</span></h6>
             </div>
             <div className="days-bar-two">
-                  <h6 style={{marginTop:'-30px', position:'relative', marginLeft:'5px'}}>{formattedStartDate} Days Elapsed : {daysElapsed}</h6>
+                  <h6 style={{marginTop:'-30px', position:'relative', marginLeft:'5px'}}>Start Date: {formattedStartDate} / End Date: {formattedEndDate}</h6>
                 <div className="d-flex justify-content-start">
                   <span className="session-number">0</span>&nbsp;
                   <div className="progress d-flex justify-content-start">
-                   <ProgressBar 
-                    now={days} 
+                   <ProgressBar now={days} 
                     max={maxDays} 
-                    // label={`${daysElapsed}`} 
-                    className="progress-bar" 
-                    style={{ width: `${(days / maxDays) * 100}%` }}
-                  />
+                    className="progress-bar progress-bar2" 
+                    style={{ width: `${(days / maxDays) * 100}%` }}>
+                   <span 
+                      style={{ 
+                        position: 'static', 
+                        left: '50%', 
+                        transform: 'translateX(0%)',
+                        fontWeight: '600',
+                        color: 'black', 
+                      }}
+                    >
+                      Days Elapsed: {daysElapsed}
+                    </span>
+                   </ProgressBar>
+                    
+                  {/* /> */}
+                  
                   </div>
                   &nbsp;<span className="session-number">{maxDays}</span>
                 </div>
