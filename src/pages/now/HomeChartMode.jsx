@@ -18,10 +18,10 @@ const HomeChartMode = ({ currentKwValue, budgetedKwhValue }) => {
             aria-valuenow={progressPercentage} 
             aria-valuemin="0" 
             aria-valuemax="100" 
-            style={{ width: `${progressPercentage}%`, backgroundColor: progressColor, borderRadius: '0px' }}
+            style={{ width: `${progressPercentage}%`, backgroundColor: progressColor, borderRadius: '0px', marginTop: '0px', height: '50px' }}
           ></div>
           <div 
-            className="progress-bar-text" 
+            className="progress-bar-text " 
             style={{
               position: 'absolute',
               top: '50%',

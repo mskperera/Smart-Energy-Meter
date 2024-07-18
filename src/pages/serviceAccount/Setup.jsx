@@ -493,7 +493,7 @@ const Setup = () => {
         <div className='d-flex align-items-center justify-content-center'>
           <div className="app-setup">
             <div className="header-setup">
-              <h2>Build Your Account</h2>
+              <h2>Build Profile SetUp</h2>
               {/* {JSON.stringify(formData)} */}
             </div>
             <div className="tabs-setup">

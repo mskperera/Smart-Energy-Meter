@@ -23,6 +23,12 @@
     height: 20px;
 }
 
+/* .progress-bar span {
+    position: absolute;
+    left: 50%;
+    transform: translateX(50%);
+    color: black; 
+} */
 
 .page-mode{
     display: flex;
@@ -284,6 +290,18 @@
     margin-left: 50px;
    
 }
+
+/* .back-color{
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    padding: 0px;
+    margin-left: 0px;
+    width:790px;
+    height: 55px;
+    margin-top: 50px;
+    position: absolute;
+    z-index: 0;
+} */
 
 .section-status-mode{
     /* width: 200px; */
@@ -600,8 +618,9 @@
     align-items: center;
  }
 
- .days-bar-two .progress-bar{
+ .days-bar-two .progress-bar2{
     margin-top: 0px;
+    background-color: #4484ff;
 }
 
 .session-number{
@@ -1265,7 +1284,7 @@
     margin-top: -40px;
 }
 
-.days-bar-two .progress-bar{
+.days-bar-two .progress-bar2{
     margin-top: 0px;
     
 }
@@ -1457,7 +1476,7 @@
     }
 
 
-    .days-bar-two .progress-bar{
+    .days-bar-two .progress-bar2{
         margin-top: 0px;
     }
 
@@ -1482,7 +1501,7 @@
         width: 375px;
     }
 
-    .days-bar-two .progress-bar{
+    .days-bar-two .progress-bar2{
         margin-top: 8px;
     }
 }
@@ -1599,7 +1618,7 @@
         
     }
 
-    .days-bar-two .progress-bar{
+    .days-bar-two .progress-bar2{
         margin-top: 8px;
         
     }

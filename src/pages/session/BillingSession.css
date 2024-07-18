@@ -197,23 +197,32 @@
   .form-field{
     width: 95%;
   }
-  
+  @media screen and (max-width:1300px){
+    .notification2{
+      margin-left: 320px;
+    }
+  }
 
   @media screen and (max-width:1050px){
     .notification2{
-      margin-left: 200px;
+      margin-left: 180px;
     }
   }
 
   @media screen and (max-width:950px){
     .notification2{
-      margin-left: 10px;
+      margin-left: 100px;
     }
   }
 
 
 
 @media screen and (max-width:850px) {
+
+  .notification2{
+    margin-left: 50px;
+  }
+
 .picker1 div{
   padding: 0px;
 }
@@ -271,6 +280,13 @@
   font-size: 0.9rem;
 }
 
+}
+
+@media screen and (max-width:770px) {
+
+  .notification2{
+    margin-left: 35px;
+  }
 }
 
 @media screen and (max-width:650px){
@@ -415,16 +431,16 @@
 }
 
 .form-field{
-  width: 95%;
+  width: 93%;
 }
 
 .table-responsive{
-  width: 92%;
+  width: 89%;
   padding: 0px;
 }  
 
 .custom-button {
-  margin-right: 50px;
+  margin-right: 55px;
  }
 }
 
@@ -441,16 +457,16 @@
 }
 
 .form-field{
-  width: 90%;
+  width: 88%;
 }
 
 .table-responsive{
-  width: 88%;
+  width: 83%;
   padding: 0px;
 }  
 
 .custom-button {
-  margin-right: 50px;
+  margin-right: 70px;
  }
 }
 
@@ -466,16 +482,16 @@
 }
 
 .form-field{
-  width: 88%;
+  width: 82%;
 }
 
 .table-responsive{
-  width: 82%;
+  width: 78%;
   padding: 0px;
 }  
 
 .custom-button {
-  margin-right: 70px;
+  margin-right: 100px;
  }
 }
 
@@ -491,15 +507,15 @@
 }
 
 .form-field{
-  width: 78%;
+  width: 76%;
 }
 
 .table-responsive{
-  width: 74%;
+  width: 73%;
   padding: 0px;
 }  
 
 .custom-button {
-  margin-right: 100px;
+  margin-right: 120px;
  }
 }
