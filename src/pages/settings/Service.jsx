@@ -144,6 +144,7 @@ useEffect(()=>{
     const loadDrpConsumerCategories=async()=>{
         const result=await getDrpConsumerCategories();
         // setLoading(true);
+        console.log("consumerCategory",result);
         setDropoptionsConsumerCatogery(result.data);
         // setLoading(false);
        }

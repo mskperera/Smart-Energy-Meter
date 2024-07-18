@@ -45,7 +45,7 @@ function Login() {
 
     try {
       const response = await login(formData);
-      console.log('response', response);
+      // console.log('response', response);
 
       if (response.status === 200) {
         

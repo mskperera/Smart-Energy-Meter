@@ -18,7 +18,7 @@
 }
 
 .days-bar-two .progress{
-    width: 300px;
+    width: 260px;
     margin-top: -5px;
     height: 20px;
 }
@@ -61,7 +61,7 @@
 
 .navnav1{
     position: fixed;
-    top: 73px; 
+    top: 60px; 
     width: 100%;
     z-index: 1000;
 }
@@ -282,6 +282,7 @@
 .section-status{
     width: 200px;
     margin-left: 50px;
+   
 }
 
 .section-status-mode{
@@ -600,6 +601,10 @@
  }
 
  .days-bar-two .progress-bar{
+    margin-top: 0px;
+}
+
+.session-number{
     margin-top: 0px;
 }
 
@@ -1221,6 +1226,9 @@
     .line-values{
         margin-top: -20px;
     }
+    .session-number{
+        margin-top: -10px;
+    }
 }
 
 @media screen and (max-width:770px){
@@ -1450,8 +1458,11 @@
 
 
     .days-bar-two .progress-bar{
-        margin-top: 8px;
-        
+        margin-top: 0px;
+    }
+
+    .session-number{
+        margin-top: -15px;
     }
 } 
 
@@ -1473,7 +1484,6 @@
 
     .days-bar-two .progress-bar{
         margin-top: 8px;
-        
     }
 }
 
@@ -1736,6 +1746,9 @@
     margin-left: 0px;
     margin-top: 5px;
  }
+ .session-number{
+    margin-top: -15px;
+}
     }
 
     @media screen and (max-width:435px){
@@ -1877,6 +1890,9 @@
         margin-top: 35px;
        }
        
+       .session-number{
+        margin-top: -15px;
+    }
     }
 
     @media screen and (max-width:415px){
@@ -2079,7 +2095,11 @@
         }
 
         .section-status{
-            margin-top: -50px;
+            margin-top: 0px;
             margin-bottom: 20px;
         }  
+
+        .session-number{
+            margin-top: -15px;
+        }
     }

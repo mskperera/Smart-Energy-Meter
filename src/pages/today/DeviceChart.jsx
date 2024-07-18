@@ -14,10 +14,12 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
   return (
     <>
       <div className='bar-chartss'>
-        <h6 className='name-device'>
-          {deviceName} <FaLocationDot color={'red'} size={15} style={{ marginTop: '-8px' }} />{deviceLocation}
-        </h6>
-        <h6 className='name-device'>{formattedStartDate} {daysElapsed}Days Elapsed</h6>
+        <div className='name-session'>
+          <h6 className='name-device'>
+            {deviceName} <FaLocationDot color={'red'} size={15} style={{ marginTop: '-8px' }} />{deviceLocation}
+          </h6>
+          <h6 className='name-device name-device-date'>{formattedStartDate} / Days Elapsed {daysElapsed}</h6>
+        </div>
         {/* <h6 className='name-device'></h6> */}
         {lines.map((line, index) => (
           <KwhBillChart
