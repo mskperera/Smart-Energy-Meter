@@ -20,7 +20,7 @@ const Home = () => {
     setLoading(true);
     const intervalId = setInterval(() => {
       loadChartData();
-    }, 4000);
+    }, 2000);
 
     return () => clearInterval(intervalId);
   }, [selectedDevice]);

@@ -34,6 +34,8 @@ import Unauthorized from './pages/other/unauthorized';
 
 import Setup from './pages/serviceAccount/Setup';
 
+import MonthActive from './pages/month copy/MonthActive';
+
 function App() {
   return (
     <BrowserRouter>
@@ -52,6 +54,7 @@ function App() {
           <Route path='/today' element={<Today />} />
           <Route path='/week' element={<Week />} />
           <Route path='/month' element={<Month />} />
+          <Route path='/monthactive' element={<MonthActive />} />
           <Route path='/apiData/charts' element={<Charts />} />
           <Route path='/year' element={<Year />} />
           <Route path='/custom' element={<Custom />} />
