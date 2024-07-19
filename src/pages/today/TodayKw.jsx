@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
+import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title } from 'chart.js';
 import moment from 'moment';
 
-ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title);
 
 const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
 
@@ -20,7 +20,7 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
       case "months":
         return "Billing Session";
       case "weeks":
-          return "Weeks";
+        return "Weeks";
       default:
         return "Time";
     }
@@ -29,42 +29,36 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
   const loadChartData = async () => {
     const labels = [];
     const data = [];
-    //console.log(' e.kwhPerWeek ',days)
+    let totalSum = 0;  
+
     for (const e of days) {
       if (chartFrequencty === "hours") {
         data.push(e.kwhPerHour);
         labels.push(moment(e.date).format('HH'));
-      }
-      else if (chartFrequencty === "days") {
+        totalSum += e.kwhPerHour;
+      } else if (chartFrequencty === "days") {
         data.push(e.kwhPerDay);
         labels.push(moment(e.date).format('DD / MMM'));
-      }
-      else if (chartFrequencty === "months") {
+        totalSum += e.kwhPerDay;
+      } else if (chartFrequencty === "months") {
         data.push(e.kwhPerMonth);
-       // console.log('months.find(m => m.number === e.date.month))',months.find(m => m.number === parseInt(e.date.month)))
         labels.push(`${months.find(m => m.number === parseInt(e.date.month)).shortName} / ${e.date.year}`);
-      }
-      else if (chartFrequencty === "weeks") {
-    
+        totalSum += e.kwhPerMonth;
+      } else if (chartFrequencty === "weeks") {
         data.push(e.kwhPerWeek);
         labels.push(moment(e.date).format('DD / MMM'));
+        totalSum += e.kwhPerWeek;
       }
-     // console.log('labelsllll ',labels)
     }
 
-    
     const datasets0 = [{
       label: "kWh",
       data: data,
       backgroundColor: "#fff346",
-      // borderColor: "#ff6347",
-      // borderWidth: 2,
-      borderRadius: 5, 
-      // barPercentage: 1, 
-      // barThickness: 15, 
+      borderRadius: 5,
     }];
 
-    setChartData({ ...data, labels: labels, datasets: datasets0 });
+    setChartData({ labels: labels, datasets: datasets0 });
 
     const newOptions = {
       scales: {
@@ -104,23 +98,24 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
           display: true,
           labels: {
             color: 'white',
-            font: {
-              // size: 14, 
-              // family: 'Arial', 
-            },
-            // padding: 20, 
-            // boxWidth: 20, 
-            usePointStyle: true, 
-            pointStyle: 'rectRounded', // Change to desired shape: 'circle', 'rect', 'triangle', 'star', 'line', 'dash', 'cross', 'rectRounded', 'rectRot', 'crossRot'
+            usePointStyle: true,
+            pointStyle: 'rectRounded',
           },
-          onClick: () =>{},
+          onClick: () => {},
         },
+        title: {
+          display: true,
+          text: `Total Energy Consumption :${totalSum.toFixed(2)} kWh`,
+          color: 'white',
+          font: {
+            size: 13,
+          }
+        }
       },
     };
 
     setOptions(newOptions);
   };
-
 
   const months = [
     { shortName: "Jan", number: 1 },
@@ -136,9 +131,7 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
     { shortName: "Nov", number: 11 },
     { shortName: "Dec", number: 12 },
   ];
-  
 
-  
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [{
@@ -188,12 +181,20 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
           color: 'white',
         },
       },
+      title: {
+        display: true,
+        text: 'Total Energy Consumption',
+        color: 'white',
+        font: {
+          size: 13,
+        }
+      }
     },
   });
 
   return (
     <Bar data={chartData} options={options} id='box' className='chart' />
   );
-}
+};
 
 export default TodayKw;

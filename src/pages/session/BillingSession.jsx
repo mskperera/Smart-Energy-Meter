@@ -343,7 +343,9 @@ function BillingSession() {
                                       editingSessionId !==
                                       session.deviceBillingSessionId
                                     }
-                                    value={session.totalAmountDue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                    value={
+                                      session.totalAmountDue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })+" "+session.currencyCode 
+                                    }
                                   />
                                 </div>
                               </div>
@@ -370,8 +372,8 @@ function BillingSession() {
                                     <td>{formatDate(t.TariffRenewalDate)}</td>
                                     <td>{t.NoOfDays}</td>
                                     <td>{t.Kwh}</td>
-                                    <td>{(t.Cost).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                                    <td>{t.Tax}</td>
+                                    <td>{(t.Cost).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{" "}{session.currencyCode}</td>
+                                    <td>{t.Tax}{" "}{session.currencyCode}</td>
                                   </tr>
                                 ))}
                               </tbody>

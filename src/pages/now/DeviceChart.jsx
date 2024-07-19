@@ -8,12 +8,13 @@ import { FaLocationDot } from "react-icons/fa6";
 import { ProgressBar } from 'react-bootstrap';
 import { MdPermDeviceInformation } from "react-icons/md";
 import moment from "moment";
+import LineChart from "./LineChart";
 
-function DeviceChartMode({ deviceName, device, deviceLocation }) {
-  const { lines, daysElapsed , numberOfDays, startDate,endDate } = device;
+function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , numberOfDays, startDate, endDate  }) {
+  const { lines} = device;
 
-  const days = daysElapsed;
-  const maxDays = numberOfDays;
+  // const days = daysElapsed;
+  // const maxDays = numberOfDays;
   const formattedStartDate = moment(startDate).format('YYYY-MM-DD');
   const formattedEndDate = moment(endDate).format('YYYY-MM-DD');
 
@@ -57,27 +58,27 @@ function DeviceChartMode({ deviceName, device, deviceLocation }) {
                 <div className="d-flex justify-content-start">
                   <span className="session-number">0</span>&nbsp;
                   <div className="progress d-flex justify-content-start">
-                   <ProgressBar now={days} 
-                    max={maxDays} 
+                   <ProgressBar now={daysElapsed} 
+                    max={numberOfDays} 
                     className="progress-bar progress-bar2" 
-                    style={{ width: `${(days / maxDays) * 100}%` }}>
+                    style={{ width: `${(daysElapsed / numberOfDays) * 100}%` }}>
                    <span 
                       style={{ 
-                        position: 'static', 
+                        position: 'inherit', 
                         left: '50%', 
                         transform: 'translateX(0%)',
                         fontWeight: '600',
                         color: 'black', 
                       }}
                     >
-                      Days Elapsed: {daysElapsed}
+                      {daysElapsed}
                     </span>
                    </ProgressBar>
                     
                   {/* /> */}
                   
                   </div>
-                  &nbsp;<span className="session-number">{maxDays}</span>
+                  &nbsp;<span className="session-number">{numberOfDays}</span>
                 </div>
             </div>
           </div>
@@ -162,6 +163,8 @@ function DeviceChartMode({ deviceName, device, deviceLocation }) {
         </React.Fragment>
       ))}
     </div>
+    {/* <br/> */}
+    {/* <LineChart/> */}
        {/* {lines.map((line, index) => (
         <React.Fragment key={`operational-chart-${line.lineNo || index}`}>
           {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (

@@ -20,7 +20,7 @@ const Home = () => {
     setLoading(true);
     const intervalId = setInterval(() => {
       loadChartData();
-    }, 4000);
+    }, 2000);
 
     return () => clearInterval(intervalId);
   }, [selectedDevice]);
@@ -112,7 +112,9 @@ const Home = () => {
               {devices?.map((device, index) => (
                 <div key={index}>
                   <div className="device-name-state align-items-center justify-content-center w-100">
-                    <DeviceChart3p deviceName={device.deviceName} deviceLocation={device.deviceLocation} device={device} />
+                    <DeviceChart3p deviceName={device.deviceName} deviceLocation={device.deviceLocation} device={device} daysElapsed={device.daysElapsed} 
+                    numberOfDays={device.numberOfDays} startDate={device.startDate} endDate={device.endDate}
+                    />
                   </div>
                 </div>
               ))}

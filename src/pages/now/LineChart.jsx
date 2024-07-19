@@ -5,13 +5,17 @@ import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement
 import moment from 'moment';
 import {  getEngergyUsageKwhByDateRangePrediction } from '../../action/device';
 import { getbillingSessionByDeviceId } from '../../action/billingSession';
+import { useSelector } from 'react-redux';
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler, BarController, BarElement);
 
-function LineChart({ selectedDevice}) {
+function LineChart() {
+
+  const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
   useEffect(() => {
     // if(selectedDevice)
+    
     loadEngergyUsageKwhByDateRangePrediction();
   }, [selectedDevice]);
 
@@ -123,8 +127,8 @@ const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
       // ctx.fillText('Trending Power Usage', width / 2, top + 30);
 
      
-      ctx.font = '14px Trebuchet MS';
-      ctx.fillText('Trending Power Usage', left +30, top +310);
+      // ctx.font = '14px Trebuchet MS';
+      // ctx.fillText('Trending Power Usage', left +30, top +310);
 
       ctx.restore();
     }
@@ -155,6 +159,7 @@ const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
       },
       y: {
         grid: {
+          display: false,
           color: 'Gray', //  color-x-axis grid lines
         },
         beginAtZero: true,
@@ -172,16 +177,16 @@ const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
       filler: {
         propagate: false,
       },
-      title: {
-        display: true,
-        text: 'Trending Power Usage',
-      },
+      // title: {
+      //   display: true,
+      //   text: 'Trending Power Usage',
+      // },
       legend: {
         //  position:'bottom',
         display: true,
         labels: {
           color: 'white',
-          border: 'none',
+          // border: 'none',
         },
       },
     },
@@ -189,7 +194,7 @@ const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
 
   return (
     <div className='chart2'>
-      <Line data={data} options={options} plugins={[customTextPlugin]} id='box2' />
+      <Line data={data} options={options} plugins={[customTextPlugin]} id='box' className='chart' />
     </div>
   );
 }

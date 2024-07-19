@@ -16,11 +16,12 @@ import DeviceCharts from '../today/DeviceChart'
 import { ThreeDots } from 'react-loader-spinner'
 import { useSessionDate } from '../../context/SessionDateContext'
 import { getBillingSessionDateRangeBySessionStartDate, getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession'
+import { IoMdArrowDropdown } from 'react-icons/io'
 
 
 function Month() {
 
-  const [activeTab, setActiveTab] = useState('Now');
+  const [activeTab, setActiveTab] = useState('Session');
   const selectedDevice=useSelector(state=>state.device.selectedDevice);
 
   const { sessionDate, setSessionDate, numberOfDays, setNumberOfDays } = useSessionDate();
@@ -28,8 +29,15 @@ function Month() {
 
   // const {sessionDate, numberOfDays} = useSessionDate();
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const handleTabClick = (tab) => {
     setActiveTab(tab);
+    if (tab === 'Session') {
+      setIsDropdownOpen(!isDropdownOpen);
+    } else {
+      setIsDropdownOpen(false);
+    }
   };
 
 
@@ -136,15 +144,62 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
       
         <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
         <div className='back'>
-            <ul className='nav-bar-links'>
-                <Link to={"/home"}><li className='btn btn-sm btn-light'>Live</li></Link> 
-                <Link to={"/today"}><li className='btn btn-sm btn-light'>Day</li></Link>  
-                <Link to={"/week"}><li className='btn btn-sm btn-light'>Week</li></Link>  
-                <Link to={"/month"}><li className={`btn btn-sm btn-primary ${activeTab === 'Now' ? 'active' : ''}`}
-                onClick={() => handleTabClick('Now')}>Session</li></Link>
-                <Link to={"/year"}><li className='btn btn-sm btn-light'>Year</li></Link>
-                <Link to={"/custom"}><li className='btn btn-sm btn-light'>Custom</li></Link>
-            </ul>
+        <ul className='nav-bar-links'>
+          <Link to={"/home"}>
+            <li
+              className={`btn btn-sm btn-light ${activeTab === 'Now' ? 'active' : ''}`}
+              onClick={() => handleTabClick('Now')}
+            >
+              Live
+            </li>
+          </Link>
+          <Link to={"/today"}>
+            <li
+              className={`btn btn-sm btn-light ${activeTab === 'Day' ? 'active' : ''}`}
+              onClick={() => handleTabClick('Day')}
+            >
+              Day
+            </li>
+          </Link>
+          <Link to={"/week"}>
+            <li
+              className={`btn btn-sm btn-light ${activeTab === 'Week' ? 'active' : ''}`}
+              onClick={() => handleTabClick('Week')}
+            >
+              Week
+            </li>
+          </Link>
+          <li
+            className={`btn btn-sm btn-primary ${activeTab === 'Session' ? 'active' : ''}`}
+            onClick={() => handleTabClick('Session')}
+          >
+            Session<IoMdArrowDropdown size={20}/>
+            <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}>
+              <Link to={"/month"} className='dropdown-item' onClick={() => handleTabClick('Session')}>
+                Session
+              </Link>
+              <Link to={"/monthactive"} className='dropdown-item' onClick={() => handleTabClick('Month')}>
+                Month
+              </Link>
+            </div>
+          </li>
+          <Link to={"/year"}>
+            <li
+              className={`btn btn-sm btn-light ${activeTab === 'Year' ? 'active' : ''}`}
+              onClick={() => handleTabClick('Year')}
+            >
+              Year
+            </li>
+          </Link>
+          <Link to={"/custom"}>
+            <li
+              className={`btn btn-sm btn-light ${activeTab === 'Custom' ? 'active' : ''}`}
+              onClick={() => handleTabClick('Custom')}
+            >
+              Custom
+            </li>
+          </Link>
+        </ul>
         </div>
       </div>
           <div className='body'>

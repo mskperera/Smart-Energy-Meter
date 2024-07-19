@@ -44,7 +44,7 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
                         color: 'black', 
                       }}
                     >
-                      Days Elapsed: {daysElapsed}
+                      {daysElapsed}
                     </span>
                    </ProgressBar>
                     
