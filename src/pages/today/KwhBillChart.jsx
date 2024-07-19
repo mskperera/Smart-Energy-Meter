@@ -9,7 +9,7 @@ function KwhBillChart({line,isSearchLoading,chartFrequencty}) {
     <>
     {/* <div className='bar-charts'>       */}
       {/* <div className="page-5"> */}
-        <h5 className='page-5-h5' style={{marginBottom:'5px'}}>{line.lineNo}</h5>
+        <h5 className='page-5-h5' style={{marginBottom:'10px'}}>{line.lineNo}</h5>
         <div className="page" style={{marginBottom:'5px'}}>
       {/* <CombinedChart days={days} isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} /> */}
           <div className="chart-now-kw" style={{padding:'5px'}}>
