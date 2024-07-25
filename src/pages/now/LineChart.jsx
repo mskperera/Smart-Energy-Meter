@@ -45,22 +45,23 @@ const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
       deviceId:selectedDevice.id,// "4",
       frequencyId:3,
       // measurementUnitId: 0,
-      startDate:startDate,//currentSession"2024-04-01 18:30",// startOfYear,
-      endDate:endDate,//"2024-04-30 18:30",// endOfYear,
+      startDate:"2024-07-01",//startDate,//currentSession"2024-04-01 18:30",// startOfYear,
+      endDate:"2024-07-31"//endDate,//"2024-04-30 18:30",// endOfYear,
     }
 
     const resultMonth = await getEngergyUsageKwhByDateRangePrediction(payload);
     console.log('1 Month', resultMonth.data)
 
-    const charData = resultMonth.data.recordset;
+    const charData = resultMonth.data.chartData;
     const months = [];
     const monthKwArr = [];
     const predictArr = [];
 
     for (let i = 0; i < charData.length; i++) {
-      months.push(charData[i].day);
+      console.log('1 Month', charData[i])
+      months.push(charData[i].timeStamp_local);
       monthKwArr.push(charData[i].kwhPerDay);
-      predictArr.push(charData[i].kwhPerDayPredicted);
+      predictArr.push(charData[i].kwhPerDayForecast);
       // predictArr.push(charData[i].predictedKwhPerMonth);
     }
 
