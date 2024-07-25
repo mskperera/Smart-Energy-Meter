@@ -13,10 +13,10 @@ function LineChart() {
 
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
-  useEffect(() => {
-    // if(selectedDevice)
-    
-    loadEngergyUsageKwhByDateRangePrediction();
+   useEffect(() => {
+    if (selectedDevice) {
+      loadEngergyUsageKwhByDateRangePrediction();
+    }
   }, [selectedDevice]);
 
   const loadEngergyUsageKwhByDateRangePrediction = async () => {
@@ -35,20 +35,23 @@ console.log('currentSession',currentSession);
 
 // const startDate = moment(currentSession.startDate).utc().startOf('month').subtract('minutes').format('YYYY-MM-DD'); 
 // const endDate = moment(currentSession.endDate).utc().endOf('month').subtract('minutes').format('YYYY-MM-DD');
+const startDate = moment().startOf('month').format('YYYY-MM-DD');
+const endDate = moment().endOf('month').format('YYYY-MM-DD');
 
-
-const startDate = moment(currentSession.startDate).format('YYYY-MM-DD');
-const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
+// const startDate = moment(currentSession.startDate).format('YYYY-MM-DD');
+// const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
 
 
     const payload = {
       deviceId:selectedDevice.id,// "4",
       frequencyId:3,
       // measurementUnitId: 0,
-      startDate:"2024-07-01",//startDate,//currentSession"2024-04-01 18:30",// startOfYear,
-      endDate:"2024-07-31"//endDate,//"2024-04-30 18:30",// endOfYear,
+      startDate:startDate,//"2024-07-01",//startDate,//currentSession"2024-04-01 18:30",// startOfYear,
+      endDate:endDate//"2024-07-31"//endDate,//"2024-04-30 18:30",// endOfYear,
     }
 
+    console.log('payload', payload);
+    
     const resultMonth = await getEngergyUsageKwhByDateRangePrediction(payload);
     console.log('1 Month', resultMonth.data)
 
@@ -77,7 +80,7 @@ const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
         data: monthKwArr,
         borderColor: 'rgba(0, 255, 153)',
         pointBortderColor: 'aqua',
-        tension: 0.5,
+        tension: 0.3,
         backgroundColor: 'rgba(0, 255, 153, 0.5)',
         fill: true,
         showLine: false,
@@ -189,6 +192,7 @@ const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
           color: 'white',
           // border: 'none',
         },
+        onClick: () => { },
       },
     },
   };

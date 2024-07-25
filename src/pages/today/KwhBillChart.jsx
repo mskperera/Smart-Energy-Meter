@@ -17,7 +17,7 @@ function KwhBillChart({line,isSearchLoading,chartFrequencty}) {
           </div>
           <div className="chart-now-cost" style={{padding:'5px'}}>
             <TodayCost  days={days} isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} />
-            </div>
+          </div>
         </div>
       {/* </div> */}
     {/* </div> */}
