@@ -48,7 +48,7 @@ const Menu = () => {
             className={`btn btn-sm btn-light ${activeTab === 'Session' ? 'active' : ''}`}
             onClick={() => handleTabClick('Session')}
           >
-            Session<IoMdArrowDropdown size={20}/>
+            Session<IoMdArrowDropdown size={20} className='icon-drop-month'/>
             <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}>
               <Link to={"/month"} className='dropdown-item' onClick={() => handleTabClick('Session')}>
                 Session

@@ -104,6 +104,7 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
           onClick: () => {},
         },
         title: {
+          // position:'bottom',
           display: true,
           text: `Total Energy Consumption :${totalSum.toFixed(2)} kWh`,
           color: 'white',

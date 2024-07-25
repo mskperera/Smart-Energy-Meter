@@ -3,6 +3,7 @@ import KwhBillChart from './KwhBillChart';
 import { FaLocationDot } from 'react-icons/fa6';
 import moment from 'moment';
 import { ProgressBar } from 'react-bootstrap';
+import { MdPermDeviceInformation } from 'react-icons/md';
 
 function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
   const { deviceId, deviceName, deviceLocation, lines, sessionDetails } = device;
@@ -21,7 +22,7 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
         <div className='name-session' style={{marginTop:'-4px'}}>
           <div>
             <h6 className='name-device'>
-              {deviceName} <FaLocationDot color={'red'} size={15} style={{ marginTop: '-8px' }} />{deviceLocation}
+            <MdPermDeviceInformation size={18} style={{marginTop:'-10px'}}/>{deviceName} <FaLocationDot color={'red'} size={15} style={{ marginTop: '-8px' }} />{deviceLocation}
             </h6>
           </div>
           <div style={{marginTop:'30px'}}>

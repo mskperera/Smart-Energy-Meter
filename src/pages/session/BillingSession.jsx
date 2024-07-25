@@ -126,7 +126,7 @@ function BillingSession() {
 
   return (
     <div className="home">
-      <div className="body w-100">
+      <div className="body">
         <div className="notification2 ">
           <div className="">
             <h3 className="d-flex align-items-center justify-content-center mb-3">
