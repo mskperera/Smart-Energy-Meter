@@ -113,7 +113,7 @@ const TodayCost = ({days,isSearchLoading,chartFrequencty}) => {
           },
           title: {
             display: true,
-            text: `Total Cost Consumption Rs :${totalSum.toFixed(2)} `,
+            text: `Total Cost Consumption Rs :${(Number(totalSum.toFixed(2))).toLocaleString()} `,
             color: 'white',
             font: {
               size: 13,
