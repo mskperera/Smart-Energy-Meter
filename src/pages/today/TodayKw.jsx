@@ -106,7 +106,7 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
         title: {
           // position:'bottom',
           display: true,
-          text: `Total Energy Consumption :${totalSum.toFixed(2)} kWh`,
+          text: `Total Energy Consumption : ${(Number(totalSum.toFixed(2))).toLocaleString()} kWh`,
           color: 'white',
           font: {
             size: 13,
