@@ -20,6 +20,7 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
     <>
       <div className='bar-chartss'>
         <div className='name-session' style={{marginTop:'-4px'}}>
+
           <div>
             <h6 className='name-device'>
             <MdPermDeviceInformation size={18} style={{marginTop:'-10px'}}/>{deviceName} <FaLocationDot color={'red'} size={15} style={{ marginTop: '-8px' }} />{deviceLocation}
@@ -58,6 +59,7 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
           </div>
         </div>
         {/* <h6 className='name-device'></h6> */}
+
         {lines.map((line, index) => (
           <KwhBillChart
             line={line}
