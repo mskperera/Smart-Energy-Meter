@@ -166,7 +166,7 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
     </div>
     <br/> 
     <div className="">
-      <LineChart deviceId={device?.deviceId}/>
+      <LineChart device={device}/>
     </div>
        {/* {lines.map((line, index) => (
         <React.Fragment key={`operational-chart-${line.lineNo || index}`}>

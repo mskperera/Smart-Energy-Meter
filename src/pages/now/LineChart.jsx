@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler, BarController, BarElement);
 
-function LineChart({deviceId}) {
+function LineChart({device}) {
 
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
@@ -17,33 +17,33 @@ function LineChart({deviceId}) {
     if (selectedDevice) {
       loadEngergyUsageKwhByDateRangePrediction();
     }
-  }, [deviceId]);
+  }, [device]);
 
   const loadEngergyUsageKwhByDateRangePrediction = async () => {
     // const currentYear = moment().utc();
     // const startOfYear = currentYear.startOf('year').format('YYYY-MM-DD');
     // const endOfYear = currentYear.endOf('year').format('YYYY-MM-DD');
 
-// const sesstionDetailsRes= await getbillingSessionByDeviceId(selectedDevice.id);
-// const sesstionDetailsArr = sesstionDetailsRes.data;
+ //const sesstionDetailsRes= await getbillingSessionByDeviceId(selectedDevice.id);
+ //const sesstionDetailsArr = sesstionDetailsRes.data;
 // console.log('sesstionDetailsArr',sesstionDetailsArr);
 // if(sesstionDetailsArr.length===0) return;
 
-// const currentSession=sesstionDetailsArr[sesstionDetailsArr.length-1];
+ //const currentSession=sesstionDetailsArr[sesstionDetailsArr.length-1];
 // console.log('currentSession',currentSession);
 
 
 // const startDate = moment(currentSession.startDate).utc().startOf('month').subtract('minutes').format('YYYY-MM-DD'); 
 // const endDate = moment(currentSession.endDate).utc().endOf('month').subtract('minutes').format('YYYY-MM-DD');
-const startDate = moment().startOf('month').format('YYYY-MM-DD');
-const endDate = moment().endOf('month').format('YYYY-MM-DD');
+// const startDate = moment().startOf('month').format('YYYY-MM-DD');
+// const endDate = moment().endOf('month').format('YYYY-MM-DD');
 
-// const startDate = moment(currentSession.startDate).format('YYYY-MM-DD');
-// const endDate = moment(currentSession.endDate).format('YYYY-MM-DD');
+const startDate = moment(device?.startDate).format('YYYY-MM-DD');
+const endDate = moment(device?.endDate).format('YYYY-MM-DD');
 
 
     const payload = {
-      deviceId:deviceId,//selectedDevice.id,// "4",
+      deviceId:device?.deviceId,//selectedDevice.id,// "4",
       frequencyId:3,
       // measurementUnitId: 0,
       startDate:startDate,//"2024-07-01",//startDate,//currentSession"2024-04-01 18:30",// startOfYear,
