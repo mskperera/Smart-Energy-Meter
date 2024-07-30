@@ -100,3 +100,28 @@ export const saveDeviceAssigntoGroup= async (payload) => {
     return err;
   }
 }
+//saveDeviceAssigntoGroup
+// payload={
+//   "groupId":500000004,
+//   "deviceObjArr":[4,26]
+//   }
+
+
+export const getDevicesAssingedByGroupId= async (groupId) => {
+  try {
+    return await customAxios
+      .get(`/group/getDevicesAssingedByGroupId/${groupId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
