@@ -20,16 +20,15 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
     <>
       <div className='bar-chartss'>
         <div className='name-session' style={{marginTop:'-4px'}}>
-
           <div>
             <h6 className='name-device'>
-            <MdPermDeviceInformation size={18} style={{marginTop:'-10px'}}/>{deviceName} <FaLocationDot color={'red'} size={15} style={{ marginTop: '-8px' }} />{deviceLocation}
+            <MdPermDeviceInformation size={18} style={{marginTop:'-10px', color:"grey"}}/>{deviceName} <FaLocationDot color={'red'} size={15} style={{ marginTop: '-8px' }} />{deviceLocation}
             </h6>
           </div>
           <div style={{marginTop:'30px'}}>
             {/* <h6 className='name-device name-device-date'>Start Date: {formattedStartDate} / End Date: {formattedEndDate} Days Elapsed {daysElapsed}</h6> */}
             <div className="days-bar-two">
-                  <h6 style={{marginTop:'-30px', position:'relative', marginLeft:'5px',paddingBottom:'1px'}}>Start Date: {formattedStartDate} / End Date: {formattedEndDate}</h6>
+                  <h6 style={{marginTop:'-30px', position:'relative', marginLeft:'5px',paddingBottom:'1px'}}>{formattedStartDate} / {formattedEndDate}</h6>
                 <div className="d-flex justify-content-start">
                   <span className="session-number"></span>&nbsp;
                   <div className="progress d-flex justify-content-start">
@@ -43,7 +42,7 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
                         left: '0%', 
                         transform: 'translateX(0%)',
                         fontWeight: '600',
-                        color: 'black', 
+                        color: 'white', 
                       }}
                     >
                       {daysElapsed}
@@ -59,7 +58,6 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
           </div>
         </div>
         {/* <h6 className='name-device'></h6> */}
-
         {lines.map((line, index) => (
           <KwhBillChart
             line={line}

@@ -9,6 +9,7 @@ import { ProgressBar } from 'react-bootstrap';
 import { MdPermDeviceInformation } from "react-icons/md";
 import moment from "moment";
 import LineChart from "./LineChart";
+import LineChartActual from "./LineChartActual";
 
 function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , numberOfDays, startDate, endDate  }) {
   const { lines} = device;
@@ -52,24 +53,29 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
           </div>
           <div className="days-bar">
             <div className="days-bar-one">
-                <h6><MdPermDeviceInformation size={18} style={{marginTop:'-10px'}}/>{deviceName} <span><FaLocationDot color={'red'} size={15} style={{marginTop:'-8px'}}/>{deviceLocation}</span></h6>
+                <h6 className="name-location">
+                  <span><MdPermDeviceInformation size={18} style={{marginTop:'-8px', color:'gray'}}/>{deviceName}</span>
+                  <span><FaLocationDot color={'red'} size={15} style={{marginTop:'-8px', marginLeft:'5px'}}/>{deviceLocation}</span>
+                </h6>
             </div>
-            <div className="days-bar-two">
-                  <h6 style={{marginTop:'-30px', position:'relative', marginLeft:'5px'}}>Start Date: {formattedStartDate} / End Date: {formattedEndDate}</h6>
+            <div className="days-bar-two-home">
+            <h6 className='topic1' style={{ position:'relative'}}>{formattedStartDate}</h6>
+            <h6 className='topic2' style={{ position:'relative'}}>{formattedEndDate}</h6>
                 <div className="d-flex justify-content-start">
-                  <span className="session-number">0</span>&nbsp;
+                  <span className="session-number" style={{marginTop:'0px'}}>0</span>&nbsp;
                   <div className="progress d-flex justify-content-start">
                    <ProgressBar now={daysElapsed} 
                     max={numberOfDays} 
                     className="progress-bar progress-bar2" 
-                    style={{ width: `${(daysElapsed / numberOfDays) * 100}%` }}>
+                    style={{ width: `${(daysElapsed / numberOfDays) * 100}%`, background:'#00bbf0'}}>
                    <span 
                       style={{ 
                         position: 'inherit', 
                         left: '50%', 
                         transform: 'translateX(0%)',
-                        fontWeight: '600',
-                        color: 'black', 
+                        fontWeight: '550',
+                        color: 'white', 
+                        // marginTop:'-5px'
                       }}
                     >
                       {daysElapsed}
@@ -79,7 +85,7 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
                   {/* /> */}
                   
                   </div>
-                  &nbsp;<span className="session-number">{numberOfDays}</span>
+                  &nbsp;<span className="session-number" style={{marginTop:'0px'}}>{numberOfDays}</span>
                 </div>
             </div>
           </div>
@@ -122,12 +128,14 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
         <React.Fragment key={`kwh-bill-${line.lineNo || index}`}>
           {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div className="line-name">Line: {line.line}</div>
+              <div className="line-name" style={{color:'white'}}>Line: {line.line}</div>
             </div>
           )}
           <KwhBillChart
             key={`kwh-chart-${line.lineNo || index}`}
             lineNo={line.lineNo}
+            deviceTypeId={device.deviceTypeId}
+            deviceMeasuringModeId={device.deviceMeasuringModeId}
             voltage={line.voltage}
             current={line.current}
             pf={line.pf}
@@ -144,7 +152,7 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
         <React.Fragment key={`operational-chart-${line.lineNo || index}`}>
           {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div className="line-number">Line: {line.line}</div>
+              {/* <div className="line-number" style={{color:'white'}}>Line: {line.line}</div> */}
             </div>
           )}
           <OperationalChart
@@ -159,13 +167,16 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
             bill={line.bill}
             budgetedKwh={line.budgetedKwh}
             budgetedBill={line.budgetedBill}
-           
           />
         </React.Fragment>
       ))}
     </div>
     <br/> 
-    <div className="">
+    <div className="page chart-now-kw">
+      <LineChartActual device={device}/>
+    </div>
+    <br/>
+    <div className="page chart-now-kw">
       <LineChart device={device}/>
     </div>
        {/* {lines.map((line, index) => (

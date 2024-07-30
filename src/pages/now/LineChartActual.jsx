@@ -10,7 +10,7 @@ import {ThreeDots} from 'react-loader-spinner';
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler, BarController, BarElement);
 
-function LineChart({device}) {
+function LineChartActual({device}) {
 
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
@@ -68,7 +68,6 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
 
     for (let i = 0; i < charData.length; i++) {
       console.log('1 Month', charData[i])
-      // months.push(charData[i].timeStamp_local);
       months.push(moment(charData[i].timeStamp_local).format('MM-DD'));
       monthKwArr.push(charData[i].kwhPerDay);
       predictArr.push(charData[i].kwhPerDayForecast);
@@ -84,38 +83,29 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
     // }
 
     const datasets0 = [
-      {
-        label: 'Prediction',
-        data: predictArr,
-        borderColor: '#fff346',
-        pointBortderColor: 'aqua',
-        tension: 0.4,
-        // backgroundColor: '#fff346',
-        // backgroundColor: 'rgba(54,162,235, 0.3)',
-        fill: false,
-        showLine: true,
-        borderDash: [8, 10]
-      },
       // {
-      //   label: 'Actual',
-      //   data: kwhCumActualArr,
-      //   borderColor: 'red',
+      //   label: 'Prediction',
+      //   data: predictArr,
+      //   borderColor: '#fff346',
       //   pointBortderColor: 'aqua',
-      //   tension: 0.3,
-      //   backgroundColor: 'green',
+      //   tension: 0.4,
+      //   // backgroundColor: '#fff346',
+      //   // backgroundColor: 'rgba(54,162,235, 0.3)',
       //   fill: false,
       //   showLine: true,
-      // },
-      // {
-      //   label: 'Forcast',
-      //   data: kwhCumForcastArr,
-      //   borderColor: 'rgba(0, 255, 153)',
-      //   pointBortderColor: 'rgba(0, 255, 153)',
-      //   tension: 0.3,
+      //   borderDash: [4, 8]
       // },
       {
-        label: 'kWh',
-        data: monthKwArr,
+        label: 'Forcast',
+        data: kwhCumForcastArr,
+        borderColor: '#fff346',
+        pointBortderColor: 'rgba(0, 255, 153)',
+        tension: 0.3,
+        borderDash: [8, 10]
+      },
+      {
+        label: 'Actual',
+        data: kwhCumActualArr,
         borderColor: 'rgba(54,162,235)',
         pointBortderColor: 'aqua',
         tension: 0.3,
@@ -123,6 +113,16 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
         fill: true,
         showLine: true,
       },
+      // {
+      //   label: 'kWh',
+      //   data: monthKwArr,
+      //   // borderColor: 'rgba(0, 255, 153)',
+      //   pointBortderColor: 'aqua',
+      //   tension: 0.3,
+      //   backgroundColor: 'rgba(54,162,235, 0.5)',
+      //   fill: true,
+      //   showLine: false,
+      // },
       // {
       //   label: 'Bar Data',
       //   data: [10, 20, 30, 40, 50], 
@@ -239,4 +239,4 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
   );
 }
 
-export default LineChart;
+export default LineChartActual;

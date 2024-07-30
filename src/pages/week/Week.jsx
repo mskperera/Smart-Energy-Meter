@@ -133,7 +133,8 @@ const [devices, setDevices] = useState([]);
         <ul className='nav-bar-links'>
           <Link to={"/home"}>
             <li
-              className={`btn btn-sm btn-light ${activeTab === 'Now' ? 'active' : ''}`}
+              style={{backgroundColor: '#3b3b3b'}}
+              className={`btn btn-sm ${activeTab === 'Now' ? 'active' : ''}`}
               onClick={() => handleTabClick('Now')}
             >
               Live
@@ -141,7 +142,8 @@ const [devices, setDevices] = useState([]);
           </Link>
           <Link to={"/today"}>
             <li
-              className={`btn btn-sm btn-light ${activeTab === 'Day' ? 'active' : ''}`}
+              style={{backgroundColor: '#3b3b3b'}}
+              className={`btn btn-sm ${activeTab === 'Day' ? 'active' : ''}`}
               onClick={() => handleTabClick('Day')}
             >
               Day
@@ -149,6 +151,7 @@ const [devices, setDevices] = useState([]);
           </Link>
           <Link to={"/week"}>
             <li
+            style={{backgroundColor: '#00bbf0'}}
               className={`btn btn-sm btn-primary ${activeTab === 'Week' ? 'active' : ''}`}
               onClick={() => handleTabClick('Week')}
             >
@@ -156,7 +159,8 @@ const [devices, setDevices] = useState([]);
             </li>
           </Link>
           <li
-            className={`btn btn-sm btn-light ${activeTab === 'Session' ? 'active' : ''}`}
+            style={{backgroundColor: '#3b3b3b'}}
+            className={`btn btn-sm  ${activeTab === 'Session' ? 'active' : ''}`}
             onClick={() => handleTabClick('Session')}
           >
             Session<IoMdArrowDropdown size={20}/>
@@ -171,7 +175,8 @@ const [devices, setDevices] = useState([]);
           </li>
           <Link to={"/year"}>
             <li
-              className={`btn btn-sm btn-light ${activeTab === 'Year' ? 'active' : ''}`}
+              style={{backgroundColor: '#3b3b3b'}}
+              className={`btn btn-sm  ${activeTab === 'Year' ? 'active' : ''}`}
               onClick={() => handleTabClick('Year')}
             >
               Year
@@ -179,7 +184,8 @@ const [devices, setDevices] = useState([]);
           </Link>
           <Link to={"/custom"}>
             <li
-              className={`btn btn-sm btn-light ${activeTab === 'Custom' ? 'active' : ''}`}
+              style={{backgroundColor: '#3b3b3b'}}
+              className={`btn btn-sm  ${activeTab === 'Custom' ? 'active' : ''}`}
               onClick={() => handleTabClick('Custom')}
             >
               Custom

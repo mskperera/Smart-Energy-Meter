@@ -79,7 +79,7 @@ function Userlist() {
     {/* <Navbar onChangeDevice={onChangeDeviceHandler} className='navnav'/> */}
     <div className="body">
       <div className= "rounded p-2 ">
-        <h2 className='d-flex justify-content-center align-items-center'>User Management</h2>
+        <h2 className='d-flex justify-content-center align-items-center' style={{color:'white'}}>User Management</h2>
         
         {loading ? (
           // <p className="loading-message">Loading please wait...</p>

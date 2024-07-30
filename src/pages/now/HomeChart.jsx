@@ -1,25 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import { getEngergyUsageNow } from '../../action/device';
 import './Homechart.css';
 import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js';
-import { useSelector } from 'react-redux';
+import { MdEnergySavingsLeaf } from "react-icons/md";
+
 
 ChartJS.register(ArcElement, Tooltip);
 
-const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
-
- //#00ff99
+const HomeChart = ({ currentKwValue, budgetedKwhValue, deviceTypeId, deviceMeasuringModeId }) => {
   const data = {
-    
-    labels: ['Used kWh', `Remaining kWh : ${ ((budgetedKwhValue - currentKwValue) ||0 )?.toLocaleString(undefined,{minimumFractionDigits: 2, maximumFractionDigits: 2})}`],
+    labels: ['Used kWh', `Remaining kWh: ${((budgetedKwhValue - currentKwValue) || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`],
     datasets: [
       {
         data: [currentKwValue, budgetedKwhValue],
-        backgroundColor: [currentKwValue > budgetedKwhValue ? '#ff0000' : '#fff346', '#F5F5DC'],
-        circumference: 270,
-        rotation: 225,
-        cutout: '80%',
+        backgroundColor: [currentKwValue > budgetedKwhValue ? '#ff0000' : '#00bbf0', '#3b3b3b'],
+        circumference: 350,
+        rotation: 200,
+        cutout: '85%',
         borderWidth: 0,
         borderRadius: 0,
       },
@@ -32,35 +29,34 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
       const { ctx, data } = chart;
       const centerX = chart.getDatasetMeta(0).data[0].x;
       const centerY = chart.getDatasetMeta(0).data[0].y;
-  
+
       ctx.save();
-      ctx.fillStyle = [currentKwValue > budgetedKwhValue ? '#ff0000' : '#fff346'];
-      ctx.font = 'bold 30px Trebuchet MS';
+      ctx.fillStyle = [currentKwValue > budgetedKwhValue ? '#ff0000' : '#00bbf0'];
+      ctx.font = 'bold 22px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 
-      const currentValueFormatted = (data.datasets[0].data[0] || 0).toLocaleString(undefined,{minimumFractionDigits: 2, maximumFractionDigits: 2});
-      ctx.fillText(currentValueFormatted, centerX, centerY -10);
-      // ctx.fillText(data.datasets[0].data[0].toLocaleString(undefined,{minimumFractionDigits: 2, maximumFractionDigits: 2}), centerX, centerY);
-  
-      ctx.font = '22px Trebuchet MS';
-      ctx.fillStyle = [currentKwValue > budgetedKwhValue ? '#ff0000' : '#fff346'];
-      ctx.fillText('kWh', centerX, centerY + 35);
-  
+      const currentValueFormatted = (data.datasets[0].data[0] || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      ctx.fillText(currentValueFormatted, centerX, centerY +5);
+
+      ctx.font = 'bold 20px Trebuchet MS';
+      ctx.fillStyle = [currentKwValue > budgetedKwhValue ? '#ff0000' : '#00bbf0'];
+      ctx.fillText('kWh', centerX, centerY - 25);
+
       ctx.font = '15px Trebuchet MS';
       ctx.fillStyle = 'white';
-      ctx.fillText('Energy Usage', centerX, centerY + 70);
-  
+      // ctx.fillText('Energy Usage', centerX, centerY + 70);
+
       if (data.datasets[0].data[1] !== undefined) {
-        ctx.font = '15px Trebuchet MS';
+        ctx.font = '18px Trebuchet MS';
         ctx.fillStyle = 'white';
-        ctx.fillText('Budget', centerX, centerY - 75);
-  
-        ctx.font = 'bold 22px Trebuchet MS';
+        // ctx.fillText('Budget', centerX, centerY - 40);
+
+        ctx.font = ' 16px Trebuchet MS';
         ctx.fillStyle = 'white';
-        ctx.fillText(`${data.datasets[0].data[1].toLocaleString()} kWh`, centerX, centerY - 50);
+        ctx.fillText(`/ ${data.datasets[0].data[1].toLocaleString()}`, centerX, centerY  + 30);
       }
-  
+
       ctx.restore();
     },
   };
@@ -68,6 +64,7 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
   const options = {
     plugins: {
       legend: {
+        display:false,
         position: 'bottom',
         labels: {
           color: 'white',
@@ -75,7 +72,7 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
           pointStyle: 'square',
           boxWidth: 20,
         },
-        onClick: () =>{},
+        onClick: () => {},
       },
     },
     layout: {
@@ -85,12 +82,17 @@ const HomeChart = ({currentKwValue,budgetedKwhValue,selectedLine }) => {
     },
   };
 
+  // const backgroundColor = deviceTypeId === 2 && deviceMeasuringModeId === 1 ? '#FF5733' : '#131a25';  //style={{ backgroundColor }}
+
   return (
-    <>
-      <div className='text-p'>
-        <Doughnut data={data} options={options} plugins={[gaugeText]} id='box3' className='chart' />
+    <div className='text-p'>
+      {/* <div id='box3' className='chart' style={{ backgroundColor }}> */}
+      <div style={{position:'static', display:'flex'}}>
+        <MdEnergySavingsLeaf className='icon' size={20} style={{display:'flex', color:'00bbf0', marginLeft:'90px', marginTop:'55px'}}/>
       </div>
-    </>
+        <Doughnut data={data} options={options} plugins={[gaugeText]} id='box3' className='chart' /> 
+      {/* </div> */}
+    </div>
   );
 };
 

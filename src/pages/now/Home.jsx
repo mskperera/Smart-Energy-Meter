@@ -108,6 +108,7 @@ const Home = () => {
                   </h2>
                 </div>
               )}
+
               {devices?.map((device, index) => (
                 <div key={index}>
                   <div className="device-name-state align-items-center justify-content-center w-100">

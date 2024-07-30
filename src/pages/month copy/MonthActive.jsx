@@ -107,17 +107,23 @@ function MonthActive() {
         <div className='back'>
           <ul className='nav-bar-links'>
             <Link to={"/home"}>
-              <li className={`btn btn-sm btn-light ${activeTab === 'Now' ? 'active' : ''}`} onClick={() => handleTabClick('Now')}>
+              <li 
+              style={{backgroundColor: '#3b3b3b'}}
+               className={`btn btn-sm  ${activeTab === 'Now' ? 'active' : ''}`} onClick={() => handleTabClick('Now')}>
                 Live
               </li>
             </Link>
             <Link to={"/today"}>
-              <li className={`btn btn-sm btn-light ${activeTab === 'Day' ? 'active' : ''}`} onClick={() => handleTabClick('Day')}>
+              <li 
+              style={{backgroundColor: '#3b3b3b'}}
+              className={`btn btn-sm  ${activeTab === 'Day' ? 'active' : ''}`} onClick={() => handleTabClick('Day')}>
                 Day
               </li>
             </Link>
             <Link to={"/week"}>
-              <li className={`btn btn-sm btn-light ${activeTab === 'Week' ? 'active' : ''}`} onClick={() => handleTabClick('Week')}>
+              <li 
+              style={{backgroundColor: '#3b3b3b'}}
+              className={`btn btn-sm  ${activeTab === 'Week' ? 'active' : ''}`} onClick={() => handleTabClick('Week')}>
                 Week
               </li>
             </Link>
@@ -133,12 +139,16 @@ function MonthActive() {
               </div>
             </li>
             <Link to={"/year"}>
-              <li className={`btn btn-sm btn-light ${activeTab === 'Year' ? 'active' : ''}`} onClick={() => handleTabClick('Year')}>
+              <li 
+              style={{backgroundColor: '#3b3b3b'}}
+              className={`btn btn-sm ${activeTab === 'Year' ? 'active' : ''}`} onClick={() => handleTabClick('Year')}>
                 Year
               </li>
             </Link>
             <Link to={"/custom"}>
-              <li className={`btn btn-sm btn-light ${activeTab === 'Custom' ? 'active' : ''}`} onClick={() => handleTabClick('Custom')}>
+              <li
+              style={{backgroundColor: '#3b3b3b'}}
+              className={`btn btn-sm  ${activeTab === 'Custom' ? 'active' : ''}`} onClick={() => handleTabClick('Custom')}>
                 Custom
               </li>
             </Link>
