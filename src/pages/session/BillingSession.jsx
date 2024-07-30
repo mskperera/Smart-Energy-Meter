@@ -18,6 +18,9 @@ function BillingSession() {
   const [editingSessionId, setEditingSessionId] = useState(null);
   const [loadData, setLoadData] = useState(false);
 
+  const [originalDates, setOriginalDates] = useState({});
+  const [originalTimes, setOriginalTimes] = useState({});
+
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
   useEffect(() => {
@@ -30,21 +33,21 @@ function BillingSession() {
     try {
       setLoadData(true);
       const res = await getbillingSessionByDeviceId(deviceId);
-      console.log("billing session", res);
+      console.log('billing session', res);
       if (res.data.length > 0) {
         const sessions = res.data.reduce((acc, session) => {
           const startDate = new Date(session.startDate);
           const endDate = new Date(session.endDate);
           acc[session.deviceBillingSessionId] = {
             startDate,
-            endDate
+            endDate,
           };
-          setSelectedTimes(prevTimes => ({
+          setSelectedTimes((prevTimes) => ({
             ...prevTimes,
             [session.deviceBillingSessionId]: {
               startTime: startDate.toTimeString().slice(0, 5),
-              endTime: endDate.toTimeString().slice(0, 5)
-            }
+              endTime: endDate.toTimeString().slice(0, 5),
+            },
           }));
           return acc;
         }, {});
@@ -53,7 +56,7 @@ function BillingSession() {
       }
       setLoadData(false);
     } catch (error) {
-      console.error("Error fetching billing session:", error);
+      console.error('Error fetching billing session:', error);
       setLoadData(false);
     }
   };
@@ -71,52 +74,72 @@ function BillingSession() {
       endDate.setHours(endHours, endMinutes);
 
       const payload = {
-        sessionName: billingSession.find(session => session.deviceBillingSessionId === sessionId).sessionName,
+        sessionName: billingSession.find((session) => session.deviceBillingSessionId === sessionId).sessionName,
         startDate: startDate.toISOString(),
         endDate: endDate.toISOString(),
         deviceId: selectedDevice.id,
         deviceBillingSessionId: sessionId,
-        saveType: "U",
+        saveType: 'U',
       };
       const res = await saveBillingSession(payload);
-      console.log("API:", res);
+      console.log('API:', res);
       const { responseStatus, outputMessage } = res.data;
-      if (responseStatus === "failed") {
+      if (responseStatus === 'failed') {
         setErrorMessage(outputMessage);
         return;
       }
-      swal("Updated Successfully", " ", "success").then(() => {
+      swal('Updated Successfully', ' ', 'success').then(() => {
         loadBillingSessionByDeviceId(selectedDevice.id);
         setEditingSessionId(null);
       });
     } catch (err) {
-      console.error("Error saving billing session:", err);
-      setErrorMessage("Error saving billing session");
+      console.error('Error saving billing session:', err);
+      setErrorMessage('Error saving billing session');
     }
   };
 
   const handleDateChange = (date, sessionId, type) => {
-    setSelectedDates(prevDates => ({
+    setSelectedDates((prevDates) => ({
       ...prevDates,
       [sessionId]: {
         ...prevDates[sessionId],
-        [type]: date
-      }
+        [type]: date,
+      },
     }));
   };
 
   const handleTimeChange = (time, sessionId, type) => {
-    setSelectedTimes(prevTimes => ({
+    setSelectedTimes((prevTimes) => ({
       ...prevTimes,
       [sessionId]: {
         ...prevTimes[sessionId],
-        [type]: time
-      }
+        [type]: time,
+      },
     }));
   };
 
   const handleEditChange = (sessionId) => {
+    setOriginalDates((prevDates) => ({
+      ...prevDates,
+      [sessionId]: selectedDates[sessionId],
+    }));
+    setOriginalTimes((prevTimes) => ({
+      ...prevTimes,
+      [sessionId]: selectedTimes[sessionId],
+    }));
     setEditingSessionId(sessionId);
+  };
+
+  const cancelEditHandler = (sessionId) => {
+    setSelectedDates((prevDates) => ({
+      ...prevDates,
+      [sessionId]: originalDates[sessionId],
+    }));
+    setSelectedTimes((prevTimes) => ({
+      ...prevTimes,
+      [sessionId]: originalTimes[sessionId],
+    }));
+    setEditingSessionId(null);
   };
 
   const formatDate = (dateString) => {
@@ -127,9 +150,9 @@ function BillingSession() {
   return (
     <div className="home">
       <div className="body">
-        <div className="notification2 ">
+        <div className="notification2">
           <div className="">
-            <h3 className="d-flex align-items-center justify-content-center mb-3">
+            <h3 className="d-flex align-items-center justify-content-center mb-3" style={{color:'white'}}>
               Billing Session
             </h3>
 
@@ -153,7 +176,9 @@ function BillingSession() {
                       <div className="bill-background">
                         <div className="bill-ground text-left">
                           <div className="col">
-                            <h6><b>{session.sessionName}</b></h6>
+                            <h6>
+                              <b>{session.sessionName}</b>
+                            </h6>
                             <div className="form-group row">
                               <label
                                 htmlFor="startdate"
@@ -161,62 +186,39 @@ function BillingSession() {
                               >
                                 Session Start
                               </label>
-                              <div className="col-sm-8 text-left">
-                                {editingSessionId ===
-                                session.deviceBillingSessionId ? (
+                              <div className="col-sm-8 text-left table-session1">
+                                {editingSessionId === session.deviceBillingSessionId ? (
                                   <>
-                                    <ReactDatePicker 
-                                      selected={
-                                        selectedDates[
-                                          session.deviceBillingSessionId
-                                        ]?.startDate
-                                      }
-                                      onChange={(date) =>
-                                        handleDateChange(
-                                          date,
-                                          session.deviceBillingSessionId,
-                                          "startDate"
-                                        )
-                                      }
+                                  <div className='picker-session'>
+                                    <ReactDatePicker
+                                      selected={selectedDates[session.deviceBillingSessionId]?.startDate}
+                                      onChange={(date) => handleDateChange(date, session.deviceBillingSessionId, 'startDate')}
                                       className="form-control text-left editable mb-1 form-field"
                                       placeholderText="Select date"
                                       dateFormat="dd MMM yyyy"
-                                      style={{ height: "30px" }}
+                                      style={{ height: '30px' }}
                                     />
+                                  </div>
+                                  <div className='picker-session'>
                                     <TimePicker
-                                      value={
-                                        selectedTimes[
-                                          session.deviceBillingSessionId
-                                        ]?.startTime
-                                      }
-                                      onChange={(time) =>
-                                        handleTimeChange(
-                                          time,
-                                          session.deviceBillingSessionId,
-                                          "startTime"
-                                        )
-                                      }
+                                      value={selectedTimes[session.deviceBillingSessionId]?.startTime}
+                                      onChange={(time) => handleTimeChange(time, session.deviceBillingSessionId, 'startTime')}
                                       disableClock={true}
                                       className="form-control text-left editable mb-1 form-field"
-                                      style={{ height: "30px" }}
+                                      style={{ height: '30px' }}
                                     />
+                                  </div>
                                   </>
                                 ) : (
                                   <input
                                     type="text"
-                                    style={{ height: "30px" }}
+                                    style={{ height: '30px' }}
                                     className="form-control text-center disabled form-field"
                                     disabled
                                     value={
-                                      selectedDates[
-                                        session.deviceBillingSessionId
-                                      ]?.startDate
-                                        ? new Date(
-                                            selectedDates[
-                                              session.deviceBillingSessionId
-                                            ].startDate
-                                          ).toLocaleString()
-                                        : ""
+                                      selectedDates[session.deviceBillingSessionId]?.startDate
+                                        ? new Date(selectedDates[session.deviceBillingSessionId].startDate).toLocaleString()
+                                        : ''
                                     }
                                   />
                                 )}
@@ -225,67 +227,43 @@ function BillingSession() {
                             <div className="form-group row">
                               <label
                                 htmlFor="enddate"
-                                className="col-sm-4 col-form-label "
+                                className="col-sm-4 col-form-label"
                               >
                                 Session End
                               </label>
-                              <div className="col-sm-8 text-left">
-                                {editingSessionId ===
-                                session.deviceBillingSessionId ? (
+                              <div className="col-sm-8 text-left table-session">
+                                {editingSessionId === session.deviceBillingSessionId ? (
                                   <>
+                                  <div className='picker-session'>
                                     <ReactDatePicker
-                                      selected={
-                                        selectedDates[
-                                          session.deviceBillingSessionId
-                                        ]?.endDate
-                                      }
-                                      onChange={(date) =>
-                                        handleDateChange(
-                                          date,
-                                          session.deviceBillingSessionId,
-                                          "endDate"
-                                        )
-                                      }
+                                      selected={selectedDates[session.deviceBillingSessionId]?.endDate}
+                                      onChange={(date) => handleDateChange(date, session.deviceBillingSessionId, 'endDate')}
                                       className="form-control text-left editable mb-1 form-field"
                                       placeholderText="Select date"
                                       dateFormat="dd MMM yyyy"
-                                      style={{ height: "30px" }}
+                                      style={{ height: '30px' }}
                                     />
-
+                                  </div>
+                                  <div className='picker-session'>
                                     <TimePicker
-                                      value={
-                                        selectedTimes[
-                                          session.deviceBillingSessionId
-                                        ]?.endTime
-                                      }
-                                      onChange={(time) =>
-                                        handleTimeChange(
-                                          time,
-                                          session.deviceBillingSessionId,
-                                          "endTime"
-                                        )
-                                      }
+                                      value={selectedTimes[session.deviceBillingSessionId]?.endTime}
+                                      onChange={(time) => handleTimeChange(time, session.deviceBillingSessionId, 'endTime')}
                                       disableClock={true}
                                       className="form-control text-left editable mb-1 form-field"
-                                      style={{ height: "30px" }}
+                                      style={{ height: '30px' }}
                                     />
+                                  </div>
                                   </>
                                 ) : (
                                   <input
                                     type="text"
-                                    style={{ height: "30px" }}
+                                    style={{ height: '30px' }}
                                     className="form-control text-center disabled form-field"
                                     disabled
                                     value={
-                                      selectedDates[
-                                        session.deviceBillingSessionId
-                                      ]?.endDate
-                                        ? new Date(
-                                            selectedDates[
-                                              session.deviceBillingSessionId
-                                            ].endDate
-                                          ).toLocaleString()
-                                        : ""
+                                      selectedDates[session.deviceBillingSessionId]?.endDate
+                                        ? new Date(selectedDates[session.deviceBillingSessionId].endDate).toLocaleString()
+                                        : ''
                                     }
                                   />
                                 )}
@@ -303,20 +281,17 @@ function BillingSession() {
                                 <div className="col-sm-8">
                                   <input
                                     type="text"
-                                    style={{ height: "30px" }}
+                                    style={{ height: '30px' }}
                                     className={`form-control text-center form-field ${
-                                      editingSessionId ===
-                                      session.deviceBillingSessionId
-                                        ? "editable"
-                                        : "disabled"
+                                      editingSessionId === session.deviceBillingSessionId ? 'editable' : 'disabled'
                                     }`}
                                     id="units"
                                     placeholder="Enter units"
-                                    disabled={
-                                      editingSessionId !==
-                                      session.deviceBillingSessionId
-                                    }
-                                    value={session.totalConsumption_Kwh.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                    disabled={editingSessionId !== session.deviceBillingSessionId}
+                                    value={session.totalConsumption_Kwh.toLocaleString(undefined, {
+                                      minimumFractionDigits: 2,
+                                      maximumFractionDigits: 2,
+                                    })}
                                   />
                                 </div>
                               </div>
@@ -330,89 +305,97 @@ function BillingSession() {
                                 <div className="col-sm-8">
                                   <input
                                     type="text"
-                                    style={{ height: "30px" }}
+                                    style={{ height: '30px' }}
                                     className={`form-control text-center form-field ${
-                                      editingSessionId ===
-                                      session.deviceBillingSessionId
-                                        ? "editable"
-                                        : "disabled"
+                                      editingSessionId === session.deviceBillingSessionId ? 'editable' : 'disabled'
                                     }`}
                                     id="amount"
                                     placeholder="Enter amount"
-                                    disabled={
-                                      editingSessionId !==
-                                      session.deviceBillingSessionId
-                                    }
+                                    disabled={editingSessionId !== session.deviceBillingSessionId}
                                     value={
-                                      session.totalAmountDue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })+" "+session.currencyCode 
+                                      session.totalAmountDue.toLocaleString(undefined, {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2,
+                                      }) +
+                                      ' ' +
+                                      session.currencyCode
                                     }
                                   />
                                 </div>
                               </div>
                             </>
-                     
-                            <div className="table-responsive">
-                            <table className="table table-bordered">
-                              <thead>
-                                <tr>
-                                  <th>Start Date</th>
-                                  <th>End Date</th>
-                                  <th>Tariff Renewal Date</th>
-                                  <th>No Of Days</th>
-                                  <th>Kwh</th>
-                                  <th>Cost</th>
-                                  <th>Tax</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {session.tariffChanges[0].map((t, index) => (
-                                  <tr key={index}>
-                                    <td>{formatDate(t.StartDate)}</td>
-                                    <td>{formatDate(t.EndDate)}</td>
-                                    <td>{formatDate(t.TariffRenewalDate)}</td>
-                                    <td>{t.NoOfDays}</td>
-                                    <td>{t.Kwh}</td>
-                                    <td>{(t.Cost).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{" "}{session.currencyCode}</td>
-                                    <td>{t.Tax}{" "}{session.currencyCode}</td>
+
+                            <div className="table-responsive table-table">
+                              <table className="table table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Tariff Renewal Date</th>
+                                    <th>No Of Days</th>
+                                    <th>Kwh</th>
+                                    <th>Cost</th>
+                                    <th>Tax</th>
                                   </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          </div>
+                                </thead>
+                                <tbody>
+                                  {session.tariffChanges[0].map((t, index) => (
+                                    <tr key={index}>
+                                      <td>{formatDate(t.StartDate)}</td>
+                                      <td>{formatDate(t.EndDate)}</td>
+                                      <td>{formatDate(t.TariffRenewalDate)}</td>
+                                      <td>{t.NoOfDays}</td>
+                                      <td>{t.Kwh}</td>
+                                      <td>
+                                        {t.Cost.toLocaleString(undefined, {
+                                          minimumFractionDigits: 2,
+                                          maximumFractionDigits: 2,
+                                        })}{' '}
+                                        {session.currencyCode}
+                                      </td>
+                                      <td>
+                                        {t.Tax} {session.currencyCode}
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
 
                             {session.isEditable ? (
                               <div className="d-flex justify-content-end">
-                                <button
-                                  type="button"
-                                  style={{ width: "80px", marginTop: "3px"}}
-                                  className={`btn btn-sm custom-button btn-${
-                                    editingSessionId ===
-                                    session.deviceBillingSessionId
-                                      ? "success"
-                                      : "primary"
-                                  } btn-edit `}
-                                  onClick={
-                                    editingSessionId ===
-                                    session.deviceBillingSessionId
-                                      ? (e) =>
-                                          saveEditHandler(
-                                            e,
-                                            session.deviceBillingSessionId
-                                          )
-                                      : () =>
-                                          handleEditChange(
-                                            session.deviceBillingSessionId
-                                          )
-                                  }
-                                >
-                                  {editingSessionId ===
-                                  session.deviceBillingSessionId
-                                    ? "Save"
-                                    : "Edit"}
-                                </button>
+                                {editingSessionId === session.deviceBillingSessionId ? (
+                                  <>
+                                    <button
+                                      type="button"
+                                      style={{ width: '80px', marginTop: '3px', marginRight: '5px' }}
+                                      className="btn btn-sm custom-button btn-danger"
+                                      onClick={() => cancelEditHandler(session.deviceBillingSessionId)}
+                                    >
+                                      Cancel
+                                    </button>
+                                    <button
+                                      type="button"
+                                      style={{ width: '80px', marginTop: '3px' }}
+                                      className="btn btn-sm custom-button btn-success-1"
+                                      onClick={(e) => saveEditHandler(e, session.deviceBillingSessionId)}
+                                    >
+                                      Save
+                                    </button>
+                                  </>
+                                ) : (
+                                  <button
+                                    type="button"
+                                    style={{ width: '80px', marginTop: '3px' }}
+                                    className="btn btn-sm custom-button btn-primary"
+                                    onClick={() => handleEditChange(session.deviceBillingSessionId)}
+                                  >
+                                    Edit
+                                  </button>
+                                )}
                               </div>
                             ) : (
-                              ""
+                              ''
                             )}
                           </div>
                         </div>

@@ -111,7 +111,7 @@ const dispatch=useDispatch();
        {userData.roleId===1 && <a href='/userlist'>User Management</a>}
        {userData.roleId===1 &&  <a href='/management'>Device Management</a>}
         <div className='menu-trigger relative'>
-          <CgProfile onClick={() => setOpen(!open)} color='#191970' size={25} />
+          <CgProfile onClick={() => setOpen(!open)} color='white' size={25} />
           {open && (
             <div className='drop'>
               <ul>
@@ -125,7 +125,7 @@ const dispatch=useDispatch();
           )}
         </div>
         <div className='bell'>
-          <a href='/notify'><BiSolidBellRing color='#191970' size={25} className='overlay__close'/></a>
+          <a href='/notify'><BiSolidBellRing color='white' size={25} className='overlay__close'/></a>
           <span className="badge1">2</span>
         </div>
       </div>
@@ -133,8 +133,8 @@ const dispatch=useDispatch();
       <div className='small'>
         <div className='menu-trigger relative devicess'>
           <div className="device-label-container">    
-          <a href='#'><MdDevices onClick={() => setOpenDevicesName(!openDevicesName)} color='#191970' size={25} className='overlay__close'  /></a>
-          {selectedDeviceName && <p className="selected-device-label">{selectedDeviceName}</p>}
+          <a href='#'><MdDevices onClick={() => setOpenDevicesName(!openDevicesName)} color='white' size={25} className='overlay__close'  /></a>
+          {selectedDeviceName && <p className="selected-device-label" style={{color:'white'}}>{selectedDeviceName}</p>}
           </div>
           {openDevicesName && (
             <div className='drop1'>
@@ -147,11 +147,11 @@ const dispatch=useDispatch();
           )}
         </div>
         <div className='bell'>
-          <a href='/notify'><BiSolidBellRing color='#191970' size={25} className='overlay__close'/></a>
+          <a href='/notify'><BiSolidBellRing color='white' size={25} className='overlay__close'/></a>
           <span className="badge">2</span>
         </div>
         <div className='app__navbar-smallscreen'>
-          <GiHamburgerMenu color='#191970' fontSize={27} className='hammenu' onClick={() => setToggleMenu(true)} />
+          <GiHamburgerMenu color='white' fontSize={27} className='hammenu' onClick={() => setToggleMenu(true)} />
           {toggleMenu && (
             <div className='app__navbar-smallscreen_overlay flex__center slide-bottom'>
               <a href='#'><MdClose fontSize={27} className='overlay__close' onClick={() => setToggleMenu(false)} /></a>

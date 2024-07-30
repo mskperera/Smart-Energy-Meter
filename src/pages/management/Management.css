@@ -19,6 +19,10 @@
     
 }
 
+.table thead th {
+  background-color: #00bbf0; 
+}
+
 .notification3{
     width: 100%;
     padding: 0px;

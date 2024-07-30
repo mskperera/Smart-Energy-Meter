@@ -14,8 +14,12 @@
  margin-right: 40px;
 }
 
+.btn-success-1{
+  background-color: rgb(74, 226, 3);
+}
+
 .custom-button:hover {
-  background-color: rgba(46, 46, 46, 0.669); 
+  background-color: rgba(217, 116, 116, 0.669); 
 }
 
 .bill-background{
@@ -197,6 +201,49 @@
   .form-field{
     width: 95%;
   }
+
+  .picker-session{
+    width: 95%;
+  }
+
+  .table-session1{
+    z-index: 100000;
+  }
+
+  .table-session{
+    z-index: 1000;
+  }
+
+  .table-table{
+    z-index: 0;
+  }
+
+  .form-group {
+    margin-bottom: 0rem;
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+  }
+  
+  
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+  
+  .react-datepicker__input-container input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .react-time-picker {
+    width: 100%;
+  }
+  
+  .react-time-picker__wrapper {
+    width: 100%;
+  }
+
   @media screen and (max-width:1300px){
     .notification2{
       margin-left: 320px;
@@ -416,6 +463,11 @@
         margin-right: 40px;
        }
 
+      .editable-date-picker {
+    width: 200px;
+  }
+
+
 }
 
 
@@ -442,6 +494,11 @@
 .custom-button {
   margin-right: 55px;
  }
+
+ .editable-date-picker {
+  width: 100px;
+}
+
 }
 
 
@@ -468,6 +525,11 @@
 .custom-button {
   margin-right: 70px;
  }
+
+ .picker-session{
+  width: 88%;
+}
+
 }
 
 @media screen and (max-width:400px){
@@ -493,6 +555,10 @@
 .custom-button {
   margin-right: 100px;
  }
+
+ .picker-session{
+  width: 85%;
+}
 }
 
 @media screen and (max-width:380px){
@@ -518,4 +584,37 @@
 .custom-button {
   margin-right: 120px;
  }
+
+ .picker-session{
+  width: 76%;
+}
+}
+
+@media screen and (max-width:350px){
+  .notification2{
+    width: 100%;
+    padding: 0px;
+    height: min-content;
+    border-radius: 5px;
+    margin-left:5px;
+    position: static;
+  
+}
+
+.form-field{
+  width: 74%;
+}
+
+.table-responsive{
+  width: 69%;
+  padding: 0px;
+}  
+
+.custom-button {
+  margin-right: 130px;
+ }
+
+ .picker-session{
+  width: 66%;
+}
 }

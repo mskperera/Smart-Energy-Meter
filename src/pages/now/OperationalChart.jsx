@@ -10,32 +10,32 @@ function formatValue(value, unit) {
   }
   return `${value} ${unit}`;
 }
-// page-bottom --> page-bottom-mode
+// page-bottom --> page-bottom-mode  #fff346
 function OperationalChart({lineNo,voltage,current,pf,hertz,power,kwh,bill,budgetedKwh,budgetedBill}) {
   return (
           <div className='page-bottom-mode'> 
             
-            <div className="vol mode1">
-              <h6 style={{color:'#4484ff',marginTop:'5px'}}>Voltage</h6>  
-              <span style={{marginTop:'-5px', color:'#fff346'}}>{voltage}V</span>
+            {/* <div className="vol mode1">
+              <h6 style={{color:'#00bbf0',marginTop:'5px'}}>Voltage</h6>  
+              <span style={{marginTop:'-5px', color:'#fffff'}}>{voltage}V</span>
             </div>
             <div className="vol mode1">
-              <h6 style={{color:'#4484ff',marginTop:'5px'}}>Current</h6> 
-              <span style={{marginTop:'-5px', color:'#fff346'}}>{current}A</span>
+              <h6 style={{color:'#00bbf0',marginTop:'5px'}}>Current</h6> 
+              <span style={{marginTop:'-5px', color:'#fffff'}}>{current}A</span>
             </div>
             <div className="vol mode1">
-              <h6 style={{color:'#4484ff',marginTop:'5px'}}>Power Fact</h6> 
-              <span style={{marginTop:'-5px', color:'#fff346'}}>{pf}pf</span>
-              {/* style={{color:'#62bbfe'}} */}
+              <h6 style={{color:'#00bbf0',marginTop:'5px'}}>Power Fact</h6> 
+              <span style={{marginTop:'-5px', color:'#fffff'}}>{pf}pf</span>
+              
             </div>
             <div className="pow mode2">
-              <h6 style={{color:'#4484ff',marginTop:'5px'}}>Power</h6> 
-              <span style={{marginTop:'-5px', color:'#fff346'}}>{formatValue(power, 'W')}</span>
+              <h6 style={{color:'#00bbf0',marginTop:'5px'}}>Power</h6> 
+              <span style={{marginTop:'-5px', color:'#fffff'}}>{formatValue(power, 'W')}</span>
             </div>
             <div className="pow mode2">
-             <h6 style={{color:'#4484ff',marginTop:'5px'}}>Hertz</h6> 
-              <span style={{marginTop:'-5px', color:'#fff346'}}>{hertz}Hz</span>
-            </div>
+             <h6 style={{color:'#00bbf0',marginTop:'5px'}}>Hertz</h6> 
+              <span style={{marginTop:'-5px', color:'#fffff'}}>{hertz}Hz</span>
+            </div> */}
          </div>
   // <div className='page-bottom'>
      

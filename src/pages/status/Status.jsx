@@ -46,7 +46,7 @@ function Status() {
     <div className='home'>
       <div className="body">
         <div className="rounded p-2">
-          <h2 className='d-flex justify-content-center align-items-center'>Device Status</h2>
+          <h2 className='d-flex justify-content-center align-items-center' style={{color:'white'}}>Device Status</h2>
           {loading ? (
             <div className="d-flex align-items-center justify-content-center">
               <ThreeDots

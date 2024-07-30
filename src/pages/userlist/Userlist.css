@@ -11,7 +11,6 @@
     height: calc(100vh - 80px - 74.41px); 
   }
   
-
   .navnav {
     height: 80px; 
     background-color: #fff; 
@@ -24,7 +23,6 @@
 
 .body h2{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: black;
 }
 
 .bbttnn{
@@ -59,7 +57,20 @@
     z-index: 5;
   }
   
- 
+
+
+/* .table1 th {
+  background-color: #4CAF50; 
+  color: white;
+  padding: 12px 15px;
+  text-align: left; 
+  border-bottom: 1px solid #ddd; 
+} */
+
+.table1 thead th {
+  background-color: #00bbf0; 
+}
+
   /* @media (max-width: 768px) {
     .table th, .table td {
       font-size: 14px; 

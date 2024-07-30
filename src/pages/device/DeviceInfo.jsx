@@ -38,7 +38,7 @@ const DeviceInfo = () => {
     <div className='home'>
       <div className="body">
         <div className="rounded p-2">
-          <h2 className='d-flex justify-content-center align-items-center'>Device Information</h2>
+          <h2 className='d-flex justify-content-center align-items-center' style={{color:'white'}}>Device Information</h2>
           {loading ? (
             // <p className="loading-message">Loading please wait...</p>
             <div className="d-flex align-items-center justify-content-center">

@@ -128,7 +128,8 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
        <ul className='nav-bar-links'>
             <Link to={"/home"}>
               <li
-                className={`btn btn-sm btn-light ${activeTab === 'Now' ? 'active' : ''}`}
+              style={{backgroundColor: '#3b3b3b'}}
+                className={`btn btn-sm  ${activeTab === 'Now' ? 'active' : ''}`}
                 onClick={() => handleTabClick('Now')}
               >
                 Live
@@ -136,7 +137,8 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
             </Link>
             <Link to={"/today"}>
               <li
-                className={`btn btn-sm btn-light ${activeTab === 'Day' ? 'active' : ''}`}
+              style={{backgroundColor: '#3b3b3b'}}
+                className={`btn btn-sm  ${activeTab === 'Day' ? 'active' : ''}`}
                 onClick={() => handleTabClick('Day')}
               >
                 Day
@@ -144,14 +146,16 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
             </Link>
             <Link to={"/week"}>
               <li
-                className={`btn btn-sm btn-light ${activeTab === 'Week' ? 'active' : ''}`}
+              style={{backgroundColor: '#3b3b3b'}}
+                className={`btn btn-sm  ${activeTab === 'Week' ? 'active' : ''}`}
                 onClick={() => handleTabClick('Week')}
               >
                 Week
               </li>
             </Link>
             <li
-              className={`btn btn-sm btn-light ${activeTab === 'Session' ? 'active' : ''}`}
+            style={{backgroundColor: '#3b3b3b'}}
+              className={`btn btn-sm  ${activeTab === 'Session' ? 'active' : ''}`}
               onClick={() => handleTabClick('Session')}
             >
               Session<IoMdArrowDropdown size={20}/>
@@ -166,6 +170,7 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
             </li>
             <Link to={"/year"}>
               <li
+              style={{backgroundColor: '#00bbf0'}}
                 className={`btn btn-sm btn-primary ${activeTab === 'Year' ? 'active' : ''}`}
                 onClick={() => handleTabClick('Year')}
               >
@@ -174,7 +179,8 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
             </Link>
             <Link to={"/custom"}>
               <li
-                className={`btn btn-sm btn-light ${activeTab === 'Custom' ? 'active' : ''}`}
+              style={{backgroundColor: '#3b3b3b'}}
+                className={`btn btn-sm  ${activeTab === 'Custom' ? 'active' : ''}`}
                 onClick={() => handleTabClick('Custom')}
               >
                 Custom
