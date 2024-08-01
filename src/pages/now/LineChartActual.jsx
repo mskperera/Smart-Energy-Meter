@@ -179,7 +179,7 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
         title: {
           position: 'top',
           display: true,
-          text: "Date",
+          text: "Session",
           // text: "Trending To:",
           // font: {
           //   size: 20

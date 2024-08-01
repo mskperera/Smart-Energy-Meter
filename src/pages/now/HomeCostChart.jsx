@@ -41,7 +41,7 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
       const currentValueFormatted = (data.datasets[0].data[0] || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       ctx.fillText(currentValueFormatted, centerX, centerY +5);
 
-      ctx.font = '20px Trebuchet MS';
+      ctx.font = 'bold 20px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = [currentValue > budgetedBill ? '#ff0000' : '#00bbf0'];
@@ -58,7 +58,7 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
         // ctx.fillText('Budget', centerX, centerY - 75);
 
         const budgetedBillFormatted = (data.datasets[0].data[1] || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        ctx.font = 'bold 16px Trebuchet MS';
+        ctx.font = 'bolder 16px Trebuchet MS';
         ctx.fillStyle = 'white';
         ctx.fillText(`/ ${budgetedBillFormatted}`, centerX, centerY +30);
       }
