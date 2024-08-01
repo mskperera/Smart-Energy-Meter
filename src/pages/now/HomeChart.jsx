@@ -52,7 +52,7 @@ const HomeChart = ({ currentKwValue, budgetedKwhValue, deviceTypeId, deviceMeasu
         ctx.fillStyle = 'white';
         // ctx.fillText('Budget', centerX, centerY - 40);
 
-        ctx.font = ' 16px Trebuchet MS';
+        ctx.font = 'bolder 16px Trebuchet MS';
         ctx.fillStyle = 'white';
         ctx.fillText(`/ ${data.datasets[0].data[1].toLocaleString()}`, centerX, centerY  + 30);
       }
