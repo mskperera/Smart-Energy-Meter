@@ -16,8 +16,8 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
 
   // const days = daysElapsed;
   // const maxDays = numberOfDays;
-  const formattedStartDate = moment(startDate).format('YYYY-MM-DD');
-  const formattedEndDate = moment(endDate).format('YYYY-MM-DD');
+  const formattedStartDate = moment(startDate).format('YYYY-MMM-DD');
+  const formattedEndDate = moment(endDate).format('YYYY-MMM-DD');
 
   return (
     <>
@@ -59,10 +59,12 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
                 </h6>
             </div>
             <div className="days-bar-two-home">
-            <h6 className='topic1' style={{ position:'relative'}}>{formattedStartDate}</h6>
-            <h6 className='topic2' style={{ position:'relative'}}>{formattedEndDate}</h6>
+              <div>
+                <h6 className='topic1' style={{ position:'relative'}}>{formattedStartDate}</h6>
+                <h6 className='topic2' style={{ position:'relative'}}>{formattedEndDate}</h6>
+              </div>
                 <div className="d-flex justify-content-start">
-                  <span className="session-number" style={{marginTop:'0px'}}>0</span>&nbsp;
+                  <span className="session-number">0</span>&nbsp;
                   <div className="progress d-flex justify-content-start">
                    <ProgressBar now={daysElapsed} 
                     max={numberOfDays} 
@@ -82,10 +84,10 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
                     </span>
                    </ProgressBar>
                     
-                  {/* /> */}
+                
                   
                   </div>
-                  &nbsp;<span className="session-number" style={{marginTop:'0px'}}>{numberOfDays}</span>
+                  &nbsp;<span className="session-number" >{numberOfDays}</span>
                 </div>
             </div>
           </div>
@@ -98,12 +100,12 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
             <div className="line-total">
             <div className="line-total-kw">
               <div>
-                Total kWh: <span style={{color:'#fff346'}}>{device.kwh.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                Total kWh: <span>{device.kwh.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
               </div>
             </div>
             <div className="line-total-kw">
               <div>
-                Total Bill:<span style={{color:'#4484ff'}}>{device.usageBill.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> 
+                Total Bill:<span>{device.usageBill.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> 
               </div>
             </div>
             </div>
@@ -172,13 +174,15 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
       ))}
     </div>
     <br/> 
-    <div className="page chart-now-kw">
+    {/* <div className=""> */}
+    <div className="chart-now-kw">
       <LineChartActual device={device}/>
     </div>
-    <br/>
-    <div className="page chart-now-kw">
+    <br/> 
+    <div className="chart-now-cost">
       <LineChart device={device}/>
     </div>
+    {/* </div> */}
        {/* {lines.map((line, index) => (
         <React.Fragment key={`operational-chart-${line.lineNo || index}`}>
           {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (

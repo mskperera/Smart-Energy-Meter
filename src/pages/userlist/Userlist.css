@@ -59,13 +59,13 @@
   
 
 
-/* .table1 th {
-  background-color: #4CAF50; 
+.table1 th {
+  background-color: #00bbf0; 
   color: white;
-  padding: 12px 15px;
+  padding: 8px 8px;
   text-align: left; 
   border-bottom: 1px solid #ddd; 
-} */
+}
 
 .table1 thead th {
   background-color: #00bbf0; 

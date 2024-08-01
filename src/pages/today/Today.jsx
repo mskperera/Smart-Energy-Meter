@@ -110,7 +110,7 @@ function Today() {
         <ul className='nav-bar-links'>
           <Link to={"/home"}>
             <li
-              style={{backgroundColor: '#3b3b3b'}}
+             
               className={`btn btn-sm  ${activeTab === 'Now' ? 'active' : ''}`}
               onClick={() => handleTabClick('Now')}
             >
@@ -119,7 +119,7 @@ function Today() {
           </Link>
           <Link to={"/today"}>
             <li
-              style={{backgroundColor: '#00bbf0'}}
+             
               className={`btn btn-sm btn-primary ${activeTab === 'Day' ? 'active' : ''}`}
               onClick={() => handleTabClick('Day')}
             >
@@ -135,7 +135,7 @@ function Today() {
             </li>
           </Link>
           <li
-            style={{backgroundColor: '#3b3b3b'}}
+           
             className={`btn btn-sm  ${activeTab === 'Session' ? 'active' : ''}`}
             onClick={() => handleTabClick('Session')}
           >
@@ -151,7 +151,7 @@ function Today() {
           </li>
           <Link to={"/year"}>
             <li
-              style={{backgroundColor: '#3b3b3b'}}
+              
               className={`btn btn-sm  ${activeTab === 'Year' ? 'active' : ''}`}
               onClick={() => handleTabClick('Year')}
             >
@@ -160,7 +160,7 @@ function Today() {
           </Link>
           <Link to={"/custom"}>
             <li
-              style={{backgroundColor: '#3b3b3b'}}
+             
               className={`btn btn-sm  ${activeTab === 'Custom' ? 'active' : ''}`}
               onClick={() => handleTabClick('Custom')}
             >

@@ -35,11 +35,12 @@ const Home = () => {
 
     console.log('result---11111', result?.data);
 
-    setDevices(result?.data);
+    setDevices(result?.data || []);
     setLoading(false);
   }
   catch(err){
     console.log('loadChartData:', err);
+    setLoading(false);
 
   }
   };
@@ -71,12 +72,12 @@ const Home = () => {
 
   const [devices, setDevices] = useState([]);
 
-  const totalUsageBill = devices.reduce((total, line) => total + line.usageBill, 0);
-  const totalUsageKwh = devices.reduce((total, line) => total + line.kwh, 0);
+  const totalUsageBill = devices.reduce((total, line) => total + (line.usageBill || 0), 0);
+  const totalUsageKwh = devices.reduce((total, line) => total + (line.kwh || 0), 0);
 
   return (
     <div className="home">
-      <Menu className="nav-bar" />
+      <Menu className="nav-bar"/>
       <div className="body">
         {/* <div className="session-name">
           <h6>Session Date :<b> {sessionDate}</b></h6>
@@ -100,11 +101,11 @@ const Home = () => {
             <>
               {devices.length > 1 && (
                 <div className='budget-values' style={{ display: "flex", justifyContent: "space-between" }}>
-                  <h2 style={{ color: 'black' }}>
-                    Total kWh: <span style={{ color: '#fff346' }}>{totalUsageKwh?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                  <h2>
+                    <span className='span1'>Total kWh:</span><span style={{color:'#00bbf0'}}>{totalUsageKwh?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </h2>
-                  <h2 style={{ color: 'black' }}>
-                    Total Bill: <span style={{ color: '#4484ff' }}>{totalUsageBill?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                  <h2>
+                    <span className='span1'>Total Bill:</span><span style={{color:'#00bbf0'}}>{totalUsageBill?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </h2>
                 </div>
               )}

@@ -37,7 +37,7 @@ function Notify() {
       {/* <Navbar className="navnav" /> */}
       <div className="body">
     <div className="rounded ">
-    <h2 className="d-flex justify-content-center align-items-center" style={{ color: '' }}>
+    <h2 className="d-flex justify-content-center align-items-center" style={{ color: 'white' }}>
       Notifications
     </h2>
     <div className="notificatoin-container">

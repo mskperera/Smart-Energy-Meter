@@ -88,7 +88,7 @@ const HomeChart = ({ currentKwValue, budgetedKwhValue, deviceTypeId, deviceMeasu
     <div className='text-p'>
       {/* <div id='box3' className='chart' style={{ backgroundColor }}> */}
       <div style={{position:'static', display:'flex'}}>
-        <MdEnergySavingsLeaf className='icon' size={20} style={{display:'flex', color:'00bbf0', marginLeft:'90px', marginTop:'55px'}}/>
+        <MdEnergySavingsLeaf className='icon' size={20} style={{ color:'00bbf0', marginLeft:'90px', marginTop:'55px'}}/>
       </div>
         <Doughnut data={data} options={options} plugins={[gaugeText]} id='box3' className='chart' /> 
       {/* </div> */}

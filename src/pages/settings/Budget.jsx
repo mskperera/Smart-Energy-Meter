@@ -136,10 +136,10 @@ function Budget() {
                   />
                 </div>
             ) : (
-            <div className='notification'>
-                <h4 className='d-flex align-items-center justify-content-center mb-1'>Device Preferences and Settings</h4>
+                <div className='notification'>
+                    <h5 className='d-flex align-items-center justify-content-center mb-3'>Budgeted Preferences Settings</h5>
                 <form className='need-validation' onSubmit={onSubmitHandler}>
-                    <h5 className='d-flex align-items-center justify-content-center mb-3'>Budgeted Preferences</h5>
+                    {/* <h5 className='d-flex align-items-center justify-content-center mb-3'>Budgeted Preferences</h5> */}
 
                     <div className='form-group mb-2 form-budgetKw'>
                         <div className='form-group d-flex align-items-center'>

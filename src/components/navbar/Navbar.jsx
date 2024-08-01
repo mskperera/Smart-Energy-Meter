@@ -111,7 +111,7 @@ const dispatch=useDispatch();
        {userData.roleId===1 && <a href='/userlist'>User Management</a>}
        {userData.roleId===1 &&  <a href='/management'>Device Management</a>}
         <div className='menu-trigger relative'>
-          <CgProfile onClick={() => setOpen(!open)} color='white' size={25} />
+          <CgProfile onClick={() => setOpen(!open)} size={25}  className='nav-icons'/>
           {open && (
             <div className='drop'>
               <ul>
@@ -119,13 +119,14 @@ const dispatch=useDispatch();
                 {/* <br/> */}
                 <li><a href='/status' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded'>Device Status</a></li>
                 <li><a href='/billingsession' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded '>Session</a></li>
+                <li><a href='/group' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded '>Group</a></li>
                 <li><a href='#' onClick={handleLogoutClick} className='p-2 cursor-pointer rounded '>Logout</a></li>
               </ul>
             </div>
           )}
         </div>
         <div className='bell'>
-          <a href='/notify'><BiSolidBellRing color='white' size={25} className='overlay__close'/></a>
+          <a href='/notify'><BiSolidBellRing size={25} className='overlay__close nav-icons'/></a>
           <span className="badge1">2</span>
         </div>
       </div>
@@ -133,7 +134,7 @@ const dispatch=useDispatch();
       <div className='small'>
         <div className='menu-trigger relative devicess'>
           <div className="device-label-container">    
-          <a href='#'><MdDevices onClick={() => setOpenDevicesName(!openDevicesName)} color='white' size={25} className='overlay__close'  /></a>
+          <a href='#'><MdDevices onClick={() => setOpenDevicesName(!openDevicesName)} size={25} className='overlay__close nav-icons'  /></a>
           {selectedDeviceName && <p className="selected-device-label" style={{color:'white'}}>{selectedDeviceName}</p>}
           </div>
           {openDevicesName && (
@@ -147,11 +148,11 @@ const dispatch=useDispatch();
           )}
         </div>
         <div className='bell'>
-          <a href='/notify'><BiSolidBellRing color='white' size={25} className='overlay__close'/></a>
+          <a href='/notify'><BiSolidBellRing size={25} className='overlay__close nav-icons'/></a>
           <span className="badge">2</span>
         </div>
         <div className='app__navbar-smallscreen'>
-          <GiHamburgerMenu color='white' fontSize={27} className='hammenu' onClick={() => setToggleMenu(true)} />
+          <GiHamburgerMenu fontSize={27} className='hammenu nav-icons' onClick={() => setToggleMenu(true)} />
           {toggleMenu && (
             <div className='app__navbar-smallscreen_overlay flex__center slide-bottom'>
               <a href='#'><MdClose fontSize={27} className='overlay__close' onClick={() => setToggleMenu(false)} /></a>
@@ -159,6 +160,7 @@ const dispatch=useDispatch();
                 <li><a href='/management'>Device Management</a></li>
                 <li><a href='/status'>Device Status</a></li>
                 <li><a href='/billingsession'>Session</a></li>
+                <li><a href='/group'>Group</a></li>
                 <li><a href='/profile'> Profile</a></li>
                 <li><a href='#' onClick={handleLogoutClick}>Logout</a></li>
               </ul>

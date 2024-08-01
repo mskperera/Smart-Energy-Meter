@@ -1,14 +1,14 @@
 .wrapper{
     height: 100vh;
-    background-color:#6299fedd;
+    background-color:#131a25;
 }
 .login{
     width: 330px;
     padding: 5px;
     height: min-content;
     border-radius: 5px;
-    background-color: #ffffff4e;
-    color: rgb(0, 0, 0);
+    background-color: #3b3b3b;
+    color: rgb(255, 255, 255);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
