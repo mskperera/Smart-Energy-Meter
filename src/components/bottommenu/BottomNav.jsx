@@ -12,10 +12,10 @@ const BottomNav = () => {
   return (
     <div className='bottom-bar'>
     <ul className='bottom-bar-links'>
-        <Link to={"/home"}><li><LuGauge size={25} color='white' title='Live'/></li></Link>
-        <Link to={"/today"}><li><VscGraph size={25} color='white' title='Day'/></li></Link>
-        <Link to={"/deviceinfo"}><li ><HiMenuAlt2 size={25} color='white' title='Device Info'/></li></Link>
-        <Link to={"/service"}><li ><IoSettingsOutline className='tool' size={25} color='white' title='Settings'/></li></Link>
+        <Link to={"/home"}><li><LuGauge size={25} className='nav-icons'  title='Live'/></li></Link>
+        <Link to={"/today"}><li><VscGraph size={25} className='nav-icons' title='Day'/></li></Link>
+        <Link to={"/deviceinfo"}><li ><HiMenuAlt2 size={25} className='nav-icons' title='Device Info'/></li></Link>
+        <Link to={"/service"}><li ><IoSettingsOutline className='nav-icons' size={25} title='Settings'/></li></Link>
         {/* <span className='tooltip'>Settings</span> */}
     </ul>
    </div> 

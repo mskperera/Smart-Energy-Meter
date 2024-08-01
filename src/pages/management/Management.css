@@ -23,6 +23,14 @@
   background-color: #00bbf0; 
 }
 
+.table th {
+  background-color: #00bbf0; 
+  color: white;
+  padding: 8px 8px;
+  text-align: left; 
+  border-bottom: 1px solid #ddd; 
+}
+
 .notification3{
     width: 100%;
     padding: 0px;
@@ -41,7 +49,7 @@
 
   .bill-background1{
     /* background-color: #d1dde8; */
-    background-color: #fff346;
+    background-color: #00bbf0;
     padding: 0px 0px 0px 20px;
     border-radius: 20px;
     display: flex;

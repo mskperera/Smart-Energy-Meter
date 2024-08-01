@@ -23,7 +23,7 @@
 }
 
 .bill-background{
-  background-color: #fff346;
+  background-color: #00bbf0;
   padding: 0px 0px 0px 20px;
   border-radius: 20px;
   display: flex;
@@ -207,11 +207,11 @@
   }
 
   .table-session1{
-    z-index: 100000;
+    z-index: 100;
   }
 
   .table-session{
-    z-index: 1000;
+    z-index: 10;
   }
 
   .table-table{

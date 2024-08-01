@@ -28,7 +28,7 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
           <div style={{marginTop:'30px'}}>
             {/* <h6 className='name-device name-device-date'>Start Date: {formattedStartDate} / End Date: {formattedEndDate} Days Elapsed {daysElapsed}</h6> */}
             <div className="days-bar-two">
-                  <h6 style={{marginTop:'-30px', position:'relative', marginLeft:'5px',paddingBottom:'1px'}}>{formattedStartDate} / {formattedEndDate}</h6>
+                  <h6 style={{marginTop:'-30px', position:'relative', marginLeft:'5px',paddingBottom:'5px'}}>{formattedStartDate} / {formattedEndDate}</h6>
                 <div className="d-flex justify-content-start">
                   <span className="session-number"></span>&nbsp;
                   <div className="progress d-flex justify-content-start">

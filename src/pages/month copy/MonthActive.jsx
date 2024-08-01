@@ -108,21 +108,21 @@ function MonthActive() {
           <ul className='nav-bar-links'>
             <Link to={"/home"}>
               <li 
-              style={{backgroundColor: '#3b3b3b'}}
+            
                className={`btn btn-sm  ${activeTab === 'Now' ? 'active' : ''}`} onClick={() => handleTabClick('Now')}>
                 Live
               </li>
             </Link>
             <Link to={"/today"}>
               <li 
-              style={{backgroundColor: '#3b3b3b'}}
+           
               className={`btn btn-sm  ${activeTab === 'Day' ? 'active' : ''}`} onClick={() => handleTabClick('Day')}>
                 Day
               </li>
             </Link>
             <Link to={"/week"}>
               <li 
-              style={{backgroundColor: '#3b3b3b'}}
+             
               className={`btn btn-sm  ${activeTab === 'Week' ? 'active' : ''}`} onClick={() => handleTabClick('Week')}>
                 Week
               </li>
@@ -140,14 +140,14 @@ function MonthActive() {
             </li>
             <Link to={"/year"}>
               <li 
-              style={{backgroundColor: '#3b3b3b'}}
+             
               className={`btn btn-sm ${activeTab === 'Year' ? 'active' : ''}`} onClick={() => handleTabClick('Year')}>
                 Year
               </li>
             </Link>
             <Link to={"/custom"}>
               <li
-              style={{backgroundColor: '#3b3b3b'}}
+             
               className={`btn btn-sm  ${activeTab === 'Custom' ? 'active' : ''}`} onClick={() => handleTabClick('Custom')}>
                 Custom
               </li>

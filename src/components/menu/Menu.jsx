@@ -17,12 +17,12 @@ const Menu = () => {
   };
 
   return (
-    <div className='navnav1 nav-bar d-flex align-items-center justify-content-center w-100'>
+    <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
       <div className='back'>
         <ul className='nav-bar-links'>
           <Link to={"/home"}>
             <li
-              style={{backgroundColor: '#00bbf0'}}
+            
               className={`btn btn-sm btn-primary ${activeTab === 'Now' ? 'active' : ''}`}
               onClick={() => handleTabClick('Now')}
             >
@@ -31,7 +31,7 @@ const Menu = () => {
           </Link>
           <Link to={"/today"}>
             <li
-              style={{backgroundColor: '#3b3b3b'}} //btn-light
+              //btn-light
               className={`btn btn-sm  ${activeTab === 'Day' ? 'active' : ''}`}
               onClick={() => handleTabClick('Day')}
             >
@@ -40,7 +40,7 @@ const Menu = () => {
           </Link>
           <Link to={"/week"}>
             <li
-              style={{backgroundColor: '#3b3b3b'}}
+              
               className={`btn btn-sm  ${activeTab === 'Week' ? 'active' : ''}`}
               onClick={() => handleTabClick('Week')}
             >
@@ -48,7 +48,7 @@ const Menu = () => {
             </li>
           </Link>
           <li
-            style={{backgroundColor: '#3b3b3b'}}
+           
             className={`btn btn-sm  ${activeTab === 'Session' ? 'active' : ''}`}
             onClick={() => handleTabClick('Session')}
           >
@@ -64,7 +64,7 @@ const Menu = () => {
           </li>
           <Link to={"/year"}>
             <li
-              style={{backgroundColor: '#3b3b3b'}}
+            
               className={`btn btn-sm  ${activeTab === 'Year' ? 'active' : ''}`}
               onClick={() => handleTabClick('Year')}
             >
@@ -73,8 +73,8 @@ const Menu = () => {
           </Link>
           <Link to={"/custom"}>
             <li
-              style={{backgroundColor: '#3b3b3b'}}
-              className={`btn btn-sm  ${activeTab === 'Custom' ? 'active' : ''}`}
+             
+              className={`btn btn-sm ${activeTab === 'Custom' ? 'active' : ''}`}
               onClick={() => handleTabClick('Custom')}
             >
               Custom

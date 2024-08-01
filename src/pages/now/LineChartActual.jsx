@@ -68,7 +68,7 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
 
     for (let i = 0; i < charData.length; i++) {
       console.log('1 Month', charData[i])
-      months.push(moment(charData[i].timeStamp_local).format('MM-DD'));
+      months.push(moment(charData[i].timeStamp_local).format('M-DD'));
       monthKwArr.push(charData[i].kwhPerDay);
       predictArr.push(charData[i].kwhPerDayForecast);
       kwhCumActualArr.push(charData[i].kwhCumActual);
