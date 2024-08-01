@@ -125,7 +125,7 @@ function DeviceRegister() {
       ) : (
         <div className='register'>
           <div className="d-flex justify-content-end">
-            <Link to="/management" className="button-close"><IoClose size={25} color='black'/></Link>
+            <Link to="/management" className="button-close"><IoClose size={25}/></Link>
           </div>
           {saveType === 'I' ? (
             <h2 className='d-flex align-items-center justify-content-center mb-2'>Device Registration</h2>
