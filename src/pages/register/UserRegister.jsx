@@ -124,7 +124,7 @@ function UserRegister() {
       ) : (
         <div className='register'>
           <div className="d-flex justify-content-end">
-            <Link to="/userlist" className="button-close"><IoClose size={25} color='black' className='button-close' /></Link>
+            <Link to="/userlist" className="button-close"><IoClose size={25} className='button-close' /></Link>
           </div>
           <h2 className='d-flex align-items-center justify-content-center mb-2'>
             {saveType === "I" ? "User Registration" : "Update User Details"}
