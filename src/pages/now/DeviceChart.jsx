@@ -16,8 +16,8 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
 
   // const days = daysElapsed;
   // const maxDays = numberOfDays;
-  const formattedStartDate = moment(startDate).format('YYYY-MMM-DD');
-  const formattedEndDate = moment(endDate).format('YYYY-MMM-DD');
+  const formattedStartDate = moment(startDate).format('YYYY MMM DD');
+  const formattedEndDate = moment(endDate).format('YYYY MMM DD');
 
   return (
     <>
