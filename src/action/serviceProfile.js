@@ -21,7 +21,6 @@ export const getServiceProfileSelectByUserId= async (userId) => {
 }
 
 
-
 export const serviceProfileSetup= async (payload) => {
   try {
     return await customAxios
@@ -65,3 +64,25 @@ export const serviceProfileSetup= async (payload) => {
 //       "opertationalMetricId":1
 
 //   }
+
+
+
+
+export const getServiceProfiles= async () => {
+  try {
+    return await customAxios
+      .get(`/serviceProfile/getServiceProfiles`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
