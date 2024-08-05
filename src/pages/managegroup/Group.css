@@ -8,7 +8,7 @@
     padding-top: 30px;
     padding-bottom: 60px; 
     overflow-y: auto; 
-    height: calc(100vh - 80px - 39px);
+    height: calc(100vh - 80px - 38px);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
     /* color: #fff; */
   }
@@ -364,7 +364,7 @@
       padding-top: 30px;
       padding-bottom: 60px; 
       overflow-y: auto; 
-      height: calc(104vh - 80px - 60px); 
+      height: calc(104vh - 80px - 25px); 
     }
 }
 
@@ -377,12 +377,12 @@
     }
   } */
 
-  @media screen and (max-width: 390px) {
+  @media screen and (max-width: 395px) {
     .body {
       padding-top: 30px;
       padding-bottom: 60px; 
       overflow-y: auto; 
-      height: calc(104vh - 80px - 60px); 
+      height: calc(100vh - 70px - 0px); 
     }
   }
 

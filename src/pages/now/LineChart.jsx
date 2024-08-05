@@ -17,9 +17,9 @@ function LineChart({device}) {
   const [loading, setLoading] = useState(true); 
 
    useEffect(() => {
-    if (selectedDevice) {
+    // if (selectedDevice) {
       loadEngergyUsageKwhByDateRangePrediction();
-    }
+    // }
   }, []);
 
   const loadEngergyUsageKwhByDateRangePrediction = async () => {
@@ -235,7 +235,7 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
           <ThreeDots color={"#36A2EB"} loading={loading} size={50} />
         </div>
       ) : (
-      <Line data={data} options={options} plugins={[customTextPlugin]} id='box22' className='chart box22' />
+        <Line data={data} options={options} plugins={[customTextPlugin]} id='box22' className='chart box22' />
       )}
     </div>
   );

@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import KwhBillChart from "./KwhBillChart";
 import OperationalChart from "./OperationalChart";
 import { FaHeartbeat } from "react-icons/fa";
 import { FaHeartBroken } from "react-icons/fa";
-// import { color } from "chart.js/helpers";
 import { FaLocationDot } from "react-icons/fa6";
 import { ProgressBar } from 'react-bootstrap';
 import { MdPermDeviceInformation } from "react-icons/md";
@@ -12,18 +11,15 @@ import LineChart from "./LineChart";
 import LineChartActual from "./LineChartActual";
 
 function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , numberOfDays, startDate, endDate  }) {
-  const { lines} = device;
-
-  // const days = daysElapsed;
-  // const maxDays = numberOfDays;
+  const { lines } = device;
   const formattedStartDate = moment(startDate).format('YYYY MMM DD');
   const formattedEndDate = moment(endDate).format('YYYY MMM DD');
+  
+  const [showActualChart, setShowActualChart] = useState(true);
 
   return (
     <>
     <div className="main-section">
-      {/* <div className="back-color"></div> */}
-
       <div className="section">
         <div className="section-status">
           <div className="device-active">
@@ -77,15 +73,11 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
                         transform: 'translateX(0%)',
                         fontWeight: '550',
                         color: 'white', 
-                        // marginTop:'-5px'
                       }}
                     >
                       {daysElapsed}
                     </span>
                    </ProgressBar>
-                    
-                
-                  
                   </div>
                   &nbsp;<span className="session-number" >{numberOfDays}</span>
                 </div>
@@ -94,33 +86,30 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
         </div>
         {device.deviceTypeId === 2 && (
           <div className="line-values" style={{ display: 'flex'}}>
-            {/* <div className="line-type" title="Individual Line Measurement Mode" style={{cursor:'pointer'}}>
-              {device.deviceMeasuringModeId === 1 ? "Mode : ILMM" : "Consolidated Mode"}
-            </div> */}
             <div className="line-total">
-            <div className="line-total-kw">
-              <div>
-                Total kWh: <span>{device.kwh.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <div className="line-total-kw">
+                <div>
+                  Total kWh: <span>{device.kwh.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                </div>
               </div>
-            </div>
-            <div className="line-total-kw">
-              <div>
-                Total Bill:<span>{device.usageBill.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> 
+              <div className="line-total-kw">
+                <div>
+                  Total Bill:<span>{device.usageBill.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> 
+                </div>
               </div>
-            </div>
             </div>
             {device.deviceMeasuringModeId === 2 && (
               <>
-              <div className="line-values">
-                <div className="line-total">
-                  <div className="line-total-kw">
-                    <div>Budgeted kWh: {device.budgetedKwh}</div>
-                  </div>
-                  <div className="line-total-kw">
-                    <div>Budgeted Bill: {device.budgetedBill}</div>
+                <div className="line-values">
+                  <div className="line-total">
+                    <div className="line-total-kw">
+                      <div>Budgeted kWh: {device.budgetedKwh}</div>
+                    </div>
+                    <div className="line-total-kw">
+                      <div>Budgeted Bill: {device.budgetedBill}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
               </>
             )}
           </div>
@@ -154,7 +143,6 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
         <React.Fragment key={`operational-chart-${line.lineNo || index}`}>
           {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              {/* <div className="line-number" style={{color:'white'}}>Line: {line.line}</div> */}
             </div>
           )}
           <OperationalChart
@@ -174,37 +162,26 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
       ))}
     </div>
     <br/> 
-    {/* <div className=""> */}
-    <div className="chart-now-kw">
-      <LineChartActual device={device}/>
+    <div className="chart-toggle">
+      <div className="switch-container">
+        <span className="switch-label">{showActualChart ? 'Show Prediction' : 'Show Forecast'}</span>
+        <label className="switch">
+          <input type="checkbox" checked={showActualChart} onChange={() => setShowActualChart(!showActualChart)} />
+          <span className="slider round"></span>
+        </label>
+      </div>
     </div>
-    <br/> 
-    <div className="chart-now-cost">
-      <LineChart device={device}/>
+    <div className="chart-now">
+      {showActualChart ? (
+        <div className="chart-now-kw">
+          <LineChartActual device={device} />
+        </div>
+      ) : (
+        <div className="chart-now-cost">
+          <LineChart device={device} />
+        </div>
+      )}
     </div>
-    {/* </div> */}
-       {/* {lines.map((line, index) => (
-        <React.Fragment key={`operational-chart-${line.lineNo || index}`}>
-          {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div className="line-number">Line: {line.line}</div>
-            </div>
-          )}
-        <OperationalChartMode
-          key={`operational-chart-${line.lineNo || index}`}
-          lineNo={line.lineNo}
-          voltage={line.voltage}
-          current={line.current}
-          pf={line.pf}
-          hertz={line.hertz}
-          power={line.power}
-          kwh={line.kwh}
-          bill={line.bill}
-          budgetedKwh={line.budgetedKwh}
-          budgetedBill={line.budgetedBill}
-        />
-        </React.Fragment>
-      ))} */}
     </>
   );
 }

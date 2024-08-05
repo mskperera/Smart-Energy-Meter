@@ -70,6 +70,11 @@ const dispatch=useDispatch();
     }
   };
 
+  // const handleAddDevice = () => {
+  //   console.log('Add Device button clicked');
+  //   navigate('/setup');
+  // };
+
   const handleLogoutClick = () => {
     logout(); 
 
@@ -104,6 +109,7 @@ const dispatch=useDispatch();
                   <li key={index} onClick={() => handleDeviceSelect(device.name)} className='p-2 cursor-pointer rounded hover:bg-blue-100'>{device.name}</li>
                 ))}
               </ul>
+              {/* <button onClick={handleAddDevice} className='p-2 cursor-pointer rounded hover:bg-blue-100'>Add Device</button> */}
             </div>
           )}
         </div>}

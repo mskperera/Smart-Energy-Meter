@@ -10,11 +10,14 @@ import CustomCost from './CustomCostAdmin'
 import './DateAdmin.css'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useSelector } from 'react-redux'
 
 
 function Admin() {
 
   const [activeTab, setActiveTab] = useState('Now');
+
+  const selectedDevice=useSelector(state=>state.device.selectedDevice);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
