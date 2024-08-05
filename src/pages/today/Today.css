@@ -9,6 +9,37 @@
     
 }
 
+.highlight-today {
+    background-color: #fff346;
+    color: #000; 
+    border-radius: 20%;
+  }
+  
+
+ 
+.no-data-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 1.5em;
+    margin: 100px;
+  }
+
+  .no-data-message1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 1.5em;
+    margin-top: -100px;
+  }
+
+#no-data{
+    color: white;
+  }
+  
+
 .page-now{
     margin-top: 560px;
 }

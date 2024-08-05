@@ -28,7 +28,7 @@ function MonthActive() {
     setActiveTab(tab);
     if (tab === 'Session') {
       setDropdownLabel('Session');
-      setIsDropdownOpen(false); // Close the dropdown after selecting
+      setIsDropdownOpen(false); 
     } else {
       setIsDropdownOpen(false);
     }
@@ -36,7 +36,7 @@ function MonthActive() {
 
   // Handle month change
   const handleMonthChange = (date) => {
-    setSelectedDate(date); // Update state with the new date
+    setSelectedDate(date); 
   };
 
   // Set current billing session
@@ -48,7 +48,7 @@ function MonthActive() {
     setSelectedDate(sessionDate ? new Date(sessionDate) : moment().startOf('month').toDate());
   };
 
-  // Load chart data when date, device, or active tab changes
+ 
   useEffect(() => {
     if (selectedDate && selectedDevice) {
       loadChartData(selectedDevice.id, selectedDate);

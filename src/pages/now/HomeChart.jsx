@@ -9,7 +9,7 @@ ChartJS.register(ArcElement, Tooltip);
 
 const HomeChart = ({ currentKwValue, budgetedKwhValue, deviceTypeId, deviceMeasuringModeId }) => {
   const data = {
-    labels: ['Used kWh', `Remaining kWh: ${((budgetedKwhValue - currentKwValue) || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`],
+    labels: ['Used kWh', `Remaining: ${((budgetedKwhValue - currentKwValue) || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`],
     datasets: [
       {
         data: [currentKwValue, budgetedKwhValue],
@@ -37,24 +37,24 @@ const HomeChart = ({ currentKwValue, budgetedKwhValue, deviceTypeId, deviceMeasu
       ctx.textBaseline = 'middle';
 
       const currentValueFormatted = (data.datasets[0].data[0] || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      ctx.fillText(currentValueFormatted, centerX, centerY +5);
+      ctx.fillText(currentValueFormatted, centerX, centerY +8);
 
       ctx.font = 'bold 20px Trebuchet MS';
       ctx.fillStyle = [currentKwValue > budgetedKwhValue ? '#ff0000' : '#00bbf0'];
-      ctx.fillText('kWh', centerX, centerY - 25);
+      ctx.fillText('kWh', centerX, centerY - 30);
 
-      ctx.font = '15px Trebuchet MS';
+      ctx.font = '13px Trebuchet MS';
       ctx.fillStyle = 'white';
-      // ctx.fillText('Energy Usage', centerX, centerY + 70);
+      ctx.fillText('Energy Usage', centerX, centerY - 10);
 
       if (data.datasets[0].data[1] !== undefined) {
-        ctx.font = '18px Trebuchet MS';
+        ctx.font = '13px Trebuchet MS';
         ctx.fillStyle = 'white';
-        // ctx.fillText('Budget', centerX, centerY - 40);
+        ctx.fillText('Budget', centerX, centerY +28);
 
         ctx.font = 'bolder 16px Trebuchet MS';
         ctx.fillStyle = 'white';
-        ctx.fillText(`/ ${data.datasets[0].data[1].toLocaleString()}`, centerX, centerY  + 30);
+        ctx.fillText(`/ ${data.datasets[0].data[1].toLocaleString()}`, centerX, centerY  + 45);
       }
 
       ctx.restore();
@@ -64,13 +64,16 @@ const HomeChart = ({ currentKwValue, budgetedKwhValue, deviceTypeId, deviceMeasu
   const options = {
     plugins: {
       legend: {
-        display:false,
+        display: true,
         position: 'bottom',
         labels: {
           color: 'white',
           usePointStyle: true,
           pointStyle: 'square',
           boxWidth: 20,
+          filter: function(legendItem, data) {
+            return legendItem.text.includes('Remaining');
+          },
         },
         onClick: () => {},
       },
@@ -88,7 +91,7 @@ const HomeChart = ({ currentKwValue, budgetedKwhValue, deviceTypeId, deviceMeasu
     <div className='text-p'>
       {/* <div id='box3' className='chart' style={{ backgroundColor }}> */}
       <div style={{position:'static', display:'flex'}}>
-        <MdEnergySavingsLeaf className='icon' size={20} style={{ color:'00bbf0', marginLeft:'90px', marginTop:'55px'}}/>
+        <MdEnergySavingsLeaf className='icon' size={20} style={{ color:'00bbf0', marginLeft:'115px', marginTop:'55px'}}/>
       </div>
         <Doughnut data={data} options={options} plugins={[gaugeText]} id='box3' className='chart' /> 
       {/* </div> */}

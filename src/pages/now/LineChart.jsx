@@ -178,7 +178,7 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
         beginAtZero: true,
         title: {
           position: 'top',
-          display: true,
+          display: false,
           text: "Session",
           // text: "Trending To:",
           // font: {
@@ -192,7 +192,7 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
       },
       y: {
         grid: {
-          display: false,
+          display: true,
           color: 'Gray', //  color-x-axis grid lines
         },
         beginAtZero: true,
@@ -219,6 +219,8 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
         display: true,
         labels: {
           color: 'white',
+          usePointStyle: true,
+          pointStyle: 'rectRounded',
           // border: 'none',
         },
         onClick: () => { },

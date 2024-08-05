@@ -35,6 +35,7 @@ import Unauthorized from './pages/other/unauthorized';
 import Setup from './pages/serviceAccount/Setup';
 
 import MonthActive from './pages/month copy/MonthActive';
+import ServiceProfiles from './pages/serviceprofiles/ServiceProfiles';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
           <Route path='/Notify' element={<Notify />} />
           <Route path='/status' element={<Status />} />
           <Route path='/userlist' element={<Userlist />} />
+          <Route path='/serviceprofiles' element={<ServiceProfiles />} />
           <Route path='/home' element={<Home />} />
           <Route path='/homemode' element={<HomeMode />} />
           <Route path='/homecopy' element={<Home />} />

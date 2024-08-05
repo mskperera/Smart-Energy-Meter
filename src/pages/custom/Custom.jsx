@@ -95,6 +95,7 @@ const endOfDayUtc = moment(endDate).endOf('day').subtract(0,'days',utcOffSet).fo
 
 const [devices, setDevices] = useState([]);
 
+const currentDate = moment().toDate();
 
 useEffect(() => {
   if (selectedDevice) {
@@ -205,6 +206,7 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
                 endDate={endDate}
                 placeholderText="Start Date"
                 dateFormat='dd MMM yyyy'
+                dayClassName={(date) => date.toDateString() === currentDate.toDateString() ? 'highlight-today' : undefined}
             />
         </div>
         
@@ -218,6 +220,7 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
                 minDate={startDate}
                 placeholderText="End Date"
                 dateFormat='dd MMM yyyy'
+                dayClassName={(date) => date.toDateString() === currentDate.toDateString() ? 'highlight-today' : undefined}
             />
          </div>
          

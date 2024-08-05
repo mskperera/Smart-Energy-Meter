@@ -196,9 +196,9 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
             </div> */}
           <div className='date'>
           <div className='picker'>
-          <div>
+          <div className='picker-year'>
             <DatePicker
-        selected={selectedDate} 
+                selected={selectedDate} 
                 onChange={handleMonthChange}
                 dateFormat="yyyy"
                 showYearPicker
