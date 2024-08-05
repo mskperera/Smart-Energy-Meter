@@ -41,7 +41,7 @@
 }
 
 .days-bar-two-home .topic2{
-    margin-left: 195px;
+    margin-left: 150px;
     margin-top:-25px;
     flex: 1;
     display: flex;
@@ -50,7 +50,7 @@
 
 .days-bar-two-home{
     margin-top: -5px;
-    margin-left: 120px;
+    margin-left: 215px;
     width: 100%;
 }
 
@@ -171,7 +171,7 @@
 
 .page-bottom-mode-new1{
     display: flex;
-    width: 400px;
+    width: 500px;
     flex-wrap: wrap;
     margin-top: 0px;
 }
@@ -457,7 +457,7 @@
     padding: 0px 0px 0px 10px;
     /* padding-top: 1rem; */
     font-size: 18px;
-    color: white;
+    color: #ffffff;
    }
 
 .budget-values{
@@ -2314,6 +2314,7 @@
         display: flex;
         justify-content: space-around;
     }
+    
     }
 
      @media screen and (max-width:400px){
@@ -2361,7 +2362,7 @@
         }  
         .section-status{
             margin-top: 0px;
-            margin-left: 20px;
+            margin-left: 10px;
             width: fit-content;
         }
         

@@ -8,23 +8,15 @@ import 'react-datepicker/dist/react-datepicker.css';
 import DeviceChart from './DeviceChart';
 import { getEngergyUsageKwhByDateRange } from '../../action/device';
 import moment from 'moment';
-// import { useSessionDate } from '../../context/SessionDateContext';
 import { ThreeDots } from 'react-loader-spinner';
 import { IoMdArrowDropdown } from 'react-icons/io';
-// import { getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession';
 
 function Today() {
   const [activeTab, setActiveTab] = useState('Day');
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
-  
-  // const { sessionDate, setSessionDate, numberOfDays, setNumberOfDays } = useSessionDate();
-
   const [startDate, setStartDate] = useState(null);
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [devices, setDevices] = useState([]);
-
-  
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleTabClick = (tab) => {
@@ -80,101 +72,71 @@ function Today() {
     setIsSearchLoading(false);
   };
 
-  // useEffect(() => {
-  //   if (selectedDevice) {
-  //     const deviceId = selectedDevice.id;
-  //     loadCurrentBillingSessionInfoByDeviceId(deviceId);
-  //   }
-  // }, [selectedDevice]);
-
-  // const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
-  //   const result = await getBillingSessionNameCurrentByDeviceId(deviceId);
-  //   const billingSessionInfo = result.data;
-  //   console.log('Current-BillingSession-Info-By-DeviceId', billingSessionInfo);
-
-  //   if (billingSessionInfo && billingSessionInfo.data && billingSessionInfo.data.length > 0) {
-  //     const session = billingSessionInfo.data[0];
-  //     if (session.startDate) {
-  //       setSessionDate(new Date(session.startDate).toLocaleString());
-  //     }
-  //     if (session.numberOfDays) {
-  //       setNumberOfDays(session.daysElapsed);
-  //     }
-  //   }
-  // };
+  const currentDate = moment().toDate();
 
   return (
     <div className='home'>
       <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
         <div className='back'>
-        <ul className='nav-bar-links'>
-          <Link to={"/home"}>
+          <ul className='nav-bar-links'>
+            <Link to={"/home"}>
+              <li
+                className={`btn btn-sm  ${activeTab === 'Now' ? 'active' : ''}`}
+                onClick={() => handleTabClick('Now')}
+              >
+                Live
+              </li>
+            </Link>
+            <Link to={"/today"}>
+              <li
+                className={`btn btn-sm btn-primary ${activeTab === 'Day' ? 'active' : ''}`}
+                onClick={() => handleTabClick('Day')}
+              >
+                Day
+              </li>
+            </Link>
+            <Link to={"/week"}>
+              <li
+                className={`btn btn-sm ${activeTab === 'Week' ? 'active' : ''}`}
+                onClick={() => handleTabClick('Week')}
+              >
+                Week
+              </li>
+            </Link>
             <li
-             
-              className={`btn btn-sm  ${activeTab === 'Now' ? 'active' : ''}`}
-              onClick={() => handleTabClick('Now')}
+              className={`btn btn-sm  ${activeTab === 'Session' ? 'active' : ''}`}
+              onClick={() => handleTabClick('Session')}
             >
-              Live
+              Session<IoMdArrowDropdown size={20} />
+              <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}>
+                <Link to={"/month"} className='dropdown-item' onClick={() => handleTabClick('Session')}>
+                  Session
+                </Link>
+                <Link to={"/monthactive"} className='dropdown-item' onClick={() => handleTabClick('Month')}>
+                  Month
+                </Link>
+              </div>
             </li>
-          </Link>
-          <Link to={"/today"}>
-            <li
-             
-              className={`btn btn-sm btn-primary ${activeTab === 'Day' ? 'active' : ''}`}
-              onClick={() => handleTabClick('Day')}
-            >
-              Day
-            </li>
-          </Link>
-          <Link to={"/week"}>
-            <li
-              className={`btn btn-sm ${activeTab === 'Week' ? 'active' : ''}`}
-              onClick={() => handleTabClick('Week')}
-            >
-              Week
-            </li>
-          </Link>
-          <li
-           
-            className={`btn btn-sm  ${activeTab === 'Session' ? 'active' : ''}`}
-            onClick={() => handleTabClick('Session')}
-          >
-            Session<IoMdArrowDropdown size={20}/>
-            <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}>
-              <Link to={"/month"} className='dropdown-item' onClick={() => handleTabClick('Session')}>
-                Session
-              </Link>
-              <Link to={"/monthactive"} className='dropdown-item' onClick={() => handleTabClick('Month')}>
-                Month
-              </Link>
-            </div>
-          </li>
-          <Link to={"/year"}>
-            <li
-              
-              className={`btn btn-sm  ${activeTab === 'Year' ? 'active' : ''}`}
-              onClick={() => handleTabClick('Year')}
-            >
-              Year
-            </li>
-          </Link>
-          <Link to={"/custom"}>
-            <li
-             
-              className={`btn btn-sm  ${activeTab === 'Custom' ? 'active' : ''}`}
-              onClick={() => handleTabClick('Custom')}
-            >
-              Custom
-            </li>
-          </Link>
-        </ul>
+            <Link to={"/year"}>
+              <li
+                className={`btn btn-sm  ${activeTab === 'Year' ? 'active' : ''}`}
+                onClick={() => handleTabClick('Year')}
+              >
+                Year
+              </li>
+            </Link>
+            <Link to={"/custom"}>
+              <li
+                className={`btn btn-sm  ${activeTab === 'Custom' ? 'active' : ''}`}
+                onClick={() => handleTabClick('Custom')}
+              >
+                Custom
+              </li>
+            </Link>
+          </ul>
         </div>
       </div>
       <div className='body'>
-        {/* <div className="session-name">
-          <h6>Session Date :<b> {sessionDate}</b></h6>
-          <p>Days Elapsed : <b>{numberOfDays}</b></p>
-        </div> */}
         <div className='date'>
           <div className='picker'>
             <div>
@@ -184,6 +146,7 @@ function Today() {
                 selectsStart
                 placeholderText="Start Date"
                 dateFormat='dd MMM yyyy'
+                dayClassName={(date) => date.toDateString() === currentDate.toDateString() ? 'highlight-today' : undefined}
               />
             </div>    
           </div>
@@ -201,15 +164,21 @@ function Today() {
             />
           </div>
         ) : (
-          devices.length > 0 && devices.map((device, index) => (
-            <div key={index}>
-              <DeviceChart  
-                device={device}
-                className="device-name-state body d-flex align-items-center justify-content-center w-100"
-                chartFrequencty="hours"
-              />
+          devices.length === 0 ? (
+            <div className="no-data-message1" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+              <h2 id='no-data'>No data Found</h2>
             </div>
-          ))
+          ) : (
+            devices.map((device, index) => (
+              <div key={index}>
+                <DeviceChart  
+                  device={device}
+                  className="device-name-state body d-flex align-items-center justify-content-center w-100"
+                  chartFrequencty="hours"
+                />
+              </div>
+            ))
+          )
         )}
       </div>
       <BottomNav />

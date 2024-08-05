@@ -11,7 +11,7 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
   const data = {
     labels: [
       'Used Rs', 
-      `Remaining Rs : ${(budgetedBill - currentValue || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+      `Remaining: ${(budgetedBill - currentValue || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
     ],
     datasets: [
       {
@@ -39,28 +39,28 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
       ctx.textAlign = 'center';
 
       const currentValueFormatted = (data.datasets[0].data[0] || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      ctx.fillText(currentValueFormatted, centerX, centerY +5);
+      ctx.fillText(currentValueFormatted, centerX, centerY +8);
 
       ctx.font = 'bold 20px Trebuchet MS';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = [currentValue > budgetedBill ? '#ff0000' : '#00bbf0'];
-      ctx.fillText('Rs', centerX, centerY -25);
+      ctx.fillText('Rs', centerX, centerY -30);
 
-      ctx.font = '15px Trebuchet MS';
+      ctx.font = '13px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.fillText("", centerX, centerY -30);
-      // ctx.fillText('Energy Usage(Value)', centerX, centerY + 70);
+      ctx.fillText('Energy Usage', centerX, centerY - 10);
 
       if (data.datasets[0].data[1] !== undefined) {
-        ctx.font = '15px Trebuchet MS';
+        ctx.font = '13px Trebuchet MS';
         ctx.fillStyle = 'white';
-        // ctx.fillText('Budget', centerX, centerY - 75);
+        ctx.fillText('Budget', centerX, centerY + 28);
 
         const budgetedBillFormatted = (data.datasets[0].data[1] || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         ctx.font = 'bolder 16px Trebuchet MS';
         ctx.fillStyle = 'white';
-        ctx.fillText(`/ ${budgetedBillFormatted}`, centerX, centerY +30);
+        ctx.fillText(`/ ${budgetedBillFormatted}`, centerX, centerY + 45);
       }
     },
   };
@@ -68,13 +68,16 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
   const options = {
     plugins: {
       legend: {
-        display: false,
+        display: true,
         position: 'bottom',
         labels: {
           color: 'white',
           usePointStyle: true,
           pointStyle: 'square',
           boxWidth: 20,
+          filter: function(legendItem, data){
+            return legendItem.text.includes('Remaining');
+          },
         },
         onClick: () =>{},
       },
@@ -90,7 +93,7 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
     <>
       <div className='text-p'>
         <div className='' style={{position:'static', display:'flex'}}>
-          <GiTwoCoins className='icon' size={20} style={{ color:'00bbf0', marginLeft:'90px', marginTop:'55px'}}/>
+          <GiTwoCoins className='icon' size={20} style={{ color:'00bbf0', marginLeft:'115px', marginTop:'55px'}}/>
         </div>
         <Doughnut data={data} options={options} plugins={[gaugeText]} id='box3' className='chart' />
       </div>

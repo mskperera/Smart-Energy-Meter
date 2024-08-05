@@ -116,8 +116,8 @@
   margin: 0px;
   width: 100%;
   padding: 20px 10px 0px 10px;
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 250px;
   /* height: 100px; */
   /* background:  #131a25; */
   /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
@@ -130,7 +130,7 @@
   margin: 0px;
     /* width: 100%; */
     width: 100%;
-  padding: 10px 10px 10px 10px;
+  padding: 5px 5px 5px 5px;
   height: 780px;
   width: 780px;
     /* height: 100px; */
@@ -515,7 +515,7 @@
     margin: 0px;
       /* width: 100%; */
     width: 100%;
-    padding: 10px 10px 10px 10px;
+    padding: 0px 0px 0px 0px;
     height: 380px; 
     width: 380px;
       /* height: 100px; */
@@ -528,18 +528,31 @@
 
 @media only screen and (max-width: 415px) {
   #box22 {
-
     margin: 0px;
       /* width: 100%; */
     width: 100%;
-    padding: 10px 10px 10px 10px;
-    height: 370px; 
+    padding: 0px 0px 0px 0px;
+    height: 600px; 
     width: 370px;
       /* height: 100px; */
       /* background:  rgba(11, 11, 11, 0.7); */
       /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
       /* background: #131a25; */
       background: #3b3b3b;
+  }
+
+  #box3 {
+    /* border: solid rgb(180, 246, 72) 1px; */
+    margin: 0px;
+    width: 100%;
+    padding: 20px 10px 0px 10px;
+    height: 250px;
+    width: 250px;
+    /* height: 100px; */
+    /* background:  #131a25; */
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); */
+    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.2) */
   }
 }
 
@@ -549,7 +562,7 @@
     margin: 0px;
       /* width: 100%; */
     width: 100%;
-    padding: 10px 10px 10px 10px;
+    padding: 0px 0px 0px 0px;
     height: 335px; 
     width: 335px;
       /* height: 100px; */

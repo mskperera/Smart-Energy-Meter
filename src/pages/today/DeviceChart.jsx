@@ -9,8 +9,8 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
   const { deviceId, deviceName, deviceLocation, lines, sessionDetails } = device;
 
   const session = sessionDetails[0];
-  const formattedStartDate = moment(session.startDate).format('YYYY-MM-DD');
-  const formattedEndDate = moment(session.endDate).format('YYYY-MM-DD');
+  const formattedStartDate = moment(session.startDate).format('YYYY MMM DD');
+  const formattedEndDate = moment(session.endDate).format('YYYY MMM DD');
 
   // const startDate = session.startDate;/
   const daysElapsed = session.daysElapsed;

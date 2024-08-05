@@ -9,12 +9,21 @@
     display: flex;
 }
 
+.week-start {
+    background-color: #fff346 !important;
+    border-radius: 20%;
+  }
+  
+  .current-week {
+    background-color: #a0d6fa !important;
+    border-radius: 20%;
+  }
+  
 .page-week{
     /* margin-top: 200px; */
     display: flex;
     flex-direction: column;
 }
-
 .chart-week-kw{
     flex: 1;
     width: 80%;

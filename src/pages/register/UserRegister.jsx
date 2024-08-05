@@ -6,6 +6,7 @@ import swal from 'sweetalert';
 import { ThreeDots } from 'react-loader-spinner';
 import { IoClose } from "react-icons/io5";
 import { getDrpUserRole } from '../../action/dropdown';
+import { ca } from 'date-fns/locale';
 
 function UserRegister() {
   
@@ -26,28 +27,42 @@ function UserRegister() {
   const [errormessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    loadDrpUserRole();
     if(saveType === "U"){
       loadUser();
+      setLoading(true);
     }
+    loadDrpUserRole();
+    setLoading(true);
   }, [saveType, userRegId]);
 
-  const loadUser = async () => {
+
+  const loadDrpUserRole = async () => {
+    const result = await getDrpUserRole();
     setLoading(true);
-    const result = await getUserbyUserId(userRegId);
-    const user = result.data;
-    console.log("user-select", user);
-    setUserName(user.userName);
-    setUserPassword(user.password);
-    setUserEmail(user.email);
-    setUserDisplayName(user.displayName);
-    setUserMobile(user.mobileNo);
-    setUserAddress(user.siteAddress);
-    setUserBillAddress(user.billingAddress);
-    setUserTel(user.tel);
-    setRoleName(user.roleName);
-    setRoleId(user.roleId);
+    setDrpUserRole(result.data);
     setLoading(false);
+  };
+
+  const loadUser = async () => {
+    try{
+      const result = await getUserbyUserId(userRegId);
+      setLoading(true);
+      const user = result.data;
+      console.log("user-select", user);
+      setUserName(user.userName || '');
+      setUserPassword(user.password || '');
+      setUserEmail(user.email || '');
+      setUserDisplayName(user.displayName || '');
+      setUserMobile(user.mobileNo || '');
+      setUserAddress(user.siteAddress || '');
+      setUserBillAddress(user.billingAddress || '');
+      setUserTel(user.tel || '');
+      setRoleName(user.roleName || '');
+      setRoleId(user.roleId || '');
+      setLoading(false);
+    }catch(err){
+      console.log(err);
+    }
   }
 
   const onsubmitHandler = async (e) => {
@@ -71,39 +86,58 @@ function UserRegister() {
         gmt_Offset: "+05:30"
       };
   
-      let res;
+      
       if (saveType === "I") {
-        res = await addUser(payload);
+        const res = await addUser(payload);
+        setLoading(true);
+        handleResponse(res);
       } else if (saveType === "U") {
-        res = await updateUser(payload, userRegId);
+        const res = await updateUser(payload, userRegId);
+        setLoading(true);
+        handleResponse(res);
       }
-  
-      setLoading(true);
-      const { responseStatus, outputMessage } = res.data.output;
-      if (responseStatus === "failed") {
-        setErrorMessage(outputMessage);
-        setLoading(false);
-        return;
-      }
-      setMessage(outputMessage);
-      swal(saveType === "I" ? "User Added Successfully" : "User Updated Successfully", "", "success").then(() => {
-        window.location = "/userlist";
-      });
     } catch (err) {
       console.log(err);
     }
   };
-  
-  const loadDrpUserRole = async () => {
-    const result = await getDrpUserRole();
-    setDrpUserRole(result.data);
+
+  const handleResponse = (res) => {
+    const { responseStatus, outputMessage } = res.data.output;
+    if (responseStatus === "failed") {
+      setErrorMessage(outputMessage);
+      return;
+    }
+    else{
+      setMessage(outputMessage);
+      swal(saveType === "I" ? "User Added Successfully" : "User Updated Successfully", "", "success").then(() => {
+        window.location = "/userlist";
+      });
+    }
   };
+  
+  //     setLoading(true);
+  //     const { responseStatus, outputMessage } = res.data.output;
+  //     if (responseStatus === "failed") {
+  //       setErrorMessage(outputMessage);
+  //       return;
+  //     }
+  //     setMessage(outputMessage);
+  //     swal(saveType === "I" ? "User Added Successfully" : "User Updated Successfully", "", "success").then(() => {
+  //       window.location = "/userlist";
+  //     });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+  
+  
 
   const handleRoleChange = (e) => {
     const selectedRole = drpUserRole.find(role => role.RoleName === e.target.value);
     if (selectedRole) {
       setRoleName(selectedRole.RoleName);
       setRoleId(selectedRole.RoleId);
+      setLoading(false);
     }
   };
 
@@ -149,30 +183,30 @@ function UserRegister() {
                   </div>
                   <div className='form-group was-validated mb-2'>
                     <label htmlFor='password' className='form-check-label'>Password</label>
-                    <input type='password' className='form-control' value={userPassword || ''} onChange={(e) => setUserPassword(e.target.value)} required />
+                    <input type='password' className='form-control' value={userPassword} onChange={(e) => setUserPassword(e.target.value)} required />
                   </div>
                   <div className='form-group was-validated mb-2'>
                     <label htmlFor='email' className='form-check-label'>Email</label>
-                    <input type='email' className='form-control' value={userEmail || ''} onChange={(e) => setUserEmail(e.target.value)} required />
+                    <input type='email' className='form-control' value={userEmail} onChange={(e) => setUserEmail(e.target.value)} required />
                   </div>
                 </div>
 
                 <div className='col-md-6 mb-1'>
                   <div className='form-group was-validated mb-2'>
                     <label htmlFor='displayname' className='form-check-label'>Address</label>
-                    <input type='text' className='form-control' value={userAddress || ''} onChange={(e) => setUserAddress(e.target.value)} required />
+                    <input type='text' className='form-control' value={userAddress} onChange={(e) => setUserAddress(e.target.value)} required />
                   </div>
                   <div className='form-group was-validated mb-2'>
                     <label htmlFor='displayname' className='form-check-label'>Display Name</label>
-                    <input type='text' className='form-control' value={userDisplayName || ''} onChange={(e) => setUserDisplayName(e.target.value)} required />
+                    <input type='text' className='form-control' value={userDisplayName} onChange={(e) => setUserDisplayName(e.target.value)} required />
                   </div>
                   <div className='form-group was-validated mb-2'>
                     <label htmlFor='mobile' className='form-check-label'>Mobile</label>
-                    <input type='text' className='form-control' value={userMobile || ''} onChange={(e) => setUserMobile(e.target.value)} required />
+                    <input type='text' className='form-control' value={userMobile} onChange={(e) => setUserMobile(e.target.value)} required />
                   </div>
                   <div className='form-group was-validated mb-2'>
                     <label htmlFor='tel' className='form-check-label'>Tel</label>
-                    <input type='text' className='form-control' value={userTel || ''} onChange={(e) => setUserTel(e.target.value)} required />
+                    <input type='text' className='form-control' value={userTel} onChange={(e) => setUserTel(e.target.value)} required />
                   </div>
                 </div>
               </div>
