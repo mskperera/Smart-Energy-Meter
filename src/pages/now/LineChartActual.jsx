@@ -133,7 +133,7 @@ function LineChartActual({ device }) {
       },
       y: {
         grid: {
-          display: false,
+          display: true,
           color: 'Gray', //  color-x-axis grid lines
         },
         beginAtZero: true,
