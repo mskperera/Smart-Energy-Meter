@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import './AreaChart.css';
-import { Line, Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Filler, BarController, BarElement } from 'chart.js';
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Filler } from 'chart.js';
 import moment from 'moment';
 import { getEngergyUsageKwhByDateRangePrediction } from '../../action/device';
-import { getbillingSessionByDeviceId } from '../../action/billingSession';
 import { useSelector } from 'react-redux';
 import { ThreeDots } from 'react-loader-spinner';
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler, BarController, BarElement);
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler);
 
 function LineChartActual({ device }) {
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
   const [loading, setLoading] = useState(true);
-  const [totalForecast, setTotalForecast] = useState(0); 
+  const [totalForecast, setTotalForecast] = useState(0);
+  const [totalUsed, setTotalUsed] = useState(0); // To store total used value
   const [data, setData] = useState({
     labels: [],
     datasets: [
@@ -25,9 +25,9 @@ function LineChartActual({ device }) {
   });
 
   useEffect(() => {
-    if (selectedDevice) {
+    // if (selectedDevice) {
       loadEngergyUsageKwhByDateRangePrediction();
-    }
+    // }
   }, []);
 
   const loadEngergyUsageKwhByDateRangePrediction = async () => {
@@ -54,7 +54,8 @@ function LineChartActual({ device }) {
     const kwhCumActualArr = [];
     const kwhCumForcastArr = [];
 
-    let totalForecastValue = 0; 
+    let totalForecastValue = 0;
+    let totalUsedValue = 0;
 
     for (let i = 0; i < charData.length; i++) {
       console.log('1 Month', charData[i]);
@@ -63,14 +64,16 @@ function LineChartActual({ device }) {
       predictArr.push(charData[i].kwhPerDayForecast);
       kwhCumActualArr.push(charData[i].kwhCumActual);
       kwhCumForcastArr.push(charData[i].kwhCumForcast);
-      totalForecastValue += charData[i].kwhPerDayForecast; 
+      totalForecastValue += charData[i].kwhPerDayForecast;
+      totalUsedValue += charData[i].kwhPerDay;
     }
 
-    setTotalForecast(totalForecastValue); 
+    setTotalForecast(totalForecastValue);
+    setTotalUsed(totalUsedValue); 
 
     const datasets0 = [
       {
-        label: 'Forcast',
+        label: 'Forecast',
         data: kwhCumForcastArr,
         borderColor: '#fff346',
         pointBortderColor: 'rgba(0, 255, 153)',
@@ -98,10 +101,14 @@ function LineChartActual({ device }) {
     beforeDraw: (chart) => {
       const { ctx, chartArea: { top, right } } = chart;
       ctx.save();
-      ctx.font = 'bolder 16px Trebuchet MS';
+      ctx.font = 'bolder 15px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
       ctx.fillText(`Trending : ${(Number(totalForecast.toFixed(2))).toLocaleString()} kWh`, right, top - 15);
+
+
+      ctx.font = 'bolder 13px Trebuchet MS';
+      ctx.fillText(`Actual Used: ${(Number(totalUsed.toFixed(2))).toLocaleString()} kWh`, right, top + 0);
       ctx.restore();
     },
   };
@@ -126,7 +133,7 @@ function LineChartActual({ device }) {
       },
       y: {
         grid: {
-          display: true,
+          display: false,
           color: 'Gray', //  color-x-axis grid lines
         },
         beginAtZero: true,
@@ -156,6 +163,14 @@ function LineChartActual({ device }) {
         },
         onClick: () => { },
       },
+      // title: {
+      //   display: true,
+      //   text: `Actual Value Used: ${(Number(totalUsed.toFixed(2))).toLocaleString()} kWh`,
+      //   color: 'white',
+      //   font: {
+      //     size: 18,
+      //   },
+      // },
     },
   };
 
