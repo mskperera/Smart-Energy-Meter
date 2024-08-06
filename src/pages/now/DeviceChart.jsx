@@ -9,6 +9,7 @@ import { MdPermDeviceInformation } from "react-icons/md";
 import moment from "moment";
 import LineChart from "./LineChart";
 import LineChartActual from "./LineChartActual";
+import LineChartBudget from "./LineChartBudget";
 
 function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , numberOfDays, startDate, endDate  }) {
   const { lines } = device;
@@ -181,6 +182,12 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
           <LineChart device={device} />
         </div>
       )}
+    </div>
+    <br/>
+    <div>
+        <div className="chart-now-kw">
+          <LineChartBudget device={device} />
+        </div>
     </div>
     </>
   );

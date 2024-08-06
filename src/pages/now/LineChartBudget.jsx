@@ -9,7 +9,7 @@ import { ThreeDots } from 'react-loader-spinner';
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler);
 
-function LineChartActual({ device }) {
+function LineChartBudget({ device }) {
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
   const [loading, setLoading] = useState(null);
   const [totalForecast, setTotalForecast] = useState(0);
@@ -18,11 +18,13 @@ function LineChartActual({ device }) {
     labels: [],
     datasets: [
       {
-        label: ['kWh', 'Forecast'],
+        label: ['Rs', 'Forecast'],
         data: [],
       },
     ],
   });
+
+  const [lastForecastValue, setLastForecastValue] = useState(0); 
 
   useEffect(() => {
     // if (selectedDevice) {
@@ -50,52 +52,44 @@ function LineChartActual({ device }) {
     const charData = resultMonth.data.chartData;
 
     if (!Array.isArray(charData)) {
-      console.error('charData is not an array or is undefined');
       setLoading(false);
       return;
     }
-
     const months = [];
-    const monthKwArr = [];
-    const predictArr = [];
-    const kwhCumActualArr = [];
-    const kwhCumForcastArr = [];
+    // const monthKwArr = [];
+    // const predictArr = [];
+    // const kwhCumActualArr = [];
+    // const kwhCumForcastArr = [];
+    const costCumForcastArr = [];
 
-    let totalForecastValue = 0;
-    let totalUsedValue = 0;
+    
 
     for (let i = 0; i < charData.length; i++) {
       console.log('1 Month', charData[i]);
       months.push(moment(charData[i].timeStamp_local).format('M-DD'));
-      monthKwArr.push(charData[i].kwhPerDay);
-      predictArr.push(charData[i].kwhPerDayForecast);
-      kwhCumActualArr.push(charData[i].kwhCumActual);
-      kwhCumForcastArr.push(charData[i].kwhCumForcast);
-      totalForecastValue += charData[i].kwhPerDayForecast;
-      totalUsedValue += charData[i].kwhPerDay;
+      // monthKwArr.push(charData[i].kwhPerDay);
+      // predictArr.push(charData[i].kwhPerDayForecast);
+      // kwhCumActualArr.push(charData[i].kwhCumActual);
+      // kwhCumForcastArr.push(charData[i].kwhCumForcast);
+      costCumForcastArr.push(charData[i].costCumForcast);
+      // totalForecastValue += charData[i].kwhPerDayForecast;
+      // totalUsedValue += charData[i].kwhPerDay;
     }
 
-    setTotalForecast(totalForecastValue);
-    setTotalUsed(totalUsedValue); 
+    const lastForecast = costCumForcastArr[costCumForcastArr.length - 1];
+    setLastForecastValue(lastForecast || 0); 
 
     const datasets0 = [
       {
-        label: 'Forecast',
-        data: kwhCumForcastArr,
+        label: 'Cost',
+        data: costCumForcastArr,
         borderColor: '#fff346',
-        pointBortderColor: 'rgba(0, 255, 153)',
+        // pointBortderColor: 'aqua',
         tension: 0.3,
+        backgroundColor:'rgb(255,243,70, 0.2)',
+        // fill: true,
+        // showLine: true,
         borderDash: [8, 10],
-      },
-      {
-        label: 'Actual',
-        data: kwhCumActualArr,
-        borderColor: 'rgba(54,162,235)',
-        pointBortderColor: 'aqua',
-        tension: 0.3,
-        backgroundColor: 'rgba(54,162,235, 0.7)',
-        fill: true,
-        showLine: true,
       },
     ];
 
@@ -111,11 +105,7 @@ function LineChartActual({ device }) {
       ctx.font = 'bolder 14px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
-      ctx.fillText(`Forecast : ${(Number(totalForecast.toFixed(2))).toLocaleString()} kWh`, right, top - 20);
-
-
-      ctx.font = 'bolder 12px Trebuchet MS';
-      ctx.fillText(`Actual Used: ${(Number(totalUsed.toFixed(2))).toLocaleString()} kWh`, right, top - 5);
+      ctx.fillText(`Forecast : Rs.${(Number(lastForecastValue.toFixed(2))).toLocaleString()}`, right, top - 20);
       ctx.restore();
     },
   };
@@ -147,7 +137,7 @@ function LineChartActual({ device }) {
         title: {
           display: true,
           position: 'top',
-          text: 'kWh',
+          text: 'Rs',
           color: 'white',
         },
         ticks: {
@@ -194,4 +184,4 @@ function LineChartActual({ device }) {
   );
 }
 
-export default LineChartActual;
+export default LineChartBudget;

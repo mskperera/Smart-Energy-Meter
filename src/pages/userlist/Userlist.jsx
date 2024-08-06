@@ -38,7 +38,7 @@ function Userlist() {
 
    
    
-   const onDeleteUser = async (userId) => {
+  const onDeleteUser = async (userId) => {
     swal({
       title: "Are you sure?",
       text: "Once deleted, You will not be able to recover this User Details!",
@@ -48,27 +48,35 @@ function Userlist() {
     })
     .then(async (willDelete) => {
       if (willDelete) {
-        try{
-        const res = await deleteUser(userId);
-        console.log("result", res);
-        const { responseStatus, outputMessage } = res.data.output;
-        if (responseStatus === "failed") {
-          console.log("exception:", outputMessage);
-
-        } else{
-
-          console.log("successful:", outputMessage);
-          swal("Success!", "Your User Details have been deleted!", "success");
-          loadusers();
+        try {
+          const res = await deleteUser(userId);
+          console.log("result", res);
+          
+          if (res.data && res.data.output) {
+            const { responseStatus, outputMessage } = res.data.output;
+            
+            if (responseStatus === "failed") {
+              console.log("exception:", outputMessage);
+              swal("Error!", outputMessage, "error");
+            } else {
+              console.log("successful:", outputMessage);
+              swal("Success!", "Your User Details have been deleted!", "success");
+              loadusers();
+            }
+          } else {
+            console.error("Unexpected response structure:", res);
+            swal("Error!", "You can not delete this user.", "error");
+          }
+        } catch (error) {
+          console.error("Error deleting user:", error);
+          swal("Error!", "An error occurred while deleting the user.", "error");
         }
-      }catch (error){
-        console.error("Error deleting user:", error);
-      }
       } else {
         swal("Your User Details are safe!");
       }
     });
   };
+  
         // if (res.data && res.data.output) {
         
   
