@@ -14,7 +14,18 @@ function LineChart({device}) {
 
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
 
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(null); 
+
+  const [data, setData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: ['kWh', 'Prediction'],
+        data: [],
+      }
+      
+    ],
+  });
 
    useEffect(() => {
     // if (selectedDevice) {
@@ -60,6 +71,13 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
     console.log('1 Month', resultMonth.data)
 
     const charData = resultMonth.data.chartData;
+
+    if (!Array.isArray(charData)) {
+      console.error('charData is not an array or is undefined');
+      setLoading(false);
+      return;
+    }
+
     const months = [];
     const monthKwArr = [];
     const predictArr = [];
@@ -135,37 +153,28 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
     setLoading(false);
   }
 
-  const [data, setData] = useState({
-    labels: [],
-    datasets: [
-      {
-        label: ['kWh', 'Prediction'],
-        data: [],
-      }
-      
-    ],
-  });
+  
 
 
-  const customTextPlugin = {
-    id: 'customTextPlugin',
-    beforeDraw: (chart) => {
-      const { ctx, chartArea: { top, right, bottom, left, width, height } } = chart;
-      ctx.save();
+  // const customTextPlugin = {
+  //   id: 'customTextPlugin',
+  //   beforeDraw: (chart) => {
+  //     const { ctx, chartArea: { top, right, bottom, left, width, height } } = chart;
+  //     ctx.save();
 
     
-      ctx.font = '20px Trebuchet MS';
-      ctx.fillStyle = 'white';
-      ctx.textAlign = 'center';
-      // ctx.fillText('Trending Power Usage', width / 2, top + 30);
+  //     ctx.font = '20px Trebuchet MS';
+  //     ctx.fillStyle = 'white';
+  //     ctx.textAlign = 'center';
+  //     ctx.fillText('Trending Power Usage', width / 2, top + 30);
 
      
-      // ctx.font = '14px Trebuchet MS';
-      // ctx.fillText('Trending Power Usage', left +30, top +310);
+  //     ctx.font = '14px Trebuchet MS';
+  //     ctx.fillText('Trending Power Usage', left +30, top +310);
 
-      ctx.restore();
-    }
-  };
+  //     ctx.restore();
+  //   }
+  // };
 
 
   const options = {
@@ -235,7 +244,7 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
           <ThreeDots color={"#36A2EB"} loading={loading} size={50} />
         </div>
       ) : (
-        <Line data={data} options={options} plugins={[customTextPlugin]} id='box22' className='chart box22' />
+        <Line data={data} options={options} id='box22' className='chart box22' />
       )}
     </div>
   );
