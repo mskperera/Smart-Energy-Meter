@@ -97,10 +97,10 @@ export const updateUser= async (payload,userRegId) => {
   }
 }
 
-export const getUserIdByUsername= async (userName) => {
+export const getUserIdByUsername= async (payload) => {
   try {
     return await customAxios
-      .get(`/user/getUserIdByUsername/${userName}`, {
+      .post(`/user/getUserIdByUsername`,payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -115,3 +115,8 @@ export const getUserIdByUsername= async (userName) => {
     return err;
   }
 }
+
+// ex:
+// payload={
+//   userName:'lasitha'
+// }
