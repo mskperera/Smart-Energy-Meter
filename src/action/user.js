@@ -97,6 +97,7 @@ export const updateUser= async (payload,userRegId) => {
   }
 }
 
+
 export const getUserIdByUsername= async (payload) => {
   try {
     return await customAxios
@@ -115,6 +116,7 @@ export const getUserIdByUsername= async (payload) => {
     return err;
   }
 }
+
 
 // ex:
 // payload={
