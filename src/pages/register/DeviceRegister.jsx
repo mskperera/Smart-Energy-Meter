@@ -17,7 +17,7 @@ function DeviceRegister() {
   const [product, setProduct] = useState('');
   const [chipId, setChipId] = useState('');
   const [deviceType, setDeviceType] = useState('');
-
+ 
   const [dropDeviceType, setDropDeviceType] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -62,13 +62,14 @@ function DeviceRegister() {
   };
 
   const [message, setMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errormessage, setErrorMessage] = useState('');
 
   const onsubmitHandler = async (e) => {
     e.preventDefault();
     try {
       setErrorMessage('');
       setMessage('');
+      setLoading(true);
 
       const payload = {
         deviceId: selectedDevice.id,
@@ -81,24 +82,26 @@ function DeviceRegister() {
         deviceTypeId: deviceType,
       };
 
+      let res;
       if (saveType === 'I') {
-        const res = await addDevice(payload);
-        setLoading(true);
-        handleResponse(res);
+         res = await addDevice(payload);
       } else if (saveType === 'U') {
-        const res = await updateDevice(payload, deviceRegId);
-        setLoading(true);
-        handleResponse(res);
+         res = await updateDevice(payload, deviceRegId);
       }
+      handleResponse(res);
     } catch (err) {
       console.log(err);
+      setErrorMessage('Something went wrong');
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleResponse = (res) => {
-    const { responseStatus, outputMessage } = res.data;
-    if (responseStatus === 'error') {
+    const { responseStatus, outputMessage } = res.data.output;
+    if (responseStatus === 'failed') {
       setErrorMessage(outputMessage);
+      clearForm();
       return;
     } else {
       setMessage(outputMessage);
@@ -107,6 +110,17 @@ function DeviceRegister() {
       });
     }
   };
+
+  const clearForm = () => {
+    setDeviceNo('');
+    setHardwareVersion('');
+    setSerialNo('');
+    setFirmwareVersion('');
+    setProduct('');
+    setChipId('');
+    setDeviceType('');
+  };
+
 
   return (
     <div className='wrapper-register d-flex align-items-center justify-content-center w-100'>
@@ -204,9 +218,9 @@ function DeviceRegister() {
             <button type='submit' className='btn btn-primary w-100 mt-3'>
               Save
             </button>
+          {errormessage && <p className='text-danger'>{errormessage}</p>}
+          {message && <p className='text-success'>{message}</p>}
           </form>
-          {message && <div className="alert alert-success mt-2">{message}</div>}
-          {errorMessage && <div className="alert alert-danger mt-2">{errorMessage}</div>}
         </div>
       )}
     </div>

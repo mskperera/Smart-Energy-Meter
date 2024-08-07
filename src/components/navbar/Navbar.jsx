@@ -113,9 +113,9 @@ const dispatch=useDispatch();
             </div>
           )}
         </div>}
-       {userData.roleId===1 && <a href='/serviceprofiles'>Service Profiles</a>}
-       {userData.roleId===1 && <a href='/userlist'>User Management</a>}
-       {userData.roleId===1 &&  <a href='/management'>Device Management</a>}
+       {userData.roleId===1 && <a href='/serviceprofiles' className='nav-icons'>Service Profiles</a>}
+       {userData.roleId===1 && <a href='/userlist'className='nav-icons'>User Management</a>}
+       {userData.roleId===1 &&  <a href='/management' className='nav-icons'>Device Management</a>}
         <div className='menu-trigger relative'>
           <CgProfile onClick={() => setOpen(!open)} size={25}  className='nav-icons'/>
           {open && (

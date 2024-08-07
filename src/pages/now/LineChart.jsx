@@ -137,7 +137,7 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
         borderColor: 'rgba(54,162,235)',
         pointBortderColor: 'aqua',
         tension: 0.3,
-        backgroundColor: 'rgba(54,162,235, 0.7)',
+        backgroundColor: 'rgba(54,162,235, 0.5)',
         fill: true,
         showLine: true,
       },

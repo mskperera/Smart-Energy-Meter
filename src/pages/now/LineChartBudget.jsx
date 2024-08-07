@@ -12,8 +12,8 @@ ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler);
 function LineChartBudget({ device }) {
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
   const [loading, setLoading] = useState(null);
-  const [totalForecast, setTotalForecast] = useState(0);
-  const [totalUsed, setTotalUsed] = useState(0); // To store total used value
+  // const [totalForecast, setTotalForecast] = useState(0);
+  // const [totalUsed, setTotalUsed] = useState(0); 
   const [data, setData] = useState({
     labels: [],
     datasets: [
@@ -86,8 +86,8 @@ function LineChartBudget({ device }) {
         borderColor: '#fff346',
         // pointBortderColor: 'aqua',
         tension: 0.3,
-        backgroundColor:'rgb(255,243,70, 0.2)',
-        // fill: true,
+        backgroundColor:'rgb(255,243,70, 0.5)',
+        fill: true,
         // showLine: true,
         borderDash: [8, 10],
       },
