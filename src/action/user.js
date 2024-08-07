@@ -96,3 +96,22 @@ export const updateUser= async (payload,userRegId) => {
     return err;
   }
 }
+
+export const getUserIdByUsername= async (userName) => {
+  try {
+    return await customAxios
+      .get(`/user/getUserIdByUsername/${userName}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
