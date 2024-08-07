@@ -162,6 +162,12 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
         </React.Fragment>
       ))}
     </div>
+    <br/>
+    <div>
+        <div className="chart-now-kw">
+          <LineChartBudget device={device} />
+        </div>
+    </div>
     <br/> 
     <div className="chart-toggle">
       <div className="switch-container">
@@ -182,12 +188,6 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
           <LineChart device={device} />
         </div>
       )}
-    </div>
-    <br/>
-    <div>
-        <div className="chart-now-kw">
-          <LineChartBudget device={device} />
-        </div>
     </div>
     </>
   );
