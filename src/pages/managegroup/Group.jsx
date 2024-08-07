@@ -47,6 +47,7 @@ function Group() {
     setLoading(true);
     const result = await getDevicesByUserId(userData.userId);
     const devices = result.data.map(device => ({ id: device.deviceId, name: device.deviceName }));
+    console.log('user-devices', devices);
     setDropDeviceNamesList(devices);
     setLoading(false);
   };
@@ -226,27 +227,32 @@ function Group() {
                   </div>
                   <div className='device-list'>
                     <h5 className='d-flex justify-content-center align-items-center'>{selectedGroupName}</h5>
-                    <select
-                      className='form-control group-device-select'
-                      onChange={(e) => setDevice(e.target.value)}
-                      value={device}>
-                      {dropDeviceNamesList.map(d => (
-                        <option key={d.id} value={d.id}>{d.name}</option>
-                      ))}
-                    </select>
-                    <button type="button" className='btn btn-primary btn-sm add-device-btn' onClick={onAddDevice}>Add</button><br />
+                    <div className='group-section'>
+                      <select
+                        className='form-control group-device-select'
+                        onChange={(e) => setDevice(e.target.value)}
+                        value={device}>
+                        {dropDeviceNamesList.map(d => (
+                          <option key={d.id} value={d.id}>{d.name}</option>
+                        ))}
+                      </select>
+                      <button type="button" className='btn btn-primary btn-sm add-device-btn' onClick={onAddDevice}>Add</button><br />
+                    </div>
+                    <br />
                     <h6 className='d-flex justify-content-center align-items-center'><u>Device List</u></h6>
-                    <ul>
-                      {assignedDevices.map(device => (
-                        <li key={device.id}>
-                          <button 
-                            className="btn btn-sm btn-danger ml-2"
-                            onClick={() => handleDeleteDevice(device.id)}
-                          ><MdDelete/></button>&nbsp;
-                          {device.name}
-                        </li>
-                      ))}
-                    </ul>
+                    <div className='group-list'>
+                      <ul style={{alignItems:'flex-start'}}>
+                        {assignedDevices.map(device => (
+                          <li key={device.id}>
+                            <button 
+                              className="btn btn-sm btn-danger"
+                              onClick={() => handleDeleteDevice(device.id)}
+                            ><MdDelete/></button>
+                            <span style={{marginLeft:'50px'}}>{device.name}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>

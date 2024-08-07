@@ -70,6 +70,8 @@ function UserRegister() {
     try {
       setErrorMessage('');
       setMessage('');
+      setLoading(true); 
+  
       const payload = {
         roleName,
         userRoleId: roleId,
@@ -86,34 +88,51 @@ function UserRegister() {
         gmt_Offset: "+05:30"
       };
   
-      
+      let res;
       if (saveType === "I") {
-        const res = await addUser(payload);
-        setLoading(true);
-        handleResponse(res);
+        res = await addUser(payload);
       } else if (saveType === "U") {
-        const res = await updateUser(payload, userRegId);
-        setLoading(true);
-        handleResponse(res);
+        res = await updateUser(payload, userRegId);
       }
+  
+      handleResponse(res); 
     } catch (err) {
       console.log(err);
+      setErrorMessage('An unexpected error occurred.'); 
+    } finally {
+      setLoading(false); 
     }
   };
+  
 
   const handleResponse = (res) => {
     const { responseStatus, outputMessage } = res.data.output;
     if (responseStatus === "failed") {
-      setErrorMessage(outputMessage);
+      setErrorMessage(outputMessage); // Set error message
+      clearForm(); // Clear the form
       return;
-    }
-    else{
-      setMessage(outputMessage);
+    } else {
+      setMessage(outputMessage); // Set success message
       swal(saveType === "I" ? "User Added Successfully" : "User Updated Successfully", "", "success").then(() => {
-        window.location = "/userlist";
+        window.location = "/userlist"; // Redirect after success
       });
     }
   };
+  
+  // Function to clear the form
+  const clearForm = () => {
+    setUserName('');
+    setUserDisplayName('');
+    setUserPassword('');
+    setUserEmail('');
+    setUserMobile('');
+    setUserAddress('');
+    setUserBillAddress('');
+    setUserTel('');
+    setRoleName('');
+    setRoleId('');
+  };
+  
   
   //     setLoading(true);
   //     const { responseStatus, outputMessage } = res.data.output;
@@ -212,6 +231,7 @@ function UserRegister() {
               </div>
               <button type='submit' className='btn btn-primary w-100 mt-3'>Save</button>
               {errormessage && <p className='text-danger'>{errormessage}</p>}
+              {message && <p className='text-success'>{message}</p>}
             </form>
 
         </div>

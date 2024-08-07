@@ -22,17 +22,15 @@
   }
 
   .group-section{
-    display: flex;
-    position: relative;
+   display: flex;
     align-items: center;
     justify-content: space-around;
-    gap: 20px;
-    margin-top: 0px;
-    width: 50%;
-    /* margin: auto; */
+    gap: 10px;
+    width: 100%;
+
   }
   .group-list{
-    width: 50px;
+    width: 100%;
     background-color: #3b3b3b;
     padding-top: 46px;
     border-radius: 10px;
@@ -41,9 +39,21 @@
     color: white;
   }
 
+  .group-list ul{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .device-list ul{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
   .device-list{
     flex: 1;
-    width: 50px;
+    width: 100%;
     background-color: #3b3b3b;
     padding-top: 15px;
     border-radius: 10px;
@@ -65,16 +75,17 @@
    list-style: none;
    align-items: center;
    justify-content: center;
-   margin-left: 20px;
+   /* margin-left: 0px; */
    cursor: pointer;
-   width: fit-content;
-   padding: 5px;
+   width: 100%;
+   /* padding: 5px; */
   }
 
   .device-list li:hover{
     border-radius: 0px;
     border-bottom: 2px solid yellow;
     border-color: yellow;
+    /* width: fit-content; */
    }
 
   .group-list li{
@@ -112,14 +123,14 @@
   }
 
  
-  .add-device-btn{
+  /* .add-device-btn{
     justify-content: flex-end;
     display: flex;
-    margin-left: 250px;
+    margin-left: 0px;
     position: relative;
-    margin-top: -32px;
+    margin-top: 0px;
     width: 40px;
-  }
+  } */
   
 
   .navnav {
@@ -138,11 +149,11 @@
 }
 
 
- .group-device-select {
+ /* .group-device-select {
   width: 200px;
   margin-left: 20px;
   height: 35px;
- }
+ } */
 
 
 .form-control.group-device-select {
@@ -226,12 +237,7 @@
   
       }
 
-      .add-device-btn{
-        justify-content: flex-end;
-        display: flex;
-        margin-left: 150px;
-        position: relative;
-      }
+      
   }
 
   @media only screen and (max-width: 650px) {
@@ -271,11 +277,7 @@
         justify-content: flex-start;
       }
 
-      .button-delete{
-        margin-top: -55px;
-        margin-left: 120px;
-        position: relative;
-      }
+  
 
       input[type="text"].group-name {
         width: 300px; 
@@ -291,12 +293,7 @@
         text-align: center;
       }
 
-      .add-device-btn{
-        justify-content: flex-end;
-        display: flex;
-        margin-left: 240px;
-        position: relative;
-      }
+    
     }
 
     @media screen and (max-width:580px){
@@ -316,55 +313,20 @@
       height: calc(102.7vh - 80px - 40px); 
     }
 
-    .group-list{
-      width: 100%;
-      /* background-color: #1515157f; */
-      padding-top: 15px;
-      border-radius: 10px;
-      flex: 1;
-      background-color: #3b3b3b00;
-      justify-content: flex-end;
-    }
-  
-    .device-list{
-      flex: 1;
-      width:100%;
-      background-color: #3b3b3b00;
-      /* background-color: #1515157f; */
-      padding-top: 15px;
-      border-radius: 10px;
-      justify-content: flex-start;
-    }
 
-    .group-device-select {
-      width: 100px;
+    .form-control.group-device-select {
+      width: 200px;
       height: 35px; 
-      margin-left:15px;
+      margin-left: -150px;
     }
 
-    .add-device-btn{
-      justify-content: flex-end;
-      display: flex;
-      width: 40px;
-      margin-left: 250px;
-      /* position: ; */
-      margin-top: -32.5px;
+    .group-list{
+      background-color: #00000000;
     }
-
-    .save-group-btn{
-      justify-content: center;
-      align-items: center;
-      display: flex;
-      margin-left: 120px;
-      width: 100px;
-      text-align: center;
+    .device-list{
+      background-color: #00000000;
     }
-
-    .button-delete{
-      margin-top: -55px;
-      margin-left: 190px;
-      position: relative;
-    }
+   
   }
 
   @media screen and (max-width:415px){
