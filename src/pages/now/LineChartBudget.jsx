@@ -25,6 +25,7 @@ function LineChartBudget({ device }) {
   });
 
   const [lastForecastValue, setLastForecastValue] = useState(0); 
+  const [totalUsed, setTotalUsed] = useState(0);
 
   useEffect(() => {
     // if (selectedDevice) {
@@ -61,8 +62,10 @@ function LineChartBudget({ device }) {
     // const kwhCumActualArr = [];
     // const kwhCumForcastArr = [];
     const costCumForcastArr = [];
+    const costCumActualArr = [];
 
     
+    // let totalUsedValue = 0;
 
     for (let i = 0; i < charData.length; i++) {
       console.log('1 Month', charData[i]);
@@ -72,12 +75,16 @@ function LineChartBudget({ device }) {
       // kwhCumActualArr.push(charData[i].kwhCumActual);
       // kwhCumForcastArr.push(charData[i].kwhCumForcast);
       costCumForcastArr.push(charData[i].costCumForcast);
+      costCumActualArr.push(charData[i].costCumActual);
       // totalForecastValue += charData[i].kwhPerDayForecast;
-      // totalUsedValue += charData[i].kwhPerDay;
+      // totalUsedValue += charData[i].costCumActual;
     }
 
     const lastForecast = costCumForcastArr[costCumForcastArr.length - 1];
     setLastForecastValue(lastForecast || 0); 
+
+    const totalUsed = costCumActualArr[costCumActualArr.length - 1];
+    setTotalUsed(totalUsed || 0);
 
     const datasets0 = [
       {
@@ -91,6 +98,16 @@ function LineChartBudget({ device }) {
         // showLine: true,
         borderDash: [8, 10],
       },
+      {
+        label: 'Actual',
+        data: costCumActualArr,
+        borderColor: 'rgba(54,162,235)',
+        // pointBortderColor: 'aqua',
+        tension: 0.3,
+        backgroundColor: 'rgba(54,162,235, 0.5)',
+        fill: true,
+        showLine: true,
+      }
     ];
 
     setData({ ...data, labels: months, datasets: datasets0 });
@@ -106,6 +123,13 @@ function LineChartBudget({ device }) {
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
       ctx.fillText(`Forecast : Rs.${(Number(lastForecastValue.toFixed(2))).toLocaleString()}`, right, top - 20);
+
+
+      ctx.font = 'bolder 12px Trebuchet MS';
+      ctx.fillStyle = 'white';
+      ctx.textAlign = 'right';
+      ctx.fillText(`Actual : Rs.${(Number(totalUsed.toFixed(2))).toLocaleString()}`, right, top - 5);
+
       ctx.restore();
     },
   };

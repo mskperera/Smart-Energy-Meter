@@ -40,6 +40,14 @@
     justify-content: space-between;
 }
 
+/* .days-bar-two-home .topic3{
+    margin-left: 50px;
+    margin-top:-25px;
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+} */
+
 .days-bar-two-home .topic2{
     margin-left: 195px;
     margin-top:-25px;
@@ -58,14 +66,14 @@
     width: 275px;
     margin-top: 0px;
     height: 15px;
-    background-color: #3b3b3b;
+    background-color: #454545;
 }
 
 .days-bar-two .progress{
     width: 260px;
     margin-top: -6px;
     height: 15px;
-    background-color: #3b3b3b;
+    background-color: #454545;
 }
 
 /* .progress-bar span {
