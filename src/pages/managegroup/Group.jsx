@@ -44,6 +44,7 @@ function Group() {
 
   const loadDevicesByUserId = async () => {
     const userData = JSON.parse(localStorage.getItem('userData'));
+    console.log('user-data', userData);
     setLoading(true);
     const result = await getDevicesByUserId(userData.userId);
     const devices = result.data.map(device => ({ id: device.deviceId, name: device.deviceName }));

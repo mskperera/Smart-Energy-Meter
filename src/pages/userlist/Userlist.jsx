@@ -27,7 +27,7 @@ function Userlist() {
   const loadusers=async()=>{
     try{
     const result=await getUsers();
-    // console.log("result-555555",result);
+    console.log("result-555555",result);
     setUserData(result.data || []);
    } catch (error) {
       console.error("Error loading users:", error);
