@@ -87,7 +87,7 @@ function LineChartBudget({ device }) {
         // pointBortderColor: 'aqua',
         tension: 0.3,
         backgroundColor:'rgb(255,243,70, 0.5)',
-        fill: true,
+        // fill: true,
         // showLine: true,
         borderDash: [8, 10],
       },

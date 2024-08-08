@@ -4,10 +4,11 @@ import BottomNav from '../../components/bottommenu/BottomNav';
 import { CgProfile } from 'react-icons/cg';
 import { serviceProfileSetup } from '../../action/serviceProfile';
 import swal from 'sweetalert';
-import { verifyDeviceBySN } from '../../action/device';
+import { getDevicesByUserId, verifyDeviceBySN } from '../../action/device';
 import { getDrpConsumerCategories, getDrpConsumerSubCategoriesById, getDrpMeasuringMode, getDrpSupplier, getDrpUserRole } from '../../action/dropdown';
 import { de } from 'date-fns/locale';
 import ReactDatePicker from 'react-datepicker';
+import { getUserIdByUsername, getUsers } from '../../action/user';
 
 const Step1 = ({ nextStep, handleChange, values, errors }) => {
 
@@ -39,9 +40,9 @@ const Step1 = ({ nextStep, handleChange, values, errors }) => {
       <div className='row'>
         <div className='col-md-6 mb-1 was-validated'>
           <div className='form-group mb-2'>
-            <label htmlFor='username' className='form-check-label'>Username</label>
-            <input type='text' className='form-control' required value={values.username} onChange={handleChange('username')} />
-            {errors.username && <div className="text-danger">{errors.username}</div>}
+            <label htmlFor='userName' className='form-check-label'>Username</label>
+            <input type='text' className='form-control' required value={values.userName} onChange={handleChange('userName')} />
+            {errors.userName && <div className="text-danger">{errors.userName}</div>}
           </div>
           {/* <div className='form-group was-validated mb-2'>
                   <label htmlFor='userrole' className='form-check-label'>User Role</label>
@@ -109,6 +110,44 @@ const Step2 = ({ nextStep, prevStep, handleChange, values, errors, setFormData }
   const [deviceVerified, setDeviceVerified] = useState(false);
   const [deviceDetails, setDeviceDetails] = useState(null);
 
+  useEffect(() => {
+    if (values.userName) {
+      loadUserIdByUsername(values.userName);
+      console.log('loadUserIdByUsername', values.userName);
+    }
+  }, [values.userName]);
+
+  const loadUserIdByUsername = async (userName) => {
+    try {
+      const payload = { userName: userName };
+
+      const result = await getUserIdByUsername(payload);
+      console.log('loadUserIdByUsername', result);
+      if (result && result.data) {
+        loadDevicesByUserId(result.data.userId);
+      }
+    } catch (error) {
+      console.error('Error loading user ID by username:', error);
+    }
+  };
+
+
+  useEffect(() => {
+    loadDevicesByUserId();
+  }, []);
+
+  const loadDevicesByUserId = async (userId) => {
+    try {
+      const result = await getDevicesByUserId(userId);
+      console.log('device---Details', result);
+      const filteredDevices = result.data.filter(device => device.deviceTypeId === 1 || device.deviceTypeId === 2);
+      console.log('filteredDevices', filteredDevices);
+      setDeviceDetails(filteredDevices);
+    } catch (error) {
+      console.error('Error loading devices by user ID:', error);
+    }
+  };
+
   const loadVerifyDeviceBySN = async () => {
     setLoading(true);
     setVerifyMessage('');
@@ -140,6 +179,7 @@ const Step2 = ({ nextStep, prevStep, handleChange, values, errors, setFormData }
   return (
     <div className="form-container">
       <h2>Account</h2>
+      {/* {JSON.stringify(values.userName)} */}
       <div className="form-group mb-2 was-validated">
         <label htmlFor="serialno" className="form-check-label">Serial No</label>
         <div className="d-flex">
@@ -181,6 +221,28 @@ const Step2 = ({ nextStep, prevStep, handleChange, values, errors, setFormData }
             </div>
           </div>
         </div>
+      )}
+
+      {deviceDetails && deviceDetails.length > 0 && (
+        <>
+        <h5>Existing Devices</h5>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Device ID</th>
+                <th>Device Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              {deviceDetails.map(device => (
+                <tr key={device.deviceId}>
+                  <td>{device.deviceId}</td>
+                  <td>{device.deviceName}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
       )}
 
       <div className="button-group">
@@ -375,7 +437,7 @@ const Setup = () => {
 
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
-    username: '',
+    userName: '',
     userrole: '',
     displayname: '',
     password: '',
@@ -446,7 +508,7 @@ const Setup = () => {
   const saveServiceProfileSetup = async () => {
     try {
       const payload = {
-        userName: formData.username,
+        userName: formData.userName,
         userrole: 2,
         displayName: formData.displayname, 
         password: formData.password, 

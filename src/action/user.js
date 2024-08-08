@@ -106,7 +106,10 @@ export const getUserIdByUsername= async (payload) => {
         },
       })
       .then((res) => {
+        console.log('user - id');
+        console.log(res);
         return res;
+
       })
       .catch((err) => {
         return err.response;
