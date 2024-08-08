@@ -18,6 +18,9 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
   
   const [showActualChart, setShowActualChart] = useState(true);
 
+
+  const remainingDays = numberOfDays - daysElapsed;
+
   return (
     <>
     <div className="main-section">
@@ -79,8 +82,20 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
                       {daysElapsed}
                     </span>
                    </ProgressBar>
+                   <span 
+                      style={{ 
+                        position: 'inherit', 
+                        right: '5px', 
+                        transform: 'translateX(0%)',
+                        fontWeight: '550',
+                        color: '#00bbf0', 
+                      }}
+                    >
+                      {remainingDays}
+                    </span>
                   </div>
                   &nbsp;<span className="session-number" >{numberOfDays}</span>
+                  {/* &nbsp;<span className="session-number">({remainingDays} days left)</span> */}
                 </div>
             </div>
           </div>

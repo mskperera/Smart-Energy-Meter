@@ -56,8 +56,8 @@ function LineChartActual({ device }) {
     }
 
     const months = [];
-    const monthKwArr = [];
-    const predictArr = [];
+    // const monthKwArr = [];
+    // const predictArr = [];
     const kwhCumActualArr = [];
     const kwhCumForcastArr = [];
 
@@ -67,8 +67,8 @@ function LineChartActual({ device }) {
     for (let i = 0; i < charData.length; i++) {
       console.log('1 Month', charData[i]);
       months.push(moment(charData[i].timeStamp_local).format('M-DD'));
-      monthKwArr.push(charData[i].kwhPerDay);
-      predictArr.push(charData[i].kwhPerDayForecast);
+      // monthKwArr.push(charData[i].kwhPerDay);
+      // predictArr.push(charData[i].kwhPerDayForecast);
       kwhCumActualArr.push(charData[i].kwhCumActual);
       kwhCumForcastArr.push(charData[i].kwhCumForcast);
       totalForecastValue += charData[i].kwhPerDayForecast;
