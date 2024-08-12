@@ -13,7 +13,7 @@ function LineChartActual({ device }) {
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
   const [loading, setLoading] = useState(null);
   const [totalForecast, setTotalForecast] = useState(0);
-  const [totalUsed, setTotalUsed] = useState(0); // To store total used value
+  const [totalUsed, setTotalUsed] = useState(0); 
   const [data, setData] = useState({
     labels: [],
     datasets: [
@@ -56,27 +56,35 @@ function LineChartActual({ device }) {
     }
 
     const months = [];
-    // const monthKwArr = [];
-    // const predictArr = [];
     const kwhCumActualArr = [];
     const kwhCumForcastArr = [];
 
-    let totalForecastValue = 0;
-    let totalUsedValue = 0;
+    // let totalForecastValue = 0;
+    // let totalUsedValue = 0;
 
     for (let i = 0; i < charData.length; i++) {
       console.log('1 Month', charData[i]);
       months.push(moment(charData[i].timeStamp_local).format('M-DD'));
-      // monthKwArr.push(charData[i].kwhPerDay);
-      // predictArr.push(charData[i].kwhPerDayForecast);
       kwhCumActualArr.push(charData[i].kwhCumActual);
       kwhCumForcastArr.push(charData[i].kwhCumForcast);
-      totalForecastValue += charData[i].kwhPerDayForecast;
-      totalUsedValue += charData[i].kwhPerDay;
+      // totalForecastValue += charData[i].kwhPerDayForecast;
+      // totalUsedValue += charData[i].kwhPerDay;
     }
 
-    setTotalForecast(totalForecastValue);
-    setTotalUsed(totalUsedValue); 
+    const lastForecast = kwhCumForcastArr[kwhCumForcastArr.length - 1];
+    setTotalForecast(lastForecast || 0);
+    // setTotalForecast(totalForecastValue);
+    // setTotalUsed(totalUsedValue); 
+
+    let lastActualValue = 0;
+    for (let i = kwhCumActualArr.length - 1; i >= 0; i--) {
+      if (kwhCumActualArr[i] !== null) {
+        lastActualValue = kwhCumActualArr[i];
+        break;
+      }
+    }
+    setTotalUsed(lastActualValue || 0);
+    
 
     const datasets0 = [
       {

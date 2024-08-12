@@ -101,7 +101,7 @@ function DeviceRegister() {
     const { responseStatus, outputMessage } = res.data.output;
     if (responseStatus === 'failed') {
       setErrorMessage(outputMessage);
-      clearForm();
+      // clearForm();
       return;
     } else {
       setMessage(outputMessage);
@@ -111,15 +111,15 @@ function DeviceRegister() {
     }
   };
 
-  const clearForm = () => {
-    setDeviceNo('');
-    setHardwareVersion('');
-    setSerialNo('');
-    setFirmwareVersion('');
-    setProduct('');
-    setChipId('');
-    setDeviceType('');
-  };
+  // const clearForm = () => {
+  //   setDeviceNo('');
+  //   setHardwareVersion('');
+  //   setSerialNo('');
+  //   setFirmwareVersion('');
+  //   setProduct('');
+  //   setChipId('');
+  //   setDeviceType('');
+  // };
 
 
   return (

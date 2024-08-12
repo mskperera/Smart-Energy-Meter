@@ -10,6 +10,7 @@ import moment from "moment";
 import LineChart from "./LineChart";
 import LineChartActual from "./LineChartActual";
 import LineChartBudget from "./LineChartBudget";
+import LineChartCost from "./LineChartCost";
 
 function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , numberOfDays, startDate, endDate  }) {
   const { lines } = device;
@@ -178,12 +179,38 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
       ))}
     </div>
     <br/>
+    <>
+      <div className="chart-now-kw">      
+    <div className="chart-budget-cost">
+          {lines.map((line, index) => (
+            <React.Fragment key={`line-${line.lineNo || index}`}>
+              {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  </div>
+              )}
+              
+              <LineChartCost 
+              key={`line-chart-${line.lineNo || index}`} 
+              device={line} 
+              daysElapsed={daysElapsed} 
+              numberOfDays={numberOfDays} 
+              usageBill={line.usageBill} 
+              budgetedBill={line.budgetedBill} 
+              startDate={startDate}
+              endDate={endDate}
+              />
+            </React.Fragment>
+          ))}
+      </div>
+    </div>
+    </>
+    <br/>
     <div>
         <div className="chart-now-kw">
           <LineChartBudget device={device} />
         </div>
     </div>
-    <br/> 
+    <br/>
     <div className="chart-toggle">
       <div className="switch-container">
         <span className="switch-label">{showActualChart ? 'Show Prediction' : 'Show Forecast'}</span>
