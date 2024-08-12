@@ -50,7 +50,7 @@ const HomeCostChart = ({ budgetedBill, currentValue, selectedLine }) => {
       ctx.font = '13px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.fillText("", centerX, centerY -30);
-      ctx.fillText('Energy Usage', centerX, centerY - 10);
+      ctx.fillText('Energy Cost', centerX, centerY - 12);
 
       if (data.datasets[0].data[1] !== undefined) {
         ctx.font = '13px Trebuchet MS';

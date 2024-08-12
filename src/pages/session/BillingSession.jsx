@@ -300,7 +300,7 @@ function BillingSession() {
                                   htmlFor="amount"
                                   className="col-sm-4 col-form-label"
                                 >
-                                  Bill Amount
+                                  Energy Cost
                                 </label>
                                 <div className="col-sm-8">
                                   <input

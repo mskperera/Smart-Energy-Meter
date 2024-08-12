@@ -306,7 +306,7 @@
     }
 
     .selected-device-label{
-        color: black;
+        /* color: black; */
         position: absolute;
         top: 25px;
         width: 200px;
@@ -352,7 +352,7 @@
     }
 
     .selected-device-label{
-        color: black;
+        /* color: black; */
         position: absolute;
         top: 2px;
         width: 125px;
@@ -373,7 +373,7 @@
     }
 
     .selected-device-label{
-        color: black;
+        /* color: black; */
         position: absolute;
         top: 5px;
         width: 120px;
@@ -416,7 +416,7 @@
     }
     
     .selected-device-label{
-        color: black;
+        /* color: black; */
         position: absolute;
         top: 1px;
         width: 130px;

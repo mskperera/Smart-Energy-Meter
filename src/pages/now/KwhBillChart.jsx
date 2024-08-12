@@ -2,15 +2,15 @@ import React from 'react'
 import HomeChart from './HomeChart'
 import HomeCostChart from './HomeCostChart'
 import OperationalChart from './OperationalChart'
+import LineChartCost from './LineChartCost'
 
 
-function KwhBillChart({lineNo,voltage,current,pf,hertz,power,kwh,usageBill,budgetedKwh,budgetedBill,deviceTypeId,deviceMeasuringModeId}) {
+function KwhBillChart({lineNo,device,voltage,current,pf,hertz,power,kwh,usageBill,budgetedKwh,budgetedBill,deviceTypeId,deviceMeasuringModeId}) {
 
 
 
   return (
     <>
-
             <div className='d-flex justify-content-center align-items-center page'>
                 <div className="page">
                     
@@ -22,7 +22,7 @@ function KwhBillChart({lineNo,voltage,current,pf,hertz,power,kwh,usageBill,budge
                        
                         <div className="chart-now-cost">
                            
-                            <HomeCostChart currentValue={usageBill} budgetedBill={budgetedBill} />
+                            <HomeCostChart currentValue={usageBill} budgetedBill={budgetedBill} deviceTypeId={deviceTypeId} deviceMeasuringModeId={deviceMeasuringModeId}/>
                         </div>
                     </div>
                     <div className='page-bottom-mode-new'>
@@ -50,10 +50,9 @@ function KwhBillChart({lineNo,voltage,current,pf,hertz,power,kwh,usageBill,budge
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
-
-
     </>
   )
 }

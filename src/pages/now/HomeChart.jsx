@@ -45,7 +45,7 @@ const HomeChart = ({ currentKwValue, budgetedKwhValue, deviceTypeId, deviceMeasu
 
       ctx.font = '13px Trebuchet MS';
       ctx.fillStyle = 'white';
-      ctx.fillText('Energy Usage', centerX, centerY - 10);
+      ctx.fillText('Energy Usage', centerX, centerY - 12);
 
       if (data.datasets[0].data[1] !== undefined) {
         ctx.font = '13px Trebuchet MS';

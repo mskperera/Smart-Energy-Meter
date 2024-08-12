@@ -91,7 +91,7 @@ const Step1 = ({ nextStep, handleChange, values, errors }) => {
             {errors.mobile && <div className="text-danger">{errors.mobile}</div>}
           </div>
           <div className='form-group mb-2'>
-            <label htmlFor='tel' className='form-check-label'>Tel</label>
+            <label htmlFor='tel' className='form-check-label'>Telephone</label>
             <input type='text' className='form-control' required value={values.tel} onChange={handleChange('tel')} />
             {errors.tel && <div className="text-danger">{errors.tel}</div>}
           </div>
@@ -481,12 +481,56 @@ const Setup = () => {
   };
   
 
+  // const validateForm = () => {
+  //   let newErrors = {};
+    
+  //   setErrors(newErrors);
+  //   return Object.keys(newErrors).length === 0;
+  // };
+
   const validateForm = () => {
     let newErrors = {};
     
+    // if (!formData.userName) {
+    //   newErrors.userName = "Username is required";
+    // }
+  
+    // if (!formData.password) {
+    //   newErrors.password = "Password is required";
+    // } else if (formData.password.length < 6) {
+    //   newErrors.password = "Password at least 6 characters long";
+    // }
+  
+    // if (!formData.email) {
+    //   newErrors.email = "Email is required";
+    // } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    //   newErrors.email = "Email address is invalid";
+    // }
+  
+    // if (!formData.address) {
+    //   newErrors.address = "Address is required";
+    // }
+  
+    // if (!formData.displayname) {
+    //   newErrors.displayname = "Display Name is required";
+    // }
+  
+    // if (!formData.mobile) {
+    //   newErrors.mobile = "Mobile number is required";
+    // } else if (!/^\d{10}$/.test(formData.mobile)) {
+    //   newErrors.mobile = "Mobile number must be 10 digits";
+    // }
+   
+    // if (!formData.tel) {
+    //   newErrors.tel = "Telephone number is required";
+    // } else if (!/^\d{10}$/.test(formData.tel)) {
+    //   newErrors.tel = "Telephone number must be 10 digits";
+    // }
+  
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+  
 
 
   useEffect(() => {

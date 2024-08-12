@@ -12,8 +12,9 @@ ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler);
 function LineChartBudget({ device }) {
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
   const [loading, setLoading] = useState(null);
-  // const [totalForecast, setTotalForecast] = useState(0);
-  // const [totalUsed, setTotalUsed] = useState(0); 
+  const [lastForecastValue, setLastForecastValue] = useState(0); 
+  const [totalUsed, setTotalUsed] = useState(0);
+
   const [data, setData] = useState({
     labels: [],
     datasets: [
@@ -24,13 +25,8 @@ function LineChartBudget({ device }) {
     ],
   });
 
-  const [lastForecastValue, setLastForecastValue] = useState(0); 
-  const [totalUsed, setTotalUsed] = useState(0);
-
   useEffect(() => {
-    // if (selectedDevice) {
-      loadEngergyUsageKwhByDateRangePrediction();
-    // }
+    loadEngergyUsageKwhByDateRangePrediction();
   }, []);
 
   const loadEngergyUsageKwhByDateRangePrediction = async () => {
@@ -57,52 +53,41 @@ function LineChartBudget({ device }) {
       return;
     }
     const months = [];
-    // const monthKwArr = [];
-    // const predictArr = [];
-    // const kwhCumActualArr = [];
-    // const kwhCumForcastArr = [];
     const costCumForcastArr = [];
     const costCumActualArr = [];
 
-    
-    // let totalUsedValue = 0;
-
     for (let i = 0; i < charData.length; i++) {
-      console.log('1 Month', charData[i]);
       months.push(moment(charData[i].timeStamp_local).format('M-DD'));
-      // monthKwArr.push(charData[i].kwhPerDay);
-      // predictArr.push(charData[i].kwhPerDayForecast);
-      // kwhCumActualArr.push(charData[i].kwhCumActual);
-      // kwhCumForcastArr.push(charData[i].kwhCumForcast);
       costCumForcastArr.push(charData[i].costCumForcast);
       costCumActualArr.push(charData[i].costCumActual);
-      // totalForecastValue += charData[i].kwhPerDayForecast;
-      // totalUsedValue += charData[i].costCumActual;
     }
 
     const lastForecast = costCumForcastArr[costCumForcastArr.length - 1];
     setLastForecastValue(lastForecast || 0); 
 
-    const totalUsed = costCumActualArr[costCumActualArr.length - 1];
-    setTotalUsed(totalUsed || 0);
+    
+    let lastActualValue = 0;
+    for (let i = costCumActualArr.length - 1; i >= 0; i--) {
+      if (costCumActualArr[i] !== null) {
+        lastActualValue = costCumActualArr[i];
+        break;
+      }
+    }
+    setTotalUsed(lastActualValue || 0);
 
     const datasets0 = [
       {
         label: 'Cost',
         data: costCumForcastArr,
         borderColor: '#fff346',
-        // pointBortderColor: 'aqua',
         tension: 0.3,
-        backgroundColor:'rgb(255,243,70, 0.5)',
-        // fill: true,
-        // showLine: true,
+        backgroundColor: 'rgba(255,243,70, 0.5)',
         borderDash: [8, 10],
       },
       {
         label: 'Actual',
         data: costCumActualArr,
         borderColor: 'rgba(54,162,235)',
-        // pointBortderColor: 'aqua',
         tension: 0.3,
         backgroundColor: 'rgba(54,162,235, 0.5)',
         fill: true,
@@ -124,7 +109,6 @@ function LineChartBudget({ device }) {
       ctx.textAlign = 'right';
       ctx.fillText(`Forecast : Rs.${(Number(lastForecastValue.toFixed(2))).toLocaleString()}`, right, top - 20);
 
-
       ctx.font = 'bolder 12px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
@@ -139,7 +123,7 @@ function LineChartBudget({ device }) {
       x: {
         grid: {
           display: false,
-          color: 'gray', //  color-x-axis grid lines
+          color: 'gray',
         },
         beginAtZero: true,
         title: {
@@ -149,13 +133,13 @@ function LineChartBudget({ device }) {
           color: 'white',
         },
         ticks: {
-          color: 'white', // color-x-axis labels
+          color: 'white',
         },
       },
       y: {
         grid: {
           display: true,
-          color: 'Gray', //  color-x-axis grid lines
+          color: 'Gray',
         },
         beginAtZero: true,
         title: {
@@ -165,7 +149,7 @@ function LineChartBudget({ device }) {
           color: 'white',
         },
         ticks: {
-          color: 'white', // color of y-axis labels
+          color: 'white',
         },
       },
     },
@@ -184,14 +168,6 @@ function LineChartBudget({ device }) {
         },
         onClick: () => { },
       },
-      // title: {
-      //   display: true,
-      //   text: `Actual Value Used: ${(Number(totalUsed.toFixed(2))).toLocaleString()} kWh`,
-      //   color: 'white',
-      //   font: {
-      //     size: 18,
-      //   },
-      // },
     },
   };
 

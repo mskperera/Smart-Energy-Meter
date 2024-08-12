@@ -108,30 +108,30 @@ function UserRegister() {
   const handleResponse = (res) => {
     const { responseStatus, outputMessage } = res.data.output;
     if (responseStatus === "failed") {
-      setErrorMessage(outputMessage); // Set error message
-      clearForm(); // Clear the form
+      setErrorMessage(outputMessage); 
+      // clearForm(); 
       return;
     } else {
-      setMessage(outputMessage); // Set success message
+      setMessage(outputMessage); 
       swal(saveType === "I" ? "User Added Successfully" : "User Updated Successfully", "", "success").then(() => {
-        window.location = "/userlist"; // Redirect after success
+        window.location = "/userlist"; 
       });
     }
   };
   
-  // Function to clear the form
-  const clearForm = () => {
-    setUserName('');
-    setUserDisplayName('');
-    setUserPassword('');
-    setUserEmail('');
-    setUserMobile('');
-    setUserAddress('');
-    setUserBillAddress('');
-    setUserTel('');
-    setRoleName('');
-    setRoleId('');
-  };
+  
+  // const clearForm = () => {
+  //   setUserName('');
+  //   setUserDisplayName('');
+  //   setUserPassword('');
+  //   setUserEmail('');
+  //   setUserMobile('');
+  //   setUserAddress('');
+  //   setUserBillAddress('');
+  //   setUserTel('');
+  //   setRoleName('');
+  //   setRoleId('');
+  // };
   
   
   //     setLoading(true);

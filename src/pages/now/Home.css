@@ -98,7 +98,14 @@
     width: fit-content;
   
 }
-
+.chart-budget-cost{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    /* width: 100%; */
+}
 
 .page-mode-charts .chart-now-mode{
     margin-top: 20px;
