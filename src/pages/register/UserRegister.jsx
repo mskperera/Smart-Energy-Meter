@@ -221,11 +221,11 @@ function UserRegister() {
                   </div>
                   <div className='form-group was-validated mb-2'>
                     <label htmlFor='mobile' className='form-check-label'>Mobile</label>
-                    <input type='text' className='form-control' value={userMobile} onChange={(e) => setUserMobile(e.target.value)} required />
+                    <input type='number' className='form-control' value={userMobile} onChange={(e) => setUserMobile(e.target.value)} required />
                   </div>
                   <div className='form-group was-validated mb-2'>
                     <label htmlFor='tel' className='form-check-label'>Tel</label>
-                    <input type='text' className='form-control' value={userTel} onChange={(e) => setUserTel(e.target.value)} required />
+                    <input type='number' className='form-control' value={userTel} onChange={(e) => setUserTel(e.target.value)} required />
                   </div>
                 </div>
               </div>

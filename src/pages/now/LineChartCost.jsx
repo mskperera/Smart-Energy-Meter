@@ -96,6 +96,7 @@ function LineChartCost({ device, daysElapsed, numberOfDays, usageBill, budgetedB
           usePointStyle: true,
           pointStyle: 'rectRounded',
         },
+        onClick: () =>{},
       },
     },
   };

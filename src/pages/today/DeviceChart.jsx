@@ -16,6 +16,8 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
   const daysElapsed = session.daysElapsed;
   const maxDays = session.numberOfDays;
 
+  const remainingDays = maxDays - daysElapsed;
+
   return (
     <>
       <div className='bar-chartss'>
@@ -48,9 +50,18 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
                       {daysElapsed}
                     </span>
                    </ProgressBar>
-                    
+                   <span 
+                      style={{ 
+                        position: 'inherit', 
+                        right: '5px', 
+                        transform: 'translateX(0%)',
+                        fontWeight: '550',
+                        color: '#00bbf0', 
+                      }}
+                    >
+                      {remainingDays}
+                    </span>   
                   {/* /> */}
-                  
                   </div>
                   &nbsp;<span className="session-number"> &nbsp;</span>
                 </div>
