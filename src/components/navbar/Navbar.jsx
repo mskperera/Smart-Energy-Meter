@@ -75,10 +75,21 @@ const dispatch=useDispatch();
   //   navigate('/setup');
   // };
 
-  const handleLogoutClick = () => {
-    logout(); 
+//   const handleLogoutClick = () => {
+//     logout(); 
 
-    navigate('/');
+//     navigate('/');
+// };
+
+const handleLogoutClick = () => {
+ 
+  localStorage.removeItem('userData');
+  localStorage.removeItem('selectedDevice');
+
+  logout();
+
+  navigate('/', { replace: true });
+  window.location.reload();
 };
 
   return (
