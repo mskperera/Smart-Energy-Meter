@@ -119,7 +119,9 @@ const Step2 = ({ nextStep, prevStep, handleChange, values, errors, setFormData }
 
   const loadUserIdByUsername = async (userName) => {
     try {
-      const payload = { userName: userName };
+      const payload = { 
+        userName: userName,
+      };
 
       const result = await getUserIdByUsername(payload);
       console.log('loadUserIdByUsername', result);
@@ -223,6 +225,11 @@ const Step2 = ({ nextStep, prevStep, handleChange, values, errors, setFormData }
         </div>
       )}
 
+      <div className="button-group">
+        <button onClick={prevStep} className="prev-btn">Back</button>
+        <button onClick={nextStep} className="next-btn" disabled={!deviceVerified}>Next</button>
+      </div>
+
       {deviceDetails && deviceDetails.length > 0 && (
         <>
         <h5>Existing Devices</h5>
@@ -244,11 +251,7 @@ const Step2 = ({ nextStep, prevStep, handleChange, values, errors, setFormData }
           </table>
         </>
       )}
-
-      <div className="button-group">
-        <button onClick={prevStep} className="prev-btn">Back</button>
-        <button onClick={nextStep} className="next-btn" disabled={!deviceVerified}>Next</button>
-      </div>
+ 
     </div>
   );
 };
@@ -491,41 +494,41 @@ const Setup = () => {
   const validateForm = () => {
     let newErrors = {};
     
-    // if (!formData.userName) {
-    //   newErrors.userName = "Username is required";
-    // }
+    if (!formData.userName) {
+      newErrors.userName = "Username is required";
+    }
   
-    // if (!formData.password) {
-    //   newErrors.password = "Password is required";
-    // } else if (formData.password.length < 6) {
-    //   newErrors.password = "Password at least 6 characters long";
-    // }
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 5) {
+      newErrors.password = "Password at least 5 characters long";
+    }
   
-    // if (!formData.email) {
-    //   newErrors.email = "Email is required";
-    // } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-    //   newErrors.email = "Email address is invalid";
-    // }
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Email address is invalid";
+    }
   
-    // if (!formData.address) {
-    //   newErrors.address = "Address is required";
-    // }
+    if (!formData.address) {
+      newErrors.address = "Address is required";
+    }
   
-    // if (!formData.displayname) {
-    //   newErrors.displayname = "Display Name is required";
-    // }
+    if (!formData.displayname) {
+      newErrors.displayname = "Display Name is required";
+    }
   
-    // if (!formData.mobile) {
-    //   newErrors.mobile = "Mobile number is required";
-    // } else if (!/^\d{10}$/.test(formData.mobile)) {
-    //   newErrors.mobile = "Mobile number must be 10 digits";
-    // }
+    if (!formData.mobile) {
+      newErrors.mobile = "Mobile number is required";
+    } else if (!/^\d{10}$/.test(formData.mobile)) {
+      newErrors.mobile = "Mobile number must be 10 digits";
+    }
    
-    // if (!formData.tel) {
-    //   newErrors.tel = "Telephone number is required";
-    // } else if (!/^\d{10}$/.test(formData.tel)) {
-    //   newErrors.tel = "Telephone number must be 10 digits";
-    // }
+    if (!formData.tel) {
+      newErrors.tel = "Telephone number is required";
+    } else if (!/^\d{10}$/.test(formData.tel)) {
+      newErrors.tel = "Telephone number must be 10 digits";
+    }
   
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
