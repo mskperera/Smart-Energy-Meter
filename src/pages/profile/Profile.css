@@ -151,6 +151,6 @@ p {
 
 @media screen and (max-width:375px){
     .wrap{
-        height: 84.6vh;
+        height: 100vh;
     }
 }

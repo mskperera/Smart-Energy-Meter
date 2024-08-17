@@ -22,7 +22,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    font-size: 1.5em;
+    font-size: 2rem;
     margin: 100px;
   }
 
@@ -31,12 +31,13 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    font-size: 1.5em;
+    font-size: 2rem;
     margin-top: -100px;
   }
 
 #no-data{
     color: white;
+    font-size: 1.5rem;
   }
   
 
@@ -310,6 +311,12 @@
 .name-device{
     margin-top: 20px;
 }
+
+#no-data{
+    color: white;
+    font-size: 1rem;
+  }
+  
 }
 
 @media screen and (max-width:450px){

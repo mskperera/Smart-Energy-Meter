@@ -81,6 +81,19 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
 
   const [totalSum, setTotalSum] = useState(0);
 
+  const customTextPlugin = {
+    id: 'customTextPlugin',
+    beforeDraw: (chart) => {
+      const { ctx, chartArea: { top, right } } = chart;
+      ctx.save();
+      ctx.font = 'bold 13px Trebuchet MS';
+      ctx.fillStyle = 'white';
+      ctx.textAlign = 'right';
+      ctx.fillText(`Total Energy : ${(Number(totalSum.toFixed(2))).toLocaleString()} kWh`, right - 5, top -20);
+      ctx.restore();
+    },
+  };
+
   useEffect(() => {
     if (!isSearchLoading) {
       loadChartData();
@@ -148,53 +161,70 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
         scales: {
           x: {
             grid: {
-              display: false,
-              color: 'Gray',
+              display: true,
+              color: '#4f4f4f',
             },
             beginAtZero: true,
             title: {
               display: true,
               text: getXAxisTitle(chartFrequencty),
-              color: 'white'
+              color: 'white',
+              font: {
+                size: 10,
+              },
             },
             ticks: {
               color: 'white',
+              font: {
+                size: 10,
+              },
             },
           },
           y: {
             grid: {
-              display: false,
-              color: 'Gray',
+              display: true,
+              color: '#4f4f4f',
             },
             beginAtZero: true,
             title: {
               display: true,
               text: "kWh",
-              color: 'white'
+              color: 'white',
+              font: {
+                size: 10,
+              },
             },
             ticks: {
               color: 'white',
+              font: {
+                size: 10,
+              },
             },
           },
         },
         plugins: {
           legend: {
             display: true,
+            position: 'top',
+            align: 'start', 
             labels: {
               color: 'white',
               usePointStyle: true,
               pointStyle: 'rectRounded',
+              font: {
+                size: 10,
+              },
             },
             onClick: () => {},
           },
-          title: {
-            display: true,
-            text: `Total Energy : ${(Number(totalSum.toFixed(2))).toLocaleString()} kWh`,
-            color: 'white',
-            font: {
-              size: 13,
-            }
-          },
+          // title: {
+          //   display: true,
+          //   text: `Total Energy : ${(Number(totalSum.toFixed(2))).toLocaleString()} kWh`,
+          //   color: 'white',
+          //   font: {
+          //     size: 13,
+          //   }
+          // },
           tooltip: {
             callbacks: {
               label: (tooltipItem) => {
@@ -237,7 +267,7 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
           <h2 id='no-data'>No data Found</h2>
         </div>
       ) : (
-        <Bar data={chartData} options={options} id='box' className='chart' />
+        <Bar data={chartData} options={options} plugins={[customTextPlugin]} id='box' className='chart' />
       )}
     </>
   );

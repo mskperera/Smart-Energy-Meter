@@ -86,7 +86,7 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
                    <span 
                       style={{ 
                         position: 'inherit', 
-                        right: '5px', 
+                        right: '0px', 
                         transform: 'translateX(0%)',
                         fontWeight: '550',
                         color: '#00bbf0', 
@@ -179,37 +179,56 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
       ))}
     </div>
     <br/>
-    <>
-      <div className="chart-now-kw">      
-    <div className="chart-budget-cost">
-          {lines.map((line, index) => (
-            <React.Fragment key={`line-${line.lineNo || index}`}>
-              {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  </div>
-              )}
-              
-              <LineChartCost 
-              key={`line-chart-${line.lineNo || index}`} 
-              device={line} 
-              daysElapsed={daysElapsed} 
-              numberOfDays={numberOfDays} 
-              usageBill={line.usageBill} 
-              budgetedBill={line.budgetedBill} 
-              startDate={startDate}
-              endDate={endDate}
-              />
-            </React.Fragment>
-          ))}
-      </div>
-    </div>
-    </>
+    {/* <> */}
+      {/* <div className="chart-budget-cost">      
+            {lines.map((line, index) => (
+              <React.Fragment key={`line-${line.lineNo || index}`}>
+                {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    </div>
+                )}
+                
+                <LineChartCost 
+                key={`line-chart-${line.lineNo || index}`} 
+                device={device} 
+                daysElapsed={daysElapsed} 
+                numberOfDays={numberOfDays} 
+                usageBill={line.usageBill} 
+                budgetedBill={line.budgetedBill} 
+                startDate={startDate}
+                endDate={endDate}
+                />
+              </React.Fragment>
+            ))}
+        </div> */}
+    {/* </> */}
     <br/>
-    <div>
-        <div className="chart-now-kw">
-          <LineChartBudget device={device} />
+    {/* <> */}
+      {/* <div className="chart-budget-cost"> */}
+        <div className="chart-budget-cost">      
+            {lines.map((line, index) => (
+              <React.Fragment key={`line-${line.lineNo || index}`}>
+                {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    </div>
+                )}
+                
+                <LineChartBudget 
+                key={`line-chart-${line.lineNo || index}`} 
+                device={device} 
+                daysElapsed={daysElapsed} 
+                numberOfDays={numberOfDays} 
+                usageBill={line.usageBill} 
+                budgetedBill={line.budgetedBill} 
+                startDate={startDate}
+                endDate={endDate}
+                />
+              </React.Fragment>
+            ))}
         </div>
-    </div>
+      {/* </div> */}
+    {/* </> */}
+    
     <br/>
     <div className="chart-toggle">
       <div className="switch-container">
