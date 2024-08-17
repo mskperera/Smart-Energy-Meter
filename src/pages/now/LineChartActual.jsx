@@ -116,14 +116,14 @@ function LineChartActual({ device }) {
     beforeDraw: (chart) => {
       const { ctx, chartArea: { top, right } } = chart;
       ctx.save();
-      ctx.font = 'bolder 14px Trebuchet MS';
+      ctx.font = 'bold 13px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
-      ctx.fillText(`Forecast : ${(Number(totalForecast.toFixed(2))).toLocaleString()} kWh`, right, top - 20);
+      ctx.fillText(`Forecast : ${(Number(totalForecast.toFixed(2))).toLocaleString()} kWh`, right, top - 25);
 
 
-      ctx.font = 'bolder 12px Trebuchet MS';
-      ctx.fillText(`Actual Used: ${(Number(totalUsed.toFixed(2))).toLocaleString()} kWh`, right, top - 5);
+      ctx.font = 'bold 11px Trebuchet MS';
+      ctx.fillText(`Actual Used: ${(Number(totalUsed.toFixed(2))).toLocaleString()} kWh`, right, top - 8);
       ctx.restore();
     },
   };
@@ -132,8 +132,8 @@ function LineChartActual({ device }) {
     scales: {
       x: {
         grid: {
-          display: false,
-          color: 'gray', //  color-x-axis grid lines
+          display: true,
+          color: '#4f4f4f', //  color-x-axis grid lines
         },
         beginAtZero: true,
         title: {
@@ -143,13 +143,16 @@ function LineChartActual({ device }) {
           color: 'white',
         },
         ticks: {
-          color: 'white', // color-x-axis labels
+          color: 'white', //x axis labels
+          font: {
+            size: 10, 
+          },
         },
       },
       y: {
         grid: {
           display: true,
-          color: 'Gray', //  color-x-axis grid lines
+          color: '#4f4f4f', //  color-x-axis grid lines
         },
         beginAtZero: true,
         title: {
@@ -157,9 +160,15 @@ function LineChartActual({ device }) {
           position: 'top',
           text: 'kWh',
           color: 'white',
+          font: {
+            size: 10,
+          },
         },
         ticks: {
-          color: 'white', // color of y-axis labels
+          color: 'white', //y axis labels
+          font: {
+            size: 10, 
+          },
         },
       },
     },
@@ -175,6 +184,9 @@ function LineChartActual({ device }) {
           color: 'white',
           usePointStyle: true,
           pointStyle: 'rectRounded',
+          font: {
+            size: 10,
+          },
         },
         onClick: () => { },
       },

@@ -166,7 +166,7 @@ function Today() {
         ) : (
           devices.length === 0 ? (
             <div className="no-data-message1" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-              <h2 id='no-data'>No data Found</h2>
+              <p id='no-data'>No data Found</p>
             </div>
           ) : (
             devices.map((device, index) => (

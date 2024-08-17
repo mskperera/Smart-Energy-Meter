@@ -6,23 +6,21 @@ import moment from 'moment';
 import { getEngergyUsageKwhByDateRangePrediction } from '../../action/device';
 import { useSelector } from 'react-redux';
 import { ThreeDots } from 'react-loader-spinner';
+// import { CrosshairPlugin } from 'chartjs-plugin-crosshair';
+// ChartJS.register(CrosshairPlugin);
+
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Filler);
 
-function LineChartBudget({ device }) {
+function LineChartBudget({ device, daysElapsed, numberOfDays, usageBill, budgetedBill, startDate, endDate }) {
   const selectedDevice = useSelector((state) => state.device.selectedDevice);
   const [loading, setLoading] = useState(null);
-  const [lastForecastValue, setLastForecastValue] = useState(0); 
+  const [lastForecastValue, setLastForecastValue] = useState(0);
   const [totalUsed, setTotalUsed] = useState(0);
 
   const [data, setData] = useState({
     labels: [],
-    datasets: [
-      {
-        label: ['Rs', 'Forecast'],
-        data: [],
-      },
-    ],
+    datasets: []
   });
 
   useEffect(() => {
@@ -31,14 +29,14 @@ function LineChartBudget({ device }) {
 
   const loadEngergyUsageKwhByDateRangePrediction = async () => {
     setLoading(true);
-    const startDate = moment(device?.startDate).format('YYYY-MM-DD');
-    const endDate = moment(device?.endDate).format('YYYY-MM-DD');
+    const formattedStartDate = moment(device?.startDate).format('YYYY-MM-DD');
+    const formattedEndDate = moment(device?.endDate).format('YYYY-MM-DD');
 
     const payload = {
       deviceId: device?.deviceId,
       frequencyId: 3,
-      startDate: startDate,
-      endDate: endDate,
+      startDate: formattedStartDate,
+      endDate: formattedEndDate,
     };
 
     console.log('payload', payload);
@@ -63,9 +61,8 @@ function LineChartBudget({ device }) {
     }
 
     const lastForecast = costCumForcastArr[costCumForcastArr.length - 1];
-    setLastForecastValue(lastForecast || 0); 
+    setLastForecastValue(lastForecast || 0);
 
-    
     let lastActualValue = 0;
     for (let i = costCumActualArr.length - 1; i >= 0; i--) {
       if (costCumActualArr[i] !== null) {
@@ -75,28 +72,61 @@ function LineChartBudget({ device }) {
     }
     setTotalUsed(lastActualValue || 0);
 
-    const datasets0 = [
+    const labels = generateLabels(formattedStartDate, numberOfDays);
+
+    const datasets = [
       {
-        label: 'Cost',
-        data: costCumForcastArr,
-        borderColor: '#fff346',
+        label: 'Budget',
+        data: calculateCumulativeValues(budgetedBill, numberOfDays),
+        borderColor: 'rgb(252,111,47)',
         tension: 0.3,
-        backgroundColor: 'rgba(255,243,70, 0.5)',
-        borderDash: [8, 10],
+        backgroundColor: 'rgb(252,111,47, 0.4)',
+        borderDash: [5, 5],
       },
+      // {
+      //   label: 'Usage Bill',
+      //   data: calculateCumulativeValues(usageBill, daysElapsed),
+      //   borderColor: 'rgb(254,170,131, 0.6)',
+      //   tension: 0.3,
+      //   backgroundColor: 'rgb(254,170,131, 0.4)',
+      //   fill: false,
+      // },
       {
         label: 'Actual',
         data: costCumActualArr,
-        borderColor: 'rgba(54,162,235)',
+        borderColor: 'rgba(54,162,235,0.5)',
         tension: 0.3,
-        backgroundColor: 'rgba(54,162,235, 0.5)',
+        backgroundColor: 'rgba(54,162,235, 0.3)',
         fill: true,
         showLine: true,
-      }
+      },
+      {
+        label: 'Prediction',
+        data: costCumForcastArr,
+        borderColor: 'rgb(255,243,70)',
+        tension: 0.3,
+        backgroundColor: 'rgba(255,243,70,0.50)',
+        borderDash: [10, 5],
+      },
     ];
 
-    setData({ ...data, labels: months, datasets: datasets0 });
+    setData({ labels, datasets });
     setLoading(false);
+  };
+
+  const calculateCumulativeValues = (value, days) => {
+    const dailyValue = value / days;
+    let cumulativeValue = 0;
+    return Array.from({ length: days }, (_, index) => {
+      cumulativeValue += dailyValue;
+      return cumulativeValue;
+    });
+  };
+
+  const generateLabels = (start, days) => {
+    return Array.from({ length: days }, (_, index) => {
+      return moment(start).add(index, 'days').format('M-DD');
+    });
   };
 
   const customTextPlugin = {
@@ -104,15 +134,15 @@ function LineChartBudget({ device }) {
     beforeDraw: (chart) => {
       const { ctx, chartArea: { top, right } } = chart;
       ctx.save();
-      ctx.font = 'bolder 14px Trebuchet MS';
+      ctx.font = 'bold 13px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
-      ctx.fillText(`Forecast : Rs.${(Number(lastForecastValue.toFixed(2))).toLocaleString()}`, right, top - 20);
+      ctx.fillText(`Prediction : Rs.${(Number(lastForecastValue.toFixed(2))).toLocaleString()}`, right, top - 25);
 
-      ctx.font = 'bolder 12px Trebuchet MS';
+      ctx.font = 'bold 11px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
-      ctx.fillText(`Actual : Rs.${(Number(totalUsed.toFixed(2))).toLocaleString()}`, right, top - 5);
+      ctx.fillText(`Actual : Rs.${(Number(totalUsed.toFixed(2))).toLocaleString()}`, right, top - 8);
 
       ctx.restore();
     },
@@ -122,8 +152,8 @@ function LineChartBudget({ device }) {
     scales: {
       x: {
         grid: {
-          display: false,
-          color: 'gray',
+          display: true,
+          color: '#4f4f4f',
         },
         beginAtZero: true,
         title: {
@@ -134,12 +164,15 @@ function LineChartBudget({ device }) {
         },
         ticks: {
           color: 'white',
+          font: {
+            size: 10, 
+          },
         },
       },
       y: {
         grid: {
           display: true,
-          color: 'Gray',
+          color: '#4f4f4f',
         },
         beginAtZero: true,
         title: {
@@ -147,9 +180,15 @@ function LineChartBudget({ device }) {
           position: 'top',
           text: 'Rs',
           color: 'white',
+          font: {
+            size: 10,
+          },
         },
         ticks: {
           color: 'white',
+          font: {
+            size: 10, 
+          },
         },
       },
     },
@@ -165,9 +204,36 @@ function LineChartBudget({ device }) {
           color: 'white',
           usePointStyle: true,
           pointStyle: 'rectRounded',
+          font: {
+            size: 10,
+          },
         },
         onClick: () => { },
       },
+      // tooltip: {
+      //   mode: 'index',
+      //   intersect: false,
+      //   callbacks: {
+      //     label: function(context) {
+      //       const label = context.dataset.label || '';
+      //       const value = context.parsed.y;
+      //       return `${label}: Rs.${value.toLocaleString()}`;
+      //     },
+      //   },
+      // },
+      // crosshair: {
+      //   line: {
+      //     color: 'rgba(255, 255, 255, 0.6)',
+      //     width: 1,
+      //     dashPattern: [5, 5],
+      //   },
+      //   sync: {
+      //     enabled: false,
+      //   },
+      //   zoom: {
+      //     enabled: false,
+      //   },
+      // },
     },
   };
 

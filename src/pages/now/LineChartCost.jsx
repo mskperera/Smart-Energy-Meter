@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './AreaChart.css';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Filler } from 'chart.js';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
@@ -23,7 +23,7 @@ function LineChartCost({ device, daysElapsed, numberOfDays, usageBill, budgetedB
 
   const generateLabels = (start, days) => {
     return Array.from({ length: days }, (_, index) => {
-      return moment(start).add(index, 'days').format('M-D');
+      return moment(start).add(index, 'days').format('M-DD');
     });
   };
 
@@ -33,14 +33,16 @@ function LineChartCost({ device, daysElapsed, numberOfDays, usageBill, budgetedB
     labels: labels,
     datasets: [
       {
-        label: 'Budgeted Bill',
+        label: 'KvA',
         data: calculateCumulativeValues(budgetedBill, numberOfDays),
         borderColor: '#fff346',
         tension: 0.3,
-        borderDash: [5, 5],
+        backgroundColor: 'rgba(255,243,70)',
+        // borderDash: [5, 5],
+        fill: true,
       },
       {
-        label: 'Usage Bill',
+        label: 'Kw',
         data: calculateCumulativeValues(usageBill, daysElapsed),
         borderColor: 'rgba(54,162,235, 1)',
         tension: 0.3,
@@ -63,8 +65,11 @@ function LineChartCost({ device, daysElapsed, numberOfDays, usageBill, budgetedB
           display: false,
         },
         ticks: {
-          color: 'white',
-        },
+            color: 'white',
+            font: {
+              size: 10, 
+            },
+          },
       },
       y: {
         grid: {
@@ -75,12 +80,18 @@ function LineChartCost({ device, daysElapsed, numberOfDays, usageBill, budgetedB
         title: {
           display: true,
           position: 'top',
-          text: 'Rs',
+          text: 'Kw',
           color: 'white',
+          font: {
+            size: 10,
+          },
         },
         ticks: {
-          color: 'white',
-        },
+            color: 'white',
+            font: {
+              size: 10, 
+            },
+          },
       },
     },
     plugins: {
@@ -96,7 +107,7 @@ function LineChartCost({ device, daysElapsed, numberOfDays, usageBill, budgetedB
           usePointStyle: true,
           pointStyle: 'rectRounded',
         },
-        onClick: () =>{},
+        onClick: () =>[]
       },
     },
   };
@@ -108,7 +119,7 @@ function LineChartCost({ device, daysElapsed, numberOfDays, usageBill, budgetedB
           <ThreeDots color={"#36A2EB"} loading={loading} size={50} />
         </div>
       ) : (
-        <Line data={data} options={options} id='box22' className='chart box22' />
+        <Bar data={data} options={options} id='box22' className='chart box22' />
       )}
     </div>
   );
