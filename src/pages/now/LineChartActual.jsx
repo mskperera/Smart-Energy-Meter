@@ -91,9 +91,10 @@ function LineChartActual({ device }) {
         label: 'Forecast',
         data: kwhCumForcastArr,
         borderColor: '#fff346',
-        pointBortderColor: 'rgba(0, 255, 153)',
+        pointBortderColor: 'rgba(255, 243, 70, 1)',
         tension: 0.3,
         borderDash: [8, 10],
+        backgroundColor: 'rgba(255, 243, 70, 0.5)',
       },
       {
         label: 'Actual',
@@ -119,11 +120,11 @@ function LineChartActual({ device }) {
       ctx.font = 'bold 13px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
-      ctx.fillText(`Forecast : ${(Number(totalForecast.toFixed(2))).toLocaleString()} kWh`, right, top - 25);
+      ctx.fillText(`Forecast : ${(Number(totalForecast.toFixed(2))).toLocaleString()} kWh`, right, top - 23);
 
 
       ctx.font = 'bold 11px Trebuchet MS';
-      ctx.fillText(`Actual Used: ${(Number(totalUsed.toFixed(2))).toLocaleString()} kWh`, right, top - 8);
+      ctx.fillText(`Actual Used: ${(Number(totalUsed.toFixed(2))).toLocaleString()} kWh`, right, top - 9);
       ctx.restore();
     },
   };
