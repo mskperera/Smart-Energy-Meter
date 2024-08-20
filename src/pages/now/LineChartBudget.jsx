@@ -137,12 +137,12 @@ function LineChartBudget({ device, daysElapsed, numberOfDays, usageBill, budgete
       ctx.font = 'bold 13px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
-      ctx.fillText(`Prediction : Rs.${(Number(lastForecastValue.toFixed(2))).toLocaleString()}`, right, top - 25);
+      ctx.fillText(`Prediction : Rs.${(Number(lastForecastValue.toFixed(2))).toLocaleString()}`, right, top - 23);
 
       ctx.font = 'bold 11px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
-      ctx.fillText(`Actual : Rs.${(Number(totalUsed.toFixed(2))).toLocaleString()}`, right, top - 8);
+      ctx.fillText(`Actual : Rs.${(Number(totalUsed.toFixed(2))).toLocaleString()}`, right, top - 9);
 
       ctx.restore();
     },
