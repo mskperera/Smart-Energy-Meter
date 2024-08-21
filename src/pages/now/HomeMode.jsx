@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
-// import Navbar from '../../components/navbar/Navbar';
 import Menu from '../../components/menu/Menu';
 import BottomNav from '../../components/bottommenu/BottomNav';
 import { useSelector } from 'react-redux';

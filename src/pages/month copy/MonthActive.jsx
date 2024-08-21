@@ -10,7 +10,6 @@ import moment from 'moment';
 import DeviceCharts from '../today/DeviceChart';
 import { ThreeDots } from 'react-loader-spinner';
 import { useSessionDate } from '../../context/SessionDateContext';
-import { getBillingSessionDateRangeBySessionStartDate, getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession';
 import { IoMdArrowDropdown } from 'react-icons/io';
 
 function MonthActive() {
@@ -76,29 +75,6 @@ function MonthActive() {
     const result = await getEngergyUsageKwhByDateRange(payload);
     setDevices(result.data);
     setIsSearchLoading(false);
-  };
-
-  // Load current billing session info by device ID
-  useEffect(() => {
-    if (selectedDevice) {
-      const deviceId = selectedDevice.id;
-      loadCurrentBillingSessionInfoByDeviceId(deviceId);
-    }
-  }, [selectedDevice]);
-
-  const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
-    const result = await getBillingSessionNameCurrentByDeviceId(deviceId);
-    const billingSessionInfo = result.data;
-
-    if (billingSessionInfo && billingSessionInfo.data && billingSessionInfo.data.length > 0) {
-      const session = billingSessionInfo.data[0];
-      if (session.startDate) {
-        setSessionDate(new Date(session.startDate).toLocaleString());
-      }
-      if (session.numberOfDays) {
-        setNumberOfDays(session.daysElapsed);
-      }
-    }
   };
 
   return (

@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Month.css'
-import Navbar from '../../components/navbar/Navbar'
-//import Menu from '../../components/menu/Menu'
 import { Link } from 'react-router-dom'
 import BottomNav from '../../components/bottommenu/BottomNav'
-// import TodayKw from './TodayKw'
-// import TodayCost from './TodayCost'
 import { useSelector } from 'react-redux'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -64,6 +60,7 @@ setSelectedDate(sessionDate);
 }
 
 
+
 useEffect(()=>{
 
   console.log('selectedDate && selectedDevice',selectedDate, selectedDevice)
@@ -77,8 +74,9 @@ const loadChartData = async (deviceId,selecedDate) => {
 
   const utcOffSet= moment().utcOffset();
 
- const year=moment(selecedDate).year();
-  const month=moment(selecedDate).month()+1;
+
+ const year=moment(selecedDate, "MM/DD/YYYY, HH:mm:ss").year();
+  const month=moment(selecedDate, "MM/DD/YYYY, HH:mm:ss").month()+1;
 
    // const startOfMonth = moment(`${year}-${month}`, 'YYYY-M').startOf('month');
     
@@ -130,7 +128,9 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
   if (billingSessionInfo && billingSessionInfo.data && billingSessionInfo.data.length > 0) {
     const session = billingSessionInfo.data[0];
     if (session.startDate) {
-      setSessionDate(new Date(session.startDate).toLocaleString());
+
+      const startDate_local=moment(session.startDate).add(330,'minutes');
+      setSessionDate(startDate_local);
     }
     if (session.numberOfDays) {
       setNumberOfDays(session.daysElapsed);
@@ -139,98 +139,109 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
 };
 
   return (
-    <div className='home'>
-        {/* <Navbar /> */}
-      
-        <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
-        <div className='back'>
-        <ul className='nav-bar-links'>
-          <Link to={"/home"}>
+    <div className="home">
+      {/* <Navbar /> */}
+
+      <div className="nav-bar d-flex align-items-center justify-content-center w-100">
+        <div className="back">
+          <ul className="nav-bar-links">
+            <Link to={"/home"}>
+              <li
+                className={`btn btn-sm  ${activeTab === "Now" ? "active" : ""}`}
+                onClick={() => handleTabClick("Now")}
+              >
+                Live
+              </li>
+            </Link>
+            <Link to={"/today"}>
+              <li
+                className={`btn btn-sm  ${activeTab === "Day" ? "active" : ""}`}
+                onClick={() => handleTabClick("Day")}
+              >
+                Day
+              </li>
+            </Link>
+            <Link to={"/week"}>
+              <li
+                className={`btn btn-sm ${activeTab === "Week" ? "active" : ""}`}
+                onClick={() => handleTabClick("Week")}
+              >
+                Week
+              </li>
+            </Link>
             <li
-             
-              className={`btn btn-sm  ${activeTab === 'Now' ? 'active' : ''}`}
-              onClick={() => handleTabClick('Now')}
+              className={`btn btn-sm btn-primary ${
+                activeTab === "Session" ? "active" : ""
+              }`}
+              onClick={() => handleTabClick("Session")}
             >
-              Live
+              Session
+              <IoMdArrowDropdown size={20} />
+              <div className={`dropdown-menu ${isDropdownOpen ? "show" : ""}`}>
+                <Link
+                  to={"/month"}
+                  className="dropdown-item"
+                  onClick={() => handleTabClick("Session")}
+                >
+                  Session
+                </Link>
+                <Link
+                  to={"/monthactive"}
+                  className="dropdown-item"
+                  onClick={() => handleTabClick("Month")}
+                >
+                  Month
+                </Link>
+              </div>
             </li>
-          </Link>
-          <Link to={"/today"}>
-            <li
-              
-              className={`btn btn-sm  ${activeTab === 'Day' ? 'active' : ''}`}
-              onClick={() => handleTabClick('Day')}
-            >
-              Day
-            </li>
-          </Link>
-          <Link to={"/week"}>
-            <li
-              
-              className={`btn btn-sm ${activeTab === 'Week' ? 'active' : ''}`}
-              onClick={() => handleTabClick('Week')}
-            >
-              Week
-            </li>
-          </Link>
-          <li
-           
-            className={`btn btn-sm btn-primary ${activeTab === 'Session' ? 'active' : ''}`}
-            onClick={() => handleTabClick('Session')}
-          >
-            Session<IoMdArrowDropdown size={20}/>
-            <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}>
-              <Link to={"/month"} className='dropdown-item' onClick={() => handleTabClick('Session')}>
-                Session
-              </Link>
-              <Link to={"/monthactive"} className='dropdown-item' onClick={() => handleTabClick('Month')}>
-                Month
-              </Link>
-            </div>
-          </li>
-          <Link to={"/year"}>
-            <li
-             
-              className={`btn btn-sm ${activeTab === 'Year' ? 'active' : ''}`}
-              onClick={() => handleTabClick('Year')}
-            >
-              Year
-            </li>
-          </Link>
-          <Link to={"/custom"}>
-            <li
-             
-              className={`btn btn-sm  ${activeTab === 'Custom' ? 'active' : ''}`}
-              onClick={() => handleTabClick('Custom')}
-            >
-              Custom
-            </li>
-          </Link>
-        </ul>
+            <Link to={"/year"}>
+              <li
+                className={`btn btn-sm ${activeTab === "Year" ? "active" : ""}`}
+                onClick={() => handleTabClick("Year")}
+              >
+                Year
+              </li>
+            </Link>
+            <Link to={"/custom"}>
+              <li
+                className={`btn btn-sm  ${
+                  activeTab === "Custom" ? "active" : ""
+                }`}
+                onClick={() => handleTabClick("Custom")}
+              >
+                Custom
+              </li>
+            </Link>
+          </ul>
         </div>
       </div>
-          <div className='body'>
-            {/* <div className="session-name">
+      <div className="body">
+        {/* <div className="session-name">
               <h6>Session Date :<b> {sessionDate}</b></h6>
               <p>Days Elapsed : <b>{numberOfDays}</b></p>
             </div> */}
-          <div className='date'>
-          <div className='picker'>
-          <div>
-            <DatePicker
-        selected={selectedDate && moment(selectedDate).format("yyyy-MM")} 
+        <div className="date">
+          <div className="picker">
+          
+             <div>
+              <DatePicker
+                selected={
+                  selectedDate &&
+                  moment(selectedDate, "MM/DD/YYYY, HH:mm:ss").format("yyyy-MM-DD")
+                }
                 onChange={handleMonthChange}
                 dateFormat="MMMM yyyy"
                 showMonthYearPicker
-                placeholderText="Select Month" 
-            />
-        </div>   
-         {/* <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button> */}
-         </div>
+                placeholderText="Select Month"
+              />
+            </div>
+            {/* <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button> */}
           </div>
-          {isSearchLoading ? (
+        </div>
+        {isSearchLoading ? (
           //  <p className="loading-message">Loading please wait...</p>
           <div className="d-flex align-items-center justify-content-center">
-          <ThreeDots
+            <ThreeDots
               height={100}
               width={100}
               color="#36A2EB"
@@ -238,29 +249,26 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
               secondaryColor="#36A2EB"
               strokeWidth={2}
               strokeWidthSecondary={2}
-              
             />
           </div>
-          ) : (
-            devices.length >0 && devices?.map((device, index) => (
-              <div key={index}>
-                  {/* <h4>{device.deviceName}</h4> */}
-                  <DeviceCharts 
-                  device={device}
-                  className="device-name-state"
-                  isSearchLoading={isSearchLoading}
-                  chartFrequencty="days"
-                  />
-          
-              </div>
-            ))
-          )}
-           
-          </div>
-            <BottomNav/>
-    
+        ) : (
+          devices.length > 0 &&
+          devices?.map((device, index) => (
+            <div key={index}>
+              {/* <h4>{device.deviceName}</h4> */}
+              <DeviceCharts
+                device={device}
+                className="device-name-state"
+                isSearchLoading={isSearchLoading}
+                chartFrequencty="days"
+              />
+            </div>
+          ))
+        )}
+      </div>
+      <BottomNav />
     </div>
-  )
+  );
 }
 
 export default Month;
