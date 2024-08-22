@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Year.css'
-import Navbar from '../../components/navbar/Navbar'
-//import Menu from '../../components/menu/Menu'
 import { Link } from 'react-router-dom'
 import BottomNav from '../../components/bottommenu/BottomNav'
-// import TodayKw from './TodayKw'
-// import TodayCost from './TodayCost'
 import { useSelector } from 'react-redux'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
