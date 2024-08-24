@@ -11,14 +11,16 @@ import DeviceCharts from '../today/DeviceChart';
 import { ThreeDots } from 'react-loader-spinner';
 import { useSessionDate } from '../../context/SessionDateContext';
 import { IoMdArrowDropdown } from 'react-icons/io';
+import { GrFormNext,GrFormPrevious } from "react-icons/gr";
+
 
 function MonthActive() {
-  const [activeTab, setActiveTab] = useState('Month'); // Set default active tab to 'Month'
+  const [activeTab, setActiveTab] = useState('Month'); 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSearchLoading, setIsSearchLoading] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(moment().startOf('month').toDate()); // Default to the start of the current month
+  const [selectedDate, setSelectedDate] = useState(moment().startOf('month').toDate()); 
   const [devices, setDevices] = useState([]);
-  const [dropdownLabel, setDropdownLabel] = useState('Month'); // State to track the dropdown label
+  const [dropdownLabel, setDropdownLabel] = useState('Month'); 
   const selectedDevice = useSelector(state => state.device.selectedDevice);
   const { sessionDate, setSessionDate, numberOfDays, setNumberOfDays } = useSessionDate();
 
@@ -77,6 +79,17 @@ function MonthActive() {
     setIsSearchLoading(false);
   };
 
+  const handlePrevMonth = () => {
+    const prevMonth = moment(selectedDate).subtract(1, 'month').toDate();
+    setSelectedDate(prevMonth);
+  };
+
+  
+  const handleNextMonth = () => {
+    const nextMonth = moment(selectedDate).add(1, 'month').toDate();
+    setSelectedDate(nextMonth);
+  };
+
   return (
     <div className='home'>
       <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
@@ -133,15 +146,21 @@ function MonthActive() {
       </div>
       <div className='body'>
         <div className='date'>
+            <div style={{display:'flex', position:'relative'}}>
+              <button onClick={handlePrevMonth} className='arrow-button-left'><GrFormPrevious /></button>
+            </div>
           <div className='picker'>
             <DatePicker
               selected={selectedDate}
               onChange={handleMonthChange}
-              dateFormat="MMMM yyyy"
+              dateFormat="MMM yyyy"
               showMonthYearPicker
               placeholderText="Select Month"
             />
           </div>
+            <div style={{display:'flex', position:'relative'}}>
+              <button onClick={handleNextMonth} className='arrow-button-right'><GrFormNext /></button>  
+            </div> 
         </div>
         {isSearchLoading ? (
           <div className="d-flex align-items-center justify-content-center">

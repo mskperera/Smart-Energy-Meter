@@ -236,6 +236,13 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
                   return `kWh: ${tooltipItem.raw}`;
                 }
               },
+              afterLabel: (tooltipItem) => {
+                if (chartFrequencty === "weeks") {
+                  const startDate = moment(days[tooltipItem.dataIndex].date).format('DD MMM');
+                  const endDate = moment(days[tooltipItem.dataIndex].date).add(6, 'days').format('DD MMM');
+                  return `Week: ${startDate} - ${endDate}`;
+                }
+              }
             },
           },
         },

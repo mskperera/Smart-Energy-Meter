@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Setup.css';
 import BottomNav from '../../components/bottommenu/BottomNav';
 import { CgProfile } from 'react-icons/cg';
-import { serviceProfileSetup } from '../../action/serviceProfile';
+import { getServiceProfiles, serviceProfileSetup } from '../../action/serviceProfile';
 import swal from 'sweetalert';
 import { getDevicesByUserId, verifyDeviceBySN } from '../../action/device';
 import { getDrpConsumerCategories, getDrpConsumerSubCategoriesById, getDrpMeasuringMode, getDrpSupplier, getDrpUserRole } from '../../action/dropdown';
@@ -11,7 +11,6 @@ import ReactDatePicker from 'react-datepicker';
 import { getUserIdByUsername, getUsers } from '../../action/user';
 
 const Step1 = ({ nextStep, handleChange, values, errors }) => {
-
   const [drpUserRole, setDrpUserRole] = useState([]);
   const [roleName, setRoleName] = useState('');
   const [roleId, setRoleId] = useState('');
@@ -25,14 +24,37 @@ const Step1 = ({ nextStep, handleChange, values, errors }) => {
     setDrpUserRole(result.data);
   };
 
-  const handleRoleChange = (e) => {
-    const selectedRole = drpUserRole.find(role => role.RoleName === e.target.value);
-    if (selectedRole) {
-      setRoleName(selectedRole.RoleName);
-      setRoleId(selectedRole.RoleId);
-      handleChange('userrole')({ target: { value: selectedRole.RoleId } }); 
+  useEffect(() => {
+    if (values.userName) {
+      loadUser();
     }
-  };
+  }, [values.userName]);
+
+  const loadUser = async () => {
+    const result = await getServiceProfiles();
+    // console.log("profiles", result.data);
+
+    const matchedProfile = result.data.find(profile => profile.userName.toLowerCase() === values.userName.toLowerCase());
+      if (matchedProfile) {
+        handleChange()({
+          displayname: matchedProfile.displayName,
+          email: matchedProfile.email,
+          mobile: matchedProfile.mobileNo,
+          tel: matchedProfile.tel,
+          address: matchedProfile.siteAddress,
+        });
+      }
+}
+
+
+  // const handleRoleChange = (e) => {
+  //   const selectedRole = drpUserRole.find(role => role.RoleName === e.target.value);
+  //   if (selectedRole) {
+  //     setRoleName(selectedRole.RoleName);
+  //     setRoleId(selectedRole.RoleId);
+  //     handleChange('userrole')({ target: { value: selectedRole.RoleId } });
+  //   }
+  // };
 
   return (
     <div className="form-container">
@@ -41,58 +63,81 @@ const Step1 = ({ nextStep, handleChange, values, errors }) => {
         <div className='col-md-6 mb-1 was-validated'>
           <div className='form-group mb-2'>
             <label htmlFor='userName' className='form-check-label'>Username</label>
-            <input type='text' className='form-control' required value={values.userName} onChange={handleChange('userName')} />
+            <input
+              type='text'
+              className='form-control'
+              required
+              value={values.userName}
+              onChange={handleChange('userName')}
+            />
             {errors.userName && <div className="text-danger">{errors.userName}</div>}
           </div>
-          {/* <div className='form-group was-validated mb-2'>
-                  <label htmlFor='userrole' className='form-check-label'>User Role</label>
-                  <select onChange={handleRoleChange} required name='userrole' className='form-control' value={roleName || ''}>
-                  <option value="" disabled>Select User Role</option>
-                    {drpUserRole.map((role) => (
-                      <option key={role.RoleId} value={role.RoleName}>
-                        {role.RoleName}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.userrole && <div className="text-danger">{errors.userrole}</div>}
-                </div> */}
-          {/* <div className='form-group mb-2'>
-            <label htmlFor='userrole' className='form-check-label'>User Role</label>
-            <select required name='userrole' className='form-control' value={values.userrole} onChange={handleChange('userrole')} >
-              <option value="" disabled>Select User Role</option>
-            </select>
-            
-          </div> */}
           <div className='form-group mb-2'>
             <label htmlFor='password' className='form-check-label'>Password</label>
-            <input type='password' className='form-control' required value={values.password} onChange={handleChange('password')} />
+            <input
+              type='password'
+              className='form-control'
+              required
+              value={values.password}
+              onChange={handleChange('password')}
+            />
             {errors.password && <div className="text-danger">{errors.password}</div>}
           </div>
           <div className='form-group mb-2'>
             <label htmlFor='email' className='form-check-label'>Email</label>
-            <input type='email' className='form-control' required value={values.email} onChange={handleChange('email')} />
+            <input
+              type='email'
+              className='form-control'
+              required
+              value={values.email}
+              onChange={handleChange('email')}
+            />
             {errors.email && <div className="text-danger">{errors.email}</div>}
           </div>
           <div className='form-group mb-2'>
             <label htmlFor='address' className='form-check-label'>Address</label>
-            <input type='text' className='form-control' required value={values.address} onChange={handleChange('address')} />
+            <input
+              type='text'
+              className='form-control'
+              required
+              value={values.address}
+              onChange={handleChange('address')}
+            />
             {errors.address && <div className="text-danger">{errors.address}</div>}
           </div>
         </div>
         <div className='col-md-6 mb-1 was-validated'>
           <div className='form-group mb-2'>
             <label htmlFor='displayname' className='form-check-label'>Display Name</label>
-            <input type='text' className='form-control' required value={values.displayname} onChange={handleChange('displayname')} />
+            <input
+              type='text'
+              className='form-control'
+              required
+              value={values.displayname}
+              onChange={handleChange('displayname')}
+            />
             {errors.displayname && <div className="text-danger">{errors.displayname}</div>}
           </div>
           <div className='form-group mb-2'>
             <label htmlFor='mobile' className='form-check-label'>Mobile</label>
-            <input type='text' className='form-control' required value={values.mobile} onChange={handleChange('mobile')} />
+            <input
+              type='text'
+              className='form-control'
+              required
+              value={values.mobile}
+              onChange={handleChange('mobile')}
+            />
             {errors.mobile && <div className="text-danger">{errors.mobile}</div>}
           </div>
           <div className='form-group mb-2'>
             <label htmlFor='tel' className='form-check-label'>Telephone</label>
-            <input type='text' className='form-control' required value={values.tel} onChange={handleChange('tel')} />
+            <input
+              type='text'
+              className='form-control'
+              required
+              value={values.tel}
+              onChange={handleChange('tel')}
+            />
             {errors.tel && <div className="text-danger">{errors.tel}</div>}
           </div>
         </div>
@@ -104,6 +149,8 @@ const Step1 = ({ nextStep, handleChange, values, errors }) => {
   );
 };
 
+
+
 const Step2 = ({ nextStep, prevStep, handleChange, values, errors, setFormData }) => {
   const [loading, setLoading] = useState(false);
   const [verifyMessage, setVerifyMessage] = useState('');
@@ -113,7 +160,6 @@ const Step2 = ({ nextStep, prevStep, handleChange, values, errors, setFormData }
   useEffect(() => {
     if (values.userName) {
       loadUserIdByUsername(values.userName);
-      console.log('loadUserIdByUsername', values.userName);
     }
   }, [values.userName]);
 
@@ -124,7 +170,7 @@ const Step2 = ({ nextStep, prevStep, handleChange, values, errors, setFormData }
       };
 
       const result = await getUserIdByUsername(payload);
-      console.log('loadUserIdByUsername', result);
+      
       if (result && result.data) {
         loadDevicesByUserId(result.data.userId);
       }
@@ -141,9 +187,9 @@ const Step2 = ({ nextStep, prevStep, handleChange, values, errors, setFormData }
   const loadDevicesByUserId = async (userId) => {
     try {
       const result = await getDevicesByUserId(userId);
-      console.log('device---Details', result);
+      
       const filteredDevices = result.data.filter(device => device.deviceTypeId === 1 || device.deviceTypeId === 2);
-      console.log('filteredDevices', filteredDevices);
+     
       setDeviceDetails(filteredDevices);
     } catch (error) {
       console.error('Error loading devices by user ID:', error);
@@ -474,14 +520,33 @@ const Setup = () => {
   //   setFormData({ ...formData, [input]: e.target.value });
   // };
 
+  // const handleChange = (input) => (e) => {
+  //   if (input === 'billingSessionStart' || input === 'billingSessionEnd') {
+  //     const utcDate = new Date(Date.UTC(e.getFullYear(), e.getMonth(), e.getDate(), e.getHours(), e.getMinutes(), e.getSeconds()));
+  //     setFormData({ ...formData, [input]: utcDate  }); 
+  //   } else {
+  //     setFormData({ ...formData, [input]: e.target.value }); 
+  //   }
+  // };
+
   const handleChange = (input) => (e) => {
     if (input === 'billingSessionStart' || input === 'billingSessionEnd') {
-      const utcDate = new Date(Date.UTC(e.getFullYear(), e.getMonth(), e.getDate(), e.getHours(), e.getMinutes(), e.getSeconds()));
-      setFormData({ ...formData, [input]: utcDate  }); 
-    } else {
-      setFormData({ ...formData, [input]: e.target.value }); 
+      const utcDate = new Date(Date.UTC(
+        e.getFullYear(), 
+        e.getMonth(), 
+        e.getDate(), 
+        e.getHours(), 
+        e.getMinutes(), 
+        e.getSeconds()
+      ));
+      setFormData({ ...formData, [input]: utcDate });
+    } else if (typeof e === 'object' && e !== null && 'target' in e) {
+      setFormData({ ...formData, [input]: e.target.value });
+    } else if (typeof e === 'object') {
+      setFormData({ ...formData, ...e });  
     }
   };
+  
   
 
   // const validateForm = () => {
@@ -494,41 +559,41 @@ const Setup = () => {
   const validateForm = () => {
     let newErrors = {};
     
-    if (!formData.userName) {
-      newErrors.userName = "Username is required";
-    }
+    // if (!formData.userName) {
+    //   newErrors.userName = "Username is required";
+    // }
   
-    if (!formData.password) {
-      newErrors.password = "Password is required";
-    } else if (formData.password.length < 5) {
-      newErrors.password = "Password at least 5 characters long";
-    }
+    // if (!formData.password) {
+    //   newErrors.password = "Password is required";
+    // } else if (formData.password.length < 5) {
+    //   newErrors.password = "Password at least 5 characters long";
+    // }
   
-    if (!formData.email) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email address is invalid";
-    }
+    // if (!formData.email) {
+    //   newErrors.email = "Email is required";
+    // } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    //   newErrors.email = "Email address is invalid";
+    // }
   
-    if (!formData.address) {
-      newErrors.address = "Address is required";
-    }
+    // if (!formData.address) {
+    //   newErrors.address = "Address is required";
+    // }
   
-    if (!formData.displayname) {
-      newErrors.displayname = "Display Name is required";
-    }
+    // if (!formData.displayname) {
+    //   newErrors.displayname = "Display Name is required";
+    // }
   
-    if (!formData.mobile) {
-      newErrors.mobile = "Mobile number is required";
-    } else if (!/^\d{10}$/.test(formData.mobile)) {
-      newErrors.mobile = "Mobile number must be 10 digits";
-    }
+    // if (!formData.mobile) {
+    //   newErrors.mobile = "Mobile number is required";
+    // } else if (!/^\d{10}$/.test(formData.mobile)) {
+    //   newErrors.mobile = "Mobile number must be 10 digits";
+    // }
    
-    if (!formData.tel) {
-      newErrors.tel = "Telephone number is required";
-    } else if (!/^\d{10}$/.test(formData.tel)) {
-      newErrors.tel = "Telephone number must be 10 digits";
-    }
+    // if (!formData.tel) {
+    //   newErrors.tel = "Telephone number is required";
+    // } else if (!/^\d{10}$/.test(formData.tel)) {
+    //   newErrors.tel = "Telephone number must be 10 digits";
+    // }
   
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;

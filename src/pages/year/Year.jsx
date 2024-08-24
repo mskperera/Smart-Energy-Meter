@@ -13,6 +13,7 @@ import { ThreeDots } from 'react-loader-spinner'
 import { useSessionDate } from '../../context/SessionDateContext'
 import { getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession'
 import { IoMdArrowDropdown } from 'react-icons/io'
+import { GrFormNext,GrFormPrevious } from "react-icons/gr";
 
 
 function Year() {
@@ -60,7 +61,6 @@ const loadChartData = async (deviceId,year) => {
   const utcOffset = moment().utcOffset();
 
  
-  // Create start and end of year moments
   const startOfYear = moment(year).startOf('year');
   const endOfYear = moment(year).endOf('year');
 
@@ -68,7 +68,7 @@ const loadChartData = async (deviceId,year) => {
   const startOfYearUtc = startOfYear.subtract(utcOffset, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
   const endOfYearUtc = endOfYear.subtract(utcOffset, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
 
-  // Log the UTC start and end of the year
+
   console.log('startOfYearUtc', startOfYearUtc);
   console.log('endOfYearUtc', endOfYearUtc);
 
@@ -113,6 +113,17 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
       setNumberOfDays(session.daysElapsed);
     }
   }
+};
+
+
+const handlePreviousYear = () => {
+  const previousYear = moment(selectedDate).subtract(1, 'years').toDate();
+  setSelectedDate(previousYear);
+};
+
+const handleNextYear = () => {
+  const nextYear = moment(selectedDate).add(1, 'years').toDate();
+  setSelectedDate(nextYear);
 };
 
   return (
@@ -192,6 +203,9 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
             </div> */}
           <div className='date'>
           <div className='picker'>
+            <div style={{display:'flex', position:'relative'}}>
+              <button onClick={handlePreviousYear} className='arrow-button-left'><GrFormPrevious /></button>
+            </div>
           <div className='picker-year'>
             <DatePicker
                 selected={selectedDate} 
@@ -202,6 +216,9 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
             />
         </div>   
          {/* <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button> */}
+            <div style={{display:'flex', position:'relative'}}>
+              <button onClick={handleNextYear} className='arrow-button-right'><GrFormNext /></button>  
+            </div> 
          </div>
           </div>
           {isSearchLoading?(

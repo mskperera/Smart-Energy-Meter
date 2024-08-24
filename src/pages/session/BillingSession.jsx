@@ -33,7 +33,7 @@ function BillingSession() {
     try {
       setLoadData(true);
       const res = await getbillingSessionByDeviceId(deviceId);
-      console.log('billing session', res);
+      
       if (res.data.length > 0) {
         const sessions = res.data.reduce((acc, session) => {
           const startDate = new Date(session.startDate);
@@ -82,7 +82,7 @@ function BillingSession() {
         saveType: 'U',
       };
       const res = await saveBillingSession(payload);
-      console.log('API:', res);
+      
       const { responseStatus, outputMessage } = res.data;
       if (responseStatus === 'failed') {
         setErrorMessage(outputMessage);
@@ -217,7 +217,16 @@ function BillingSession() {
                                     disabled
                                     value={
                                       selectedDates[session.deviceBillingSessionId]?.startDate
-                                        ? new Date(selectedDates[session.deviceBillingSessionId].startDate).toLocaleString()
+                                        // ? new Date(selectedDates[session.deviceBillingSessionId].startDate).toLocaleString()
+                                        ? new Intl.DateTimeFormat('en-US', {
+                                          year: 'numeric',  
+                                          month: 'short',
+                                          day: '2-digit',
+                                          hour: '2-digit',
+                                          minute: '2-digit',
+                                          second: '2-digit',
+                                          hour12: true
+                                        }).format(new Date(selectedDates[session.deviceBillingSessionId].startDate))
                                         : ''
                                     }
                                   />
@@ -262,7 +271,15 @@ function BillingSession() {
                                     disabled
                                     value={
                                       selectedDates[session.deviceBillingSessionId]?.endDate
-                                        ? new Date(selectedDates[session.deviceBillingSessionId].endDate).toLocaleString()
+                                      ? new Intl.DateTimeFormat('en-US', {
+                                        year: 'numeric',
+                                        month: 'short', 
+                                        day: '2-digit',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        second: '2-digit',
+                                        hour12: true 
+                                      }).format(new Date(selectedDates[session.deviceBillingSessionId].endDate))
                                         : ''
                                     }
                                   />

@@ -10,6 +10,8 @@ import { getEngergyUsageKwhByDateRange } from '../../action/device';
 import moment from 'moment';
 import { ThreeDots } from 'react-loader-spinner';
 import { IoMdArrowDropdown } from 'react-icons/io';
+import { GrFormNext,GrFormPrevious } from "react-icons/gr";
+// import { GrFormNext } from "react-icons/gr";
 
 function Today() {
   const [activeTab, setActiveTab] = useState('Day');
@@ -73,6 +75,18 @@ function Today() {
   };
 
   const currentDate = moment().toDate();
+
+  const handlePrevDay = () => {
+    const prevDay = moment(startDate).subtract(1, 'days').toDate();
+    setStartDate(prevDay);
+  };
+
+  
+  const handleNextDay = () => {
+    const nextDay = moment(startDate).add(1, 'days').toDate();
+    setStartDate(nextDay);
+  };
+
 
   return (
     <div className='home'>
@@ -139,6 +153,9 @@ function Today() {
       <div className='body'>
         <div className='date'>
           <div className='picker'>
+            <div style={{display:'flex', position:'relative'}}>
+              <button onClick={handlePrevDay} className='arrow-button-left'><GrFormPrevious /></button>
+            </div>
             <div>
               <DatePicker
                 selected={startDate}
@@ -148,7 +165,10 @@ function Today() {
                 dateFormat='dd MMM yyyy'
                 dayClassName={(date) => date.toDateString() === currentDate.toDateString() ? 'highlight-today' : undefined}
               />
-            </div>    
+            </div> 
+            <div style={{display:'flex', position:'relative'}}>
+              <button onClick={handleNextDay} className='arrow-button-right'><GrFormNext /></button>  
+            </div> 
           </div>
         </div>
         {isSearchLoading ? (
