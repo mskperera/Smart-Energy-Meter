@@ -15,7 +15,28 @@
     border-radius: 20%;
   }
   
+  .arrow-button-left {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    z-index:1000;
+    margin-left:1rem;
+    margin-top:-15px;
+    font-size: 1rem;
+    color: #00ff;
+  }  
 
+  .arrow-button-right {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    margin-top:-15px;
+    margin-left:-2.7rem;
+    font-size: 1rem;
+    color: #00ff;
+  } 
  
 .no-data-message {
     display: flex;

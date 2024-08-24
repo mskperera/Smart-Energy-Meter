@@ -39,7 +39,7 @@ function DeviceTab() {
     const loadDeviceSettingstData = async (deviceId) => {
         const result = await get_DeviceSettingsByDeviceId(deviceId);
         const deviceSetting = result.data;
-        console.log("deviceSetting---------", deviceSetting);
+        // console.log("deviceSetting---------", deviceSetting);
         setEditLineOne(deviceSetting.l1);
         setEditLineTwo(deviceSetting.l2);
         setEditLineThree(deviceSetting.l3);
@@ -61,7 +61,7 @@ function DeviceTab() {
             };
 
             const res = await deviceMeasuringModeSave(payload);
-            console.log("deviceMeasuringModeSave", res);
+            // console.log("deviceMeasuringModeSave", res);
             const { responseStatus, outputMessage } = res.data.output;
             if (responseStatus === "failed") {
                 setErrorMessage(outputMessage);
@@ -80,7 +80,7 @@ function DeviceTab() {
 
     const loadDeviceConnectionData = async (deviceId) => {
         const result = await getConnectionSettingsByDeviceId(deviceId);
-        console.log("test111111111", result);
+        // console.log("test111111111", result);
         const deviceSettings = result.data;
         setEditedDeviceName(deviceSettings.deviceName);
         setEditedConnection(deviceSettings.connection);

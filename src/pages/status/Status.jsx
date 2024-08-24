@@ -30,7 +30,7 @@ function Status() {
 
   const loadDeviceStatus = async (userId, deviceId) => {
     const result = await getDeviceStatus(userId, deviceId);
-    console.log('Result:', result);
+    // console.log('Result:', result);
     setDeviceDetails(result.data);
     setLoading(false);
   };

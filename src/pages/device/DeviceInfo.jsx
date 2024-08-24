@@ -25,7 +25,7 @@ const DeviceInfo = () => {
     setLoading(true);
     try {
       const result = await getDeviceInfoByUserId(userId);
-      console.log('Result 11111111', result);
+      // console.log('Result 11111111', result);
       setDeviceDetails(result.data);
     } catch (error) {
       console.error('Error loading device info:', error);

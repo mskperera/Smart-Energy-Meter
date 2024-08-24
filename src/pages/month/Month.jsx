@@ -13,6 +13,7 @@ import { ThreeDots } from 'react-loader-spinner'
 import { useSessionDate } from '../../context/SessionDateContext'
 import { getBillingSessionDateRangeBySessionStartDate, getBillingSessionNameCurrentByDeviceId } from '../../action/billingSession'
 import { IoMdArrowDropdown } from 'react-icons/io'
+import { GrFormNext,GrFormPrevious } from "react-icons/gr";
 
 
 function Month() {
@@ -138,6 +139,19 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
   }
 };
 
+
+const handlePrevMonth = () => {
+  const prevMonth = moment(selectedDate).subtract(1, 'month').toDate();
+  setSelectedDate(prevMonth);
+};
+
+
+const handleNextMonth = () => {
+  const nextMonth = moment(selectedDate).add(1, 'month').toDate();
+  setSelectedDate(nextMonth);
+};
+
+
   return (
     <div className="home">
       {/* <Navbar /> */}
@@ -222,7 +236,9 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
             </div> */}
         <div className="date">
           <div className="picker">
-          
+            <div style={{display:'flex', position:'relative'}}>
+              <button onClick={handlePrevMonth} className='arrow-button-left'><GrFormPrevious /></button>
+            </div>
              <div>
               <DatePicker
                 selected={
@@ -235,6 +251,9 @@ const loadCurrentBillingSessionInfoByDeviceId = async (deviceId) => {
                 placeholderText="Select Month"
               />
             </div>
+            <div style={{display:'flex', position:'relative'}}>
+              <button onClick={handleNextMonth} className='arrow-button-right'><GrFormNext /></button>  
+            </div> 
             {/* <button className='btn-search btn btn-sm btn-primary' onClick={handleSearch}>Search</button> */}
           </div>
         </div>

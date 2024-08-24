@@ -113,7 +113,7 @@ useEffect(()=>{
         const result=await get_DeviceSettingsByDeviceId(deviceId);
         // setLoading(true);
        // setDeviceSettings(result.data);
-       console.log("test - test",result);
+      //  console.log("test - test",result);
        const deviceSetttings=result.data;
        
        setConsumerCategoryselectedValue(deviceSetttings.consumerCategoryId);
@@ -131,7 +131,7 @@ useEffect(()=>{
         const result=await getConnectionSettingsByDeviceId(deviceId);
         // setLoading(true);
        // setDeviceSettings(result.data);
-       console.log("test111111111",result);
+      //  console.log("test111111111",result);
        const deviceSetttings=result.data;
        setEditedDeviceName(deviceSetttings.deviceName);
        setEditedConnection(deviceSetttings.connection);
@@ -144,7 +144,7 @@ useEffect(()=>{
     const loadDrpConsumerCategories=async()=>{
         const result=await getDrpConsumerCategories();
         // setLoading(true);
-        console.log("consumerCategory",result);
+        // console.log("consumerCategory",result);
         setDropoptionsConsumerCatogery(result.data);
         // setLoading(false);
        }
@@ -153,7 +153,7 @@ useEffect(()=>{
         const result=await getDrpConsumerSubCategoriesById(consumerCategoryselectedValue);
         // setLoading(true);
         const subCategory = result.data;
-        console.log("subCategory",subCategory);
+        // console.log("subCategory",subCategory);
 
         if (Array.isArray(subCategory)) {
             setDropoptionsConsumerSubCatogery(subCategory);
@@ -166,7 +166,7 @@ useEffect(()=>{
     const loadDrpSupplier=async(deviceId)=>{
         const result=await getDrpSupplier(deviceId);
         // setLoading(true);
-        console.log("sup",result);
+        // console.log("sup",result);
         const supplier = result.data;
         setDropoptionsSupplier(result.data);
         // setLoading(false);
@@ -176,7 +176,7 @@ useEffect(()=>{
     const loadDrpSupplyType=async(deviceId)=>{
         const result=await getDrpSupplyType(deviceId);
         // setLoading(true);
-        console.log("supType",result);
+        // console.log("supType",result);
         const supplierType = result.data;
         setDropoptionsSupplyType(result.data);
         setSupplyTypeselectedValue(supplierType.supplyTypeId);
@@ -210,7 +210,7 @@ console.log("testingsave")
     console.log('payload',payload);
     const res = await saveDeviceSettings(payload);
     // setLoading(true);
-    console.log('saveDeviceSettings',res);
+    // console.log('saveDeviceSettings',res);
     const { responseStatus, outputMessage } = res.data;
     if (responseStatus === "failed") {
       setErrorMessage(outputMessage)
@@ -254,7 +254,7 @@ const loadOperationalLimitByDeviceId = async (deviceId) => {
 
         if (operationalData.operationalMetricId === 7 )
         {
-            console.log("operationmetricId",operationalData);
+            // console.log("operationmetricId",operationalData);
             setOperationalDataBill(operationalData);
             // setLoading(false);
         }

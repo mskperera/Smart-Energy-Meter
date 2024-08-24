@@ -37,11 +37,11 @@ const dispatch=useDispatch();
  const loadDevicesByUserId = async () => {
 
   const result = await getDevicesByUserId(userData.userId);
-  console.log('deviceDetails', result);
+  // console.log('deviceDetails', result);
   
   if (result.status === 200) {
     const devices = result.data.map(device => ({ id: device.deviceId, deviceTypeId: device.deviceTypeId, name: device.deviceName }));
-    console.log('devices12123313',devices);
+    // console.log('devices12123313',devices);
      setDeviceNames(devices);
    dispatch(setDropDevices({dropDeviceList:devices}));
    dispatch(setSelectedDevie({ device: devices[0]}));
@@ -57,7 +57,7 @@ const dispatch=useDispatch();
   const handleDeviceSelect = (deviceName) => {
     
     const selectedDeviceObject = deviceNames.find(item => item.name === deviceName);
-    console.log('handleDeviceSelect',selectedDeviceObject)
+    // console.log('handleDeviceSelect',selectedDeviceObject)
     dispatch(setSelectedDevie({device:selectedDeviceObject}));
     if (selectedDeviceObject) {
      // onChangeDevice(selectedDeviceObject); 

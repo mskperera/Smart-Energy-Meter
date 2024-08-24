@@ -11,6 +11,7 @@ import moment from 'moment';
 import DeviceCharts from '../today/DeviceChart';
 import { ThreeDots } from 'react-loader-spinner';
 import { IoMdArrowDropdown } from 'react-icons/io';
+import { GrFormNext,GrFormPrevious } from "react-icons/gr";
 
 function Week() {
   const [activeTab, setActiveTab] = useState('Week');
@@ -90,6 +91,16 @@ function Week() {
     return date.isSame(startOfCurrentWeek, 'day');
   };
 
+  const handlePrevMon = () => {
+    const prevMon = moment(startDate).subtract(1, 'month').toDate();
+    setStartDate(prevMon);
+  };
+  
+  const handleNextMon = () => {
+    const nextMon = moment(startDate).add(1, 'month').toDate();
+    setStartDate(nextMon);
+  };
+
   return (
     <div className='home'>
       <div className='nav-bar d-flex align-items-center justify-content-center w-100'>
@@ -155,13 +166,16 @@ function Week() {
       <div className='body'>
         <div className='date'>
           <div className='picker'>
+            <div style={{display:'flex', position:'relative'}}>
+              <button onClick={handlePrevMon} className='arrow-button-left'><GrFormPrevious /></button>
+            </div>
             <div>
               <DatePicker
                 selected={startDate}
                 onChange={handleStartDateChange}
                 selectsStart
                 placeholderText="Start Date"
-                dateFormat='dd MMM yyyy'
+                dateFormat='MMM yyyy'
                 dayClassName={(date) =>
                   weekStartDates.some(weekDate => weekDate.isSame(date, 'day')) 
                     ? isCurrentWeek(moment(date))
@@ -170,6 +184,9 @@ function Week() {
                     : undefined
                 }
               />
+            </div>
+            <div style={{display:'flex', position:'relative'}}>
+              <button onClick={handleNextMon} className='arrow-button-right'><GrFormNext /></button>  
             </div>
           </div>
         </div>

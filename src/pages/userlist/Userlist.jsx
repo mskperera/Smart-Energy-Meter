@@ -27,7 +27,7 @@ function Userlist() {
   const loadusers=async()=>{
     try{
     const result=await getUsers();
-    console.log("result-555555",result);
+    // console.log("result-555555",result);
     setUserData(result.data || []);
    } catch (error) {
       console.error("Error loading users:", error);
@@ -50,7 +50,7 @@ function Userlist() {
       if (willDelete) {
         try {
           const res = await deleteUser(userId);
-          console.log("result", res);
+          // console.log("result", res);
           
           if (res.data && res.data.output) {
             const { responseStatus, outputMessage } = res.data.output;

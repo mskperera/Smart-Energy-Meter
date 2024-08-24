@@ -33,7 +33,7 @@ const Profile = () => {
   useEffect(() => {
     // if(device){
     const userData = localStorage.getItem('userData');
-    console.log('userData', userData);
+    // console.log('userData', userData);
     const userId = JSON.parse(userData).userId;
     loadUserbyUserId(userId);
     setLoading(true);
@@ -43,7 +43,7 @@ const Profile = () => {
   const loadUserbyUserId = async (userId) => {
     const result = await getServiceProfileSelectByUserId(userId);
     setLoading(true);
-    console.log('Result 11111111', result);
+    // console.log('Result 11111111', result);
     setDeviceDetails(result.data[0]);
     setLoading(false);
     // console.log('Details',result)

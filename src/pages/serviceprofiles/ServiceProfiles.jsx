@@ -27,7 +27,7 @@ function ServiceProfiles() {
 
   const loadusers=async()=>{
     const result=await getServiceProfiles();
-    console.log("profiles",result);
+    // console.log("profiles",result);
     setLoading(true);
     setUserData(result.data);
     setLoading(false);

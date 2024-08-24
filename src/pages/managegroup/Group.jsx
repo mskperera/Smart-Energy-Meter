@@ -44,11 +44,11 @@ function Group() {
 
   const loadDevicesByUserId = async () => {
     const userData = JSON.parse(localStorage.getItem('userData'));
-    console.log('user-data', userData);
+    // console.log('user-data', userData);
     setLoading(true);
     const result = await getDevicesByUserId(userData.userId);
     const devices = result.data.map(device => ({ id: device.deviceId, name: device.deviceName }));
-    console.log('user-devices', devices);
+    // console.log('user-devices', devices);
     setDropDeviceNamesList(devices);
     setLoading(false);
   };
