@@ -73,8 +73,10 @@
     align-items: center;
     top: 100%;
     width: 120px;
-    margin-top: 2px;
+    margin-top: 0px;
     margin-left: 0;
+    max-height: 50vh; 
+    overflow-y: auto;
     border-radius: 5px;
     justify-content: flex-start;
     flex-direction: column;
@@ -82,6 +84,16 @@
     padding: 0rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
+
+.drop1::-webkit-scrollbar{
+    width: 2px;
+    background-color:  rgb(50, 51, 43);
+}
+
+.drop1::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+  }
 
 .drop1 ul{
     margin-top: 5px;
