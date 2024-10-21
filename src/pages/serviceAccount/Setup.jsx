@@ -529,24 +529,25 @@ const Setup = () => {
   //   }
   // };
 
-  const handleChange = (input) => (e) => {
-    if (input === 'billingSessionStart' || input === 'billingSessionEnd') {
-      const utcDate = new Date(Date.UTC(
-        e.getFullYear(), 
-        e.getMonth(), 
-        e.getDate(), 
-        e.getHours(), 
-        e.getMinutes(), 
-        e.getSeconds()
-      ));
-      setFormData({ ...formData, [input]: utcDate });
-    } else if (typeof e === 'object' && e !== null && 'target' in e) {
-      setFormData({ ...formData, [input]: e.target.value });
-    } else if (typeof e === 'object') {
-      setFormData({ ...formData, ...e });  
-    }
-  };
-  
+ const handleChange = (input) => (e) => {
+  if (input === 'billingSessionStart' || input === 'billingSessionEnd') {
+    const utcDate = new Date(Date.UTC(e.getFullYear(), e.getMonth(), e.getDate(), e.getHours(), e.getMinutes(), e.getSeconds()));
+    setFormData({ ...formData, [input]: utcDate });
+  } else if (input === 'userName' && e.target.value === '') {
+    setFormData({
+      ...formData,
+      userName: '',
+      displayname: '',
+      email: '',
+      mobile: '',
+      tel: '',
+      address: '',
+    });
+  } else {
+    setFormData({ ...formData, [input]: e.target.value });
+  }
+};
+
   
 
   // const validateForm = () => {
@@ -610,7 +611,7 @@ const Setup = () => {
       // console.log('verifyDeviceBySN', formData);
 
       const result = await verifyDeviceBySN(formData.serialno);   
-      console.log('verifyDeviceBySN', result);
+      
     } catch (error) {
       console.error('Error verifying device:', error);
     }

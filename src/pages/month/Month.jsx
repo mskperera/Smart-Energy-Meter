@@ -246,7 +246,7 @@ const handleNextMonth = () => {
                   moment(selectedDate, "MM/DD/YYYY, HH:mm:ss").format("yyyy-MM-DD")
                 }
                 onChange={handleMonthChange}
-                dateFormat="MMMM yyyy"
+                dateFormat="MMM yyyy"
                 showMonthYearPicker
                 placeholderText="Select Month"
               />

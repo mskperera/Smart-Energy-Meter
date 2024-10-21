@@ -117,13 +117,13 @@ function LineChartActual({ device }) {
     beforeDraw: (chart) => {
       const { ctx, chartArea: { top, right } } = chart;
       ctx.save();
-      ctx.font = 'bold 13px Trebuchet MS';
+      ctx.font = 'bold 12px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
       ctx.fillText(`Forecast : ${(Number(totalForecast.toFixed(2))).toLocaleString()} kWh`, right, top - 23);
 
 
-      ctx.font = 'bold 11px Trebuchet MS';
+      ctx.font = 'bold 10px Trebuchet MS';
       ctx.fillText(`Actual Used: ${(Number(totalUsed.toFixed(2))).toLocaleString()} kWh`, right, top - 9);
       ctx.restore();
     },

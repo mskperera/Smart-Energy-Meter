@@ -56,8 +56,8 @@ function LineChartCost({ device, daysElapsed, numberOfDays, usageBill, budgetedB
     scales: {
       x: {
         grid: {
-          display: false,
-          color: 'gray',
+          display: true,
+          color: '#4f4f4f',
         },
         beginAtZero: true,
         title: {
@@ -74,7 +74,7 @@ function LineChartCost({ device, daysElapsed, numberOfDays, usageBill, budgetedB
       y: {
         grid: {
           display: true,
-          color: 'Gray',
+          color: '#4f4f4f',
         },
         beginAtZero: true,
         title: {
