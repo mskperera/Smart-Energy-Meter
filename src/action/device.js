@@ -164,6 +164,26 @@ export const getDeviceByDeviceId= async (deviceId) => {
     return err;
   }
 }
+
+export const getMaximumDemand = async (deviceId) =>{
+  try{
+    return await customAxios
+    .get(`/device/getMaximumDemand?deviceId=${deviceId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err.response;
+    });
+  } 
+  catch (err){
+    return err;
+  }
+}
 //////////
 export const getDevices= async () => {
   try {

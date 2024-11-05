@@ -30,6 +30,10 @@ function OperationalChartMode({lineNo,voltage,current,pf,hertz,power,kwh,bill,bu
              <h6 style={{color:'#4484ff',marginTop:'5px'}}>Hertz</h6> 
               <span style={{marginTop:'-5px'}}>{hertz}Hz</span>
             </div>
+            <div className="pow mode2">
+             <h6 style={{color:'#4484ff',marginTop:'5px'}}>Hertz</h6> 
+              <span style={{marginTop:'-5px'}}>{hertz}Hz</span>
+            </div>
          </div>
   // <div className='page-bottom-mode'>
      

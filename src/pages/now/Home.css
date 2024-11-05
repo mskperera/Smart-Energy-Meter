@@ -668,38 +668,38 @@
 }
 
 .line-total{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* text-align: center; */
     margin-top: 0px;
     margin-left: 0px;
     padding: 0px;
-    width: 100%;
+    /* width: 100%; */
 
 }
 
 .line-total-kw {
-    width:100%;
+    /* width:100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: center; */
     margin-top: 0px;
     margin-left: 0px;
     /* font-weight: 550; */
     color: white;
-    font-style: italic;
+    /* font-style: italic; */
     /* background-color:#59585883; */
 }
 
 .line-total-kw div{
     /* background-color: rgba(11, 11, 11, 0.7); */
-    width: fit-content;
-    padding: 2px 10px 2px 10px;
-    border-radius: 5px;
+    /* width: fit-content; */
+    /* padding: 2px 10px 2px 10px; */
+    /* border-radius: 5px; */
     /* color: white; */
-    margin: 5px;
+    /* margin: 5px; */
 }
  .line-number{
     display: flex;

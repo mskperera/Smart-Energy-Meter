@@ -1,12 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import HomeChart from './HomeChart'
 import HomeCostChart from './HomeCostChart'
-import OperationalChart from './OperationalChart'
-import LineChartCost from './LineChartCost'
+// import OperationalChart from './OperationalChart'
+// import LineChartCost from './LineChartCost'
+// import { getMaximumDemand } from '../../action/device'
+// import { useSelector } from 'react-redux'
 
 
 function KwhBillChart({lineNo,device,voltage,current,pf,hertz,power,kwh,usageBill,budgetedKwh,budgetedBill,deviceTypeId,deviceMeasuringModeId}) {
 
+    // const [maximumDemand, setMaximumDemand] = useState('');
+
+    // const selectedDevice = useSelector((state) => state.device.selectedDevice);
+    
+
+    // useEffect(() => {
+    //     if (selectedDevice) {
+    //         const deviceId = selectedDevice.id;
+    //     loadMaximumDemand(deviceId);
+    //     }
+    // }, [selectedDevice]);
+
+    // const loadMaximumDemand = async (deviceId) => { 
+
+    //     const result = await getMaximumDemand(deviceId);
+    //     console.log('Maximum Demand',result.data);
+    //     setMaximumDemand(result.data.maximumdemand);
+    // }
+
+        
 
 
   return (
@@ -26,6 +48,7 @@ function KwhBillChart({lineNo,device,voltage,current,pf,hertz,power,kwh,usageBil
                         </div>
                     </div>
                     <div className='page-bottom-mode-new'>
+                       
                         <div className='page-bottom-mode'> 
                             <div className="vol mode1">
                             <h6 style={{marginTop:'5px'}}>Voltage</h6>  
@@ -48,6 +71,7 @@ function KwhBillChart({lineNo,device,voltage,current,pf,hertz,power,kwh,usageBil
                             <h6 style={{marginTop:'5px'}}>Hertz</h6> 
                             <span style={{marginTop:'-5px'}}>{hertz}Hz</span>
                             </div>
+                            
                         </div>
                     </div>
                     
