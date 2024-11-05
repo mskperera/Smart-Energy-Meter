@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import KwhBillChart from "./KwhBillChart";
 import OperationalChart from "./OperationalChart";
 import { FaHeartbeat } from "react-icons/fa";
@@ -11,6 +11,8 @@ import LineChart from "./LineChart";
 import LineChartActual from "./LineChartActual";
 import LineChartBudget from "./LineChartBudget";
 import LineChartCost from "./LineChartCost";
+import { getMaximumDemand } from "../../action/device";
+import { useSelector } from "react-redux";
 
 function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , numberOfDays, startDate, endDate  }) {
   const { lines } = device;
@@ -21,6 +23,26 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
 
 
   const remainingDays = numberOfDays - daysElapsed;
+
+
+  const [maximumDemand, setMaximumDemand] = useState('');
+
+    const selectedDevice = useSelector((state) => state.device.selectedDevice);
+    
+
+    useEffect(() => {
+        if (selectedDevice) {
+            const deviceId = selectedDevice.id;
+        loadMaximumDemand(deviceId);
+        }
+    }, [selectedDevice]);
+
+    const loadMaximumDemand = async (deviceId) => { 
+
+        const result = await getMaximumDemand(deviceId);
+        console.log('Maximum Demand',result.data);
+        setMaximumDemand(result.data.maximumdemand);
+    }
 
   return (
     <>
@@ -102,14 +124,15 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
           </div>
         </div>
         {device.deviceTypeId === 2 && (
+          
           <div className="line-values" style={{ display: 'flex'}}>
-            <div className="line-total">
-              <div className="line-total-kw">
+            <div className="line-total d-flex" >
+              <div className="line-total-kw" style={{marginLeft:'60px'}}>
                 <div>
                   Total kWh: <span>{device.kwh.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 </div>
               </div>
-              <div className="line-total-kw">
+              <div className="line-total-kw" style={{marginLeft:'-320px'}}>
                 <div>
                   Total Bill:<span>{device.usageBill.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span> 
                 </div>
@@ -132,6 +155,13 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
           </div>
         )}
       </div>
+      <div className='d-flex justify-content-end page-bottom-mode' style={{marginLeft:'-10px'}}> 
+        <div className="pow mode2" style={{width:'310px'}}>
+          <h6 style={{marginTop:'5px', color:'yellow'}}>Maximum Demand</h6> 
+          <span style={{marginTop:'-5px'}}>{maximumDemand}</span>
+        </div>
+      </div>
+
       {lines.map((line, index) => (
         <React.Fragment key={`kwh-bill-${line.lineNo || index}`}>
           {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (
@@ -206,25 +236,26 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
     {/* <> */}
       {/* <div className="chart-budget-cost"> */}
         <div className="chart-budget-cost">      
-            {lines.map((line, index) => (
-              <React.Fragment key={`line-${line.lineNo || index}`}>
+            {/* {lines.map((line, index) => ( */}
+            
+              <React.Fragment key={`line-${lines[0].lineNo }`}>
                 {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     </div>
                 )}
                 
                 <LineChartBudget 
-                key={`line-chart-${line.lineNo || index}`} 
+                key={`line-chart-${lines[0].lineNo }`} 
                 device={device} 
                 daysElapsed={daysElapsed} 
                 numberOfDays={numberOfDays} 
-                usageBill={line.usageBill} 
-                budgetedBill={line.budgetedBill} 
+                usageBill={lines[0].usageBill} 
+                budgetedBill={lines[0].budgetedBill} 
                 startDate={startDate}
                 endDate={endDate}
                 />
               </React.Fragment>
-            ))}
+           
         </div>
       {/* </div> */}
     {/* </> */}
