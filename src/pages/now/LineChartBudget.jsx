@@ -142,7 +142,7 @@ function LineChartBudget({ device, daysElapsed, numberOfDays, usageBill, budgete
       ctx.font = 'bold 10px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
-      ctx.fillText(`Budget : Rs.${(Number(budgetedBill?.toFixed(2))).toLocaleString()}`, right -20, top +8);
+      ctx.fillText(`Budget : Rs.${(Number(budgetedBill?.toFixed(2))).toLocaleString()}`, right +0, top +8);
 
 
       ctx.font = 'bold 10px Trebuchet MS';
