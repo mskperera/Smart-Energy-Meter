@@ -134,7 +134,7 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
         totalSum += e.kwhPerDay;
       } else if (chartFrequencty === "months") {
         data.push(e.kwhPerMonth);
-        //labels.push(`${months.find(m => m.number === parseInt(e.date.month)).shortName} / ${e.date.year}`);
+        labels.push(`${months.find(m => m.number === parseInt(e.date.month)).shortName} / ${e.date.year}`);
         backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
         totalSum += e.kwhPerMonth;
       } else if (chartFrequencty === "weeks") {
