@@ -10,7 +10,7 @@ import moment from "moment";
 import LineChart from "./LineChart";
 import LineChartActual from "./LineChartActual";
 import LineChartBudget from "./LineChartBudget";
-import LineChartCost from "./LineChartCost";
+// import LineChartCost from "./LineChartCost";
 import { getMaximumDemand } from "../../action/device";
 import { useSelector } from "react-redux";
 
@@ -152,7 +152,7 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
           {device.deviceTypeId === 2 && (
             <div className="line-values" style={{ display: "flex" }}>
               <div className="line-total d-flex">
-                <div className="line-total-kw" style={{ marginLeft: "60px" }}>
+                <div className="line-total-kw1">
                   <div>
                     Total kWh:{" "}
                     <span>
@@ -163,7 +163,7 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
                     </span>
                   </div>
                 </div>
-                <div className="line-total-kw" style={{ marginLeft: "-320px" }}>
+                <div className="line-total-kw2" >
                   <div>
                     Total Bill:
                     <span>
@@ -192,17 +192,17 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
             </div>
           )}
         </div>
-        <div
-          className="d-flex justify-content-end page-bottom-mode"
-          style={{ marginLeft: "-10px" }}
-        >
-          <div className="pow mode2" style={{ width: "310px" }}>
-            <h6 style={{ marginTop: "5px", color: "yellow" }}>
-              Maximum Demand
-            </h6>
-            <span style={{ marginTop: "-5px" }}>{maximumDemand}</span>
+
+        {device.deviceTypeId === 2 && device.deviceMeasuringModeId === 1 && (
+          <div className="d-flex justify-content-end page-bottom-mode max-demand">
+            <div className="pow mode2" style={{ width: "310px" }}>
+              <h6 style={{ marginTop: "5px", color: "yellow" }}>
+                Maximum Demand
+              </h6>
+              <span style={{ marginTop: "-5px" }}>{maximumDemand} kVA</span>
+            </div>
           </div>
-        </div>
+        )}
 
         {lines.map((line, index) => (
           <React.Fragment key={`kwh-bill-${line.lineNo || index}`}>
