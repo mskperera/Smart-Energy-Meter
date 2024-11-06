@@ -170,7 +170,7 @@ function BillingSession() {
               </div>
             ) : (
               <>
-                {billingSession &&
+                {billingSession.length>0 &&
                   billingSession.map((session, index) => (
                     <div key={`${session.deviceBillingSessionId}-${index}`}>
                       <div className="bill-background">
@@ -308,7 +308,8 @@ function BillingSession() {
                                     value={session.totalConsumption_Kwh.toLocaleString(undefined, {
                                       minimumFractionDigits: 2,
                                       maximumFractionDigits: 2,
-                                    })}
+                                    })  +     ' ' +
+                                    'LKR'}
                                   />
                                 </div>
                               </div>
@@ -317,7 +318,7 @@ function BillingSession() {
                                   htmlFor="amount"
                                   className="col-sm-4 col-form-label"
                                 >
-                                  Energy Cost
+                                  Energy Cost
                                 </label>
                                 <div className="col-sm-8">
                                   <input
@@ -335,14 +336,14 @@ function BillingSession() {
                                         maximumFractionDigits: 2,
                                       }) +
                                       ' ' +
-                                      session.currencyCode
+                                      'LKR'
                                     }
                                   />
                                 </div>
                               </div>
                             </>
 
-                            <div className="table-responsive table-table">
+                       {session.tariffChanges ?    <div className="table-responsive table-table">
                               <table className="table table-bordered">
                                 <thead>
                                   <tr>
@@ -377,7 +378,7 @@ function BillingSession() {
                                   ))}
                                 </tbody>
                               </table>
-                            </div>
+                            </div>:''}
 
                             {session.isEditable ? (
                               <div className="d-flex justify-content-end">
