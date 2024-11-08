@@ -69,14 +69,22 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
           </div>
         </div>
         {/* <h6 className='name-device'></h6> */}
-        {lines.map((line, index) => (
+        {/* {lines.map((line, index) => (
           <KwhBillChart
             line={line}
             key={index}
             isSearchLoading={isSearchLoading}
             chartFrequencty={chartFrequencty}
           />
-        ))}
+        ))} */}
+         
+          <KwhBillChart
+            line={lines[0]}
+          //  key={index}
+            isSearchLoading={isSearchLoading}
+            chartFrequencty={chartFrequencty}
+          />
+     
       </div>
     </>
   );
