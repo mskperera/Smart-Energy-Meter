@@ -244,9 +244,9 @@ const TodayCost = ({ days, isSearchLoading, chartFrequencty }) => {
                 const dataIndex = tooltipItem.dataIndex;
                 const dataSourceId = days[dataIndex].dataSourceId;
                 if (dataSourceId === 2) {
-                  return `Offline kWh: ${tooltipItem.raw}`;
+                  return `Offline Rs: ${tooltipItem.raw}`;
                 } else {
-                  return `kWh: ${tooltipItem.raw}`;
+                  return `Rs: ${tooltipItem.raw}`;
                 }
               },
               afterLabel: (tooltipItem) => {
