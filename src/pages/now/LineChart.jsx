@@ -181,8 +181,8 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
     scales: {
       x: {
         grid: {
-          display: false,
-          color: 'gray', //  color-x-axis grid lines
+          display: true,
+          color: '#4f4f4f', //  color-x-axis grid lines
         },
         beginAtZero: true,
         title: {
@@ -196,22 +196,31 @@ const endDate = moment(device?.endDate).format('YYYY-MM-DD');
           color: 'white'
         },
         ticks: {
-          color: 'white', // color-x-axis labels
+          color: 'white',
+          font: {
+            size: 10, 
+          }, // color-x-axis labels
         },
       },
       y: {
         grid: {
           display: true,
-          color: 'Gray', //  color-x-axis grid lines
+          color: '#4f4f4f', //  color-x-axis grid lines
         },
         beginAtZero: true,
         title: {
           display: true,
           text: "kWh",
-          color: 'white'
+          color: 'white',
+          font: {
+            size: 10,
+          },
         },
         ticks: {
           color: 'white', //color of y-axis labels
+          font: {
+            size: 10, 
+          },
         },
       },
     },
