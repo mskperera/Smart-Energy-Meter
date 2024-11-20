@@ -77,14 +77,15 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
             chartFrequencty={chartFrequencty}
           />
         ))} */}
-         
+        {lines.map((line, index) => (
           <KwhBillChart
-            line={lines[0]}
-          //  key={index}
+            // line={lines[0]}
+            line={line}
+           key={index}
             isSearchLoading={isSearchLoading}
             chartFrequencty={chartFrequencty}
           />
-     
+        ))}
       </div>
     </>
   );
