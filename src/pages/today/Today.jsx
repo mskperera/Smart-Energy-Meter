@@ -20,6 +20,9 @@ function Today() {
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [devices, setDevices] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [chartLineOne, setChartLineOne] = useState([]);
+  const [chartLineTwo, setChartLineTwo] = useState([]);
+  const [chartLineThree, setChartLineThree] = useState([]);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -70,10 +73,19 @@ function Today() {
 
     console.log('result--result', result.data);
     setDevices(result.data);
+    // setChartLine(result.data[0].lines);
+    setChartLineOne(result.data[0].lines[0]);
+    setChartLineTwo(result.data[0].lines[1]);
+    setChartLineThree(result.data[0].lines[2]);
 
     setIsSearchLoading(false);
   };
 
+  useEffect(() => {
+     console.log('chartLine---1111', chartLineOne);
+     console.log('chartLine---2222', chartLineTwo);
+     console.log('chartLine---3333', chartLineThree);
+  }, [chartLineOne, chartLineTwo, chartLineThree]);
   const currentDate = moment().toDate();
 
   const handlePrevDay = () => {
@@ -191,11 +203,18 @@ function Today() {
           ) : (
             devices.map((device, index) => (
               <div key={index}>
+                {/* {JSON.stringify(device)} */}
+                {/* {chartLine && chartLine.length > 0 && ( */}
                 <DeviceChart  
                   device={device}
+                  // chartLine={chartLine}
+                  chartLineOne={chartLineOne}
+                  chartLineTwo={chartLineTwo}
+                  chartLineThree={chartLineThree}
                   className="device-name-state body d-flex align-items-center justify-content-center w-100"
                   chartFrequencty="hours"
                 />
+                {/* )} */}
               </div>
             ))
           )

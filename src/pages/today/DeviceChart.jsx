@@ -5,7 +5,7 @@ import moment from 'moment';
 import { ProgressBar } from 'react-bootstrap';
 import { MdPermDeviceInformation } from 'react-icons/md';
 
-function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
+function DeviceCharts({ device,chartLineOne,chartLineTwo,chartLineThree, isSearchLoading, chartFrequencty }) {
   const { deviceId, deviceName, deviceLocation, lines, sessionDetails } = device;
 
   const session = sessionDetails[0];
@@ -17,6 +17,10 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
   const maxDays = session.numberOfDays;
 
   const remainingDays = maxDays - daysElapsed;
+  
+  console.log('line data -----', chartLineOne);
+  console.log('line data -----', chartLineTwo);
+  console.log('line data -----', chartLineThree);
 
   return (
     <>
@@ -75,17 +79,25 @@ function DeviceCharts({ device, isSearchLoading, chartFrequencty }) {
             key={index}
             isSearchLoading={isSearchLoading}
             chartFrequencty={chartFrequencty}
-          />
+          />  
         ))} */}
-        {lines.map((line, index) => (
-          <KwhBillChart
-            // line={lines[0]}
-            line={line}
-           key={index}
-            isSearchLoading={isSearchLoading}
-            chartFrequencty={chartFrequencty}
-          />
-        ))}
+          {/* {JSON.stringify(lines)} */}
+        {/* {lines.map((line, index) => ( */}
+          {/* <div key={index}> */}
+
+            <KwhBillChart
+              line={lines[0]}
+              // chartLine={chartLine}
+              chartLineOne={chartLineOne}
+              chartLineTwo={chartLineTwo}
+              chartLineThree={chartLineThree}
+              // line={line}
+            //  key={index}
+              isSearchLoading={isSearchLoading}
+              chartFrequencty={chartFrequencty}
+            />
+          {/* </div> */}
+        {/* ))} */}
       </div>
     </>
   );

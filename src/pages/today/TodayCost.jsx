@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
 import moment from 'moment';
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-const TodayCost = ({ days, isSearchLoading, chartFrequencty }) => {
+const TodayCost = ({ days,chartValueOne, chartValueTwo, chartValueThree, isSearchLoading, chartFrequencty }) => {
   const [chartData, setChartData] = useState({
     labels: [],
-    datasets: [{
-      label: 'Cost',
-      data: [],
-      backgroundColor: [],
-      borderWidth: 1,
-    }],
+    datasets: [],
+    // datasets: [{
+    //   label: 'Cost',
+    //   data: [],
+    //   backgroundColor: [],
+    //   borderWidth: 1,
+    // }],
   });
 
   const [options, setOptions] = useState({
@@ -62,6 +63,8 @@ const TodayCost = ({ days, isSearchLoading, chartFrequencty }) => {
         display: true,
         labels: {
           color: 'white',
+          usePointStyle: true,
+          pointStyle: 'line',
         },
       },
       title: {
@@ -73,6 +76,9 @@ const TodayCost = ({ days, isSearchLoading, chartFrequencty }) => {
         }
       },
       tooltip: {
+        backgroundColor: '#333', // Dark tooltip background
+        titleColor: '#fff', // Tooltip title color
+        bodyColor: '#fff',
         callbacks: {
           label: (tooltipItem) => {
             const dataIndex = tooltipItem.dataIndex;
@@ -127,48 +133,125 @@ const TodayCost = ({ days, isSearchLoading, chartFrequencty }) => {
 
   const loadChartData = async () => {
     const labels = [];
-    const data = [];
-    const backgroundColors = [];
+    // const data = [];
+    const datasetOneData = [];
+    const datasetTwoData = [];
+    const datasetThreeData = [];
+    const backgroundColor = [];
     let totalSum = 0;
 
     for (const e of days) {
       if (chartFrequencty === "hours") {
-        data.push(parseFloat(e.usageBillPerHour).toFixed(1));
+        // data.push(parseFloat(e.usageBillPerHour).toFixed(1));
+        // labels.push(moment(e.date).format('HH'));
+        // totalSum += e.usageBillPerHour;
+        // backgroundColors.push(e.dataSourceId === 2 ? '#4486ff61' : '#4484ff');
         labels.push(moment(e.date).format('HH'));
-        totalSum += e.usageBillPerHour;
-        backgroundColors.push(e.dataSourceId === 2 ? '#4486ff61' : '#4484ff');
+        datasetOneData.push(chartValueOne.days.find(day => day.date === e.date)?.usageBillPerHour || 0);
+        datasetTwoData.push(chartValueTwo.days.find(day => day.date === e.date)?.usageBillPerHour || 0);
+        datasetThreeData.push(chartValueThree.days.find(day => day.date === e.date)?.usageBillPerHour || 0);
+        backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
+        // totalSum += e.kwhPerHour;
+        totalSum += (datasetOneData[datasetOneData.length - 1] + datasetTwoData[datasetTwoData.length - 1] + datasetThreeData[datasetThreeData.length - 1]);
       }
       else if (chartFrequencty === "days") {
-        data.push(parseFloat(e.usageBillPerDay).toFixed(1));
+        // data.push(parseFloat(e.usageBillPerDay).toFixed(1));
+        // labels.push(moment(e.date).format('DD / MMM'));
+        // totalSum += e.usageBillPerDay;
+        // backgroundColors.push(e.dataSourceId === 2 ? '#4486ff61' : '#4484ff');
         labels.push(moment(e.date).format('DD / MMM'));
-        totalSum += e.usageBillPerDay;
-        backgroundColors.push(e.dataSourceId === 2 ? '#4486ff61' : '#4484ff');
+        datasetOneData.push(chartValueOne.days.find(day => day.date === e.date)?.usageBillPerDay || 0);
+        datasetTwoData.push(chartValueTwo.days.find(day => day.date === e.date)?.usageBillPerDay || 0);
+        datasetThreeData.push(chartValueThree.days.find(day => day.date === e.date)?.usageBillPerDay || 0);
+        backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
+        // totalSum += e.kwhPerDay;
+        totalSum += (datasetOneData[datasetOneData.length - 1] + datasetTwoData[datasetTwoData.length - 1] + datasetThreeData[datasetThreeData.length - 1]);
       }
       else if (chartFrequencty === "months") {
-        data.push(parseFloat(e.usageBillPerMonth).toFixed(1));
+        // data.push(parseFloat(e.usageBillPerMonth).toFixed(1));
+        // labels.push(`${months.find(m => m.number === parseInt(e.date.month)).shortName} / ${e.date.year}`);
+        // totalSum += e.usageBillPerMonth;
+        // backgroundColors.push(e.dataSourceId === 2 ? '#4486ff61' : '#4484ff');
         labels.push(`${months.find(m => m.number === parseInt(e.date.month)).shortName} / ${e.date.year}`);
-        totalSum += e.usageBillPerMonth;
-        backgroundColors.push(e.dataSourceId === 2 ? '#4486ff61' : '#4484ff');
+        datasetOneData.push(chartValueOne.days.find(day => day.date === e.date)?.usageBillPerMonth || 0);
+        datasetTwoData.push(chartValueTwo.days.find(day => day.date === e.date)?.usageBillPerMonth || 0);
+        datasetThreeData.push(chartValueThree.days.find(day => day.date === e.date)?.usageBillPerMonth || 0);
+        backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
+        // totalSum += e.kwhPerMonth;
+        totalSum += (datasetOneData[datasetOneData.length - 1] + datasetTwoData[datasetTwoData.length - 1] + datasetThreeData[datasetThreeData.length - 1]);
       }
       else if (chartFrequencty === "weeks") {
-        data.push(parseFloat(e.usageBillPerWeek).toFixed(1));
+        // data.push(parseFloat(e.usageBillPerWeek).toFixed(1));
+        // labels.push(moment(e.date).format('DD / MMM'));
+        // totalSum += e.usageBillPerWeek;
+        // backgroundColors.push(e.dataSourceId === 2 ? '#4486ff61' : '#4484ff');
         labels.push(moment(e.date).format('DD / MMM'));
-        totalSum += e.usageBillPerWeek;
-        backgroundColors.push(e.dataSourceId === 2 ? '#4486ff61' : '#4484ff');
+        datasetOneData.push(chartValueOne.days.find(day => day.date === e.date)?.usageBillPerWeek || 0);
+        datasetTwoData.push(chartValueTwo.days.find(day => day.date === e.date)?.usageBillPerWeek || 0);
+        datasetThreeData.push(chartValueThree.days.find(day => day.date === e.date)?.usageBillPerWeek || 0);
+        backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
+        // totalSum += e.kwhPerWeek;
+        totalSum += (datasetOneData[datasetOneData.length - 1] + datasetTwoData[datasetTwoData.length - 1] + datasetThreeData[datasetThreeData.length - 1]);
+      
       }
     }
 
     setTotalSum(totalSum);
 
-    if (totalSum > 0) {
-      const datasets0 = [{
-        label: "Cost",
-        data: data,
-        backgroundColor: backgroundColors,
-        borderRadius: 5,
-      }];
+    // if (totalSum > 0) {
+    //   const datasets0 = [{
+    //     label: "Cost",
+    //     data: data,
+    //     // backgroundColor: backgroundColors,
+    //     // borderRadius: 5,
+    //     backgroundColor: 'rgba(68, 132, 255, 0.2)', // Transparent fill for line
+    //     borderColor: '#4484ff', // Line color
+    //     pointBackgroundColor: 'rgba(68, 132, 255, 0.2)', // White point fill
+    //     pointBorderColor: '#4484ff', // Point border
+    //     pointHoverBackgroundColor: '#4484ff', // Hovered point fill
+    //     pointHoverBorderColor: '#ffffff', // Hovered point border
+    //     borderWidth: 2,
+    //     tension: 0.4, // Smooth line curve
+    //     fill: true,
+    //   }];
 
-      setChartData({ labels: labels, datasets: datasets0 });
+    //   setChartData({ labels: labels, datasets: datasets0 });
+
+    const datasets = [
+      {
+        label: "Line 1 - Cost",
+        data: datasetOneData,
+        borderColor: '#FF5733', // Color for the first line
+        borderWidth: 2,
+        fill: false,
+        backgroundColor: 'rgba(255, 87, 51, 0.2)', // Hovered point border
+        // borderWidth: 2,
+        tension: 0.4, // Smooth line curve
+        // fill: true,
+      },
+      {
+        label: "Line 2 - Cost",
+        data: datasetTwoData,
+        borderColor: '#33FF57', // Color for the second line
+        borderWidth: 2,
+        fill: false,
+        backgroundColor: 'rgba(51, 255, 87, 0.2)',
+        tension: 0.4, // Smooth line curve
+        // fill: true,
+      },
+      {
+        label: "Line 3 - Cost",
+        data: datasetThreeData,
+        borderColor: '#3357FF', // Color for the third line
+        borderWidth: 2,
+        fill: false,
+        backgroundColor: 'rgba(51, 87, 255, 0.2)',
+        tension: 0.4, // Smooth line curve
+        // fill: true,
+      },
+    ];
+
+    setChartData({ labels: labels, datasets: datasets });
 
       const newOptions = {
         scales: {
@@ -262,7 +345,7 @@ const TodayCost = ({ days, isSearchLoading, chartFrequencty }) => {
       };
 
       setOptions(newOptions);
-    }
+    // }
   };
 
   const months = [
@@ -287,7 +370,7 @@ const TodayCost = ({ days, isSearchLoading, chartFrequencty }) => {
             <h2 id='no-data'>No data Found</h2>
           </div>
       ) : (
-        <Bar data={chartData} options={options} plugins={[customTextPlugin]} id='box' className='chart' />
+        <Line  data={chartData} options={options} plugins={[customTextPlugin]} id='box' className='chart' />
       )}
     </>
   );

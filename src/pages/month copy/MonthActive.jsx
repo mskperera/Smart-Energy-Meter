@@ -24,6 +24,10 @@ function MonthActive() {
   const selectedDevice = useSelector(state => state.device.selectedDevice);
   const { sessionDate, setSessionDate, numberOfDays, setNumberOfDays } = useSessionDate();
 
+  const [chartLineOne, setChartLineOne] = useState([]);
+  const [chartLineTwo, setChartLineTwo] = useState([]);
+  const [chartLineThree, setChartLineThree] = useState([]);
+
   // Handle tab clicks
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -76,6 +80,11 @@ function MonthActive() {
 
     const result = await getEngergyUsageKwhByDateRange(payload);
     setDevices(result.data);
+
+    setChartLineOne(result.data[0].lines[0]);
+    setChartLineTwo(result.data[0].lines[1]);
+    setChartLineThree(result.data[0].lines[2]);
+
     setIsSearchLoading(false);
   };
 
@@ -179,6 +188,9 @@ function MonthActive() {
             <div key={index}>
               <DeviceCharts
                 device={device}
+                chartLineOne={chartLineOne}
+                chartLineTwo={chartLineTwo}
+                chartLineThree={chartLineThree}
                 className="device-name-state"
                 isSearchLoading={isSearchLoading}
                 chartFrequencty="days"

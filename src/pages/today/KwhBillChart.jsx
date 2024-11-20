@@ -3,8 +3,9 @@ import TodayKw from './TodayKw'
 import TodayCost from './TodayCost'
 // import CombinedChart from './CombinedChart';
 
-function KwhBillChart({line,isSearchLoading,chartFrequencty}) {
+function KwhBillChart({line,chartLineOne,chartLineTwo,chartLineThree,isSearchLoading,chartFrequencty}) {
   const {days}=line;
+  
   return (
     <>
     {/* <div className='bar-charts'>       */}
@@ -13,10 +14,10 @@ function KwhBillChart({line,isSearchLoading,chartFrequencty}) {
         <div className="page" style={{marginBottom:'5px'}}>
       {/* <CombinedChart days={days} isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} /> */}
           <div className="chart-now-kw" style={{padding:'5px'}}>
-            <TodayKw days={days} isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} />
+            <TodayKw days={days} chartValueOne={chartLineOne} chartValueTwo={chartLineTwo} chartValueThree={chartLineThree} isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} />
           </div>
           <div className="chart-now-cost" style={{padding:'5px'}}>
-            <TodayCost  days={days} isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} />
+            <TodayCost  days={days} chartValueOne={chartLineOne} chartValueTwo={chartLineTwo} chartValueThree={chartLineThree} isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} />
           </div>
         </div>
       {/* </div> */}

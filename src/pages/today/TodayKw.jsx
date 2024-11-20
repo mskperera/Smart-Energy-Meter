@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title } from 'chart.js';
 import moment from 'moment';
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title);
 
-const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
+const TodayKw = ({ days, chartValueOne, chartValueTwo, chartValueThree, isSearchLoading, chartFrequencty }) => {
+
+  // console.log('days', days);
+  console.log('chartData -- charValues', chartValueOne);
+  console.log('chartData -- charValues', chartValueTwo);
+  console.log('chartData -- charValues', chartValueThree);
+
   const [chartData, setChartData] = useState({
     labels: [],
-    datasets: [{
-      label: 'kWh',
-      data: [],
-      backgroundColor: [],
-      borderWidth: 1,
-    }],
+    datasets: [],
+    // datasets: [{
+      // label: 'kWh',
+      // data: [],
+      // backgroundColor: [],
+      // borderWidth: 1,
+      // borderColor: '#fff346', 
+      // borderWidth: 2,
+      // fill: true,
+      // backgroundColor: 'rgba(255, 243, 70, 0.2)',
+    // }],
   });
 
   const [options, setOptions] = useState({
@@ -53,6 +64,8 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
         display: true,
         labels: {
           color: 'white',
+          usePointStyle: true,
+          pointStyle: 'line',
         },
       },
       title: {
@@ -64,6 +77,9 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
         }
       },
       tooltip: {
+        backgroundColor: '#333', // Dark tooltip background
+        titleColor: '#fff', // Tooltip title color
+        bodyColor: '#fff',
         callbacks: {
           label: (tooltipItem) => {
             const dataIndex = tooltipItem.dataIndex;
@@ -117,45 +133,92 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
 
   const loadChartData = async () => {
     const labels = [];
-    const data = [];
+    // const data = [];
+    const datasetOneData = [];
+    const datasetTwoData = [];
+    const datasetThreeData = [];
     const backgroundColor = [];
     let totalSum = 0;  
 
     for (const e of days) {
       if (chartFrequencty === "hours") {
-        data.push(e.kwhPerHour);
         labels.push(moment(e.date).format('HH'));
+        datasetOneData.push(chartValueOne.days.find(day => day.date === e.date)?.kwhPerHour || 0);
+        datasetTwoData.push(chartValueTwo.days.find(day => day.date === e.date)?.kwhPerHour || 0);
+        datasetThreeData.push(chartValueThree.days.find(day => day.date === e.date)?.kwhPerHour || 0);
         backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
-        totalSum += e.kwhPerHour;
+        // totalSum += e.kwhPerHour;
+        totalSum += (datasetOneData[datasetOneData.length - 1] + datasetTwoData[datasetTwoData.length - 1] + datasetThreeData[datasetThreeData.length - 1]);
       } else if (chartFrequencty === "days") {
-        data.push(e.kwhPerDay);
         labels.push(moment(e.date).format('DD / MMM'));
+        datasetOneData.push(chartValueOne.days.find(day => day.date === e.date)?.kwhPerDay || 0);
+        datasetTwoData.push(chartValueTwo.days.find(day => day.date === e.date)?.kwhPerDay || 0);
+        datasetThreeData.push(chartValueThree.days.find(day => day.date === e.date)?.kwhPerDay || 0);
         backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
-        totalSum += e.kwhPerDay;
+        // totalSum += e.kwhPerDay;
+        totalSum += (datasetOneData[datasetOneData.length - 1] + datasetTwoData[datasetTwoData.length - 1] + datasetThreeData[datasetThreeData.length - 1]);
       } else if (chartFrequencty === "months") {
-        data.push(e.kwhPerMonth);
+        // data.push(e.kwhPerMonth);
+        // labels.push(`${months.find(m => m.number === parseInt(e.date.month)).shortName} / ${e.date.year}`);
+        // backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
+        // totalSum += e.kwhPerMonth;
         labels.push(`${months.find(m => m.number === parseInt(e.date.month)).shortName} / ${e.date.year}`);
+        datasetOneData.push(chartValueOne.days.find(day => day.date === e.date)?.kwhPerMonth || 0);
+        datasetTwoData.push(chartValueTwo.days.find(day => day.date === e.date)?.kwhPerMonth || 0);
+        datasetThreeData.push(chartValueThree.days.find(day => day.date === e.date)?.kwhPerMonth || 0);
         backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
-        totalSum += e.kwhPerMonth;
+        // totalSum += e.kwhPerMonth;
+        totalSum += (datasetOneData[datasetOneData.length - 1] + datasetTwoData[datasetTwoData.length - 1] + datasetThreeData[datasetThreeData.length - 1]);
+
       } else if (chartFrequencty === "weeks") {
-        data.push(e.kwhPerWeek);
+        // data.push(e.kwhPerWeek);
+        // labels.push(moment(e.date).format('DD / MMM'));
+        // backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
+        // totalSum += e.kwhPerWeek;
         labels.push(moment(e.date).format('DD / MMM'));
+        datasetOneData.push(chartValueOne.days.find(day => day.date === e.date)?.kwhPerWeek || 0);
+        datasetTwoData.push(chartValueTwo.days.find(day => day.date === e.date)?.kwhPerWeek || 0);
+        datasetThreeData.push(chartValueThree.days.find(day => day.date === e.date)?.kwhPerWeek || 0);
         backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
-        totalSum += e.kwhPerWeek;
+        // totalSum += e.kwhPerWeek;
+        totalSum += (datasetOneData[datasetOneData.length - 1] + datasetTwoData[datasetTwoData.length - 1] + datasetThreeData[datasetThreeData.length - 1]);
       }
     }
 
     setTotalSum(totalSum);
 
-    if (totalSum > 0) {
-      const datasets0 = [{
-        label: "kWh",
-        data: data,
-        backgroundColor: backgroundColor,
-        borderRadius: 5,
-      }];
+    const datasets = [
+      {
+        label: "Line 1 - kWh",
+        data: datasetOneData,
+        borderColor: '#FF5733', // Color for the first line
+        borderWidth: 2,
+        fill: false,
+        backgroundColor: 'rgba(255, 87, 51, 0.2)',
+        tension: 0.4,
+      },
+      {
+        label: "Line 2 - kWh",
+        data: datasetTwoData,
+        borderColor: '#33FF57', // Color for the second line
+        borderWidth: 2,
+        fill: false,
+        backgroundColor: 'rgba(51, 255, 87, 0.2)',
+        tension: 0.4,
+      },
+      {
+        label: "Line 3 - kWh",
+        data: datasetThreeData,
+        borderColor: '#3357FF', // Color for the third line
+        borderWidth: 2,
+        fill: false,
+        backgroundColor: 'rgba(51, 87, 255, 0.2)',
+        tension: 0.4,
+      },
+    ];
 
-      setChartData({ labels: labels, datasets: datasets0 });
+    setChartData({ labels: labels, datasets: datasets });
+  // };
   
       const newOptions = {
         scales: {
@@ -249,8 +312,8 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
       };
   
       setOptions(newOptions);
-    }
-  }
+    };
+  
 
   const months = [
     { shortName: "Jan", number: 1 },
@@ -267,6 +330,7 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
     { shortName: "Dec", number: 12 },
   ];
 
+  
   return (
     <>
       {totalSum === 0 ? (
@@ -274,10 +338,11 @@ const TodayKw = ({ days, isSearchLoading, chartFrequencty }) => {
           <h2 id='no-data'>No data Found</h2>
         </div>
       ) : (
-        <Bar data={chartData} options={options} plugins={[customTextPlugin]} id='box' className='chart' />
+        <Line  data={chartData} options={options} plugins={[customTextPlugin]} id='box' className='chart' />
       )}
     </>
   );
 };
+
 
 export default TodayKw;
