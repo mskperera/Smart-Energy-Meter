@@ -21,6 +21,9 @@ function Week() {
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [devices, setDevices] = useState([]);
   const [weekStartDates, setWeekStartDates] = useState([]);
+  const [chartLineOne, setChartLineOne] = useState([]);
+  const [chartLineTwo, setChartLineTwo] = useState([]);
+  const [chartLineThree, setChartLineThree] = useState([]);
 
   const handleTabClick = tab => {
     setActiveTab(tab);
@@ -69,6 +72,11 @@ function Week() {
     const result = await getEngergyUsageKwhByDateRange(payload);
     console.log("111111",result);
     setDevices(result.data);
+
+    setChartLineOne(result.data[0].lines[0]);
+    setChartLineTwo(result.data[0].lines[1]);
+    setChartLineThree(result.data[0].lines[2]);
+
     setIsSearchLoading(false);
   };
 
@@ -208,6 +216,9 @@ function Week() {
             <div key={index}>
               <DeviceCharts
                 device={device}
+                chartLineOne={chartLineOne}
+                chartLineTwo={chartLineTwo}
+                chartLineThree={chartLineThree}
                 className="device-name-state"
                 isSearchLoading={isSearchLoading}
                 chartFrequencty="weeks"
