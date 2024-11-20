@@ -4,6 +4,7 @@ import { FaLocationDot } from 'react-icons/fa6';
 import moment from 'moment';
 import { ProgressBar } from 'react-bootstrap';
 import { MdPermDeviceInformation } from 'react-icons/md';
+import KwBillChartSingle from './KwBillChartSingle';
 
 function DeviceCharts({ device,chartLineOne,chartLineTwo,chartLineThree, isSearchLoading, chartFrequencty }) {
   const { deviceId, deviceName, deviceLocation, lines, sessionDetails } = device;
@@ -81,21 +82,29 @@ function DeviceCharts({ device,chartLineOne,chartLineTwo,chartLineThree, isSearc
             chartFrequencty={chartFrequencty}
           />  
         ))} */}
-          {/* {JSON.stringify(lines)} */}
+          {/* {JSON.stringify(device)} */}
         {/* {lines.map((line, index) => ( */}
           {/* <div key={index}> */}
 
-            <KwhBillChart
-              line={lines[0]}
-              // chartLine={chartLine}
-              chartLineOne={chartLineOne}
-              chartLineTwo={chartLineTwo}
-              chartLineThree={chartLineThree}
-              // line={line}
-            //  key={index}
-              isSearchLoading={isSearchLoading}
-              chartFrequencty={chartFrequencty}
-            />
+          {device.deviceTypeId === 2 ? (
+          <KwhBillChart
+            line={lines[0]}
+            chartLineOne={chartLineOne}
+            chartLineTwo={chartLineTwo}
+            chartLineThree={chartLineThree}
+            isSearchLoading={isSearchLoading}
+            chartFrequencty={chartFrequencty}
+          />
+        ) : (
+          <KwBillChartSingle
+            line={lines[0]}
+            chartLineOne={chartLineOne}
+            // chartLineTwo={chartLineTwo}
+            // chartLineThree={chartLineThree}
+            isSearchLoading={isSearchLoading}
+            chartFrequencty={chartFrequencty}
+          />
+        )}
           {/* </div> */}
         {/* ))} */}
       </div>

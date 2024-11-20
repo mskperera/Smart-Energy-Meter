@@ -102,7 +102,7 @@ const TodayKw = ({ days, chartValueOne, chartValueTwo, chartValueThree, isSearch
     beforeDraw: (chart) => {
       const { ctx, chartArea: { top, right } } = chart;
       ctx.save();
-      ctx.font = 'bold 13px Trebuchet MS';
+      ctx.font = 'bold 12px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
       ctx.fillText(`Total Energy : ${(Number(totalSum.toFixed(2))).toLocaleString()} kWh`, right - 5, top -20);
@@ -189,7 +189,7 @@ const TodayKw = ({ days, chartValueOne, chartValueTwo, chartValueThree, isSearch
 
     const datasets = [
       {
-        label: "Line 1 - kWh",
+        label: "Line 1",
         data: datasetOneData,
         borderColor: '#FF5733', // Color for the first line
         borderWidth: 2,
@@ -198,7 +198,7 @@ const TodayKw = ({ days, chartValueOne, chartValueTwo, chartValueThree, isSearch
         tension: 0.4,
       },
       {
-        label: "Line 2 - kWh",
+        label: "Line 2",
         data: datasetTwoData,
         borderColor: '#33FF57', // Color for the second line
         borderWidth: 2,
@@ -207,7 +207,7 @@ const TodayKw = ({ days, chartValueOne, chartValueTwo, chartValueThree, isSearch
         tension: 0.4,
       },
       {
-        label: "Line 3 - kWh",
+        label: "Line 3",
         data: datasetThreeData,
         borderColor: '#3357FF', // Color for the third line
         borderWidth: 2,

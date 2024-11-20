@@ -74,9 +74,9 @@ function Today() {
     console.log('result--result', result.data);
     setDevices(result.data);
     // setChartLine(result.data[0].lines);
-    setChartLineOne(result.data[0].lines[0]);
-    setChartLineTwo(result.data[0].lines[1]);
-    setChartLineThree(result.data[0].lines[2]);
+    setChartLineOne(result.data[0]?.lines[0] || []);
+    setChartLineTwo(result.data[0]?.lines[1] || []);
+    setChartLineThree(result.data[0]?.lines[2] || []);
 
     setIsSearchLoading(false);
   };
