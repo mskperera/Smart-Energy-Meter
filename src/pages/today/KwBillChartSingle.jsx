@@ -1,9 +1,11 @@
 import React from 'react'
 import TodayKw from './TodayKw'
 import TodayCost from './TodayCost'
+import TodayKwSingle from './TodayKwSingle';
+import TodayCostSingle from './TodayCostSingle';
 // import CombinedChart from './CombinedChart';
 
-function KwhBillChart({line,chartLineOne,chartLineTwo,chartLineThree,isSearchLoading,chartFrequencty}) {
+function KwBillChartSingle({line,chartLineOne,isSearchLoading,chartFrequencty}) {
   const {days}=line;
   
   return (
@@ -14,10 +16,10 @@ function KwhBillChart({line,chartLineOne,chartLineTwo,chartLineThree,isSearchLoa
         <div className="page" style={{marginBottom:'5px'}}>
       {/* <CombinedChart days={days} isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} /> */}
           <div className="chart-now-kw" style={{padding:'5px'}}>
-            <TodayKw days={days} chartValueOne={chartLineOne} chartValueTwo={chartLineTwo} chartValueThree={chartLineThree} isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} />
+            <TodayKwSingle days={days} chartValueOne={chartLineOne}  isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} />
           </div>
           <div className="chart-now-cost" style={{padding:'5px'}}>
-            <TodayCost  days={days} chartValueOne={chartLineOne} chartValueTwo={chartLineTwo} chartValueThree={chartLineThree} isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} />
+            <TodayCostSingle  days={days} chartValueOne={chartLineOne}  isSearchLoading={isSearchLoading} chartFrequencty={chartFrequencty} />
           </div>
         </div>
       {/* </div> */}
@@ -26,4 +28,4 @@ function KwhBillChart({line,chartLineOne,chartLineTwo,chartLineThree,isSearchLoa
   );
 }
 
-export default KwhBillChart
+export default KwBillChartSingle
