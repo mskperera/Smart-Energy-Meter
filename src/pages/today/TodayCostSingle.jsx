@@ -83,10 +83,11 @@ const TodayCostSingle = ({ days,chartValueOne, isSearchLoading, chartFrequencty 
           label: (tooltipItem) => {
             const dataIndex = tooltipItem.dataIndex;
             const dataSourceId = days[dataIndex].dataSourceId;
+            const value = tooltipItem.raw.toFixed(2);
             if (dataSourceId === 2) {
-              return `Offline Cost: ${tooltipItem.raw} Rs`;
+              return `Offline Cost: ${value}`;
             }else {
-              return `Cost: ${tooltipItem.raw} Rs`;
+              return `Rs: ${value}`;
             }
           },
         },
@@ -325,10 +326,11 @@ const TodayCostSingle = ({ days,chartValueOne, isSearchLoading, chartFrequencty 
               label: (tooltipItem) => {
                 const dataIndex = tooltipItem.dataIndex;
                 const dataSourceId = days[dataIndex].dataSourceId;
+                const value = tooltipItem.raw.toFixed(2);
                 if (dataSourceId === 2) {
-                  return `Offline Rs: ${tooltipItem.raw}`;
+                  return `Offline Rs: ${value}`;
                 } else {
-                  return `Rs: ${tooltipItem.raw}`;
+                  return `Rs: ${value}`;
                 }
               },
               afterLabel: (tooltipItem) => {

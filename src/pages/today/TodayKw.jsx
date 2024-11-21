@@ -278,7 +278,7 @@ const TodayKw = ({ days, chartValueOne, chartValueTwo, chartValueThree, isSearch
                 size: 10,
               },
             },
-            onClick: () => {},
+            // onClick: () => {},
           },
           // title: {
           //   display: true,
