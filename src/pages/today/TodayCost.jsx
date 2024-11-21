@@ -311,7 +311,7 @@ const TodayCost = ({ days,chartValueOne, chartValueTwo, chartValueThree, isSearc
                 size: 10,
               },
             },
-            onClick: () => { },
+            // onClick: () => { },
           },
           // title: {
           //   display: true,
@@ -326,10 +326,11 @@ const TodayCost = ({ days,chartValueOne, chartValueTwo, chartValueThree, isSearc
               label: (tooltipItem) => {
                 const dataIndex = tooltipItem.dataIndex;
                 const dataSourceId = days[dataIndex].dataSourceId;
+                const value = tooltipItem.raw.toFixed(2);
                 if (dataSourceId === 2) {
-                  return `Offline Rs: ${tooltipItem.raw}`;
+                  return `Offline Rs: ${value}`;
                 } else {
-                  return `Rs: ${tooltipItem.raw}`;
+                  return `Rs: ${value}`;
                 }
               },
               afterLabel: (tooltipItem) => {
