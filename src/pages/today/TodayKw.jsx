@@ -105,7 +105,7 @@ const TodayKw = ({ days, chartValueOne, chartValueTwo, chartValueThree, isSearch
       ctx.font = 'bold 12px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
-      ctx.fillText(`Total Energy : ${(Number(totalSum.toFixed(2))).toLocaleString()} kWh`, right - 5, top -20);
+      ctx.fillText(`Total : ${(Number(totalSum.toFixed(2))).toLocaleString()} kWh`, right - 5, top -20);
       ctx.restore();
     },
   };
@@ -133,57 +133,51 @@ const TodayKw = ({ days, chartValueOne, chartValueTwo, chartValueThree, isSearch
 
   const loadChartData = async () => {
     const labels = [];
-    // const data = [];
     const datasetOneData = [];
     const datasetTwoData = [];
     const datasetThreeData = [];
+    const dailySumData = [];
     const backgroundColor = [];
-    let totalSum = 0;  
-
+    let totalSum = 0;
+  
     for (const e of days) {
+      let line1 = 0, line2 = 0, line3 = 0;
+  
       if (chartFrequencty === "hours") {
         labels.push(moment(e.date).format('HH'));
-        datasetOneData.push(chartValueOne.days.find(day => day.date === e.date)?.kwhPerHour || 0);
-        datasetTwoData.push(chartValueTwo.days.find(day => day.date === e.date)?.kwhPerHour || 0);
-        datasetThreeData.push(chartValueThree.days.find(day => day.date === e.date)?.kwhPerHour || 0);
-        backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
-        // totalSum += e.kwhPerHour;
-        totalSum += (datasetOneData[datasetOneData.length - 1] + datasetTwoData[datasetTwoData.length - 1] + datasetThreeData[datasetThreeData.length - 1]);
+        line1 = chartValueOne.days.find(day => day.date === e.date)?.kwhPerHour || 0;
+        line2 = chartValueTwo.days.find(day => day.date === e.date)?.kwhPerHour || 0;
+        line3 = chartValueThree.days.find(day => day.date === e.date)?.kwhPerHour || 0;
       } else if (chartFrequencty === "days") {
         labels.push(moment(e.date).format('DD / MMM'));
-        datasetOneData.push(chartValueOne.days.find(day => day.date === e.date)?.kwhPerDay || 0);
-        datasetTwoData.push(chartValueTwo.days.find(day => day.date === e.date)?.kwhPerDay || 0);
-        datasetThreeData.push(chartValueThree.days.find(day => day.date === e.date)?.kwhPerDay || 0);
-        backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
-        // totalSum += e.kwhPerDay;
-        totalSum += (datasetOneData[datasetOneData.length - 1] + datasetTwoData[datasetTwoData.length - 1] + datasetThreeData[datasetThreeData.length - 1]);
+        line1 = chartValueOne.days.find(day => day.date === e.date)?.kwhPerDay || 0;
+        line2 = chartValueTwo.days.find(day => day.date === e.date)?.kwhPerDay || 0;
+        line3 = chartValueThree.days.find(day => day.date === e.date)?.kwhPerDay || 0;
       } else if (chartFrequencty === "months") {
-        // data.push(e.kwhPerMonth);
-        // labels.push(`${months.find(m => m.number === parseInt(e.date.month)).shortName} / ${e.date.year}`);
-        // backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
-        // totalSum += e.kwhPerMonth;
         labels.push(`${months.find(m => m.number === parseInt(e.date.month)).shortName} / ${e.date.year}`);
-        datasetOneData.push(chartValueOne.days.find(day => day.date === e.date)?.kwhPerMonth || 0);
-        datasetTwoData.push(chartValueTwo.days.find(day => day.date === e.date)?.kwhPerMonth || 0);
-        datasetThreeData.push(chartValueThree.days.find(day => day.date === e.date)?.kwhPerMonth || 0);
-        backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
-        // totalSum += e.kwhPerMonth;
-        totalSum += (datasetOneData[datasetOneData.length - 1] + datasetTwoData[datasetTwoData.length - 1] + datasetThreeData[datasetThreeData.length - 1]);
-
+        line1 = chartValueOne.days.find(day => day.date === e.date)?.kwhPerMonth || 0;
+        line2 = chartValueTwo.days.find(day => day.date === e.date)?.kwhPerMonth || 0;
+        line3 = chartValueThree.days.find(day => day.date === e.date)?.kwhPerMonth || 0;
       } else if (chartFrequencty === "weeks") {
-        // data.push(e.kwhPerWeek);
-        // labels.push(moment(e.date).format('DD / MMM'));
-        // backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
-        // totalSum += e.kwhPerWeek;
         labels.push(moment(e.date).format('DD / MMM'));
-        datasetOneData.push(chartValueOne.days.find(day => day.date === e.date)?.kwhPerWeek || 0);
-        datasetTwoData.push(chartValueTwo.days.find(day => day.date === e.date)?.kwhPerWeek || 0);
-        datasetThreeData.push(chartValueThree.days.find(day => day.date === e.date)?.kwhPerWeek || 0);
-        backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
-        // totalSum += e.kwhPerWeek;
-        totalSum += (datasetOneData[datasetOneData.length - 1] + datasetTwoData[datasetTwoData.length - 1] + datasetThreeData[datasetThreeData.length - 1]);
+        line1 = chartValueOne.days.find(day => day.date === e.date)?.kwhPerWeek || 0;
+        line2 = chartValueTwo.days.find(day => day.date === e.date)?.kwhPerWeek || 0;
+        line3 = chartValueThree.days.find(day => day.date === e.date)?.kwhPerWeek || 0;
       }
+  
+      const dailyTotal = line1 + line2 + line3;
+  
+      datasetOneData.push(line1);
+      datasetTwoData.push(line2);
+      datasetThreeData.push(line3);
+  
+      //  daily total only if it's not null or undefined, but can be 0
+     dailySumData.push(dailyTotal>0 ? Number(dailyTotal.toFixed(2)) : null);
+  
+      backgroundColor.push(e.dataSourceId === 2 ? '#fff34661' : '#fff346');
+      totalSum += dailyTotal;
     }
+  
 
     setTotalSum(totalSum);
 
@@ -192,28 +186,36 @@ const TodayKw = ({ days, chartValueOne, chartValueTwo, chartValueThree, isSearch
         label: "Line 1",
         data: datasetOneData,
         borderColor: '#FF5733', // Color for the first line
-        borderWidth: 2,
+        borderWidth: 0,
         fill: false,
-        backgroundColor: 'rgba(255, 87, 51, 0.2)',
-        tension: 0.4,
+        backgroundColor: 'rgba(255, 87, 51, 0.9)',
+        tension: 0,
       },
       {
         label: "Line 2",
         data: datasetTwoData,
         borderColor: '#33FF57', // Color for the second line
-        borderWidth: 2,
+        borderWidth: 0,
         fill: false,
-        backgroundColor: 'rgba(51, 255, 87, 0.2)',
-        tension: 0.4,
+        backgroundColor: 'rgba(51, 255, 87, 0.9)',
+        tension: 0,
       },
       {
         label: "Line 3",
         data: datasetThreeData,
         borderColor: '#3357FF', // Color for the third line
-        borderWidth: 2,
+        borderWidth: 0,
         fill: false,
-        backgroundColor: 'rgba(51, 87, 255, 0.2)',
-        tension: 0.4,
+        backgroundColor: 'rgba(51, 87, 255, 0.9)',
+        tension: 0,
+      },
+      {
+        label: "Total",
+        data: dailySumData,
+        borderColor: '#FFD700',
+        backgroundColor: 'rgba(255, 215, 0, 0.9)', // color for total sum
+        type: 'line',
+        tension: 0,
       },
     ];
 
@@ -338,7 +340,7 @@ const TodayKw = ({ days, chartValueOne, chartValueTwo, chartValueThree, isSearch
           <h2 id='no-data'>No data Found</h2>
         </div>
       ) : (
-        <Line  data={chartData} options={options} plugins={[customTextPlugin]} id='box' className='chart' />
+        <Bar  data={chartData} options={options} plugins={[customTextPlugin]} id='box' className='chart' />
       )}
     </>
   );
