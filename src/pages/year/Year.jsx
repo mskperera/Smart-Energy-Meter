@@ -23,9 +23,9 @@ function Year() {
 
   // const {sessionDate, numberOfDays} = useSessionDate();
   const { sessionDate, setSessionDate, numberOfDays, setNumberOfDays } = useSessionDate();
-  const [chartLineOne, setChartLineOne] = useState([]);
-  const [chartLineTwo, setChartLineTwo] = useState([]);
-  const [chartLineThree, setChartLineThree] = useState([]);
+  const [chartLineOne, setChartLineOne] = useState(null);
+  const [chartLineTwo, setChartLineTwo] = useState(null);
+  const [chartLineThree, setChartLineThree] = useState(null);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -85,12 +85,14 @@ const loadChartData = async (deviceId,year) => {
   const result = await getEngergyUsageKwhByDateRange(payload);
 
   console.log('result---payload', payload);
-  console.log('result---2222', result.data);
+  console.log('result---2222 year', result.data);
   setDevices(result.data);
 
-  setChartLineOne(result.data[0].lines[0]);
+  if (result.data.length > 0) {
+    setChartLineOne(result.data[0].lines[0]);
     setChartLineTwo(result.data[0].lines[1]);
     setChartLineThree(result.data[0].lines[2]);
+  }
 
   setIsSearchLoading(false);
 }
@@ -244,15 +246,16 @@ const handleNextYear = () => {
             devices.length >0 && devices?.map((device, index) => (
               <div key={index}>
                   {/* <h4>{device.deviceName}</h4> */}
-                  <DeviceCharts 
+                  { chartLineOne && chartLineTwo && chartLineThree &&
+                    <DeviceCharts 
                   device={device}
                   chartLineOne={chartLineOne}
-                chartLineTwo={chartLineTwo}
-                chartLineThree={chartLineThree}
+                  chartLineTwo={chartLineTwo}
+                  chartLineThree={chartLineThree}
                   className="device-name-state"
                   isSearchLoading={isSearchLoading}
                   chartFrequencty="months"
-                  />
+                  />}
           
               </div>
             ))
