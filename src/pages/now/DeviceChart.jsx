@@ -14,8 +14,7 @@ import LineChartBudget from "./LineChartBudget";
 import { getMaximumDemand } from "../../action/device";
 import { useSelector } from "react-redux";
 import { getbillingSessionByDeviceId } from "../../action/billingSession";
-import { ca } from "date-fns/locale";
-import { set } from "date-fns";
+
 
 function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , numberOfDays, startDate, endDate  }) {
   const { lines } = device;
