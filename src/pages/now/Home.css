@@ -7,6 +7,38 @@
     min-height: auto;
 }
 
+.line-total-kw1  {
+    color: white;
+    /* display: flex; */
+    flex: 1;
+    margin-left: 5px;
+    background-color: #00bbf0;
+}
+  
+  .line-total-kw1 .header {
+    font-weight: bold;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .line-total-kw1 .rowrow {
+    display: flex;
+    /* justify-content: space-between;  */
+    align-items: center;
+    text-align: center;
+  }
+  
+  .line-total-kw1 .rowrow .column12 {
+    /* flex: 1;  */
+    width: 100px;
+    text-align: center;
+    padding: 5px;
+
+  }
+  
 
 
 .days-bar{
@@ -655,6 +687,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 0px;
+    /* background-color: #00bbf0; */
   }
 
 .line-type{
@@ -674,26 +707,23 @@
     /* align-items: center; */
     /* text-align: center; */
     margin-top: 0px;
-    margin-left: 0px;
+    margin-left: 50px;
     padding: 0px;
+    /* width: 100px; */
+    /* background-color: #00bbf0; */
     /* width: 100%; */
 
 }
 
-.line-total-kw1 {
-    /* width:100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center; */
+/* .line-total-kw1 {
+   
     margin-top: 0px;
     margin-left: 0px;
-    /* font-weight: 550; */
+   
     color: white;
     margin-left: 60px;
-    /* font-style: italic; */
-    /* background-color:#59585883; */
-}
+    
+} */
 
 .line-total-kw2 {
     /* width:100%;
@@ -705,9 +735,10 @@
     margin-left: 0px;
     /* font-weight: 550; */
     color: white;
-    margin-left: -320px;
+    margin-left: 20px;
     /* font-style: italic; */
-    /* background-color:#59585883; */
+    /* background-color: #00bbf0; */
+
 }
 
 .line-total-kw div{
@@ -1955,6 +1986,22 @@
 
 
 @media screen and (max-width:450px){
+
+    .line-total-kw3  {
+        color: white;
+        /* display: flex; */
+        flex: 1;
+        margin-left: 0px;
+    }
+
+    .line-total-kw3 .rowrow .column12 {
+        /* flex: 1;  */
+        width: 120px;
+        text-align: center;
+        padding: 5px;
+    
+      }
+
     .page{
         width: 100%;
         flex-direction: column;
@@ -2209,6 +2256,19 @@
 
  .device-name-state-mode{
     margin-top: 0px;
+}
+
+.line-total{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding: 0px;
+    width: 100%;
+    flex-direction: column;
+
 }
 
 .line-number{
@@ -2619,6 +2679,7 @@
             margin-left: 0px;
             padding: 0px;
             width: 100%;
+            flex-direction: column;
         
         }
 

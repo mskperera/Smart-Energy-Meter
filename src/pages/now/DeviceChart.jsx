@@ -13,6 +13,8 @@ import LineChartBudget from "./LineChartBudget";
 // import LineChartCost from "./LineChartCost";
 import { getMaximumDemand } from "../../action/device";
 import { useSelector } from "react-redux";
+import { getbillingSessionByDeviceId } from "../../action/billingSession";
+
 
 function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , numberOfDays, startDate, endDate  }) {
   const { lines } = device;
@@ -43,6 +45,100 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
         console.log('Maximum Demand',result.data);
         setMaximumDemand(result.data.maximumdemand);
     }
+
+    const [billingSession, setBillingSession] = useState([]);
+    const [selectedDates, setSelectedDates] = useState({});
+    const [selectedTimes, setSelectedTimes] = useState({});
+
+    const [peakTime, setPeakTime] = useState([]);
+    const [offPeakTime, setOffPeakTime] = useState([]);
+    const [dayTime, setDayTime] = useState([]);
+
+    const  [totalSum, setTotalSum] = useState([]);
+    // const [loadData, setLoadData] = useState(false);
+    // useEffect(() => {
+    //   if (selectedDevice) {
+    //     loadBillingSessionByDeviceId(selectedDevice.id);
+    //   }
+    // }, [selectedDevice]);
+    useEffect(() => {
+      const interval = setInterval(() => {
+
+        if (selectedDevice){
+          const deviceId = selectedDevice.id;
+          loadBillingSessionByDeviceId(deviceId);
+        }
+      }, 1000,selectedDevice); // 1-second interval
+  
+      return () => clearInterval(interval); // Clean up the interval
+    }, []);
+  
+    const loadBillingSessionByDeviceId = async (deviceId) => {
+      try {
+        // setLoadData(true);
+        const res = await getbillingSessionByDeviceId(deviceId);
+        
+        console.log('getbilling-----SessionByDeviceId',res)
+
+        console.log('getbillingSessionByDeviceId',res.data[0].timeSlotsAndUsage);
+
+          const usage = res.data[0].timeSlotsAndUsage[0];
+          const totalSum = usage.TotalKwh + usage.TotalKwh2 + usage.TotalKwh3;
+          setPeakTime(totalSum);
+          
+          const usage1 = res.data[0].timeSlotsAndUsage[1];
+          const totalSum1 = usage1.TotalKwh + usage1.TotalKwh2 + usage1.TotalKwh3;
+          setDayTime(totalSum1);
+
+          const usage2 = res.data[0].timeSlotsAndUsage[2];
+          const totalSum2 = usage2.TotalKwh + usage2.TotalKwh2 + usage2.TotalKwh3;
+          setOffPeakTime(totalSum2);
+
+          const totalSum3 = totalSum + totalSum1 + totalSum2; 
+          setTotalSum(totalSum3);
+          
+
+        console.log('sumpeak',totalSum);
+        
+        console.log('getbillingSessionByDeviceId',res)
+        if (res.data.length > 0) {
+          const sessions = res.data.reduce((acc, session) => {
+            const startDate = new Date(session.startDate);
+            const endDate = new Date(session.endDate);
+            acc[session.deviceBillingSessionId] = {
+              startDate,
+              endDate,
+            };
+            setSelectedTimes((prevTimes) => ({
+              ...prevTimes,
+              [session.deviceBillingSessionId]: {
+                startTime: startDate.toTimeString().slice(0, 5),
+                endTime: endDate.toTimeString().slice(0, 5),
+              },
+            }));
+            return acc;
+          }, {});
+          setBillingSession(res.data);
+          setSelectedDates(sessions);
+        }
+        // setLoadData(false);
+      } catch (error) {
+        console.error('Error fetching billing session:', error);
+        // setLoadData(false);
+      }
+    };
+
+   
+
+    // const calculateTotalKwhSum = (data) => {
+    //   return data[0].timeSlotsAndUsage.map((usage) => {
+    //     const totalSum = usage.TotalKwh + usage.TotalKwh2 + usage.TotalKwh3;
+    //     return {
+    //       TimeSlot: usage.TimeSlot,
+    //       TotalSum: totalSum
+    //     };
+    //   });
+    // };
 
   return (
     <>
@@ -151,8 +247,8 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
           </div>
           {device.deviceTypeId === 2 && (
             <div className="line-values" style={{ display: "flex" }}>
-              <div className="line-total d-flex">
-                <div className="line-total-kw1">
+              <div className="line-total d-flex mt-3" >
+                {/* <div className="line-total-kw1">
                   <div>
                     Total kWh:{" "}
                     <span>
@@ -162,8 +258,71 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
                       })}
                     </span>
                   </div>
-                </div>
-                <div className="line-total-kw2" >
+                  </div> */}
+                  <div className="line-total-kw1">
+                     <div className="header">
+                       Total:&nbsp;
+                       {
+                          totalSum.toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })
+                       } kWh
+                     </div>
+                     <div className="rowrow">
+                       <div className="column12">Peak</div>
+                       
+                       <div className="column12">Off Peak</div>
+                       <div className="column12">Day</div>
+                       
+                     </div>
+                     <div className="rowrow">
+                     <div className="column12">
+                          {peakTime.toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
+                       </div>
+                         <div className="column12">
+                           {offPeakTime.toLocaleString(undefined, {
+                             minimumFractionDigits: 2,
+                             maximumFractionDigits: 2,
+                           })}
+                           </div>
+                       <div className="column12">
+                          {dayTime.toLocaleString(undefined, {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}
+                          </div>
+                      </div>
+                   </div>
+                   <div className="line-total-kw1" style={{disply:'flex',padding:'17px',textAlign:'center',alignItems:'center',justifyContent:'center'}}>
+                     <div className="header">
+                       Total Rs:
+                     </div>
+                     <div className="rowrow">
+                       {/* <div className="column12">Peak</div>
+                       <div className="column12">Off Peak</div>
+                       <div className="column12">Day</div> */}
+                       <div className="column12">
+                        {device.usageBill.toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })} 
+                      </div>
+                     </div>
+                     {/* <div className="rowrow" style={{ visibility: 'hidden' }}>
+                       
+                       <div className="column12">
+                        {device.usageBill.toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
+                      </div>
+                     </div> */}
+                   </div>
+                <div className="line-total-kw2" style={{ visibility: 'hidden' }}>
                   <div>
                     Total Bill:
                     <span>
@@ -174,6 +333,7 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
                     </span>
                   </div>
                 </div>
+
               </div>
               {device.deviceMeasuringModeId === 2 && (
                 <>
