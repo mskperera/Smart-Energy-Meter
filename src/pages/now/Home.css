@@ -690,6 +690,15 @@
     /* background-color: #00bbf0; */
   }
 
+  .line-values1{
+    width: 100%;
+    /* display: flex; */
+    /* flex-direction: row; */
+    margin-top: 0px;
+    color: white;
+    /* background-color: #00bbf0; */
+  }
+
 .line-type{
     display: flex;
     justify-content: center;
@@ -709,6 +718,21 @@
     margin-top: 0px;
     margin-left: 50px;
     padding: 0px;
+    /* width: 100px; */
+    /* background-color: #00bbf0; */
+    /* width: 100%; */
+
+}
+
+.line-total1{
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding: 0px;
+    display: flex;
     /* width: 100px; */
     /* background-color: #00bbf0; */
     /* width: 100%; */
