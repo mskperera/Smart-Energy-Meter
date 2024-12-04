@@ -13,7 +13,7 @@ import LineChartBudget from "./LineChartBudget";
 // import LineChartCost from "./LineChartCost";
 import { getMaximumDemand } from "../../action/device";
 import { useSelector } from "react-redux";
-import { getbillingSessionByDeviceId } from "../../action/billingSession";
+import { getbillingSessionByDeviceId, getBillingSessionDateRangeBySessionStartDateTimebasedTable } from "../../action/billingSession";
 
 
 function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , numberOfDays, startDate, endDate  }) {
@@ -61,36 +61,45 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
     //     loadBillingSessionByDeviceId(selectedDevice.id);
     //   }
     // }, [selectedDevice]);
-    useEffect(() => {
-      const interval = setInterval(() => {
+    // useEffect(() => {
+    //   const interval = setInterval(() => {
 
-        if (selectedDevice){
-          const deviceId = selectedDevice.id;
-          loadBillingSessionByDeviceId(deviceId);
-        }
-      }, 1000,selectedDevice); // 1-second interval
+    //     if (selectedDevice){
+    //       // const deviceId = selectedDevice.id;
+    //       loadBillingSessionDateRangeBySessionStartDateTimebasedTable();
+    //     }
+    //   }, 1000,selectedDevice); // 1-second interval
   
-      return () => clearInterval(interval); // Clean up the interval
-    }, []);
-  
-    const loadBillingSessionByDeviceId = async (deviceId) => {
+    //   return () => clearInterval(interval); // Clean up the interval
+    // }, []);
+  useEffect(() => {
+    if (selectedDevice) {
+      loadBillingSessionDateRangeBySessionStartDateTimebasedTable();
+    }
+  }, [selectedDevice]);
+
+
+    const loadBillingSessionDateRangeBySessionStartDateTimebasedTable = async () => {
       try {
         // setLoadData(true);
-        const res = await getbillingSessionByDeviceId(deviceId);
+        const payload = {
+          deviceId: selectedDevice.id,
+        };
+        const res = await getBillingSessionDateRangeBySessionStartDateTimebasedTable(payload);
         
         console.log('getbilling-----SessionByDeviceId',res)
 
-        console.log('getbillingSessionByDeviceId',res.data[0].timeSlotsAndUsage);
+        console.log('getbillingSessionByDeviceId',res.data);
 
-          const usage = res.data[0].timeSlotsAndUsage[0];
+          const usage = res.data[0];
           const totalSum = usage.TotalKwh + usage.TotalKwh2 + usage.TotalKwh3;
           setPeakTime(totalSum);
           
-          const usage1 = res.data[0].timeSlotsAndUsage[1];
+          const usage1 = res.data[1];
           const totalSum1 = usage1.TotalKwh + usage1.TotalKwh2 + usage1.TotalKwh3;
           setDayTime(totalSum1);
 
-          const usage2 = res.data[0].timeSlotsAndUsage[2];
+          const usage2 = res.data[2];
           const totalSum2 = usage2.TotalKwh + usage2.TotalKwh2 + usage2.TotalKwh3;
           setOffPeakTime(totalSum2);
 
