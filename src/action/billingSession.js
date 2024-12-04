@@ -102,3 +102,24 @@ export const  getBillingSessionDateRangeBySessionStartDate= async (payload) => {
     return err;
   }
 }
+
+
+
+export const  getBillingSessionDateRangeBySessionStartDateTimebasedTable= async (payload) => {
+  try {
+    return await customAxios
+      .post(`/billingSession/getBillingSessionDateRangeBySessionStartDateTimebasedTable`,payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  } catch (err) {
+    return err;
+  }
+}
