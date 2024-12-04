@@ -88,7 +88,7 @@ const HomeChart = ({ currentKwValue, budgetedKwhValue, deviceTypeId, deviceMeasu
   // const backgroundColor = deviceTypeId === 2 && deviceMeasuringModeId === 1 ? '#FF5733' : '#131a25';  //style={{ backgroundColor }}
 
   return (
-    <div className='text-p'>
+    <div className='text-p mt-3'>
       {/* <div id='box3' className='chart' style={{ backgroundColor }}> */}
       <div style={{position:'static', display:'flex'}}>
         <MdEnergySavingsLeaf className='icon' size={20} style={{ color:'00bbf0', marginLeft:'115px', marginTop:'55px'}}/>

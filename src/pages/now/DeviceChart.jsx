@@ -337,8 +337,8 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
               </div>
               {device.deviceMeasuringModeId === 2 && (
                 <>
-                  <div className="line-values">
-                    <div className="line-total">
+                  <div className="line-values1">
+                    <div className="line-total1 mb-4 mt-2">
                       <div className="line-total-kw">
                         <div>Budgeted kWh: {device.budgetedKwh}</div>
                       </div>
