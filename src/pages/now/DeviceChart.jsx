@@ -349,10 +349,10 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
                   <div className="line-values1">
                     <div className="line-total1 mb-4 mt-2">
                       <div className="line-total-kw">
-                        <div>Budgeted kWh: {device.budgetedKwh}</div>
+                        <div>Budgeted kWh: {device.budgetedKwh.toLocaleString()}</div>
                       </div>
                       <div className="line-total-kw">
-                        <div>Budgeted Bill: {device.budgetedBill}</div>
+                        <div>Budgeted Bill: {device.budgetedBill.toLocaleString()}</div>
                       </div>
                     </div>
                   </div>
@@ -368,7 +368,8 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
               <h6 style={{ marginTop: "5px", color: "yellow" }}>
                 Maximum Demand
               </h6>
-              <span style={{ marginTop: "-5px" }}>{maximumDemand} kVA</span>
+              {/* <span style={{ marginTop: "-5px" }}>{maximumDemand} kVA</span>  */}
+              <span style={{ marginTop: "-5px" }}>{maximumDemand ? maximumDemand.toLocaleString() : "0"} kVA</span>
             </div>
           </div>
         )}
