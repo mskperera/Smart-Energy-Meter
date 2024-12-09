@@ -133,22 +133,32 @@ function LineChartBudget({ device, daysElapsed, numberOfDays, usageBill, budgete
     id: 'customTextPlugin',
     afterDraw: (chart) => {
       const { ctx, chartArea: { top, right, left } } = chart;
+
+      const xPosition = left + 140;
+
       ctx.save();
-      ctx.font = 'bold 12px Trebuchet MS';
+      ctx.font = 'bold 10px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
-      ctx.fillText(`Prediction : Rs.${(Number(lastForecastValue?.toFixed(2))).toLocaleString()}`, left +180, top +30);
+      ctx.fillText(`Prediction : Rs.${(Number(lastForecastValue?.toFixed(2))).toLocaleString()}`, xPosition, top + 10);
+      // ctx.fillText(`Prediction : Rs.${(Number(lastForecastValue?.toFixed(2))).toLocaleString()}`, right, top - 24);
+      // ctx.fillText(`Prediction : Rs.${(Number(lastForecastValue?.toFixed(2))).toLocaleString()}`, left +180, top +30);
 
-      ctx.font = 'bold 12px Trebuchet MS';
+      ctx.font = 'bold 10px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
-      ctx.fillText(`Budget : Rs.${(Number(budgetedBill?.toFixed(2))).toLocaleString()}`, left +160, top +48);
+      ctx.fillText(`Budget : Rs.${(Number(budgetedBill?.toFixed(2))).toLocaleString()}`, xPosition, top + 40);
+      // ctx.fillText(`Budget : Rs.${(Number(budgetedBill?.toFixed(2))).toLocaleString()}`, right +0, top +0);
+      // ctx.fillText(`Budget : Rs.${(Number(budgetedBill?.toFixed(2))).toLocaleString()}`, left +160, top +48);
 
 
-      ctx.font = 'bold 12px Trebuchet MS';
+      ctx.font = 'bold 10px Trebuchet MS';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'right';
-      ctx.fillText(`Actual : Rs.${(Number(totalUsed.toFixed(2))).toLocaleString()}`, left +150, top +65);
+      ctx.fillText(`Actual : Rs.${(Number(totalUsed.toFixed(2))).toLocaleString()}`, xPosition, top + 25);
+      // ctx.fillText(`Actual : Rs.${(Number(totalUsed.toFixed(2))).toLocaleString()}`, right, top - 12);
+      // ctx.fillText(`Actual : Rs.${(Number(totalUsed.toFixed(2))).toLocaleString()}`, left +150, top +65);
+
 
       ctx.restore();
     },
