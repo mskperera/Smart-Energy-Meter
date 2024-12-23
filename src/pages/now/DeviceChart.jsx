@@ -91,17 +91,17 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
 
         console.log('getbillingSessionByDeviceId',res.data);
 
-          const usage = res.data[0];
+          const usage = res.data[1];
           const totalSum = usage.TotalKwh + usage.TotalKwh2 + usage.TotalKwh3;
-          setPeakTime(totalSum);
+          setDayTime(totalSum);
           
-          const usage1 = res.data[1];
+          const usage1 = res.data[2];
           const totalSum1 = usage1.TotalKwh + usage1.TotalKwh2 + usage1.TotalKwh3;
-          setDayTime(totalSum1);
+          setOffPeakTime(totalSum1);
 
-          const usage2 = res.data[2];
+          const usage2 = res.data[0];
           const totalSum2 = usage2.TotalKwh + usage2.TotalKwh2 + usage2.TotalKwh3;
-          setOffPeakTime(totalSum2);
+          setPeakTime(totalSum2);
 
           const totalSum3 = totalSum + totalSum1 + totalSum2; 
           setTotalSum(totalSum3);
@@ -400,6 +400,7 @@ function DeviceChartMode({ deviceName, device, deviceLocation, daysElapsed , num
               usageBill={line.usageBill}
               budgetedKwh={line.budgetedKwh}
               budgetedBill={line.budgetedBill}
+              maximumDemand={maximumDemand}
             />
           </React.Fragment>
         ))}

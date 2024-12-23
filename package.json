@@ -32,6 +32,7 @@
     "reactjs-popup": "^2.0.6",
     "redux": "^5.0.1",
     "rsuite": "^5.53.2",
+    "socket.io-client": "^4.8.1",
     "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4"
   },
