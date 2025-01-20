@@ -1,6 +1,6 @@
-# Smart Energy Meter
+# FIDA Smart Energy Meter
 
-Welcome to Smart Energy Meter, your go-to solution for monitoring and managing energy consumption in real-time. With Smart Energy Meter, you can effortlessly track your energy usage, view insightful charts, and stay within your budget.
+Welcome to The Smart Energy Meter, your go-to solution for monitoring and managing energy consumption in real-time. With Smart Energy Meter, you can effortlessly track your energy usage, view insightful charts, and stay within your budget.
 
 ## Features
 
@@ -20,14 +20,20 @@ To start using Smart Energy Meter, follow these simple steps:
 4. **Monitor**: Start monitoring your energy consumption in real-time.
 5. **Explore Features**: Explore various features including charts and budget management.
 
+## Supported Services and Git Repositories
+
+Smart Energy Meter is built with a robust architecture that includes several services. You can access their repositories below:
+
+- **Frontend**:
+  - **Energy Meter Frontend** https://github.com/mskperera/Smart-Energy-Meter.git
+- **Backend Services**:
+  - **Core Service** https://github.com/mskperera/FIDA_EnergyMeter_backend.git
+  - **IoT Service** https://github.com/mskperera/energymeter_mqtt_socketio_nosql_service.git
+  - **Analytics Service** https://github.com/your-repo/analytics
+
+Feel free to explore these repositories to understand how each service works and contributes to the system.
+
 ## Usage
 
-Smart Energy Meter offers a user-friendly interface with intuitive navigation. Here's how you can use the app:
-
-- **Dashboard**: View real-time energy consumption data on the dashboard.
-- **Charts**: Navigate to the charts section to visualize energy usage trends.
-- **Budget**: Set and monitor your energy budget to manage your expenses effectively.
 
 ## Feedback
-
-We value your feedback! If you have any suggestions, questions, or concerns, please don't hesitate to contact us at [support@energymeter.com](mailto:support@ergymeter.com).
