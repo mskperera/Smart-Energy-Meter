@@ -26,6 +26,7 @@ Smart Energy Meter is built with a robust architecture that includes several ser
 
 - **Frontend**:
   - **Energy Meter Frontend** https://github.com/mskperera/Smart-Energy-Meter.git
+  - **Energy Meter IOT Dashboard** https://github.com/mskperera/energy_dashboard_socketio.git
 - **Backend Services**:
   - **Core Service** https://github.com/mskperera/FIDA_EnergyMeter_backend.git
   - **IoT Service** https://github.com/mskperera/energymeter_mqtt_socketio_nosql_service.git
