@@ -1,6 +1,6 @@
-# FIDA Smart Energy Meter
+# Smart Energy Meter
 
-Welcome to FIDA Smart Energy Meter, your go-to solution for monitoring and managing energy consumption in real-time. With FIDA Smart Energy Meter, you can effortlessly track your energy usage, view insightful charts, and stay within your budget.
+Welcome to Smart Energy Meter, your go-to solution for monitoring and managing energy consumption in real-time. With Smart Energy Meter, you can effortlessly track your energy usage, view insightful charts, and stay within your budget.
 
 ## Features
 
@@ -12,9 +12,9 @@ Welcome to FIDA Smart Energy Meter, your go-to solution for monitoring and manag
 
 ## Getting Started
 
-To start using FIDA Smart Energy Meter, follow these simple steps:
+To start using Smart Energy Meter, follow these simple steps:
 
-1. **Installation**: Install the FIDA Smart Energy Meter app on your device.
+1. **Installation**: Install the Smart Energy Meter app on your device.
 2. **Registration**: Create an account or log in to your existing account.
 3. **Device Setup**: Connect your energy meter device to the app.
 4. **Monitor**: Start monitoring your energy consumption in real-time.
@@ -22,7 +22,7 @@ To start using FIDA Smart Energy Meter, follow these simple steps:
 
 ## Usage
 
-FIDA Smart Energy Meter offers a user-friendly interface with intuitive navigation. Here's how you can use the app:
+Smart Energy Meter offers a user-friendly interface with intuitive navigation. Here's how you can use the app:
 
 - **Dashboard**: View real-time energy consumption data on the dashboard.
 - **Charts**: Navigate to the charts section to visualize energy usage trends.
@@ -30,8 +30,4 @@ FIDA Smart Energy Meter offers a user-friendly interface with intuitive navigati
 
 ## Feedback
 
-We value your feedback! If you have any suggestions, questions, or concerns, please don't hesitate to contact us at [support@fidaenergymeter.com](mailto:support@fidaenergymeter.com).
-
-## About Us
-
-FIDA Smart Energy Meter is developed by FIDA Technologies, a leading provider of energy management solutions. Our mission is to empower individuals and businesses to make informed decisions about energy usage and contribute to a sustainable future.
+We value your feedback! If you have any suggestions, questions, or concerns, please don't hesitate to contact us at [support@energymeter.com](mailto:support@ergymeter.com).
