@@ -22,15 +22,7 @@ To start using Smart Energy Meter, follow these simple steps:
 
 ## Supported Services and Git Repositories
 
-Smart Energy Meter is built with a robust architecture that includes several services. You can access their repositories below:
 
-- **Frontend**:
-  - **Energy Meter Frontend** https://github.com/mskperera/Smart-Energy-Meter.git
-  - **Energy Meter IOT Dashboard** https://github.com/mskperera/energy_dashboard_socketio.git
-- **Backend Services**:
-  - **Core Service** https://github.com/mskperera/FIDA_EnergyMeter_backend.git
-  - **IoT Service** https://github.com/mskperera/energymeter_mqtt_socketio_nosql_service.git
-  - **Analytics Service** https://github.com/your-repo/analytics
 
 Feel free to explore these repositories to understand how each service works and contributes to the system.
 
