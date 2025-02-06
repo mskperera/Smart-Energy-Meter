@@ -35,10 +35,12 @@
   .device-card {
     margin-bottom: 0.5rem;
     padding: 0.75rem;
+    cursor: pointer;
     border-radius: 0.5rem;
+    background-color: #f3f4f6;
   }
   
-  .device-1, .device-2 {
+  /* .device-1, .device-2 {
     background-color: #feb3b3;
   }
   
@@ -52,7 +54,7 @@
   
   .device-5 {
     background-color: #e1c5fe;
-  }
+  } */
   
   .device-content {
     display: flex;
