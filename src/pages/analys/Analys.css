@@ -1,0 +1,200 @@
+.dashboard-container {
+    display: flex;
+    /* height: 100vh; */
+    background-color: #2d2e2e;
+  }
+  
+  /* Left Panel Styles */
+  .left-panel {
+    width: 33.333%;
+    padding: 1rem;
+    background-color: #e5e7eb;
+  }
+  
+  .group-card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: #ffddf0;
+    border-radius: 0.5rem;
+  }
+  
+  .group-title {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  
+  .group-energy {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  
+  .group-stats {
+    font-size: 0.875rem;
+  }
+  
+  .device-card {
+    margin-bottom: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+  }
+  
+  .device-1, .device-2 {
+    background-color: #feb3b3;
+  }
+  
+  .device-3 {
+    background-color: #a7ffc6;
+  }
+  
+  .device-4 {
+    background-color: #b0d2fc;
+  }
+  
+  .device-5 {
+    background-color: #e1c5fe;
+  }
+  
+  .device-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* .device-name {
+    font-weight: 600;
+  } */
+
+  .device-info{
+    /* display: flex; */
+    justify-content: center;
+    /* justify-content: space-between; */
+    align-items: center;
+    width: 100%;
+  }
+  
+  .device-energy {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .device-stats {
+    font-size: 0.875rem;
+    display: flex;
+    gap: 1.5rem;
+    /* flex-wrap: wrap; */
+    
+  }
+
+  .device-stats-left{
+    
+  }
+  
+  /* Right Panel Styles */
+  .right-panel {
+    width: 66.667%;
+    padding: 1rem;
+  }
+  
+  .controls-section {
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    background-color: #99fbbb;
+    border-radius: 0.5rem;
+    width: 100%;
+  }
+  
+  .controls-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0rem;
+    width: 100%;
+  }
+
+  .date-range-container{
+    display: flex;
+    padding-top: 15px;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .period-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .period-buttons button {
+    padding: 0.25rem 0.75rem;
+    background-color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  
+  .period-buttons button:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .charts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 50px;
+  }
+  
+  .chart-card {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    height: 12rem;
+  }
+  
+  .chart-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  
+  @media (max-width: 1024px) {
+    .dashboard-container {
+      flex-direction: column;
+    }
+    
+    .left-panel,
+    .right-panel {
+      width: 100%;
+      /* max-height: 100vh; */
+      /* overflow-y: auto; */
+    }
+    
+    .chart-card {
+      height: 10rem;
+    }
+  }
+  
+ 
+  .recharts-cartesian-grid-horizontal line,
+  .recharts-cartesian-grid-vertical line {
+    stroke: #e5e7eb;
+  }
+  
+  .recharts-xaxis-tick-value,
+  .recharts-yaxis-tick-value {
+    font-size: 0.75rem;
+    fill: #6b7280;
+  }
+
+  @media screen and (max-width: 768px) {
+    .controls-container{
+        flex-direction: column;
+    }
+    .period-buttons button {
+        padding: 0.25rem 0.25rem;
+        background-color: white;
+        border: none;
+        border-radius: 0.25rem;
+        cursor: pointer;
+      }
+  }

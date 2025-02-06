@@ -36,6 +36,7 @@ import Setup from './pages/serviceAccount/Setup';
 
 import MonthActive from './pages/month copy/MonthActive';
 import ServiceProfiles from './pages/serviceprofiles/ServiceProfiles';
+import Analys from './pages/analys/Analys';
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
           <Route path='/apiData/deviceSettings' element={<DeviceSettings />} />
           <Route path='/apiData' element={<APIData />} />
           <Route path='/device' element={<DeviceMan />} />
+          <Route path='/analys' element={<Analys />} />
           <Route path='/admin' element={<Admin />} />
           <Route path='/group' element={<Group />} />
           <Route path='/unauthorized' element={<Unauthorized />} />
