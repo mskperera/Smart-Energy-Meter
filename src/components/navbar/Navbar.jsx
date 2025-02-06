@@ -134,6 +134,7 @@ const handleLogoutClick = () => {
               <ul>
                 <li><a href='/profile' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded '>Profile</a></li>
                 {/* <br/> */}
+                <li><a href='/analys' onClick={()=> setOpen(false)} className='p-2 cursor-pointer rounded'>Analys</a></li>
                 <li><a href='/status' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded'>Device Status</a></li>
                 <li><a href='/billingsession' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded '>Session</a></li>
                 <li><a href='/group' onClick={() => setOpen(false)} className='p-2 cursor-pointer rounded '>Group</a></li>
@@ -175,6 +176,7 @@ const handleLogoutClick = () => {
               <a href='#'><MdClose fontSize={27} className='overlay__close' onClick={() => setToggleMenu(false)} /></a>
               <ul className='app__navbar-smaillscreen-links'>
                 <li><a href='/management'>Device Management</a></li>
+                <li><a href='/analys'>Analys</a></li>
                 <li><a href='/status'>Device Status</a></li>
                 <li><a href='/billingsession'>Session</a></li>
                 <li><a href='/group'>Group</a></li>
