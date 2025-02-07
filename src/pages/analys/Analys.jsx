@@ -134,8 +134,8 @@ const Analys = () => {
                frequencyId: 1,
               //  startDate: startOfDayUtc,
               //  endDate: endOfDayUtc,
-              startDate: '2025-02-05T18:30:00Z',
-              endDate: '2025-02-06T18:29:59Z',
+              startDate: '2025-02-06T18:30:00Z',
+              endDate: '2025-02-07T18:29:59Z',
              };
              const result = await getEngergyUsageKwhByDateRange(payload);
          
@@ -228,34 +228,34 @@ const Analys = () => {
         <div className="left-panel" style={{ backgroundColor: '#2d2e2e' }}>
           <div className="group-card">
             <div className="group-title">Group 1</div>
-            <div className="group-energy"> kWh</div>
+            <div className="group-energy">630 kWh</div>
             <div className="group-stats">29.5kw 149.45A</div>
           </div>
           
           {deviceNames.map((device, index) => (
-            <div key={device.id} className="device-card " onClick={() => handleDeviceSelect(device.id)}>
+            <div key={device.id} className="device-card  " onClick={() => handleDeviceSelect(device.id)}>
               <div className="device-content">
                 <div className="device-info">
                   <div className="">{device.name}</div>
-                  <div className="device-energy">Total:&nbsp;
+                  {/* <div className="device-energy">Total:&nbsp; */}
                        {/* {
                           totalSum.toLocaleString(undefined, {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                           })
                        }  */}
-                       kWh</div>
+                      {/* 120 kWh</div> */}
                   
                   <div className="device-energy">{device.power}</div>
                 </div>
                 <div className="device-stats">
                   <div className='device-stats-left'>
-                    <div>{device.voltage}</div>
-                    <div>{device.current}</div>
+                    {/* <div>231.2V</div>
+                    <div>25.89A</div> */}
                   </div>
                   <div className='device-stats-left'>
-                    <div>{device.pf}</div>
-                    <div>{device.freq}</div>
+                    {/* <div>0.9pf</div>
+                    <div>50Hz</div> */}
                   </div>
                 </div>
               </div>
@@ -275,8 +275,8 @@ const Analys = () => {
                 <button>Custom</button>
               </div>
               <div className="date-range-container">
-              <div className="date-range">29 Dec - 04 Jan</div>
-              <div className="period-label">Last week</div>
+              {/* <div className="date-range">07 Feb</div>
+              <div className="period-label">Last week</div> */}
               </div>
             </div>
           </div>
