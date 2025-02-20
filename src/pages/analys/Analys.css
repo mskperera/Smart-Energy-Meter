@@ -39,6 +39,14 @@
     border-radius: 0.5rem;
     background-color: #f3f4f6;
   }
+
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Adjust height as needed */
+  }
+  
   
   /* .device-1, .device-2 {
     background-color: #feb3b3;

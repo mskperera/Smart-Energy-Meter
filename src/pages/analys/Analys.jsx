@@ -6,7 +6,10 @@ import { getDevicesByUserId, getEngergyUsageKwhByDateRange } from '../../action/
 import { getBillingSessionDateRangeBySessionStartDateTimebasedTable } from '../../action/billingSession';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
-import { use } from 'react';
+import { SpinnerCircular } from "spinners-react";
+
+
+
 
 
 const Analys = () => {
@@ -107,6 +110,9 @@ const Analys = () => {
            }
          };
 
+         
+
+          const [isLoading, setIsLoading] = useState(false);
           const [devices, setDevices] = useState([]);
           const [chartLineOne, setChartLineOne] = useState([]);
            const [chartLineTwo, setChartLineTwo] = useState([]);
@@ -121,6 +127,7 @@ const Analys = () => {
          
            const loadChartData = async (deviceId, startDay) => {
             //  setIsSearchLoading(true);
+              setIsLoading(true);
          
              const utcOffSet = moment().utcOffset();
              const startOfDayUtc = moment(startDay).startOf('day').subtract(utcOffSet, 'minutes').format('YYYY-MM-DDTHH:mm:ss[Z]');
@@ -132,19 +139,30 @@ const Analys = () => {
                deviceId: deviceId,
                mesurementUnitId: 1,
                frequencyId: 1,
-              //  startDate: startOfDayUtc,
-              //  endDate: endOfDayUtc,
-              startDate: '2025-02-06T18:30:00Z',
-              endDate: '2025-02-07T18:29:59Z',
+              //  startDate: '2025-02-19T18:30:00Z',
+              //  endDate: '2025-02-20T18:29:59Z',
+                startDate: startOfDayUtc,
+                endDate: endOfDayUtc,
+              
              };
+             try {
              const result = await getEngergyUsageKwhByDateRange(payload);
          
              console.log('result--result', result.data);
              setDevices(result.data);
-             // setChartLine(result.data[0].lines);
+             
              setChartLineOne(result.data[0]?.lines[0] || []);
              setChartLineTwo(result.data[0]?.lines[1] || []);
              setChartLineThree(result.data[0]?.lines[2] || []);
+             }
+              catch(err){
+                console.log('loadChartData:', err);
+                setIsLoading(false);
+              }
+              finally {
+                setIsLoading(false);
+              }
+
          
             //  setIsSearchLoading(false);
            };
@@ -187,10 +205,6 @@ const Analys = () => {
   
   
 
-  useEffect(() => {
-    
-  }, []);
-
   const chartDataWeek = [
     { day: 'Sun', Energy: 80, Power: 45, Current: 85, Voltage: 231, PowerFactor: 0.9 },
     { day: 'Mon', Energy: 85, Power: 50, Current: 88, Voltage: 229, PowerFactor: 0.85 },
@@ -207,6 +221,9 @@ const Analys = () => {
   //   { id: 4, name: 'Device 4', energy: 170, voltage: '231.2v', current: '25.89A', power: '5.9kw', pf: '0.9kf', freq: '50.1Hz' },
   //   { id: 5, name: 'Device 5', energy: 80, voltage: '231.2v', current: '25.89A', power: '5.9kw', pf: '0.9kf', freq: '50.1Hz' }
   // ];
+
+   // startDate: moment().startOf('day').format('YYYY-MM-DDTHH:mm:ss[Z]'),
+   // endDate: moment().endOf('day').format('YYYY-MM-DDTHH:mm:ss[Z]'),
 
   const totalEnergy = devices.reduce((sum, device) => sum + device.energy, 0);
 
@@ -283,31 +300,42 @@ const Analys = () => {
 
           {/* Charts */}
           <div className="charts-container">
-            {Object.keys(chartKeys).map((title, index) => (
-              <div key={title} className="chart-card">
-                <div className="chart-title">{title}</div>
-                <ResponsiveContainer width="100%" height="80%">
-                  <LineChart data={chartDataDay}  style={{ margin: '0 auto' }}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="hour" />
-                    <YAxis />
-                    <Tooltip />
-                    <Line 
-                      type="monotone" 
-                      dataKey={chartKeys[title]} 
-                      stroke={
-                        index === 0 ? '#3B82F6' :
-                        index === 1 ? '#EF4444' :
-                        index === 2 ? '#F59E0B' :
-                        index === 3 ? '#10B981' :
-                        '#6366F1'
-                      }
-                      strokeWidth={2}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
+            {isLoading ? ( 
+              // Show a loading spinner when fetching data
+              <div className="loading-container">
+                <SpinnerCircular color="#3B82F6" size={50} thickness={100} speed={100} />
+                {/* Alternative Bootstrap Spinner */}
+                {/* <Spinner animation="border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner> */}
               </div>
-            ))}
+            ) : (
+              Object.keys(chartKeys).map((title, index) => (
+                <div key={title} className="chart-card">
+                  <div className="chart-title">{title}</div>
+                  <ResponsiveContainer width="100%" height="80%">
+                    <LineChart data={chartDataDay} style={{ margin: '0 auto' }}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="hour" />
+                      <YAxis />
+                      <Tooltip />
+                      <Line 
+                        type="monotone" 
+                        dataKey={chartKeys[title]} 
+                        stroke={
+                          index === 0 ? '#3B82F6' :
+                          index === 1 ? '#EF4444' :
+                          index === 2 ? '#F59E0B' :
+                          index === 3 ? '#10B981' :
+                          '#6366F1'
+                        }
+                        strokeWidth={2}
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
